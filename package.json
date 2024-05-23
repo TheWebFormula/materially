@@ -1,0 +1,38 @@
+{
+  "name": "materially",
+  "version": "0.1.0",
+  "description": "Material design web components",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./services": "./src/services.js"
+  },
+  "scripts": {
+    "start": "node --watch-path=./src --watch-path=./docs build.js",
+    "build": "NODE_ENV=production node build.js"
+  },
+  "keywords": [
+    "materially",
+    "material",
+    "javascript",
+    "web",
+    "component",
+    "webcomponents"
+  ],
+  "author": "Ben Rubin (B-3PO)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheWebFormula/materially.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TheWebFormula/materially/issues"
+  },
+  "homepage": "https://github.com/TheWebFormula/materially#readme",
+  "devDependencies": {
+    "esbuild": "^0.21.3",
+    "@thewebformula/lithe": "file:../lithe",
+    "@thewebformula/materially": "file:./"
+  }
+}

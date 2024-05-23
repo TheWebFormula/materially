@@ -1,0 +1,270 @@
+:root {
+  --wfc-primary: var(--wfc-primary-40);
+  --wfc-primary-container: var(--wfc-primary-90);
+  --wfc-on-primary: var(--wfc-primary-100);
+  --wfc-on-primary-container: var(--wfc-primary-10);
+  --wfc-primary-inverse: var(--wfc-primary-80);
+  --wfc-primary-fixed: var(--wfc-primary-90);
+  --wfc-primary-fixed-dim: var(--wfc-primary-80);
+  --wfc-on-primary-fixed: var(--wfc-primary-10);
+  --wfc-on-primary-fixed-variant: var(--wfc-primary-30);
+  --wfc-secondary: var(--wfc-secondary-40);
+  --wfc-secondary-container: var(--wfc-secondary-90);
+  --wfc-on-secondary: var(--wfc-secondary-100);
+  --wfc-on-secondary-container: var(--wfc-secondary-10);
+  --wfc-secondary-fixed: var(--wfc-secondary-90);
+  --wfc-secondary-fixed-dim: var(--wfc-secondary-80);
+  --wfc-on-secondary-fixed: var(--wfc-secondary-10);
+  --wfc-on-secondary-fixed-variant: var(--wfc-secondary-30);
+  --wfc-tertiary: var(--wfc-tertiary-40);
+  --wfc-tertiary-container: var(--wfc-tertiary-90);
+  --wfc-on-tertiary: var(--wfc-tertiary-100);
+  --wfc-on-tertiary-container: var(--wfc-tertiary-10);
+  --wfc-tertiary-fixed: var(--wfc-tertiary-90);
+  --wfc-tertiary-fixed-dim: var(--wfc-tertiary-80);
+  --wfc-on-tertiary-fixed: var(--wfc-tertiary-10);
+  --wfc-on-tertiary-fixed-variant: var(--wfc-tertiary-30);
+  --wfc-error: var(--wfc-error-40);
+  --wfc-error-container: var(--wfc-error-90);
+  --wfc-on-error: var(--wfc-error-100);
+  --wfc-on-error-container: var(--wfc-error-10);
+  --wfc-neutral: var(--wfc-neutral-40);
+  --wfc-neutral-variant: var(--wfc-neutral-variant-40);
+  --wfc-surface: var(--wfc-neutral-98);
+  --wfc-surface-dim: var(--wfc-neutral-87);
+  --wfc-surface-bright: var(--wfc-neutral-98);
+  --wfc-surface-container-lowest: var(--wfc-neutral-100);
+  --wfc-surface-container-low: var(--wfc-neutral-96);
+  --wfc-surface-container: var(--wfc-neutral-94);
+  --wfc-surface-container-high: var(--wfc-neutral-92);
+  --wfc-surface-container-highest: var(--wfc-neutral-90);
+  --wfc-surface-variant: var(--wfc-neutral-variant-90);
+  --wfc-on-surface: var(--wfc-neutral-10);
+  --wfc-on-surface-variant: var(--wfc-neutral-variant-30);
+  --wfc-surface-inverse: var(--wfc-neutral-20);
+  --wfc-on-surface-inverse: var(--wfc-neutral-95);
+  --wfc-surface-tint: var(--wfc-primary);
+  --wfc-outline: var(--wfc-neutral-variant-50);
+  --wfc-outline-variant: var(--wfc-neutral-variant-80);
+  --wfc-shadow: var(--wfc-neutral-0);
+  --wfc-scrim: var(--wfc-neutral-0);
+
+  --wfc-state-layer-opacity-hover: 0.08;
+  --wfc-state-layer-opacity-focus: 0.1;
+  --wfc-state-layer-opacity-pressed: 0.1;
+  --wfc-state-layer-opacity-dragged: 0.16;
+  
+  --wfc-shape-extra-small: 4px;
+  --wfc-shape-extra-small-top: 4px 4px 0 0;
+  --wfc-shape-small: 8px;
+  --wfc-shape-medium: 12px;
+  --wfc-shape-large: 16px;
+  --wfc-shape-large-start: 16px 0 0 16px;
+  --wfc-shape-large-end: 0 16px 16px 0;
+  --wfc-shape-large-top: 16px 16px 0 0;
+  --wfc-shape-extra-large: 28px;
+  --wfc-shape-extra-large-top: 28px 28px 0 0;
+  --wfc-shape-extra-large-bottom: 0 0 28px 28px;
+  --wfc-shape-full: 50%;
+  --wfc-navigation-rail-width: 88px;
+  --wfc-navigation-drawer-width: 360px;
+  --wfc-card-group-columns: 4;
+  --wfc-side-sheet-width: 296px;
+  --wfc-bottom-sheet-initial-position: 40%;
+  --wfc-bottom-sheet-minimized-position: 64px;
+
+
+  --wfc-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --wfc-motion-easing-standard-accelerate: cubic-bezier(0.3, 0, 1, 1);
+  --wfc-motion-easing-standard-decelerate: cubic-bezier(0, 0, 0, 1);
+  --wfc-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --wfc-motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --wfc-motion-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --wfc-transition-bounce: cubic-bezier(.47, 1.64, .41, .8);
+  --wfc-transition-overshoot: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  --wfc-motion-duration-short1: 50ms;
+  --wfc-motion-duration-short2: 100ms;
+  --wfc-motion-duration-short3: 150ms;
+  --wfc-motion-duration-short4: 200ms;
+  --wfc-motion-duration-medium1: 250ms;
+  --wfc-motion-duration-medium2: 300ms;
+  --wfc-motion-duration-medium3: 350ms;
+  --wfc-motion-duration-medium4: 400ms;
+  --wfc-motion-duration-long1: 450ms;
+  --wfc-motion-duration-long2: 500ms;
+  --wfc-motion-duration-long3: 550ms;
+  --wfc-motion-duration-long4: 600ms;
+  --wfc-motion-duration-extra-long1: 700ms;
+  --wfc-motion-duration-extra-long2: 800ms;
+  --wfc-motion-duration-extra-long3: 900ms;
+  --wfc-motion-duration-extra-long4: 1000ms;
+
+
+  --wfc-font-small-icon-size: 1.25rem;
+  --wfc-font-medium-icon-size: 1.5rem;
+  --wfc-font-large-icon-size: 2.25rem;
+  --wfc-font-large-icon-size-extra: 3rem;
+
+  /* display */
+  --wfc-font-large-display-font: var(--wfc-font-brand, inherit);
+  --wfc-font-large-display-size: 3.5625rem;
+  --wfc-font-large-display-line-height: 4rem;
+  --wfc-font-large-display-weight: 400;
+  --wfc-font-large-display-tracking: -0.015625rem;
+
+  --wfc-font-medium-display-font: var(--wfc-font-brand, inherit);
+  --wfc-font-medium-display-size: 2.8125rem;
+  --wfc-font-medium-display-line-height: 3.25rem;
+  --wfc-font-medium-display-weight: 400;
+  --wfc-font-medium-display-tracking: 0rem;
+
+  --wfc-font-small-display-font: var(--wfc-font-brand, inherit);
+  --wfc-font-small-display-size: 2.25rem;
+  --wfc-font-small-display-line-height: 2.75rem;
+  --wfc-font-small-display-weight: 400;
+  --wfc-font-small-display-tracking: 0rem;
+
+  /* headline */
+  --wfc-font-large-headline-font: var(--wfc-font-brand, inherit);
+  --wfc-font-large-headline-size: 2rem;
+  --wfc-font-large-headline-line-height: 2.5rem;
+  --wfc-font-large-headline-weight: 400;
+  --wfc-font-large-headline-tracking: 0rem;
+
+  --wfc-font-medium-headline-font: var(--wfc-font-brand, inherit);
+  --wfc-font-medium-headline-size: 1.75rem;
+  --wfc-font-medium-headline-line-height: 2.25rem;
+  --wfc-font-medium-headline-weight: 400;
+  --wfc-font-medium-headline-tracking: 0rem;
+
+  --wfc-font-small-headline-font: var(--wfc-font-brand, inherit);
+  --wfc-font-small-headline-size: 1.5rem;
+  --wfc-font-small-headline-line-height: 2rem;
+  --wfc-font-small-headline-weight: 400;
+  --wfc-font-small-headline-tracking: 0rem;
+
+  /* title */
+  --wfc-font-large-title-font: var(--wfc-font-brand, inherit);
+  --wfc-font-large-title-size: 1.375rem;
+  --wfc-font-large-title-line-height: 1.75rem;
+  --wfc-font-large-title-weight: 400;
+  --wfc-font-large-title-tracking: 0rem;
+
+  --wfc-font-medium-title-font: var(--wfc-font-brand, inherit);
+  --wfc-font-medium-title-size: 1rem;
+  --wfc-font-medium-title-line-height: 1.5rem;
+  --wfc-font-medium-title-weight: 500;
+  --wfc-font-medium-title-tracking: 0.009375rem;
+
+  --wfc-font-small-title-font: var(--wfc-font-brand, inherit);
+  --wfc-font-small-title-size: 0.875rem;
+  --wfc-font-small-title-line-height: 1.25rem;
+  --wfc-font-small-title-weight: 500;
+  --wfc-font-small-title-tracking: 0.00625rem;
+
+  /* label */
+  --wfc-font-large-label-font: var(--wfc-font-plain, inherit);
+  --wfc-font-large-label-size: 0.875rem;
+  --wfc-font-large-label-line-height: 1.25rem;
+  --wfc-font-large-label-weight: 500;
+  --wfc-font-large-label-tracking: 0.00625rem;
+
+  --wfc-font-medium-label-font: var(--wfc-font-plain, inherit);
+  --wfc-font-medium-label-size: 0.75rem;
+  --wfc-font-medium-label-line-height: 1rem;
+  --wfc-font-medium-label-weight: 500;
+  --wfc-font-medium-label-tracking: 0.03125rem;
+
+  --wfc-font-small-label-font: var(--wfc-font-plain, inherit);
+  --wfc-font-small-label-size: 0.6875rem;
+  --wfc-font-small-label-line-height: 1rem;
+  --wfc-font-small-label-weight: 500;
+  --wfc-font-small-label-tracking: 0.03125rem;
+
+  /* body */
+  --wfc-font-large-body-font: var(--wfc-font-plain, inherit);
+  --wfc-font-large-body-size: 1rem;
+  --wfc-font-large-body-line-height: 1.5rem;
+  --wfc-font-large-body-weight: 400;
+  --wfc-font-large-body-tracking: 0.03125rem;
+
+  --wfc-font-medium-body-font: var(--wfc-font-plain, inherit);
+  --wfc-font-medium-body-size: 0.875rem;
+  --wfc-font-medium-body-line-height: 1.25rem;
+  --wfc-font-medium-body-weight: 400;
+  --wfc-font-medium-body-tracking: 0.015625rem;
+
+  --wfc-font-small-body-font: var(--wfc-font-plain, inherit);
+  --wfc-font-small-body-size: 0.75rem;
+  --wfc-font-small-body-line-height: 1rem;
+  --wfc-font-small-body-weight: 400;
+  --wfc-font-small-body-tracking: 0.025rem;
+
+
+  --wfc-elevation-1:
+    0px 1px 2px 0px var(--wfc-shadow-alpha-30),
+    0px 1px 3px 1px var(--wfc-shadow-alpha-15);
+
+  --wfc-elevation-2:
+    0px 1px 2px 0px var(--wfc-shadow-alpha-30),
+    0px 2px 6px 2px var(--wfc-shadow-alpha-15);
+
+  /* shift shadow vertically. Used for filter selects when surface is above textfield to reduce shadow covering */
+  --wfc-elevation-2-reverse:
+      0px -1px 2px 0px var(--wfc-shadow-alpha-30),
+      0px -2px 6px 2px var(--wfc-shadow-alpha-15);
+
+  --wfc-elevation-3:
+    0px 1px 3px 0px var(--wfc-shadow-alpha-30),
+    0px 4px 8px 3px var(--wfc-shadow-alpha-15);
+
+  --wfc-elevation-4:
+    0px 2px 3px 0px var(--wfc-shadow-alpha-30),
+    0px 6px 10px 4px var(--wfc-shadow-alpha-15);
+
+  --wfc-elevation-5:
+    0px 4px 4px 0px var(--wfc-shadow-alpha-30),
+    0px 8px 12px 6px var(--wfc-shadow-alpha-15);
+}
+
+.wfc-theme-dark,
+:root.wfc-theme-dark {
+  --wfc-primary: var(--wfc-primary-80);
+  --wfc-primary-container: var(--wfc-primary-30);
+  --wfc-on-primary: var(--wfc-primary-20);
+  --wfc-on-primary-container: var(--wfc-primary-90);
+  --wfc-primary-inverse: var(--wfc-primary-40);
+  --wfc-secondary: var(--wfc-secondary-80);
+  --wfc-secondary-container: var(--wfc-secondary-30);
+  --wfc-on-secondary: var(--wfc-secondary-20);
+  --wfc-on-secondary-container: var(--wfc-secondary-90);
+  --wfc-tertiary: var(--wfc-tertiary-80);
+  --wfc-tertiary-container: var(--wfc-tertiary-30);
+  --wfc-on-tertiary: var(--wfc-tertiary-20);
+  --wfc-on-tertiary-container: var(--wfc-tertiary-90);
+  --wfc-error: var(--wfc-error-80);
+  --wfc-error-container: var(--wfc-error-30);
+  --wfc-on-error: var(--wfc-error-20);
+  --wfc-on-error-container: var(--wfc-error-90);
+  --wfc-neutral: var(--wfc-neutral-80);
+  --wfc-neutral-variant: var(--wfc-neutral-variant-80);
+  --wfc-surface: var(--wfc-neutral-6);
+  --wfc-surface-dim: var(--wfc-neutral-6);
+  --wfc-surface-bright: var(--wfc-neutral-24);
+  --wfc-surface-container-lowest: var(--wfc-neutral-4);
+  --wfc-surface-container-low: var(--wfc-neutral-10);
+  --wfc-surface-container: var(--wfc-neutral-12);
+  --wfc-surface-container-high: var(--wfc-neutral-17);
+  --wfc-surface-container-highest: var(--wfc-neutral-22);
+  --wfc-surface-variant: var(--wfc-neutral-variant-30);
+  --wfc-on-surface: var(--wfc-neutral-90);
+  --wfc-on-surface-variant: var(--wfc-neutral-variant-80);
+  --wfc-surface-tint: var(--wfc-primary);
+  --wfc-surface-inverse: var(--wfc-neutral-90);
+  --wfc-on-surface-inverse: var(--wfc-neutral-20);
+  --wfc-outline: var(--wfc-neutral-variant-60);
+  --wfc-outline-variant: var(--wfc-neutral-variant-30);
+  --wfc-shadow: var(--wfc-neutral-0);
+  --wfc-scrim: var(--wfc-neutral-0);
+}

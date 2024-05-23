@@ -1,0 +1,105 @@
+:host {
+  --wfc-top-app-bar-alt-headline-opacity: 1;
+
+  grid-area: header;
+  
+  position: sticky;
+  top: 0;
+  display: inline-flex;
+  height: 64px;
+  width: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
+  background-color: var(--wfc-top-app-bar-container-color);
+  z-index: 1;
+}
+
+:host(.animation) {
+  transition: background-color;
+  transition-duration: var(--wfc-motion-duration-medium1);
+  transition-timing-function: var(--wfc-motion-easing-standard);
+}
+
+:host(.scrolled:not([compress])) {
+  background-color: var(--wfc-top-app-bar-container-scrolled-color);
+}
+
+.container {
+  display: inline-flex;
+  width: 100%;
+  height: 64px;
+  box-sizing: border-box;
+  align-items: center;
+  background-color: inherit;
+  z-index: 1;
+}
+
+[name="headline"] {
+  display: block;
+  flex: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: var(--wfc-font-large-title-size);
+  font-weight: var(--wfc-font-large-title-weight);
+  line-height: var(--wfc-font-large-title-line-height);
+  letter-spacing: var(--wfc-font-large-title-tracking);
+  color: var(--wfc-on-surface);
+}
+
+:host([centered]) [name="headline"] {
+  text-align: center;
+}
+
+[name="leading-icon"]::slotted(*) {
+  margin-right: 16px;
+}
+
+[name="leading-icon"]::slotted(wfc-navigation-button) {
+  margin-left: -8px;
+}
+
+[name="trailing-icon"]::slotted(*) {
+  margin-left: 24px;
+}
+
+
+:host([medium]),
+:host([large]) {
+  align-items: start;
+  /* padding-top: 20px; */
+  height: 112px;
+}
+
+:host([large]) {
+  height: 152px;
+}
+
+[name="alt-headline"] {
+  display: block;
+  position: absolute;
+  bottom: 16px;
+  font-size: var(--wfc-font-small-headline-size);
+  font-weight: var(--wfc-font-small-headline-weight);
+  line-height: var(--wfc-font-small-headline-line-height);
+  letter-spacing: var(--wfc-font-small-headline-tracking);
+  opacity: var(--wfc-top-app-bar-alt-headline-opacity);
+  /* opacity: 1;
+  transition: opacity;
+  transition-duration: 200ms; */
+}
+
+/* :host([medium]) [name="headline"],
+:host([large]) [name="headline"] {
+  opacity: 0;
+  transition: opacity;
+  transition-duration: 140ms;
+}
+
+:host(.switch-headline) [name="alt-headline"] {
+  opacity: 0;
+}
+:host([medium].switch-headline) [name="headline"],
+:host([large].switch-headline) [name="headline"] {
+  opacity: 1;
+} */

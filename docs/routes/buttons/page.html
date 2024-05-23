@@ -1,0 +1,98 @@
+<article>
+  <header>
+    <h1>Buttons</h1>
+    <div class="page-subheader wfc-font-title-medium">Buttons help people initiate actions, from sending an email, to
+      sharing a document, to
+      liking a post</div>
+    <a href="https://m3.material.io/components/buttons/overview" target="_new">Material Design Guidelines: Buttons</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#types">Button types</a></li>
+        <li><a href="#icon_button">Button with icon</a></li>
+        <li><a href="#async_button">Async button</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+      <section>
+        <wfc-card>
+          <h2 slot="headline">Button types</h2>
+          <div slot="supporting-text">There are five types of common buttons: elevated, filled, filled tonal, outlined, and text</div>
+
+          <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap;">
+            <wfc-button>Text</wfc-button>
+            <wfc-button elevated>Elevated</wfc-button>
+            <wfc-button filled>Filled</wfc-button>
+            <wfc-button filled-tonal>Filled tonal</wfc-button>
+            <wfc-button outlined>Outlined</wfc-button>
+            <wfc-button>
+              <wfc-icon slot="leading-icon">home</wfc-icon>
+              Icon
+            </wfc-button>
+            <wfc-button disabled outlined>Disabled</wfc-button>
+          </div>
+
+          <pre>
+            <code class="language-html">
+  ${`<wfc-button>Text</wfc-button>
+  <wfc-button elevated>Elevated</wfc-button>
+  <wfc-button filled>Filled</wfc-button>
+  <wfc-button filled-tonal>Filled tonal</wfc-button>
+  <wfc-button outlined>Outlined</wfc-button>
+  <wfc-button>
+    <wfc-icon slot="leading-icon">home</wfc-icon>
+    Icon
+  </wfc-button>`}
+            </code>
+          </pre>
+        </wfc-card>
+      </section>
+
+
+      <section>
+        <wfc-card id="icon_button">
+          <h2 slot="headline">Button with icon</h2>
+
+          <div class="example">
+            <wfc-button>
+              <wfc-icon slot="leading-icon">home</wfc-icon>
+              Icon
+            </wfc-button>
+          </div>
+
+          <pre>
+            <code class="language-html">
+  ${`<wfc-button>
+    <wfc-icon slot="leading-icon">home</wfc-icon>
+    Icon
+  </wfc-button>`}
+            </code>
+          </pre>
+        </wfc-card>
+      </section>
+
+      <section>
+        <wfc-card id="async_button">
+          <h2 slot="headline">Async button</h2>
+
+
+          <div class="example" style="gap: 8px; display: flex;">
+            <wfc-button id="async-button" async filled>Example</wfc-button>
+            <wfc-button onclick="document.querySelector('#async-button').resolve()">Resolve</wfc-button>
+          </div>
+
+          <pre>
+            <code class="language-html">
+  ${`<wfc-button id="async-button" async filled>Example</wfc-button>
+  <wfc-button onclick="document.querySelector('#async-button').resolve()">Resolve</wfc-button>`}
+            </code>
+          </pre>
+        </wfc-card>
+      </section>
+    </div>
+  </div>
+</article>

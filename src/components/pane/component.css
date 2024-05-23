@@ -1,0 +1,80 @@
+:host {
+  grid-area: main;
+  position: relative;
+  display: flex;
+  flex: 1;
+  padding: 16px;
+  box-sizing: border-box;
+  gap: 16px;
+}
+
+:host([scroll]) {
+  height: 100%;
+}
+
+:host(.window-compact) {
+  padding: 0;
+  gap: 0;
+}
+
+::slotted(wfc-pane) {
+  padding: 16px;
+  box-sizing: border-box;
+  border-radius: var(--wfc-shape-large);
+  background-color: var(--wfc-surface-container-color, var(--wfc-surface));
+}
+
+::slotted(wfc-pane[no-padding]) {
+  padding: 0;
+}
+
+:host([scroll]) ::slotted(wfc-pane) {
+  height: 100%;
+  overflow: auto;
+}
+
+:host(:not([resize])) ::slotted(wfc-pane:not([fixed])) {
+  flex: 1;
+}
+
+:host([resize]) ::slotted(wfc-pane:not([fixed])) {
+  flex-grow: 1;
+}
+
+:host([resize]) ::slotted(wfc-pane[fixed]) {
+  max-width: max-content;
+}
+
+:host([resize]) ::slotted(wfc-pane[collapsible]) {
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+:host([resize]) ::slotted(wfc-pane[collapsible]:not([scroll])) {
+  overflow: hidden;
+}
+
+
+.resize-handle {
+  display: none;
+}
+
+:host([resize]) .resize-handle {
+  cursor: col-resize;
+  display: block;
+  position: absolute;
+  top: calc(50% - 28px);
+  width: 24px;
+  height: 56px;
+  user-select: none;
+}
+
+:host([resize]) .resize-handle::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 56px;
+  border-radius: 2px;
+  margin-left: 10px;
+  background-color: var(--wfc-outline);
+}

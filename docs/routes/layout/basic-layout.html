@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Webformaula material components layout basic">
+  <meta name="wfc-theme-color-scheme-preference-disable">
+
+  <title></title>
+
+  <style>
+   body {
+      font-family: Arial;
+    }
+    body:not(.wfc-initiated) {
+      visibility: hidden;
+    }
+  </style>
+
+  <link href="/app.css" rel="stylesheet">
+  <script defer src="/material.js" type="module"></script>
+  <style>
+    @font-face {
+      font-family: 'Material Symbols Outlined';
+      font-style: normal;
+      font-weight: 100 700;
+      font-display: swap;
+      src: url(/icons.woff2) format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Material Symbols Outlined alt';
+      font-style: normal;
+      font-weight: 100 700;
+      font-display: swap;
+      src: url(/outlined-icons-variable.woff2) format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Material Symbols Rounded';
+      font-style: normal;
+      font-weight: 100 700;
+      font-display: swap;
+      src: url(/rounded-icons.woff2) format('woff2');
+    }
+  </style>
+</head>
+
+<body style="--wfc-navigation-drawer-width: 200px;">
+  <wfc-navigation-drawer>
+    <div slot="header" class="headline">Webformula material</div>
+    <wfc-anchor href="/">Welcome</wfc-anchor>
+    <wfc-anchor href="/one">One</wfc-anchor>
+    <wfc-anchor href="/two">Two</wfc-anchor>
+  </wfc-navigation-drawer>
+
+  <wfc-top-app-bar compress>
+    <div slot="headline">Headline</div>
+    <wfc-icon slot="trailing-icon">account_circle</wfc-icon>
+  </wfc-top-app-bar>
+
+  <wfc-pane-container>
+    <wfc-pane id="page-content">
+      <h1>Hello world</h1>
+    </wfc-pane>
+  </wfc-pane-container>
+
+  <wfc-navigation-bar auto-hide>
+    <wfc-anchor href="/">
+      <wfc-icon slot="leading-icon">home</wfc-icon>
+    </wfc-anchor>
+  </wfc-navigation-bar>
+</body>
+
+</html>

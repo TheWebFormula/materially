@@ -1,0 +1,169 @@
+:host {
+  position: relative;
+  display: inline-flex;
+  border-radius: var(--wfc-button-shape);
+  box-sizing: border-box;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  place-content: center;
+  place-items: center;
+  height: 40px;
+  line-height: 40px;
+  font-size: var(--wfc-font-large-label-size);
+  font-weight: var(--wfc-font-large-label-weight);
+  letter-spacing: var(--wfc-font-large-label-tracking);
+  color: var(--wfc-button-color);
+}
+
+:host([disabled]) {
+  cursor: default;
+  color: var(--wfc-on-surface);
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+button {
+  border-radius: inherit;
+  cursor: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  vertical-align: middle;
+  background: transparent;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  font: inherit;
+  color: inherit;
+  padding: 0;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+:host([disabled]) button {
+  pointer-events: none;
+}
+
+:host([filled]) {
+  color: var(--wfc-button-color-filled);
+  background-color: var(--wfc-button-container-color-filled);
+}
+
+:host([disabled][filled]) {
+  background-color: var(--wfc-button-container-color-disabled);
+  color: var(--wfc-button-color-disabled);
+}
+
+:host([elevated]) {
+  color: var(--wfc-button-color-elevated);
+  background-color: var(--wfc-button-container-color-elevated);
+}
+
+:host([disabled][elevated]) {
+  background-color: var(--wfc-button-container-color-disabled);
+  color: var(--wfc-button-color-disabled);
+}
+
+:host([filled-tonal]) {
+  color: var(--wfc-button-color-filled-tonal);
+  background-color: var(--wfc-button-container-color-filled-tonal);
+}
+
+:host([disabled][filled-tonal]) {
+  background-color: var(--wfc-button-container-color-disabled);
+  color: var(--wfc-button-color-disabled);
+}
+
+:host([outlined]) {
+  color: var(--wfc-button-color-outlined);
+  background-color: var(--wfc-button-container-color-outlined);
+  border: 1px solid var(--wfc-button-outline-color-outlined);
+}
+
+:host([disabled][outlined]) {
+  color: var(--wfc-button-color-disabled);
+  border: 1px solid var(--wfc-button-container-color-disabled);
+}
+
+
+::slotted(wfc-icon),
+slot[name="leading-icon"]::slotted(wfc-icon) {
+  pointer-events: none;
+  margin-right: -2px;
+  margin-left: -2px;
+  width: var(--wfc-font-small-icon-size);
+  height: var(--wfc-font-small-icon-size);
+  font-size: var(--wfc-font-small-icon-size);
+  line-height: var(--wfc-font-small-icon-size);
+}
+
+
+/* --- states --- */
+
+wfc-state-layer {
+  --wfc-state-layer-focus-color: var(--wfc-on-surface);
+  --wfc-state-layer-hover-color: var(--wfc-primary);
+  --wfc-state-layer-ripple-color: var(--wfc-primary);
+}
+
+:host([filled]) wfc-state-layer {
+  --wfc-state-layer-focus-color: var(--wfc-on-primary);
+  --wfc-state-layer-hover-color: var(--wfc-on-primary);
+  --wfc-state-layer-ripple-color: var(--wfc-on-primary);
+}
+
+:host([filled-tonal]) wfc-state-layer {
+  --wfc-state-layer-focus-color: var(--wfc-on-secondary-container);
+  --wfc-state-layer-hover-color: var(--wfc-on-secondary-container);
+  --wfc-state-layer-ripple-color: var(--wfc-on-secondary-container);
+}
+
+:host([elevated]) wfc-state-layer {
+  --wfc-state-layer-focus-color: var(--wfc-button-elevate-state-layer-color);
+  --wfc-state-layer-hover-color: var(--wfc-primary);
+  --wfc-state-layer-ripple-color: var(--wfc-primary);
+}
+
+:host([outlined]) wfc-state-layer {
+  --wfc-state-layer-focus-color: var(--wfc-primary);
+  --wfc-state-layer-hover-color: var(--wfc-primary);
+}
+
+:host([filled]) wfc-state-layer,
+:host([filled-tonal]) wfc-state-layer {
+  --wfc-state-layer-focus-box-shadow: var(--wfc-elevation-1);
+  --wfc-state-layer-hover-box-shadow: var(--wfc-elevation-1);
+}
+
+:host([elevated]) wfc-state-layer {
+  --wfc-state-layer-box-shadow: var(--wfc-elevation-1);
+  --wfc-state-layer-focus-box-shadow: var(--wfc-elevation-2);
+  --wfc-state-layer-hover-box-shadow: var(--wfc-elevation-2);
+}
+
+:host([disabled]) wfc-state-layer {
+  --wfc-state-layer-box-shadow: none;
+}
+
+.spinner {
+  position: absolute;
+  top: 5px;
+  --wfc-progress-circular-stroke-width: 6;
+}
+
+:host(.async-pending) {
+  pointer-events: none;
+}
+
+:host(.async-pending) button .default-slot {
+  color: transparent;
+}

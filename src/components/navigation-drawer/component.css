@@ -1,0 +1,47 @@
+:host {
+  --wfc-side-sheet-width: var(--wfc-navigation-drawer-width);
+  --wfc-side-sheet-container-color: var(--wfc-navigation-drawer-container-color);
+  --wfc-side-sheet-shape: var(--wfc-navigation-drawer-sheet-shape);
+
+  /* use sticky to ignore page scroll */
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 9;
+  grid-area: navigation;
+}
+
+slot[name="header"] {
+  display: flex;
+  justify-content: space-between;
+  opacity: 1;
+  padding-left: 0;
+  height: 56px;
+}
+
+::slotted(.headline) {
+  line-height: 56px;
+  height: 56px;
+  font-size: var(--wfc-font-small-title-size);
+  font-weight: var(--wfc-font-small-title-weight);
+  letter-spacing: var(--wfc-font-small-title-tracking);
+  color: var(--wfc-on-surface-variant);
+}
+
+.surface-content {
+  padding: 12px 28px;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  overscroll-behavior: contain;
+}
+
+.default-slot {
+  padding: 0;
+  overflow-y: visible;
+}
+
+/* adjust for sticky */
+:host([modal][scrim]) .scrim {
+  width: 100vw;
+  height: 100vh;
+}

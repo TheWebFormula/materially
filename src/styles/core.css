@@ -1,0 +1,67 @@
+:root {
+  color-scheme: only light;
+}
+
+:root.wfc-theme-dark {
+  color-scheme: only dark;
+}
+
+body {
+  background-color: var(--wfc-background-color, var(--wfc-surface));
+  margin: 0;
+  width: 100vw;
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: min-content minmax(0, 1fr) min-content;
+  grid-template-rows: min-content minmax(0, 1fr) min-content;
+  grid-template-areas:
+    "navigation header header"
+    "navigation main side"
+    "navigation footer footer";
+  overflow: auto;
+}
+
+body.pane-layout {
+  height: 100vh;
+}
+
+body:has(wfc-dialog[open]),
+body:has(dialog[open]) {
+  overflow: hidden
+}
+
+/* main {
+  padding: 16px;
+} */
+
+
+/* html {
+  font-size: 16px;
+  height: 100%;
+  overflow-anchor: none;
+} */
+
+/* body {
+  display: flex;
+  min-height: 100%;
+  width: 100%;
+  margin: 0;
+
+  background-color: var(--wfc-background);
+  color: var(--wfc-on-background);
+} */
+
+/* body page-content,
+body #page-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  box-sizing: border-box;
+  padding: 12px;
+  max-width: 100dvw;
+} */
+
+wfc-pane::-webkit-resizer {
+  border: 2px solid black;
+  background: blue;
+}

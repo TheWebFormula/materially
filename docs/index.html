@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Webformaula material components">
+  <meta name="color-scheme" content="light dark">
+  <meta name="wfc-theme-color-scheme-preference-disable">
+  <meta name="theme-color" content="#fdf8fd">
+  <link rel="manifest" href="manifest.json" />
+
+  <title></title>
+
+  <link rel="prefetch" href="./outlined-icons-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="prefetch" href="./rounded-icons.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="/app.css" rel="stylesheet">
+  <script src="/app.js"></script>
+  <script id="hljsscript" src="/highlight-11.8.0.js" async></script>
+
+  <style>
+    body {
+      font-family: Arial;
+    }
+    body:not(.wfc-initiated) {
+      visibility: hidden;
+    }
+  </style>
+
+  <style>
+    @font-face {
+      font-family: 'Material Symbols Outlined';
+      font-style: normal;
+      font-weight: 100 700;
+      font-display: swap;
+      src: url(./icons.woff2) format('woff2');
+    }
+  
+    @font-face {
+      font-family: 'Material Symbols Outlined alt';
+      font-style: normal;
+      font-weight: 100 700;
+      font-display: swap;
+      src: url(./outlined-icons-variable.woff2) format('woff2');
+    }
+  
+    @font-face {
+      font-family: 'Material Symbols Rounded';
+      font-style: normal;
+      font-weight: 100 700;
+      font-display: swap;
+      src: url(./rounded-icons.woff2) format('woff2');
+    }
+  </style>
+</head>
+
+<!-- <body class="pane-layout"> -->
+<body>
+  <wfc-navigation-drawer>
+    <div slot="header" class="headline">Webformula material</div>
+    <wfc-anchor href="/">Welcome</wfc-anchor>
+    <wfc-anchor href="/layout">Layout</wfc-anchor>
+    <wfc-anchor href="/styles">styles</wfc-anchor>
+    
+    <wfc-anchor-group>
+      <div slot="control">buttons</div>
+    
+      <wfc-anchor href="/buttons">Common buttons</wfc-anchor>
+      <wfc-anchor href="/fabs">FAB</wfc-anchor>
+      <wfc-anchor href="/icon-buttons">Icon buttons</wfc-anchor>
+      <wfc-anchor href="/segmented-buttons">Segmented buttons</wfc-anchor>
+    </wfc-anchor-group>
+
+    <wfc-anchor href="/dialogs">Dialogs</wfc-anchor>
+    <wfc-anchor href="/menus">Menus</wfc-anchor>
+    <wfc-anchor href="/6">6</wfc-anchor>
+    <wfc-anchor href="/7">7</wfc-anchor>
+    <wfc-anchor href="/8">8</wfc-anchor>
+    <wfc-anchor href="/9">9</wfc-anchor>
+    <wfc-anchor href="/10">10</wfc-anchor>
+    <wfc-anchor href="/11">11</wfc-anchor>
+    <wfc-anchor href="/two">two</wfc-anchor>
+  </wfc-navigation-drawer>
+
+  <wfc-navigation-rail>
+    <wfc-anchor href="/">
+      <wfc-icon slot="leading-icon">home</wfc-icon>
+    </wfc-anchor>
+  
+    <wfc-anchor href="/buttons">
+      <wfc-icon slot="leading-icon">apps</wfc-icon>
+      Buttons
+    </wfc-anchor>
+  
+    <wfc-anchor href="/two">
+      <wfc-icon slot="leading-icon">palette</wfc-icon>
+      Two
+    </wfc-anchor>
+  </wfc-navigation-rail>
+
+  <wfc-top-app-bar compress>
+    <div slot="headline">Headline</div>
+    <wfc-icon slot="trailing-icon">inbox</wfc-icon>
+    <wfc-icon slot="trailing-icon">account_circle</wfc-icon>
+  </wfc-top-app-bar>
+
+  <!-- <main id="page-content"></main> -->
+  <!-- <wfc-pane-container scroll> -->
+  <wfc-pane-container>
+    <wfc-pane id="page-content"></wfc-pane>
+    <!-- <wfc-pane fixed collapsible no-padding>
+      <wfc-side-sheet close back onback="console.log('okok')">
+        <div slot="headline">Headline</div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna
+          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat.
+          Duis
+          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna
+          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat.
+          Duis
+          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna
+          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat.
+          Duis
+          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+      </wfc-side-sheet>
+    </wfc-pane> -->
+  </wfc-pane-container>
+
+  <wfc-navigation-bar auto-hide>  
+    <wfc-anchor href="/">
+      <wfc-icon slot="leading-icon">home</wfc-icon>
+    </wfc-anchor>
+  
+    <wfc-anchor href="/getting-started">
+      <wfc-icon slot="leading-icon">apps</wfc-icon>
+      Get started
+    </wfc-anchor>
+  </wfc-navigation-bar>
+
+
+  <!-- <wfc-pane id="page-content"></wfc-pane>
+  <wfc-side-sheet close back onback="console.log('okok')" inset>
+    <div slot="headline">Headline</div>
+    <div>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      magna
+      aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat.
+      Duis
+      aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+      occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+    <div>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      magna
+      aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat.
+      Duis
+      aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+      occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+    <div>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      magna
+      aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat.
+      Duis
+      aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+      occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+  </wfc-side-sheet> -->
+</body>
+
+</html>

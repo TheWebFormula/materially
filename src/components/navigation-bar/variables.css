@@ -1,0 +1,4 @@
+:root {
+  --wfc-navigation-bar-container-color: var(--wfc-navigation-container-color, var(--wfc-surface-container));
+  --wfc-navigation-bar-elevation: var(--wfc-elevation-2);
+}

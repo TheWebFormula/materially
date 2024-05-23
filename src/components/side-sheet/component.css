@@ -1,0 +1,226 @@
+:host {
+  min-width: 0px;
+  pointer-events: none;
+}
+
+.surface {
+  z-index: 22;
+  overflow: hidden;
+  width: 0px;
+  height: 100%;
+  transition: width;
+  transition-duration: var(--wfc-motion-duration-medium2);
+  transition-timing-function: var(--wfc-motion-easing-standard);
+  border-radius: var(--wfc-side-sheet-shape) 0 0 var(--wfc-side-sheet-shape);
+  background-color: var(--wfc-side-sheet-container-color);
+  pointer-events: none;
+}
+
+:host([open]) .surface {
+  pointer-events: all;
+  width: var(--wfc-side-sheet-width);
+  transition: width;
+  transition-duration: var(--wfc-motion-duration-medium3);
+  transition-timing-function: var(--wfc-motion-easing-standard-decelerate);
+}
+
+:host([align-left]) .surface {
+  border-radius: 0 var(--wfc-side-sheet-shape) var(--wfc-side-sheet-shape) 0;
+}
+
+:host([modal]) .surface {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  animation: box-shadow-animation;
+  animation-duration: var(--wfc-motion-duration-medium2);
+  animation-timing-function: var(--wfc-motion-easing-standard);
+}
+
+:host([modal][open]) .surface {
+  box-shadow: var(--wfc-elevation-2);
+  animation-duration: var(--wfc-motion-duration-medium3);
+  animation-timing-function: var(--wfc-motion-easing-standard-decelerate);
+}
+
+:host([align-left][modal]) .surface {
+  left: 0;
+  right: unset;
+}
+
+:host([inset][modal]) .surface {
+  right: 0px;
+  top: 16px;
+  height: calc(100% - 32px);
+  border-radius: var(--wfc-side-sheet-shape);
+  transition: width, right;
+  transition-duration: var(--wfc-motion-duration-medium2), var(--wfc-motion-duration-short1);
+  transition-timing-function: var(--wfc-motion-easing-standard);
+}
+
+:host([open][inset][modal]) .surface {
+  right: 16px;
+  width: var(--wfc-side-sheet-width);
+  transition: width, right;
+  transition-duration: var(--wfc-motion-duration-medium3), var(--wfc-motion-duration-short1);
+  transition-timing-function: var(--wfc-motion-easing-standard-decelerate);
+}
+
+:host([inset]:not([modal])) {
+  margin: 16px;
+  margin-left: 0;
+  border-radius: var(--wfc-side-sheet-shape);
+}
+:host([inset]:not([modal])) .surface {
+  border-radius: var(--wfc-side-sheet-shape);
+}
+
+.surface-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  width: var(--wfc-side-sheet-width);
+  overflow: visible;
+  background-color: var(--wfc-side-sheet-container-color);
+}
+
+.default-slot {
+  display: block;
+  flex: 1;
+  overflow-y: scroll;
+  padding: 24px;
+  padding-top: 8px;
+}
+
+:host([modal][scrim]) .scrim {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0;
+  background-color: var(--wfc-scrim);
+  animation: scrim-close-animation;
+  animation-duration: var(--wfc-motion-duration-short4);
+  animation-timing-function: var(--wfc-motion-easing-standard);
+}
+
+:host([modal][open][scrim]) .scrim {
+  display: block;
+  overscroll-behavior: contain;
+  opacity: 0.16;
+  pointer-events: all;
+  animation: scrim-open-animation;
+  animation-duration: var(--wfc-motion-duration-short4);
+  animation-timing-function: var(--wfc-motion-easing-standard);
+}
+
+
+.header {
+  display: flex;
+  align-items: end;
+  justify-content: end;
+}
+
+slot[name="headline"] {
+  display: inline-flex;
+  flex: 1;
+  font-size: var(--wfc-font-large-title-size);
+  font-weight: var(--wfc-font-large-title-weight);
+  letter-spacing: var(--wfc-font-large-title-tracking);
+  line-height: 46px;
+  color: var(--wfc-on-surface-variant);
+  margin-left: 24px;
+}
+
+:host([back]) slot[name="headline"] {
+  margin-left: 12px;
+}
+
+.back,
+.close {
+  display: none;
+  position: relative;
+}
+
+/* used for composedPath on click event */
+.back::after,
+.close::after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+}
+
+:host([back]) .back {
+  display: inline-flex;
+  margin: 24px;
+  margin-right: 0;
+  margin-bottom: 8px;
+}
+
+:host(:not([hide-close])) .close {
+  display: inline-flex;
+  margin: 24px;
+  margin-left: 12px;
+  margin-bottom: 8px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  max-height: 72px;
+  padding-left: 8px;
+  gap: 8px;
+  /* use for border since with no elements the height is 0 */
+  box-shadow: inset 0px 1px 0px 0px var(--wfc-outline-variant);
+}
+
+/* use margin to fill 72px height */
+slot[name="action"]::slotted(*) {
+  margin: 36px 0;
+}
+
+
+/* Hack to show box shadow during open and close animations for modal */
+@keyframes box-shadow-animation {
+  0% {
+    box-shadow: var(--wfc-elevation-2);
+  }
+
+  100% {
+    box-shadow: var(--wfc-elevation-2);
+  }
+}
+
+@keyframes scrim-open-animation {
+  0% {
+    display: block;
+    opacity: 0;
+  }
+
+  100% {
+    display: block;
+    opacity: 0.16;
+  }
+}
+
+@keyframes scrim-close-animation {
+  0% {
+    display: block;
+    opacity: 0.16;
+  }
+
+  100% {
+    display: block;
+    opacity: 0;
+  }
+}

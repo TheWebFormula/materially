@@ -1,0 +1,81 @@
+:host {
+  --wfc-state-layer-focus-color: var(--wfc-on-surface);
+  --wfc-state-layer-hover-color: var(--wfc-on-surface);
+  --wfc-state-layer-focus-indicator-color: var(--wfc-secondary);
+  --wfc-state-layer-focus-indicator-thickness: 3px;
+  --wfc-state-layer-focus-indicator-offset: 2px;
+  --wfc-state-layer-box-shadow: none;
+  --wfc-state-layer-focus-box-shadow: none;
+  --wfc-state-layer-hover-box-shadow: none;
+  --wfc-state-layer-ripple-color: var(--wfc-primary);
+
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  outline: none;
+  box-shadow: var(--wfc-state-layer-box-shadow);
+  transition: box-shadow;
+  transition-duration: var(--wfc-motion-duration-short2);
+  transition-timing-function: var(--wfc-motion-easing-emphasized);
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: inherit;
+  opacity: 0;
+
+  transition: outline-width, box-shadow;
+  transition-duration: var(--wfc-motion-duration-short2);
+  transition-timing-function: var(--wfc-motion-easing-emphasized);
+}
+
+:host(.focus) .background {
+  opacity: var(--wfc-state-layer-opacity-focus);
+  background-color: var(--wfc-state-layer-focus-color);
+}
+
+:host(.hover) .background {
+  opacity: var(--wfc-state-layer-opacity-hover);
+  background-color: var(--wfc-state-layer-hover-color);
+}
+
+:host(.focus) {
+  box-shadow: var(--wfc-state-layer-focus-box-shadow);
+  outline: var(--wfc-state-layer-focus-indicator-thickness) solid var(--wfc-state-layer-focus-indicator-color);
+  outline-offset: var(--wfc-state-layer-focus-indicator-offset);
+}
+
+:host(.hover) {
+  box-shadow: var(--wfc-state-layer-hover-box-shadow);
+}
+
+.ripple {
+  overflow: hidden;
+  border-radius: inherit;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+
+  .ripple-element {
+    background-color: var(--wfc-state-layer-ripple-color);
+  }
+}
+
+:host([outer-circle]) .ripple,
+:host([outer-circle]) .background {
+  border-radius: 50%;
+  margin: -9px;
+}

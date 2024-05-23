@@ -1,0 +1,5 @@
+:root {
+  /* Override variables */
+  --wfc-top-app-bar-container-color: var(--wfc-navigation-container-color, var(--wfc-surface));
+  --wfc-top-app-bar-container-scrolled-color: var(--wfc-surface-container);
+}

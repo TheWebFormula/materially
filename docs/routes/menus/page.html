@@ -1,0 +1,172 @@
+<article>
+  <header>
+    <h1>Menus</h1>
+    <div class="page-subheader wfc-font-title-medium">Menus display a list of choices on a temporary surface</div>
+    <a href="https://m3.material.io/components/menus/specs#15cc3423-ab1f-4d1c-8ce4-e5c9ae95f19f" target="_new">Material
+      Design Guidelines: Select</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#basic">Basic</a></li>
+        <li><a href="#nested">Nested menu</a></li>
+        <li><a href="#context-menu">Context menu</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="basic">
+        <wfc-card>
+          <h2 slot="headline">Basic menu</h2>
+          <div slot="supporting-text">Menus can be connected top controls by adding a selector or nesting them inside.</div>
+
+          <div class="example">
+            <wfc-button id="control" class="filled">Show</wfc-button>
+            <wfc-menu anchor="control">
+              <wfc-menu-item>
+                <wfc-icon slot="start">content_copy</wfc-icon>
+                copy
+              </wfc-menu-item>
+              <wfc-menu-item>
+                <wfc-icon slot="start">content_paste</wfc-icon>
+                paste
+              </wfc-menu-item>
+              <wfc-menu-item>plain</wfc-menu-item>
+              <wfc-menu-item>plain</wfc-menu-item>
+            </wfc-menu>
+
+
+            <wfc-button id="overlay" class="filled">Show overlay</wfc-button>
+            <wfc-menu anchor="overlay" overlay>
+              <wfc-menu-item>
+                <wfc-icon slot="start">content_copy</wfc-icon>
+                copy
+              </wfc-menu-item>
+              <wfc-menu-item>
+                <wfc-icon slot="start">content_paste</wfc-icon>
+                paste
+              </wfc-menu-item>
+              <wfc-menu-item>plain</wfc-menu-item>
+              <wfc-menu-item>plain</wfc-menu-item>
+            </wfc-menu>
+          </div>
+
+          <pre>
+            <code class="language-html">
+  ${`<wfc-button id="controlid">Control</wfc-button>
+  <wfc-menu anchor="controlid">
+    <wfc-menu-item>
+      <wfc-icon slot="start">content_copy</wfc-icon>
+      copy
+    </wfc-menu-item>
+    <wfc-menu-item>plain</wfc-menu-item>
+  </wfc-menu>
+  
+  
+  <!-- Overlay -->
+  <wfc-button id="overlayid">Control</wfc-button>
+  <wfc-menu anchor="overlayid" overlay>
+    <wfc-menu-item>
+      <wfc-icon slot="start">content_copy</wfc-icon>
+      copy
+    </wfc-menu-item>
+    <wfc-menu-item>plain</wfc-menu-item>
+  </wfc-menu>`}
+            </code>
+          </pre>
+        </wfc-card>
+      </section>
+
+
+
+      <section id="nested">
+        <wfc-card>
+          <h2 slot="headline">Nested menu</h2>
+
+          <div class="example">
+            <wfc-button id="nested-top" class="filled">Show</wfc-button>
+            <wfc-menu anchor="nested-top">
+              <wfc-menu-item>
+                <wfc-icon slot="start">content_copy</wfc-icon>
+                copy
+              </wfc-menu-item>
+              <wfc-menu-item>
+                <wfc-icon slot="start">content_paste</wfc-icon>
+                paste
+              </wfc-menu-item>
+              <wfc-menu-item id="nested-item">Nested item</wfc-menu-item>
+
+              <wfc-menu anchor="nested-item">
+                <wfc-menu-item>
+                  <wfc-icon slot="start">content_copy</wfc-icon>
+                  copy
+                </wfc-menu-item>
+                <wfc-menu-item>
+                  <wfc-icon slot="start">content_paste</wfc-icon>
+                  paste
+                </wfc-menu-item>
+                <wfc-menu-item>plain</wfc-menu-item>
+                <wfc-menu-item>plain</wfc-menu-item>
+              </wfc-menu>
+            </wfc-menu>
+          </div>
+
+          <pre>
+            <code class="language-html">
+  ${`<wfc-button id="nested" class="filled">Show</wfc-button>
+  <wfc-menu anchor="nested">
+    <wfc-menu-item id="nested-item">Nested item</wfc-menu-item>
+
+    <wfc-menu anchor="nested-item">
+      <wfc-menu-item>plain</wfc-menu-item>
+    </wfc-menu>
+  </wfc-menu>`}
+            </code>
+          </pre>
+        </wfc-card>
+      </section>
+
+
+
+      <section id="context-menu">
+        <wfc-card>
+          <h2 slot="headline">Context menu (right click)</h2>
+
+          <div class="example">
+            <div context-menu="cm1">Right click me</div>
+            <wfc-menu context-menu="cm1">
+              <wfc-menu-item onclick="console.log(this.contextTarget)">
+                <wfc-icon slot="start">content_copy</wfc-icon>
+                copy
+              </wfc-menu-item>
+              <wfc-menu-item>
+                <wfc-icon slot="start">content_paste</wfc-icon>
+                paste
+              </wfc-menu-item>
+              <wfc-menu-item>plain</wfc-menu-item>
+              <wfc-menu-item>plain</wfc-menu-item>
+            </wfc-menu>
+          </div>
+
+          <pre>
+            <code class="language-html">
+  ${`<!--
+    Any element with context-menu="id" will toggle the menu
+    Access current target with wfc-menu.anchor
+  -->
+  
+  <div context-menu="cm1">Right click me</div>
+  <wfc-menu context-menu="cm1">
+    <wfc-menu-item>plain</wfc-menu-item>
+  </wfc-menu>`}
+            </code>
+          </pre>
+        </wfc-card>
+      </section>
+
+    </div>
+  </div>
+</article>

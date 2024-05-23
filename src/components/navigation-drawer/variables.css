@@ -1,0 +1,5 @@
+:root {
+  /* --wfc-navigation-drawer-width - set globally */
+  --wfc-navigation-drawer-container-color: var(--wfc-navigation-container-color, var(--wfc-surface));
+  --wfc-navigation-drawer-sheet-shape: var(--wfc-shape-large);
+}

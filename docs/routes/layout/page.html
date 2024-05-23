@@ -1,0 +1,207 @@
+<article>
+  <header>
+    <h1>Layout</h1>
+    <div class="page-subheader wfc-font-title-medium">Layout is the visual arrangement of elements on the screens</div>
+    <a href="https://m3.material.io/foundations/layout/understanding-layout/overview" target="_new">Material Design Guidelines: Layout</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#regions">Layout regions</a></li>
+        <li><a href="#panes">Panes</a></li>
+        <li><a href="#windowsizes">Window sizes</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="regions">
+        <wfc-card>
+          <h2 slot="headline">Layout regions</h2>
+          <div slot="supporting-text">There are four main regions. Page layout is controlled with a CSS grid. The components will automatically assign themselves to the correct region.</div>
+          
+          <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap;">
+            <iframe src="./routes/layout/basic-layout.html" title="Layout Basic" style="height: 360px; width: 100%;"></iframe>
+          </div>
+
+          <pre>
+            <code class="language-html">
+  ${`<!--
+      Components automatically assign to grid areas
+      Grid areas are not visible if empty
+    -->
+  <!DOCTYPE html>
+  <html lang="en">
+    <header>...</header>
+
+    <!-- Hide content while site loads to prevent layout shifts -->
+    <style>    
+      body:not(.wfc-initiated) { visibility: hidden; }
+    </style>
+
+    <body>
+      <wfc-top-app-bar>...</wfc-top-app-bar>
+      <wfc-navigation-drawer>...</wfc-navigation-drawer>
+      
+      <wfc-pane-container>
+        <wfc-pane>...</wfc-pane>
+      </wfc-pane-container>
+
+      <wfc-navigation-bar>...</wfc-navigation-bar>
+    </body>
+  </html>
+  
+  
+  
+  <!-- Custom grid area assignment -->
+  <!DOCTYPE html>
+  <html lang="en">
+    <header>...</header>
+    <body>
+      <div style="grid-area: header;">...</div>
+      <div style="grid-area: navigation;">...</div>
+      <main>...</main>
+      <div style="grid-area: footer;">...</div>
+    </body>
+  </html>`}
+            </code>
+          </pre>
+        </wfc-card>
+      </section>
+
+
+
+      <section id="panes">
+        <wfc-card>
+          <h2 slot="headline">Panes</h2>
+          <div slot="supporting-text">Panes are used to group the UI</div>
+
+          <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap;">
+            <iframe src="./routes/layout/panes.html" title="Layout Basic" style="height: 360px; width: 100%;"></iframe>
+          </div>
+
+          <pre>
+            <code class="language-html">
+  ${`<!DOCTYPE html>
+  <html lang="en">
+    <header>...</header>
+    <body>
+      <wfc-top-app-bar>...</wfc-top-app-bar>
+      <wfc-navigation-drawer>...</wfc-navigation-drawer>
+      
+      <wfc-pane-container>
+        <wfc-pane>...</wfc-pane>
+        <!--
+          You can have multiple panes
+          <wfc-pane>...</wfc-pane>
+        -->
+      </wfc-pane-container>
+
+      <wfc-navigation-bar>...</wfc-navigation-bar>
+    </body>
+  </html>
+
+
+
+  <!--
+    Make panes scroll in stead of document
+    This means your document body will always be 100vh
+    This also means top an bottom app bars will always show.
+  -->
+  <wfc-pane-container scroll>
+    <wfc-pane>...</wfc-pane>
+  </wfc-pane-container>
+
+
+
+  <!-- Fixed panes lock pane width based on content -->
+  <wfc-pane-container>
+    <wfc-pane>...</wfc-pane>
+    <wfc-pane fixed>...</wfc-pane>
+  </wfc-pane-container>
+  
+
+  
+  <!-- Resizable panes -->
+  <wfc-pane-container resize>
+    <wfc-pane>...</wfc-pane>
+    <wfc-pane>...</wfc-pane>
+  </wfc-pane-container>
+  
+
+  
+  <!-- Collapsable panes -->
+  <wfc-pane-container resize>
+    <wfc-pane>...</wfc-pane>
+    <wfc-pane collapsible>...</wfc-pane>
+    <!--
+      You can mix collapsable and fixed
+      <wfc-pane fixed collapsible>...</wfc-pane>
+    -->
+  </wfc-pane-container>
+  
+
+  
+  <!-- Remove padding -->
+  <wfc-pane-container>
+    <wfc-pane no-padding>...</wfc-pane>
+  </wfc-pane-container>`}
+            </code>
+          </pre>
+        </wfc-card>
+      </section>
+
+
+
+
+      <section id="windowsizes">
+        <wfc-card>
+          <h2 slot="headline">Window sizes</h2>
+          <div slot="supporting-text">Window size classes help create layouts that scale across devices of all shapes and sizes</div>
+          <h3 slot="supporting-text">Window size classes</h3>
+          <ul slot="supporting-text">
+            <li>Compact</li>
+            <li>Medium</li>
+            <li>Exapnded</li>
+          </ul>
+          <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap;">
+            
+          </div>
+
+          <pre>
+            <code class="language-html">
+  ${`<!-- Class names are added to the body for the current window size -->
+    <body class="window-compact"></body>
+    <body class="window-medium"></body>
+    <body class="window-exapnded"></body>`}
+            </code>
+          </pre>
+
+          <pre>
+            <code class="language-javascript">
+  ${`
+    
+    // Interact with wfcDevice
+    import { wfcDevice } from '@Webformaula/core';
+
+    console.log(wfcDevice.state); // current state
+    
+    window.addEventListener('wfcwindowstatechange', ({ detail }) => {
+      console.log(detail.lastState);
+
+      switch (detail.state) {
+        case wfcDevice.COMPACT;
+        case wfcDevice.MEDIUM;
+        case wfcDevice.EXPANDED;
+      }
+    });`}
+            </code>
+          </pre>
+        </wfc-card>
+      </section>
+
+    </div>
+  </div>
+</article>

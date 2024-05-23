@@ -1,0 +1,116 @@
+<article>
+  <header>
+    <h1>Styles</h1>
+    <div class="page-subheader wfc-font-title-medium">Material theme, colors, motion, font</div>
+    <a href="https://m3.material.io/styles" target="_new">Material Design Guidelines: Styles</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#colors">Colors</a></li>
+        <li><a href="#customize">Customize</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="colors">
+        <wfc-card>
+          <h2 slot="headline">Colors</h2>
+          <div slot="supporting-text">You can generate theme colors using the themeGenerator</div>
+
+          <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap;">
+          </div>
+
+          <pre>
+            <code class="language-javascript">
+  ${`import generate from '@webformula/material/themeGenerator';
+
+  // generate(input path, output path)
+  generate({
+    coreColors: {
+      // primary is the only required color
+      primary: '#6750A4',
+
+      // By default these generate from the primary
+      // You can override them here
+      secondary: '#625B71',
+      tertiary: '#7D5260',
+      neutral: '#67616f',
+      neutralVariant: '#605666',
+      error: '#B3261E'
+    },
+
+    // Specify custom colors to use in app
+    customColors: [
+      {
+        name: 'customColor',
+        color: '#5b7166'
+      }
+    ]
+  }, './colorTokens.css');`}
+            </code>
+          </pre>
+        </wfc-card>
+      </section>
+
+
+      <section id="customize">
+        <wfc-card>
+          <h2 slot="headline">Customize</h2>
+          <div slot="supporting-text">You can customize colors, fonts, elevations, and animations, both globally and at the component level</div>
+
+          <pre>
+            <code class="language-css">
+  ${`/*
+    Customize base application surfaces
+    These are special properties to make it easier to control all navigation and page backgrounds
+  */
+
+  :root {
+    /* Defaults: --wfc-surface */
+    --wfc-background-color: var(--wfc-surface-container-low);
+    --wfc-navigation-container-color: var(--wfc-surface-container-low);
+    --wfc-surface-container-color: var(--wfc-surface-container-lowest);
+  }`}
+            </code>
+          </pre>
+
+          <pre>
+            <code class="language-html">
+  ${`
+  
+  <!--
+    Override at component level
+    Check out overrides on component pages
+  -->
+
+  <wfc-navigation-drawer style="--wfc-navigation-drawer-container-color: var(--wfc-surface-container-low)"></wfc-navigation-drawer>`}
+            </code>
+          </pre>
+
+
+          <pre>
+            <code class="language-css">
+  ${`
+    
+  /* Set font families */
+
+  :root {
+    --wfc-font-brand: 'Roboto';
+    --wfc-font-plain: 'Roboto';
+  }`}
+            </code>
+          </pre>
+          <pre>
+            <code class="language-html">
+  ${`<!-- TODO setting font -->`}
+            </code>
+          </pre>
+        </wfc-card>
+      </section>
+    </div>
+  </div>
+</article>

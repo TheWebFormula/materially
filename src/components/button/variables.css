@@ -1,0 +1,21 @@
+:root {
+  --wfc-button-shape: var(--wfc-shape-extra-large);
+
+  --wfc-button-color: var(--wfc-primary);
+
+  --wfc-button-color-filled: var(--wfc-on-primary);
+  --wfc-button-container-color-filled: var(--wfc-primary);
+
+  --wfc-button-color-disabled: var(--wfc-on-surface-alpha-38);
+  --wfc-button-container-color-disabled: var(--wfc-on-surface-alpha-12);
+
+  --wfc-button-color-elevated: var(--wfc-primary);
+  --wfc-button-container-color-elevated: var(--wfc-surface-container-low);
+
+  --wfc-button-color-filled-tonal: var(--wfc-on-secondary-container);
+  --wfc-button-container-color-filled-tonal: var(--wfc-secondary-container);
+
+  --wfc-button-color-outlined: var(--wfc-primary);
+  --wfc-button-container-color-outlined: var(--wfc-button-outlined-container-color);
+  --wfc-button-outline-color-outlined: var(--wfc-outline);
+}

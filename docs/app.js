@@ -1,6 +1,4 @@
 import '@thewebformula/materially';
-import { setSecurityLevel } from '@thewebformula/lithe';
-setSecurityLevel(0);
 
 if (typeof hljs === 'undefined') {
   const hljsTag = document.querySelector('#hljsscript');

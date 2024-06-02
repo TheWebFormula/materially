@@ -32,7 +32,7 @@
   "homepage": "https://github.com/TheWebFormula/materially#readme",
   "devDependencies": {
     "esbuild": "^0.21.3",
-    "@thewebformula/lithe": "file:../lithe",
+    "@thewebformula/lithe": "^0.6.1",
     "@thewebformula/materially": "file:./"
   }
 }

@@ -1,7 +1,7 @@
 <article>
   <header>
     <h1>Buttons</h1>
-    <div class="page-subheader wfc-font-title-medium">Buttons help people initiate actions, from sending an email, to
+    <div class="page-subheader mc-font-title-medium">Buttons help people initiate actions, from sending an email, to
       sharing a document, to
       liking a post</div>
     <a href="https://m3.material.io/components/buttons/overview" target="_new">Material Design Guidelines: Buttons</a>
@@ -19,79 +19,79 @@
 
     <div class="article-content">
       <section>
-        <wfc-card>
+        <mc-card>
           <h2 slot="headline">Button types</h2>
           <div slot="supporting-text">There are five types of common buttons: elevated, filled, filled tonal, outlined, and text</div>
 
           <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap;">
-            <wfc-button>Text</wfc-button>
-            <wfc-button elevated>Elevated</wfc-button>
-            <wfc-button filled>Filled</wfc-button>
-            <wfc-button filled-tonal>Filled tonal</wfc-button>
-            <wfc-button outlined>Outlined</wfc-button>
-            <wfc-button>
-              <wfc-icon slot="leading-icon">home</wfc-icon>
+            <mc-button>Text</mc-button>
+            <mc-button elevated>Elevated</mc-button>
+            <mc-button filled>Filled</mc-button>
+            <mc-button filled-tonal>Filled tonal</mc-button>
+            <mc-button outlined>Outlined</mc-button>
+            <mc-button>
+              <mc-icon slot="leading-icon">home</mc-icon>
               Icon
-            </wfc-button>
-            <wfc-button disabled outlined>Disabled</wfc-button>
+            </mc-button>
+            <mc-button disabled outlined>Disabled</mc-button>
           </div>
 
           <pre>
             <code class="language-html">
-  ${`<wfc-button>Text</wfc-button>
-  <wfc-button elevated>Elevated</wfc-button>
-  <wfc-button filled>Filled</wfc-button>
-  <wfc-button filled-tonal>Filled tonal</wfc-button>
-  <wfc-button outlined>Outlined</wfc-button>
-  <wfc-button>
-    <wfc-icon slot="leading-icon">home</wfc-icon>
+  ${`<mc-button>Text</mc-button>
+  <mc-button elevated>Elevated</mc-button>
+  <mc-button filled>Filled</mc-button>
+  <mc-button filled-tonal>Filled tonal</mc-button>
+  <mc-button outlined>Outlined</mc-button>
+  <mc-button>
+    <mc-icon slot="leading-icon">home</mc-icon>
     Icon
-  </wfc-button>`}
+  </mc-button>`}
             </code>
           </pre>
-        </wfc-card>
+        </mc-card>
       </section>
 
 
       <section>
-        <wfc-card id="icon_button">
+        <mc-card id="icon_button">
           <h2 slot="headline">Button with icon</h2>
 
           <div class="example">
-            <wfc-button>
-              <wfc-icon slot="leading-icon">home</wfc-icon>
+            <mc-button>
+              <mc-icon slot="leading-icon">home</mc-icon>
               Icon
-            </wfc-button>
+            </mc-button>
           </div>
 
           <pre>
             <code class="language-html">
-  ${`<wfc-button>
-    <wfc-icon slot="leading-icon">home</wfc-icon>
+  ${`<mc-button>
+    <mc-icon slot="leading-icon">home</mc-icon>
     Icon
-  </wfc-button>`}
+  </mc-button>`}
             </code>
           </pre>
-        </wfc-card>
+        </mc-card>
       </section>
 
       <section>
-        <wfc-card id="async_button">
+        <mc-card id="async_button">
           <h2 slot="headline">Async button</h2>
 
 
           <div class="example" style="gap: 8px; display: flex;">
-            <wfc-button id="async-button" async filled>Example</wfc-button>
-            <wfc-button onclick="document.querySelector('#async-button').resolve()">Resolve</wfc-button>
+            <mc-button id="async-button" async filled>Example</mc-button>
+            <mc-button onclick="document.querySelector('#async-button').resolve()">Resolve</mc-button>
           </div>
 
           <pre>
             <code class="language-html">
-  ${`<wfc-button id="async-button" async filled>Example</wfc-button>
-  <wfc-button onclick="document.querySelector('#async-button').resolve()">Resolve</wfc-button>`}
+  ${`<mc-button id="async-button" async filled>Example</mc-button>
+  <mc-button onclick="document.querySelector('#async-button').resolve()">Resolve</mc-button>`}
             </code>
           </pre>
-        </wfc-card>
+        </mc-card>
       </section>
     </div>
   </div>

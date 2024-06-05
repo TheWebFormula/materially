@@ -1,7 +1,7 @@
 <article>
   <header>
     <h1>Styles</h1>
-    <div class="page-subheader wfc-font-title-medium">Material theme, colors, motion, font</div>
+    <div class="page-subheader mc-font-title-medium">Material theme, colors, motion, font</div>
     <a href="https://m3.material.io/styles" target="_new">Material Design Guidelines: Styles</a>
   </header>
 
@@ -17,7 +17,7 @@
     <div class="article-content">
 
       <section id="colors">
-        <wfc-card>
+        <mc-card>
           <h2 slot="headline">Colors</h2>
           <div slot="supporting-text">You can generate theme colors using the themeGenerator</div>
 
@@ -53,12 +53,12 @@
   }, './colorTokens.css');`}
             </code>
           </pre>
-        </wfc-card>
+        </mc-card>
       </section>
 
 
       <section id="customize">
-        <wfc-card>
+        <mc-card>
           <h2 slot="headline">Customize</h2>
           <div slot="supporting-text">You can customize colors, fonts, elevations, and animations, both globally and at the component level</div>
 
@@ -70,10 +70,10 @@
   */
 
   :root {
-    /* Defaults: --wfc-surface */
-    --wfc-background-color: var(--wfc-surface-container-low);
-    --wfc-navigation-container-color: var(--wfc-surface-container-low);
-    --wfc-surface-container-color: var(--wfc-surface-container-lowest);
+    /* Defaults: --mc-surface */
+    --mc-background-color: var(--mc-surface-container-low);
+    --mc-navigation-container-color: var(--mc-surface-container-low);
+    --mc-surface-container-color: var(--mc-surface-container-lowest);
   }`}
             </code>
           </pre>
@@ -87,7 +87,7 @@
     Check out overrides on component pages
   -->
 
-  <wfc-navigation-drawer style="--wfc-navigation-drawer-container-color: var(--wfc-surface-container-low)"></wfc-navigation-drawer>`}
+  <mc-navigation-drawer style="--mc-navigation-drawer-container-color: var(--mc-surface-container-low)"></mc-navigation-drawer>`}
             </code>
           </pre>
 
@@ -99,8 +99,8 @@
   /* Set font families */
 
   :root {
-    --wfc-font-brand: 'Roboto';
-    --wfc-font-plain: 'Roboto';
+    --mc-font-brand: 'Roboto';
+    --mc-font-plain: 'Roboto';
   }`}
             </code>
           </pre>
@@ -109,7 +109,7 @@
   ${`<!-- TODO setting font -->`}
             </code>
           </pre>
-        </wfc-card>
+        </mc-card>
       </section>
     </div>
   </div>

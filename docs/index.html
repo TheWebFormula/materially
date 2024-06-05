@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Webformaula material components">
   <meta name="color-scheme" content="light dark">
-  <meta name="wfc-theme-color-scheme-preference-disable">
+  <meta name="mc-theme-color-scheme-preference-disable">
   <meta name="theme-color" content="#fdf8fd">
   <link rel="manifest" href="manifest.json" />
 
@@ -23,7 +23,7 @@
     body {
       font-family: Arial;
     }
-    body:not(.wfc-initiated) {
+    body:not(.mc-initiated) {
       visibility: hidden;
     }
   </style>
@@ -57,60 +57,60 @@
 
 <!-- <body class="pane-layout"> -->
 <body>
-  <wfc-navigation-drawer>
+  <mc-navigation-drawer>
     <div slot="header" class="headline">Webformula material</div>
-    <wfc-anchor href="/">Welcome</wfc-anchor>
-    <wfc-anchor href="/layout">Layout</wfc-anchor>
-    <wfc-anchor href="/styles">styles</wfc-anchor>
+    <mc-anchor href="/">Welcome</mc-anchor>
+    <mc-anchor href="/layout">Layout</mc-anchor>
+    <mc-anchor href="/styles">styles</mc-anchor>
     
-    <wfc-anchor-group>
+    <mc-anchor-group>
       <div slot="control">buttons</div>
     
-      <wfc-anchor href="/buttons">Common buttons</wfc-anchor>
-      <wfc-anchor href="/fabs">FAB</wfc-anchor>
-      <wfc-anchor href="/icon-buttons">Icon buttons</wfc-anchor>
-      <wfc-anchor href="/segmented-buttons">Segmented buttons</wfc-anchor>
-    </wfc-anchor-group>
+      <mc-anchor href="/buttons">Common buttons</mc-anchor>
+      <mc-anchor href="/fabs">FAB</mc-anchor>
+      <mc-anchor href="/icon-buttons">Icon buttons</mc-anchor>
+      <mc-anchor href="/segmented-buttons">Segmented buttons</mc-anchor>
+    </mc-anchor-group>
 
-    <wfc-anchor href="/dialogs">Dialogs</wfc-anchor>
-    <wfc-anchor href="/menus">Menus</wfc-anchor>
-    <wfc-anchor href="/6">6</wfc-anchor>
-    <wfc-anchor href="/7">7</wfc-anchor>
-    <wfc-anchor href="/8">8</wfc-anchor>
-    <wfc-anchor href="/9">9</wfc-anchor>
-    <wfc-anchor href="/10">10</wfc-anchor>
-    <wfc-anchor href="/11">11</wfc-anchor>
-    <wfc-anchor href="/two">two</wfc-anchor>
-  </wfc-navigation-drawer>
+    <mc-anchor href="/dialogs">Dialogs</mc-anchor>
+    <mc-anchor href="/menus">Menus</mc-anchor>
+    <mc-anchor href="/progress-indicators">Progress indicators</mc-anchor>
+    <mc-anchor href="/7">7</mc-anchor>
+    <mc-anchor href="/8">8</mc-anchor>
+    <mc-anchor href="/9">9</mc-anchor>
+    <mc-anchor href="/10">10</mc-anchor>
+    <mc-anchor href="/11">11</mc-anchor>
+    <mc-anchor href="/two">two</mc-anchor>
+  </mc-navigation-drawer>
 
-  <wfc-navigation-rail>
-    <wfc-anchor href="/">
-      <wfc-icon slot="leading-icon">home</wfc-icon>
-    </wfc-anchor>
+  <mc-navigation-rail>
+    <mc-anchor href="/">
+      <mc-icon slot="leading-icon">home</mc-icon>
+    </mc-anchor>
   
-    <wfc-anchor href="/buttons">
-      <wfc-icon slot="leading-icon">apps</wfc-icon>
+    <mc-anchor href="/buttons">
+      <mc-icon slot="leading-icon">apps</mc-icon>
       Buttons
-    </wfc-anchor>
+    </mc-anchor>
   
-    <wfc-anchor href="/two">
-      <wfc-icon slot="leading-icon">palette</wfc-icon>
+    <mc-anchor href="/two">
+      <mc-icon slot="leading-icon">palette</mc-icon>
       Two
-    </wfc-anchor>
-  </wfc-navigation-rail>
+    </mc-anchor>
+  </mc-navigation-rail>
 
-  <wfc-top-app-bar compress>
+  <mc-top-app-bar compress>
     <div slot="headline">Headline</div>
-    <wfc-icon slot="trailing-icon">inbox</wfc-icon>
-    <wfc-icon slot="trailing-icon">account_circle</wfc-icon>
-  </wfc-top-app-bar>
+    <mc-icon slot="trailing-icon">inbox</mc-icon>
+    <mc-icon slot="trailing-icon">account_circle</mc-icon>
+  </mc-top-app-bar>
 
   <!-- <main id="page-content"></main> -->
-  <!-- <wfc-pane-container scroll> -->
-  <wfc-pane-container>
-    <wfc-pane id="page-content"></wfc-pane>
-    <!-- <wfc-pane fixed collapsible no-padding>
-      <wfc-side-sheet close back onback="console.log('okok')">
+  <!-- <mc-pane-container scroll> -->
+  <mc-pane-container>
+    <mc-pane id="page-content"></mc-pane>
+    <!-- <mc-pane fixed collapsible no-padding>
+      <mc-side-sheet close back onback="console.log('okok')">
         <div slot="headline">Headline</div>
         <div>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
@@ -139,24 +139,24 @@
           aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
           occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </div>
-      </wfc-side-sheet>
-    </wfc-pane> -->
-  </wfc-pane-container>
+      </mc-side-sheet>
+    </mc-pane> -->
+  </mc-pane-container>
 
-  <wfc-navigation-bar auto-hide>  
-    <wfc-anchor href="/">
-      <wfc-icon slot="leading-icon">home</wfc-icon>
-    </wfc-anchor>
+  <mc-navigation-bar auto-hide>  
+    <mc-anchor href="/">
+      <mc-icon slot="leading-icon">home</mc-icon>
+    </mc-anchor>
   
-    <wfc-anchor href="/getting-started">
-      <wfc-icon slot="leading-icon">apps</wfc-icon>
+    <mc-anchor href="/getting-started">
+      <mc-icon slot="leading-icon">apps</mc-icon>
       Get started
-    </wfc-anchor>
-  </wfc-navigation-bar>
+    </mc-anchor>
+  </mc-navigation-bar>
 
 
-  <!-- <wfc-pane id="page-content"></wfc-pane>
-  <wfc-side-sheet close back onback="console.log('okok')" inset>
+  <!-- <mc-pane id="page-content"></mc-pane>
+  <mc-side-sheet close back onback="console.log('okok')" inset>
     <div slot="headline">Headline</div>
     <div>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
@@ -185,7 +185,7 @@
       aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
       occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </div>
-  </wfc-side-sheet> -->
+  </mc-side-sheet> -->
 </body>
 
 </html>

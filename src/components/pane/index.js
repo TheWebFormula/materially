@@ -4,8 +4,8 @@ import device from '../../helpers/device.js';
 
 // TODO save pane resize
 
-export default class WFCPaneContainerElement extends HTMLComponentElement {
-  static tag = 'wfc-pane-container';
+export default class MCPaneContainerElement extends HTMLComponentElement {
+  static tag = 'mc-pane-container';
   static useShadowRoot = true;
   static useTemplate = true;
   static styleSheets = [styles];
@@ -29,11 +29,11 @@ export default class WFCPaneContainerElement extends HTMLComponentElement {
     if (this.hasAttribute('scroll')) document.body.classList.add('pane-layout');
     this.render();
     this.#resizeHandle = this.shadowRoot.querySelector('.resize-handle');
-    const panes = this.querySelectorAll('wfc-pane');
+    const panes = this.querySelectorAll('mc-pane');
     this.#pane1 = panes[0];
     this.#pane2 = panes[1];
-    window.addEventListener('wfcwindowstatechange', this.#windowStateChange_bound);
-    if (panes.length > 2 && this.resize) console.warn('wfc-pane-container only supports resizing for 2 wfc-pane elements');
+    window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound);
+    if (panes.length > 2 && this.resize) console.warn('mc-pane-container only supports resizing for 2 mc-pane elements');
   }
 
   template() {
@@ -54,7 +54,7 @@ export default class WFCPaneContainerElement extends HTMLComponentElement {
   }
 
   connectedCallback() {
-    // window.addEventListener('wfcwindowstatechange', this.#windowStateChange_bound);
+    // window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound);
   }
 
   get resize() {
@@ -115,4 +115,4 @@ export default class WFCPaneContainerElement extends HTMLComponentElement {
   }
 }
 
-customElements.define(WFCPaneContainerElement.tag, WFCPaneContainerElement);
+customElements.define(MCPaneContainerElement.tag, MCPaneContainerElement);

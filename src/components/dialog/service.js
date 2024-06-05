@@ -1,14 +1,12 @@
 import util from '../../helpers/util.js';
 
-const wfcDialog = new class wfcDialog {
-  #dialogStack = [];
+const mcDialog = new class mcDialog {
   #idCounter = 0;
 
   async simple(params = {
     headline: '',
     icon: '',
     message: '',
-    noScrim: false,
     allowClose: false,
     preventNavigation: false,
     actionConfirm: true,
@@ -18,23 +16,33 @@ const wfcDialog = new class wfcDialog {
   }) {
     const actionConfirm = params.actionConfirm === undefined ? true : params.actionConfirm;
     const actionCancel = params.actionCancel || false;
-    const id = `wfc-dialog-${this.#idCounter++}`;
+    const id = `mc-dialog-${++this.#idCounter}`;
+    const formId = `mc-dialog-form-${this.#idCounter}`;
     document.body.insertAdjacentHTML('beforeend', `
-      <wfc-dialog id="${id}" aria-label="[dialog] ${params.message}">
-        ${!params.icon ? '' : `<wfc-icon slot="icon">${params.icon}</wfc-icon>`}
+      <mc-dialog id="${id}" aria-label="[dialog] ${params.message}">
+        ${!params.icon ? '' : `<mc-icon slot="icon">${params.icon}</mc-icon>`}
         ${!params.headline ? '' : `<div slot="headline">${params.headline}</div>`}
         <div slot="content">${params.message || ''}</div>
-        ${actionConfirm === true ? `<wfc-button slot="actions" onclick="wfcDialog.close('confirm')">${params.actionConfirmLabel || 'OK'}</wfc-button>` : ''}
-        ${actionCancel === true ? `<wfc-button slot="actions" onclick="wfcDialog.close('cancel')">${params.actionCancelLabel || 'Cancel'}</wfc-button>` : ''}
-      </wfc-dialog>
+        <form id="${formId}" slot="content" method="dialog"></form>
+        ${actionConfirm === true ? `<mc-button type="submit" slot="actions" form="${formId}" value="confirm">${params.actionConfirmLabel || 'OK'}</mc-button>` : ''}
+        ${actionCancel === true ? `<mc-button slot="actions" form="${formId}" value="cancel">${params.actionCancelLabel || 'Cancel'}</mc-button>` : ''}
+      </mc-dialog>
     `);
     const element = document.body.querySelector(`#${id}`);
     element.removeOnClose = true;
     element.allowClose = params.allowClose;
-    element.noScrim = params.noScrim === undefined ? false : params.noScrim;
+    // element.noScrim = params.noScrim === undefined ? false : params.noScrim;
     element.preventNavigation = !!params.preventNavigation;
     await util.nextAnimationFrameAsync();
-    return element.show();
+    
+    const returnPromise = new Promise((resolve) => {
+      element.addEventListener('close', () => {
+        resolve(element.returnValue);
+      });
+    });
+    element.showModal();
+
+    return returnPromise
   }
 
 
@@ -44,11 +52,11 @@ const wfcDialog = new class wfcDialog {
     allowClose: false,
     preventNavigation: true
   }) {
-    const id = `wfc-dialog-${this.#idCounter++}`;
+    const id = `mc-dialog-${this.#idCounter++}`;
     document.body.insertAdjacentHTML('beforeend', `
-      <wfc-dialog id="${id}">
+      <mc-dialog id="${id}">
         ${params.template}
-      </wfc-dialog>
+      </mc-dialog>
     `);
     const element = document.body.querySelector(`#${id}`);
     element.removeOnClose = true;
@@ -56,29 +64,17 @@ const wfcDialog = new class wfcDialog {
     element.scrim = params.scrim === undefined ? true : params.scrim;
     element.preventNavigation = !!params.preventNavigation;
     await util.nextAnimationFrameAsync();
-    return element.show();
-  }
+    
+    const returnPromise = new Promise((resolve) => {
+      element.addEventListener('close', () => {
+        resolve(element.returnValue);
+      });
+    });
+    element.showModal();
 
-
-  async close(returnValue) {
-    const currentDialog = this.#dialogStack.pop();
-    if (!currentDialog) throw Error('No dialog to close');
-    return currentDialog.close(returnValue);
-  }
-
-
-
-  track(dialogElement) {
-    if (dialogElement.nodeName !== 'WFC-DIALOG') throw Error('Can only track wfc-dialog elements');
-    this.#dialogStack.push(dialogElement);
-  }
-
-  untrack(dialogElement) {
-    const dialog = this.#dialogStack.find(({ element }) => element === dialogElement);
-    if (!dialog) return;
-    this.#dialogStack = this.#dialogStack.filter(({ element }) => element !== dialogElement);
+    return returnPromise
   }
 };
 
-window.wfcDialog = wfcDialog;
-export default wfcDialog;
+window.mcDialog = mcDialog;
+export default mcDialog;

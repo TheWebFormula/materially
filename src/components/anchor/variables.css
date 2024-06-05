@@ -1,6 +1,6 @@
 :root {
   /* Override variables */
-  --wfc-anchor-color: var(--wfc-on-surface-variant);
-  --wfc-anchor-shape: var(--wfc-shape-extra-large);
-  --wfc-anchor-current-container-color: var(--wfc-secondary-container);
+  --mc-anchor-color: var(--mc-on-surface-variant);
+  --mc-anchor-shape: var(--mc-shape-extra-large);
+  --mc-anchor-current-container-color: var(--mc-secondary-container);
 }

@@ -1,8 +1,8 @@
 :host {
   font-family: 'Material Symbols Outlined', 'Material Symbols Sharp', 'Material Symbols Rounded';
-  width: var(--wfc-font-medium-icon-size);
-  height: var(--wfc-font-medium-icon-size);
-  font-size: var(--wfc-font-medium-icon-size);
+  width: var(--mc-font-medium-icon-size);
+  height: var(--mc-font-medium-icon-size);
+  font-size: var(--mc-font-medium-icon-size);
   font-weight: normal;
   font-style: normal;
   text-transform: none;
@@ -35,21 +35,21 @@
 }
 
 :host([small]) {
-  width: var(--wfc-font-small-icon-size);
-  height: var(--wfc-font-small-icon-size);
-  font-size: var(--wfc-font-small-icon-size);
+  width: var(--mc-font-small-icon-size);
+  height: var(--mc-font-small-icon-size);
+  font-size: var(--mc-font-small-icon-size);
 }
 
 :host([large]) {
-  width: var(--wfc-font-large-icon-size);
-  height: var(--wfc-font-large-icon-size);
-  font-size: var(--wfc-font-large-icon-size);
+  width: var(--mc-font-large-icon-size);
+  height: var(--mc-font-large-icon-size);
+  font-size: var(--mc-font-large-icon-size);
 }
 
 :host([extra-large]) {
-  width: var(--wfc-font-large-icon-size-extra);
-  height: var(--wfc-font-large-icon-size-extra);
-  font-size: var(--wfc-font-large-icon-size-extra);
+  width: var(--mc-font-large-icon-size-extra);
+  height: var(--mc-font-large-icon-size-extra);
+  font-size: var(--mc-font-large-icon-size-extra);
 }
 
 :host([filled]),

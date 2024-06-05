@@ -10,8 +10,8 @@ import {
 } from '../../helpers/svgs.js';
 
 
-export default class WFCCardElement extends HTMLComponentElement {
-  static tag = 'wfc-card';
+export default class MCCardElement extends HTMLComponentElement {
+  static tag = 'mc-card';
   static useShadowRoot = true;
   static useTemplate = true;
   static styleSheets = [styles];
@@ -27,9 +27,9 @@ export default class WFCCardElement extends HTMLComponentElement {
     return /*html*/`
       <div class="placeholder"></div>
       <div class="container">
-        <wfc-icon-button class="elevated fullscreen-close">
-          <wfc-icon>${arrow_back_ios_FILL1_wght300_GRAD0_opsz24}</wfc-icon>
-        </wfc-icon-button>
+        <mc-icon-button class="elevated fullscreen-close">
+          <mc-icon>${arrow_back_ios_FILL1_wght300_GRAD0_opsz24}</mc-icon>
+        </mc-icon-button>
         <slot name="swipe-action"></slot>
         <slot name="image"></slot>
         <div class="content">
@@ -41,10 +41,10 @@ export default class WFCCardElement extends HTMLComponentElement {
           <slot class="default-slot"></slot>
           <slot name="action"></slot>
         </div>
-        <wfc-state-layer ripple="false" enabled="false" class="temp"></wfc-state-layer>
+        <mc-state-layer ripple="false" enabled="false" class="temp"></mc-state-layer>
       </div>
     `;
   }
 }
 
-customElements.define(WFCCardElement.tag, WFCCardElement);
+customElements.define(MCCardElement.tag, MCCardElement);

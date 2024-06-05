@@ -45,11 +45,11 @@ function handleHashAnchor(hash, animate = true) {
 
 
 window.toggleColorScheme = () => {
-  const scheme = wfcUtil.toggleColorScheme();
+  const scheme = mcUtil.toggleColorScheme();
   setTimeout(() => {
     document.querySelectorAll('.theme-toggle').forEach(element => {
-      if (scheme === 'dark') element.classList.add('wfc-toggled');
-      else element.classList.remove('wfc-toggled');
+      if (scheme === 'dark') element.classList.add('mc-toggled');
+      else element.classList.remove('mc-toggled');
     });
   }, 0);
 };

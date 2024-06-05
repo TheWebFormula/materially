@@ -5,20 +5,23 @@ import '../state-layer/index.js';
 
 const targetValues = ['_blank', '_parent', '_self', '_top'];
 
-export default class WFCButtonElement extends HTMLComponentElement {
-  static tag = 'wfc-button';
+export default class MCButtonElement extends HTMLComponentElement {
+  static tag = 'mc-button';
   static useShadowRoot = true;
   static useTemplate = true;
   static shadowRootDelegateFocus = true;
   static styleSheets = [styles];
+  static formAssociated = true;
 
+
+
+  #internals;
   #abort;
   #target;
   #href;
   #type;
   #button;
   #value;
-  #form;
   #formState;
   #onclickValue;
   #async = false;
@@ -36,6 +39,8 @@ export default class WFCButtonElement extends HTMLComponentElement {
   constructor() {
     super();
 
+    this.#internals = this.attachInternals();
+
     this.role = 'button';
     this.render();
     this.#button = this.shadowRoot.querySelector('button');
@@ -48,7 +53,7 @@ export default class WFCButtonElement extends HTMLComponentElement {
         <slot class="default-slot"></slot>
       </button>
       <div class="spinner"></div>
-      <wfc-state-layer ripple></wfc-state-layer>
+      <mc-state-layer ripple></mc-state-layer>
     `;
   }
 
@@ -57,9 +62,9 @@ export default class WFCButtonElement extends HTMLComponentElement {
     return [
       ['href', 'string'],
       ['target', 'string'],
-      ['type', 'string'],
+      // ['type', 'string'],
       ['value', 'string'],
-      ['form', 'string'],
+      // ['form', 'string'],
       ['async', 'boolean'],
       ['disabled', 'boolean'],
       ['popovertarget', 'string']
@@ -75,11 +80,12 @@ export default class WFCButtonElement extends HTMLComponentElement {
 
     if (this.#async) this.addEventListener('mouseup', this.#asyncMouseup_bound, { signal: this.#abort.signal });
     this.addEventListener('focus', this.#focus_bound, { signal: this.#abort.signal });
-    if (this.#form) {
+
+    if (this.form) {
       this.addEventListener('click', this.#formClick_bound, { signal: this.#abort.signal });
       this.addEventListener('mousedown', this.#formMouseDown_bound, { signal: this.#abort.signal });
       this.addEventListener('mouseup', this.#formMouseUp_bound, { signal: this.#abort.signal });
-      this.#form.addEventListener('focusin', this.#formFocusIn_bound, { signal: this.#abort.signal });
+      this.form.addEventListener('focusin', this.#formFocusIn_bound, { signal: this.#abort.signal });
     }
   }
 
@@ -113,24 +119,32 @@ export default class WFCButtonElement extends HTMLComponentElement {
     this.#target = value;
   }
 
-  get type() { return this.#type; }
-  set type(value) {
-    this.#type = value;
-    this.#button.setAttribute('type', value);
-    if (['reset', 'cancel', 'submit'].includes(value) && !this.#form && this.parentElement.nodeName === 'FORM') {
-      this.#form = this.parentElement;
-    }
-  }
+  // get type() { return this.#type; }
+  // set type(value) {
+  //   this.#type = value;
+  //   this.#button.setAttribute('type', value);
+  //   if (['reset', 'cancel', 'submit'].includes(value) && !this.#form && this.parentElement.nodeName === 'FORM') {
+  //     this.#form = this.parentElement;
+  //   }
+  // }
 
   get value() { return this.#value; }
   set value(value) {
     this.#value = value;
     this.#button.setAttribute('value', value);
+    // if (this.form) this.#internals.setFormValue(value);
   }
 
-  get form() { return this.#form }
-  set form(value) {
-    this.#form = document.querySelector(`form#${value}`);
+  // get form() { return this.#form }
+  // set form(value) {
+  //   console.log(document.querySelector(`form#${value}`))
+  //   this.#form = document.querySelector(`form#${value}`);
+  //   // this.#button.form = value;
+  //   // this.#form = document.querySelector(`form#${value}`);
+  // }
+
+  get form() {
+    return this.#internals.form;
   }
 
   get async() { return this.#async }
@@ -138,37 +152,37 @@ export default class WFCButtonElement extends HTMLComponentElement {
     this.#async = !!value;
   }
 
-  get formNoValidate() { return this.hasAttribute('formnovalidate'); }
-  set formNoValidate(value) {
-    if (!!value) this.setAttribute('formnovalidate', '');
-    else this.removeAttribute('formnovalidate');
-  }
+  // get formNoValidate() { return this.hasAttribute('formnovalidate'); }
+  // set formNoValidate(value) {
+  //   if (!!value) this.setAttribute('formnovalidate', '');
+  //   else this.removeAttribute('formnovalidate');
+  // }
 
-  get popovertarget() {
-    return this.#button.getAttribute('popovertarget');
-  }
-  set popovertarget(value) {
-    this.#button.setAttribute('popovertarget', value);
-  }
+  // get popovertarget() {
+  //   return this.#button.getAttribute('popovertarget');
+  // }
+  // set popovertarget(value) {
+  //   this.#button.setAttribute('popovertarget', value);
+  // }
 
-  get popoverTargetElement() {
-    return this.#button.popoverTargetElement;
-  }
-  set popoverTargetElement(value) {
-    this.#button.popoverTargetElement = value;
-  }
+  // get popoverTargetElement() {
+  //   return this.#button.popoverTargetElement;
+  // }
+  // set popoverTargetElement(value) {
+  //   this.#button.popoverTargetElement = value;
+  // }
 
-  get popoverTargetAction() {
-    return this.#button.popoverTargetAction;
-  }
-  set popoverTargetAction(value) {
-    this.#button.popoverTargetAction = value;
-  }
+  // get popoverTargetAction() {
+  //   return this.#button.popoverTargetAction;
+  // }
+  // set popoverTargetAction(value) {
+  //   this.#button.popoverTargetAction = value;
+  // }
 
   pending() {
     this.classList.add('async-pending');
     this.shadowRoot.querySelector('.spinner').innerHTML = `
-      <wfc-progress-circular style="width: 20px; height: 20px;" indeterminate class="${this.hasAttribute('filled') ? ' on-filled' : ''}${this.hasAttribute('filled-tonal') ? ' on-filled-tonal' : ''}"></wfc-progress-circular>
+      <mc-progress-circular style="width: 20px; height: 20px;" indeterminate class="${this.hasAttribute('filled') ? ' on-filled' : ''}${this.hasAttribute('filled-tonal') ? ' on-filled-tonal' : ''}"></mc-progress-circular>
     `;
   }
 
@@ -189,7 +203,7 @@ export default class WFCButtonElement extends HTMLComponentElement {
   }
 
   #focusKeydown(e) {
-    if (e.key === 'Enter') this.shadowRoot.querySelector('wfc-state-layer').triggerRipple();
+    if (e.key === 'Enter') this.shadowRoot.querySelector('mc-state-layer').triggerRipple();
   }
 
   // prevent onclick attribute from firing when form invalid
@@ -210,14 +224,17 @@ export default class WFCButtonElement extends HTMLComponentElement {
   }
 
   async #formClick(event) {
+    this.#formRequestSubmit();
+    return;
+
     switch (this.#type) {
       case 'reset':
-        this.#form.reset();
+        this.form.reset();
         break;
 
       case 'submit':
-        if (!this.formNoValidate && !this.#form.hasAttribute('novalidate') && !this.#form.checkValidity()) {
-          const formElements = [...this.#form.elements];
+        if (!this.formNoValidate && !this.form.hasAttribute('novalidate') && !this.form.checkValidity()) {
+          const formElements = [...this.form.elements];
           formElements.forEach(element => element.reportValidity());
           const firstInvalid = formElements.find(e => !e.checkValidity());
           const bounds = firstInvalid.getBoundingClientRect();
@@ -251,30 +268,31 @@ export default class WFCButtonElement extends HTMLComponentElement {
         break;
 
       default:
-        if (this.#form.method === 'dialog') {
+        if (this.form.method === 'dialog') {
           this.#formRequestSubmit();
         }
     }
   }
 
   #formRequestSubmit() {
-    const previousNoValidate = this.#form.noValidate;
-    if (this.formNoValidate) this.#form.noValidate = true;
+    const previousNoValidate = this.form.noValidate;
+    if (this.formNoValidate) this.form.noValidate = true;
     // intercept submit so we can inject submitter
-    this.#form.addEventListener('submit', (submitEvent) => {
+    this.form.addEventListener('submit', (submitEvent) => {
       Object.defineProperty(submitEvent, 'submitter', {
         configurable: true,
         enumerable: true,
         get: () => this,
       });
     }, { capture: true, once: true });
-    this.#form.requestSubmit();
-    if (this.formNoValidate) this.#form.noValidate = previousNoValidate;
+    this.#internals.setFormValue(this.value);
+    this.form.requestSubmit();
+    if (this.formNoValidate) this.form.noValidate = previousNoValidate;
   }
 
   // used to track changes based on values
   #getFormState() {
-    return [...this.#form.elements].map(e => e.type === 'checkbox' ? e.checked : e.value).toString();
+    return [...this.form.elements].map(e => e.type === 'checkbox' ? e.checked : e.value).toString();
   }
 
   #formFocusIn() {
@@ -290,4 +308,4 @@ export default class WFCButtonElement extends HTMLComponentElement {
   }
 }
 
-customElements.define(WFCButtonElement.tag, WFCButtonElement);
+customElements.define(MCButtonElement.tag, MCButtonElement);

@@ -1,0 +1,135 @@
+:host {
+  display: flex;
+  position: relative;
+  min-width: 80px;
+  height: 4px;
+  content-visibility: auto;
+  contain: strict;
+}
+
+
+.active-bar,
+.inactive-bar {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  inset: 0;
+  height: 4px;
+  transform-origin: left center;
+}
+
+.active-bar {
+  background-color: var(--mc-primary);
+}
+
+.active-bar > .inner-bar {
+  display: none;
+  position: absolute;
+  inset: 0;
+}
+
+.inactive-bar,
+.active-bar > .inner-bar {
+  background: var(--mc-surface-container-highest);
+}
+
+:host([indeterminate]) .active-bar > .inner-bar {
+  display: block;
+  animation: linear infinite 2s;
+  animation-name: primary-indeterminate-scale;
+}
+
+:host([indeterminate][disabled]) .active-bar > .inner-bar {
+  animation: none;
+}
+
+
+:host([indeterminate]) .active-bar {
+  inset-inline-start: -100%;
+  animation: linear infinite 2s;
+  animation-name: primary-indeterminate-translate;
+}
+
+:host([indeterminate][disabled]) .active-bar {
+  animation: none;
+}
+
+.inactive-bar .stop {
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+  background-color: var(--mc-primary);
+  justify-content: flex-end;
+}
+
+:host(:not([indeterminate])) .inactive-bar {
+  margin-left: 4px;
+  right: 0;
+  width: unset;
+}
+
+:host(:not([indeterminate])) .inactive-bar .stop {
+  display: block;
+}
+
+
+@keyframes primary-indeterminate-translate {
+  0% {
+    transform: translateX(0px);
+  }
+
+  20% {
+    animation-timing-function: var(--mc-motion-easing-emphasized-accelerate);
+    transform: translateX(0px);
+  }
+
+  60% {
+    transform: translateX(100%);
+  }
+
+  90% {
+    transform: translateX(200%);
+  }
+
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+
+@keyframes primary-indeterminate-scale {
+  0% {
+    inset-inline-start: 0%;
+    inset-inline-end: 100%;
+  }
+
+  10% {
+    animation-timing-function: var(--mc-motion-easing-emphasized-accelerate);
+    inset-inline-end: 100%;
+  }
+
+  40% {
+    inset-inline-start: 10%;
+  }
+
+  55% {
+    inset-inline-end: 5%;
+  }
+
+  60% {
+    inset-inline-end: 0%;
+    inset-inline-start: 50%;
+  }
+
+  80% {
+    inset-inline-start: 40%;
+  }
+
+  100% {
+    inset-inline-start: 30%;
+    inset-inline-end: 0%;
+  }
+}

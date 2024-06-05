@@ -1,7 +1,7 @@
 <article>
   <header>
     <h1>Layout</h1>
-    <div class="page-subheader wfc-font-title-medium">Layout is the visual arrangement of elements on the screens</div>
+    <div class="page-subheader mc-font-title-medium">Layout is the visual arrangement of elements on the screens</div>
     <a href="https://m3.material.io/foundations/layout/understanding-layout/overview" target="_new">Material Design Guidelines: Layout</a>
   </header>
 
@@ -18,7 +18,7 @@
     <div class="article-content">
 
       <section id="regions">
-        <wfc-card>
+        <mc-card>
           <h2 slot="headline">Layout regions</h2>
           <div slot="supporting-text">There are four main regions. Page layout is controlled with a CSS grid. The components will automatically assign themselves to the correct region.</div>
           
@@ -38,18 +38,18 @@
 
     <!-- Hide content while site loads to prevent layout shifts -->
     <style>    
-      body:not(.wfc-initiated) { visibility: hidden; }
+      body:not(.mc-initiated) { visibility: hidden; }
     </style>
 
     <body>
-      <wfc-top-app-bar>...</wfc-top-app-bar>
-      <wfc-navigation-drawer>...</wfc-navigation-drawer>
+      <mc-top-app-bar>...</mc-top-app-bar>
+      <mc-navigation-drawer>...</mc-navigation-drawer>
       
-      <wfc-pane-container>
-        <wfc-pane>...</wfc-pane>
-      </wfc-pane-container>
+      <mc-pane-container>
+        <mc-pane>...</mc-pane>
+      </mc-pane-container>
 
-      <wfc-navigation-bar>...</wfc-navigation-bar>
+      <mc-navigation-bar>...</mc-navigation-bar>
     </body>
   </html>
   
@@ -68,13 +68,13 @@
   </html>`}
             </code>
           </pre>
-        </wfc-card>
+        </mc-card>
       </section>
 
 
 
       <section id="panes">
-        <wfc-card>
+        <mc-card>
           <h2 slot="headline">Panes</h2>
           <div slot="supporting-text">Panes are used to group the UI</div>
 
@@ -88,18 +88,18 @@
   <html lang="en">
     <header>...</header>
     <body>
-      <wfc-top-app-bar>...</wfc-top-app-bar>
-      <wfc-navigation-drawer>...</wfc-navigation-drawer>
+      <mc-top-app-bar>...</mc-top-app-bar>
+      <mc-navigation-drawer>...</mc-navigation-drawer>
       
-      <wfc-pane-container>
-        <wfc-pane>...</wfc-pane>
+      <mc-pane-container>
+        <mc-pane>...</mc-pane>
         <!--
           You can have multiple panes
-          <wfc-pane>...</wfc-pane>
+          <mc-pane>...</mc-pane>
         -->
-      </wfc-pane-container>
+      </mc-pane-container>
 
-      <wfc-navigation-bar>...</wfc-navigation-bar>
+      <mc-navigation-bar>...</mc-navigation-bar>
     </body>
   </html>
 
@@ -110,54 +110,54 @@
     This means your document body will always be 100vh
     This also means top an bottom app bars will always show.
   -->
-  <wfc-pane-container scroll>
-    <wfc-pane>...</wfc-pane>
-  </wfc-pane-container>
+  <mc-pane-container scroll>
+    <mc-pane>...</mc-pane>
+  </mc-pane-container>
 
 
 
   <!-- Fixed panes lock pane width based on content -->
-  <wfc-pane-container>
-    <wfc-pane>...</wfc-pane>
-    <wfc-pane fixed>...</wfc-pane>
-  </wfc-pane-container>
+  <mc-pane-container>
+    <mc-pane>...</mc-pane>
+    <mc-pane fixed>...</mc-pane>
+  </mc-pane-container>
   
 
   
   <!-- Resizable panes -->
-  <wfc-pane-container resize>
-    <wfc-pane>...</wfc-pane>
-    <wfc-pane>...</wfc-pane>
-  </wfc-pane-container>
+  <mc-pane-container resize>
+    <mc-pane>...</mc-pane>
+    <mc-pane>...</mc-pane>
+  </mc-pane-container>
   
 
   
   <!-- Collapsable panes -->
-  <wfc-pane-container resize>
-    <wfc-pane>...</wfc-pane>
-    <wfc-pane collapsible>...</wfc-pane>
+  <mc-pane-container resize>
+    <mc-pane>...</mc-pane>
+    <mc-pane collapsible>...</mc-pane>
     <!--
       You can mix collapsable and fixed
-      <wfc-pane fixed collapsible>...</wfc-pane>
+      <mc-pane fixed collapsible>...</mc-pane>
     -->
-  </wfc-pane-container>
+  </mc-pane-container>
   
 
   
   <!-- Remove padding -->
-  <wfc-pane-container>
-    <wfc-pane no-padding>...</wfc-pane>
-  </wfc-pane-container>`}
+  <mc-pane-container>
+    <mc-pane no-padding>...</mc-pane>
+  </mc-pane-container>`}
             </code>
           </pre>
-        </wfc-card>
+        </mc-card>
       </section>
 
 
 
 
       <section id="windowsizes">
-        <wfc-card>
+        <mc-card>
           <h2 slot="headline">Window sizes</h2>
           <div slot="supporting-text">Window size classes help create layouts that scale across devices of all shapes and sizes</div>
           <h3 slot="supporting-text">Window size classes</h3>
@@ -183,23 +183,23 @@
             <code class="language-javascript">
   ${`
     
-    // Interact with wfcDevice
-    import { wfcDevice } from '@Webformaula/core';
+    // Interact with mcDevice
+    import { mcDevice } from '@Webformaula/core';
 
-    console.log(wfcDevice.state); // current state
+    console.log(mcDevice.state); // current state
     
-    window.addEventListener('wfcwindowstatechange', ({ detail }) => {
+    window.addEventListener('mcwindowstatechange', ({ detail }) => {
       console.log(detail.lastState);
 
       switch (detail.state) {
-        case wfcDevice.COMPACT;
-        case wfcDevice.MEDIUM;
-        case wfcDevice.EXPANDED;
+        case mcDevice.COMPACT;
+        case mcDevice.MEDIUM;
+        case mcDevice.EXPANDED;
       }
     });`}
             </code>
           </pre>
-        </wfc-card>
+        </mc-card>
       </section>
 
     </div>

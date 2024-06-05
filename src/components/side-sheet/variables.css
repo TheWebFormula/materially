@@ -1,5 +1,5 @@
 :root {
-  /* --wfc-side-sheet-width - set globally */
-  --wfc-side-sheet-container-color: var(--wfc-surface);
-  --wfc-side-sheet-shape: var(--wfc-shape-large);
+  /* --mc-side-sheet-width - set globally */
+  --mc-side-sheet-container-color: var(--mc-surface);
+  --mc-side-sheet-shape: var(--mc-shape-large);
 }

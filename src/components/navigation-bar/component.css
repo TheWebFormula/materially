@@ -16,8 +16,8 @@
   z-index: 9;
   gap: 8px;
 
-  background-color: var(--wfc-navigation-bar-container-color);
-  box-shadow: var(--wfc-navigation-bar-elevation);
+  background-color: var(--mc-navigation-bar-container-color);
+  box-shadow: var(--mc-navigation-bar-elevation);
 }
 
 :host(.window-compact) {
@@ -26,8 +26,8 @@
 
 :host([auto-hide].window-compact) {
   transition: bottom;
-  transition-duration: var(--wfc-motion-duration-short3);
-  transition-timing-function: var(---wfc-motion-easing-standard);
+  transition-duration: var(--mc-motion-duration-short3);
+  transition-timing-function: var(---mc-motion-easing-standard);
 }
 
 :host([auto-hide].window-compact.hide) {

@@ -8,11 +8,78 @@
   position: fixed;
   height: fit-content;
   width: fit-content;
-  border-radius: var(--wfc-shape-extra-large);
+  border-radius: var(--mc-shape-extra-large);
+  animation: hide-translate-y;
+  animation-duration: var(--mc-motion-duration-short3);
+  animation-timing-function: var(--mc-motion-easing-emphasized-accelerate);
+  pointer-events: none;
 }
 
+:host([open]) {
+  pointer-events: all;
+  animation: show-translate-y;
+  animation-duration: var(--mc-dialog-height-transition-duration, 300ms);
+  animation-timing-function: var(--mc-motion-easing-emphasized);
+}
+
+
+:host(.fullscreen) {
+  max-height: 100dvh;
+  max-width: 100dvw;
+  width: 100dvw;
+  height: 100dvh;
+  border-radius: 0px;
+  animation: hide-fullscreen;
+  animation-duration: var(--mc-motion-duration-short3);
+  animation-timing-function: var(--mc-motion-easing-emphasized-accelerate);
+
+  dialog {
+    transform: translateY(0px);
+    top: 0px;
+    transform-origin: center;
+    transform: none;
+    transition:
+      opacity var(--mc-motion-duration-short1) 60ms,
+      overlay var(--mc-motion-duration-short3) allow-discrete,
+      display var(--mc-motion-duration-short3) allow-discrete;
+
+
+    &[open] {
+      transform-origin: center;
+      transform: none;
+      transition:
+        opacity var(--mc-motion-duration-short3),
+        overlay var(--mc-dialog-height-transition-duration, 300ms),
+        display var(--mc-dialog-height-transition-duration, 300ms);
+    }
+  }
+
+  .close-fullscreen {
+    display: block;
+
+    &::after {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+}
+
+
+:host([open].fullscreen) {
+  height: 100dvh;
+  width: 100dvw;
+  animation: show-fullscreen;
+  animation-duration: var(--mc-dialog-height-transition-duration, 300ms);
+  animation-timing-function: var(--mc-motion-easing-emphasized);
+}
+
+
 dialog {
-  background: transparent;
+  display: flex;
   border: none;
   border-radius: inherit;
   flex-direction: column;
@@ -23,99 +90,85 @@ dialog {
   min-height: inherit;
   min-width: inherit;
   outline: none;
-  overflow: visible;
+  overflow: hidden;
   padding: 24px;
   width: inherit;
   box-sizing: border-box;
+  background-color: var(--mc-surface-container-high);
+  box-shadow: var(--mc-elevation-3);
+
   transform-origin: top;
-}
-
-dialog.open {
-  display: flex;
-}
-
-dialog.fullscreen {
-  border-radius: 0;
-  width: 100dvw;
-  max-width: 100dvw;
-  height: 100dvh;
-  max-height: 100dvh;
-}
-
-::backdrop {
-  background: none;
-  overscroll-behavior: contain;
-  overflow: auto;
-}
-
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: inherit;
-  background-color: var(--wfc-surface-container-high);
-  box-shadow: var(--wfc-elevation-3);
-}
-
-.scrim {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
   opacity: 0;
-  z-index: 21;
-  background-color: var(--wfc-scrim);
+  transform: translateY(-100px);
+  transition:
+    transform var(--mc-motion-duration-short3) 0ms,
+    opacity var(--mc-motion-duration-short1) 60ms,
+    overlay var(--mc-motion-duration-short3) allow-discrete,
+    display var(--mc-motion-duration-short3) allow-discrete;
+  transition-timing-function: var(--mc-motion-easing-emphasized-accelerate);
+
+  &::backdrop {
+    opacity: 0;
+    background-color: var(--mc-scrim);
+    transition: opacity;
+    transition-duration: var(--mc-motion-duration-short3);
+  }
+
+  &[open] {
+    opacity: 1;
+    transform: translateY(0px);
+    transition:
+      transform calc(var(--mc-dialog-height-transition-duration, 300ms) - 30ms) 30ms,
+      opacity var(--mc-motion-duration-short3),
+      overlay var(--mc-dialog-height-transition-duration, 300ms),
+      display var(--mc-dialog-height-transition-duration, 300ms);
+    transition-timing-function: var(--mc-motion-easing-emphasized);
+
+    &::backdrop {
+      opacity: 32%;
+      transition-duration: var(--mc-motion-duration-medium2);
+    }
+  }
+
+  &.scroll .header::after {
+    position: absolute;
+    content: '';
+    bottom: 0;
+    height: 1px;
+    left: -24px;
+    right: -24px;
+    background-color: var(--mc-outline);
+  }
 }
 
-:host([open]) .scrim:not(.hide) {
-  overscroll-behavior: contain;
-  opacity: 32%;
-  /* pointer-events: all; */
+@starting-style {
+  dialog[open]::backdrop {
+    opacity: 0;
+  }
 }
 
 .header {
+  display: flex;
   position: relative;
   align-items: center;
-  align-self: stretch;
+  /* align-self: stretch; */
   box-sizing: border-box;
-  display: none;
   gap: 8px;
   padding-bottom: 16px;
+
+  &.has-icon {
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
-.header.not-empty {
-  display: flex;
-}
-
-.header.has-icon {
-  flex-direction: column;
-  justify-content: center;
-}
-
-.header .close-fullscreen {
+.close-fullscreen {
   display: none;
   position: absolute;
   right: 16px;
   top: 6px;
   cursor: pointer;
-  color: var(--wfc-on-surface);
-}
-
-dialog.fullscreen .header .close-fullscreen {
-  display: block;
-}
-
-dialog.fullscreen .header .close-fullscreen::after {
-  position: absolute;
-  content: '';
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  color: var(--mc-on-surface);
 }
 
 dialog.scroll .header::after {
@@ -125,42 +178,33 @@ dialog.scroll .header::after {
   height: 1px;
   left: -24px;
   right: -24px;
-  background-color: var(--wfc-outline);
+  background-color: var(--mc-outline);
 }
 
-::slotted(wfc-icon) {
-  color: var(--wfc-on-surface);
+::slotted(mc-icon) {
+  color: var(--mc-on-surface);
 }
 
 slot[name='headline']::slotted(*) {
-  font-size: var(--wfc-font-small-headline-size);
-  font-weight: var(--wfc-font-small-headline-weight);
-  line-height: var(--wfc-font-small-headline-line-height);
-  letter-spacing: var(--wfc-font-small-headline-tracking);
-  color: var(--wfc-on-surface);
+  font-size: var(--mc-font-small-headline-size);
+  font-weight: var(--mc-font-small-headline-weight);
+  line-height: var(--mc-font-small-headline-line-height);
+  letter-spacing: var(--mc-font-small-headline-tracking);
+  color: var(--mc-on-surface);
 }
-
 
 slot[name="content"] {
   display: block;
   flex: 1;
-  /* overflow-y: auto; */
-  z-index: 1;
-}
-
-dialog.scroll slot[name="content"] {
-  padding: 12px 0;
-  margin-right: -8px;
   overflow-y: auto;
 }
 
-
 slot[name='content']::slotted(*) {
-  font-size: var(--wfc-font-medium-body-size);
-  font-weight: var(--wfc-font-medium-body-weight);
-  line-height: var(--wfc-font-medium-body-line-height);
-  letter-spacing: var(--wfc-font-medium-body-tracking);
-  color: var(--wfc-on-surface-variant);
+  font-size: var(--mc-font-medium-body-size);
+  font-weight: var(--mc-font-medium-body-weight);
+  line-height: var(--mc-font-medium-body-line-height);
+  letter-spacing: var(--mc-font-medium-body-tracking);
+  color: var(--mc-on-surface-variant);
 }
 
 slot[name='actions'] {
@@ -168,24 +212,15 @@ slot[name='actions'] {
   display: none;
   flex-direction: row-reverse;
   gap: 8px;
-  padding-top: 24px;
-}
-
-slot[name='actions'].not-empty {
   display: flex;
+  justify-content: end;
 }
 
-dialog.scroll slot[name='actions']::after {
-  position: absolute;
-  content: '';
-  top: 0;
-  height: 1px;
-  left: -24px;
-  right: -24px;
-  background-color: var(--wfc-outline);
+slot[name='actions']::slotted(*) {
+  margin-top: 24px;
 }
 
-::slotted(wfc-divider) {
+::slotted(mc-divider) {
   display: flex;
   position: absolute;
   max-width: calc(100% - 48px);
@@ -199,112 +234,17 @@ slot[name='actions']::slotted(md-divider) {
   top: 0;
 }
 
-
-dialog.animating .header {
-  opacity: 0;
-  transition: opacity;
-  transition-duration: var(--wfc-motion-duration-short2);
-  transition-timing-function: linear;
-}
-
-dialog.animating.open .header {
-  opacity: 1;
-  transition-duration: var(--wfc-motion-duration-short4);
-  transition-delay: 0.2s;
-}
-
-dialog.animating .content {
-  opacity: 0;
-  transition: opacity;
-  transition-duration: var(--wfc-motion-duration-short2);
-  transition-timing-function: linear;
-}
-
-dialog.animating.open .content {
-  opacity: 1;
-  transition-duration: var(--wfc-motion-duration-short4);
-  transition-delay: 0.2s;
-}
-
-dialog.animating .actions {
-  opacity: 0;
-  transition: opacity;
-  transition-duration: var(--wfc-motion-duration-short2);
-  transition-timing-function: linear;
-}
-
-dialog.animating.open .actions {
-  opacity: 1;
-  transition-duration: var(--wfc-motion-duration-short4);
-  transition-delay: 0.5s;
-}
-
-
-
-dialog.animating {
-  animation: hide-translate-y;
-  animation-duration: var(--wfc-motion-duration-short3);
-  animation-timing-function: var(--wfc-motion-easing-emphasized-accelerate);
-}
-
-dialog.animating.open {
-  animation: show-translate-y;
-  animation-duration: var(--wfc-dialog-height-transition-duration, 300ms);
-  animation-timing-function: var(--wfc-motion-easing-emphasized);
-}
-
-dialog.fullscreen.animating {
-  animation: hide-fullscreen;
-  animation-duration: var(--wfc-motion-duration-short3);
-  animation-timing-function: var(--wfc-motion-easing-emphasized-accelerate);
-}
-
-dialog.fullscreen.animating.open {
-  animation: show-fullscreen;
-  animation-duration: var(--wfc-motion-duration-medium2);
-  animation-timing-function: var(--wfc-motion-easing-emphasized);
-}
-
-.background,
-.header,
-[name="content"],
-[name="actions"] {
-  opacity: 0;
-  transition: opacity;
-  transition-duration: var(--wfc-motion-duration-short1);
-  transition-delay: var(--wfc-motion-duration-short2);
-}
-
-dialog.open .background,
-dialog.open .header,
-dialog.open [name="content"],
-dialog.open [name="actions"] {
-  opacity: 1;
-  transition-delay: 0s;
-}
-
-.scrim {
-  transition: opacity;
-  transition-duration: var(--wfc-motion-duration-short3);
-}
-
-:host([open]) .scrim {
-  transition-duration: var(--wfc-motion-duration-medium2);
-}
-
-
 @keyframes show-translate-y {
   0% {
     min-height: 48px;
     overflow: hidden;
-    height: min(48px, calc(var(--wfc-dialog-height) * 0.35));
-    transform: translateY(-50px);
+    height: max(48px, calc(var(--mc-dialog-height) * 0.35));
   }
 
   100% {
     min-height: 48px;
     overflow: hidden;
-    height: var(--wfc-dialog-height);
+    height: var(--mc-dialog-height);
   }
 }
 
@@ -312,23 +252,22 @@ dialog.open [name="actions"] {
   0% {
     overflow: hidden;
     min-height: 48px;
-    height: var(--wfc-dialog-height);
+    height: var(--mc-dialog-height);
   }
 
   100% {
     overflow: hidden;
     min-height: 48px;
-    height: min(48px, calc(var(--wfc-dialog-height) * 0.35));
-    transform: translateY(-50px);
+    height: max(48px, calc(var(--mc-dialog-height) * 0.70));
   }
 }
-
 
 @keyframes show-fullscreen {
   0% {
     overflow: hidden;
     opacity: 0;
     height: 60dvh;
+    width: 70dvw;
   }
 
   60% {
@@ -338,6 +277,7 @@ dialog.open [name="actions"] {
   100% {
     overflow: hidden;
     height: 100dvh;
+    width: 100dvw;
   }
 }
 
@@ -346,11 +286,17 @@ dialog.open [name="actions"] {
     overflow: hidden;
     opacity: 1;
     height: 100dvh;
+    width: 100dvw;
+  }
+
+  80% {
+    opacity: 0;
   }
 
   100% {
     overflow: hidden;
     opacity: 0;
     height: 60dvh;
+    width: 70dvw;
   }
 }

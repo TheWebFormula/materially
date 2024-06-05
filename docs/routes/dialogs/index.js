@@ -1,5 +1,5 @@
 import { Component } from '@thewebformula/lithe';
-import { wfcDialog } from '@thewebformula/materially/services';
+import { mcDialog } from '@thewebformula/materially/services';
 import htmlTemplate from './page.html';
 
 export default class extends Component {
@@ -14,7 +14,7 @@ export default class extends Component {
   }
 
   async openSimple(allowClose = false, preventNavigation = true, icon) {
-    const answer = await wfcDialog.simple({
+    const answer = await mcDialog.simple({
       icon,
       headline: 'Question',
       message: 'Are you sure?',
@@ -28,11 +28,13 @@ export default class extends Component {
   }
 
   async openTemplate() {
-    const value = await wfcDialog.template({
+    const value = await mcDialog.template({
       template: `
       <div slot="headline">Headline</div>
-      <div slot="content">Here is some content for the dialog.</div>
-      <wfc-button slot="actions" onclick="wfcDialog.close('response value')">Close</wfc-button>
+      <form id="template-form" slot="content" method="dialog">
+        <div>Here is some content for the dialog.</div>
+      </form>
+      <mc-button slot="actions" value="response value" form="template-form">Close</mc-button>
       `
     });
     console.log(value);

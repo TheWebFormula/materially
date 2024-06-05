@@ -1,13 +1,13 @@
 :host {
-  --wfc-state-layer-focus-color: var(--wfc-on-surface);
-  --wfc-state-layer-hover-color: var(--wfc-on-surface);
-  --wfc-state-layer-focus-indicator-color: var(--wfc-secondary);
-  --wfc-state-layer-focus-indicator-thickness: 3px;
-  --wfc-state-layer-focus-indicator-offset: 2px;
-  --wfc-state-layer-box-shadow: none;
-  --wfc-state-layer-focus-box-shadow: none;
-  --wfc-state-layer-hover-box-shadow: none;
-  --wfc-state-layer-ripple-color: var(--wfc-primary);
+  --mc-state-layer-focus-color: var(--mc-on-surface);
+  --mc-state-layer-hover-color: var(--mc-on-surface);
+  --mc-state-layer-focus-indicator-color: var(--mc-secondary);
+  --mc-state-layer-focus-indicator-thickness: 3px;
+  --mc-state-layer-focus-indicator-offset: 2px;
+  --mc-state-layer-box-shadow: none;
+  --mc-state-layer-focus-box-shadow: none;
+  --mc-state-layer-hover-box-shadow: none;
+  --mc-state-layer-ripple-color: var(--mc-primary);
 
   display: block;
   position: absolute;
@@ -19,10 +19,10 @@
   pointer-events: none;
   box-sizing: border-box;
   outline: none;
-  box-shadow: var(--wfc-state-layer-box-shadow);
+  box-shadow: var(--mc-state-layer-box-shadow);
   transition: box-shadow;
-  transition-duration: var(--wfc-motion-duration-short2);
-  transition-timing-function: var(--wfc-motion-easing-emphasized);
+  transition-duration: var(--mc-motion-duration-short2);
+  transition-timing-function: var(--mc-motion-easing-emphasized);
 }
 
 .background {
@@ -35,28 +35,28 @@
   opacity: 0;
 
   transition: outline-width, box-shadow;
-  transition-duration: var(--wfc-motion-duration-short2);
-  transition-timing-function: var(--wfc-motion-easing-emphasized);
+  transition-duration: var(--mc-motion-duration-short2);
+  transition-timing-function: var(--mc-motion-easing-emphasized);
 }
 
 :host(.focus) .background {
-  opacity: var(--wfc-state-layer-opacity-focus);
-  background-color: var(--wfc-state-layer-focus-color);
+  opacity: var(--mc-state-layer-opacity-focus);
+  background-color: var(--mc-state-layer-focus-color);
 }
 
 :host(.hover) .background {
-  opacity: var(--wfc-state-layer-opacity-hover);
-  background-color: var(--wfc-state-layer-hover-color);
+  opacity: var(--mc-state-layer-opacity-hover);
+  background-color: var(--mc-state-layer-hover-color);
 }
 
 :host(.focus) {
-  box-shadow: var(--wfc-state-layer-focus-box-shadow);
-  outline: var(--wfc-state-layer-focus-indicator-thickness) solid var(--wfc-state-layer-focus-indicator-color);
-  outline-offset: var(--wfc-state-layer-focus-indicator-offset);
+  box-shadow: var(--mc-state-layer-focus-box-shadow);
+  outline: var(--mc-state-layer-focus-indicator-thickness) solid var(--mc-state-layer-focus-indicator-color);
+  outline-offset: var(--mc-state-layer-focus-indicator-offset);
 }
 
 :host(.hover) {
-  box-shadow: var(--wfc-state-layer-hover-box-shadow);
+  box-shadow: var(--mc-state-layer-hover-box-shadow);
 }
 
 .ripple {
@@ -70,7 +70,7 @@
   pointer-events: none;
 
   .ripple-element {
-    background-color: var(--wfc-state-layer-ripple-color);
+    background-color: var(--mc-state-layer-ripple-color);
   }
 }
 

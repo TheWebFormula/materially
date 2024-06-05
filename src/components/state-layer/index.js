@@ -3,8 +3,8 @@ import styles from './component.css' assert { type: 'css' };
 import Ripple from '../../helpers/Ripple.js';
 import device from '../../helpers/device.js';
 
-export default class WFCStateLayer extends HTMLComponentElement {
-  static tag = 'wfc-state-layer';
+export default class MCStateLayer extends HTMLComponentElement {
+  static tag = 'mc-state-layer';
   static useShadowRoot = true;
   static useTemplate = true;
   static styleSheets = [styles];
@@ -158,4 +158,4 @@ export default class WFCStateLayer extends HTMLComponentElement {
   }
 }
 
-customElements.define(WFCStateLayer.tag, WFCStateLayer);
+customElements.define(MCStateLayer.tag, MCStateLayer);

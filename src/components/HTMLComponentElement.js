@@ -6,14 +6,18 @@ const dashCaseRegex = /-([a-z])/g;
 
 export default class HTMLComponentElement extends HTMLElement {
   static tag = 'none';
+
   /** if not using shadowRoot templates and rendering still work */
   static useShadowRoot = false;
   static shadowRootDelegateFocus = false;
   static styleSheets = [];
 
   /** Use template element to clone from
-   *   If your template uses dynamic variables you do not want to use this */
+   *   If your template uses dynamic variables you do not want to use this
+   */
   static useTemplate = true;
+
+  /** Extend observedAttributes to allow type information and handling */
   static get observedAttributesExtended() { return []; };
   static get observedAttributes() { return this.observedAttributesExtended.map(a => a[0]); }
 
@@ -35,6 +39,7 @@ export default class HTMLComponentElement extends HTMLElement {
   }
 
 
+  /** Default function used by extended version */
   attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue === newValue) return;
     const type = this.#attributesLookup[name];
@@ -56,7 +61,6 @@ export default class HTMLComponentElement extends HTMLElement {
       );
     }
   }
-
   attributeChangedCallbackExtended() { }
 
   connectedCallback() { }
@@ -71,6 +75,7 @@ export default class HTMLComponentElement extends HTMLElement {
     else this.replaceChildren(this.#templateElement.content.cloneNode(true));
   }
 
+  /** Handle template once per instance */
   #prepareRender() {
     this.#prepared = true;
 
@@ -89,7 +94,7 @@ export default class HTMLComponentElement extends HTMLElement {
     }
   }
 
-
+  /** Type logic for observedAttributesExtended */
   #attributeDescriptorTypeConverter(value, type) {
     switch (type) {
       case 'boolean':
@@ -105,7 +110,6 @@ export default class HTMLComponentElement extends HTMLElement {
       case 'event':
         // TODO remove window.page?
         return !value ? null : () => new Function('page', value).call(this, window.page);
-        break;
       default:
         return value;
     }

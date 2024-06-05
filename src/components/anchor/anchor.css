@@ -14,39 +14,46 @@
   margin-bottom: 2px;
   width: 100%;
 
-  font-size: var(--wfc-font-large-label-size);
-  font-weight: var(--wfc-font-large-label-weight);
-  letter-spacing: var(--wfc-font-large-label-tracking);
-  border-radius: var(--wfc-anchor-shape);
-  color: var(--wfc-anchor-color);
+  font-size: var(--mc-font-large-label-size);
+  font-weight: var(--mc-font-large-label-weight);
+  letter-spacing: var(--mc-font-large-label-tracking);
+  border-radius: var(--mc-anchor-shape);
+  color: var(--mc-anchor-color);
   text-decoration: none;
-}
 
-:host::before {
-  content: '';
-  position: absolute;
-  left: -16px;
-  top: 0;
-  right: -16px;
-  height: 56px;
-  z-index: 0;
-  border-radius: var(--wfc-anchor-shape);
+  &::before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 0;
+    right: -16px;
+    height: 56px;
+    z-index: 0;
+    border-radius: var(--mc-anchor-shape);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 0;
+    right: -16px;
+    height: 56px;
+    pointer-events: none;
+    border-radius: var(--mc-anchor-shape);
+  }
+
+  &::after,
+  &::before {
+    transition: left, right;
+    transition-duration: var(--mc-motion-duration-medium1);
+    transition-timing-function: var(--mc-motion-easing-standard);
+  }
 }
 
 :host(.current)::before {
   pointer-events: none;
-  background-color: var(--wfc-anchor-current-container-color);
-}
-
-:host::after {
-  content: '';
-  position: absolute;
-  left: -16px;
-  top: 0;
-  right: -16px;
-  height: 56px;
-  pointer-events: none;
-  border-radius: var(--wfc-anchor-shape);
+  background-color: var(--mc-anchor-current-container-color);
 }
 
 a {
@@ -90,40 +97,41 @@ a {
   transition-duration: 0s;
 }
 
-:host::after,
-:host::before {
-  transition: left, right;
-  transition-duration: var(--wfc-motion-duration-medium1);
-  transition-timing-function: var(--wfc-motion-easing-standard);
-}
-
 :host(:focus)::after {
-  opacity: var(--wfc-state-layer-opacity-focus);
-  background-color: var(--wfc-on-surface);
+  opacity: var(--mc-state-layer-opacity-focus);
+  background-color: var(--mc-on-surface);
 }
 
 :host(.current:focus)::after {
-  background-color: var(--wfc-on-secondary-container);
+  background-color: var(--mc-on-secondary-container);
 }
 
-slot[name="leading-icon"]::slotted(wfc-icon) {
+slot[name="leading-icon"]::slotted(mc-icon) {
   pointer-events: none;
   margin-right: 12px;
+}
+
+.badge-display {
+  z-index: 0;
+  color: var(--wfc-on-surface-variant);
+  font-size: var(--wfc-font-large-label-size);
+  font-size: var(--wfc-font-large-label-weight);
+  letter-spacing: var(--wfc-font-large-label-tracking);
 }
 
 
 @media (hover: hover) {
   :host(:hover)::after {
-    opacity: var(--wfc-state-layer-opacity-hover);
-    background-color: var(--wfc-on-surface);
+    opacity: var(--mc-state-layer-opacity-hover);
+    background-color: var(--mc-on-surface);
   }
 
   :host(.current:hover)::after {
-    background-color: var(--wfc-on-secondary-container);
+    background-color: var(--mc-on-secondary-container);
   }
 
-  :host(:not(.current):hover) ::slotted(wfc-icon) {
-    color: var(--wfc-on-surface);
+  :host(:not(.current):hover) ::slotted(mc-icon) {
+    color: var(--mc-on-surface);
   }
 }
 
@@ -131,7 +139,7 @@ slot[name="leading-icon"]::slotted(wfc-icon) {
   display: block;
   height: 42px;
   transition: transform 0ms;
-  transition-duration: var(--wfc-motion-duration-short3);
+  transition-duration: var(--mc-motion-duration-short3);
 }
 
 :host(.open) [name="trailing-icon"]::slotted(.arrow) {

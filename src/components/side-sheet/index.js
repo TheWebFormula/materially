@@ -9,8 +9,8 @@ import {
 
 // TODO predictive back
 
-export default class WFCSideSheetElement extends HTMLComponentElement {
-  static tag = 'wfc-side-sheet';
+export default class MCSideSheetElement extends HTMLComponentElement {
+  static tag = 'mc-side-sheet';
   static useShadowRoot = true;
   static useTemplate = true;
   static styleSheets = [styles];
@@ -40,17 +40,17 @@ export default class WFCSideSheetElement extends HTMLComponentElement {
         <div class="surface-content">
           <slot name="header"></slot>
           <div class="header">
-            <wfc-icon-button class="back" aria-label="back">
-              <wfc-icon>${arrow_back_FILL1_wght300_GRAD0_opsz24}</wfc-icon>
-            </wfc-icon-button>
+            <mc-icon-button class="back" aria-label="back">
+              <mc-icon>${arrow_back_FILL1_wght300_GRAD0_opsz24}</mc-icon>
+            </mc-icon-button>
             <slot name="headline"></slot>
-            <wfc-icon-button class="close" aria-label="close">
-              <wfc-icon>${close_FILL0_wght400_GRAD0_opsz24}</wfc-icon>
-            </wfc-icon-button>
+            <mc-icon-button class="close" aria-label="close">
+              <mc-icon>${close_FILL0_wght400_GRAD0_opsz24}</mc-icon>
+            </mc-icon-button>
           </div>
           <slot class="default-slot"></slot>
           <div class="actions">
-            <wfc-divider></wfc-divider>
+            <mc-divider></mc-divider>
             <slot name="action"></div>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default class WFCSideSheetElement extends HTMLComponentElement {
     if (this.allowClose && this.scrim) {
       this.shadowRoot.querySelector('.scrim').addEventListener('click', this.#scrimClick_bound, { signal: this.#abort.signal });
     }
-    window.addEventListener('wfcwindowstatechange', this.#windowStateChange_bound, { signal: this.#abort.signal });
+    window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound, { signal: this.#abort.signal });
   }
 
   disconnectedCallback() {
@@ -158,4 +158,4 @@ export default class WFCSideSheetElement extends HTMLComponentElement {
   }
 }
 
-customElements.define(WFCSideSheetElement.tag, WFCSideSheetElement);
+customElements.define(MCSideSheetElement.tag, MCSideSheetElement);

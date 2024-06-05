@@ -1,9 +1,9 @@
-import WFCSideSheetElement from '../side-sheet/index.js';
+import MCSideSheetElement from '../side-sheet/index.js';
 import styles from './component.css' assert { type: 'css' };
 import device from '../../helpers/device.js';
 
-class WFCNavigationDrawerElement extends WFCSideSheetElement {
-  static tag = 'wfc-navigation-drawer';
+class MCNavigationDrawerElement extends MCSideSheetElement {
+  static tag = 'mc-navigation-drawer';
   static {
     this.styleSheets.push(styles);
   }
@@ -28,7 +28,7 @@ class WFCNavigationDrawerElement extends WFCSideSheetElement {
   connectedCallback() {
     super.connectedCallback();
     window.addEventListener('locationchange', this.#locationchange_bound);
-    window.addEventListener('wfcwindowstatechange', this.#windowStateChange_bound);
+    window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound);
   }
 
 
@@ -37,7 +37,7 @@ class WFCNavigationDrawerElement extends WFCSideSheetElement {
     const current = this.querySelector('.current');
     if (current) {
       current.classList.remove('current');
-      if (current.parentElement.nodeName === 'WFC-ANCHOR-GROUP') {
+      if (current.parentElement.nodeName === 'MC-ANCHOR-GROUP') {
         current.parentElement.open = false;
         current.parentElement.classList.remove('has-current');
       }
@@ -45,7 +45,7 @@ class WFCNavigationDrawerElement extends WFCSideSheetElement {
     const match = this.querySelector(`[href="${path}"]`) || this.querySelector(`[href="${path.split('#')[0]}"]`);
     if (match) {
       match.classList.add('current');
-      if (match.parentElement.nodeName === 'WFC-ANCHOR-GROUP') {
+      if (match.parentElement.nodeName === 'MC-ANCHOR-GROUP') {
         match.parentElement.open = true;
         match.parentElement.classList.add('has-current');
       }
@@ -70,4 +70,4 @@ class WFCNavigationDrawerElement extends WFCSideSheetElement {
   }
 }
 
-customElements.define(WFCNavigationDrawerElement.tag, WFCNavigationDrawerElement);
+customElements.define(MCNavigationDrawerElement.tag, MCNavigationDrawerElement);

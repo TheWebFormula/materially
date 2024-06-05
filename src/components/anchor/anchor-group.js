@@ -3,8 +3,8 @@ import styles from './anchor-group.css' assert { type: 'css' };
 import { expand_more_FILL0_wght400_GRAD0_opsz24 } from '../../helpers/svgs.js';
 
 
-class WFCAnchorGroupElement extends HTMLComponentElement {
-  static tag = 'wfc-anchor-group';
+class MCAnchorGroupElement extends HTMLComponentElement {
+  static tag = 'mc-anchor-group';
   static useShadowRoot = true;
   static useTemplate = true;
   static styleSheets = [styles];
@@ -22,10 +22,10 @@ class WFCAnchorGroupElement extends HTMLComponentElement {
 
   template() {
     return /*html*/`
-      <wfc-anchor control>
+      <mc-anchor control>
         <slot name="control"></slot>
         <span slot="trailing-icon" class="arrow">${expand_more_FILL0_wght400_GRAD0_opsz24}</span>
-      </wfc-anchor>
+      </mc-anchor>
       <slot class="default-slot"></slot>
     `;
   }
@@ -47,15 +47,15 @@ class WFCAnchorGroupElement extends HTMLComponentElement {
     this.#open = !!value;
     if (this.#open) {
       this.#control.classList.add('open');
-      if (!this.parentElement.classList.contains('wfc-state-rail')) this.style.setProperty('--wfc-navigation-drawer-group-height', `${this.#fullHeight}px`);
+      if (!this.parentElement.classList.contains('mc-state-rail')) this.style.setProperty('--mc-navigation-drawer-group-height', `${this.#fullHeight}px`);
     } else {
-      this.style.setProperty('--wfc-navigation-drawer-group-height', '0px');
+      this.style.setProperty('--mc-navigation-drawer-group-height', '0px');
       this.#control.classList.remove('open');
     }
   }
 
   get #fullHeight() {
-    return [...this.querySelectorAll('wfc-anchor')].length * 58;
+    return [...this.querySelectorAll('mc-anchor')].length * 58;
   }
 
   #controlClick(event) {
@@ -65,4 +65,4 @@ class WFCAnchorGroupElement extends HTMLComponentElement {
   }
 }
 
-customElements.define(WFCAnchorGroupElement.tag, WFCAnchorGroupElement);
+customElements.define(MCAnchorGroupElement.tag, MCAnchorGroupElement);

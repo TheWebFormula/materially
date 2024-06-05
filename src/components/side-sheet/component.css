@@ -9,23 +9,23 @@
   width: 0px;
   height: 100%;
   transition: width;
-  transition-duration: var(--wfc-motion-duration-medium2);
-  transition-timing-function: var(--wfc-motion-easing-standard);
-  border-radius: var(--wfc-side-sheet-shape) 0 0 var(--wfc-side-sheet-shape);
-  background-color: var(--wfc-side-sheet-container-color);
+  transition-duration: var(--mc-motion-duration-medium2);
+  transition-timing-function: var(--mc-motion-easing-standard);
+  border-radius: var(--mc-side-sheet-shape) 0 0 var(--mc-side-sheet-shape);
+  background-color: var(--mc-side-sheet-container-color);
   pointer-events: none;
 }
 
 :host([open]) .surface {
   pointer-events: all;
-  width: var(--wfc-side-sheet-width);
+  width: var(--mc-side-sheet-width);
   transition: width;
-  transition-duration: var(--wfc-motion-duration-medium3);
-  transition-timing-function: var(--wfc-motion-easing-standard-decelerate);
+  transition-duration: var(--mc-motion-duration-medium3);
+  transition-timing-function: var(--mc-motion-easing-standard-decelerate);
 }
 
 :host([align-left]) .surface {
-  border-radius: 0 var(--wfc-side-sheet-shape) var(--wfc-side-sheet-shape) 0;
+  border-radius: 0 var(--mc-side-sheet-shape) var(--mc-side-sheet-shape) 0;
 }
 
 :host([modal]) .surface {
@@ -34,14 +34,14 @@
   right: 0;
   bottom: 0;
   animation: box-shadow-animation;
-  animation-duration: var(--wfc-motion-duration-medium2);
-  animation-timing-function: var(--wfc-motion-easing-standard);
+  animation-duration: var(--mc-motion-duration-medium2);
+  animation-timing-function: var(--mc-motion-easing-standard);
 }
 
 :host([modal][open]) .surface {
-  box-shadow: var(--wfc-elevation-2);
-  animation-duration: var(--wfc-motion-duration-medium3);
-  animation-timing-function: var(--wfc-motion-easing-standard-decelerate);
+  box-shadow: var(--mc-elevation-2);
+  animation-duration: var(--mc-motion-duration-medium3);
+  animation-timing-function: var(--mc-motion-easing-standard-decelerate);
 }
 
 :host([align-left][modal]) .surface {
@@ -53,27 +53,27 @@
   right: 0px;
   top: 16px;
   height: calc(100% - 32px);
-  border-radius: var(--wfc-side-sheet-shape);
+  border-radius: var(--mc-side-sheet-shape);
   transition: width, right;
-  transition-duration: var(--wfc-motion-duration-medium2), var(--wfc-motion-duration-short1);
-  transition-timing-function: var(--wfc-motion-easing-standard);
+  transition-duration: var(--mc-motion-duration-medium2), var(--mc-motion-duration-short1);
+  transition-timing-function: var(--mc-motion-easing-standard);
 }
 
 :host([open][inset][modal]) .surface {
   right: 16px;
-  width: var(--wfc-side-sheet-width);
+  width: var(--mc-side-sheet-width);
   transition: width, right;
-  transition-duration: var(--wfc-motion-duration-medium3), var(--wfc-motion-duration-short1);
-  transition-timing-function: var(--wfc-motion-easing-standard-decelerate);
+  transition-duration: var(--mc-motion-duration-medium3), var(--mc-motion-duration-short1);
+  transition-timing-function: var(--mc-motion-easing-standard-decelerate);
 }
 
 :host([inset]:not([modal])) {
   margin: 16px;
   margin-left: 0;
-  border-radius: var(--wfc-side-sheet-shape);
+  border-radius: var(--mc-side-sheet-shape);
 }
 :host([inset]:not([modal])) .surface {
-  border-radius: var(--wfc-side-sheet-shape);
+  border-radius: var(--mc-side-sheet-shape);
 }
 
 .surface-content {
@@ -81,9 +81,9 @@
   flex-direction: column;
   height: 100%;
   box-sizing: border-box;
-  width: var(--wfc-side-sheet-width);
+  width: var(--mc-side-sheet-width);
   overflow: visible;
-  background-color: var(--wfc-side-sheet-container-color);
+  background-color: var(--mc-side-sheet-container-color);
 }
 
 .default-slot {
@@ -104,10 +104,10 @@
   pointer-events: none;
   z-index: 20;
   opacity: 0;
-  background-color: var(--wfc-scrim);
+  background-color: var(--mc-scrim);
   animation: scrim-close-animation;
-  animation-duration: var(--wfc-motion-duration-short4);
-  animation-timing-function: var(--wfc-motion-easing-standard);
+  animation-duration: var(--mc-motion-duration-short4);
+  animation-timing-function: var(--mc-motion-easing-standard);
 }
 
 :host([modal][open][scrim]) .scrim {
@@ -116,8 +116,8 @@
   opacity: 0.16;
   pointer-events: all;
   animation: scrim-open-animation;
-  animation-duration: var(--wfc-motion-duration-short4);
-  animation-timing-function: var(--wfc-motion-easing-standard);
+  animation-duration: var(--mc-motion-duration-short4);
+  animation-timing-function: var(--mc-motion-easing-standard);
 }
 
 
@@ -130,11 +130,11 @@
 slot[name="headline"] {
   display: inline-flex;
   flex: 1;
-  font-size: var(--wfc-font-large-title-size);
-  font-weight: var(--wfc-font-large-title-weight);
-  letter-spacing: var(--wfc-font-large-title-tracking);
+  font-size: var(--mc-font-large-title-size);
+  font-weight: var(--mc-font-large-title-weight);
+  letter-spacing: var(--mc-font-large-title-tracking);
   line-height: 46px;
-  color: var(--wfc-on-surface-variant);
+  color: var(--mc-on-surface-variant);
   margin-left: 24px;
 }
 
@@ -181,7 +181,7 @@ slot[name="headline"] {
   padding-left: 8px;
   gap: 8px;
   /* use for border since with no elements the height is 0 */
-  box-shadow: inset 0px 1px 0px 0px var(--wfc-outline-variant);
+  box-shadow: inset 0px 1px 0px 0px var(--mc-outline-variant);
 }
 
 /* use margin to fill 72px height */
@@ -193,11 +193,11 @@ slot[name="action"]::slotted(*) {
 /* Hack to show box shadow during open and close animations for modal */
 @keyframes box-shadow-animation {
   0% {
-    box-shadow: var(--wfc-elevation-2);
+    box-shadow: var(--mc-elevation-2);
   }
 
   100% {
-    box-shadow: var(--wfc-elevation-2);
+    box-shadow: var(--mc-elevation-2);
   }
 }
 

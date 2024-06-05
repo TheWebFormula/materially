@@ -2,8 +2,8 @@ import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import device from '../../helpers/device.js';
 
-class WFCNavigationRailElement extends HTMLComponentElement {
-  static tag = 'wfc-navigation-rail';
+class MCNavigationRailElement extends HTMLComponentElement {
+  static tag = 'mc-navigation-rail';
   static useShadowRoot = true;
   static useTemplate = true;
   static styleSheets = [styles];
@@ -32,7 +32,7 @@ class WFCNavigationRailElement extends HTMLComponentElement {
 
   connectedCallback() {
     window.addEventListener('locationchange', this.#locationchange_bound);
-    window.addEventListener('wfcwindowstatechange', this.#windowStateChange_bound);
+    window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound);
   }
 
   disconnectedCallback() {
@@ -48,7 +48,7 @@ class WFCNavigationRailElement extends HTMLComponentElement {
 
     if (match) {
       match.classList.add('current');
-      // if (match.parentElement.nodeName === 'WFC-ANCHOR-GROUP') {
+      // if (match.parentElement.nodeName === 'MC-ANCHOR-GROUP') {
       //   match.parentElement.classList.add('has-current');
       // }
 
@@ -73,4 +73,4 @@ class WFCNavigationRailElement extends HTMLComponentElement {
     }
   }
 }
-customElements.define(WFCNavigationRailElement.tag, WFCNavigationRailElement);
+customElements.define(MCNavigationRailElement.tag, MCNavigationRailElement);

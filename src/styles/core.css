@@ -2,12 +2,12 @@
   color-scheme: only light;
 }
 
-:root.wfc-theme-dark {
+:root.mc-theme-dark {
   color-scheme: only dark;
 }
 
 body {
-  background-color: var(--wfc-background-color, var(--wfc-surface));
+  background-color: var(--mc-background-color, var(--mc-surface));
   margin: 0;
   width: 100vw;
   display: grid;
@@ -25,7 +25,7 @@ body.pane-layout {
   height: 100vh;
 }
 
-body:has(wfc-dialog[open]),
+body:has(mc-dialog[open]),
 body:has(dialog[open]) {
   overflow: hidden
 }
@@ -47,8 +47,8 @@ body:has(dialog[open]) {
   width: 100%;
   margin: 0;
 
-  background-color: var(--wfc-background);
-  color: var(--wfc-on-background);
+  background-color: var(--mc-background);
+  color: var(--mc-on-background);
 } */
 
 /* body page-content,
@@ -61,7 +61,7 @@ body #page-content {
   max-width: 100dvw;
 } */
 
-wfc-pane::-webkit-resizer {
+mc-pane::-webkit-resizer {
   border: 2px solid black;
   background: blue;
 }

@@ -1,5 +1,5 @@
 :host {
-  --wfc-top-app-bar-alt-headline-opacity: 1;
+  --mc-top-app-bar-alt-headline-opacity: 1;
 
   grid-area: header;
   
@@ -10,18 +10,18 @@
   width: 100%;
   padding: 0 16px;
   box-sizing: border-box;
-  background-color: var(--wfc-top-app-bar-container-color);
+  background-color: var(--mc-top-app-bar-container-color);
   z-index: 1;
 }
 
 :host(.animation) {
   transition: background-color;
-  transition-duration: var(--wfc-motion-duration-medium1);
-  transition-timing-function: var(--wfc-motion-easing-standard);
+  transition-duration: var(--mc-motion-duration-medium1);
+  transition-timing-function: var(--mc-motion-easing-standard);
 }
 
 :host(.scrolled:not([compress])) {
-  background-color: var(--wfc-top-app-bar-container-scrolled-color);
+  background-color: var(--mc-top-app-bar-container-scrolled-color);
 }
 
 .container {
@@ -40,11 +40,11 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  font-size: var(--wfc-font-large-title-size);
-  font-weight: var(--wfc-font-large-title-weight);
-  line-height: var(--wfc-font-large-title-line-height);
-  letter-spacing: var(--wfc-font-large-title-tracking);
-  color: var(--wfc-on-surface);
+  font-size: var(--mc-font-large-title-size);
+  font-weight: var(--mc-font-large-title-weight);
+  line-height: var(--mc-font-large-title-line-height);
+  letter-spacing: var(--mc-font-large-title-tracking);
+  color: var(--mc-on-surface);
 }
 
 :host([centered]) [name="headline"] {
@@ -55,7 +55,7 @@
   margin-right: 16px;
 }
 
-[name="leading-icon"]::slotted(wfc-navigation-button) {
+[name="leading-icon"]::slotted(mc-navigation-button) {
   margin-left: -8px;
 }
 
@@ -79,11 +79,11 @@
   display: block;
   position: absolute;
   bottom: 16px;
-  font-size: var(--wfc-font-small-headline-size);
-  font-weight: var(--wfc-font-small-headline-weight);
-  line-height: var(--wfc-font-small-headline-line-height);
-  letter-spacing: var(--wfc-font-small-headline-tracking);
-  opacity: var(--wfc-top-app-bar-alt-headline-opacity);
+  font-size: var(--mc-font-small-headline-size);
+  font-weight: var(--mc-font-small-headline-weight);
+  line-height: var(--mc-font-small-headline-line-height);
+  letter-spacing: var(--mc-font-small-headline-tracking);
+  opacity: var(--mc-top-app-bar-alt-headline-opacity);
   /* opacity: 1;
   transition: opacity;
   transition-duration: 200ms; */

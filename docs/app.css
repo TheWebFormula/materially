@@ -2,25 +2,25 @@
 @import url(./dracula.css);
 
 :root {
-  --wfc-background-color: var(--wfc-surface-container-low);
-  --wfc-navigation-container-color: var(--wfc-surface-container-low);
-  /* --wfc-surface-container-color: var(--wfc-surface-container-lowest); */
+  --mc-background-color: var(--mc-surface-container-low);
+  --mc-navigation-container-color: var(--mc-surface-container-low);
+  /* --mc-surface-container-color: var(--mc-surface-container-lowest); */
 }
 
 h1 {
   margin: 0;
-  font-size: var(--wfc-font-large-headline-size);
-  line-height: var(--wfc-font-large-headline-line-height);
-  font-weight: var(--wfc-font-large-headline-weight);
-  letter-spacing: var(--wfc-font-large-headline-tracking);
+  font-size: var(--mc-font-large-headline-size);
+  line-height: var(--mc-font-large-headline-line-height);
+  font-weight: var(--mc-font-large-headline-weight);
+  letter-spacing: var(--mc-font-large-headline-tracking);
 }
 
 h2 {
   margin: 0;
-  font-size: var(--wfc-font-small-headline-size);
-  line-height: var(--wfc-font-small-headline-line-height);
-  font-weight: var(--wfc-font-small-headline-weight);
-  letter-spacing: var(--wfc-font-small-headline-tracking);
+  font-size: var(--mc-font-small-headline-size);
+  line-height: var(--mc-font-small-headline-line-height);
+  font-weight: var(--mc-font-small-headline-weight);
+  letter-spacing: var(--mc-font-small-headline-tracking);
 }
 
 section {
@@ -41,8 +41,8 @@ pre > code {
   flex-grow: 1;
 }
 
-wfc-card pre,
-wfc-card pre {
+mc-card pre,
+mc-card pre {
   margin: 0 -16px;
   margin-bottom: -16px;
 }
@@ -52,17 +52,17 @@ pre > code {
   overflow-x: auto;
 }
 
-wfc-card > pre:first-of-type > code,
-wfc-card > pre:first-of-type > code {
+mc-card > pre:first-of-type > code,
+mc-card > pre:first-of-type > code {
   margin-top: 24px;
 }
 
-wfc-card > pre:last-of-type > code,
-wfc-card > pre:last-of-type > code {
-  border-radius: 0 0 var(--wfc-shape-medium) var(--wfc-shape-medium);
+mc-card > pre:last-of-type > code,
+mc-card > pre:last-of-type > code {
+  border-radius: 0 0 var(--mc-shape-medium) var(--mc-shape-medium);
 }
 
-wfc-card .example {
+mc-card .example {
   margin-top: 18px;
 }
 
@@ -150,7 +150,7 @@ body.window-compact .article-main {
 
 
 iframe {
-  border: 1px solid var(--wfc-outline-alpha-30);
+  border: 1px solid var(--mc-outline-alpha-30);
   border-radius: 16px;
 }
 

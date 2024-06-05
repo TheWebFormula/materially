@@ -3,8 +3,8 @@ import styles from './component.css' assert { type: 'css' };
 import device from '../../helpers/device.js';
 
 
-class WFCNavigationBarElement extends HTMLComponentElement {
-  static tag = 'wfc-navigation-bar';
+class MCNavigationBarElement extends HTMLComponentElement {
+  static tag = 'mc-navigation-bar';
   static useShadowRoot = true;
   static useTemplate = true;
   static styleSheets = [styles];
@@ -42,7 +42,7 @@ class WFCNavigationBarElement extends HTMLComponentElement {
   connectedCallback() {
     this.#abort =  new AbortController();
     window.addEventListener('locationchange', this.#locationchange_bound, { signal: this.#abort.signal });
-    window.addEventListener('wfcwindowstatechange', this.#windowStateChange_bound, { signal: this.#abort.signal });
+    window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound, { signal: this.#abort.signal });
     if (this.#autoHide) document.addEventListener('scroll', this.#scroll_bound, { signal: this.#abort.signal });
   }
 
@@ -94,4 +94,4 @@ class WFCNavigationBarElement extends HTMLComponentElement {
     this.classList.toggle('window-compact', detail.state === device.COMPACT);
   }
 }
-customElements.define(WFCNavigationBarElement.tag, WFCNavigationBarElement);
+customElements.define(MCNavigationBarElement.tag, MCNavigationBarElement);

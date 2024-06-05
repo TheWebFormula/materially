@@ -2,8 +2,8 @@ import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 
 
-class WFCTopAppBarElement extends HTMLComponentElement {
-  static tag = 'wfc-top-app-bar';
+class MCTopAppBarElement extends HTMLComponentElement {
+  static tag = 'mc-top-app-bar';
   static useShadowRoot = true;
   static useTemplate = true;
   static styleSheets = [styles];
@@ -22,8 +22,8 @@ class WFCTopAppBarElement extends HTMLComponentElement {
   constructor() {
     super();
 
-    this.#scrollTopContainer = document.querySelector('wfc-pane[scroll]') || document.documentElement;
-    this.#scrollContainer = document.querySelector('wfc-pane[scroll]') || document;
+    this.#scrollTopContainer = document.querySelector('mc-pane[scroll]') || document.documentElement;
+    this.#scrollContainer = document.querySelector('mc-pane[scroll]') || document;
     this.render();
   }
 
@@ -107,11 +107,11 @@ class WFCTopAppBarElement extends HTMLComponentElement {
 
       const start = Math.max(this.#position, 5);
       const percent = 1 - ((start - 5) / (minPosition / 3));
-      if (!isNormal) this.style.setProperty('--wfc-top-app-bar-alt-headline-opacity', percent);
+      if (!isNormal) this.style.setProperty('--mc-top-app-bar-alt-headline-opacity', percent);
     } else {
       this.classList.toggle('scrolled', this.#scrollTopContainer.scrollTop > 0);
     }
   }
 }
 
-customElements.define(WFCTopAppBarElement.tag, WFCTopAppBarElement);
+customElements.define(MCTopAppBarElement.tag, MCTopAppBarElement);

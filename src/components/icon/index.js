@@ -4,11 +4,11 @@ import styles from './component.css' assert { type: 'css' };
 // Wait for icon font to load
 // document.fonts.ready.then(event => {
 //   const iconFont = [...event].find(v => v.family.contains('Material Symbols'));
-//   if (iconFont) document.querySelector('html').classList.add('wfc-material-icon-font-loaded');
+//   if (iconFont) document.querySelector('html').classList.add('mc-material-icon-font-loaded');
 // });
 
-class WFCIconElement extends HTMLComponentElement {
-  static tag = 'wfc-icon';
+class MCIconElement extends HTMLComponentElement {
+  static tag = 'mc-icon';
   static useShadowRoot = true;
   static useTemplate = true;
   static styleSheets = [styles];
@@ -22,6 +22,6 @@ class WFCIconElement extends HTMLComponentElement {
     return /*html*/`<slot></slot>`;
   }
 }
-customElements.define(WFCIconElement.tag, WFCIconElement);
+customElements.define(MCIconElement.tag, MCIconElement);
 
 // https://fonts.google.com/icons?icon.style=Outlined&icon=

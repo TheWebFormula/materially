@@ -1,4 +1,4 @@
-const wfcUtil = new class WFCUtil {
+const mcUtil = new class MCUtil {
   getNextFocusableElement(element, previous = false, acceptFilter = () => { return true; }) {
     let walker = document.createNodeIterator(
       element.parentElement,
@@ -67,7 +67,7 @@ const wfcUtil = new class WFCUtil {
   #isElementFocusable(element) {
     if (!element) return false;
     return !element.hasAttribute('disabled') && (
-      element.nodeName === 'WFC-TEXTFIELD'
+      element.nodeName === 'MC-TEXTFIELD'
       || element.role === 'menuitem'
       || element.role === 'option'
       || element.tabindex > -1
@@ -139,5 +139,5 @@ const wfcUtil = new class WFCUtil {
   }
 }
 
-window.wfcUtil = wfcUtil;
-export default wfcUtil;
+window.mcUtil = mcUtil;
+export default mcUtil;

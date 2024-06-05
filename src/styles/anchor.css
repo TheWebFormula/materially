@@ -5,11 +5,11 @@ a {
   outline: none;
   -webkit-tap-highlight-color: transparent;
 
-  font-size: var(--wfc-font-large-label-size);
-  font-weight: var(--wfc-font-large-label-weight);
-  letter-spacing: var(--wfc-font-large-label-tracking);
+  font-size: var(--mc-font-large-label-size);
+  font-weight: var(--mc-font-large-label-weight);
+  letter-spacing: var(--mc-font-large-label-tracking);
   line-height: 40px;
-  color: var(--wfc-primary);
+  color: var(--mc-primary);
 }
 
 a:-webkit-any-link:active {
@@ -17,8 +17,8 @@ a:-webkit-any-link:active {
 }
 
 a:focus {
-  /* opacity: var(--wfc-state-layer-opacity-focus);
-  background-color: var(--wfc-on-surface); */
+  /* opacity: var(--mc-state-layer-opacity-focus);
+  background-color: var(--mc-on-surface); */
 }
 
 
@@ -34,8 +34,8 @@ a::after {
 
 @media (hover: hover) {
   a:hover::after {
-    /* opacity: var(--wfc-state-layer-opacity-hover); */
-    background-color: var(--wfc-primary);
+    /* opacity: var(--mc-state-layer-opacity-hover); */
+    background-color: var(--mc-primary);
     mix-blend-mode: color;
   }
 }

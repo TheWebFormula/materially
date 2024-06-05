@@ -1,7 +1,7 @@
 <article>
   <header>
     <h1>Dialogs</h1>
-    <div class="page-subheader wfc-font-title-medium">Dialogs provide important prompts in a user flow</div>
+    <div class="page-subheader mc-font-title-medium">Dialogs provide important prompts in a user flow</div>
     <div class="supporting-text">Dialogs can require an action, communicate information, or help users accomplish a
       task. There are two types of dialogs:
       basic and full-screen</div>
@@ -15,11 +15,9 @@
       <ul class="links">
         <li><a href="#simple">Simple</a></li>
         <li><a href="#template">Template</a></li>
-        <li><a href="#response">Response</a></li>
         <li><a href="#html">HTML Only</a></li>
         <li><a href="#scrollable">Scrollable</a></li>
         <li><a href="#fullscreen">Fullscreen</a></li>
-        <li><a href="#prevent-navigation">Click outside close</a></li>
         <li><a href="#prevent-navigation">Prevent navigation</a></li>
       </ul>
     </nav>
@@ -27,15 +25,370 @@
     <div class="article-content">
 
       <section id="colors">
-        <wfc-card>
+        <mc-card>
           <h2 slot="headline">Simple dialog</h2>
 
           <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap;">
-            <wfc-button onclick="page.openSimple(false, true, 'settings')">Open</wfc-button>
+            <!-- <mc-button onclick="page.openSimple(false, true, 'settings')">Open</mc-button>
+            <mc-dialog onclose="console.log('close');" oncancel="console.log('cancel')">
+              <mc-icon slot="icon">home</mc-icon>
+              <div slot="headline">Headline</div>
+              <form id="form" slot="content" method="dialog">
+                content
+              </form>
+              <mc-button slot="actions" form="form" value="cancel">ok</mc-button>
+              <mc-button slot="actions" form="form">cancel</mc-button>
+            </mc-dialog> -->
+            <mc-button onclick="page.openSimple(false, true, 'settings')">open</mc-button>
           </div>
-        </wfc-card>
+
+          <pre>
+            <code class="language-javascript">
+  // also available globally on window
+  import { mcDialog } from '@webformula/material/services';
+
+  const answer = await mcDialog.simple({
+    icon: 'settings',
+    headline: 'Question',
+    message: 'Are you sure?',
+    allowClose: false, // clicking outside of dialog will close it
+
+    // If prevent navigation is not set then it will be the opposite of allowClose
+    preventNavigation: true, // default false
+    
+    actionConfirm: true, // default true
+    actionConfirm: 'OK', // default OK
+    actionCancel: true, // default false
+    actionCancelLabel: 'Cancel' // default Cancel
+  });
+
+  if (answer === 'confirm') console.log('User pressed ok');
+  if (answer === 'cancel') console.log('User pressed cancel');
+            </code>
+          </pre>
+        </mc-card>
       </section>
 
+
+      <section id="template">
+        <mc-card>
+          <h2 slot="headline">Template dialog</h2>
+
+          <mc-button onclick="page.openTemplate()" style="margin-top: 12px;">Open</mc-button>
+
+          <pre>
+            <code class="language-html">
+  ${`// templateString
+  <div slot="headline">Headline</div>
+  <div>Here is some content for the dialog.</div>
+  <mc-button slot="actions" value="response value">Close</mc-button>`}
+      </code>
+    </pre>
+    <pre>
+      <code class="language-javascript">
+  // also available globally on window
+  import { mcDialog } from '@webformula/material/services';
+
+  const value = await mcDialog.template({
+    template: templateString,
+    allowClose: false
+  });
+
+  // value is passed in when closing the dialog: mcDialog.close('response value')
+  console.log(value);
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="html">
+        <mc-card>
+          <h2 slot="headline">HTML Only</h2>
+          <div slot="subhead">You can interact directly with dialogs added to the DOM</div>
+
+          <mc-dialog id="html-only-dialog" aria-label="[dialog] html only">
+            <div slot="headline">Headline</div>
+            <form id="one" method="dialog" slot="content">
+              <mc-textfield required label="Required input"></mc-textfield>
+            </form>
+            <mc-button slot="actions" form="one" value="submit" type="submit">Submit</mc-button>
+            <mc-button slot="actions" form="one" type="reset">Reset</mc-button>
+            <mc-button slot="actions" form="one" formnovalidate value="cancel">Cancel (with formnovalidate)</mc-button>
+          </mc-dialog>
+          
+          <mc-button onclick="document.querySelector('#html-only-dialog').showModal()" style="margin-top: 12px;">Open</mc-button>
+        
+          <pre>
+            <code class="language-html">
+  ${`<!-- Added directly to document
+  Adding the 'open' attribute will automatically show the dialog -->
+  <mc-dialog id="html-only-dialog">
+    <div slot="headline">Headline</div>
+    <form id="one" method="dialog" slot="content">
+      <mc-textfield required label="Required input"></mc-textfield>
+    </form>
+    <mc-button slot="actions" form="one" value="submit" type="submit">Submit</mc-button>
+    <mc-button slot="actions" form="one" type="reset">Reset</mc-button>
+    <mc-button slot="actions" form="one" formnovalidate value="cancel">Cancel (with formnovalidate)</mc-button>
+  </mc-dialog>
+  
+
+  <!-- attributes to control allowClose (ESC) -->
+  <mc-dialog allow-close></mc-dialog>`}
+            </code>
+          </pre>
+          <pre>
+            <code class="language-javascript">
+  const dialog = document.querySelector('#html-only-dialog');
+  dialog.scrim = true;
+  dialog.allowClose = true; // allow clicking scrim to close dialog. Default false
+  dialog.show();
+  console.log(dialog.open);
+
+  dialog.addEventListener('close', event => {
+    console.log('close', event.target.returnValue);
+  });
+
+  dialog.addEventListener('cancel', event => {
+  console.log('cancel', event.target.returnValue);
+  });
+
+  dialog.addEventListener('submit', event => {
+    console.log('submit', event.target.returnValue);
+  });
+
+  dialog.close('returnValue string');
+  console.log(dialog.returnValue);
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="scrollable">
+        <mc-card>
+          <h2 slot="headline">Scrollable</h2>
+          <div slot="subhead">Dialog header and actions sections will be fixed when dialog content is too large</div>
+
+          <mc-dialog id="scrollable-dialog" aria-label="[dialog] scrollable">
+            <div slot="headline">Headline</div>
+            <form slot="content" id="scroll-form" method="dialog">
+              <div class="supporting-text">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+                Latin
+                literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
+                Hampden-Sydney
+                College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage,
+                and
+                going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum
+                comes
+                from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by
+                Cicero,
+                written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The
+                first
+                line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+          
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections
+                1.10.32
+                and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form,
+                accompanied by English versions from the 1914 translation by H. Rackham.
+              </div>
+          
+              <div class="supporting-text">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+                Latin
+                literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
+                Hampden-Sydney
+                College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage,
+                and
+                going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum
+                comes
+                from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by
+                Cicero,
+                written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The
+                first
+                line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+          
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections
+                1.10.32
+                and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form,
+                accompanied by English versions from the 1914 translation by H. Rackham.
+              </div>
+          
+              <div class="supporting-text">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+                Latin
+                literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
+                Hampden-Sydney
+                College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage,
+                and
+                going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum
+                comes
+                from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by
+                Cicero,
+                written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The
+                first
+                line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+          
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections
+                1.10.32
+                and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form,
+                accompanied by English versions from the 1914 translation by H. Rackham.
+              </div>
+          
+              <div class="supporting-text">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+                Latin
+                literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
+                Hampden-Sydney
+                College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage,
+                and
+                going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum
+                comes
+                from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by
+                Cicero,
+                written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The
+                first
+                line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+          
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections
+                1.10.32
+                and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form,
+                accompanied by English versions from the 1914 translation by H. Rackham.
+              </div>
+            </form>
+            <mc-button slot="actions" form="scroll-form">Close</mc-button>
+          </mc-dialog>
+          
+          <mc-button onclick="document.querySelector('#scrollable-dialog').showModal()" style="margin-top: 12px;">Open</mc-button>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-dialog id="scrollable-dialog">
+    <div slot="headline">Headline</div>
+    <div slot="content">
+      ...large content
+    </div>
+    <mc-button slot="actions" onclick="mcDialog.close()">Close</mc-button>
+  </mc-dialog>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="fullscreen">
+        <mc-card>
+          <h2 slot="headline">Fullscreen</h2>
+          <div slot="subhead">Fullscreen dialogs are for compact window sizes only</div>
+
+          <mc-dialog id="fullscreen-dialog" aria-label="[dialog] fullscreen" allow-close>
+            <div slot="headline">Headline</div>
+            <div slot="content">
+              <div class="supporting-text">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
+                literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
+                College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and
+                going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes
+                from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
+                written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first
+                line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+          
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32
+                and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form,
+                accompanied by English versions from the 1914 translation by H. Rackham.
+              </div>
+          
+              <div class="supporting-text">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
+                literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
+                College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and
+                going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes
+                from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
+                written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first
+                line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+          
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32
+                and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form,
+                accompanied by English versions from the 1914 translation by H. Rackham.
+              </div>
+          
+              <div class="supporting-text">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
+                literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
+                College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and
+                going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes
+                from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
+                written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first
+                line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+          
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32
+                and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form,
+                accompanied by English versions from the 1914 translation by H. Rackham.
+              </div>
+          
+              <div class="supporting-text">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
+                literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
+                College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and
+                going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes
+                from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
+                written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first
+                line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+          
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32
+                and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form,
+                accompanied by English versions from the 1914 translation by H. Rackham.
+              </div>
+            </div>
+          </mc-dialog>
+          
+          <mc-button onclick="document.querySelector('#fullscreen-dialog').showFullscreen()" style="margin-top: 12px;">Open</mc-button>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-dialog id="fullscreen-dialog">
+    <div slot="headline">Headline</div>
+    <div slot="content">
+      ...content
+    </div>
+  </mc-dialog>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="prevent-navigation">
+        <mc-card>
+          <h2 slot="headline">Allow close and prevent navigation</h2>
+          <div slot="supporting-text"><b>Allow close</b> will prevent the dialog from being closed when scrim (backdrop) is
+            clicked</div>
+          <div slot="supporting-text"><b>Prevent navigation</b> will show a confirm dialog, asking the user if they want to
+            navigate away</div>
+        
+          <div style="display: flex; flex-direction: column;">
+            <mc-switch onchange="page.allowClose = this.checked">allowClose</mc-switch>
+            <mc-switch checked onchange="page.preventNavigation = this.checked">preventNavigation</mc-switch>
+          </div>
+          <mc-button onclick="page.openSimple(page.allowClose, page.preventNavigation)">Open</mc-button>
+        
+          <pre>
+            <code class="language-javascript">
+  // also available globally on window
+  import { mcDialog } from '@webformula/material/services';
+
+  const answer = await mcDialog.simple({
+    headline: 'Question',
+    message: 'Are you sure?',
+    allowClose: false, // default false
+    preventNavigation: true // default false
+  });
+            </code>
+          </pre>
+        </mc-card>
+      </section>
     </div>
   </div>
 </article>

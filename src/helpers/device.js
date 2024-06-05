@@ -1,4 +1,4 @@
-const wfcDevice = new class WFCDevice {
+const mcDevice = new class MCDevice {
   COMPACT = 'compact';
   MEDIUM = 'medium';
   EXPANDED = 'expanded';
@@ -37,11 +37,11 @@ const wfcDevice = new class WFCDevice {
 
     if (document.readyState !== 'complete') {
       document.addEventListener('DOMContentLoaded', () => {
-        document.body.classList.add('wfc-initiated');
+        document.body.classList.add('mc-initiated');
       });
     } else {
       window.addEventListener('pageshow', () => {
-        document.body.classList.add('wfc-initiated');
+        document.body.classList.add('mc-initiated');
       });
     }
   }
@@ -83,7 +83,7 @@ const wfcDevice = new class WFCDevice {
     }
 
     // if (!this.#lastState || state !== this.#lastState.state) {
-    //   window.dispatchEvent(new CustomEvent('wfcwindowstatechange', {
+    //   window.dispatchEvent(new CustomEvent('mcwindowstatechange', {
     //     detail: {
     //       state,
     //       lastState: this.#lastState?.state
@@ -91,7 +91,7 @@ const wfcDevice = new class WFCDevice {
     //   }));
     // }
 
-    window.dispatchEvent(new CustomEvent('wfcwindowstatechange', {
+    window.dispatchEvent(new CustomEvent('mcwindowstatechange', {
       detail: {
         state,
         lastState: this.#lastState?.state
@@ -104,5 +104,5 @@ const wfcDevice = new class WFCDevice {
   }
 }
 
-window.wfcDevice = wfcDevice;
-export default wfcDevice;
+window.mcDevice = mcDevice;
+export default mcDevice;

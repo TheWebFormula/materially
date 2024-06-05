@@ -1,12 +1,11 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './anchor.css' assert { type: 'css' };
-import { expand_more_FILL0_wght400_GRAD0_opsz24 } from '../../helpers/svgs.js';
 import util from '../../helpers/util.js';
 
 const targetValues = ['_blank', '_parent', '_self', '_top'];
 
-class WFCAnchorElement extends HTMLComponentElement {
-  static tag = 'wfc-anchor';
+class MCAnchorElement extends HTMLComponentElement {
+  static tag = 'mc-anchor';
   static useShadowRoot = true;
   static useTemplate = true;
   static shadowRootDelegateFocus = true;
@@ -15,6 +14,8 @@ class WFCAnchorElement extends HTMLComponentElement {
   #link;
   #abort;
   #target;
+  #badge;
+  #ariaLabelOriginal;
   #click_bound = this.#click.bind(this);
   #focus_bound = this.#focus.bind(this);
   #blur_bound = this.#blur.bind(this);
@@ -45,7 +46,7 @@ class WFCAnchorElement extends HTMLComponentElement {
   static get observedAttributesExtended() {
     return [
       ['href', 'string'],
-      // ['badge', 'number'],
+      ['badge', 'number'],
       ['target', 'string']
     ];
   }
@@ -78,6 +79,18 @@ class WFCAnchorElement extends HTMLComponentElement {
     if (value && !targetValues.includes(value)) throw Error(`Invalid target value. Valid values ${targetValues.join(', ')}`);
     this.#target = value;
     this.#link.setAttribute('target', value);
+  }
+
+  get badge() { return this.#badge; }
+  set badge(value) {
+    if (value === 0) value = '';
+    if (value > 999) value = '999+';
+    this.#badge = value;
+    this.shadowRoot.querySelector('.badge-display').innerText = value;
+
+    if (!this.#ariaLabelOriginal) this.#ariaLabelOriginal = this.ariaLabel || util.getTextFromNode(this);
+    if (!value) this.ariaLabel = this.#ariaLabelOriginal;
+    else this.ariaLabel = `[${this.#ariaLabelOriginal}] ${value} New ${value === 1 ? 'notification' : 'notifications'}`;
   }
 
 
@@ -121,7 +134,7 @@ class WFCAnchorElement extends HTMLComponentElement {
   }
 
   #acceptFilter(element) {
-    return element.nodeName === 'WFC-ANCHOR' && !element.hasAttribute('control');
+    return element.nodeName === 'MC-ANCHOR' && !element.hasAttribute('control');
   }
 
   #slotChange(event) {
@@ -137,4 +150,4 @@ class WFCAnchorElement extends HTMLComponentElement {
     }
   }
 }
-customElements.define(WFCAnchorElement.tag, WFCAnchorElement);
+customElements.define(MCAnchorElement.tag, MCAnchorElement);

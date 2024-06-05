@@ -1,7 +1,7 @@
 :host {
-  --wfc-side-sheet-width: var(--wfc-navigation-drawer-width);
-  --wfc-side-sheet-container-color: var(--wfc-navigation-drawer-container-color);
-  --wfc-side-sheet-shape: var(--wfc-navigation-drawer-sheet-shape);
+  --mc-side-sheet-width: var(--mc-navigation-drawer-width);
+  --mc-side-sheet-container-color: var(--mc-navigation-drawer-container-color);
+  --mc-side-sheet-shape: var(--mc-navigation-drawer-sheet-shape);
 
   /* use sticky to ignore page scroll */
   position: sticky;
@@ -22,10 +22,10 @@ slot[name="header"] {
 ::slotted(.headline) {
   line-height: 56px;
   height: 56px;
-  font-size: var(--wfc-font-small-title-size);
-  font-weight: var(--wfc-font-small-title-weight);
-  letter-spacing: var(--wfc-font-small-title-tracking);
-  color: var(--wfc-on-surface-variant);
+  font-size: var(--mc-font-small-title-size);
+  font-weight: var(--mc-font-small-title-weight);
+  letter-spacing: var(--mc-font-small-title-tracking);
+  color: var(--mc-on-surface-variant);
 }
 
 .surface-content {

@@ -9,11 +9,13 @@ import './src/components/navigation-bar/index.js';
 import './src/components/navigation-rail/index.js';
 import './src/components/pane/index.js';
 import './src/components/dialog/index.js';
+import './src/components/progress-circular/index.js';
+import './src/components/progress-linear/index.js';
 
 export {
-  // wfcDate,
-  // wfcDevice,
-  wfcDialog,
-  // wfcUtil,
-  // wfcSnackbar
+  // mcDate,
+  // mcDevice,
+  mcDialog,
+  // mcUtil,
+  // mcSnackbar
 } from './src/services.js';

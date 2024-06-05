@@ -1,5 +1,5 @@
 :host {
-  --wfc-navigation-drawer-group-height: 0px;
+  --mc-navigation-drawer-group-height: 0px;
 }
 
 .default-slot {
@@ -7,11 +7,11 @@
   flex-direction: column;
   flex-shrink: 0;
   overflow: hidden;
-  height: var(--wfc-navigation-drawer-group-height);
+  height: var(--mc-navigation-drawer-group-height);
   width: calc(100% - 16px);
   transition: height;
   padding-left: 16px;
   padding-right: 16px;
-  transition-duration: var(--wfc-motion-duration-short4);
-  transition-timing-function: var(--wfc-motion-easing-standard-decelerate);
+  transition-duration: var(--mc-motion-duration-short4);
+  transition-timing-function: var(--mc-motion-easing-standard-decelerate);
 }

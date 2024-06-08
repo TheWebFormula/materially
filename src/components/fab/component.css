@@ -1,0 +1,186 @@
+:host {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  min-width: 56px;
+  max-width: 100%;
+  height: 56px;
+  box-sizing: border-box;
+  border-radius: var(--mc-fab-shape);
+
+  transition: max-width;
+  transition-duration: var(--mc-motion-duration-medium2);
+  transition-timing-function: var(--mc-motion-easing-standard);
+}
+
+:host(:not(.mc-animation)) {
+  transition-duration: 0s !important;
+}
+
+:host([fixed]) {
+  position: fixed !important;
+  z-index: 11;
+}
+
+:host([large]) {
+  min-width: 96px;
+  height: 96px;
+  max-width: 96px;
+  justify-content: center;
+  border-radius: var(--mc-fab-shape-large);
+
+  slot.icon::slotted(mc-icon) {
+    width: var(--mc-font-large-icon-size);
+    height: var(--mc-font-large-icon-size);
+    font-size: var(--mc-font-large-icon-size);
+    line-height: var(--mc-font-large-icon-size);
+  }
+}
+
+:host([small]) {
+  min-width: 40px;
+  max-width: 40px;
+  height: 40px;
+  border-radius: var(--mc-fab-shape-small);
+
+  button {
+    padding: 8px;
+  }
+}
+
+:host([position-bottom-right]) {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+}
+
+:host([position-bottom-left]) {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+}
+
+:host([position-top-right]) {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+:host([position-top-left]) {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+:host([auto-hide]) {
+  transition: transform;
+  transition-duration: var(--mc-motion-duration-medium2);
+  transition-timing-function: var(--mc-motion-easing-standard);
+  overflow: hidden;
+  transform: scale(1);
+  transform-origin: bottom right;
+}
+
+:host([auto-hide].hide) {
+  transition-duration: var(--mc-motion-duration-medium2);
+  transform: scale(0);
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  padding: 16px;
+  position: relative;
+  height: inherit;
+  min-width: inherit;
+  max-width: inherit;
+  border-width: 0px;
+  outline: none;
+  z-index: 0;
+  border-radius: inherit;
+  cursor: inherit;
+
+  color: var(--mc-fab-color);
+  background-color: var(--mc-fab-container-color);
+}
+
+
+:host([surface]) button {
+  color: var(--mc-fab-color-surface);
+  background-color: var(--mc-fab-container-color-surface);
+}
+
+:host([surface][lowered]) button {
+  color: var(--mc-fab-color-surface-lowered);
+  background-color: var(--mc-fab-container-color-surface-lowered);
+}
+
+:host([secondary]) button {
+  color: var(--mc-fab-color-secondary);
+  background-color: var(--mc-fab-container-color-secondary);
+}
+
+:host([tertiary]) button {
+  color: var(--mc-fab-color-tertiary);
+  background-color: var(--mc-fab-container-color-tertiary);
+}
+
+:host(.hide-label) {
+  max-width: 0px;
+  transition-duration: var(--mc-motion-duration-medium4);
+}
+
+slot[name="label"] {
+  display: inline-flex;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--mc-font-large-label-size);
+  font-weight: var(--mc-font-large-label-weight);
+  letter-spacing: var(--mc-font-large-label-tracking);
+}
+
+slot[name="label"]::slotted(*) {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+
+/* --- states --- */
+
+mc-state-layer {
+  --mc-state-layer-box-shadow: var(--mc-elevation-3);
+  --mc-state-layer-hover-box-shadow: var(--mc-elevation-4);
+  --mc-state-layer-focus-box-shadow: var(--mc-elevation-3);
+  --mc-state-layer-hover-color: var(--mc-on-primary-container);
+  --mc-state-layer-focus-color: var(--mc-on-primary-container);
+  --mc-state-layer-ripple-color: var(--mc-on-primary-container);
+}
+
+:host([lowered]) mc-state-layer {
+  --mc-state-layer-box-shadow: var(--mc-elevation-1);
+  --mc-state-layer-hover-box-shadow: var(--mc-elevation-2);
+  --mc-state-layer-focus-box-shadow: var(--mc-elevation-1);
+}
+
+:host([secondary]) mc-state-layer {
+  --mc-state-layer-hover-color: var(--mc-on-secondary-container);
+  --mc-state-layer-focus-color: var(--mc-on-secondary-container);
+  --mc-state-layer-ripple-color: var(--mc-on-secondary-container);
+}
+
+:host([surface]) mc-state-layer {
+  --mc-state-layer-hover-color: var(--mc-primary);
+  --mc-state-layer-focus-color: var(--mc-primary);
+  --mc-state-layer-ripple-color: var(--mc-primary);
+}
+
+:host([tertiary]) mc-state-layer {
+  --mc-state-layer-hover-color: var(--mc-on-tertiary-container);
+  --mc-state-layer-focus-color: var(--mc-on-tertiary-container);
+  --mc-state-layer-ripple-color: var(--mc-on-tertiary-container);
+}

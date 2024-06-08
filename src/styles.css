@@ -9,6 +9,6 @@
 @import url(./components/side-sheet/variables.css);
 @import url(./components/top-app-bar/variables.css);
 @import url(./components/button/variables.css);
-/* @import url(./components/fab/variables.css); */
+@import url(./components/fab/variables.css);
 @import url(./components/navigation-rail/variables.css);
 @import url(./components/navigation-bar/variables.css);

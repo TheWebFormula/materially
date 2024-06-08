@@ -11,6 +11,7 @@ import './src/components/pane/index.js';
 import './src/components/dialog/index.js';
 import './src/components/progress-circular/index.js';
 import './src/components/progress-linear/index.js';
+import './src/components/fab/index.js';
 
 export {
   // mcDate,

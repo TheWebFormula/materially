@@ -16,7 +16,7 @@
 
     <div class="article-content">
 
-      <section id="colors">
+      <section id="colors" aria-label="Colors">
         <mc-card>
           <h2 slot="headline">Colors</h2>
           <div slot="supporting-text">You can generate theme colors using the themeGenerator</div>
@@ -57,7 +57,7 @@
       </section>
 
 
-      <section id="customize">
+      <section id="customize" aria-label="Customize">
         <mc-card>
           <h2 slot="headline">Customize</h2>
           <div slot="supporting-text">You can customize colors, fonts, elevations, and animations, both globally and at the component level</div>
@@ -87,7 +87,9 @@
     Check out overrides on component pages
   -->
 
-  <mc-navigation-drawer style="--mc-navigation-drawer-container-color: var(--mc-surface-container-low)"></mc-navigation-drawer>`}
+  <mc-navigation-drawer
+    style="--mc-navigation-drawer-container-color: var(--mc-surface-container-low)"
+  ></mc-navigation-drawer>`}
             </code>
           </pre>
 

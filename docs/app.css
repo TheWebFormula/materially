@@ -116,8 +116,10 @@ mc-card .example {
   justify-content: center;
 }
 
-body.window-compact .article-main {
-  flex-direction: column;
+@media (width < 1100px) {
+  .article-main {
+    flex-direction: column;
+  }
 }
 
 

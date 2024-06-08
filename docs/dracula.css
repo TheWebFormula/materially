@@ -13,6 +13,7 @@
  code {
   font-weight: bold;
   padding: 0.5em;
+  font-family:'Courier New', Courier, monospace;
  }
 
 .hljs {
@@ -57,6 +58,7 @@
 .hljs-template-tag,
 .hljs-template-variable {
   color: #f1fa8c;
+  word-break: break-word;
 }
 
 .hljs-comment,

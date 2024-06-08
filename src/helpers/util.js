@@ -1,4 +1,6 @@
 const mcUtil = new class MCUtil {
+  #scrollHandler_bound = this.#scrollHandler.bind(this);
+
   getNextFocusableElement(element, previous = false, acceptFilter = () => { return true; }) {
     let walker = document.createNodeIterator(
       element.parentElement,
@@ -136,6 +138,45 @@ const mcUtil = new class MCUtil {
         fn.apply(context, args);
       }, wait || 10);
     };
+  }
+
+
+  #scrollCallbacks = [];
+  #initialScroll = false;
+  #lastScrollTop;
+  #lastScrollDirection;
+  trackPageScroll(callback = () => { }) {
+    if (this.#scrollCallbacks.length === 0) {
+      if (!this.#initialScroll) this.#lastScrollTop = document.documentElement.scrollTop;
+      else this.#initialScroll = false;
+      window.addEventListener('scroll', this.#scrollHandler_bound);
+    }
+    this.#scrollCallbacks.push(callback);
+  }
+
+  untrackPageScroll(callback = () => { }) {
+    this.#scrollCallbacks = this.#scrollCallbacks.filter(c => c !== callback);
+    if (this.#scrollCallbacks.length === 0) window.removeEventListener('scroll', this.#scrollHandler_bound);
+  }
+
+
+  #scrollHandler(event) {
+    const distance = document.documentElement.scrollTop - this.#lastScrollTop;
+    if (distance === 0) return;
+
+    const direction = document.documentElement.scrollTop >= this.#lastScrollTop ? -1 : 1;
+    const directionChange = direction !== this.#lastScrollDirection;
+    this.#lastScrollDirection = direction;
+    this.#lastScrollTop = document.documentElement.scrollTop;
+
+    this.#scrollCallbacks.forEach(callback => callback({
+      event,
+      isScrolled: document.documentElement.scrollTop > 0,
+      scrollTop: document.documentElement.scrollTop,
+      direction,
+      distance,
+      directionChange
+    }));
   }
 }
 

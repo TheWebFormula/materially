@@ -21,7 +21,6 @@ export default class MCButtonElement extends HTMLComponentElement {
   #href;
   #type;
   #button;
-  #value;
   #formState;
   #onclickValue;
   #async = false;
@@ -39,9 +38,9 @@ export default class MCButtonElement extends HTMLComponentElement {
   constructor() {
     super();
 
-    this.#internals = this.attachInternals();
 
     this.role = 'button';
+    this.#internals = this.attachInternals();
     this.render();
     this.#button = this.shadowRoot.querySelector('button');
   }
@@ -62,12 +61,8 @@ export default class MCButtonElement extends HTMLComponentElement {
     return [
       ['href', 'string'],
       ['target', 'string'],
-      // ['type', 'string'],
-      ['value', 'string'],
-      // ['form', 'string'],
       ['async', 'boolean'],
-      ['disabled', 'boolean'],
-      ['popovertarget', 'string']
+      ['disabled', 'boolean']
     ];
   }
 
@@ -119,30 +114,6 @@ export default class MCButtonElement extends HTMLComponentElement {
     this.#target = value;
   }
 
-  // get type() { return this.#type; }
-  // set type(value) {
-  //   this.#type = value;
-  //   this.#button.setAttribute('type', value);
-  //   if (['reset', 'cancel', 'submit'].includes(value) && !this.#form && this.parentElement.nodeName === 'FORM') {
-  //     this.#form = this.parentElement;
-  //   }
-  // }
-
-  get value() { return this.#value; }
-  set value(value) {
-    this.#value = value;
-    this.#button.setAttribute('value', value);
-    // if (this.form) this.#internals.setFormValue(value);
-  }
-
-  // get form() { return this.#form }
-  // set form(value) {
-  //   console.log(document.querySelector(`form#${value}`))
-  //   this.#form = document.querySelector(`form#${value}`);
-  //   // this.#button.form = value;
-  //   // this.#form = document.querySelector(`form#${value}`);
-  // }
-
   get form() {
     return this.#internals.form;
   }
@@ -151,33 +122,6 @@ export default class MCButtonElement extends HTMLComponentElement {
   set async(value) {
     this.#async = !!value;
   }
-
-  // get formNoValidate() { return this.hasAttribute('formnovalidate'); }
-  // set formNoValidate(value) {
-  //   if (!!value) this.setAttribute('formnovalidate', '');
-  //   else this.removeAttribute('formnovalidate');
-  // }
-
-  // get popovertarget() {
-  //   return this.#button.getAttribute('popovertarget');
-  // }
-  // set popovertarget(value) {
-  //   this.#button.setAttribute('popovertarget', value);
-  // }
-
-  // get popoverTargetElement() {
-  //   return this.#button.popoverTargetElement;
-  // }
-  // set popoverTargetElement(value) {
-  //   this.#button.popoverTargetElement = value;
-  // }
-
-  // get popoverTargetAction() {
-  //   return this.#button.popoverTargetAction;
-  // }
-  // set popoverTargetAction(value) {
-  //   this.#button.popoverTargetAction = value;
-  // }
 
   pending() {
     this.classList.add('async-pending');

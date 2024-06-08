@@ -1,0 +1,149 @@
+<article>
+  <style>
+    .article-main mc-icon:not(.rounded) {
+      font-family: "Material Symbols Outlined alt" !important;
+    }
+  </style>
+
+  <header>
+    <h1>Icons</h1>
+    <div class="page-subheader mc-font-title-medium">Google material font icons</div>
+    <a href="https://fonts.google.com/icons" target="_new">Material icons</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#sizes">Sizes</a></li>
+        <li><a href="#variations">Variation</a></li>
+        <li><a href="#color">Color</a></li>
+        <li><a href="#loading">Loading</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section aria-label="Icon examples">
+        <mc-card>
+          <h2 slot="headline">Example</h2>
+
+          <mc-icon small filled>favorite</mc-icon>
+          <mc-icon style="color: var(--mc-neutral);" filled>favorite</mc-icon>
+          <mc-icon large filled style="color: var(--mc-tertiary-variant);">favorite</mc-icon>
+          <mc-icon extra-large filled style="color: var(--mc-primary);">favorite</mc-icon>
+          <mc-icon style="color: var(--mc-neutral-variant);">favorite</mc-icon>
+          <mc-icon bold style="color: var(--mc-error);">favorite</mc-icon>
+        </mc-card>
+      </section>
+
+
+      <section id="sizes" aria-label="Icon sizes">
+        <mc-card>  
+          <div slot="headline">Sizes</div>
+
+          <mc-icon small>mail</mc-icon>
+          <mc-icon>mail</mc-icon>
+          <mc-icon large>mail</mc-icon>
+          <mc-icon extra-large>mail</mc-icon>
+
+          <pre>
+            <code class="language-html">
+  ${`<mc-icon small>mail</mc-icon>
+  <mc-icon>mail</mc-icon>
+  <mc-icon large>mail</mc-icon>
+  <mc-icon extra-large>mail</mc-icon>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="variations" aria-label="Icon variations">
+        <mc-card>
+          <div slot="headline">Variations</div>
+        
+          <mc-icon extra-large>home</mc-icon>
+          <mc-icon extra-large rounded>home</mc-icon>
+          <mc-icon extra-large rounded bold>home</mc-icon>
+          <mc-icon extra-large filled>home</mc-icon>
+          <mc-icon extra-large rounded filled>home</mc-icon>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-icon extra-large>home</mc-icon>
+  <mc-icon extra-large rounded>home</mc-icon>
+  <mc-icon extra-large rounded bold>home</mc-icon>
+  <mc-icon extra-large filled>home</mc-icon>
+  <mc-icon extra-large rounded filled>home</mc-icon>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="color" aria-label="Icon colors">
+        <mc-card>
+          <div slot="headline">Color</div>
+          <div slot="subhead">Theme color variables automatically adjust for light and dark modes</div>
+
+          <mc-icon large filled style="color: var(--mc-primary)">favorite</mc-icon>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-icon large filled style="color: var(--mc-primary)">favorite</mc-icon>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="loading" aria-label="Loading icons">
+        <mc-card style="max-width: calc(100dvw - 32px);">
+          <div slot="headline">Loading</div>
+          <div slot="subhead">You can use google icons or other font icon libraries for icons</div>
+          <div slot="supporting-text">If you are not using a variable font then <strong>mc-fill</strong> will not work</div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<!--
+      Loading from google fonts
+
+      you can add \`&text=favorite,home,mail\`
+      to the url to load an icon subset for smaller file size.
+      Although the size changes are inconsistent and non-linear
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />`}
+            </code>
+          </pre>
+
+          <pre>
+            <code class="language-css">
+  ${`/* load font file directly */
+  @font-face {
+    font-family: 'Material Symbols Outlined';
+    font-style: normal;
+    font-weight: 100 700;
+    /* Using block to prevent text from showing before load */
+    font-display: block;
+    src: url(./outlined-icons.woff2) format('woff2');
+  }
+  @font-face {
+    font-family: 'Material Symbols Rounded';
+    font-style: normal;
+    font-weight: 100 700;
+    font-display: block;
+    src: url(./rounded-icons.woff2) format('woff2');
+  }`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

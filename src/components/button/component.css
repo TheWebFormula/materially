@@ -26,6 +26,10 @@
   color: var(--mc-on-surface);
   opacity: 0.38;
   pointer-events: none;
+
+  button {
+    pointer-events: none;
+  }
 }
 
 button {
@@ -47,10 +51,6 @@ button {
   padding: 0;
   gap: 8px;
   padding: 0 16px;
-}
-
-:host([disabled]) button {
-  pointer-events: none;
 }
 
 :host([filled]) {
@@ -106,6 +106,21 @@ slot[name="leading-icon"]::slotted(mc-icon) {
   line-height: var(--mc-font-small-icon-size);
 }
 
+.spinner {
+  position: absolute;
+  top: 5px;
+  --mc-progress-circular-stroke-width: 6;
+}
+
+:host(.async-pending) {
+  pointer-events: none;
+
+  button .default-slot {
+    color: transparent;
+  }
+}
+
+
 
 /* --- states --- */
 
@@ -152,18 +167,4 @@ mc-state-layer {
 
 :host([disabled]) mc-state-layer {
   --mc-state-layer-box-shadow: none;
-}
-
-.spinner {
-  position: absolute;
-  top: 5px;
-  --mc-progress-circular-stroke-width: 6;
-}
-
-:host(.async-pending) {
-  pointer-events: none;
-}
-
-:host(.async-pending) button .default-slot {
-  color: transparent;
 }

@@ -261,15 +261,12 @@
           <div class="example" style="flex-direction: column; display: flex;">
             The FAB in the bottom right corner of the page. If you do not set it to fixed then it would be bound to the bottom
             right of this container.
-            <mc-switch style="width: 200px"
-              onchange="document.querySelector('#fixed-fab').toggleAttribute('fixed', !this.checked)">Toggle fixed</mc-switch>
-            <mc-switch id="hide-switch" style="width: 200px"
-              onchange="page.toggleHideStates({hide: this.checked})">Toggle auto hide
-            </mc-switch>
-            <mc-switch id="hide-label-switch" style="width: 200px" checked
-              onchange="page.toggleHideStates({hideLabel: this.checked})">Toggle
-              auto hide label
-            </mc-switch>
+            <mc-switch style="width: 200px" label="Toggle fixed"
+              onchange="document.querySelector('#fixed-fab').toggleAttribute('fixed', !this.checked)"></mc-switch>
+            <mc-switch id="hide-switch" style="width: 200px" label="Toggle auto hide"
+              onchange="page.toggleHideStates({hide: this.checked})"></mc-switch>
+            <mc-switch id="hide-label-switch" style="width: 200px" checked label="Toggle auto hide label"
+              onchange="page.toggleHideStates({hideLabel: this.checked})"></mc-switch>
             <mc-fab id="fixed-fab" auto-hide-label fixed position-bottom-right>
               <mc-icon>edit</mc-icon>
               <span slot="label">Example</span>

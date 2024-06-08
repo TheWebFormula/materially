@@ -14,7 +14,6 @@ class MCFabElement extends HTMLComponentElement {
   #autoHide;
   #autoHideLabel;
   #maxWidth;
-  #initialAutoHideLabel = false;
   #scrollDirectionChange_bound = this.#scrollDirectionChange.bind(this);
 
   constructor() {
@@ -76,15 +75,10 @@ class MCFabElement extends HTMLComponentElement {
 
 
   #enableAutoHide() {
-    if (this.#autoHideLabel && !this.#initialAutoHideLabel) {
-      this.#initialAutoHideLabel = true;
-      this.#maxWidth = this.offsetWidth;
-      this.style.maxWidth = `${this.#maxWidth}px`;
-      util.trackPageScroll(this.#scrollDirectionChange_bound);
-      if (!this.classList.contains('mc-animation')) this.classList.add('mc-animation');
-    } else {
-      util.untrackPageScroll(this.#scrollDirectionChange_bound);
-    }
+    this.#maxWidth = this.offsetWidth;
+    this.style.maxWidth = `${this.#maxWidth}px`;
+    util.trackPageScroll(this.#scrollDirectionChange_bound);
+    if (!this.classList.contains('mc-animation')) this.classList.add('mc-animation')
   }
 
   #scrollDirectionChange({ direction, directionChange }) {

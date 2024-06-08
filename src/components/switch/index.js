@@ -15,6 +15,7 @@ class MCSwitchElement extends HTMLComponentElement {
   #input;
   #label;
   #abort;
+  #initiating = true;
   #updateValue_bound = this.#updateValue.bind(this);
 
   
@@ -74,6 +75,12 @@ class MCSwitchElement extends HTMLComponentElement {
     this.#abort = new AbortController();
     this.#input.addEventListener('change', this.#updateValue_bound, { signal: this.#abort.signal });
     this.#updateValidity();
+    this.#initiating = false;
+  }
+
+  disconnectedCallback() {
+    if (this.#abort) this.#abort.abort();
+    this.#initiating = true;
   }
 
 
@@ -159,6 +166,7 @@ class MCSwitchElement extends HTMLComponentElement {
     this.#internals.setFormValue(this.#input.checked ? this.value : null, this.#input.checked ? 'checked' : undefined);
     this.#updateValidity();
     this.#updateValidityDisplay();
+    if (!this.#initiating) this.dispatchEvent(new Event('change', { bubbles: true }));
   }
 }
 customElements.define(MCSwitchElement.tag, MCSwitchElement);

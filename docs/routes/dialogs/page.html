@@ -369,8 +369,8 @@
             navigate away</div>
         
           <div style="display: flex; flex-direction: column;">
-            <mc-switch onchange="page.allowClose = this.checked">allowClose</mc-switch>
-            <mc-switch checked onchange="page.preventNavigation = this.checked">preventNavigation</mc-switch>
+            <mc-switch onchange="page.allowClose = this.checked" label="allowClose"></mc-switch>
+            <mc-switch checked onchange="page.preventNavigation = this.checked" label="preventNavigation"></mc-switch>
           </div>
           <mc-button onclick="page.openSimple(page.allowClose, page.preventNavigation)">Open</mc-button>
         

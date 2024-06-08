@@ -1,0 +1,15 @@
+:root {
+  --mc-switch-track-color: var(--mc-surface-container-highest);
+  --mc-switch-track-checked-color: var(--mc-primary);
+  --mc-switch-track-border-color: var(--mc-outline);
+  --mc-switch-track-disabled-color: var(--mc-surface-container-highest);
+  --mc-switch-track-disabled-checked-color: var(--mc-on-surface);
+  --mc-switch-track-border-disabled-color: var(--mc-on-surface);
+  --mc-switch-thumb-color: var(--mc-outline);
+  --mc-switch-thumb-checked-color: var(--mc-on-primary);
+  --mc-switch-thumb-disabled-color: var(--mc-on-surface);
+  --mc-switch-thumb-disabled-checked-color: var(--mc-on-surface);
+  --mc-switch-icon-color: var(--mc-surface-container-highest);
+  --mc-switch-icon-checked-color: var(--mc-primary);
+  --mc-switch-label-disabled-color: var(--mc-on-surface);
+}

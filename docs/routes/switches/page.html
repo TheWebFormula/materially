@@ -1,0 +1,88 @@
+<article>
+  <header>
+    <h1>Switches</h1>
+    <div class="page-subheader mc-font-title-medium">Switches toggle the state of a single item on or off</div>
+    <a href="https://m3.material.io/components/switch/overview" target="_new">Material Design Guidelines: Switch</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#basic">Basic</a></li>
+        <li><a href="#labels">Labels</a></li>
+        <li><a href="#icon">Icons</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="basic" aria-label="Example switches">
+        <mc-card>  
+          <h2 slot="headline">Sizes</h2>
+
+          <div class="example" style="flex-direction: column; display: flex; max-width: 360px; margin: 0 auto;">
+            <mc-switch name="one" label="label" required></mc-switch>
+            <mc-switch name="two" checked label-right="Label"></mc-switch>
+          </div>
+
+          <pre>
+            <code class="language-html">
+  ${`<mc-switch>Label</mc-switch>
+  <mc-switch checked>Label</mc-switch>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="labels" aria-label="Switch labels">
+        <mc-card>
+          <h2 slot="headline">Switch labels</h2>
+
+          <div class="example" style="flex-direction: column; display: flex; max-width: 360px; margin: 0 auto;">
+            <mc-switch label="Label"></mc-switch>
+            <mc-switch checked label-right="Label right"></mc-switch>
+            <mc-divider style="margin: 24px 0;"></mc-divider>
+            <mc-switch class="min-width" label="Label min width"></mc-switch>
+            <mc-switch class="min-width" checked label-right="Label right min width"></mc-switch>
+          </div>
+
+          <pre>
+            <code class="language-html">
+  ${`<mc-switch label="Label"></mc-switch>
+  <mc-switch checked label-right="Label right"></mc-switch>
+  <mc-switch class="min-width" label="Label min width"></mc-switch>
+  <mc-switch class="min-width" checked label-right="Label right min width"></mc-switch>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+      
+
+      <section id="icon" aria-label="Switch icons">
+        <mc-card>
+          <h2 slot="headline">Switch with icons</h2>
+
+          <div class="example" style="flex-direction: column; display: flex; max-width: 360px; margin: 0 auto;">
+            <mc-switch label="No icons unchecked"></mc-switch>
+            <mc-switch checked label="No icons checked"></mc-switch>
+            <mc-switch checked checked-icon label="Checked icon"></mc-switch>
+            <mc-switch unchecked-icon label="Unchecked icon"></mc-switch>
+            <mc-switch icon label="Both icons"></mc-switch>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+      ${`<mc-switch label="No icons unchecked"></mc-switch>
+      <mc-switch checked label="No icons checked"></mc-switch>
+      <mc-switch checked checked-icon label="Checked icon"></mc-switch>
+      <mc-switch unchecked-icon label="Unchecked icon"></mc-switch>
+      <mc-switch icon label="Both icons"></mc-switch>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,260 @@
+:host {
+  display: inline-flex;
+  outline: none;
+  vertical-align: top;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  margin: 9px 0;
+  flex-grow: 1;
+}
+
+:host(.min-width) {
+  flex-grow: 0;
+}
+
+:host([disabled]) {
+  cursor: default;
+  pointer-events: none;
+  
+  .container {
+    .track {
+      &::before {     
+        opacity: 0.12; 
+        background-color: var(--mc-switch-track-disabled-color);
+        border-color: var(--mc-switch-track-border-disabled-color);
+      }
+
+      .thumb::before {
+        opacity: 0.38; 
+        background-color: var(--mc-switch-thumb-disabled-color);
+      }
+    }
+  }
+
+  .container:has(input:checked) {
+    .track {
+      &::before {      
+        background-color: var(--mc-switch-track-disabled-checked-color);
+      }
+
+      .thumb::before {
+        background-color: var(--mc-switch-thumb-disabled-checked-color);
+      }
+    }
+  }
+
+  label {
+    color: var(--mc-switch-label-disabled-color);
+    opacity: 0.38;
+  }
+}
+
+.container {
+  align-items: center;
+  display: inline-flex;
+  flex-shrink: 0;
+  position: relative;
+  min-width: 52px;
+  height: 32px;
+  border-radius: var(--mc-shape-large);
+}
+
+input {
+  appearance: none;
+  height: 48px;
+  outline: none;
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  cursor: inherit;
+}
+
+.track {
+  position: absolute;
+  width: 52px;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    content: '';
+    display: flex;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: inherit;
+    box-sizing: border-box;
+    transition-property: opacity, background-color;
+    transition-duration: var(--mc-motion-duration-short1);
+  
+    background-color: var(--mc-switch-track-color);
+    border: 2px solid;
+    border-color: var(--mc-switch-track-border-color);
+  }
+
+  .thumb-container {
+    display: flex;
+    place-content: center;
+    place-items: center;
+    position: relative;
+    margin-inline-end: 20px;
+    
+    transition: margin;
+    transition-duration: var(--mc-motion-duration-medium2);
+    transition-timing-function: var(--mc-transition-overshoot);
+  }
+
+  .thumb {
+    position: relative;
+    border-radius: var(--mc-shape-full);
+    height: 16px;
+    width: 16px;
+  
+    transform-origin: center;
+    transition-property: height, width;
+    transition-duration: var(--mc-motion-duration-medium1), var(--mc-motion-duration-medium1);
+    transition-timing-function: var(--mc-motion-easing-standard), var(--mc-motion-easing-standard);
+    z-index: 0;
+
+    &::before {
+      content: '';
+      display: flex;
+      inset: 0;
+      position: absolute;
+      border-radius: inherit;
+      box-sizing: border-box;
+      transition: background-color;
+      transition-duration: var(--mc-motion-duration-short1);
+    
+      background-color: var(--mc-switch-thumb-color);
+    }
+  }
+}
+
+.container:has(input:checked) {
+  .track {
+    &::before {
+      background-color: var(--mc-switch-track-checked-color);
+    }
+
+    .thumb-container {
+      margin-inline-end: unset;
+      margin-inline-start: 20px;
+    }
+
+    .thumb {
+      width: 24px;
+      height: 24px;
+
+      &::before {
+        background-color: var(--mc-switch-thumb-checked-color);
+      }
+    }
+  }
+}
+
+:host([icon]),
+:host([unchecked-icon]) {
+  .track {
+    .thumb {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+
+.container:has(input:invalid.touched) {
+  .track {
+    &::before {
+      border-color: var(--mc-error);
+    }
+
+    .thumb::before {
+      background-color: var(--mc-error);
+    }
+  }
+}
+
+label {
+  display: none;
+  flex-grow: inherit;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: inherit;
+  white-space: nowrap;
+  height: 32px;
+  line-height: 32px;
+  margin-right: 16px;
+
+  font-size: var(--mc-font-large-label-size);
+  font-weight: var(--mc-font-large-label-weight);
+  letter-spacing: var(--mc-font-large-label-tracking);
+
+  &.show {
+    display: inline-flex;
+  }
+
+  &.right {
+    justify-content: flex-end;
+    order: 1;
+    margin-right: 0;
+    margin-left: 16px;
+  }
+}
+
+label:has(~ .container input:invalid.touched) {
+  color: var(--mc-error);
+}
+
+.icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  fill: currentColor;
+
+  transition:
+    fill 67ms linear, opacity 33ms linear,
+    transform 167ms var(--mc-motion-easing-standard);
+  opacity: 0;
+}
+
+.icon.icon-checked {
+  width: 16px;
+  height: 16px;
+  color: var(--mc-switch-icon-checked-color);
+}
+
+.icon.icon-unchecked {
+  width: 16px;
+  height: 16px;
+  color: var(--mc-switch-icon-color);
+}
+
+:host([checked-icon]),
+:host([icon]) {
+  .container:has(input:checked) .icon.icon-checked {
+    opacity: 1;
+  }
+}
+
+:host([unchecked-icon]),
+:host([icon]) {
+  .container:has(input:not(:checked)) .icon.icon-unchecked {
+    opacity: 1;
+  }
+}
+
+mc-state-layer {
+  --mc-state-layer-hover-color: var(--mc-on-surface);
+  --mc-state-layer-focus-color: var(--mc-on-surface);
+}
+
+/* TODO focus ring color broken? */

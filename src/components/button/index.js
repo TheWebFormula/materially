@@ -62,7 +62,8 @@ export default class MCButtonElement extends HTMLComponentElement {
       ['href', 'string'],
       ['target', 'string'],
       ['async', 'boolean'],
-      ['disabled', 'boolean']
+      ['disabled', 'boolean'],
+      ['type', 'string']
     ];
   }
 
@@ -112,6 +113,11 @@ export default class MCButtonElement extends HTMLComponentElement {
   set target(value) {
     if (value && !targetValues.includes(value)) throw Error(`Invalid target value. Valid values ${targetValues.join(', ')}`);
     this.#target = value;
+  }
+
+  get type() { return this.#button.getAttribute('type'); }
+  set type(value) {
+    this.#button.setAttribute('type', value);
   }
 
   get form() {
@@ -168,17 +174,16 @@ export default class MCButtonElement extends HTMLComponentElement {
   }
 
   async #formClick(event) {
-    this.#formRequestSubmit();
-    return;
-
-    switch (this.#type) {
+    switch (this.#button.type) {
       case 'reset':
         this.form.reset();
         break;
 
       case 'submit':
-        if (!this.formNoValidate && !this.form.hasAttribute('novalidate') && !this.form.checkValidity()) {
-          const formElements = [...this.form.elements];
+        const shouldValidate = !this.form.hasAttribute('novalidate') && !this.hasAttribute('formnovalidate') && !this.form.checkValidity();
+        if (shouldValidate) {
+          const formElements = [...this.form.elements].filter(e => e.checkValidity);
+
           formElements.forEach(element => element.reportValidity());
           const firstInvalid = formElements.find(e => !e.checkValidity());
           const bounds = firstInvalid.getBoundingClientRect();
@@ -191,25 +196,26 @@ export default class MCButtonElement extends HTMLComponentElement {
         }
         break;
 
-      case 'cancel':
-        if (this.#formState !== undefined && this.#getFormState() !== this.#formState) {
-          event.preventDefault();
-          event.stopPropagation();
-          event.stopImmediatePropagation();
+      // TODO
+      // case 'cancel':
+      //   if (this.#formState !== undefined && this.#getFormState() !== this.#formState) {
+      //     event.preventDefault();
+      //     event.stopPropagation();
+      //     event.stopImmediatePropagation();
 
-          dialog.simple({
-            message: 'Discard changes?',
-            actionConfirm: true,
-            actionConfirmLabel: 'Cancel',
-            actionCancel: true,
-            actionCancelLabel: 'Discard'
-          }).then(action => {
-            if (action !== 'cancel') return;
-            this.#formState = undefined;
-            this.click();
-          });
-        }
-        break;
+      //     dialog.simple({
+      //       message: 'Discard changes?',
+      //       actionConfirm: true,
+      //       actionConfirmLabel: 'Cancel',
+      //       actionCancel: true,
+      //       actionCancelLabel: 'Discard'
+      //     }).then(action => {
+      //       if (action !== 'cancel') return;
+      //       this.#formState = undefined;
+      //       this.click();
+      //     });
+      //   }
+      //   break;
 
       default:
         if (this.form.method === 'dialog') {
@@ -219,8 +225,8 @@ export default class MCButtonElement extends HTMLComponentElement {
   }
 
   #formRequestSubmit() {
-    const previousNoValidate = this.form.noValidate;
-    if (this.formNoValidate) this.form.noValidate = true;
+    // const previousNoValidate = this.form.noValidate;
+    // if (this.hasAttribute('formnovalidate')) this.form.noValidate = true;
     // intercept submit so we can inject submitter
     this.form.addEventListener('submit', (submitEvent) => {
       Object.defineProperty(submitEvent, 'submitter', {
@@ -231,7 +237,7 @@ export default class MCButtonElement extends HTMLComponentElement {
     }, { capture: true, once: true });
     this.#internals.setFormValue(this.value);
     this.form.requestSubmit();
-    if (this.formNoValidate) this.form.noValidate = previousNoValidate;
+    // this.form.noValidate = previousNoValidate;
   }
 
   // used to track changes based on values

@@ -1,0 +1,103 @@
+<article>
+  <header>
+    <h1>Checkboxes</h1>
+    <div class="page-subheader mc-font-title-medium">Checkboxes allow users to select one or more items from a set. Checkboxes can turn an option on or off</div>
+    <a href="https://m3.material.io/components/checkbox/overview" target="_new">Material Design Guidelines: Checkboxes</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#standard">Standard</a></li>
+        <li><a href="#left_label">Left label</a></li>
+        <li><a href="#error">Error style</a></li>
+        <li><a href="#indeterminate">Indeterminate state</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="standard" aria-label="Example checkboxes">
+        <mc-card>  
+          <h2 slot="headline">Checkboxes</h2>
+
+          <div class="example" style="flex-direction: column; display: flex;">
+            <mc-checkbox aria-label="checkbox"></mc-checkbox>
+            <mc-checkbox checked label="Checked"></mc-checkbox>
+            <mc-checkbox indeterminate label="Indeterminate"></mc-checkbox>
+            <mc-checkbox disabled label="Disabled"></mc-checkbox>
+            <mc-checkbox checked disabled label="Checked disabled"></mc-checkbox>
+          </div>
+
+          <pre>
+            <code class="language-html">
+  ${`<mc-checkbox aria-label="checkbox"></mc-checkbox>
+  <mc-checkbox checked label="Checked"></mc-checkbox>
+  <mc-checkbox indeterminate label="Indeterminate"></mc-checkbox>
+  <mc-checkbox disabled label="Disabled"></mc-checkbox>
+  <mc-checkbox checked disabled label="Checked disabled"></mc-checkbox>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="left_label" aria-label="Checkbox left labels">
+        <mc-card>
+          <h2 slot="headline">Label right</h2>
+        
+          <div class="example" style="flex-direction: column; display: flex;">
+            <mc-checkbox label="label"></mc-checkbox>
+            <mc-checkbox label-left="Left label"></mc-checkbox>
+            <mc-divider style="margin: 24px 0;"></mc-divider>
+            <mc-checkbox class="full-width" label="label full width"></mc-checkbox>
+            <mc-checkbox class="full-width" label-left="Left label full width"></mc-checkbox>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-checkbox label="label"></mc-checkbox>
+  <mc-checkbox label-left="Left label"></mc-checkbox>
+  <mc-divider style="margin: 24px 0;"></mc-divider>
+  <mc-checkbox class="full-width" label="label full width"></mc-checkbox>
+  <mc-checkbox class="full-width" label-left="Left label full width"></mc-checkbox>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="error" aria-label="Checkbox errors">
+        <mc-card>
+          <h2 slot="headline">Checkboxes error style</h2>
+        
+          <mc-checkbox required label="Click twice to make invalid"></mc-checkbox>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-checkbox required label="Click twice to make invalid"></mc-checkbox>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+      <section id="indeterminate" aria-label="Checkbox indeterminate">
+        <mc-card id="indeterminate">
+          <h2 slot="headline">Indeterminate</h2>
+          <div slot="supporting-text">There is no input attribute for Indeterminate, only a property. An attribute has been added
+            to mc-checkbox for convenience. Indeterminate overrides checked and unchecked states. If checked is changed then
+            indeterminate will be set false.</div>
+        
+          <mc-checkbox indeterminate label="Indeterminate"></mc-checkbox>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-checkbox indeterminate label="Indeterminate"></mc-checkbox>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

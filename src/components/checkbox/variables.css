@@ -1,0 +1,9 @@
+:root {
+  --mc-checkbox-background-color: var(--mc-primary);
+  --mc-checkbox-background-disabled-color: var(--mc-on-surface);
+  --mc-checkbox-icon-color: var(--mc-on-primary);
+  --mc-checkbox-icon-disabled-color: var(--mc-surface);
+  --mc-checkbox-outline-color: var(--mc-on-surface-variant);
+  --mc-checkbox-outline-disabled-color: var(--mc-on-surface);
+  --mc-checkbox-label-disabled-color: var(--mc-on-surface);
+}

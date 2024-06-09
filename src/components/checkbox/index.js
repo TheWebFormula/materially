@@ -4,8 +4,8 @@ import '../state-layer/index.js';
 
 let counter = 0;
 
-class MCSwitchElement extends HTMLComponentElement {
-  static tag = 'mc-switch';
+class MCCheckboxElement extends HTMLComponentElement {
+  static tag = 'mc-checkbox';
   static useShadowRoot = true;
   static useTemplate = true;
   static shadowRootDelegateFocus = true;
@@ -14,54 +14,43 @@ class MCSwitchElement extends HTMLComponentElement {
 
   #internals;
   #input;
-  #label;
   #abort;
+  #label;
   #initiating = true;
   #updateValue_bound = this.#updateValue.bind(this);
 
-  
+
   constructor() {
     super();
 
-    this.role = 'switch';
     this.#internals = this.attachInternals();
+    this.role = 'checkbox';
     this.render();
     this.#input = this.shadowRoot.querySelector('input');
   }
 
   template() {
     return /*html*/`
-      <label></label>
       <div class="container">
-        <input type="checkbox" role="switch">
-        <div class="track">
-          <div class="thumb-container">
-            <div class="thumb">
-              <div class="icon icon-checked">
-                <svg viewBox="0 0 24 24">
-                  <path d="M9.55 18.2 3.65 12.3 5.275 10.675 9.55 14.95 18.725 5.775 20.35 7.4Z" />
-                </svg>
-              </div>
-              <div class="icon icon-unchecked">
-                <svg viewBox="0 0 24 24">
-                  <path d="M6.4 19.2 4.8 17.6 10.4 12 4.8 6.4 6.4 4.8 12 10.4 17.6 4.8 19.2 6.4 13.6 12 19.2 17.6 17.6 19.2 12 13.6Z" />
-                </svg>
-              </div>
-
-            <mc-state-layer></mc-state-layer>
-            </div>
-          </div>
-        </div>
+        <input type="checkbox">
+        <div class="outline"></div>
+        <div class="background"></div>
+        <mc-state-layer ripple ripple-centered outer-circle></mc-state-layer>
+        <svg class="icon" viewBox="0 0 18 18" aria-hidden="true">
+          <rect class="mark short" />
+          <rect class="mark long" />
+        </svg>
       </div>
+      <label></label>
     `;
   }
-
 
   static get observedAttributesExtended() {
     return [
       ['label', 'string'],
-      ['label-right', 'string'],
+      ['label-left', 'string'],
       ['checked', 'boolean'],
+      ['indeterminate', 'boolean'],
       ['disabled', 'boolean'],
       ['required', 'boolean'],
       ['value', 'string']
@@ -84,7 +73,6 @@ class MCSwitchElement extends HTMLComponentElement {
     this.#initiating = true;
   }
 
-
   get value() { return this.#input.value; }
   set value(value) {
     this.#input.value = value;
@@ -98,15 +86,19 @@ class MCSwitchElement extends HTMLComponentElement {
     this.#updateValue();
   }
 
+  get indeterminate() { return this.#input.indeterminate; }
+  set indeterminate(value) {
+    this.#input.indeterminate = value;
+  }
+
   get label() { return this.#label; }
   set label(value) {
     const label = this.shadowRoot.querySelector('label');
     if (!this.#input.hasAttribute('id')) {
-      const id = `mcswitch-${counter++}`;
+      const id = `mccheckbox-${counter++}`;
       this.#input.setAttribute('id', id);
       label.setAttribute('for', id);
     }
-
     this.#label = value;
     label.innerText = this.#label || '';
     this.ariaLabel = value;
@@ -114,11 +106,11 @@ class MCSwitchElement extends HTMLComponentElement {
     label.classList.remove('right');
   }
 
-  get labelRight() { return this.#label; }
-  set labelRight(value) {
+  get labelLeft() { return this.#label; }
+  set labelLeft(value) {
     const label = this.shadowRoot.querySelector('label');
     if (!this.#input.hasAttribute('id')) {
-      const id = `mcswitch-${counter++}`;
+      const id = `mccheckbox-${counter++}`;
       this.#input.setAttribute('id', id);
       label.setAttribute('for', id);
     }
@@ -127,7 +119,7 @@ class MCSwitchElement extends HTMLComponentElement {
     label.innerText = this.#label || '';
     this.ariaLabel = value;
     label.classList.toggle('show', !!value);
-    label.classList.toggle('right', !!value);
+    label.classList.toggle('left', !!value);
   }
 
   get required() { return this.hasAttribute('required'); }
@@ -181,4 +173,4 @@ class MCSwitchElement extends HTMLComponentElement {
     if (!this.#initiating) this.dispatchEvent(new Event('change', { bubbles: true }));
   }
 }
-customElements.define(MCSwitchElement.tag, MCSwitchElement);
+customElements.define(MCCheckboxElement.tag, MCCheckboxElement);

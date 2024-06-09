@@ -14,6 +14,7 @@ import './src/components/progress-linear/index.js';
 import './src/components/fab/index.js';
 import './src/components/switch/index.js';
 import './src/components/checkbox/index.js';
+import './src/components/icon-button/index.js';
 
 export {
   // mcDate,

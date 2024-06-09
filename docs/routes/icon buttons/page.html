@@ -1,0 +1,132 @@
+<article>
+  <style>
+    .article-content mc-icon.alt {
+      font-family: "Material Symbols Outlined alt" !important;
+    }
+  </style>
+
+  <header>
+    <h1>Icon buttons</h1>
+    <div class="page-subheader mc-font-title-medium">Icon buttons help people take supplementary actions with a single tap</div>
+    <a href="https://m3.material.io/components/icon-buttons/overview" target="_new">Material Design Guidelines: Icon buttons</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav" aria-label="page-content">
+      <div class="mc-font-headline-small page-secondary-header">Links</div>
+      <ul class="links">
+        <li><a href="#icon_button">Icon button</a></li>
+        <li><a href="#icon_toggle_button">Icon toggle button</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+      <section id="icon_button" aria-label="Icon button examples">
+        <mc-card>
+          <h2 slot="headline">Example</h2>
+          <div slot="supporting-text">Use icon buttons when a compact button is required, such as in a toolbar or image
+            list. There are two types of icon
+            buttons: standard and contained</div>
+          
+          <div class="example">
+            <mc-icon-button>
+              <mc-icon style="font-family: Material Symbols Outlined alt">favorite</mc-icon>
+            </mc-icon-button>
+            
+            <mc-icon-button>
+              <mc-icon filled style="font-family: Material Symbols Outlined alt">favorite</mc-icon>
+            </mc-icon-button>
+            
+            <mc-icon-button filled>
+              <mc-icon>favorite</mc-icon>
+            </mc-icon-button>
+            
+            <mc-icon-button filled-tonal>
+              <mc-icon>favorite</mc-icon>
+            </mc-icon-button>
+            
+            <mc-icon-button outlined>
+              <mc-icon style="font-family: Material Symbols Outlined alt">favorite</mc-icon>
+            </mc-icon-button>
+            
+            <mc-icon-button outlined>
+              <mc-icon filled style="font-family: Material Symbols Outlined alt">favorite</mc-icon>
+            </mc-icon-button>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-icon-button>
+    <mc-icon>favorite</mc-icon>
+  </mc-icon-button>
+  
+  <mc-icon-button>
+    <mc-icon filled>favorite</mc-icon>
+  </mc-icon-button>
+  
+  <mc-icon-button filled>
+    <mc-icon>favorite</mc-icon>
+  </mc-icon-button>
+  
+  <mc-icon-button filled-tonal>
+    <mc-icon>favorite</mc-icon>
+  </mc-icon-button>
+  
+  <mc-icon-button outlined>
+    <mc-icon>favorite</mc-icon>
+  </mc-icon-button>
+  
+  <mc-icon-button outlined>
+    <mc-icon filled>favorite</mc-icon>
+  </mc-icon-button>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="icon_toggle_button" aria-label="Icon button toggle">
+        <mc-card>
+          <h2 slot="headline">Icon toggle button</h2>
+          <div slot="supporting-text">If not using a variable icon, then the toggle state will not change between outlined and
+            filled</div>
+        
+          <mc-icon-button toggle>
+            <mc-icon style="font-family: Material Symbols Outlined alt">favorite</mc-icon>
+          </mc-icon-button>
+        
+          <mc-icon-button toggle filled>
+            <mc-icon style="font-family: Material Symbols Outlined alt">favorite</mc-icon>
+            <mc-icon slot="selected">settings</mc-icon>
+          </mc-icon-button>
+        
+          <mc-icon-button toggle outlined checked onchange="console.log(this.checked)">
+            <mc-icon style="font-family: Material Symbols Outlined alt">favorite</mc-icon>
+            <mc-icon slot="selected">settings</mc-icon>
+          </mc-icon-button>
+        
+          <pre>
+            <code class="language-html">
+  ${`<!-- Toggle with single icon will change the fill state -->
+  <mc-icon-button toggle>
+    <mc-icon style="font-family: Material Symbols Outlined alt">favorite</mc-icon>
+  </mc-icon-button>
+  
+  <!-- Toggle with second icon filled -->
+  <mc-icon-button toggle filled>
+    <mc-icon style="font-family: Material Symbols Outlined alt">favorite</mc-icon>
+    <mc-icon slot="selected">settings</mc-icon>
+  </mc-icon-button>
+  
+  <!-- Toggle with second icon checked outlined -->
+  <mc-icon-button toggle outlined checked onchange="console.log(this.checked)">
+    <mc-icon style="font-family: Material Symbols Outlined alt">favorite</mc-icon>
+    <mc-icon slot="selected">settings</mc-icon>
+  </mc-icon-button>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

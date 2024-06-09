@@ -17,7 +17,7 @@ export default class MCButtonElement extends HTMLComponentElement {
 
   #internals;
   #abort;
-  #target;
+  #target = 'test';
   #href;
   #type;
   #button;

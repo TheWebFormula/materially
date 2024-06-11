@@ -40,6 +40,7 @@ export default class MCButtonElement extends HTMLComponentElement {
 
 
     this.role = 'button';
+    this.tabIndex = this.hasAttribute('tabindex') ? this.getAttribute('tabindex') : 0;
     this.#internals = this.attachInternals();
     this.render();
     this.#button = this.shadowRoot.querySelector('button');
@@ -63,7 +64,8 @@ export default class MCButtonElement extends HTMLComponentElement {
       ['target', 'string'],
       ['async', 'boolean'],
       ['disabled', 'boolean'],
-      ['type', 'string']
+      ['type', 'string'],
+      ['popovertarget', 'string']
     ];
   }
 
@@ -129,6 +131,27 @@ export default class MCButtonElement extends HTMLComponentElement {
     this.#async = !!value;
   }
 
+  get popovertarget() {
+    return this.#button.getAttribute('popovertarget');
+  }
+  set popovertarget(value) {
+    this.#button.setAttribute('popovertarget', value);
+  }
+
+  get popoverTargetElement() {
+    return this.#button.popoverTargetElement;
+  }
+  set popoverTargetElement(value) {
+    this.#button.popoverTargetElement = value;
+  }
+
+  get popoverTargetAction() {
+    return this.#button.popoverTargetAction;
+  }
+  set popoverTargetAction(value) {
+    this.#button.popoverTargetAction = value;
+  }
+
   pending() {
     this.classList.add('async-pending');
     this.shadowRoot.querySelector('.spinner').innerHTML = `
@@ -153,7 +176,7 @@ export default class MCButtonElement extends HTMLComponentElement {
   }
 
   #focusKeydown(e) {
-    if (e.key === 'Enter') this.shadowRoot.querySelector('mc-state-layer').triggerRipple();
+    if (e.key === 'Enter' || e.keyCode === 32) this.shadowRoot.querySelector('mc-state-layer').triggerRipple();
   }
 
   // prevent onclick attribute from firing when form invalid

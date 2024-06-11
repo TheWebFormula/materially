@@ -20,6 +20,7 @@ class MCFabElement extends HTMLComponentElement {
     super();
 
     this.role = 'button';
+    this.tabIndex = this.hasAttribute('tabindex') ? this.getAttribute('tabindex') : 0;
     this.render();
   }
 

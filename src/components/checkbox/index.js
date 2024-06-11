@@ -23,8 +23,9 @@ class MCCheckboxElement extends HTMLComponentElement {
   constructor() {
     super();
 
-    this.#internals = this.attachInternals();
     this.role = 'checkbox';
+    this.tabIndex = this.hasAttribute('tabindex') ? this.getAttribute('tabindex') : 0;
+    this.#internals = this.attachInternals();
     this.render();
     this.#input = this.shadowRoot.querySelector('input');
   }

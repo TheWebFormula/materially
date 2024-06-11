@@ -1,38 +1,12 @@
 const mcUtil = new class MCUtil {
   #scrollHandler_bound = this.#scrollHandler.bind(this);
 
-  getNextFocusableElement(element, previous = false, acceptFilter = () => { return true; }) {
-    let walker = document.createNodeIterator(
-      element.parentElement,
-      NodeFilter.SHOW_ELEMENT,
-      node => {
-        return node.tabIndex >= 0 && acceptFilter(node)
-          ? NodeFilter.FILTER_ACCEPT
-          : NodeFilter.FILTER_REJECT
-      }
-    );
-    
-    // do not find entry node if not focusable
-    if (element.tabIndex >= 0) {
-      let node = walker.nextNode();
-      while (node !== element) {
-        node = walker.nextNode();
-      }
-    }
-
-    if (previous) {
-      walker.previousNode()
-      return walker.previousNode();
-    }
-    return walker.nextNode();
-  }
-
-  getNextFocusableElement2(containerElement, previous = false, acceptFilter = () => { return true; }) {
+  getNextFocusableElement(containerElement, previous = false, acceptFilter = () => { return true; }) {
     let walker = document.createNodeIterator(
       containerElement,
       NodeFilter.SHOW_ELEMENT,
       node => {
-        return node.tabIndex >= 0 && acceptFilter(node)
+        return node.tabIndex !== -1 && acceptFilter(node)
           ? NodeFilter.FILTER_ACCEPT
           : NodeFilter.FILTER_REJECT
       }
@@ -44,7 +18,7 @@ const mcUtil = new class MCUtil {
 
     // get current focused
     let node = walker.nextNode();
-    while (node !== activeElement) {
+    while (node && node !== activeElement) {
       node = walker.nextNode();
     }
 
@@ -56,25 +30,25 @@ const mcUtil = new class MCUtil {
     return walker.nextNode();
   }
 
-  getFocusableElements(parent, excludeCB = () => { }) {
-    const walker = document.createTreeWalker(parent, NodeFilter.SHOW_ELEMENT);
-    let node;
-    let elements = [];
-    while (node = walker.nextNode()) {
-      if (!excludeCB(node) && this.#isElementFocusable(node)) elements.push(node);
-    }
-    return elements;
-  }
+  // getFocusableElements(parent, excludeCB = () => { }) {
+  //   const walker = document.createTreeWalker(parent, NodeFilter.SHOW_ELEMENT);
+  //   let node;
+  //   let elements = [];
+  //   while (node = walker.nextNode()) {
+  //     if (!excludeCB(node) && this.#isElementFocusable(node)) elements.push(node);
+  //   }
+  //   return elements;
+  // }
 
-  #isElementFocusable(element) {
-    if (!element) return false;
-    return !element.hasAttribute('disabled') && (
-      element.nodeName === 'MC-TEXTFIELD'
-      || element.role === 'menuitem'
-      || element.role === 'option'
-      || element.tabindex > -1
-    );
-  }
+  // #isElementFocusable(element) {
+  //   if (!element) return false;
+  //   return !element.hasAttribute('disabled') && (
+  //     element.nodeName === 'MC-TEXTFIELD'
+  //     || element.role === 'menuitem'
+  //     || element.role === 'option'
+  //     || element.tabindex > -1
+  //   );
+  // }
 
   // <div>one<div></div></div> === one
   getTextFromNode(element) {

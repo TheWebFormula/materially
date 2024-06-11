@@ -24,6 +24,7 @@ class MCSwitchElement extends HTMLComponentElement {
     super();
 
     this.role = 'switch';
+    this.tabIndex = this.hasAttribute('tabindex') ? this.getAttribute('tabindex') : 0;
     this.#internals = this.attachInternals();
     this.render();
     this.#input = this.shadowRoot.querySelector('input');

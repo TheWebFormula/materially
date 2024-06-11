@@ -26,7 +26,7 @@ class MCAnchorElement extends HTMLComponentElement {
     super();
 
     this.role = 'link';
-    this.tabIndex = 0;
+    this.tabIndex = this.hasAttribute('tabindex') ? this.getAttribute('tabindex') : 0;
     this.render();
 
     this.#link = this.shadowRoot.querySelector('a');
@@ -115,7 +115,8 @@ class MCAnchorElement extends HTMLComponentElement {
   #focusKeydown(e) {
     if (e.code === 'Tab') {
       const pageContent = document.querySelector('#page-content') || document.querySelector('page-content');
-      const firstFocusablePageContent = util.getNextFocusableElement(pageContent.children[0], false);
+      const firstFocusablePageContent = util.getNextFocusableElement(pageContent, false);
+      console.log('firstFocusablePageContent', firstFocusablePageContent)
       if (firstFocusablePageContent) firstFocusablePageContent.focus();
       e.preventDefault();
     } if (e.code === 'Enter' || e.code === 'Space') {
@@ -123,11 +124,11 @@ class MCAnchorElement extends HTMLComponentElement {
       this.blur();
       e.preventDefault();
     } else if (e.code === 'ArrowDown') {
-      const next = util.getNextFocusableElement(e.target, false, this.#acceptFilter);
+      const next = util.getNextFocusableElement(e.target.parentElement, false, this.#acceptFilter);
       if (next) next.focus();
       e.preventDefault();
     } else if (e.code === 'ArrowUp') {
-      const next = util.getNextFocusableElement(e.target, true, this.#acceptFilter);
+      const next = util.getNextFocusableElement(e.target.parentElement, true, this.#acceptFilter);
       if (next) next.focus();
       e.preventDefault();
     }

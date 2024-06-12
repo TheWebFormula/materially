@@ -3,7 +3,7 @@ import { mcDialog } from '@thewebformula/materially/services';
 import htmlTemplate from './page.html';
 
 export default class extends Component {
-  static pageTitle = 'Dialogs';
+  static title = 'Dialogs';
   static htmlTemplate = htmlTemplate;
 
   allowClose = false;

@@ -1,0 +1,72 @@
+mc-snackbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 344px;
+  height: 48px;
+  padding: 0 16px;
+  position: fixed;
+  inset: unset;
+  bottom: 12px;
+  left: 12px;
+  margin: 0;
+  border: none;
+
+  box-shadow: var(--mc-elevation-1);
+  background-color: var(--mc-surface-inverse);
+  font-size: var(--mc-font-medium-body-size);
+  font-weight: var(--mc-font-medium-body-weight);
+  line-height: 24px;
+  letter-spacing: var(--mc-font-medium-body-tracking);
+  border-radius: var(--mc-shape-extra-small);
+  color: var(--mc-on-surface-inverse);
+
+  animation: show-snackbar;
+  animation-duration: var(--mc-motion-duration-medium1);
+  animation-timing-function: var(--mc-motion-easing-emphasized);
+  z-index: 9;
+}
+
+mc-snackbar:not(:popover-open) {
+  display: none;
+  pointer-events: none;
+  animation: hide-snackbar;
+  animation-duration: var(--mc-motion-duration-short3);
+  animation-timing-function: var(--mc-motion-easing-emphasized-accelerate);
+}
+
+mc-snackbar.two-line {
+  height: 68px;
+}
+
+mc-snackbar mc-button,
+mc-snackbar mc-icon {
+  color: var(--mc-primary-container);
+}
+
+
+@keyframes show-snackbar {
+  0% {
+    opacity: 0;
+    max-height: 24px;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    max-height: 68px;
+  }
+}
+
+@keyframes hide-snackbar {
+  0% {
+    display: flex;
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

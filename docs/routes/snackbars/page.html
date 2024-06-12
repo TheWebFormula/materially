@@ -1,0 +1,87 @@
+<article>
+  <header>
+    <h1>Snackbars</h1>
+    <div class="page-subheader mc-font-title-medium">Snackbars provide brief messages about app processes at the bottom of the screen</div>
+    <a href="https://m3.material.io/components/snackbar/overview" target="_new">Material Design Guidelines: Snackbar</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#basic">Examples</a></li>
+        <li><a href="#action">Action</a></li>
+        <li><a href="#no-close">No close and longer time</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="basic" aria-label="Snackbar examples">
+        <mc-card>
+          <h2 slot="headline">Example</h2>
+
+          <mc-button onclick="page.basic();">Show</mc-button>
+
+          <pre>
+            <code class="language-javascript">
+  ${`// also available globally on window
+  import { mcSnackbar } from '@thewebformula/materially/services';
+  
+  mcSnackbar.show({
+    message: 'Message goes here'
+  });`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="action" aria-label="Snackbar actions">
+        <mc-card>
+          <div slot="headline">Actions</div>
+        
+          <mc-button onclick="page.action();">Show</mc-button>
+        
+          <pre>
+            <code class="language-javascript">
+  ${`// also available globally on window
+  import { mcSnackbar } from '@webformula/material/services';
+  
+  // Promise will resolve when the Snackbar is dismissed automatically or when action is pressed
+  await mcSnackbar.show({
+    message: 'Message goes here',
+    action: true,
+    actionLabel: 'Done' // default 'Dismiss'
+  });
+  console.log('Snackbar dismissed');`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="no-close" aria-label="Snackbar no close button">
+        <mc-card>
+          <div slot="headline">No close button and longer time</div>
+        
+          <mc-button onclick="page.noClose();">Show</mc-button>
+        
+          <pre>
+            <code class="language-javascript">
+  ${`// also available globally on window
+  import { mcSnackbar } from '@webformula/material/services';
+  
+  mcSnackbar.show({
+    message: 'Message goes here',
+    closeButton: false,
+    ms: 6000
+  });`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

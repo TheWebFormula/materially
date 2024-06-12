@@ -16,6 +16,7 @@ import './src/components/switch/index.js';
 import './src/components/checkbox/index.js';
 import './src/components/icon-button/index.js';
 import './src/components/menu/index.js';
+import './src/components/snackbar/index.js';
 
 export {
   // mcDate,

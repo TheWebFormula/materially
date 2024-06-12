@@ -103,6 +103,7 @@ class MCAnchorElement extends HTMLComponentElement {
   }
 
   #focus() {
+    if (this.parentElement.nodeName === 'MC-ANCHOR-GROUP' && !this.parentElement.open) this.parentElement.open = true;
     this.addEventListener('blur', this.#blur_bound, { signal: this.#abort.signal });
     this.addEventListener('keydown', this.#focusKeydown_bound, { signal: this.#abort.signal });
   }
@@ -116,7 +117,6 @@ class MCAnchorElement extends HTMLComponentElement {
     if (e.code === 'Tab') {
       const pageContent = document.querySelector('#page-content') || document.querySelector('page-content');
       const firstFocusablePageContent = util.getNextFocusableElement(pageContent, false);
-      console.log('firstFocusablePageContent', firstFocusablePageContent)
       if (firstFocusablePageContent) firstFocusablePageContent.focus();
       e.preventDefault();
     } if (e.code === 'Enter' || e.code === 'Space') {
@@ -124,11 +124,13 @@ class MCAnchorElement extends HTMLComponentElement {
       this.blur();
       e.preventDefault();
     } else if (e.code === 'ArrowDown') {
-      const next = util.getNextFocusableElement(e.target.parentElement, false, this.#acceptFilter);
+      const parent = e.target.parentElement.nodeName === 'MC-ANCHOR-GROUP' ? e.target.parentElement.parentElement : e.target.parentElement;
+      const next = util.getNextFocusableElement(parent, false, this.#acceptFilter);
       if (next) next.focus();
       e.preventDefault();
     } else if (e.code === 'ArrowUp') {
-      const next = util.getNextFocusableElement(e.target.parentElement, true, this.#acceptFilter);
+      const parent = e.target.parentElement.nodeName === 'MC-ANCHOR-GROUP' ? e.target.parentElement.parentElement : e.target.parentElement;
+      const next = util.getNextFocusableElement(parent, true, this.#acceptFilter);
       if (next) next.focus();
       e.preventDefault();
     }

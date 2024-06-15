@@ -2,7 +2,7 @@ import { close_FILL1_wght400_GRAD0_opsz24 } from '../../helpers/svgs.js';
 import util from '../../helpers/util.js';
 
 const mcSnackbar = new class mcSnackbar {
-  defaultTime = 4000;
+  defaultTime = 3000;
   #currentSnackbar;
   #snackbarQueue = [];
   #idCounter = 0;
@@ -22,7 +22,7 @@ const mcSnackbar = new class mcSnackbar {
       <mc-snackbar id="${id}" ${params.twoLine ? 'class="two-line"' : ''} aria-label="[alert] ${params.message}">
         <div class="mc-text">${params.message}</div>
         ${!params.actionLabel ? '' : `<mc-button onclick="mcSnackbar.dismiss('action')">${params.actionLabel}</mc-button>`}
-        ${!params.closeButton ? '' : `<mc-icon onclick="mcSnackbar.dismiss('close')">${close_FILL1_wght400_GRAD0_opsz24}</mc-icon>`}
+        ${!params.closeButton ? '' : `<mc-icon-button onclick="mcSnackbar.dismiss('close')"><mc-icon>${close_FILL1_wght400_GRAD0_opsz24}</mc-icon></mc-icon-button>`}
       </mc-snackbar>
     `);
 

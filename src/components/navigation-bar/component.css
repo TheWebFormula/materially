@@ -33,3 +33,8 @@
 :host([auto-hide].window-compact.hide) {
   bottom: -80px;
 }
+
+
+::slotted(mc-icon-button) {
+  margin: 0 12px;
+}

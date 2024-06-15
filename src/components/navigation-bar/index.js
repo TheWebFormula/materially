@@ -15,6 +15,7 @@ class MCNavigationBarElement extends HTMLComponentElement {
   #scrollTop = 0;
   #movement = 0;
   #direction = 1;
+  #stateCallbacks = [];
   #scroll_bound = this.#scroll.bind(this);
   #locationchange_bound = this.#locationchange.bind(this);
   #windowStateChange_bound = this.#windowStateChange.bind(this);
@@ -48,6 +49,7 @@ class MCNavigationBarElement extends HTMLComponentElement {
 
   disconnectedCallback() {
     if (this.#abort) this.#abort.abort();
+    this.#stateCallbacks.length = 0;
   }
 
   get hide() {
@@ -56,6 +58,19 @@ class MCNavigationBarElement extends HTMLComponentElement {
   set hide (value) {
     this.#hide = !!value;
     this.classList.toggle('hide', !!value);
+    this.#stateCallbacks.forEach(cb => cb(this.#hide));
+  }
+
+
+  onState(callback) {
+    this.#stateCallbacks.push(callback);
+    callback(this.hide)
+  }
+
+  offState(callback) {
+    const index = this.#stateCallbacks.indexOf(callback);
+    if (index === -1) return;
+    this.#stateCallbacks.splice(index, 1);
   }
 
   #scroll() {

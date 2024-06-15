@@ -143,7 +143,11 @@
     </mc-pane> -->
   </mc-pane-container>
 
-  <mc-navigation-bar auto-hide>  
+  <mc-navigation-bar auto-hide>
+    <mc-icon-button onclick="document.querySelector('mc-navigation-drawer').toggle()">
+      <mc-icon>menu</mc-icon>
+    </mc-icon-button>
+
     <mc-anchor href="/">
       <mc-icon slot="leading-icon">home</mc-icon>
     </mc-anchor>

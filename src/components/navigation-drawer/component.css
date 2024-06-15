@@ -11,6 +11,10 @@
   grid-area: navigation;
 }
 
+:host([modal]) {
+  z-index: 10;
+}
+
 slot[name="header"] {
   display: flex;
   justify-content: space-between;

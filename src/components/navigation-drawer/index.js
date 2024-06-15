@@ -50,6 +50,8 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
         match.parentElement.classList.add('has-current');
       }
     }
+
+    if (this.modal && this.open) setTimeout(() => this.open = false, 100); 
   }
 
   #windowStateChange({ detail }) {

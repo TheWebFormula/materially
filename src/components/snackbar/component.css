@@ -29,6 +29,14 @@ mc-snackbar {
   animation-duration: var(--mc-motion-duration-medium1);
   animation-timing-function: var(--mc-motion-easing-emphasized);
   z-index: 9;
+
+  transition: bottom;
+  transition-duration: var(--mc-motion-duration-short3);
+  transition-timing-function: var(---mc-motion-easing-standard);
+  
+  &.navigation-bar-show {
+    bottom: 92px;
+  }
 }
 
 mc-snackbar:not(:popover-open) {

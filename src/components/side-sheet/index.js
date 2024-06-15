@@ -92,14 +92,14 @@ export default class MCSideSheetElement extends HTMLComponentElement {
   }
 
   get open() {
-    return this.getAttribute('open');
+    return this.hasAttribute('open');
   }
   set open(value) {
     this.toggleAttribute('open', !!value);
   }
 
   get modal() {
-    return this.getAttribute('modal');
+    return this.hasAttribute('modal');
   }
   set modal(value) {
     this.toggleAttribute('modal', !!value);
@@ -137,6 +137,9 @@ export default class MCSideSheetElement extends HTMLComponentElement {
     this.toggleAttribute('back', !!value);
   }
 
+  toggle() {
+    this.open = !this.open;
+  }
 
   #windowStateChange({ detail }) {
     const state = detail.state;

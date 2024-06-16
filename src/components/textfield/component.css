@@ -1,0 +1,609 @@
+:host {
+  display: inline-flex;
+  position: relative;
+  outline: none;
+  resize: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  margin-bottom: 36px;
+}
+
+:host([resize]) {
+  resize: both;
+}
+
+.text-field {
+  display: inline-flex;
+  position: relative;
+  box-sizing: border-box;
+  min-height: 56px;
+  padding: 8px 16px;
+  resize: inherit;
+  width: 100%;
+}
+
+:host([type="textarea"]) .text-field {
+  /* padding-bottom: 0; */
+  /* padding-top: 0; */
+}
+
+.text-field::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: var(--mc-shape-extra-small-top);
+  border-bottom: 1px solid;
+  border-bottom-color: var(--mc-on-surface-variant);
+  background-color: var(--mc-surface-container-highest);
+}
+
+:host(:not(.outlined):focus) .text-field::after {
+  height: calc(100% - 1px);
+  border-bottom: 2px solid;
+  border-bottom-color: var(--mc-primary);
+}
+
+.input {
+  display: inline-flex;
+  flex-grow: 1;
+  align-self: flex-end;
+  min-height: 28px;
+  max-width: 100%;
+  min-width: 0px;
+  border: none;
+  background: none;
+  outline: none;
+  z-index: 1;
+  padding: 0;
+  overflow-x: hidden;
+  resize: inherit;
+  text-align: inherit;
+
+  text-decoration: inherit;
+  text-transform: inherit;
+  font-family: inherit;
+  font-size: var(--mc-font-large-body-size);
+  font-weight: var(--mc-font-large-body-weight);
+  line-height: var(--mc-font-large-body-line-height);
+  letter-spacing: var(--mc-font-large-body-tracking);
+  color: var(--mc-on-surface);
+  caret-color: var(--mc-primary);
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+textarea.input {
+  align-self: auto;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 24px;
+  width: 100%;
+  margin-top: 16px;
+  max-height: 100%;
+  overflow: scroll;
+}
+
+textarea[rows="1"] {
+  height: 24px;
+}
+
+.text-field:not(.label) .input {
+  align-self: center;
+}
+
+.text-field .input[type=date] {
+  min-width: 120px;
+}
+
+.text-field .prefix-text,
+.text-field .suffix-text {
+  font-family: inherit;
+  font-size: var(--mc-font-large-body-size);
+  font-weight: var(--mc-font-large-body-weight);
+  line-height: var(--mc-font-large-body-line-height);
+  letter-spacing: var(--mc-font-large-body-tracking);
+  color: var(--mc-on-surface-variant);
+  padding-inline-end: 2px;
+  align-self: flex-end;
+  user-select: none;
+  -webkit-user-select: none;
+  opacity: 0;
+  text-wrap: nowrap;
+  z-index: 1;
+  min-height: 26px;
+}
+
+.text-field .prefix-text {
+  padding-inline-end: 2px;
+}
+.text-field .suffix-text {
+  padding-inline-start: 2px;
+}
+:host(.raise-label) .prefix-text,
+:host(:focus) .prefix-text,
+:host(.has-value) .prefix-text,
+:host(.raise-label) .suffix-text,
+:host(:focus) .suffix-text,
+:host(.has-value) .suffix-text {
+  opacity: 1;
+}
+
+.text-field .input::-webkit-search-decoration,
+.text-field .input::-webkit-search-cancel-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+/* .text-field .input::-webkit-date-and-time-value {
+  text-align: left;
+} */
+
+:host(:not(.outlined)) .text-field .input:-webkit-autofill,
+:host(:not(.outlined)) .text-field .input:-webkit-autofill:hover,
+:host(:not(.outlined)) .text-field .input:-webkit-autofill:focus,
+:host(:not(.outlined)) .text-field .input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--mc-surface-variant) inset !important;
+}
+
+/* hack to keep autofill background color from showing
+ *  The issue is that outline does not have a background color so we cannot use a var
+ */
+:host(.outlined) .text-field .input:-webkit-autofill,
+:host(.outlined) .text-field .input:-webkit-autofill:hover,
+:host(.outlined) .text-field .input:-webkit-autofill:focus,
+:host(.outlined) .text-field .input:-webkit-autofill:active {
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+
+:host(:not(.hide-date-icon)) .text-field:not(.has-picker) .input[type="date"]::-webkit-calendar-picker-indicator,
+:host(:not(.hide-time-icon)) .text-field:not(.has-picker) .input[type="time"]::-webkit-calendar-picker-indicator {
+  width: 20px;
+  transform: translate(4px, -5px);
+  opacity: 0;
+}
+
+:host(:not(.hide-date-icon)) .text-field:not(.has-picker) .input[type="date"]::before,
+:host(:not(.hide-time-icon)) .text-field:not(.has-picker) .input[type="time"]::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  right: 17px;
+  width: 24px;
+  height: 24px;
+  mask-size: cover;
+  background-color: var(--mc-on-surface-variant);
+}
+
+:host(:not(.hide-date-icon)) .text-field:not(.has-picker) .input[type="date"]::before {
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2224%22%20viewBox%3D%220%20-960%20960%20960%22%20width%3D%2224%22%3E%3Cpath%20d%3D%22M200-80q-33%200-56.5-23.5T120-160v-560q0-33%2023.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33%200%2056.5%2023.5T840-720v560q0%2033-23.5%2056.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0%200v-80%2080Z%22%2F%3E%3C%2Fsvg%3E");
+}
+
+:host(:not(.hide-time-icon)) .text-field:not(.has-picker) .input[type="time"]::before {
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2224%22%20viewBox%3D%220%20-960%20960%20960%22%20width%3D%2224%22%3E%3Cpath%20d%3D%22m612-292%2056-56-148-148v-184h-80v216l172%20172ZM480-80q-83%200-156-31.5T197-197q-54-54-85.5-127T80-480q0-83%2031.5-156T197-763q54-54%20127-85.5T480-880q83%200%20156%2031.5T763-763q54%2054%2085.5%20127T880-480q0%2083-31.5%20156T763-197q-54%2054-127%2085.5T480-80Zm0-400Zm0%20320q133%200%20226.5-93.5T800-480q0-133-93.5-226.5T480-800q-133%200-226.5%2093.5T160-480q0%20133%2093.5%20226.5T480-160Z%22%2F%3E%3C%2Fsvg%3E");
+}
+
+:host(.hide-date-icon) .input[type="date"]::-webkit-clear-button,
+:host(.hide-date-icon) .input[type="date"]::-webkit-calendar-picker-indicator,
+.has-picker .input[type="date"]::-webkit-clear-button,
+.has-picker .input[type="date"]::-webkit-calendar-picker-indicator,
+:host(.hide-time-icon) .input[type="time"]::-webkit-clear-button,
+:host(.hide-time-icon) .input[type="time"]::-webkit-calendar-picker-indicator,
+.has-picker .input[type="time"]::-webkit-clear-button,
+.has-picker .input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+
+.text-field label {
+  position: absolute;
+  text-align: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: text;
+  z-index: 1;
+  pointer-events: none;
+  top: 15px;
+  max-width: calc(100% - 20px);
+
+  font-size: var(--mc-font-large-body-size);
+  font-weight: var(--mc-font-large-body-weight);
+  line-height: var(--mc-font-large-body-line-height);
+  letter-spacing: var(--mc-font-large-body-tracking);
+  text-decoration: inherit;
+  text-transform: inherit;
+
+  color: var(--mc-on-surface-variant);
+
+  transform-origin: left top;
+  animation: mc-textfield-label-reverse;
+  animation-duration: var(--mc-motion-duration-short3);
+  animation-timing-function: var(--mc-motion-easing-standard);
+}
+
+.text-field.trailing-icon label,
+:host(.invalid) .text-field label {
+  max-width: calc(100% - 52px);
+}
+
+.text-field.leading-icon label {
+  max-width: calc(100% - 52px);
+}
+
+.text-field.leading-icon.trailing-icon label {
+  max-width: calc(100% - 84px);
+}
+
+:host(:focus:not(.invalid)) .text-field label {
+  color: var(--mc-primary);
+}
+
+.text-field .input::placeholder {
+  font-size: var(--mc-font-large-body-size);
+  font-weight: var(--mc-font-large-body-weight);
+  line-height: var(--mc-font-large-body-line-height);
+  letter-spacing: var(--mc-font-large-body-tracking);
+  color: var(--mc-on-surface-variant-alpha-76);
+}
+
+:host(.raise-label) .text-field label,
+:host(:focus) .text-field label,
+.text-field .input:not([placeholder=" "]) + label,
+.text-field .input:not(:placeholder-shown) + label {
+  font-size: var(--mc-font-small-body-size);
+  top: 4px;
+  animation: mc-textfield-label;
+  animation-duration: var(--mc-motion-duration-short3);
+  animation-timing-function: var(--mc-motion-easing-standard);
+}
+
+.text-field label.no-animation {
+  animation-duration: 0ms !important;
+}
+
+:host .text-field slot[name="leading-icon"]::slotted(mc-icon) {
+  margin-right: 16px;
+  margin-left: -4px;
+}
+
+:host .text-field slot[name="trailing-icon"]::slotted(mc-icon) {
+  margin-left: 16px;
+  /* margin-right: -4px; */
+}
+
+::slotted(mc-icon) {
+  z-index: 1;
+  color: var(--mc-on-surface-variant);
+  align-self: center;
+}
+
+.text-field .invalid-icon {
+  position: absolute;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+  z-index: 1;
+  align-self: center;
+}
+
+.text-field.leading-icon .suggestion,
+.text-field.leading-icon label {
+  margin-left: 36px
+}
+
+.text-field .supporting-text {
+  position: absolute;
+  top: calc(100% + 4px);
+
+  font-size: var(--mc-font-small-body-size);
+  font-weight: var(--mc-font-small-body-weight);
+  line-height: var(--mc-font-small-body-line-height);
+  letter-spacing: var(--mc-font-small-body-tracking);
+  color: var(--mc-on-surface-variant);
+
+  text-overflow: ellipsis;
+  max-height: 30px;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
+
+.text-field .character-count {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 16px;
+
+  font-size: var(--mc-font-small-body-size);
+  font-weight: var(--mc-font-small-body-weight);
+  line-height: var(--mc-font-small-body-line-height);
+  letter-spacing: var(--mc-font-small-body-tracking);
+  color: var(--mc-on-surface-variant);
+}
+
+
+/* --- disabled --- */
+
+:host([disabled]),
+:host([readonly]) .text-field slot {
+  pointer-events: none;
+}
+
+:host([readonly]) {
+  pointer-events: initial;
+}
+
+:host([disabled]) .text-field::after {
+  height: 100%;
+  border-bottom: 1px solid;
+  border-bottom-color: var(--mc-on-surface-alpha-38);
+  background-color: var(--mc-on-surface-alpha-4);
+}
+
+:host([disabled]) .text-field label,
+:host([disabled]) .text-field .input,
+:host([disabled]) .text-field .input::placeholder,
+:host([disabled]) .text-field .supporting-text {
+  color: var(--mc-on-surface-alpha-38);
+}
+
+:host([disabled]) slot::slotted(mc-icon) {
+  color: var(--mc-on-surface-variant-alpha-38);
+}
+
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+
+/* --- outline --- */
+
+:host(.outlined) .text-field::after {
+  border-radius: var(--mc-shape-extra-small);
+  border: none;
+  background-color: unset;
+}
+
+:host(.outlined) .text-field .input {
+  align-self: center;
+}
+
+:host(.outlined) .text-field label {
+  transform-origin: left top;
+  animation: mc-textfield-label-outlined-reverse var(--mc-motion-duration-short3);
+  animation-timing-function: var(--mc-motion-easing-standard);
+}
+
+:host(.outlined.raise-label) .text-field label,
+:host(.outlined:focus) .text-field label,
+:host(.outlined) .text-field .input:not([placeholder=" "]) + label,
+:host(.outlined) .text-field .input:not(:placeholder-shown) + label {
+  font-size: var(--mc-font-small-body-size);
+  top: -12px;
+  left: 14px;
+  animation: mc-textfield-label-outlined var(--mc-motion-duration-short3);
+  animation-timing-function: var(--mc-motion-easing-standard);
+}
+
+.text-field .outlined-border-container {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  text-align: left;
+  pointer-events: none;
+}
+
+.text-field .outlined-border-container .outlined-leading {
+  box-sizing: border-box;
+  border-radius: var(--mc-shape-extra-small) 0 0 var(--mc-shape-extra-small);
+  border-left: 1px solid;
+  border-right: none;
+  width: 12px;
+  height: 99.2%;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  pointer-events: none;
+
+  border-color: var(--mc-outline);
+}
+
+.text-field .outlined-border-container .outlined-notch {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  max-width: 0px;
+  height: 99.2%;
+  border-bottom: 1px solid;
+  pointer-events: none;
+  border-color: var(--mc-outline);
+  transition: max-width 120ms;
+
+  font-size: var(--mc-font-small-body-size);
+  font-weight: var(--mc-font-large-body-weight);
+  line-height: var(--mc-font-large-body-line-height);
+  letter-spacing: var(--mc-font-large-body-tracking);
+  text-decoration: inherit;
+  text-transform: inherit;
+  user-select: none;
+  -webkit-user-select: none;
+  color: transparent;
+}
+
+.text-field .outlined-border-container .outlined-notch.no-animation {
+  transition-duration: 0ms !important;
+}
+
+:host(.outlined.raise-label) .outlined-border-container .outlined-notch,
+:host(.outlined:focus) .outlined-border-container .outlined-notch,
+:host(.outlined) .text-field .input:not([placeholder=" "]) ~ .outlined-border-container .outlined-notch,
+:host(.outlined) .text-field .input:not(:placeholder-shown) ~ .outlined-border-container .outlined-notch {
+  max-width: calc(100% - 12px * 2);
+  padding-right: 4px;
+}
+
+.text-field .outlined-border-container .outlined-trailing {
+  box-sizing: border-box;
+  border-left: none;
+  border-right: 1px solid;
+  border-radius: 0 var(--mc-shape-extra-small) var(--mc-shape-extra-small) 0;
+  flex-grow: 1;
+  height: 99.2%;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  pointer-events: none;
+
+  border-color: var(--mc-outline);
+}
+
+
+:host(:focus) .text-field .outlined-border-container .outlined-leading,
+:host(:focus) .text-field .outlined-border-container .outlined-notch,
+:host(:focus) .text-field .outlined-border-container .outlined-trailing {
+  border-width: 2px;
+  border-color: var(--mc-primary);
+}
+
+.text-field.leading-icon .outlined-border-container .outlined-leading {
+  width: 47px;
+}
+
+
+
+/* --- Suggestion --- */
+.text-field .suggestion {
+  position: absolute;
+  top: 22px;
+  left: 0;
+  box-sizing: border-box;
+  border: none;
+  background: none;
+  outline: none;
+  opacity: 0.5;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+
+  text-decoration: inherit;
+  text-transform: inherit;
+  font-size: var(--mc-font-large-body-size);
+  font-weight: var(--mc-font-large-body-weight);
+  line-height: var(--mc-font-large-body-line-height);
+  letter-spacing: var(--mc-font-large-body-tracking);
+}
+
+
+/* --- invalid --- */
+
+:host(.invalid:not(:hover)) .text-field::after,
+:host(:not(.outlined).invalid:focus) .text-field::after {
+  border-bottom-color: var(--mc-error);
+}
+
+:host(.invalid:not(:hover)) .text-field .input,
+:host(.invalid:focus) .text-field .input {
+  caret-color: var(--mc-error);
+  color: var(--mc-on-surface);
+}
+
+:host(.invalid:not(:hover)) .text-field label,
+:host(.invalid:focus) .text-field label {
+  color: var(--mc-error);
+}
+
+:host(.invalid) .text-field .supporting-text {
+  color: var(--mc-error);
+}
+
+:host(:not(:hover)) .text-field .invalid-icon svg,
+:host(:focus) .text-field .invalid-icon svg {
+  fill: var(--mc-error);
+}
+
+:host(.invalid:not(:hover)) .text-field  .outlined-border-container .outlined-leading,
+:host(.invalid:not(:hover)) .text-field  .outlined-border-container .outlined-notch,
+:host(.invalid:not(:hover)) .text-field  .outlined-border-container .outlined-trailing,
+:host(.invalid:focus) .text-field  .outlined-border-container .outlined-leading,
+:host(.invalid:focus) .text-field  .outlined-border-container .outlined-notch,
+:host(.invalid:focus) .text-field  .outlined-border-container .outlined-trailing {
+  border-color: var(--mc-error);
+}
+
+:host(.invalid) .text-field slot[name="trailing-icon"] {
+  visibility: hidden;
+}
+
+
+/* use scale for smooth font transition */
+@keyframes mc-textfield-label {
+  0% {
+    top: 15px;
+    font-size: var(--mc-font-large-body-size);
+    transform: scale(1);
+  }
+
+  100% {
+    top: 7px;
+    font-size: var(--mc-font-large-body-size);
+    transform: scale(0.8);
+  }
+}
+
+@keyframes mc-textfield-label-reverse {
+  0% {
+    top: 7px;
+    font-size: var(--mc-font-large-body-size);
+    transform: scale(0.8);
+  }
+
+  100% {
+    top: 15px;
+    font-size: var(--mc-font-large-body-size);
+    transform: scale(1);
+  }
+}
+
+/* use scale for smooth font transition */
+@keyframes mc-textfield-label-outlined {
+  0% {
+    top: 15px;
+    left: 16px;
+    font-size: var(--mc-font-large-body-size);
+    transform: scale(1);
+  }
+
+  100% {
+    top: -9px;
+    left: 14px;
+    font-size: var(--mc-font-large-body-size);
+    transform: scale(0.8);
+  }
+}
+
+@keyframes mc-textfield-label-outlined-reverse {
+  0% {
+    top: -9px;
+    left: 14px;
+    font-size: var(--mc-font-large-body-size);
+    transform: scale(0.8);
+  }
+
+  100% {
+    top: 15px;
+    left: 16px;
+    font-size: var(--mc-font-large-body-size);
+    transform: scale(1);
+  }
+}

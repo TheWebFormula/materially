@@ -1,4 +1,5 @@
 const mcUtil = new class MCUtil {
+  #textWidthCanvas;
   #scrollHandler_bound = this.#scrollHandler.bind(this);
 
   getNextFocusableElement(containerElement, previous = false, acceptFilter = () => { return true; }) {
@@ -151,6 +152,18 @@ const mcUtil = new class MCUtil {
       distance,
       directionChange
     }));
+  }
+
+
+  getTextWidthFromInput(inputElement) {
+    if (!inputElement || inputElement.nodeName !== 'INPUT') throw Error('requires input element');
+    if (!this.#textWidthCanvas) this.#textWidthCanvas = document.createElement('canvas');
+    const styles = window.getComputedStyle(inputElement);
+    const context = this.#textWidthCanvas.getContext('2d');
+    context.font = `${styles.getPropertyValue('font-weight')} ${styles.getPropertyValue('font-size')} ${styles.getPropertyValue('font-family')}`;
+    context.letterSpacing = styles.getPropertyValue('letter-spacing');
+    const metrics = context.measureText(inputElement.value);
+    return Math.ceil(metrics.width);
   }
 }
 

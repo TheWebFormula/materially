@@ -1,0 +1,115 @@
+:host {
+  display: inline-flex;
+  height: 20px;
+  width: 20px;
+  outline: none;
+  position: relative;
+  vertical-align: top;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  outline: none;
+
+  margin: 9px 0;
+}
+
+:host([disabled]) {
+  cursor: default;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  height: 100%;
+  place-content: center;
+  place-items: center;
+  width: 100%;
+}
+
+input {
+  appearance: none;
+  height: 48px;
+  width: 48px;
+  margin: 0;
+  position: absolute;
+  cursor: inherit;
+  outline: none;
+}
+
+
+.background {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--mc-shape-full);
+  box-sizing: border-box;
+  border: 2px solid var(--mc-primary);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 10px;
+    height: 10px;
+    border-radius: var(--mc-shape-full);
+    background-color: var(--mc-primary);
+    opacity: 0;
+    transition: opacity var(--mc-motion-duration-short2);
+  }
+}
+
+.background:has( ~ input:checked)::after {
+  opacity: 1;
+  transition: opacity var(--mc-motion-duration-short2);
+}
+
+
+label.has-label {
+  cursor: pointer;
+  display: inline-flex;
+  flex: 1;
+  flex-grow: inherit;
+  justify-content: flex-end;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: inherit;
+  white-space: nowrap;
+  margin-left: 16px;
+
+  font-size: var(--mc-font-large-label-size);
+  font-weight: var(--mc-font-large-label-weight);
+  line-height: var(--mc-font-large-label-line-height);
+  letter-spacing: var(--mc-font-large-label-tracking);
+}
+
+:host([label-left]) label.has-label {
+  order: -1;
+  justify-content: flex-start;
+  margin-left: unset;
+  margin-right: 16px;
+}
+
+:host([disabled]) label.has-label {
+  color: var(--mc-on-surface);
+  opacity: 0.38;
+}
+
+mc-state-layer {
+  --mc-state-layer-hover-color: var(--mc-on-surface);
+  --mc-state-layer-focus-color: var(--mc-on-surface);
+  --mc-state-layer-ripple-color: var(--mc-primary);
+}
+
+input:checked ~ mc-state-layer {
+  --mc-state-layer-hover-color: var(--mc-primary);
+  --mc-state-layer-focus-color: var(--mc-primary);
+  --mc-state-layer-ripple-color: var(--mc-on-surface);
+}
+
+input:invalid.touched ~ mc-state-layer {
+  --mc-state-layer-hover-color: var(--mc-error);
+  --mc-state-layer-focus-color: var(--mc-error);
+  --mc-state-layer-ripple-color: var(--mc-error);
+}

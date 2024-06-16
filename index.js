@@ -18,6 +18,7 @@ import './src/components/icon-button/index.js';
 import './src/components/menu/index.js';
 import './src/components/snackbar/index.js';
 import './src/components/textfield/index.js';
+import './src/components/radio/index.js';
 
 export {
   // mcDate,

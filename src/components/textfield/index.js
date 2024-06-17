@@ -4,6 +4,8 @@ import util from '../../helpers/util.js';
 import { error_FILL1_wght400_GRAD0_opsz24 } from '../../helpers/svgs.js';
 import formatter from './formatter.js';
 
+// TODO css variables
+
 
 const isIncrementalSupported = 'incremental' in document.createElement('input');
 const inputElement = document.createElement('input');

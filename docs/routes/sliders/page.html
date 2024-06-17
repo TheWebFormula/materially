@@ -1,0 +1,123 @@
+<article>
+  <header>
+    <h1>Sliders</h1>
+    <div class="page-subheader mc-font-title-medium">Sliders let users make selections from a range of values</div>
+    <a href="https://m3.material.io/components/sliders/overview" target="_new">Material Design Guidelines: Sliders</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#standard">Standard</a></li>
+        <li><a href="#discrete">Discrete</a></li>
+        <li><a href="#range">Range</a></li>
+        <li><a href="#range-discrete">Range discrete</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+      <section aria-label="Slider examples">
+        <mc-card>
+          <h2 slot="headline">Example</h2>
+          <div slot="supporting-text">There are two types of sliders: continuous and discrete</div>
+        
+          <mc-slider min="0" max="100" value="50" aria-label="slider"></mc-slider>
+          <mc-slider range min="0" max="100" value-start="15" value-end="85" aria-label="range"></mc-slider>
+          <mc-slider min="0" max="100" step="10" value="50">label</mc-slider>
+          <mc-slider min="0" max="100" value="50">
+            <mc-icon slot="leading-icon">volume_up</mc-icon>
+            volume
+          </mc-slider>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-slider min="0" max="100" value="50"></mc-slider>
+  <mc-slider range min="0" max="100" value-start="25" value-end="75"></mc-slider>
+  <mc-slider min="0" max="100" step="10" value="50">label</mc-slider>
+  <mc-slider min="0" max="100" value="50">
+    <mc-icon slot="leading-icon">volume_up</mc-icon>
+    volume
+  </mc-slider>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="standard" aria-label="Slider standard">
+        <mc-card>
+          <h2 slot="headline">Slider</h2>
+        
+          <mc-slider min="0" max="100" value="50" aria-label="slider"></mc-slider>
+          <mc-slider min="0" max="100" value="50">
+            label
+          </mc-slider>
+          <mc-slider min="0" max="100" value="50">
+            <mc-icon slot="leading-icon">volume_up</mc-icon>
+            volume
+          </mc-slider>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-slider min="0" max="100" value="50"></mc-slider>
+  <mc-slider min="0" max="100" value="50">
+    label
+  </mc-slider>
+  <mc-slider min="0" max="100" value="50">
+    <mc-icon slot="leading-icon">volume_up</mc-icon>
+    volume
+  </mc-slider>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="discrete" aria-label="Slider discrete">
+        <mc-card>
+          <h2 slot="headline">Slider with steps</h2>
+        
+          <mc-slider min="0" max="100" step="10" value="50" aria-label="slider"></mc-slider>
+          <mc-slider range min="0" max="100" step="10" value-start="30" value-end="70" aria-label="range"></mc-slider>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-slider min="0" max="100" step="10" value="50"></mc-slider>
+  <mc-slider range min="0" max="100" step="10" value-start="30" value-end="70"></mc-slider>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="range" aria-label="Slider range">
+        <mc-card>
+          <h2 slot="headline">Slider range</h2>
+        
+          <mc-slider range min="0" max="100" value-start="25" value-end="75" aria-label="range"></mc-slider>
+          <mc-slider range min="0" max="100" value-start="25" value-end="75">
+            label
+          </mc-slider>
+          <mc-slider range min="0" max="100" value-start="25" value-end="75">
+            <mc-icon slot="leading-icon">volume_up</mc-icon>
+            volume
+          </mc-slider>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-slider range min="0" max="100" value-start="25" value-end="75"></mc-slider>
+  <mc-slider range min="0" max="100" value-start="25" value-end="75">
+    label
+  </mc-slider>
+  <mc-slider range min="0" max="100" value-start="25" value-end="75">
+    <mc-icon slot="leading-icon">volume_up</mc-icon>
+    volume
+  </mc-slider>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

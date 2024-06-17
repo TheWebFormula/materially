@@ -2,6 +2,8 @@ import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import '../state-layer/index.js';
 
+// TODO css variables
+
 let idCounter = 0;
 
 class MCRadioElement extends HTMLComponentElement {

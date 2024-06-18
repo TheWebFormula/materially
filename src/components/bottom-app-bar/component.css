@@ -1,0 +1,138 @@
+:host {
+  grid-area: footer;
+
+  position: sticky;
+  bottom: 0;
+
+  display: inline-flex;
+  height: 80px;
+  width: 100%;
+  padding: 0 12px;
+  box-sizing: border-box;
+  background-color: var(--mc-surface-container);
+  z-index: 9;
+  align-items: center;
+}
+
+:host([auto-hide]) {
+  transition: bottom;
+  transition-duration: var(--mc-motion-duration-short3);
+  transition-timing-function: var(---mc-motion-easing-standard);
+}
+
+:host([auto-hide].hide) {
+  bottom: -80px;
+}
+
+::slotted(mc-icon-button),
+::slotted(mc-icon) {
+  margin: 4px;
+}
+
+::slotted(mc-fab) {
+  margin-left: auto;
+}
+
+:host([auto-hide]) ::slotted(mc-fab) {
+  position: fixed;
+  right: 16px;
+  bottom: 12px;
+}
+
+.default-slot.hide {
+  pointer-events: none;
+}
+
+
+[name="secondary"] {
+  display: inline-flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  padding: 0 12px;
+  box-sizing: border-box;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+[name="secondary"].show {
+  pointer-events: default;
+}
+
+[name="secondary"].show::slotted(*) {
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform;
+  transition-timing-function: var(--mc-motion-easing-emphasized-decelerate);
+  transition-duration: var(--mc-motion-duration-medium2);
+}
+
+[name="secondary"]::slotted(*) {
+  transform: translateY(60px);
+  opacity: 0;
+  transition: opacity;
+  transition-timing-function: linear;
+  transition-duration: var(--mc-motion-duration-short3);
+}
+
+
+.default-slot::slotted(*) {
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform;
+  transition-timing-function: var(--mc-motion-easing-emphasized-decelerate);
+  transition-duration: var(--mc-motion-duration-medium2);
+}
+
+.default-slot.hide::slotted(*) {
+  transform: translateY(60px);
+  opacity: 0;
+  transition: opacity;
+  transition-timing-function: linear;
+  transition-duration: var(--mc-motion-duration-short3);
+}
+
+
+::slotted([place="1"]),
+[name="secondary"]::slotted([place="1"]) {
+  transition-delay: 50ms;
+}
+::slotted([place="2"]),
+[name="secondary"]::slotted([place="2"]) {
+  transition-delay: 100ms;
+}
+::slotted([place="3"]),
+[name="secondary"]::slotted([place="3"]) {
+  transition-delay: 150ms;
+}
+::slotted([place="4"]),
+[name="secondary"]::slotted([place="4"]) {
+  transition-delay: 200ms;
+}
+::slotted([place="5"]),
+[name="secondary"]::slotted([place="5"]) {
+  transition-delay: 250ms;
+}
+::slotted([place="6"]),
+[name="secondary"]::slotted([place="6"]) {
+  transition-delay: 300ms;
+}
+::slotted([place="7"]),
+[name="secondary"]::slotted([place="7"]) {
+  transition-delay: 350ms;
+}
+::slotted([place="8"]),
+[name="secondary"]::slotted([place="8"]) {
+  transition-delay: 400ms;
+}
+::slotted([place="9"]),
+[name="secondary"]::slotted([place="9"]) {
+  transition-delay: 450ms;
+}
+::slotted([place="10"]),
+[name="secondary"]::slotted([place="10"]) {
+  transition-delay: 500ms;
+}

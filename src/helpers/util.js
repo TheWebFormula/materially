@@ -130,6 +130,7 @@ const mcUtil = new class MCUtil {
   #initialScroll = false;
   #lastScrollTop;
   #lastScrollDirection;
+  #distanceFromDirectionChange = 0;
   trackPageScroll(callback = () => { }) {
     if (this.#scrollCallbacks.length === 0) {
       if (!this.#initialScroll) this.#lastScrollTop = document.documentElement.scrollTop;
@@ -151,6 +152,8 @@ const mcUtil = new class MCUtil {
 
     const direction = document.documentElement.scrollTop >= this.#lastScrollTop ? -1 : 1;
     const directionChange = direction !== this.#lastScrollDirection;
+    if (directionChange) this.#distanceFromDirectionChange = 0;
+    this.#distanceFromDirectionChange += distance;
     this.#lastScrollDirection = direction;
     this.#lastScrollTop = document.documentElement.scrollTop;
 
@@ -160,7 +163,8 @@ const mcUtil = new class MCUtil {
       scrollTop: document.documentElement.scrollTop,
       direction,
       distance,
-      directionChange
+      directionChange,
+      distanceFromDirectionChange: this.#distanceFromDirectionChange
     }));
   }
 

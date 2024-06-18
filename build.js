@@ -66,6 +66,7 @@ build({
   chunks: false,
   basedir: 'docs/',
   outdir: 'dist/',
+  securityLevel: 0,
   copyFiles: [
     { from: 'docs/favicon.ico', to: 'dist/' },
     // { from: 'docs/woman.jpg', to: 'dist/', gzip: true },

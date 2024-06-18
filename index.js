@@ -22,6 +22,7 @@ import './src/components/radio/index.js';
 import './src/components/slider/index.js';
 import './src/components/select/index.js';
 import './src/components/badge/index.js';
+import './src/components/bottom-app-bar/index.js';
 
 export {
   // mcDate,

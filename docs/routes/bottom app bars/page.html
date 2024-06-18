@@ -1,0 +1,132 @@
+<article>
+  <header>
+    <h1>Bottom app bar</h1>
+    <div class="page-subheader mc-font-title-medium">A bottom app bar displays navigation and key actions at the bottom of mobile screens</div>
+    <a href="https://m3.material.io/components/bottom-app-bar/overview" target="_new">Material Design Guidelines:
+      Bottom app bar</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#basic">Basic</a></li>
+        <li><a href="#auto-hide">Auto hide</a></li>
+        <li><a href="#secondary-bar">Secondary bar</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="basic" aria-label="Bottom app bar examples">
+        <mc-card>
+          <h2 slot="headline">Basic</h2>
+          test
+        
+          <iframe src="./routes/bottom app bars/basic-index.html" title="bottom-app-bar Basic" style="height: 360px; width: 600px;"></iframe>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-bottom-app-bar>
+    <mc-icon-button>
+      <mc-icon>more_vert</mc-icon>
+    </mc-icon-button>
+  
+    <mc-icon-button>
+      <mc-icon>search</mc-icon>
+    </mc-icon-button>
+  
+    <mc-icon-button>
+      <mc-icon>delete</mc-icon>
+    </mc-icon-button>
+  
+    <mc-fab>
+      <mc-icon>add</mc-icon>
+    </mc-fab>
+  </mc-bottom-app-bar>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="auto-hide" aria-label="Bottom app bar auto hide">
+        <mc-card>
+          <h2 slot="headline">Auto hide</h2>
+        
+          <iframe src="./routes/bottom app bars/auto-hide-index.html" title="bottom-app-bar auto hide"
+            style="height: 360px; width: 600px;"></iframe>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-bottom-app-bar auto-hide>
+    <mc-icon-button>
+      <mc-icon>search</mc-icon>
+    </mc-icon-button>
+  
+    <mc-icon-button>
+      <mc-icon>delete</mc-icon>
+    </mc-icon-button>
+  
+    <mc-fab>
+      <mc-icon>add</mc-icon>
+    </mc-fab>
+  </mc-bottom-app-bar>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="secondary-bar" aria-label="Bottom app bar secondary bar">
+        <mc-card>
+          <h2 slot="headline">Secondary bar</h2>
+        
+          <iframe src="./routes/bottom app bars/secondary-bar-index.html" title="bottom-app-bar secondary bar"
+            style="height: 360px; width: 600px;"></iframe>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-bottom-app-bar>
+    <mc-icon-button>
+      <mc-icon>search</mc-icon>
+    </mc-icon-button>
+  
+    <mc-icon-button>
+      <mc-icon>delete</mc-icon>
+    </mc-icon-button>
+  
+    <mc-icon-button slot="secondary">
+      <mc-icon>add</mc-icon>
+    </mc-icon-button>
+  
+    <mc-icon-button slot="secondary">
+      <mc-icon>edit</mc-icon>
+    </mc-icon-button>
+  
+    <mc-icon-button slot="secondary">
+      <mc-icon>favorite</mc-icon>
+    </mc-icon-button>
+  </mc-bottom-app-bar>
+  
+  
+  <!-- you can also trigger secondary based on url hash -->
+  <mc-bottom-app-bar secondary-hash="#one">`}
+        </code>
+      </pre>
+
+      <pre>
+        <code class="language-javascript">
+  ${`document.querySelector('mc-bottom-app-bar').showAlt('bottom-ap-bar-secondary-one');
+  
+  // calling showSecondary with no id will revert back to primary
+  document.querySelector('mc-bottom-app-bar').showPrimary();
+  document.querySelector('mc-bottom-app-bar').showAlt();`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

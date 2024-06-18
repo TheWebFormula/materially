@@ -1,0 +1,123 @@
+<article>
+  <header>
+    <h1>Badges</h1>
+    <div class="page-subheader mc-font-title-medium">Badges convey dynamic information, such as counts or status. A badge can include labels or numbers</div>
+    <a href="https://m3.material.io/components/badges/overview" target="_new">Material Design Guidelines: Buttons</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#basic">Basic</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="basic" aria-label="badge examples">
+        <mc-card>
+          <h2 slot="headline">Basic</h2>
+        
+          <mc-icon-button>
+            <mc-badge>0</mc-badge>
+            <mc-icon>inbox</mc-icon>
+          </mc-icon-button>
+        
+          <mc-icon-button>
+            <mc-badge hide-value>1</mc-badge>
+            <mc-icon>inbox</mc-icon>
+          </mc-icon-button>
+        
+          <mc-icon-button>
+            <mc-badge>99</mc-badge>
+            <mc-icon>inbox</mc-icon>
+          </mc-icon-button>
+        
+          <mc-icon-button>
+            <mc-badge>1000</mc-badge>
+            <mc-icon>inbox</mc-icon>
+          </mc-icon-button>
+        
+          <div style="display: flex; gap: 4px;">
+            <mc-button>
+              <mc-badge>0</mc-badge>
+              Label
+            </mc-button>
+        
+            <mc-button>
+              <mc-badge hide-value>1</mc-badge>
+              Label
+            </mc-button>
+        
+            <mc-button>
+              <mc-badge>99</mc-badge>
+              Label
+            </mc-button>
+        
+            <mc-button>
+              <mc-badge>1000</mc-badge>
+              Label
+            </mc-button>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-icon-button>
+    <mc-badge>0</mc-badge>
+    <mc-icon>inbox</mc-icon>
+  </mc-icon-button>
+  
+  <mc-icon-button>
+    <mc-badge hide-value>1</mc-badge>
+    <mc-icon>inbox</mc-icon>
+  </mc-icon-button>
+  
+  <mc-icon-button>
+    <mc-badge>99</mc-badge>
+    <mc-icon>inbox</mc-icon>
+  </mc-icon-button>
+  
+  <mc-icon-button>
+    <mc-badge>1000</mc-badge>
+    <mc-icon>inbox</mc-icon>
+  </mc-icon-button>
+  
+  <mc-button>
+    <mc-badge>0</mc-badge>
+    Label
+  </mc-button>
+  
+  <mc-button>
+    <mc-badge hide-value>1</mc-badge>
+    Label
+  </mc-button>
+  
+  <mc-button>
+    <mc-badge>99</mc-badge>
+    Label
+  </mc-button>
+  
+  <mc-button>
+    <mc-badge>1000</mc-badge>
+    Label
+  </mc-button>`}
+            </code>
+          </pre>
+        
+          <pre>
+            <code class="language-javascript">
+  ${`// Update using value
+  document.querySelector('mc-badge').value = 99;
+
+  // Update using value. 1000 -> 999+
+  document.querySelector('mc-badge').value = 1000;`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+    </div>
+  </div>
+</article>

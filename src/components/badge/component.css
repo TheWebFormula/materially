@@ -1,0 +1,52 @@
+:host {
+  inset-inline-start: 50%;
+  margin-inline-start: 6px;
+  margin-block-start: 4px;
+  position: absolute;
+  inset-block-start: 0px;
+  border-radius: 6px;
+  min-width: 6px;
+  min-height: 6px;
+  display: none;
+  pointer-events: none;
+  background-color: var(--mc-error);
+}
+
+:host(.has-value) {
+  display: flex;
+}
+
+:host(.has-value:not([hide-value])) {
+  border-radius: 8px;
+  margin-inline-start: 2px;
+  margin-block-start: 1px;
+
+  padding: 0px 4px;
+  font-size: var(--mc-font-small-label-size);
+  font-size: var(--mc-font-small-label-weight);
+  letter-spacing: var(--mc-font-small-label-tracking);
+  line-height: var(--mc-font-small-label-line-height);
+  color: var(--mc-on-error);
+
+  slot {
+    display: contents;
+  }
+}
+
+slot {
+  display: none;
+}
+
+
+:host(.in-mc-button) {
+  position: relative;
+  order: 100;
+  margin-inline-start: 0px;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  inset-inline-start: 0;
+}
+
+:host(.in-mc-button.has-value:not([hide-value])) {
+  margin-block-end: 3px;
+}

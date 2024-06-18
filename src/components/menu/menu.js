@@ -19,12 +19,14 @@ export default class MCMenuElement extends HTMLComponentElement {
   #disableLetterFocus;
   #searchItems;
   #searchKeys = '';
+  #offsetY;
   #toggle_bound = this.#toggle.bind(this);
   #openKeydown_bound = this.#openKeydown.bind(this);
   #click_bound = this.#click.bind(this);
   #textSearchOver_debounced = util.debounce(this.#textSearchOver, 240);
   #rightClick_bound = this.#rightClick.bind(this);
   #preventContextMenuClose_bound = this.#preventContextMenuClose.bind(this);
+  #scroll_bound = this.#scroll.bind(this);
 
 
   constructor() {
@@ -37,16 +39,12 @@ export default class MCMenuElement extends HTMLComponentElement {
   connectedCallback() {
     this.#abort = new AbortController();
     this.#contextMenu = this.getAttribute('context-menu');
+    this.#offsetY = parseInt(this.getAttribute('offset-y') || 0);
 
     if (this.#contextMenu) {
       document.addEventListener('contextmenu', this.#rightClick_bound, { signal: this.#abort.signal });
     } else {
-      this.#anchor = document.querySelector(`#${this.getAttribute('anchor')}`);
-      this.#anchor.popoverTargetElement = this;
-      this.#anchor.popoverTargetAction = 'toggle';
-      const anchorParent = this.#anchor.parentElement;
-      this.#parentMenu = anchorParent.nodeName === 'MC-MENU' ? anchorParent : undefined;
-      this.#overlay = this.#parentMenu || this.hasAttribute('overlay');
+      this.anchor = document.querySelector(`#${this.getAttribute('anchor')}`);
     }
 
     this.addEventListener('toggle', this.#toggle_bound, { signal: this.#abort.signal });
@@ -58,6 +56,16 @@ export default class MCMenuElement extends HTMLComponentElement {
 
 
   get anchor() { return this.#anchor; }
+  set anchor(value) {
+    this.#anchor = value instanceof HTMLElement ? value : document.querySelector(`#${value}`);
+    if (this.#anchor) {
+      this.#anchor.popoverTargetElement = this;
+      this.#anchor.popoverTargetAction = 'toggle';
+      const anchorParent = this.#anchor.parentElement;
+      this.#parentMenu = anchorParent.nodeName === 'MC-MENU' ? anchorParent : undefined;
+      this.#overlay = this.#parentMenu || this.hasAttribute('overlay');
+    }
+  }
 
 
   #toggle(event) {
@@ -65,9 +73,11 @@ export default class MCMenuElement extends HTMLComponentElement {
       this.#setAnchorPosition();
       this.addEventListener('click', this.#click_bound, { signal: this.#abort.signal });
       window.addEventListener('keydown', this.#openKeydown_bound, { signal: this.#abort.signal });
+      window.addEventListener('scroll', this.#scroll_bound, { signal: this.#abort.signal });
     } else {
       this.removeEventListener('click', this.#click_bound);
       window.removeEventListener('keydown', this.#openKeydown_bound);
+      window.removeEventListener('scroll', this.#scroll_bound);
     }
   }
 
@@ -89,10 +99,10 @@ export default class MCMenuElement extends HTMLComponentElement {
     // handle out of bounds bottom of screen
     if (block + height > window.innerHeight) {
       block = this.#overlay ? window.innerHeight - bounds.bottom : window.innerHeight - bounds.top + 8;
-      this.style.bottom = `${block}px`;
+      this.style.bottom = `${block + this.#offsetY}px`;
       this.style.top = 'unset';
     } else {
-      this.style.top = `${block}px`;
+      this.style.top = `${block + this.#offsetY}px`;
       this.style.bottom = 'unset';
     }
 
@@ -102,20 +112,24 @@ export default class MCMenuElement extends HTMLComponentElement {
 
   #openKeydown(e) {
     if (e.key === 'Enter' || e.keyCode === 32) {
-      if (e.target.nodeName === 'MC-MENU-ITEM') e.target.shadowRoot.querySelector('mc-state-layer').triggerRipple();
+      if (e.target.nodeName === 'MC-MENU-ITEM' || e.target.nodeName === 'MC-OPTION') e.target.shadowRoot.querySelector('mc-state-layer').triggerRipple();
     } else if (e.code === 'ArrowDown') {
-      const next = util.getNextFocusableElement(this, false, this.#acceptFilter);
+      let parent = this;
+      if (this.querySelector('slot')) parent = this.getRootNode().host;
+      const next = util.getNextFocusableElement(parent, false, this.#acceptFilter);
       if (next) next.focus();
       e.preventDefault();
     } else if (e.code === 'ArrowUp') {
-      const next = util.getNextFocusableElement(this, true, this.#acceptFilter);
+      let parent = this;
+      if (this.querySelector('slot')) parent = this.getRootNode().host;
+      const next = util.getNextFocusableElement(parent, true, this.#acceptFilter);
       if (next) next.focus();
       e.preventDefault();
     } else if (!this.#disableLetterFocus && ![38, 40, 13].includes(e.keyCode)) return this.#textSearch(e.key);
   }
 
   #acceptFilter(element) {
-    return element.nodeName === 'MC-MENU-ITEM';
+    return element.nodeName === 'MC-MENU-ITEM' || element.nodeName === 'MC-OPTION';
   }
 
   #textSearch(key) {
@@ -136,7 +150,7 @@ export default class MCMenuElement extends HTMLComponentElement {
   }
 
   #getFocusableElement() {
-    return [...this.querySelectorAll('mc-menu-item')];
+    return [...this.querySelectorAll('mc-menu-item'), ...this.querySelectorAll('mc-option')];
   }
 
   #rightClick(event) {
@@ -164,6 +178,10 @@ export default class MCMenuElement extends HTMLComponentElement {
     this.togglePopover();
     event.preventDefault();
     document.removeEventListener('pointerup', this.#preventContextMenuClose_bound);
+  }
+
+  #scroll() {
+    this.#setAnchorPosition();
   }
 }
 customElements.define(MCMenuElement.tag, MCMenuElement);

@@ -1,6 +1,16 @@
+import fuzzySearch from './fuzzySearch.js';
+
+
 const mcUtil = new class MCUtil {
   #textWidthCanvas;
   #scrollHandler_bound = this.#scrollHandler.bind(this);
+
+
+  // can use array of strings ['one', 'two']
+  // can also use array of objects with label property [{ label: 'one' }, { label: 'two' }] || [{ value: 'one' }, { value: 'two' }]
+  fuzzySearch(searchTerm, items = [], distanceCap = 0.2) {
+    return fuzzySearch(searchTerm, items, distanceCap);
+  }
 
   getNextFocusableElement(containerElement, previous = false, acceptFilter = () => { return true; }) {
     let walker = document.createNodeIterator(

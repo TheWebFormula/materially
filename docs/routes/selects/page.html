@@ -1,0 +1,218 @@
+<article>
+  <header>
+    <h1>Selects</h1>
+    <div class="page-subheader mc-font-title-medium">Selects are menus that are assigned to a text field. you can use the text field to filter</div>
+    <a href="https://m3.material.io/components/menus/specs#15cc3423-ab1f-4d1c-8ce4-e5c9ae95f19f" target="_new">Material
+      Design Guidelines: Select</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#basic">Basic</a></li>
+        <li><a href="#filter">Filter</a></li>
+        <li><a href="#async-filter">Async filter</a></li>
+        <li><a href="#bottomsheet">Bottom sheet</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+      <section id="basic" aria-label="Select examples">
+        <mc-card>
+          <h2 slot="headline">Basic</h2>
+        
+          <div class="example" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+            <div style="display: flex; flex-direction: column;">
+              <mc-select label="Label" placeholder="Placeholder..." onchange="console.log('change')">
+                <mc-option value="1">one</mc-option>
+                <mc-option value="2">two</mc-option>
+                <mc-option value="3">three</mc-option>
+                <mc-option value="4">four</mc-option>
+                <mc-option value="5">five</mc-option>
+                <mc-option value="6">six</mc-option>
+              </mc-select>
+        
+              <mc-select label="Filter" filter>
+                <mc-icon slot="leading-icon">search</mc-icon>
+                <mc-option value="1">one</mc-option>
+                <mc-option value="2">two</mc-option>
+                <mc-option value="3">three</mc-option>
+                <mc-option value="4">four</mc-option>
+                <mc-option value="5">five</mc-option>
+                <mc-option value="6">six</mc-option>
+              </mc-select>
+            </div>
+        
+            <div style="display: flex; flex-direction: column;">
+              <mc-select label="Value attr" value="1">
+                <mc-option value="1">one</mc-option>
+                <mc-option value="2">two</mc-option>
+                <mc-option value="3">three</mc-option>
+                <mc-option value="4">four</mc-option>
+                <mc-option value="5">five</mc-option>
+                <mc-option value="6">six</mc-option>
+              </mc-select>
+        
+              <mc-select label="Selected attr (outlined)" class="outlined">
+                <mc-option value="1" selected>one</mc-option>
+                <mc-option value="2">two</mc-option>
+                <mc-option value="3">three</mc-option>
+                <mc-option value="4">four</mc-option>
+                <mc-option value="5">five</mc-option>
+                <mc-option value="6">six</mc-option>
+              </mc-select>
+            </div>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-select
+    label="Label"
+    placeholder="Placeholder..."
+  >
+    <mc-option value="1">one</mc-option>
+    <mc-option value="2">two</mc-option>
+  </mc-select>
+
+  
+  <mc-select
+    label="Filter"
+    filter
+  >
+    <mc-icon slot="leading-icon">search</mc-icon>
+    <mc-option value="1">one</mc-option>
+    <mc-option value="2">two</mc-option>
+  </mc-select>
+
+  
+  <mc-select
+    label="Value attr"
+    value="1"
+  >
+    <mc-option value="1">one</mc-option>
+    <mc-option value="2">two</mc-option>
+  </mc-select>
+
+  
+  <mc-select
+    label="Selected attr (outlined)"
+    class="outlined"
+  >
+    <mc-option value="1" selected>one</mc-option>
+    <mc-option value="2">two</mc-option>
+  </mc-select>`}
+        </code>
+      </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="filter" aria-label="Select filtering">
+        <mc-card>
+          <h2 slot="headline">Filter</h2>
+          <div slot="supporting-text">Filtering hides items that do not fuzzy match the input. The most likely match will also
+            add a textfield suggestion and hitting the enter key will select it.</div>
+            
+          <div class="example">
+            <mc-select label="Label" filter>
+              <mc-option value="1">one</mc-option>
+              <mc-option value="2">two</mc-option>
+              <mc-option value="3">three</mc-option>
+              <mc-option value="4">four</mc-option>
+              <mc-option value="5">five</mc-option>
+              <mc-option value="6">six</mc-option>
+              <mc-option value="7">seven</mc-option>
+              <mc-option value="8">eight</mc-option>
+              <mc-option value="9">nine</mc-option>
+              <mc-option value="10">ten</mc-option>
+            </mc-select>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-select filter label="Label">
+    <mc-option value="1">one</mc-option>
+    <mc-option value="2">two</mc-option>
+    <mc-option value="3">three</mc-option>
+    <mc-option value="4">four</mc-option>
+    <mc-option value="5">five</mc-option>
+    <mc-option value="6">six</mc-option>
+    <mc-option value="7">seven</mc-option>
+    <mc-option value="8">eight</mc-option>
+    <mc-option value="9">nine</mc-option>
+    <mc-option value="10">ten</mc-option>
+  </mc-select>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="async-filter" aria-label="Select async filtering">
+        <mc-card>
+          <h2 slot="headline">Async filter</h2>
+          <div slot="supporting-text">Async filter will trigger a <b>filter</b> event that is debounced. There will be a progress
+            bar shown at the top. You can resolve the select two ways. You can update the options or reset the options (both shown
+            below).</div>
+            
+            <div class="example">
+              <mc-select id="async-filter-select" label="Label" filter async>
+                <mc-option value="1">one</mc-option>
+                <mc-option value="2">two</mc-option>
+                <mc-option value="3">three</mc-option>
+                <mc-option value="4">four</mc-option>
+                <mc-option value="5">five</mc-option>
+                <mc-option value="6">six</mc-option>
+                <mc-option value="7">seven</mc-option>
+                <mc-option value="8">eight</mc-option>
+                <mc-option value="9">nine</mc-option>
+                <mc-option value="10">ten</mc-option>
+              </mc-select>
+            </div>
+        
+          <pre>
+                <code class="language-html">
+          ${`<mc-select filter async label="Label" id="async-filter-select">
+            <mc-option value="1">one</mc-option>
+            <mc-option value="2">two</mc-option>
+            <mc-option value="3">three</mc-option>
+            <mc-option value="4">four</mc-option>
+            <mc-option value="5">five</mc-option>
+            <mc-option value="6">six</mc-option>
+            <mc-option value="7">seven</mc-option>
+            <mc-option value="8">eight</mc-option>
+            <mc-option value="9">nine</mc-option>
+            <mc-option value="10">ten</mc-option>
+          </mc-select>`}
+                </code>
+              </pre>
+        
+          <pre>
+            <code class="language-javascript">
+  ${`// do some async stuff
+  const select = document.querySelector('#async-filter-select');
+  
+  // Incremental search is enabled
+  // You will receive debounced events as you type
+  select.addEventListener('search', e => {
+    console.log(select.displayValue); // what is being typed
+
+    // You can reset the select to the initial options
+    select.initialOptions();
+
+    // You can either append new mc-option elements to the DOM
+    // Or you can use this helper method
+    select.setOptions([
+      { label: 'One', value: 1 },
+      { label: 'Two', value: 2}
+    ]);
+  });`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

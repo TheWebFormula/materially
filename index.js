@@ -20,6 +20,7 @@ import './src/components/snackbar/index.js';
 import './src/components/textfield/index.js';
 import './src/components/radio/index.js';
 import './src/components/slider/index.js';
+import './src/components/select/index.js';
 
 export {
   // mcDate,

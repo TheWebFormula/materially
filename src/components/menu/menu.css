@@ -13,11 +13,12 @@ mc-menu {
   animation: show-max-height;
   animation-duration: var(--mc-motion-duration-medium3);
   animation-timing-function: var(--mc-motion-easing-emphasized);
-  z-index: 1;
+  z-index: 9;
 }
 
 mc-menu:not(:popover-open) {
   display: none;
+  z-index: 9;
   animation: hide-max-height;
   animation-duration: var(--mc-motion-duration-short3);
   animation-timing-function: var(--mc-motion-easing-emphasized-accelerate);

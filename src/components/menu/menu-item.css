@@ -1,5 +1,6 @@
 :host {
   align-items: center;
+  justify-content: space-between;
   box-sizing: border-box;
   display: inline-flex;
   gap: 12px;
@@ -34,7 +35,7 @@ button {
   cursor: inherit;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   border: none;
   outline: none;
   -webkit-appearance: none;
@@ -47,7 +48,7 @@ button {
   color: inherit;
   padding: 0;
   gap: 8px;
-  padding: 0 16px;
+  /* padding: 0 16px; */
 }
 
 :host(.selected) {
@@ -86,9 +87,9 @@ slot[name="end"] {
   color: var(--mc-on-surface-variant);
 }
 
-.default-slot {
+/* .default-slot {
   flex: 1;
-}
+} */
 
 ::slotted(.drop-arrow) {
   position: absolute;

@@ -1,0 +1,456 @@
+<article>
+  <header>
+    <h1>Cards</h1>
+    <div class="page-subheader mc-font-title-medium">Cards contain content and actions that relate information about a subject</div>
+    <a href="https://m3.material.io/components/cards/overview" target="_new">Material Design Guidelines: Buttons</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#basic">Basic card</a></li>
+        <li><a href="#types">Card types</a></li>
+        <li><a href="#expanding">Expanding card</a></li>
+        <li><a href="#fullscreen">Fullscreen card</a></li>
+        <li><a href="#layout">Layouts (grid, list)</a></li>
+        <li><a href="#dragreorder">Drag reorder</a></li>
+        <li><a href="#swipe-action">Swipe action</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section aria-label="Card examples">
+        <mc-card>
+          <h2 slot="headline">Example</h2>
+          <div slot="supporting-text">There are three types of cards: elevated, filled, and outlined</div>
+          
+          <div class="example">
+            <mc-card-group>
+              <mc-card value="one">
+                <div slot="headline">Regular</div>
+                <div slot="subhead">card</div>
+              </mc-card>
+            
+              <mc-card filled>
+                <div slot="headline">Filled</div>
+                <div slot="subhead">card</div>
+              </mc-card>
+            
+              <mc-card outlined>
+                <div slot="headline">Outlined</div>
+                <div slot="subhead">card</div>
+              </mc-card>
+            
+              <mc-card onclick="console.log('action')">
+                <div slot="headline">Actionable</div>
+                <div slot="subhead">ripple</div>
+              </mc-card>
+            </mc-card-group>
+          </div>
+        </mc-card>
+      </section>
+
+
+
+      <section id="basic" aria-label="Card examples">
+        <mc-card>
+          <h2 slot="headline">Basic card</h2>
+        
+          <div class="example" style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <mc-card style="max-width: 320px">
+              <img slot="image" class="rounded medium" alt="landscape"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+        
+              <div slot="headline">Headline</div>
+              <div slot="subhead">Subhead</div>
+              <div slot="supporting-text">Supporting text. Contrary to popular belief, Lorem Ipsum is not simply random text.</div>
+              <div>Some other content. Just add your content without specifying slots</div>
+            </mc-card>
+        
+            <mc-card style="width: 220px; height: 120px;" onclick="console.log('action')">
+              <div slot="headline">Actionable</div>
+              <div slot="subhead">Ripple</div>
+              <div slot="supporting-text">Click to see ripple</div>
+            </mc-card>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-card style="max-width: 320px">
+    <img slot="image" class="rounded medium" alt="landscape" src="..." />
+    <div slot="headline">Headline</div>
+    <div slot="subhead">Subhead</div>
+    <div slot="supporting-text">Supporting text. Contrary to popular belief, Lorem Ipsum is not simply random text.</div>
+    <div>Some other content. Just add your content without specifying slots</div>
+  </mc-card>
+  
+  <mc-card style="width: 220px; height: 120px;" onclick="console.log('action')">
+    <div slot="headline">Actionable</div>
+    <div slot="subhead">Ripple</div>
+    <div slot="supporting-text">Click to see ripple</div>
+  </mc-card>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="types" aria-label="Card types">
+        <mc-card>
+          <h2 slot="headline">Card types</h2>
+        
+          <div class="example" style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
+            <mc-card style="width: 200px">
+              <div slot="headline">Regular</div>
+              <div slot="subhead">card</div>
+            </mc-card>
+        
+            <mc-card filled style="width: 200px">
+              <div slot="headline">Filled</div>
+              <div slot="subhead">card</div>
+            </mc-card>
+        
+            <mc-card outlined style="width: 200px">
+              <div slot="headline">Outlined</div>
+              <div slot="subhead">card</div>
+            </mc-card>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-card>
+    <div slot="headline">Regular</div>
+    <div slot="subhead">card</div>
+  </mc-card>
+  
+  <mc-card filled>
+    <div slot="headline">Filled</div>
+    <div slot="subhead">card</div>
+  </mc-card>
+  
+  <mc-card outlined>
+    <div slot="headline">Outlined</div>
+    <div slot="subhead">card</div>
+  </mc-card>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="expanding" aria-label="Expanding cards">
+        <mc-card>
+          <h2 slot="headline">Expanding card</h2>
+        
+          <div class="example" style="display: flex; flex-wrap: wrap; gap: 20px;">
+            <mc-card style="max-width: 320px">
+              <img slot="image" class="medium rounded" alt="landscape"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+        
+              <div slot="headline">Headline</div>
+              <div slot="subhead">Subhead</div>
+        
+              <div slot="expanded">
+                <div class="supporting-text">
+                  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+                  Latin
+                  literature
+                </div>
+              </div>
+            </mc-card>
+        
+            <mc-card style="max-width: 320px">
+              <img slot="image" class="rounded medium" alt="landscape"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+        
+              <div slot="headline">Expanding with scroll</div>
+              <div slot="subhead">Subhead</div>
+        
+              <div slot="expanded">
+                <div class="supporting-text">
+                  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+                  Latin
+                  literature
+                  from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College
+                  in
+                  Virginia,
+                  looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through
+                  the
+                  cites of
+                  the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections
+                  1.10.32 and
+                  1.10.33
+                  of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book
+                  is a
+                  treatise
+                  on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum
+                  dolor
+                  sit
+                  amet..", comes from a line in section 1.10.32.
+        
+                  The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections
+                  1.10.32 and
+                  1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form,
+                  accompanied
+                  by
+                  English versions from the 1914 translation by H. Rackham.
+                </div>
+              </div>
+            </mc-card>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-card>
+    <img slot="image" class="medium rounded" alt="landscape"
+      src="..." />
+  
+    <div slot="headline">Headline</div>
+    <div slot="subhead">Subhead</div>
+  
+    <div slot="expanded">
+      <div class="supporting-text">
+        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+        Latin literature
+      </div>
+    </div>
+  </mc-card>
+  
+  <mc-card style="max-width: 320px">
+    <img slot="image" class="rounded medium" alt="landscape"
+      src="..." />
+  
+    <div slot="headline">Expanding with scroll</div>
+    <div slot="subhead">Subhead</div>
+  
+    <div slot="expanded">
+      <div class="supporting-text">
+        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+        Latin
+      </div>
+    </div>
+  </mc-card>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="fullscreen" aria-label="Fullscreen cards">
+        <mc-card>
+          <h2 slot="headline">Fullscreen card</h2>
+          <div slot="subhead">Fullscreen card will expand to fullscreen on mobile devices. On desktops the card will open a modal</div>
+        
+          <mc-card fullscreen style="max-width: 600px;">
+            <img slot="image" class="rounded medium" alt="landscape"
+              src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+        
+            <div slot="headline">Fullscreen</div>
+            <div slot="subhead">card</div>
+        
+            <div slot="expanded">
+              <div class="supporting-text">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+                Latin
+                literature
+                from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College
+                in
+                Virginia,
+                looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through
+                the
+                cites of
+                the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32
+                and
+                1.10.33
+                of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is
+                a
+                treatise
+                on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum
+                dolor
+                sit
+                amet..", comes from a line in section 1.10.32.
+        
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections
+                1.10.32 and
+                1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form,
+                accompanied
+                by
+                English versions from the 1914 translation by H. Rackham.
+              </div>
+        
+              <div class="supporting-text">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+                Latin
+                literature
+                from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College
+                in
+                Virginia,
+                looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through
+                the
+                cites of
+                the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32
+                and
+                1.10.33
+                of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is
+                a
+                treatise
+                on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum
+                dolor
+                sit
+                amet..", comes from a line in section 1.10.32.
+        
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections
+                1.10.32 and
+                1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form,
+                accompanied
+                by
+                English versions from the 1914 translation by H. Rackham.
+              </div>
+            </div>
+          </mc-card>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-card fullscreen>
+    <img slot="image" class="rounded medium" alt="landscape"
+      src="..." />
+  
+    <div slot="headline">Fullscreen</div>
+    <div slot="subhead">card</div>
+  
+    <div slot="expanded">
+      <div class="supporting-text">
+        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+        Latin
+      </div>
+  
+      <div class="supporting-text">
+        ...
+      </div>
+    </div>
+  </mc-card>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="layout" aria-label="Card layouts">
+        <mc-card>
+          <h2 slot="headline">Grids and lists</h2>
+          <div slot="subhead">By default the container will auto swap between grid and list based on screen size. You can for
+            it to always be be one or the other by using classes: 'grid' 'mc-list'</div>
+        
+          <mc-card-group>
+            ${page.cardArray.map(({ height }) => html`
+            <mc-card filled>
+              <img slot="image" class="rounded" alt="landscape"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+        
+              <div slot="headline">Headline</div>
+              <div slot="subhead">Subhead</div>
+              <div slot="supporting-text">one two three four five six.</div>
+        
+              ${height !== '' ? `
+              <div slot="supporting-text">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+                Latin literature. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
+                of classical Latin literature
+              </div>
+              ` : ''}
+            </mc-card>
+            `)}
+          </mc-card-group>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-card-group>
+    ${page.cardArray.map((_, i) => `
+      <mc-card></mc-card>
+    `).join('\n')}
+  </mc-card-group>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="dragreorder" aria-label="Card group reordering">
+        <mc-card>
+          <h2 slot="headline">Drag reorder - move item position</h2>
+          <div slot="subhead">Press and hold on card to reorder</div>
+          <div slot="supporting-text">By default the container will auto swap between grid and list based on screen size. You
+            can for it to always be be one or the other by using classes: 'grid' 'mc-list'</div>
+        
+          <mc-card-group reorder>
+            ${page.cardArray.map(({ height }, i) => html`
+            <mc-card class="${i}" filled>
+              <img slot="image" class="rounded" alt="landscape"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+        
+              <div slot="headline">${i}</div>
+              <div slot="subhead">Subhead</div>
+              <div slot="supporting-text">one two three four five six.</div>
+            </mc-card>
+            `)}
+          </mc-card-group>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-card-group reorder>
+    <mc-card></mc-card>
+    <mc-card></mc-card>
+    <mc-card></mc-card>
+  </mc-card-group>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="swipe-action" aria-label="Card swipe actions">
+        <mc-card>
+          <h2 slot="headline">Swipe actions</h2>
+          <div slot="subhead">Only works on mobile</div>
+        
+          <mc-card style="max-width: 320px;" value="favorite" onchange="console.log(event.detail)">
+            <mc-icon slot="swipe-action" action="favorite" toggle>favorite</mc-icon>
+            <div slot="headline">Favorite toggle</div>
+            <div slot="subhead">Subhead</div>
+            <div slot="supporting-text">one two three four five six.</div>
+          </mc-card>
+        
+          <div style="height: 8px"></div>
+        
+          <mc-card style="max-width: 320px;" value="favorite" onchange="console.log(event.detail)">
+            <mc-icon slot="swipe-action" action="remove" action-remove>delete</mc-icon>
+            <div slot="headline">Remove</div>
+            <div slot="subhead">Subhead</div>
+            <div slot="supporting-text">one two three four five six.</div>
+          </mc-card>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-card style="max-width: 320px;" value="favorite" onchange="console.log(event.detail)">
+    <mc-icon slot="swipe-action" action="favorite" toggle>favorite</mc-icon>
+    <div slot="headline">Favorite toggle</div>
+    <div slot="subhead">Subhead</div>
+    <div slot="supporting-text">one two three four five six.</div>
+  </mc-card>
+  
+  <mc-card style="max-width: 320px;" value="favorite" onchange="console.log(event.detail)">
+    <mc-icon slot="swipe-action" action="remove" action-remove>delete</mc-icon>
+    <div slot="headline">Remove</div>
+    <div slot="subhead">Subhead</div>
+    <div slot="supporting-text">one two three four five six.</div>
+  </mc-card>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

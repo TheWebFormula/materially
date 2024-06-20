@@ -6,10 +6,32 @@
   position: relative;
   width: inherit;
 
-  left: var(--mc-card-swipe-action-position);
-  transition: left;
-  transition-duration: var(--mc-motion-duration-short3);
   outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:host(.swipe-action-showing) {
+  overflow-x: clip;
+
+  .container {
+    transform: translateX(var(--mc-card-swipe-action-position));
+    transition: transform;
+    transition-duration: var(--mc-motion-duration-short3);
+  }
+}
+
+:host(.window-compact.expanding[open]) {
+  transform: translateY(-6px);
+}
+
+:host(.drag-active) {
+  transition: none;
+}
+
+:host([onclick]) {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .container {
@@ -24,23 +46,47 @@
   width: inherit;
 }
 
-.content {
+/* Moved to a wrapping relative div around expanding arrow. This was messing with drag drop height on ios safari */
+/* .content {
   position: relative;
-}
+} */
 
 .default-slot {
   display: block;
   position: relative;
-  /* margin: 0 -16px; */
+}
+
+.default-slot.has-content {
+  margin-top: 24px;
+}
+
+
+:host([fullscreen][open]) .container {
+  position: fixed;
 }
 
 .placeholder {
   display: none;
 }
 
+:host([fullscreen][open]) .placeholder {
+  display: block;
+}
+
+:host([outlined]) .container {
+  background-color: var(--mc-surface);
+  /* use outline because box-sizing with border-radius does not prevent hight change */
+  outline: 1px solid var(--mc-outline);
+}
+
+:host([filled]) .container {
+  color: var(--mc-on-surface-variant);
+  background-color: var(--mc-surface-container-highest);
+}
+
 [name="headline"] {
   display: block;
-  /* margin-top: 16px; */
+  margin-top: 16px;
   font-size: var(--mc-font-small-headline-size);
   font-weight: var(--mc-font-small-headline-weight);
   line-height: var(--mc-font-small-headline-line-height);
@@ -64,6 +110,73 @@
   color: var(--mc-on-surface-variant);
 }
 
+[name="supporting-text"].has-content {
+  display: block;
+  margin-top: 12px;
+}
+
+[name="image"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% + 32px);
+  overflow: hidden;
+  margin: 0 -16px;
+  margin-top: -16px;
+  border-radius: var(--mc-shape-medium) var(--mc-shape-medium) 0 0;
+}
+
+[name="image"]::slotted(img) {
+  /* Display issue when using 100% */
+  width: 101%;
+}
+
+[name="image"]::slotted(img.rounded) {
+  border-radius: var(--mc-shape-medium);
+}
+
+[name="image"]::slotted(img.small) {
+  height: 60px;
+  transition: height;
+  transition-duration: 0s;
+}
+
+[name="image"]::slotted(img.medium) {
+  height: 120px;
+  transition: height;
+  transition-duration: 0s;
+}
+
+[name="image"]::slotted(img.large) {
+  height: 180px;
+  transition: height;
+  transition-duration: 0s;
+}
+
+[name="action"] {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+[name="action"]::slotted(*) {
+  margin-top: 16px;
+}
+
+
+
+:host(.expanding) {
+  transform: translateY(0);
+  margin-bottom: 0;
+  transition: margin-bottom, transform;
+  transition-duration: 0ms;
+  transition-duration: var(--mc-motion-duration-short3);
+}
+
+:host(.expanding[open]) {
+  z-index: 11;
+}
+
 .expand-arrow {
   display: none;
   cursor: pointer;
@@ -80,13 +193,224 @@
   }
 }
 
+:host([open]) .expand-arrow.show {
+  transform: rotate(180deg) translateY(-20px);
+}
+
+[name="expanded"] {
+  display: block;
+  height: 0;
+  transform: translateY(0);
+  overflow: hidden;
+  pointer-events: none;
+  background-color: inherit;
+}
+
+:host(:not([fullscreen])) [name="expanded"] {
+  transition: height, transform;
+  transition-duration: 0ms;
+  transition-duration: var(--mc-motion-duration-short3);
+}
+
+:host([fullscreen]) .container {
+  transition: top, left, width, height;
+  transition-duration: 0ms;
+  transition-duration: var(--mc-motion-duration-short3);
+}
+
+:host([fullscreen][open]) .container {
+  z-index: 21;
+}
+
+:host([fullscreen][open]:not(.fullscreen-closing)) .container {
+  border-radius: 0;
+}
+
+:host([fullscreen][open]) [name="expanded"] {
+  height: auto;
+}
+
+:host([fullscreen][open].fullscreen-closing) [name="expanded"] {
+  height: 0;
+}
+
+:host([open]:not([fullscreen])) [name="expanded"] {
+  transform: translateY(16px);
+  pointer-events: all;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+
 .fullscreen-close {
   display: none;
 }
 
+:host([fullscreen]) .fullscreen-close {
+  --mc-icon-button-background-filled-color: rgba(from var(--mc-on-surface) r g b / 0.4);
+
+  display: inline-flex;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  cursor: pointer;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity;
+  transition-duration: 0ms;
+  transition-duration: var(--mc-motion-duration-short3);
+}
+
+:host([fullscreen]) .fullscreen-close svg {
+  margin-left: 4px;
+}
+
+:host([fullscreen][open]) .fullscreen-close {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+:host([fullscreen][open].fullscreen-closing) .fullscreen-close {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+
+:host([fullscreen]) [name="image"]::slotted(img) {
+  transition: height, border-radius;
+  transition-delay: 0ms, var(--mc-motion-duration-short1);
+  transition-timing-function: var(--mc-motion-easing-standard-accelerate);
+  transition-duration: 0ms, 0ms;
+  transition-duration: var(--mc-motion-duration-short3), 80ms;
+}
+
+:host([fullscreen][open]) [name="image"]::slotted(img) {
+  height: var(--mc-card-fullscreen-img-height, 300px);
+  transition: height, border-radius;
+  transition-duration: 0ms, 0ms;
+  transition-delay: 0ms, var(--mc-motion-duration-short3);
+  transition-timing-function: var(--mc-motion-easing-standard);
+}
+
+:host([fullscreen][open].fullscreen-closing) [name="image"]::slotted(img) {
+  height: var(--mc-card-fullscreen-img-height-previous);
+}
+
+:host([fullscreen][open].mc-duration) [name="image"]::slotted(img) {
+  transition-duration: var(--mc-motion-duration-medium3), var(--mc-motion-duration-short3);
+}
+
+:host([fullscreen]) [name="image"]::slotted(img.rounded) {
+  border-radius: var(--mc-shape-medium);
+}
+
+:host([fullscreen][open]:not(.fullscreen-closing)) [name="image"] {
+  overflow: visible;
+  border-radius: 0 0 var(--mc-shape-medium) var(--mc-shape-medium);
+}
+
+
+/* --- group ---- */
+
+:host(.window-compact.grouped:not(.grid)),
+:host(.grid-list-item) {
+  flex-direction: row;
+  height: 80px;
+  overflow: hidden;
+}
+
+:host(.window-compact.grouped:not(.grid)) .container,
+:host(.grid-list-item) .container {
+  flex-direction: row;
+  height: 80px;
+  width: 100%;
+  overflow: hidden;
+}
+
+:host(.window-compact.grouped:not(.grid)) .content,
+:host(.grid-list-item) .content {
+  align-self: flex-end;
+  margin-left: 32px;
+}
+
+:host(.window-compact.grouped:not(.grid)) [name="image"],
+:host(.grid-list-item) [name="image"] {
+  z-index: 1;
+  width: 80px;
+  height: 80px;
+}
+
+:host(.window-compact.grouped:not(.grid):not(.has-image)) [name="image"],
+:host(.grid-list-item.has-image) [name="image"] {
+  width: 0;
+}
+
+:host(.window-compact.grouped:not(.grid)) [name="image"]::slotted(img),
+:host(.grid-list-item) [name="image"]::slotted(img) {
+  width: unset;
+  height: 100%;
+}
+
+:host(.window-compact.grouped:not(.grid)) [name="supporting-text"],
+:host(.window-compact.grouped:not(.grid).card-list-item) [name="actions"],
+:host(.grid-list-item) [name="supporting-text"],
+:host(.grid-list-item.card-list-item) [name="actions"],
+:host(.window-compact.grouped:not(.grid)) .default-slot {
+  display: none;
+}
+
+
+
+/* --- swipe action --- */
+
 [name="swipe-action"] {
   display: none;
 }
+
+[name="swipe-action"].has-swipe-action {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  padding-top: 18px;
+  padding-left: 18px;
+  border-radius: var(--mc-shape-medium) 0 0 var(--mc-shape-medium);
+  box-sizing: border-box;
+
+  background-color: var(--mc-surface-tint-alpha-16);
+  color: var(--mc-on-surface-variant);
+}
+
+:host([filled]) [name="swipe-action"].has-swipe-action {
+  background-color: var(--mc-surface-variant);
+}
+
+[name="swipe-action"]::slotted(mc-icon) {
+  pointer-events: none;
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+}
+
+[name="swipe-action"][checked] {
+  background-color: var(--mc-surface-tint-alpha-38);
+}
+
+[name="swipe-action"][checked]::slotted(mc-icon) {
+  font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+}
+
+
 
 /* --- state layer --- */
 

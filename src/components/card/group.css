@@ -1,0 +1,20 @@
+:host {
+  gap: 8px;
+
+  display: grid;
+  grid-template-columns: repeat(var(--mc-card-group-columns), 1fr);
+}
+
+:host(.list),
+:host(.window-compact:not(.grid)) {
+  display: flex;
+  flex-direction: column;
+}
+
+:host(.reorder) {
+  cursor: pointer;
+}
+
+::slotted(mc-card.card-grid-cell) {
+  height: fit-content;
+}

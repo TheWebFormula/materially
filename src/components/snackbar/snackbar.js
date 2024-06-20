@@ -1,6 +1,6 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
-import mcSwipe from '../../helpers/swipe.js';
+import Swipe from '../../helpers/Swipe.js';
 
 // TODO css variables
 // TODO tab indexing. Web components buttons seem not to work by default with popover
@@ -27,7 +27,7 @@ export default class MCSnackbarElement extends HTMLComponentElement {
     this.#navigationBar = document.querySelector('mc-navigation-bar');
     if (this.#navigationBar) this.#navigationBar.onState(this.#navigationBarState_bound);
 
-    this.#swipe = new mcSwipe(this);
+    this.#swipe = new Swipe(this);
     this.#swipe.enable();
     this.addEventListener('swipe', this.#onSwipe_bound);
   }

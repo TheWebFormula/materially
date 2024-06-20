@@ -11,7 +11,7 @@
   padding: 0 16px;
   box-sizing: border-box;
   background-color: var(--mc-top-app-bar-container-color);
-  z-index: 1;
+  z-index: 4;
 }
 
 :host(.animation) {

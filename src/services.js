@@ -3,7 +3,7 @@
 import mcDialog from './components/dialog/service.js';
 import mcSnackbar from './components/snackbar/service.js';
 // import mcUtil from './core/util.js';
-import mcSwipe from './helpers/swipe.js';
+import mcSwipe from './helpers/Swipe.js';
 
 export {
   // mcDate,

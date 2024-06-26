@@ -23,6 +23,8 @@ import './src/components/slider/index.js';
 import './src/components/select/index.js';
 import './src/components/badge/index.js';
 import './src/components/bottom-app-bar/index.js';
+import './src/components/list/index.js';
+import './src/components/avatar/index.js';
 
 export {
   // mcDate,

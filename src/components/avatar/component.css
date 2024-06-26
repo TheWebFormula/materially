@@ -1,0 +1,84 @@
+:host {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: var(--mc-primary-container);
+  font-size: var(--mc-font-small-body-size);
+  font-weight: var(--mc-font-small-body-weight);
+  letter-spacing: var(--mc-font-small-body-tracking);
+  color: var(--mc-on-primary-container);
+}
+
+:host ::slotted(img) {
+  width: 100%;
+}
+
+:host(.tertiary) {
+  background-color: var(--mc-tertiary-container);
+  color: var(--mc-on-tertiary-container);
+}
+
+:host([onclick]) {
+  cursor: pointer;
+}
+
+:host::after {
+  position: absolute;
+  content: "";
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-radius: 50%;
+  background-color: var(--mc-primary-inverse);
+  opacity: 0;
+  transition: opacity;
+  transition-duration: var(--mc-motion-duration-short3);
+  border: 1px solid var(--mc-primary-inverse);
+}
+
+:host([select]) {
+  cursor: pointer;
+}
+
+:host(.checked)::after {
+  opacity: 1;
+}
+
+:host > svg {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  opacity: 0;
+}
+
+:host > svg > path {
+  stroke-dashoffset: 22.910259;
+  stroke-dasharray: 22.910259;
+  transition: stroke-dashoffset;
+  transition-duration: 90ms;
+}
+
+:host(.checked) > svg {
+  z-index: 1;
+  opacity: 1;
+}
+
+:host(.checked) > svg > path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset;
+  transition-duration: 180ms;
+}
+
+:host(:not(.animation)),
+:host(:not(.animation))::after,
+:host(:not(.animation)) > svg > path {
+  transition: none !important;
+  transition-duration: 0s !important;
+}

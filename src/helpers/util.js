@@ -179,6 +179,139 @@ const mcUtil = new class MCUtil {
     const metrics = context.measureText(inputElement.value);
     return Math.ceil(metrics.width);
   }
+
+
+
+  #longPressListeners = [];
+  addLongPressListener(element, listener, config = {
+    ms: 450,
+    disableMouseEvents: false,
+    disableTouchEvents: false,
+    once: false
+  }) {
+    let timeout;
+    let textSelectionTimeout;
+    let target;
+    let startX;
+    let startY;
+    let lastEvent;
+    let once = config.once === undefined ? false : config.once;
+
+    function start(event) {
+      // right click
+      if (event.ctrlKey || event.which === 3) return;
+
+      target = event.target;
+      startX = event.changedTouches ? event.changedTouches[0].clientX : event.clientX;
+      startY = event.changedTouches ? event.changedTouches[0].clientY : event.clientY;
+      timeout = setTimeout(() => {
+        listener(lastEvent);
+        remove();
+      }, config.ms || 450);
+
+      element.addEventListener('pointerup', remove);
+      element.addEventListener('pointermove', move);
+      window.addEventListener('contextmenu', preventContextMenu);
+
+      // prevent text selection on mobile
+      // adding a timeout seems to allow desktop text selection
+      textSelectionTimeout = setTimeout(() => {
+        element.classList.add('prevent-user-selection');
+      }, 0);
+    }
+
+    function remove(_event, destroy = false) {
+      if (timeout) clearTimeout(timeout);
+      if (textSelectionTimeout) clearTimeout(textSelectionTimeout);
+      lastEvent = undefined;
+      if (once || destroy) {
+        element.removeEventListener('pointerdown', start);
+      }
+      element.removeEventListener('pointerup', remove);
+      element.removeEventListener('pointermove', move);
+      window.removeEventListener('contextmenu', preventContextMenu);
+      element.classList.remove('prevent-user-selection');
+    }
+
+    function move(event) {
+      lastEvent = event;
+      const x = event.changedTouches ? event.changedTouches[0].clientX : event.clientX;
+      const y = event.changedTouches ? event.changedTouches[0].clientY : event.clientY;
+      const distanceX = x - startX;
+      const distanceY = y - startY;
+      const distance = Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
+      if (distance > 3) remove();
+    }
+
+    function preventContextMenu(event) {
+      event.preventDefault();
+      return false;
+    }
+
+    element.addEventListener('pointerdown', start);
+
+    this.#longPressListeners.push({
+      element,
+      remove
+    });
+  }
+
+  removeLongPressListener(element) {
+    this.#longPressListeners = this.#longPressListeners.filter(v => {
+      if (v.element === element) {
+        v.remove(null, true);
+        return false;
+      }
+      return true;
+    });
+  }
+
+
+  #clickTimeoutListeners = [];
+  addClickTimeoutEvent(element, listener, options) {
+    let timer;
+
+    function pointerdown() {
+      timer = setTimeout(end, 320);
+      element.addEventListener('pointerup', pointerup);
+    }
+
+    function pointerup(event) {
+      end();
+      listener(event);
+    }
+
+    function end() {
+      element.removeEventListener('pointerup', pointerup);
+      clearTimeout(timer);
+    }
+
+    function remove() {
+      clearTimeout(timer);
+      element.removeEventListener('pointerdown', pointerdown);
+      element.removeEventListener('pointerup', pointerup);
+    }
+
+    element.addEventListener('pointerdown', pointerdown);
+
+    if (options?.signal) options.signal.addEventListener('abort', remove);
+
+    this.#clickTimeoutListeners.push({
+      element,
+      listener,
+      remove
+    });
+  }
+
+  removeClickTimeoutEvent(element, listener) {
+    this.#clickTimeoutListeners = this.#clickTimeoutListeners.filter(v => {
+      if (v.element === element && v.listener === listener) {
+        v.remove();
+        return false;
+      }
+      return true;
+    });
+  }
 }
 
 window.mcUtil = mcUtil;

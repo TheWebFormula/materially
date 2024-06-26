@@ -1,0 +1,204 @@
+:host {
+  display: flex;
+  box-sizing: border-box;
+  gap: 16px;
+  min-height: 56px;
+  overflow: hidden;
+  position: relative;
+  text-overflow: ellipsis;
+  -webkit-tap-highlight-color: transparent;
+
+  font-size: var(--mc-font-large-body-size);
+  font-weight: var(--mc-font-large-body-weight);
+  line-height: var(--mc-font-large-body-line-height);
+  letter-spacing: var(--mc-font-large-body-tracking);
+  background-color: var(--mc-surface);
+
+  color: var(--mc-on-surface);
+  background-color: var(--mc-surface);
+  outline: none;
+}
+
+:host([draggable=true]) {
+  cursor: grab;
+}
+
+:host([multiline]) {
+  min-height: 72px;
+}
+
+:host(.selected) {
+  background-color: var(--mc-primary-container);
+}
+
+:host(.remove) {
+  height: 0px;
+  min-height: 0px;
+  transition: height;
+  transition-duration: var(--mc-motion-duration-short3);
+  transition-delay: 50ms;
+}
+
+.container {
+  z-index: 1;
+  border-radius: inherit;
+  display: flex;
+  flex: 1;
+  max-width: inherit;
+  min-width: inherit;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  width: 100%;
+  gap: inherit;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: inherit;
+
+  transition: transform;
+  transition-duration: var(--mc-motion-duration-medium1);
+  transition-timing-function: var(--mc-motion-easing-standard-accelerate);
+}
+
+:host(.swipe-active) .container {
+  transition: none;
+}
+
+[name='overline'] {
+  color: var(--mc-on-surface-variant);
+  font-size: var(--mc-font-small-label-size);
+  font-weight: var(--mc-font-small-label-weight);
+  line-height: var(--mc-font-small-label-line-height);
+  letter-spacing: var(--mc-font-small-label-tracking);
+}
+
+[name='supporting-text'] {
+  color: var(--mc-on-surface-variant);
+  font-size: var(--mc-font-medium-body-size);
+  font-weight: var(--mc-font-medium-body-weight);
+  line-height: var(--mc-font-medium-body-line-height);
+  letter-spacing: var(--mc-font-medium-body-tracking);
+}
+
+[name='trailing-supporting-text'] {
+  display: flex;
+  color: var(--mc-on-surface-variant);
+  font-size: var(--mc-font-small-label-size);
+  font-weight: var(--mc-font-small-label-weight);
+  line-height: var(--mc-font-small-label-line-height);
+  letter-spacing: var(--mc-font-small-label-tracking);
+}
+
+[name='trailing-supporting-text']::slotted(*) {
+  flex: 1;
+}
+
+.default-slot {
+  display: inline;
+}
+
+.default-slot,
+.text ::slotted(*) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.default-slot::slotted(mc-divider) {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+:host(:last-child) .default-slot::slotted(mc-divider) {
+  display: none !important;
+}
+
+
+.text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+:is([slot='start'], [slot='end'])::slotted(*) {
+  fill: currentColor;
+}
+
+[slot='start'] {
+  color: var(--mc-on-surface-variant);
+}
+
+[slot='end'] {
+  color: var(--mc-on-surface-variant);
+}
+
+::slotted(mc-switch) {
+  flex-grow: 0;
+}
+
+slot[name='end']::slotted([hover-only]) {
+  opacity: 0;
+  transition: opacity;
+  transition-duration: var(--mc-motion-duration-short1);
+}
+
+
+[name="swipe-start"] {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  inset: 1px;
+  padding-inline-start: 24px;
+  background-color: var(--mc-primary);
+  color: var(--mc-on-primary);
+}
+
+[name="swipe-end"] {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: absolute;
+  inset: 1px;
+  padding-inline-end: 24px;
+  background-color: var(--mc-secondary);
+  color: var(--mc-on-primary);
+}
+
+[name="swipe-start"],
+[name="swipe-end"] {
+  &.hide {
+    display: none;
+  }
+
+  &::slotted(*) {
+    transform: scale(0.7);
+    transition: transform;
+    transition-timing-function: var(--mc-transition-bounce);
+    transition-duration: var(--mc-motion-duration-medium4);
+  }
+
+  &.activate::slotted(*) {
+    transform: scale(1);
+  }
+}
+
+
+/* --- State layer / Ripple --- */
+
+mc-state-layer {
+  --mc-state-layer-hover-color: var(--mc-on-surface);
+  --mc-state-layer-focus-color: var(--mc-on-surface);
+  --mc-state-layer-ripple-color: var(--mc-on-surface);
+}
+
+/* :host(.drag-reorder-active) mc-state-layer {
+  --mc-state-layer-box-shadow: var(--mc-elevation-4);
+} */
+
+@media (hover: hover) {
+  :host(:hover) slot[name='end']::slotted([hover-only]) {
+    opacity: 1;
+    transition-duration: var(--mc-motion-duration-short3);
+  }
+}

@@ -18,7 +18,9 @@ body {
     "navigation header header"
     "navigation main side"
     "navigation footer footer";
-  overflow: auto;
+  /* overflow: auto; */
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 body.pane-layout {
@@ -64,4 +66,27 @@ body #page-content {
 mc-pane::-webkit-resizer {
   border: 2px solid black;
   background: blue;
+}
+
+.prevent-user-selection {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@keyframes action-bounce-in {
+  0% {
+    transform: scale(.7);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  70% {
+    transform: scale(.9);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }

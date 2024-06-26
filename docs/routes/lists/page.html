@@ -1,0 +1,716 @@
+<article>
+  <header>
+    <h1>Lists</h1>
+    <div class="page-subheader mc-font-title-medium">Lists are continuous, vertical indexes of text or images</div>
+    <a href="https://m3.material.io/components/lists/overview" target="_new">Material Design Guidelines: Lists</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#variations">Variations</a></li>
+        <li><a href="#icons-avatars">Start, end, trailing, overline</a></li>
+        <li><a href="#selection">Selection</a></li>
+        <li><a href="#header">Header</a></li>
+        <li><a href="#states">States and ripple</a></li>
+        <li><a href="#swipe-actions">Swipe actions</a></li>
+        <li><a href="#reorder">Drag reorder</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section aria-label="List examples">
+        <mc-card>
+          <h2 slot="headline">Example</h2>
+        
+          <mc-list>
+            <mc-list-item>
+              <mc-avatar slot="start">
+                <img alt="avatar" src="./woman.jpg">
+              </mc-avatar>
+        
+              <div slot="headline">Headline</div>
+              <div slot="supporting-text">Supporting text</div>
+        
+              <div slot="trailing-supporting-text">trailing</div>
+            </mc-list-item>
+        
+            <mc-list-item>
+              <mc-avatar slot="start">
+                <img alt="avatar" src="./woman.jpg">
+              </mc-avatar>
+        
+              <div slot="overline">overline</div>
+              <div slot="headline">Headline</div>
+              <div slot="supporting-text">Supporting text</div>
+        
+              <mc-icon slot="end">edit</mc-icon>
+              <mc-icon slot="end">delete</mc-icon>
+            </mc-list-item>
+        
+            <mc-list-item multiline>
+              <div slot="headline">Multiline</div>
+              <div slot="supporting-text">
+                <div>Line one</div>
+                <div>Line two</div>
+              </div>
+        
+              <mc-checkbox slot="end"></mc-checkbox>
+            </mc-list-item>
+        
+            <mc-list-item states>
+              <div slot="headline">States</div>
+              <mc-checkbox slot="end"></mc-checkbox>
+            </mc-list-item>
+        
+            <mc-divider></mc-divider>
+        
+            <mc-list-item>
+              <mc-icon slot="start">home</mc-icon>
+              <div slot="headline">Headline</div>
+              <div slot="trailing-supporting-text">trailing</div>
+              <mc-icon slot="end">settings</mc-icon>
+            </mc-list-item>
+          </mc-list>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-list>
+    <mc-list-item>
+      <mc-avatar slot="start">
+        <img alt="avatar" src="./woman.jpg">
+      </mc-avatar>
+  
+      <div slot="headline">Headline</div>
+      <div slot="supporting-text">Supporting text</div>
+  
+      <div slot="trailing-supporting-text">trailing</div>
+    </mc-list-item>
+  
+    <mc-list-item>
+      <mc-avatar slot="start">
+        <img alt="avatar" src="./woman.jpg">
+      </mc-avatar>
+  
+      <div slot="overline">overline</div>
+      <div slot="headline">Headline</div>
+      <div slot="supporting-text">Supporting text</div>
+  
+      <mc-icon slot="end">edit</mc-icon>
+      <mc-icon slot="end">delete</mc-icon>
+    </mc-list-item>
+  
+    <mc-list-item multiline>
+      <div slot="headline">Multiline</div>
+      <div slot="supporting-text">
+        <div>Line one</div>
+        <div>Line two</div>
+      </div>
+  
+      <mc-checkbox slot="end"></mc-checkbox>
+    </mc-list-item>
+  
+    <mc-list-item states>
+      <div slot="headline">States</div>
+      <mc-checkbox slot="end"></mc-checkbox>
+    </mc-list-item>
+  
+    <mc-divider></mc-divider>
+  
+    <mc-list-item>
+      <mc-icon slot="start">home</mc-icon>
+      <div slot="headline">Headline</div>
+      <div slot="trailing-supporting-text">trailing</div>
+      <mc-icon slot="end">settings</mc-icon>
+    </mc-list-item>
+  </mc-list>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="variations" aria-label="List item variations">
+        <mc-card>
+          <h2 slot="headline">List item variations</h2>
+          
+          <mc-list>
+            <mc-list-item>
+              <mc-icon slot="start">inbox</mc-icon>
+              <div slot="headline">Single line</div>
+            </mc-list-item>
+          
+            <mc-list-item multiline>
+              <mc-icon slot="start">inbox</mc-icon>
+              <div slot="headline">Line one</div>
+              <div slot="supporting-text">Line two</div>
+            </mc-list-item>
+          
+            <mc-list-item multiline>
+              <mc-icon slot="start">inbox</mc-icon>
+              <div slot="headline">Line one</div>
+              <div slot="supporting-text">
+                <div>Line two</div>
+                <div>Line three</div>
+              </div>
+            </mc-list-item>
+          </mc-list>
+          
+          <pre>
+            <code class="language-html">
+  ${`<mc-list>
+    <mc-list-item>
+      <mc-icon slot="start">inbox</mc-icon>
+      <div slot="headline">Single line</div>
+    </mc-list-item>
+  
+    <mc-list-item multiline>
+      <mc-icon slot="start">inbox</mc-icon>
+      <div slot="headline">Line one</div>
+      <div slot="supporting-text">Line two</div>
+    </mc-list-item>
+  
+    <mc-list-item multiline>
+      <mc-icon slot="start">inbox</mc-icon>
+      <div slot="headline">Line one</div>
+      <div slot="supporting-text">
+        <div>Line two</div>
+        <div>Line three</div>
+      </div>
+    </mc-list-item>
+  </mc-list>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="icons-avatars" aria-label="Icons and avatars">
+        <mc-card>
+          <h2 slot="headline">Start, end, trailing, overline</h2>
+        
+          <mc-list>
+            <mc-list-item>
+              <mc-avatar slot="start">
+                <img alt="avatar" src="./woman.jpg">
+              </mc-avatar>
+              <div slot="headline">Avatar</div>
+            </mc-list-item>
+        
+            <mc-list-item>
+              <mc-icon slot="start">inbox</mc-icon>
+              <div slot="headline">Icons</div>
+              <mc-icon slot="end">edit</mc-icon>
+            </mc-list-item>
+        
+            <mc-list-item>
+              <mc-icon slot="start">inbox</mc-icon>
+              <div slot="headline">Icon buttons</div>
+              <div slot="supporting-text">Hover to show more buttons</div>
+              <mc-icon-button slot="end" hover-only>
+                <mc-icon>delete</mc-icon>
+              </mc-icon-button>
+              <mc-icon-button slot="end">
+                <mc-icon>edit</mc-icon>
+              </mc-icon-button>
+            </mc-list-item>
+        
+            <mc-list-item>
+              <mc-icon slot="start">inbox</mc-icon>
+              <div slot="overline">Overline</div>
+              <div slot="headline">Headline</div>
+              <div slot="trailing-supporting-text">trailing</div>
+            </mc-list-item>
+          </mc-list>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-list>
+    <mc-list-item>
+      <mc-avatar slot="start">
+        <img alt="avatar" src="./woman.jpg">
+      </mc-avatar>
+      <div slot="headline">Avatar</div>
+    </mc-list-item>
+  
+    <mc-list-item>
+      <mc-icon slot="start">inbox</mc-icon>
+      <div slot="headline">Icons</div>
+      <mc-icon slot="end">edit</mc-icon>
+    </mc-list-item>
+  
+    <mc-list-item>
+      <mc-icon slot="start">inbox</mc-icon>
+      <div slot="headline">Icon buttons</div>
+      <div slot="supporting-text">Hover to show more buttons</div>
+      <mc-icon-button slot="end" hover-only>
+        <mc-icon>delete</mc-icon>
+      </mc-icon-button>
+      <mc-icon-button slot="end">
+        <mc-icon>edit</mc-icon>
+      </mc-icon-button>
+    </mc-list-item>
+  
+    <mc-list-item>
+      <mc-icon slot="start">inbox</mc-icon>
+      <div slot="overline">Overline</div>
+      <div slot="headline">Headline</div>
+      <div slot="trailing-supporting-text">trailing</div>
+    </mc-list-item>
+  </mc-list>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="selection" aria-label="List selection">
+        <mc-card>
+          <h2 slot="headline">
+            <span style="flex: 1;">Selection</span>
+            <mc-button id="selection-mode-exit" style="opacity: 0; pointer-events: none; margin-top: -2px; margin-left: 24px;"
+              onclick="page.exitSelectionMode();">Exit selection mode</mc-button>
+          </h2>
+        
+          <mc-list onchange="console.log(this.value)">
+            <mc-list-item selected value="1">
+              <mc-avatar slot="start" select>
+                <img alt="avatar" src="./woman.jpg">
+              </mc-avatar>
+              <div slot="headline">Avatar select</div>
+            </mc-list-item>
+        
+            <mc-list-item selected value="2">
+              <mc-avatar slot="start">
+                <img alt="avatar" src="./woman.jpg">
+              </mc-avatar>
+              <div slot="headline">Headline</div>
+              <mc-checkbox slot="end"></mc-checkbox>
+            </mc-list-item>
+        
+            <mc-list-item value="3">
+              <mc-avatar slot="start">
+                <img alt="avatar" src="./woman.jpg">
+              </mc-avatar>
+              <div slot="headline">Headline</div>
+              <mc-checkbox slot="end"></mc-checkbox>
+            </mc-list-item>
+        
+            <mc-list-item selected value="4">
+              <mc-avatar slot="start">
+                <img alt="avatar" src="./woman.jpg">
+              </mc-avatar>
+              <div slot="headline">Headline</div>
+              <mc-switch slot="end"></mc-switch>
+            </mc-list-item>
+        
+            <mc-list-item value="5">
+              <mc-avatar slot="start">
+                <img alt="avatar" src="./woman.jpg">
+              </mc-avatar>
+              <div slot="headline">Headline</div>
+              <mc-switch slot="end"></mc-switch>
+            </mc-list-item>
+          </mc-list>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-list id="selection-list">
+    <mc-list-item selected value="1">
+      <mc-avatar slot="start" select>
+        <img alt="avatar" src="./woman.jpg">
+      </mc-avatar>
+      <div slot="headline">Headline</div>
+      <mc-checkbox slot="end"></mc-checkbox>
+    </mc-list-item>
+  
+    <mc-list-item selected value="2">
+      <mc-avatar slot="start">
+        <img alt="avatar" src="./woman.jpg">
+      </mc-avatar>
+      <div slot="headline">Headline</div>
+      <mc-checkbox slot="end"></mc-checkbox>
+    </mc-list-item>
+  
+    <mc-list-item value="3">
+      <mc-avatar slot="start">
+        <img alt="avatar" src="./woman.jpg">
+      </mc-avatar>
+      <div slot="headline">Headline</div>
+      <mc-switch slot="end"></mc-switch>
+    </mc-list-item>
+  
+    <mc-list-item value="4">
+      <mc-avatar slot="start">
+        <img alt="avatar" src="./woman.jpg">
+      </mc-avatar>
+      <div slot="headline">Headline</div>
+      <mc-switch slot="end"></mc-switch>
+    </mc-list-item>
+  </mc-list>`}
+            </code>
+          </pre>
+        
+          <pre>
+            <code class="language-javascript">
+  ${`document.querySelector('#selection-list').addEventListener('change', event => {
+    console.log(event.target.value); // "1,2"
+    console.log(event.target.values); // ['1', '2']
+  });
+  
+  // Exit selection mode manually.
+  //   If all items are deselected then selection mode is exited automatically
+  document.querySelector('#selection-list').exitSelectionMode();
+  
+  // Selection mode events
+  document.querySelector('#selection-list').addEventListener('enter-selection-mode', () => {});
+  document.querySelector('#selection-list').addEventListener('exit-selection-mode', () => {});`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="header" aria-label="List sections and headers">
+        <mc-card>
+          <h2 slot="headline">Sections and headers</h2>
+        
+          <div class="example">
+            <mc-list style="overflow: scroll; height: 260px;">
+                <div>
+                  <mc-list-subheader>Section one</mc-list-subheader>
+          
+                  <mc-list-item multiline>
+                    <mc-icon slot="start">person</mc-icon>
+                    <div slot="headline">Headline</div>
+                    <div slot="supporting-text">Supporting text</div>
+                  </mc-list-item>
+          
+                  <mc-list-item multiline>
+                    <mc-icon slot="start">person</mc-icon>
+                    <div slot="headline">Headline</div>
+                    <div slot="supporting-text">Supporting text</div>
+                  </mc-list-item>
+          
+                  <mc-list-item multiline>
+                    <mc-icon slot="start">person</mc-icon>
+                    <div slot="headline">Headline</div>
+                    <div slot="supporting-text">Supporting text</div>
+                  </mc-list-item>
+          
+                  <mc-list-item multiline>
+                    <mc-icon slot="start">person</mc-icon>
+                    <div slot="headline">Headline</div>
+                    <div slot="supporting-text">Supporting text</div>
+                  </mc-list-item>
+                </div>
+
+                <div>
+                  <mc-list-subheader>Section two</mc-list-subheader>
+          
+                  <mc-list-item multiline>
+                    <mc-icon slot="start">person</mc-icon>
+                    <div slot="headline">Headline</div>
+                    <div slot="supporting-text">Supporting text</div>
+                  </mc-list-item>
+          
+                  <mc-list-item multiline>
+                    <mc-icon slot="start">person</mc-icon>
+                    <div slot="headline">Headline</div>
+                    <div slot="supporting-text">Supporting text</div>
+                  </mc-list-item>
+          
+                  <mc-list-item multiline>
+                    <mc-icon slot="start">person</mc-icon>
+                    <div slot="headline">Headline</div>
+                    <div slot="supporting-text">Supporting text</div>
+                  </mc-list-item>
+          
+                  <mc-list-item multiline>
+                    <mc-icon slot="start">person</mc-icon>
+                    <div slot="headline">Headline</div>
+                    <div slot="supporting-text">Supporting text</div>
+                  </mc-list-item>
+                </div>
+
+                <div>
+                  <mc-list-subheader>Section three</mc-list-subheader>
+          
+                  <mc-list-item multiline>
+                    <mc-icon slot="start">person</mc-icon>
+                    <div slot="headline">Headline</div>
+                    <div slot="supporting-text">Supporting text</div>
+                  </mc-list-item>
+          
+                  <mc-list-item multiline>
+                    <mc-icon slot="start">person</mc-icon>
+                    <div slot="headline">Headline</div>
+                    <div slot="supporting-text">Supporting text</div>
+                  </mc-list-item>
+          
+                  <mc-list-item multiline>
+                    <mc-icon slot="start">person</mc-icon>
+                    <div slot="headline">Headline</div>
+                    <div slot="supporting-text">Supporting text</div>
+                  </mc-list-item>
+          
+                  <mc-list-item multiline>
+                    <mc-icon slot="start">person</mc-icon>
+                    <div slot="headline">Headline</div>
+                    <div slot="supporting-text">Supporting text</div>
+                  </mc-list-item>
+                </div>
+            </mc-list>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-list style="overflow: scroll; height: 260px;">
+    <div>
+      <mc-list-subheader>Section one</mc-list-subheader>
+  
+      <mc-list-item multiline>
+        <mc-icon slot="start">person</mc-icon>
+        <div slot="headline">Headline</div>
+        <div slot="supporting-text">Supporting text</div>
+      </mc-list-item>
+  
+      <mc-list-item multiline>
+        <mc-icon slot="start">person</mc-icon>
+        <div slot="headline">Headline</div>
+        <div slot="supporting-text">Supporting text</div>
+      </mc-list-item>
+  
+      <mc-list-item multiline>
+        <mc-icon slot="start">person</mc-icon>
+        <div slot="headline">Headline</div>
+        <div slot="supporting-text">Supporting text</div>
+      </mc-list-item>
+  
+      <mc-list-item multiline>
+        <mc-icon slot="start">person</mc-icon>
+        <div slot="headline">Headline</div>
+        <div slot="supporting-text">Supporting text</div>
+      </mc-list-item>
+    </div>
+  
+  
+    <div>
+      <mc-list-subheader>Section two</mc-list-subheader>
+  
+      <mc-list-item multiline>
+        <mc-icon slot="start">person</mc-icon>
+        <div slot="headline">Headline</div>
+        <div slot="supporting-text">Supporting text</div>
+      </mc-list-item>
+  
+      <mc-list-item multiline>
+        <mc-icon slot="start">person</mc-icon>
+        <div slot="headline">Headline</div>
+        <div slot="supporting-text">Supporting text</div>
+      </mc-list-item>
+  
+      <mc-list-item multiline>
+        <mc-icon slot="start">person</mc-icon>
+        <div slot="headline">Headline</div>
+        <div slot="supporting-text">Supporting text</div>
+      </mc-list-item>
+  
+      <mc-list-item multiline>
+        <mc-icon slot="start">person</mc-icon>
+        <div slot="headline">Headline</div>
+        <div slot="supporting-text">Supporting text</div>
+      </mc-list-item>
+    </div>
+  
+    <div>
+      <mc-list-subheader>Section three</mc-list-subheader>
+  
+      <mc-list-item multiline>
+        <mc-icon slot="start">person</mc-icon>
+        <div slot="headline">Headline</div>
+        <div slot="supporting-text">Supporting text</div>
+      </mc-list-item>
+  
+      <mc-list-item multiline>
+        <mc-icon slot="start">person</mc-icon>
+        <div slot="headline">Headline</div>
+        <div slot="supporting-text">Supporting text</div>
+      </mc-list-item>
+  
+      <mc-list-item multiline>
+        <mc-icon slot="start">person</mc-icon>
+        <div slot="headline">Headline</div>
+        <div slot="supporting-text">Supporting text</div>
+      </mc-list-item>
+  
+      <mc-list-item multiline>
+        <mc-icon slot="start">person</mc-icon>
+        <div slot="headline">Headline</div>
+        <div slot="supporting-text">Supporting text</div>
+      </mc-list-item>
+    </div>
+  </mc-list>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="swipe-actions" aria-label="List item swipe actions">
+        <mc-card>
+          <h2 slot="headline">Swipe actions (mobile only)</h2>
+        
+          <mc-list id="swipe-list">
+            <mc-list-item>
+              <mc-icon slot="swipe-start">delete</mc-icon>
+              <div slot="headline">Headline</div>
+              <div slot="supporting-text">Supporting text</div>
+              <mc-icon slot="swipe-end">edit</mc-icon>
+            </mc-list-item>
+        
+            <mc-list-item>
+              <mc-icon slot="swipe-start">delete</mc-icon>
+              <div slot="headline">Headline</div>
+              <div slot="supporting-text">Supporting text</div>
+              <mc-icon slot="swipe-end">edit</mc-icon>
+            </mc-list-item>
+        
+            <mc-list-item>
+              <mc-icon slot="swipe-start">delete</mc-icon>
+              <div slot="headline">Headline</div>
+              <div slot="supporting-text">Supporting text</div>
+              <mc-icon slot="swipe-end">edit</mc-icon>
+            </mc-list-item>
+          </mc-list>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-list id="swipe-list">
+    <mc-list-item>
+      <mc-icon slot="swipe-start">delete</mc-icon>
+      <div slot="headline">Headline</div>
+      <div slot="supporting-text">Supporting text</div>
+      <mc-icon slot="swipe-end">delete</mc-icon>
+    </mc-list-item>
+  
+    <mc-list-item>
+      <mc-icon slot="swipe-start">delete</mc-icon>
+      <div slot="headline">Headline</div>
+      <div slot="supporting-text">Supporting text</div>
+      <mc-icon slot="swipe-end">delete</mc-icon>
+    </mc-list-item>
+  
+    <mc-list-item>
+      <mc-icon slot="swipe-start">delete</mc-icon>
+      <div slot="headline">Headline</div>
+      <div slot="supporting-text">Supporting text</div>
+      <mc-icon slot="swipe-end">delete</mc-icon>
+    </mc-list-item>
+  </mc-list>`}
+            </code>
+          </pre>
+        
+          <pre>
+            <code class="language-javascript">
+  ${`document.querySelector('#swipe-actions').addEventListener('swipeactionstart', event => {
+    event.target.remove();
+  });
+  
+  document.querySelector('#swipe-actions').addEventListener('swipeactionend', event => {
+    console.log('end', event.target);
+  });`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="reorder" aria-label="List reorder">
+        <mc-card>
+          <h2 slot="headline">Reorder list items</h2>
+        
+          <mc-list reorder id="list-reorder">
+            <mc-list-item>
+              <div slot="headline">One</div>
+              <div slot="supporting-text">Click and hold to drag</div>
+              <mc-icon slot="end">drag_handle</mc-icon>
+              <mc-divider inset></mc-divider>
+            </mc-list-item>
+        
+            <mc-list-item>
+              <div slot="headline">Two</div>
+              <div slot="supporting-text">Click and hold to drag</div>
+              <mc-icon slot="end">drag_handle</mc-icon>
+              <mc-divider inset></mc-divider>
+            </mc-list-item>
+        
+            <mc-list-item>
+              <div slot="headline">Three</div>
+              <div slot="supporting-text">Click and hold to drag</div>
+              <mc-icon slot="end">drag_handle</mc-icon>
+              <mc-divider inset></mc-divider>
+            </mc-list-item>
+        
+            <mc-list-item>
+              <div slot="headline">Four</div>
+              <div slot="supporting-text">Click and hold to drag</div>
+              <mc-icon slot="end">drag_handle</mc-icon>
+              <mc-divider inset></mc-divider>
+            </mc-list-item>
+          </mc-list>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-list reorder id="list-reorder">
+    <mc-list-item>
+      <div slot="headline">One</div>
+      <div slot="supporting-text">Click and hold to drag</div>
+      <mc-icon slot="end">drag_handle</mc-icon>
+      <mc-divider inset></mc-divider>
+    </mc-list-item>
+  
+    <mc-list-item>
+      <div slot="headline">Two</div>
+      <div slot="supporting-text">Click and hold to drag</div>
+      <mc-icon slot="end">drag_handle</mc-icon>
+      <mc-divider inset></mc-divider>
+    </mc-list-item>
+  
+    <mc-list-item>
+      <div slot="headline">Three</div>
+      <div slot="supporting-text">Click and hold to drag</div>
+      <mc-icon slot="end">drag_handle</mc-icon>
+      <mc-divider inset></mc-divider>
+    </mc-list-item>
+  
+    <mc-list-item>
+      <div slot="headline">Four</div>
+      <div slot="supporting-text">Click and hold to drag</div>
+      <mc-icon slot="end">drag_handle</mc-icon>
+      <mc-divider inset></mc-divider>
+    </mc-list-item>
+  </mc-list>`}
+            </code>
+          </pre>
+        
+          <pre>
+            <code class="language-javascript">
+  ${`// Listen for reorder event
+  const list = document.querySelector('#list-reorder');
+  list.addEventListener('reorder', () => {
+    // list elements are in new order
+    console.log(list.children);
+  });`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

@@ -2,6 +2,7 @@ export default class Drag {
   #abortMain;
   #element;
   #listOrderElement;
+  #startIndex;
   #enabled = false;
   #none;
   #start_bound = this.#start.bind(this);
@@ -42,8 +43,10 @@ export default class Drag {
     if (this.#listOrderElement) {
       this.#element.classList.add('drag-active');
       this.#element.style.opacity = '0.6';
+      let draggableItems = [...this.#listOrderElement.querySelectorAll('[draggable=true]')];
+      this.#startIndex = draggableItems.indexOf(this.#element);
 
-      [...this.#listOrderElement.querySelectorAll('mc-card')].forEach(e => e.shadowRoot.querySelector('.container').style.pointerEvents = 'none');
+      draggableItems.forEach(e => e.shadowRoot.querySelector('.container').style.pointerEvents = 'none');
       this.#listOrderElement.addEventListener('dragover', this.#over_bound, { signal: this.#abortMain.signal });
       this.#listOrderElement.addEventListener('drop', this.#drop_bound, { signal: this.#abortMain.signal });
     }
@@ -60,15 +63,20 @@ export default class Drag {
     event.dataTransfer.dropEffect = 'move';
   }
 
-  #end() {
+  #end(event) {
+    event.dataTransfer.dropEffect = 'move';
     this.#element.removeEventListener('dragend', this.#end_bound);
 
     if (this.#listOrderElement) {
       this.#element.style.opacity = '';
       this.#element.classList.remove('drag-active');
-      [...this.#listOrderElement.querySelectorAll('mc-card')].forEach(e => e.shadowRoot.querySelector('.container').style.pointerEvents = '');
+      let draggableItems = [...this.#listOrderElement.querySelectorAll('[draggable=true]')];
+      draggableItems.forEach(e => e.shadowRoot.querySelector('.container').style.pointerEvents = '');
       this.#listOrderElement.removeEventListener('dragover', this.#over_bound);
       this.#listOrderElement.removeEventListener('drop', this.#drop_bound);
+      
+      let newIndex = draggableItems.indexOf(this.#element);
+      if (this.#startIndex !== newIndex) this.#element.dispatchEvent(new Event('reorder', { bubbles: true }));
     }
   }
 

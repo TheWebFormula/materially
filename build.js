@@ -69,7 +69,7 @@ build({
   securityLevel: 0,
   copyFiles: [
     { from: 'docs/favicon.ico', to: 'dist/' },
-    // { from: 'docs/woman.jpg', to: 'dist/', gzip: true },
+    { from: 'docs/woman.jpg', to: 'dist/', gzip: true },
     { from: 'docs/icons.woff2', to: 'dist/', gzip: true },
     { from: 'docs/outlined-icons-variable.woff2', to: 'dist/', gzip: true },
     { from: 'docs/rounded-icons.woff2', to: 'dist/', gzip: true },

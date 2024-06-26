@@ -10,6 +10,13 @@
   margin: 9px 0;
 }
 
+.container:not(.animation) {
+  --mc-motion-duration-short1: 0s;
+  --mc-motion-duration-short3: 0s;
+  --mc-motion-duration-medium2: 0s;
+}
+
+
 :host(.full-width) {
   flex-grow: 1;
 }
@@ -62,6 +69,9 @@ input {
   box-sizing: border-box;
 }
 
+/* :has input:checked broken in safari */
+
+:host(.checked) .container,
 .container:has(input:checked),
 .container:has(input:indeterminate) {
   .outline {
@@ -82,6 +92,7 @@ input {
   }
 }
 
+:host(.checked) .container,
 .container:has(input:checked) {
   .mark {
     transform: scaleY(-1) translate(7px, -14px) rotate(45deg);
@@ -113,6 +124,19 @@ input {
 
   .background {
     background-color: var(--mc-error);
+  }
+}
+
+:host([disabled].checked) .container {
+  .background {
+    background-color: var(--mc-checkbox-background-disabled-color);
+    opacity: 0.38;
+  }
+
+  .icon {
+    fill: var(--mc-checkbox-icon-disabled-color);
+    /* opacity: 0.38; */
+    opacity: 0.6;
   }
 }
 

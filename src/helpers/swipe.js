@@ -148,7 +148,6 @@ export default class Swipe {
   }
 
   #move(event) {
-    console.log(event)
     let dx = event.changedTouches[0].clientX - this.#startX;
     let dy = event.changedTouches[0].clientY - this.#startY;
     let distance = Math.sqrt(dx * dx + dy * dy);

@@ -10,6 +10,10 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+:host([draggable=true]) {
+  cursor: grab;
+}
+
 :host(.swipe-action-showing) {
   overflow-x: clip;
 

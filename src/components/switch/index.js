@@ -16,6 +16,7 @@ class MCSwitchElement extends HTMLComponentElement {
   #input;
   #label;
   #abort;
+  #checked = false;
   #initiating = true;
   #updateValue_bound = this.#updateValue.bind(this);
 
@@ -74,10 +75,20 @@ class MCSwitchElement extends HTMLComponentElement {
   }
 
   connectedCallback() {
+    this.#input.value = this.value;
+    this.#input.checked = this.checked;
+    this.#input.disabled = this.disabled;
+    this.#input.required = this.required;
+    this.#updateValue();
+
     this.#abort = new AbortController();
     this.#input.addEventListener('change', this.#updateValue_bound, { signal: this.#abort.signal });
     this.#updateValidity();
     this.#initiating = false;
+
+    setTimeout(() => {
+      this.shadowRoot.querySelector('.container').classList.add('animation');
+    }, 150);
   }
 
   disconnectedCallback() {
@@ -92,10 +103,10 @@ class MCSwitchElement extends HTMLComponentElement {
     this.#updateValue();
   }
 
-  get checked() { return this.#input.checked; }
+  get checked() { return this.#checked; }
   set checked(value) {
-    const checked = !!value;
-    this.#input.checked = checked;
+    this.#checked = !!value;
+    this.#input.checked = this.#checked;
     this.#updateValue();
   }
 
@@ -175,8 +186,9 @@ class MCSwitchElement extends HTMLComponentElement {
   }
 
   #updateValue() {
-    this.setAttribute('aria-checked', this.#input.checked.toString());
-    this.#internals.setFormValue(this.#input.checked ? this.value : null, this.#input.checked ? 'checked' : undefined);
+    this.#checked = this.#input.checked;
+    this.setAttribute('aria-checked', this.#checked.toString());
+    this.#internals.setFormValue(this.#checked ? this.value : null, this.#checked ? 'checked' : undefined);
     this.#updateValidity();
     this.#updateValidityDisplay();
     if (!this.#initiating) this.dispatchEvent(new Event('change', { bubbles: true }));

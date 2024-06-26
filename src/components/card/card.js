@@ -47,7 +47,7 @@ export default class MCCardElement extends HTMLComponentElement {
 
     this.render();
     this.#swipeActionElement = this.shadowRoot.querySelector('[name="swipe-action"]');
-    if (this.hasAttribute('onclick') || this.hasAttribute('reorder') || this.hasAttribute('reorder-swap')) {
+    if (this.hasAttribute('onclick')) {
       this.tabIndex = 0;
       this.classList.add('actionable');
     }
@@ -131,24 +131,6 @@ export default class MCCardElement extends HTMLComponentElement {
     return this.shadowRoot.querySelector('.container').offsetHeight;
   }
 
-  get reorder() { return this.getAttribute('draggable') === 'true'; }
-  set reorder(value) {
-    if (!!value) {
-      this.setAttribute('draggable', 'true');
-      this.#drag = new Drag(this);
-      this.#drag.listOrderElement = this.parentElement;
-      this.#drag.enable();
-      this.addEventListener('dragstart', this.#dragState_bound, { signal: this.#abort.signal });
-      this.addEventListener('dragend', this.#dragState_bound, { signal: this.#abort.signal });
-    } else {
-      this.removeAttribute('draggable');
-      this.removeEventListener('dragstart', this.#dragState_bound);
-      this.removeEventListener('dragend', this.#dragState_bound);
-      this.#drag.destroy();
-      this.#drag = undefined;
-      this.#dragging = false;
-    }
-  }
   
 
 

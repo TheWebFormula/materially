@@ -12,6 +12,12 @@
   flex-grow: 0;
 }
 
+.container:not(.animation) {
+  --mc-motion-duration-short1: 0s;
+  --mc-motion-duration-medium1: 0s;
+  --mc-motion-duration-medium2: 0s;
+}
+
 :host([disabled]) {
   cursor: default;
   pointer-events: none;

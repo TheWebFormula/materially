@@ -27,6 +27,7 @@ import './src/components/list/index.js';
 import './src/components/avatar/index.js';
 import './src/components/segmented-button/index.js';
 import './src/components/tooltip/index.js';
+import './src/components/chip/index.js';
 
 export {
   // mcDate,

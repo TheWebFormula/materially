@@ -1,0 +1,232 @@
+:host {
+  display: inline-flex;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: var(--mc-shape-small);
+  box-sizing: border-box;
+  display: flex;
+  height: 32px;
+  position: relative;
+  outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+  white-space: nowrap;
+  align-items: center;
+  border: 1px solid var(--mc-outline);
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: inherit;
+  cursor: inherit;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  vertical-align: middle;
+  background: transparent;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  font: inherit;
+  color: inherit;
+  padding: 0;
+  padding-inline: 16px;
+}
+
+:host([disabled]) {
+  pointer-events: none;
+}
+
+:host(.elevated) {
+  border: none;
+  background-color: var(--mc-surface-container-low);
+}
+
+:host(.checked),
+:host(.elevated.checked) {
+  background-color: var(--mc-secondary-container);
+}
+
+.label {
+  font-size: var(--mc-font-large-label-size);
+  font-weight: var(--mc-font-large-label-weight);
+  letter-spacing: var(--mc-font-large-label-tracking);
+  line-height: var(--mc-font-large-label-line-height);
+  color: var(--mc-on-surface);
+  text-overflow: ellipsis;
+}
+
+::slotted(mc-icon) {
+  margin-right: 5px;
+  margin-left: -5px;
+  width: var(--mc-font-small-icon-size);
+  height: var(--mc-font-small-icon-size);
+  font-size: var(--mc-font-small-icon-size);
+  line-height: var(--mc-font-small-icon-size);
+}
+
+:host([filter].checked) ::slotted(mc-icon),
+:host([filter-menu].checked) ::slotted(mc-icon) {
+  display: none;
+}
+
+
+.clear,
+.check {
+  display: none;
+}
+
+:host([input]) .clear,
+:host([filter]) .check {
+  position: relative;
+  color: var(--mc-primary);
+  width: 18px;
+  height: 18px;
+  align-self: center;
+  margin-top: -6px;
+  margin-right: 8px;
+  margin-left: -6px;
+}
+
+:host([input]) .clear:after {
+  position: absolute;
+  content: '';
+  top: -1px;
+  left: -1px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 8px;
+}
+
+:host([filter]) .check {
+  margin-top: -6px;
+  margin-right: 8px;
+  margin-left: -6px;
+  pointer-events: none;
+}
+
+:host([input]) .clear {
+  margin-left: 8px;
+  margin-right: -4px;
+  margin-top: -1px;
+  cursor: pointer;
+}
+
+:host([input]) .clear {
+  display: block;
+}
+
+:host([filter].checked) .check {
+  display: block;
+}
+
+
+.menu-arrow {
+  display: none;
+}
+
+:host(.menu) .menu-arrow {
+  display: block;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid var(--mc-on-surface-alpha-60);
+  margin-left: 8px;
+  margin-right: -4px;
+  transform-origin: center;
+  transform: rotate(-180deg);
+  transition: transform var(--mc-motion-duration-short3);
+  pointer-events: none;
+}
+
+:host(.menu:focus-visible) .menu-arrow {
+  transform: rotate(0);
+}
+
+
+
+
+input {
+  opacity: 0;
+  display: none;
+  position: absolute;
+  /* this is needed for type time on ios */
+  box-sizing: border-box;
+  border: none;
+  background: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+
+  text-decoration: inherit;
+  text-transform: inherit;
+  font-size: var(--mc-font-large-label-size);
+  font-weight: var(--mc-font-large-label-weight);
+  letter-spacing: var(--mc-font-large-label-tracking);
+  color: var(--mc-on-surface);
+  caret-color: var(--mc-primary);
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+:host([input][edit]) input {
+  display: block;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+:host(.edit-mode) input {
+  opacity: 1;
+}
+
+:host(.edit-mode) .state-layer,
+:host(.edit-mode) .ripple,
+:host(.edit-mode) .clear,
+:host(.edit-mode) .label {
+  display: none;
+}
+
+:host(.edit-mode) {
+  border: none;
+}
+
+@media (hover: hover) {
+  :host([input]) .clear:hover::after {
+    background-color: var(--mc-on-surface-alpha-12);
+  }
+}
+
+mc-state-layer {
+  --mc-state-layer-focus-color: var(--mc-on-surface);
+  --mc-state-layer-hover-color: var(--mc-on-surface);
+  --mc-state-layer-ripple-color: var(--mc-on-surface);
+}
+
+:host([filter]) mc-state-layer {
+  --mc-state-layer-focus-color: var(--mc-on-surface-variant);
+  --mc-state-layer-hover-color: var(--mc-on-surface-variant);
+  --mc-state-layer-ripple-color: var(--mc-on-surface-variant);
+}
+:host([filter].checked) mc-state-layer {
+  --mc-state-layer-focus-color: var(--mc-on-secondary-container);
+  --mc-state-layer-hover-color: var(--mc-on-secondary-container);
+  --mc-state-layer-ripple-color: var(--mc-on-secondary-container);
+}
+
+:host([input]) mc-state-layer {
+  --mc-state-layer-focus-color: var(--mc-on-surface-variant);
+  --mc-state-layer-hover-color: var(--mc-on-surface-variant);
+  --mc-state-layer-ripple-color: var(--mc-on-surface-variant);
+}
+
+:host(.elevated) mc-state-layer {
+  --mc-state-layer-box-shadow: var(--mc-elevation-1);
+  --mc-state-layer-focus-box-shadow: var(--mc-elevation-2);
+  --mc-state-layer-hover-box-shadow: var(--mc-elevation-2);
+}

@@ -43,6 +43,8 @@ export default class MCMenuElement extends HTMLComponentElement {
 
     if (this.#contextMenu) {
       document.addEventListener('contextmenu', this.#rightClick_bound, { signal: this.#abort.signal });
+    } else if (this.hasAttribute('anchor-parent')) {
+      this.anchor = this.parentElement;
     } else {
       this.anchor = document.querySelector(`#${this.getAttribute('anchor')}`);
     }

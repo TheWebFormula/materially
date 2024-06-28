@@ -1,0 +1,275 @@
+<article>
+  <header>
+    <h1>Chips</h1>
+    <div class="page-subheader mc-font-title-medium">Chips help people enter information, make selections, filter content, or trigger actions</div>
+    <a href="https://m3.material.io/components/chips/overview" target="_new">Material Design Guidelines: Chips</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#assist">Assist</a></li>
+        <li><a href="#filter">Filter</a></li>
+        <li><a href="#input">Input</a></li>
+        <li><a href="#update">Add chips (code)</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section aria-label="Chip example">
+        <mc-card>
+          <h2 slot="headline">Example</h2>
+          <div slot="supporting-text">Chips can show multiple interactive elements together in the same area, such as a
+            list of selectable movie times, or a
+            series of email contacts. There are four types of chips: assist, filter, input, and suggestion</div>
+        
+          <div>Assist</div>
+          <mc-chip-set onchange="console.log(this.values)">
+            <mc-chip label="One"></mc-chip>
+            <mc-chip label="Two">
+              <mc-icon slot="leading-icon">settings</mc-icon>
+            </mc-chip>
+          </mc-chip-set>
+        
+          <div style="margin-top: 24px">Filter</div>
+          <mc-chip-set onchange="console.log(this.values)">
+            <mc-chip filter class="elevated" checked label="One"></mc-chip>
+            <mc-chip filter class="elevated" label="Two">
+              <mc-icon slot="leading-icon">settings</mc-icon>
+            </mc-chip>
+          </mc-chip-set>
+        
+          <div style="margin-top: 24px">Filter menu</div>
+          <mc-chip-set onchange="console.log(this.values)">
+            <mc-chip filter name="a" label="One"></mc-chip>
+            <mc-chip filter name="b" value="One">
+              <mc-menu slot="menu" anchor-parent>
+                <mc-menu-item>
+                  <mc-icon slot="start">home</mc-icon>
+                  One
+                </mc-menu-item>
+                <mc-menu-item>Two</mc-menu-item>
+                <mc-menu-item>Three</mc-menu-item>
+              </mc-menu>
+            </mc-chip>
+          </mc-chip-set>
+        
+          <div style="margin-top: 24px">Input</div>
+          <mc-chip-set label="Label" input edit onchange="console.log(this.values)">
+            <mc-chip input edit value="My Name <myname@gmail.com>" label="My Name"></mc-chip>
+          </mc-chip-set>
+        
+          <pre>
+            <code class="language-html">
+  ${`<!-- Assist -->
+  <mc-chip-set onchange="console.log(this.values)">
+    <mc-chip label="One"></mc-chip>
+    <mc-chip label="Two">
+      <mc-icon slot="leading-icon">settings</mc-icon>
+    </mc-chip>
+  </mc-chip-set>
+  
+  <!-- Filter -->
+  <mc-chip-set onchange="console.log(this.values)">
+    <mc-chip filter class="elevated" checked label="One"></mc-chip>
+    <mc-chip filter class="elevated" label="Two">
+      <mc-icon slot="leading-icon">settings</mc-icon>
+    </mc-chip>
+  </mc-chip-set>
+  
+  <!-- Filter menu -->
+  <mc-chip-set onchange="console.log(this.values)">
+    <mc-chip filter name="a" label="One"></mc-chip>
+    <mc-chip filter name="b" value="One">
+      <mc-menu slot="menu" anchor-parent>
+        <mc-menu-item>
+          <mc-icon slot="start">home</mc-icon>
+          One
+        </mc-menu-item>
+        <mc-menu-item>Two</mc-menu-item>
+        <mc-menu-item>Three</mc-menu-item>
+      </mc-menu>
+    </mc-chip>
+  </mc-chip-set>
+  
+  <!-- Input -->
+  <mc-chip-set label="Label" input edit onchange="console.log(this.values)">
+    <mc-chip input edit value="My Name <myname@gmail.com>" label="My Name"></mc-chip>
+  </mc-chip-set>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="assist" aria-label="Assist chips">
+        <mc-card>
+          <h2 slot="headline">Assist</h2>
+        
+          <mc-chip-set>
+            <mc-chip label="One" onclick="console.log('do something')"></mc-chip>
+            <mc-chip label="Two" onclick="console.log('do something')">
+              <mc-icon slot="leading-icon">inbox</mc-icon>
+            </mc-chip>
+            <mc-chip label="Three" onclick="console.log('do something')"></mc-chip>
+          </mc-chip-set>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-chip-set>
+    <mc-chip label="One" onclick="console.log('do something')"></mc-chip>
+    <mc-chip label="Two" onclick="console.log('do something')">
+      <mc-icon slot="leading-icon">inbox</mc-icon>
+    </mc-chip>
+    <mc-chip label="Three" onclick="console.log('do something')"></mc-chip>
+  </mc-chip-set>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="filter" aria-label="Filter chips">
+        <mc-card>
+          <h2 slot="headline">Filter</h2>
+        
+          <mc-chip-set>
+            <mc-chip filter label="one"></mc-chip>
+            <mc-chip filter label="two" checked></mc-chip>
+            <mc-chip filter label="three">
+              <mc-icon slot="leading-icon">inbox</mc-icon>
+            </mc-chip>
+        
+            <!-- No default value -->
+            <mc-chip filter label="number">
+              <mc-menu slot="menu" anchor-parent>
+                <mc-menu-item>One</mc-menu-item>
+                <mc-menu-item>Two</mc-menu-item>
+              </mc-menu>
+            </mc-chip>
+        
+            <!-- Default value -->
+            <mc-chip filter value="on">
+              <mc-menu slot="menu" anchor-parent>
+                <mc-menu-item>On</mc-menu-item>
+                <mc-menu-item>Off</mc-menu-item>
+              </mc-menu>
+            </mc-chip>
+          </mc-chip-set>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-chip-set>
+    <mc-chip filter label="one"></mc-chip>
+    <mc-chip filter label="two" checked></mc-chip>
+    <mc-chip filter label="three">
+      <mc-icon slot="leading-icon">inbox</mc-icon>
+    </mc-chip>
+  
+    <!-- No default value -->
+    <mc-chip filter label="number">
+      <mc-menu slot="menu" anchor-parent>
+        <mc-menu-item>One</mc-menu-item>
+        <mc-menu-item>Two</mc-menu-item>
+      </mc-menu>
+    </mc-chip>
+  
+    <!-- Default value -->
+    <mc-chip filter value="on">
+      <mc-menu slot="menu" anchor-parent>
+        <mc-menu-item>On</mc-menu-item>
+        <mc-menu-item>Off</mc-menu-item>
+      </mc-menu>
+    </mc-chip>
+  </mc-chip-set>`}
+            </code>
+          </pre>
+        
+          <pre>
+            <code class="language-javascript">
+  ${`// set value
+  document.querySelector('mc-chip-group.filter').value = 'one,status:on';`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="input" aria-label="Input chips">
+        <mc-card>
+          <h2 slot="headline">Input</h2>
+        
+          <div style="margin-top: 24px; margin-bottom: 6px;">Input</div>
+          <mc-chip-set input label="Label">
+            <mc-chip input value="Ben Rubin <ben@email.com>"></mc-chip>
+            <mc-chip input value="Other Guy <guy@email.com>"></mc-chip>
+          </mc-chip-set>
+        
+          <div style="margin-top: 32px; margin-bottom: 6px;">Input with chip editing</div>
+          <mc-chip-set input edit label="With edit">
+            <mc-chip input edit value="Ben Rubin <ben@email.com>"></mc-chip>
+            <mc-chip input edit value="Other Guy <guy@email.com>"></mc-chip>
+          </mc-chip-set>
+        
+          <pre>
+            <code class="language-html">
+  ${`<!-- Input -->
+  <mc-chip-set input label="Label">
+    <mc-chip input value="Ben Rubin <ben@email.com>"></mc-chip>
+    <mc-chip input value="Other Guy <guy@email.com>"></mc-chip>
+  </mc-chip-set>
+  
+  <!-- Input with chip editing -->
+  <mc-chip-set input edit label="With edit">
+    <mc-chip input edit value="Ben Rubin <ben@email.com>"></mc-chip>
+    <mc-chip input edit value="Other Guy <guy@email.com>"></mc-chip>
+  </mc-chip-set>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="update" aria-label="Add chip set in code">
+        <mc-card>
+          <h2 slot="headline">Add chip set in code</h2>
+          
+          <div style="display: flex; align-items: center;">
+            <mc-chip-set id="chip-set-1">
+              <mc-chip name="one" filter value="0ne" label="one" checked></mc-chip>
+            </mc-chip-set>
+            
+            <mc-button onclick="page.updateValues()">Add chip</mc-button>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-chip-set id="chip-set-1">
+    <mc-chip name="one" filter value="0ne" label="one" checked></mc-chip>
+  </mc-chip-set>`}
+            </code>
+          </pre>
+        
+          <pre>
+            <code>
+  ${`function updateValues() {
+    // get current set values
+    console.log(document.querySelector('#chip-set-1').values);
+
+    document.querySelector('#chip-set-1').addChip({
+      type: 'filter',
+      name: ++this.#counter,
+      label: this.#counter,
+      value: this.#counter,
+      checked: false
+    });
+  }`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

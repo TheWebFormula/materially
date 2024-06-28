@@ -1,0 +1,107 @@
+<article>
+  <header>
+    <h1>Segmented buttons</h1>
+    <div class="page-subheader mc-font-title-medium">Segmented buttons help people select options, switch views, or sort elements</div>
+    <a href="https://m3.material.io/components/segmented-buttons/overview" target="_new">Material Design Guidelines:
+      Segmented buttons</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#standard">Standard</a></li>
+        <li><a href="#select-icon">No checkmarks</a></li>
+        <li><a href="#multi-select">Multiple select</a></li>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="standard" aria-label="Segmented button examples">
+        <mc-card>
+          <h2 slot="headline">Standard</h2>
+        
+          <mc-segmented-button-set>
+            <mc-segmented-button checked value="1">
+              <mc-icon slot="leading-icon">format_align_right</mc-icon>
+            </mc-segmented-button>
+            <mc-segmented-button value="2">
+              <mc-icon slot="leading-icon">format_align_center</mc-icon>
+            </mc-segmented-button>
+            <mc-segmented-button value="3">
+              <mc-icon slot="leading-icon">format_align_left</mc-icon>
+            </mc-segmented-button>
+          </mc-segmented-button-set>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-segmented-button-set>
+    <mc-segmented-button checked value="1">
+      <mc-icon>format_align_right</mc-icon>
+    </mc-segmented-button>
+    <mc-segmented-button value="2">
+      <mc-icon>format_align_center</mc-icon>
+    </mc-segmented-button>
+    <mc-segmented-button value="3">
+      <mc-icon>format_align_left</mc-icon>
+    </mc-segmented-button>
+  </mc-segmented-button-set>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="select-icons" aria-label="Segmented button check icons">
+        <mc-card>
+          <h2 slot="headline">Add check icon</h2>
+        
+          <mc-segmented-button-set check-icon>
+            <mc-segmented-button checked value="one">One</mc-segmented-button>
+            <mc-segmented-button value="two">Two</mc-segmented-button>
+            <mc-segmented-button value="three">Three</mc-segmented-button>
+          </mc-segmented-button-set>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-segmented-button-set check-icon>
+    <mc-segmented-button checked value="one">One</mc-segmented-button>
+    <mc-segmented-button value="two">Two</mc-segmented-button>
+    <mc-segmented-button value="three">Three</mc-segmented-button>
+  </mc-segmented-button-set>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="multi-icons" aria-label="Segmented button multi select">
+        <mc-card>
+          <h2 slot="headline">Multiple select</h2>
+        
+          <mc-segmented-button-set id="multi-select" multiple>
+            <mc-segmented-button checked value="one">One</mc-segmented-button>
+            <mc-segmented-button checked value="two">Two</mc-segmented-button>
+            <mc-segmented-button value="three">Three</mc-segmented-button>
+          </mc-segmented-button-set>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-segmented-button-set id="multi-select" multiple>
+    <mc-segmented-button checked value="one">One</mc-segmented-button>
+    <mc-segmented-button checked value="two">Two</mc-segmented-button>
+    <mc-segmented-button value="three">Three</mc-segmented-button>
+  </mc-segmented-button-set>`}
+            </code>
+          </pre>
+        
+          <pre>
+            <code class="language-javascript">
+  ${`console.log(document.querySelector('#multi-select').value); // "one,two"`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

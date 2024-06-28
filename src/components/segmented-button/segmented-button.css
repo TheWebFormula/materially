@@ -1,0 +1,94 @@
+:host {
+  border-radius: 0;
+  color: var(--mc-on-surface);
+  border-left: 1px solid var(--mc-outline);
+  border-top: 1px solid var(--mc-outline);
+  border-bottom: 1px solid var(--mc-outline);
+}
+
+:host(:last-of-type) {
+  border-right: 1px solid var(--mc-outline);
+  border-radius: 0 var(--mc-shape-extra-large) var(--mc-shape-extra-large) 0;
+}
+
+:host(:first-of-type) {
+  border-radius: var(--mc-shape-extra-large) 0 0 var(--mc-shape-extra-large);
+}
+
+
+:host(.checked) {
+  color: var(--mc-on-secondary-container);
+  background-color: var(--mc-secondary-container);
+}
+
+:host(.check-icon.checked) .check {
+  opacity: 1;
+  width: 18px;
+  animation: check;
+  animation-duration: var(--mc-motion-duration-medium1);
+
+  svg path {
+    stroke-dashoffset: 0;
+  }
+}
+
+:host(:not(.check-icon)) .check {
+  display: none;
+}
+
+:host(.check-icon) .check {
+  opacity: 0;
+  width: 0;
+  pointer-events: none;
+  position: relative;
+  margin-top: -4px;
+  margin-left: -8px;
+  margin-right: -2px;
+  animation: uncheck;
+  animation-duration: var(--mc-motion-duration-medium1);
+
+  svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+    stroke: var(--mc-primary);
+    stroke-width: 4;
+
+    path {
+      stroke-dasharray: 40;
+      stroke-dashoffset: 40;
+      transition: stroke-dashoffset;
+      transition-duration: var(--mc-motion-duration-medium1);
+    }
+  }
+}
+
+:host(:not(.animation)) .check,
+:host(:not(.animation)) .check svg path {
+  animation-duration: 0s !important;
+  transition-duration: 0s !important;
+}
+
+@keyframes check {
+  0% {
+    width: 0px;
+    opacity: 0;
+  }
+
+  100% {
+    width: 18px;
+    opacity: 1;
+  }
+}
+
+@keyframes uncheck {
+  0% {
+    width: 18px;
+    opacity: 1;
+  }
+
+  100% { 
+    width: 0px;
+    opacity: 0;
+  }
+}

@@ -1,0 +1,58 @@
+<article>
+  <header>
+    <h1>Tooltips</h1>
+    <div class="page-subheader mc-font-title-medium">Tooltips display brief labels or messages</div>
+    <a href="https://m3.material.io/components/tooltips/overview" target="_new">Material Design Guidelines: Tooltips</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#standard">Standard</a></li>
+        <li><a href="#rich">Rich</a></li>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="standard" aria-label="Tooltip example">
+        <mc-card>
+          <h2 slot="headline">Tooltip</h2>
+        
+          <mc-button tooltip="tooltip text">Hover me</mc-button>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-button tooltip="tooltip text">Hover me</mc-button>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="rich" aria-label="Rich tooltip">
+        <mc-card>
+          <h2 slot="headline">Rich tooltip</h2>
+        
+          <mc-button tooltip-target="one">Hover me</mc-button>
+          <mc-tooltip id="one" rich>
+            <div slot="subhead">Subhead</div>
+            Use rich tooltips to provide more details, like describing the value of a feature
+            <mc-button slot="actions">action</mc-button>
+          </mc-tooltip>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-button tooltip-target="one">Hover me</mc-button>
+  <mc-tooltip id="one" rich>
+    <div slot="subhead">Subhead</div>
+    Use rich tooltips to provide more details, like describing the value of a feature
+    <mc-button slot="actions">action</mc-button>
+  </mc-tooltip>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

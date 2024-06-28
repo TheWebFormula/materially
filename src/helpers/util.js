@@ -6,6 +6,21 @@ const mcUtil = new class MCUtil {
   #scrollHandler_bound = this.#scrollHandler.bind(this);
 
 
+  rafThrottle(fn) {
+    let alreadyQueued;
+    return function throttled() {
+      const args = arguments;
+      const context = this;
+      if (!alreadyQueued) {
+        alreadyQueued = true;
+        fn.apply(context, args);
+        requestAnimationFrame(() => {
+          alreadyQueued = false;
+        });
+      }
+    };
+  }
+
   // can use array of strings ['one', 'two']
   // can also use array of objects with label property [{ label: 'one' }, { label: 'two' }] || [{ value: 'one' }, { value: 'two' }]
   fuzzySearch(searchTerm, items = [], distanceCap = 0.2) {

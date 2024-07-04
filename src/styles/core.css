@@ -27,8 +27,8 @@ body.pane-layout {
   height: 100vh;
 }
 
-body:has(mc-dialog[open]),
-body:has(dialog[open]) {
+body:has(dialog[open]),
+body:has([role=dialog][open]:not([anchor])) {
   overflow: hidden
 }
 

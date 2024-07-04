@@ -28,6 +28,7 @@ import './src/components/avatar/index.js';
 import './src/components/segmented-button/index.js';
 import './src/components/tooltip/index.js';
 import './src/components/chip/index.js';
+import './src/components/date-picker/index.js';
 
 export {
   // mcDate,

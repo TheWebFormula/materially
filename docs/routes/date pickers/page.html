@@ -1,0 +1,127 @@
+<article>
+  <header>
+    <h1>Date pickers</h1>
+    <div class="page-subheader mc-font-title-medium">Date pickers let people select a date, or a range of dates</div>
+    <a href="https://m3.material.io/components/date-pickers/overview" target="_new">Material Design Guidelines: Date pickers</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#basic">Date picker</a></li>
+        <li><a href="#dateminmax">Min max</a></li>
+        <li><a href="#daterange">Date range</a></li>
+        <li><a href="#native">Native component</a></li>
+        <li><a href="#no">No component</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="basic" aria-label="Date picker example">
+        <mc-card>
+          <h2 slot="headline">Date picker</h2>
+        
+          <mc-textfield type="date" label="date" value="2024-01-01">
+            <mc-icon slot="leading-icon">calendar_today</mc-icon>
+            <mc-date-picker slot="picker"></mc-date-picker>
+          </mc-textfield>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-textfield type="date" label="date">
+    <mc-icon slot="leading-icon">calendar_today</mc-icon>
+    <mc-date-picker slot="picker"></mc-date-picker>
+  </mc-textfield>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="dateminmax" aria-label="Date picker min max">
+        <mc-card>
+          <h2 slot="headline">Min max</h2>
+        
+          <mc-textfield type="date" label="date" min="${page.min}" max="${page.max}">
+            <mc-icon slot="leading-icon">calendar_today</mc-icon>
+            <mc-date-picker slot="picker"></mc-date-picker>
+          </mc-textfield>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-textfield type="date" label="date" min="${page.min}" max="${page.max}">
+    <mc-icon slot="leading-icon">calendar_today</mc-icon>
+    <mc-date-picker slot="picker"></mc-date-picker>
+  </mc-textfield>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="daterange" aria-label="Date range picker">
+        <mc-card>
+          <h2 slot="headline">Date range</h2>
+        
+          <mc-textfield id="start" class="hide-date-icon" value="2024-01-01" type="date" label="Start">
+            <mc-icon slot="leading-icon">calendar_today</mc-icon>
+          </mc-textfield>
+        
+          <mc-textfield id="end" class="hide-date-icon" value="2024-02-01" type="date" label="End">
+            <mc-icon slot="leading-icon">calendar_today</mc-icon>
+          </mc-textfield>
+        
+          <mc-date-range-picker start-textfield="start" end-textfield="end"></mc-date-range-picker>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-textfield id="start" class="hide-date-icon" value="2024-01-01" type="date" label="Start">
+    <mc-icon slot="leading-icon">calendar_today</mc-icon>
+  </mc-textfield>
+  
+  <mc-textfield id="end" class="hide-date-icon" value="2024-02-01" type="date" label="End">
+    <mc-icon slot="leading-icon">calendar_today</mc-icon>
+  </mc-textfield>
+  
+  <mc-date-range-picker start-textfield="start" end-textfield="end"></mc-date-range-picker>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="native" aria-label="Date picker native">
+        <mc-card>
+          <h2 slot="headline">Date native component</h2>
+        
+          <mc-textfield type="date" label="Modal"></mc-textfield>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-textfield type="date" label="date"></mc-textfield>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+      
+
+
+      <section id="no" aria-label="Date textfield no picker">
+        <mc-card>
+          <h2 slot="headline">Date no component</h2>
+        
+          <mc-textfield class="hide-date-icon" type="date" label="No modal"></mc-textfield>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-textfield class="hide-date-icon" type="date" label="date"></mc-textfield>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

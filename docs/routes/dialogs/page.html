@@ -283,7 +283,7 @@
           <h2 slot="headline">Fullscreen</h2>
           <div slot="subhead">Fullscreen dialogs are for compact window sizes only</div>
 
-          <mc-dialog id="fullscreen-dialog" aria-label="[dialog] fullscreen" allow-close>
+          <mc-dialog id="fullscreen-dialog" aria-label="[dialog] fullscreen" allow-close fullscreen>
             <div slot="headline">Headline</div>
             <div slot="content">
               <div class="supporting-text">
@@ -344,11 +344,11 @@
             </div>
           </mc-dialog>
           
-          <mc-button onclick="document.querySelector('#fullscreen-dialog').showFullscreen()" style="margin-top: 12px;">Open</mc-button>
+          <mc-button onclick="document.querySelector('#fullscreen-dialog').showModal()" style="margin-top: 12px;">Open</mc-button>
         
           <pre>
             <code class="language-html">
-  ${`<mc-dialog id="fullscreen-dialog">
+  ${`<mc-dialog id="fullscreen-dialog" fullscreen>
     <div slot="headline">Headline</div>
     <div slot="content">
       ...content

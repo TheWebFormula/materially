@@ -77,15 +77,24 @@ export default class Swipe {
     this.#startX = event.changedTouches[0].clientX;
     this.#startY = event.changedTouches[0].clientY;
     this.#startTime = Date.now();
-    this.#element.addEventListener('touchend', this.#end_bound, { signal: this.#abort.signal });
-    this.#element.addEventListener('touchmove', this.#move_bound, { signal: this.#abort.signal });
+
+    window.addEventListener('touchend', this.#end_bound, { signal: this.#abort.signal });
+    window.addEventListener('touchmove', this.#move_bound, { signal: this.#abort.signal });
+
+    let swipeEvent = new SwipeStartEvent(
+      event.changedTouches,
+      event.targetTouches,
+      event.touches
+    );
+    this.#element.dispatchEvent(swipeEvent);
+
     if (this.#disableScroll) event.preventDefault();
   }
 
   #end(event) {
     this.#element.classList.remove('swipe-active');
-    this.#element.removeEventListener('touchend', this.#end_bound);
-    this.#element.removeEventListener('touchmove', this.#move_bound);
+    window.removeEventListener('touchend', this.#end_bound);
+    window.removeEventListener('touchmove', this.#move_bound);
     this.#endX = event.changedTouches[0].clientX;
     this.#endY = event.changedTouches[0].clientY;
     this.#endTime = Date.now();
@@ -151,7 +160,10 @@ export default class Swipe {
     let dx = event.changedTouches[0].clientX - this.#startX;
     let dy = event.changedTouches[0].clientY - this.#startY;
     let distance = Math.sqrt(dx * dx + dy * dy);
-    if (this.#horizontalOnly && (Math.abs(dy) > this.#horizontalScrollThreshold || Math.abs(dx) < this.#moveStartThreshold)) return;
+    if (this.#horizontalOnly && (Math.abs(dy) > this.#horizontalScrollThreshold || Math.abs(dx) < this.#moveStartThreshold)) {
+      this.#end(event);
+      return;
+    }
     
     let swipeEvent = new SwipeMoveEvent(
       event.changedTouches,
@@ -192,6 +204,17 @@ class SwipeMoveEvent extends TouchEvent {
     this.distance = distance;
     this.distanceX = distanceX;
     this.distanceY = distanceY;
+  }
+}
+
+class SwipeStartEvent extends TouchEvent {
+  constructor(changedTouches, targetTouches, touches) {
+    super('swipestart', {
+      bubbles: true,
+      changedTouches,
+      targetTouches,
+      touches
+    });
   }
 }
 

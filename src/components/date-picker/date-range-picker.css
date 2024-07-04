@@ -1,0 +1,331 @@
+:host {
+  --mc-padding: 12px;
+  --mc-container-color: var(--mc-surface-container-high);
+  --mc-elevation: var(--mc-elevation-3);
+  --mc-shape: var(--mc-shape-large);
+
+  
+  width: 328px;
+  height: 512px;
+  max-height: 512px;
+}
+
+:host(:not([anchor])) {
+  border-radius: 0;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+}
+
+:host(:not([anchor]).input-view) {
+  width: 328px;
+  max-height: 234px;
+}
+
+.days-controls {
+  display: flex;
+  height: 48px;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: 4px;
+}
+
+.month-label {
+  margin-right: 8px
+}
+
+.header {
+  display: none;
+}
+
+:host(:not([anchor])) .header {
+  display: flex;
+  height: 104px;
+  padding: 0 12px;
+  margin-bottom: 16px;
+}
+
+:host(:not([anchor]).input-view) .header {
+  height: 60px;
+}
+
+.header > * {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-center {
+  flex: 1;
+  justify-content: flex-end;
+  margin-left: 16px;
+}
+.header-right {
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+:host(:not([anchor]).input-view) .header-right {
+  justify-content: flex-end;
+}
+
+
+.header mc-icon {
+  color: var(--mc-on-surface-variant);
+}
+
+:host(.input-view) .close,
+:host(.input-view) .save {
+  display: none;
+}
+
+.header .select-date {
+  font-size: var(--mc-font-medium-label-size);
+  font-weight: var(--mc-font-medium-label-weight);
+  letter-spacing: var(--mc-font-medium-label-tracking);
+  color: var(--mc-on-surface-variant);
+  line-height: 16px;
+  height: 16px;
+  margin-bottom: 8px;
+}
+
+.header .display-date-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--mc-on-surface-variant);
+  cursor: pointer;
+}
+
+.header .display-date {
+  font-size: var(--mc-font-large-title-size);
+  font-weight: var(--mc-font-large-title-weight);
+  letter-spacing: var(--mc-font-large-title-tracking);
+  line-height: 40px;
+  height: 40px;
+}
+
+.divider {
+  margin-bottom: 0px;
+  margin-left: -12px;
+  margin-right: -12px;
+  border-top: 1px solid var(--mc-outline-alpha-26);
+}
+
+:host(.input-view) .divider.bottom {
+  display: none;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 12px;
+  padding-top: 6px;
+}
+
+.week-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: center;
+  height: 24px;
+  width: 276px;
+  margin-bottom: 8px;
+
+  font-size: var(--mc-font-small-body-size);
+  font-weight: var(--mc-font-small-body-weight);
+  line-height: var(--mc-font-small-body-line-height);
+  letter-spacing: var(--mc-font-small-body-tracking);
+  color: var(--mc-on-surface);
+}
+
+.month-days-container {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  align-self: center;
+  overflow-y: scroll;
+  overscroll-behavior: contain;
+}
+
+:host(.input-view) .week-header,
+:host(.input-view) .month-days-container {
+  display: none;
+}
+
+.inputs {
+  display: none;
+}
+:host(.input-view) .inputs {
+  display: flex;
+  margin-top: 16px;
+  gap: 12px;
+  padding: 0 16px;
+  justify-content: center;
+}
+
+.inputs mc-textfield {
+  flex: 1;
+  width: 140px;
+  margin-bottom: 16px;
+}
+
+.months-scroll-container {
+  width: 100%;
+}
+
+.days-header {
+  display: flex;
+  margin-bottom: 12px;
+  padding-left: calc((100% - 304px) / 2);
+}
+
+.year-label,
+.month-label {
+  font-size: var(--mc-font-small-title-size);
+  font-weight: var(--mc-font-small-title-weight);
+  line-height: var(--mc-font-small-title-line-height);
+  letter-spacing: var(--mc-font-small-title-tracking);
+  color: var(--mc-on-surface-variant);
+}
+
+.scroll-spacer {
+  width: 100%;
+  height: 34776px;
+}
+
+.months-scroll-container {
+  position: absolute;
+  overflow: hidden;
+}
+
+.month {
+  width: 100%;
+  height: 322px;
+  flex-shrink: 0;
+}
+
+.days-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.days-container .days-inner {
+  display: grid;
+  height: 264px;
+  grid-template-columns: repeat(7, 40px);
+  grid-template-rows: repeat(6, 40px);
+  grid-column-gap: 4px;
+  grid-row-gap: 4px;
+  align-items: center;
+  justify-items: center;
+  align-self: center;
+  /* overflow: hidden; */
+}
+
+.day {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  user-select: none;
+  -webkit-user-select: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  pointer-events: none;
+  border-radius: var(--mc-shape-full);
+  z-index: 1;
+
+  font-size: var(--mc-font-small-label-size);
+  font-weight: var(--mc-font-small-label-weight);
+  line-height: var(--mc-font-small-label-line-height);
+  letter-spacing: var(--mc-font-small-label-tracking);
+  color: var(--mc-on-surface);
+}
+
+.day::before,
+.day::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  box-sizing: border-box;
+  border-radius: var(--mc-shape-full);
+  z-index: -1;
+}
+
+.day::after {
+  z-index: 1;
+  opacity: 0;
+  background-color: var(--mc-on-surface-variant);
+}
+
+.day.interactive {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.day.out-of-range {
+  pointer-events: none;
+  cursor: auto;
+  color: var(--mc-on-surface-alpha-60);
+}
+
+.day.selected {
+  color: var(--mc-on-primary);
+}
+
+.day.selected::before {
+  background-color: var(--mc-primary);
+}
+
+.day.selected:hover::after {
+  background-color: var(--mc-on-primary);
+}
+
+.day:hover::after {
+  opacity: var(--mc-state-layer-opacity-hover);
+}
+
+.day.today {
+  border: 1px solid var(--mc-outline-alpha-60);
+}
+
+.day.selected.start {
+  background-color: var(--mc-surface-variant);
+  border-radius: var(--mc-shape-full) 0 0 var(--mc-shape-full);
+}
+
+.day.selected.end {
+  background-color: var(--mc-surface-variant);
+  border-radius: 0 var(--mc-shape-full) var(--mc-shape-full) 0;
+}
+
+.day.selected-range:not(.not-current-month)::before {
+  background-color: var(--mc-surface-variant);
+  border-radius: 0;
+  margin-left: -2px;
+  margin-right: -2px;
+}
+
+.day.selected-range.first-day::before {
+  border-radius: var(--mc-shape-full) 0 0 var(--mc-shape-full);
+  margin-left: 0;
+}
+
+.day.selected-range.last-day::before {
+  border-radius: 0 var(--mc-shape-full) var(--mc-shape-full) 0;
+  margin-right: 0;
+}
+
+
+.day.selected-range.sunday::before {
+  margin-left: -100px;
+}
+
+.day.selected-range.saturday::before {
+  margin-right: -100px;
+}

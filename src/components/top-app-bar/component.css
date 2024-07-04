@@ -67,7 +67,6 @@
 :host([medium]),
 :host([large]) {
   align-items: start;
-  /* padding-top: 20px; */
   height: 112px;
 }
 
@@ -84,22 +83,9 @@
   line-height: var(--mc-font-small-headline-line-height);
   letter-spacing: var(--mc-font-small-headline-tracking);
   opacity: var(--mc-top-app-bar-alt-headline-opacity);
-  /* opacity: 1;
-  transition: opacity;
-  transition-duration: 200ms; */
 }
 
-/* :host([medium]) [name="headline"],
-:host([large]) [name="headline"] {
-  opacity: 0;
-  transition: opacity;
-  transition-duration: 140ms;
+:host([medium][compress]) [name="headline"],
+:host([large][compress]) [name="headline"] {
+  opacity: calc(1 - var(--mc-top-app-bar-alt-headline-opacity));
 }
-
-:host(.switch-headline) [name="alt-headline"] {
-  opacity: 0;
-}
-:host([medium].switch-headline) [name="headline"],
-:host([large].switch-headline) [name="headline"] {
-  opacity: 1;
-} */

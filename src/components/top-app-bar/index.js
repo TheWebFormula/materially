@@ -40,6 +40,7 @@ class MCTopAppBarElement extends HTMLComponentElement {
 
   static get observedAttributesExtended() {
     return [
+      ['autohide', 'boolean'],
       ['compress', 'boolean'],
       ['medium', 'boolean'],
       ['large', 'boolean']
@@ -52,13 +53,13 @@ class MCTopAppBarElement extends HTMLComponentElement {
 
   connectedCallback() {
     this.#scrollContainer.addEventListener('scroll', this.#scroll_bound);
-    if (this.#medium && !this.querySelector('[slot="alt-headline"]')) {
+    if (this.#compress && this.#medium && !this.querySelector('[slot="alt-headline"]')) {
       let headline = this.querySelector('[slot="headline"]');
       let cloned = headline.cloneNode(true);
       cloned.setAttribute('slot', 'alt-headline');
       this.appendChild(cloned);
     }
-    if (this.#large && !this.querySelector('[slot="alt-headline"]')) {
+    if (this.#compress && this.#large && !this.querySelector('[slot="alt-headline"]')) {
       let headline = this.querySelector('[slot="headline"]');
       let cloned = headline.cloneNode(true);
       cloned.setAttribute('slot', 'alt-headline');
@@ -70,6 +71,10 @@ class MCTopAppBarElement extends HTMLComponentElement {
     this.#scrollContainer.removeEventListener('scroll', this.#scroll_bound);
   }
 
+  get autohide() { return this.compress }
+  set autohide(value) {
+    this.compress = !!value;
+  }
 
   get compress() { return this.hasAttribute('compress'); }
   set compress(value) {
@@ -106,7 +111,7 @@ class MCTopAppBarElement extends HTMLComponentElement {
       this.classList.toggle('scrolled', currentScrollTop > minPosition && this.#position < this.#height);
 
       const start = Math.max(this.#position, 5);
-      const percent = 1 - ((start - 5) / (minPosition / 3));
+      const percent = Math.max(0, 1 - ((start - 5) / (minPosition / 3)));
       if (!isNormal) this.style.setProperty('--mc-top-app-bar-alt-headline-opacity', percent);
     } else {
       this.classList.toggle('scrolled', this.#scrollTopContainer.scrollTop > 0);

@@ -1,0 +1,152 @@
+<article>
+  <header>
+    <h1>Top app bars</h1>
+    <div class="page-subheader mc-font-title-medium">Top app bars display information and actions at the top of a screen</div>
+    <a href="https://m3.material.io/components/top-app-bar/overview" target="_new">Material Design Guidelines:
+      Top app bars</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#standard">Basic</a></li>
+        <li><a href="#hide">Auto hide</a></li>
+        <li><a href="#centered">Centered</a></li>
+        <li><a href="#medium">Medium</a></li>
+        <li><a href="#large">Large</a></li>
+        <li><a href="#compress">Compress</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="standard" aria-label="Top app bar example">
+        <mc-card>
+          <h2 slot="headline">Basic</h2>
+        
+          <iframe src="./routes/top app bars/basic-index.html" title="top-app-bar basic"
+            style="height: 360px; width: 600px;"></iframe>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-top-app-bar>
+    <mc-icon slot="leading-icon">arrow_back</mc-icon>
+    <div slot="headline">Headline</div>
+    <mc-icon slot="trailing-icon">inbox</mc-icon>
+    <mc-icon slot="trailing-icon">account_circle</mc-icon>
+  </mc-top-app-bar>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="hide" aria-label="Top app bar auto hide">
+        <mc-card>
+          <h2 slot="headline">Auto hide</h2>
+        
+          <iframe src="./routes/top app bars/hide-index.html" title="top-app-bar auto hide"
+            style="height: 360px; width: 600px;"></iframe>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-top-app-bar autohide>
+    <mc-icon slot="leading-icon">arrow_back</mc-icon>
+    <div slot="headline">Headline</div>
+    <mc-icon slot="trailing-icon">inbox</mc-icon>
+    <mc-icon slot="trailing-icon">account_circle</mc-icon>
+  </mc-top-app-bar>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="centered" aria-label="Top app bar centered">
+        <mc-card>
+          <h2 slot="headline">Centered</h2>
+        
+          <iframe src="./routes/top app bars/centered-index.html" title="top-app-bar centered"
+            style="height: 360px; width: 600px;"></iframe>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-top-app-bar centered>
+    <mc-icon slot="leading-icon">arrow_back</mc-icon>
+    <div slot="headline">Headline</div>
+    <mc-icon slot="trailing-icon">account_circle</mc-icon>
+  </mc-top-app-bar>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="medium" aria-label="Top app bar medium">
+        <mc-card>
+          <h2 slot="headline">Medium</h2>
+        
+          <iframe src="./routes/top app bars/medium-index.html" title="top-app-bar medium"
+            style="height: 360px; width: 600px;"></iframe>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-top-app-bar medium>
+    <mc-icon slot="leading-icon">arrow_back</mc-icon>
+    <div slot="headline">Headline</div>
+    <mc-icon slot="trailing-icon">inbox</mc-icon>
+    <mc-icon slot="trailing-icon">account_circle</mc-icon>
+  </mc-top-app-bar>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="large" aria-label="Top app bar large">
+        <mc-card>
+          <h2 slot="headline">Large</h2>
+      
+          <iframe src="./routes/top app bars/large-index.html" title="top-app-bar large"
+            style="height: 360px; width: 600px;"></iframe>
+      
+          <pre>
+            <code class="language-html">
+  ${`<mc-top-app-bar large>
+    <mc-icon slot="leading-icon">arrow_back</mc-icon>
+    <div slot="headline">Headline</div>
+    <mc-icon slot="trailing-icon">inbox</mc-icon>
+    <mc-icon slot="trailing-icon">account_circle</mc-icon>
+  </mc-top-app-bar>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="compress" aria-label="Top app bar compress">
+        <mc-card>
+          <h2 slot="headline">Compress</h2>
+          <div slot="supporting-text">Compress only works on medium and large Top app bars. You cannot use auto hide at the same
+            time as auto shrink.</div>
+        
+          <iframe src="./routes/top app bars/compress-index.html" title="top-app-bar compress"
+            style="height: 360px; width: 600px;"></iframe>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-top-app-bar medium compress>
+    <mc-icon slot="leading-icon">arrow_back</mc-icon>
+    <div slot="headline">Headline</div>
+    <mc-icon slot="trailing-icon">inbox</mc-icon>
+    <mc-icon slot="trailing-icon">account_circle</mc-icon>
+  </mc-top-app-bar>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

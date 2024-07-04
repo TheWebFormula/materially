@@ -1,0 +1,576 @@
+:host {
+  --mc-padding: 24px;
+  --mc-container-color: var(--mc-surface-container-high);
+  --mc-elevation: var(--mc-elevation-3);
+  --mc-shape: var(--mc-shape-large);
+
+  
+  width: 328px;
+  height: 538px;
+  max-height: 538px;
+}
+
+:host(.window-compact.input-view) {
+  max-height: 248px;
+}
+
+.headline {
+  font-size: var(--mc-font-medium-label-size);
+  font-weight: var(--mc-font-medium-label-weight);
+  line-height: var(--mc-font-medium-label-line-height);
+  letter-spacing: var(--mc-font-medium-label-tracking);
+  color: var(--mc-on-surface-variant);
+}
+
+.time-container {
+  display: flex;
+  margin-top: 24px;
+  margin-bottom: 36px;
+}
+
+:host([hour24]) .time-container {
+  margin-left: 28px;
+}
+
+.time-hour,
+.time-minute {
+  font-size: var(--mc-font-large-display-size);
+  font-weight: var(--mc-font-large-display-weight);
+  line-height: var(--mc-font-large-display-line-height);
+  line-height: 80px;
+  letter-spacing: var(--mc-font-large-display-tracking);
+  color: var(--mc-on-surface);
+  background-color: var(--mc-surface-container-highest);
+  border-radius: var(--mc-shape-small);
+  outline: none;
+  border: none;
+  width: 80px;
+  padding-left: 12px;
+  text-align: center;
+  cursor: pointer;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.time-hour.selected,
+.time-minute.selected {
+  color: var(--mc-on-primary-container);
+  background-color: var(--mc-primary-container);
+}
+
+.time-separator {
+  font-size: var(--mc-font-large-display-size);
+  font-weight: var(--mc-font-large-display-weight);
+  line-height: var(--mc-font-large-display-line-height);
+  letter-spacing: var(--mc-font-large-display-tracking);
+  color: var(--mc-on-surface);
+  width: 24px;
+  text-align: center;
+}
+
+.meridiem-container {
+  height: 80px;
+  width: 52px;
+  border-radius: var(--mc-shape-small);
+  border: 1px solid var(--mc-outline);
+  box-sizing: border-box;
+  margin-left: 12px;
+}
+
+:host([hour24]) .meridiem-container {
+  display: none;
+}
+
+.am,
+.pm {
+  position: relative;
+  font-size: var(--mc-font-medium-title-size);
+  font-weight: var(--mc-font-medium-title-weight);
+  line-height: 39px;
+  letter-spacing: var(--mc-font-medium-title-tracking);
+  color: var(--mc-on-surface-variant);
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+}
+
+.am::after,
+.pm::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background-color: var(--mc-on-surface-variant);
+  opacity: 0;
+}
+
+.am:focus::after,
+.pm:focus::after {
+  opacity: var(--mc-state-layer-opacity-focus);
+}
+
+.am.selected:focus::after,
+.pm.selected:focus::after {
+  background-color: var(--mc-on-tertiary-container);
+}
+
+.am.selected,
+.pm.selected {
+  color: var(--mc-on-tertiary-container);
+  background-color: var(--mc-tertiary-container);
+}
+
+.am {
+  border-bottom: 1px solid var(--mc-outline);
+  box-sizing: border-box;
+  border-radius: var(--mc-shape-small) var(--mc-shape-small) 0 0;
+}
+
+.pm {
+  line-height: 38px;
+  border-radius: 0 0 var(--mc-shape-small) var(--mc-shape-small);
+}
+
+
+.dial-container {
+  position:relative;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  height: 256px;
+  width: 256px;
+}
+
+/* keeps background in alignment with labels when animating in */
+.dial-container-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 256px;
+  width: 256px;
+  border-radius: var(--mc-shape-full);
+  background-color: var(--mc-surface-container-highest);
+}
+
+
+:host(.input-view.window-compact) .dial-container {
+  display: none;
+}
+
+.dial-hour,
+.dial-hour-secondary,
+.dial-minute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -24px;
+  margin-left: -24px;
+}
+
+.dial-minute {
+  display: none;
+}
+:host(.minute-view) .dial-minute {
+  display: block;
+}
+:host(.minute-view) .dial-hour,
+:host(.minute-view) .dial-hour-secondary {
+  display: none;
+}
+
+
+
+.dial-label {
+  position: absolute;
+  display: flex;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--mc-shape-full);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--mc-font-large-label-size);
+  font-weight: var(--mc-font-large-label-weight);
+  line-height: var(--mc-font-large-label-line-height);
+  letter-spacing: var(--mc-font-large-label-tracking);
+  color: var(--mc-on-surface);
+  z-index: 1;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+
+.dial-label.selected {
+  color: var(--mc-on-primary);
+  pointer-events: none;
+}
+
+.dial-minute .dial-label {
+  width: 6px;
+  height: 6px;
+  margin-left: 20px;
+  margin-top: 20px;
+  pointer-events: none;
+}
+
+
+
+.selector-container {
+  position: relative;
+  align-self: center;
+}
+
+.selector-center {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  margin-top: -4px;
+  border-radius: var(--mc-shape-full);
+  background-color: var(--mc-primary);
+  pointer-events: none;
+}
+
+.selector-line {
+  position: absolute;
+  top: -90px;
+  width: 2px;
+  margin-left: -1px;
+  height: 90px;
+  background-color: var(--mc-primary);
+  pointer-events: none;
+}
+
+.selector {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  margin-left: -24px;
+  margin-top: -126px;
+  border-radius: var(--mc-shape-full);
+  background-color: var(--mc-primary);
+  cursor: pointer;
+}
+
+:host(.hour-view) .hour-secondary .selector {
+  margin-top: -92px;
+}
+
+:host(.minute-view) .minute-secondary .selector {
+  transform: scale(0.25) translateY(48px);
+}
+
+
+.actions {
+  display: flex;
+  align-items: center;
+  margin-top: 32px;
+}
+
+:host(.input-view) .actions {
+  margin-top: 0;
+}
+
+:host(:not(.window-compact)) .keyboard {
+  display: none;
+}
+
+
+.dial-label[degree="0"] {
+  transform: rotate(-90deg) translate(102px) rotate(90deg);
+}
+
+.dial-label[degree="6"] {
+  transform: rotate(-84deg) translate(102px) rotate(84deg);
+}
+
+.dial-label[degree="12"] {
+  transform: rotate(-78deg) translate(102px) rotate(78deg);
+}
+
+.dial-label[degree="18"] {
+  transform: rotate(-72deg) translate(102px) rotate(72deg);
+}
+
+.dial-label[degree="24"] {
+  transform: rotate(-66deg) translate(102px) rotate(66deg);
+}
+
+.dial-label[degree="30"] {
+  transform: rotate(-60deg) translate(102px) rotate(60deg);
+}
+
+.dial-label[degree="36"] {
+  transform: rotate(-54deg) translate(102px) rotate(54deg);
+}
+
+.dial-label[degree="42"] {
+  transform: rotate(-48deg) translate(102px) rotate(48deg);
+}
+
+.dial-label[degree="48"] {
+  transform: rotate(-42deg) translate(102px) rotate(42deg);
+}
+
+.dial-label[degree="54"] {
+  transform: rotate(-36deg) translate(102px) rotate(36deg);
+}
+
+.dial-label[degree="60"] {
+  transform: rotate(-30deg) translate(102px) rotate(30deg);
+}
+
+.dial-label[degree="66"] {
+  transform: rotate(-24deg) translate(102px) rotate(24deg);
+}
+
+.dial-label[degree="72"] {
+  transform: rotate(-18deg) translate(102px) rotate(18deg);
+}
+
+.dial-label[degree="78"] {
+  transform: rotate(-12deg) translate(102px) rotate(12deg);
+}
+
+.dial-label[degree="84"] {
+  transform: rotate(-6deg) translate(102px) rotate(6deg);
+}
+
+.dial-label[degree="90"] {
+  transform: rotate(0deg) translate(102px) rotate(0deg);
+}
+
+.dial-label[degree="96"] {
+  transform: rotate(6deg) translate(102px) rotate(-6deg);
+}
+
+.dial-label[degree="102"] {
+  transform: rotate(12deg) translate(102px) rotate(-12deg);
+}
+
+.dial-label[degree="108"] {
+  transform: rotate(18deg) translate(102px) rotate(-18deg);
+}
+
+.dial-label[degree="114"] {
+  transform: rotate(24deg) translate(102px) rotate(-24deg);
+}
+
+.dial-label[degree="120"] {
+  transform: rotate(30deg) translate(102px) rotate(-30deg);
+}
+
+.dial-label[degree="126"] {
+  transform: rotate(36deg) translate(102px) rotate(-36deg);
+}
+
+.dial-label[degree="132"] {
+  transform: rotate(42deg) translate(102px) rotate(-42deg);
+}
+
+.dial-label[degree="138"] {
+  transform: rotate(48deg) translate(102px) rotate(-48deg);
+}
+
+.dial-label[degree="144"] {
+  transform: rotate(54deg) translate(102px) rotate(-54deg);
+}
+
+.dial-label[degree="150"] {
+  transform: rotate(60deg) translate(102px) rotate(-60deg);
+}
+
+.dial-label[degree="156"] {
+  transform: rotate(66deg) translate(102px) rotate(-66deg);
+}
+
+.dial-label[degree="162"] {
+  transform: rotate(72deg) translate(102px) rotate(-72deg);
+}
+
+.dial-label[degree="168"] {
+  transform: rotate(78deg) translate(102px) rotate(-78deg);
+}
+
+.dial-label[degree="174"] {
+  transform: rotate(84deg) translate(102px) rotate(-84deg);
+}
+
+.dial-label[degree="180"] {
+  transform: rotate(90deg) translate(102px) rotate(-90deg);
+}
+
+.dial-label[degree="186"] {
+  transform: rotate(96deg) translate(102px) rotate(-96deg);
+}
+
+.dial-label[degree="192"] {
+  transform: rotate(102deg) translate(102px) rotate(-102deg);
+}
+
+.dial-label[degree="198"] {
+  transform: rotate(108deg) translate(102px) rotate(-108deg);
+}
+
+.dial-label[degree="204"] {
+  transform: rotate(114deg) translate(102px) rotate(-114deg);
+}
+
+.dial-label[degree="210"] {
+  transform: rotate(120deg) translate(102px) rotate(-120deg);
+}
+
+.dial-label[degree="216"] {
+  transform: rotate(126deg) translate(102px) rotate(-126deg);
+}
+
+.dial-label[degree="222"] {
+  transform: rotate(132deg) translate(102px) rotate(-132deg);
+}
+
+.dial-label[degree="228"] {
+  transform: rotate(138deg) translate(102px) rotate(-138deg);
+}
+
+.dial-label[degree="234"] {
+  transform: rotate(144deg) translate(102px) rotate(-144deg);
+}
+
+.dial-label[degree="240"] {
+  transform: rotate(150deg) translate(102px) rotate(-150deg);
+}
+
+.dial-label[degree="246"] {
+  transform: rotate(156deg) translate(102px) rotate(-156deg);
+}
+
+.dial-label[degree="252"] {
+  transform: rotate(162deg) translate(102px) rotate(-162deg);
+}
+
+.dial-label[degree="258"] {
+  transform: rotate(168deg) translate(102px) rotate(-168deg);
+}
+
+.dial-label[degree="264"] {
+  transform: rotate(174deg) translate(102px) rotate(-174deg);
+}
+
+.dial-label[degree="270"] {
+  transform: rotate(180deg) translate(102px) rotate(-180deg);
+}
+
+.dial-label[degree="276"] {
+  transform: rotate(186deg) translate(102px) rotate(-186deg);
+}
+
+.dial-label[degree="282"] {
+  transform: rotate(192deg) translate(102px) rotate(-192deg);
+}
+
+.dial-label[degree="288"] {
+  transform: rotate(198deg) translate(102px) rotate(-198deg);
+}
+
+.dial-label[degree="294"] {
+  transform: rotate(204deg) translate(102px) rotate(-204deg);
+}
+
+.dial-label[degree="300"] {
+  transform: rotate(210deg) translate(102px) rotate(-210deg);
+}
+
+.dial-label[degree="306"] {
+  transform: rotate(216deg) translate(102px) rotate(-216deg);
+}
+
+.dial-label[degree="312"] {
+  transform: rotate(222deg) translate(102px) rotate(-222deg);
+}
+
+.dial-label[degree="318"] {
+  transform: rotate(228deg) translate(102px) rotate(-228deg);
+}
+
+.dial-label[degree="324"] {
+  transform: rotate(234deg) translate(102px) rotate(-234deg);
+}
+
+.dial-label[degree="330"] {
+  transform: rotate(240deg) translate(102px) rotate(-240deg);
+}
+
+.dial-label[degree="336"] {
+  transform: rotate(246deg) translate(102px) rotate(-246deg);
+}
+
+.dial-label[degree="342"] {
+  transform: rotate(252deg) translate(102px) rotate(-252deg);
+}
+
+.dial-label[degree="348"] {
+  transform: rotate(258deg) translate(102px) rotate(-258deg);
+}
+
+.dial-label[degree="354"] {
+  transform: rotate(264deg) translate(102px) rotate(-264deg);
+}
+
+.dial-label[degree="360"] {
+  transform: rotate(270deg) translate(102px) rotate(-270deg);
+}
+
+
+:host([hour24]) .dial-hour-secondary .dial-label[degree="0"] {
+  transform: rotate(-90deg) translate(68px) rotate(90deg);
+}
+
+:host([hour24]) .dial-hour-secondary .dial-label[degree="30"] {
+  transform: rotate(-60deg) translate(68px) rotate(60deg);
+}
+
+:host([hour24]) .dial-hour-secondary .dial-label[degree="60"] {
+  transform: rotate(-30deg) translate(68px) rotate(30deg);
+}
+
+:host([hour24]) .dial-hour-secondary .dial-label[degree="90"] {
+  transform: rotate(0deg) translate(68px) rotate(0deg);
+}
+
+:host([hour24]) .dial-hour-secondary .dial-label[degree="120"] {
+  transform: rotate(30deg) translate(68px) rotate(-30deg);
+}
+
+:host([hour24]) .dial-hour-secondary .dial-label[degree="150"] {
+  transform: rotate(60deg) translate(68px) rotate(-60deg);
+}
+
+:host([hour24]) .dial-hour-secondary .dial-label[degree="180"] {
+  transform: rotate(90deg) translate(68px) rotate(-90deg);
+}
+
+:host([hour24]) .dial-hour-secondary .dial-label[degree="210"] {
+  transform: rotate(120deg) translate(68px) rotate(-120deg);
+}
+
+:host([hour24]) .dial-hour-secondary .dial-label[degree="240"] {
+  transform: rotate(150deg) translate(68px) rotate(-150deg);
+}
+
+:host([hour24]) .dial-hour-secondary .dial-label[degree="270"] {
+  transform: rotate(180deg) translate(68px) rotate(-180deg);
+}
+
+:host([hour24]) .dial-hour-secondary .dial-label[degree="300"] {
+  transform: rotate(210deg) translate(68px) rotate(-210deg);
+}
+
+:host([hour24]) .dial-hour-secondary .dial-label[degree="330"] {
+  transform: rotate(240deg) translate(68px) rotate(-240deg);
+}

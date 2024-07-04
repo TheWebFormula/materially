@@ -1,0 +1,115 @@
+<article>
+  <header>
+    <h1>Time pickers</h1>
+    <div class="page-subheader mc-font-title-medium">Time pickers help users select and set a specific time</div>
+    <a href="https://m3.material.io/components/time-pickers/overview" target="_new">Material Design Guidelines: Time
+      pickers</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#basic">Time</a></li>
+        <li><a href="#hour24">24 Format</a></li>
+        <li><a href="#step">Time step</a></li>
+        <li><a href="#native">Native component</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="basic" aria-label="Time picker example">
+        <mc-card>
+          <h2 slot="headline">Time</h2>
+        
+          <mc-textfield label="Time" type="time">
+            <mc-icon slot="leading-icon">schedule</mc-icon>
+            <mc-time-picker slot="picker"></mc-time-picker>
+          </mc-textfield>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-textfield label="Time" type="time">
+    <mc-icon slot="leading-icon">schedule</mc-icon>
+    <mc-time-picker slot="picker"></mc-time-picker>
+  </mc-textfield>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="hour24" aria-label="Time picker hour 24">
+        <mc-card>
+          <h2 slot="headline">Time formatted in 24 hours</h2>
+          <div slot="supporting-text">The browser controls the input formate based on locale. You can force the time picker to be
+            24 hour format.</div>
+        
+          <mc-textfield label="Time" type="time">
+            <mc-icon slot="leading-icon">schedule</mc-icon>
+            <mc-time-picker hour24 slot="picker"></mc-time-picker>
+          </mc-textfield>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-textfield label="Time" type="time">
+    <mc-icon slot="leading-icon">schedule</mc-icon>
+    <mc-time-picker hour24 slot="picker"></mc-time-picker>
+  </mc-textfield>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="step" aria-label="Time picker steps">
+        <mc-card>
+          <h2 slot="headline">Step</h2>
+          <div slot="supporting-text">The step attribute is in seconds</div>
+        
+          <mc-textfield label="10 min step" type="time" step="600">
+            <mc-icon slot="leading-icon">schedule</mc-icon>
+            <mc-time-picker slot="picker"></mc-time-picker>
+          </mc-textfield>
+        
+          <mc-textfield label="2 hour step" type="time" step="7200">
+            <mc-icon slot="leading-icon">schedule</mc-icon>
+            <mc-time-picker slot="picker"></mc-time-picker>
+          </mc-textfield>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-textfield label="10 min step" type="time" step="600">
+    <mc-icon slot="leading-icon">schedule</mc-icon>
+    <mc-time-picker slot="picker"></mc-time-picker>
+  </mc-textfield>
+  
+  <mc-textfield label="2 hour step" type="time" step="7200">
+    <mc-icon slot="leading-icon">schedule</mc-icon>
+    <mc-time-picker slot="picker"></mc-time-picker>
+  </mc-textfield>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="native" aria-label="Time picker native">
+        <mc-card>
+          <h2 slot="headline">Native component</h2>
+        
+          <mc-textfield label="Browser picker" type="time" style="width: 155px"></mc-textfield>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-textfield label="Browser picker" type="time"></mc-textfield>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

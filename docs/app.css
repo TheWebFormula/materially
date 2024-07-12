@@ -35,6 +35,7 @@ pre {
 
 body.window-compact pre {
   font-size: 12px;
+  max-width: 358px;
 }
 
 pre > code {
@@ -154,6 +155,12 @@ mc-card .example {
 iframe {
   border: 1px solid var(--mc-outline-alpha-30);
   border-radius: 16px;
+  width: 600px;
+  
+}
+
+.window-compact iframe {
+  width: 320px;
 }
 
 .page-list {

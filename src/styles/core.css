@@ -28,7 +28,8 @@ body.pane-layout {
 }
 
 body:has(dialog[open]),
-body:has([role=dialog][open]:not([anchor])) {
+body:has([role=dialog][open]:not([anchor])),
+body.window-compact:has(mc-search.open) {
   overflow: hidden
 }
 

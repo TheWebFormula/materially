@@ -10,7 +10,7 @@ export default class MCMenuItemElement extends HTMLComponentElement {
   static useTemplate = true;
   static styleSheets = [styles];
 
-  #button;
+  #nesting = false;
 
 
   constructor() {
@@ -19,7 +19,6 @@ export default class MCMenuItemElement extends HTMLComponentElement {
     this.role = 'menu-item';
     this.tabIndex = this.hasAttribute('tabindex') ? this.getAttribute('tabindex') : 0;
     this.render();
-    this.#button = this.shadowRoot.querySelector('button');
   }
 
   template() {
@@ -33,29 +32,13 @@ export default class MCMenuItemElement extends HTMLComponentElement {
     `;
   }
 
-  static get observedAttributesExtended() {
-    return [
-      ['popovertarget', 'string']
-    ];
-  }
+  get nesting() { return this.#nesting; }
+  set nesting(value) {
+    this.#nesting = !!value;
 
-  attributeChangedCallbackExtended(name, _oldValue, newValue) {
-    this[name] = newValue;
-  }
-
-
-  get popovertarget() {
-    return this.#button.getAttribute('popovertarget');
-  }
-  set popovertarget(value) {
-    this.#button.setAttribute('popovertarget', value);
-  }
-
-  get popoverTargetElement() {
-    return this.#button.popoverTargetElement;
-  }
-  set popoverTargetElement(value) {
-    if (!this.#button.popoverTargetElement) {
+    let arrow = this.querySelector('.drop-arrow');
+    if (this.#nesting) {
+      if (arrow) return;
       this.insertAdjacentHTML('beforeend', `
         <svg height="4" viewBox="7 10 10 5" focusable="false" class="drop-arrow">
           <polygon
@@ -65,16 +48,9 @@ export default class MCMenuItemElement extends HTMLComponentElement {
             points="7 10 12 15 17 10"></polygon>
         </svg>
       `);
+    } else if (arrow) {
+      arrow.remove();
     }
-
-    this.#button.popoverTargetElement = value;
-  }
-
-  get popoverTargetAction() {
-    return this.#button.popoverTargetAction;
-  }
-  set popoverTargetAction(value) {
-    this.#button.popoverTargetAction = value;
   }
 }
 customElements.define(MCMenuItemElement.tag, MCMenuItemElement);

@@ -1,0 +1,19 @@
+.label {
+  display: none;
+  font-size: var(--mc-font-small-body-size);
+  font-weight: var(--mc-font-small-body-weight);
+  letter-spacing: var(--mc-font-small-body-tracking);
+  line-height: 48px;
+  margin-bottom: -8px;
+  margin-left: 16px;
+  overscroll-behavior: contain;
+}
+
+.label.has-results { 
+  display: block;
+}
+
+slot {
+  display: flex;
+  flex-direction: column;
+}

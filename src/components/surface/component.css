@@ -22,6 +22,7 @@
 
   dialog {
     position: fixed;
+    overflow-y: auto;
   }
 }
 
@@ -48,6 +49,9 @@ dialog {
   z-index: 9;
   pointer-events: none;
   overscroll-behavior: contain;
+  clip-path: inherit;
+
+  padding-top: var(--mc-padding-top, 0);
 
 
   &::backdrop {
@@ -206,8 +210,10 @@ dialog {
   0% {
     overflow: hidden;
     opacity: 0;
-    height: 60dvh;
+    height: 30dvh;
+    top: calc(50% - 15dvh);
     width: 70dvw;
+    margin: 0 auto;
   }
 
   60% {
@@ -215,9 +221,11 @@ dialog {
   }
 
   100% {
+    top: 0;
     overflow: hidden;
     height: 100dvh;
     width: 100dvw;
+    margin: 0 auto;
   }
 }
 
@@ -229,6 +237,8 @@ dialog {
     opacity: 1;
     height: 100dvh;
     width: 100dvw;
+    margin: 0 auto;
+    top: 0;
   }
 
   80% {
@@ -242,6 +252,8 @@ dialog {
     opacity: 0;
     height: 60dvh;
     width: 70dvw;
+    margin: 0 auto;
+    top: calc(50% - 30dvh);
   }
 }
 

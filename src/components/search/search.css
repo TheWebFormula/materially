@@ -1,0 +1,304 @@
+:host {
+  min-width: 210px;
+  display: inline-flex;
+  border-radius: var(--mc-shape-extra-large);
+}
+
+:host(.window-compact) {
+  mc-menu {
+    --mc-elevation: none;
+    --mc-shape: 0;
+    --mc-padding-top: 56px;
+    clip-path: none;
+  }
+
+  .item-padding {
+    padding-inline: 8px;
+    padding-top: 76px;
+  }
+}
+
+:host(.window-compact.open) {
+  /* Keeps height on page same because input is fixed. Not sure why this needs to be 4px less in height */
+  height: 52px;
+
+  mc-menu {
+    transition: border-radius;
+    transition-duration: var(--mc-motion-duration-short3);
+    transition-timing-function: var(--mc-motion-easing-emphasized);
+  }
+
+  mc-divider {
+    display: flex;
+    position: absolute;
+    top: 56px;
+    left: 0;
+  }
+
+  .back {
+    display: inline-flex;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  slot[name="leading"] {
+    display: none;
+  }
+
+  .input {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9;
+
+    &.animate {
+      transition: top, left, width;
+      transition-duration: var(--mc-motion-duration-medium2);
+      transition-timing-function: var(--mc-motion-easing-emphasized);
+    }
+  }
+}
+
+:host(.open.window-compact) .search-icon,
+.input.has-leading .search-icon {
+  display: none;
+}
+
+:host(.open.loading.window-compact) mc-progress-linear {
+  top: 56px;
+}
+
+:host(.window-compact) .input,
+:host(.open.window-compact) .input,
+:host(.closing.window-compact) .input {
+  border-radius: var(--mc-shape-extra-large);
+  /* transition: none; */
+}
+
+:host(.open.window-compact) .input,
+:host(.closing.window-compact) .input {
+  box-shadow: none;
+  z-index: 22;
+}
+
+mc-menu {
+  min-width: inherit;
+  --mc-elevation: var(--mc-elevation-3);
+  --mc-shape: var(--mc-shape-extra-large-bottom);
+  clip-path: inset(0px -30px -30px -30px);
+}
+
+mc-menu:not(.has-value) .no-results {
+  display: flex;
+}
+
+.input,
+.search,
+.surface {
+  min-width: inherit;
+  width: inherit;
+  max-width: inherit;
+}
+
+.input,
+.search {
+  width: 100%;
+}
+
+.search {
+  position: relative;
+  border-radius: inherit;
+}
+
+slot[name="suggestions"],
+.options-container {
+  display: flex;
+  flex-direction: column;
+}
+
+slot[name="suggestions"] {
+  margin-bottom: 8px;
+}
+
+.no-results {
+  display: none;
+  pointer-events: none;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  height: 48px;
+  line-height: 48px;
+  font-size: var(--mc-font-large-label-size);
+  font-weight: var(--mc-font-large-label-weight);
+  letter-spacing: var(--mc-font-large-label-tracking);
+  color: var(--mc-on-surface-variant-alpha-76);
+}
+
+mc-progress-linear {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: opacity;
+  transition-timing-function: var(--mc-motion-easing-standard);
+  transition-duration: var(--mc-motion-duration-short4);
+  transition-delay: var(--mc-motion-duration-medium2);
+}
+
+mc-divider {
+  display: none;
+}
+
+:host(.loading) mc-progress-linear {
+  opacity: 1;
+  transition-duration: var(--mc-motion-duration-short4);
+  transition-delay: 0s;
+}
+
+.input {
+  display: inline-flex;
+  position: relative;
+  box-sizing: border-box;
+  height: 56px;
+  padding: 8px 12px;
+  resize: inherit;
+  width: 100%;
+  align-items: center;
+
+  background-color: var(--mc-surface-container);
+  border-radius: var(--mc-shape-extra-large);
+  box-shadow: var(--mc-elevation-3);
+
+  transition: border-radius;
+  transition-duration: var(--mc-motion-duration-short1);
+  transition-timing-function: var(--mc-motion-easing-emphasized-accelerate);
+  transition-delay: var(--mc-motion-duration-short2);
+}
+
+:host(.open) .input {
+  border-radius: var(--mc-shape-extra-large-top);
+  transition-duration: var(--mc-motion-duration-short1);
+  transition-timing-function: var(--mc-motion-easing-emphasized);
+  transition-delay: 0s;
+}
+
+input {
+  flex: 1;
+  width: 100%;
+  height: 56px;
+  line-height: 56px;
+  outline: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background: none;
+
+  text-decoration: inherit;
+  text-transform: inherit;
+  font-size: var(--mc-font-large-body-size);
+  font-weight: var(--mc-font-large-body-weight);
+  line-height: var(--mc-font-large-body-line-height);
+  letter-spacing: var(--mc-font-large-body-tracking);
+  color: var(--mc-on-surface);
+  caret-color: var(--mc-primary);
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input::placeholder {
+  color: var(--mc-on-surface-variant);
+}
+
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+
+.clear {
+  position: absolute;
+  right: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity;
+  transition-duration: var(--mc-motion-duration-short2);
+  transition-timing-function: var(--mc-motion-easing-emphasized);
+}
+
+.input.has-value .clear {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.mic {
+  display: none;
+}
+.mic.show {
+  display: inline-flex;
+}
+
+.back {
+  position: relative;
+  display: none;
+}
+/* used for composedPath on click event */
+.back::after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+slot[name="leading"],
+slot[name="trailing"] {
+  display: contents;
+}
+
+.input.has-value slot[name="trailing"] {
+  pointer-events: none;
+}
+
+slot[name="trailing"]::slotted(*) {
+  opacity: 1;
+  transition: opacity;
+  transition-duration: var(--mc-motion-duration-short2);
+  transition-timing-function: var(--mc-motion-easing-emphasized);
+}
+
+.input.has-value slot[name="trailing"]::slotted(*) {
+  opacity: 0;
+}
+
+.search-icon {
+  display: flex;
+  width: 32px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+}
+
+.search-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+slot[name="chips"] {
+  display: contents;
+}
+
+mc-chip-set.hide {
+  display: none;
+}
+
+mc-chip-set {
+  min-height: 48px;
+}

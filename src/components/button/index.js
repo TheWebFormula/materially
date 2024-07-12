@@ -64,8 +64,7 @@ export default class MCButtonElement extends HTMLComponentElement {
       ['target', 'string'],
       ['async', 'boolean'],
       ['disabled', 'boolean'],
-      ['type', 'string'],
-      ['popovertarget', 'string']
+      ['type', 'string']
     ];
   }
 
@@ -129,27 +128,6 @@ export default class MCButtonElement extends HTMLComponentElement {
   get async() { return this.#async }
   set async(value) {
     this.#async = !!value;
-  }
-
-  get popovertarget() {
-    return this.#button.getAttribute('popovertarget');
-  }
-  set popovertarget(value) {
-    this.#button.setAttribute('popovertarget', value);
-  }
-
-  get popoverTargetElement() {
-    return this.#button.popoverTargetElement;
-  }
-  set popoverTargetElement(value) {
-    this.#button.popoverTargetElement = value;
-  }
-
-  get popoverTargetAction() {
-    return this.#button.popoverTargetAction;
-  }
-  set popoverTargetAction(value) {
-    this.#button.popoverTargetAction = value;
   }
 
   pending() {

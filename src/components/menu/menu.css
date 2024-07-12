@@ -1,58 +1,10 @@
-mc-menu {
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--mc-shape-extra-small);
-  background-color: var(--mc-surface-container);
-  box-shadow: var(--mc-elevation-2);
-  padding: 0;
-  border: none;
-  padding-block: 8px;
-  margin: 0;
+:host {
+  --mc-padding: 8px 0px;
+  --mc-container-color: var(--mc-surface-container);
+  --mc-shape: var(--mc-border-radius, var(--mc-shape-extra-small));
+
+  
   min-width: 112px;
-
-  animation: show-max-height;
-  animation-duration: var(--mc-motion-duration-medium3);
-  animation-timing-function: var(--mc-motion-easing-emphasized);
-  z-index: 9;
-}
-
-mc-menu:not(:popover-open) {
-  display: none;
-  z-index: 9;
-  animation: hide-max-height;
-  animation-duration: var(--mc-motion-duration-short3);
-  animation-timing-function: var(--mc-motion-easing-emphasized-accelerate);
-}
-
-
-@keyframes show-max-height {
-  0% {
-    opacity: 0;
-    max-height: 54px;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    max-height: var(--mc-surface-height);
-  }
-}
-
-@keyframes hide-max-height {
-  0% {
-    display: flex;
-    opacity: 1;
-    max-height: var(--mc-surface-height);
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    max-height: calc(var(--mc-surface-height) * 0.35);
-  }
+  width: min-content;
+  flex-direction: column;
 }

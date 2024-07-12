@@ -2,9 +2,8 @@ import MCMenuItemElement from '../menu/menu-item.js';
 import util from '../../helpers/util.js';
 
 
-class MCOptionElement extends MCMenuItemElement {
-  static tag = 'mc-option';
-
+class MCSearchOptionElement extends MCMenuItemElement {
+  static tag = 'mc-search-option';
 
   #value;
   #displayValue;
@@ -51,4 +50,4 @@ class MCOptionElement extends MCMenuItemElement {
     this.classList.toggle('selected', this.#selected);
   }
 }
-customElements.define(MCOptionElement.tag, MCOptionElement);
+customElements.define(MCSearchOptionElement.tag, MCSearchOptionElement);

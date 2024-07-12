@@ -1,6 +1,5 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
-import menuStyles from '../menu/menu.css' assert { type: 'css' };
 import fuzzySearch from '../../helpers/fuzzySearch.js'
 import '../textfield/index.js';
 import '../menu/index.js';
@@ -11,7 +10,7 @@ class MCSelectElement extends HTMLComponentElement {
   static tag = 'mc-select';
   static useShadowRoot = true;
   static useTemplate = true;
-  static styleSheets = [styles, menuStyles];
+  static styleSheets = [styles];
   static formAssociated = true;
 
 
@@ -19,6 +18,7 @@ class MCSelectElement extends HTMLComponentElement {
   #internals;
   #input;
   #textfield;
+  #menu;
   #value = '';
   #options = [];
   #initialOptions = [];
@@ -30,15 +30,15 @@ class MCSelectElement extends HTMLComponentElement {
   #previousFocusOption;
   // #lastOptionsOnSelect = '';
 
-  #focus_bound = this.#focus.bind(this);
   #blur_bound = this.#blur.bind(this);
   #onKeyDown_bound = this.#onKeyDown.bind(this);
   #preventContextMenuClose_bound = this.#preventContextMenuClose.bind(this);
-  #toggle_bound = this.#toggle.bind(this);
   #optionClick_bound = this.#optionClick.bind(this);
   #rightClick_bound = this.#rightClick.bind(this);
   #filterInput_bound = this.#filterInput.bind(this);
   #slotChange_bound = this.#slotChange.bind(this);
+  #open_bound = this.#open.bind(this);
+  #handleClose_bound = this.#handleClose.bind(this);
 
 
   constructor() {
@@ -49,7 +49,8 @@ class MCSelectElement extends HTMLComponentElement {
     this.render();
     this.#textfield = this.shadowRoot.querySelector('mc-textfield');
     this.#input = this.#textfield.shadowRoot.querySelector('input');
-    this.shadowRoot.querySelector('mc-menu').anchor = this;
+    this.#menu = this.shadowRoot.querySelector('mc-menu');
+    this.#menu.anchor = this.#textfield;
 
     this.#isFilter = this.hasAttribute('filter');
     this.#isAsync = this.hasAttribute('async');
@@ -91,7 +92,7 @@ class MCSelectElement extends HTMLComponentElement {
         <span class="focus-holder" tabIndex="0"></span>
 
 
-        <mc-menu offset-y="-6">
+        <mc-menu anchor-parent>
           <mc-progress-linear indeterminate disabled></mc-progress-linear>
           <slot class="options-container"></slot>
           <div class="no-results">No items</div>
@@ -102,7 +103,6 @@ class MCSelectElement extends HTMLComponentElement {
 
   static get observedAttributesExtended() {
     return [
-      ['popovertarget', 'string'],
       ['aria-label', 'string'],
       ['disabled', 'boolean'],
       ['label', 'string'],
@@ -147,27 +147,6 @@ class MCSelectElement extends HTMLComponentElement {
     this.#textfield.toggleAttribute('supporting-text', value);
   }
 
-  get popovertarget() {
-    return this.#input.getAttribute('popovertarget');
-  }
-  set popovertarget(value) {
-    this.#input.setAttribute('popovertarget', value);
-  }
-
-  get popoverTargetElement() {
-    return this.#input.popoverTargetElement;
-  }
-  set popoverTargetElement(value) {
-    this.#input.popoverTargetElement = value;
-  }
-
-  get popoverTargetAction() {
-    return this.#input.popoverTargetAction;
-  }
-  set popoverTargetAction(value) {
-    this.#input.popoverTargetAction = value;
-  }
-
   get validationMessage() { return this.#textfield.validationMessage; }
   get validity() { return this.#textfield.validity; }
   get willValidate() { return this.#textfield.willValidate; }
@@ -206,9 +185,9 @@ class MCSelectElement extends HTMLComponentElement {
 
     this.#options = [...this.querySelectorAll('mc-option')];
 
-    this.#textfield.addEventListener('focus', this.#focus_bound, { signal: this.#abort.signal });
-    this.popoverTargetElement.addEventListener('toggle', this.#toggle_bound, { signal: this.#abort.signal });
-    this.addEventListener('mousedown', this.#rightClick_bound, { signal: this.#abort.signal });
+    this.#menu.addEventListener('open', this.#open_bound, { signal: this.#abort.signal });
+
+    // this.addEventListener('mousedown', this.#rightClick_bound, { signal: this.#abort.signal });
     this.shadowRoot.querySelector('.options-container').addEventListener('slotchange', this.#slotChange_bound, { signal: this.#abort.signal });
 
     requestAnimationFrame(() => {
@@ -235,44 +214,40 @@ class MCSelectElement extends HTMLComponentElement {
   }
 
 
-  #focus(event) {
-    if (!this.#isFilter && event.target == this.#textfield) this.shadowRoot.querySelector('.focus-holder').focus();
-    else if (this.#isFilter && event.target === this.#textfield) {
+  #open() {
+    this.#menu.style.minWidth = `${this.offsetWidth}px`;
+    this.#menu.addEventListener('close', this.#handleClose_bound, { signal: this.#abort.signal });
+    window.addEventListener('keydown', this.#onKeyDown_bound, { signal: this.#abort.signal });
+    this.#menu.addEventListener('click', this.#optionClick_bound, { signal: this.#abort.signal });
+    this.#textfield.classList.add('raise-label');
+    this.ariaExpanded = true;
+
+    if (this.#isFilter) {
       this.#textfield.addEventListener('input', this.#filterInput_bound, { signal: this.#abort.signal });
       this.#textfield.addEventListener('blur', this.#blur_bound, { signal: this.#abort.signal });
+      this.#textfield.focus();
+    }
+  }
+
+  #handleClose() {
+    this.#menu.removeEventListener('close', this.#handleClose_bound);
+    window.removeEventListener('keydown', this.#onKeyDown_bound);
+    this.#menu.removeEventListener('click', this.#optionClick_bound);
+
+    if (this.#touched) {
+      this.#updateValidity();
+      this.#updateValidityDisplay();
+      this.#dirty = false;
     }
 
-    if (this.popoverTargetElement.matches(':popover-open')) return;
-    document.addEventListener('pointerup', this.#preventContextMenuClose_bound, { signal: this.#abort.signal });
+    if (this.#isFilter) this.value = this.value;
+    this.#textfield.classList.toggle('raise-label', !!this.value);
+    this.ariaExpanded = false;
   }
 
   #blur() {
     this.#textfield.removeEventListener('blur', this.#blur_bound);
     this.#textfield.removeEventListener('input', this.#filterInput_bound);
-  }
-
-
-  #toggle(event) {
-    if (event.newState === 'open') {
-      window.addEventListener('keydown', this.#onKeyDown_bound, { signal: this.#abort.signal });
-      this.addEventListener('click', this.#optionClick_bound, { signal: this.#abort.signal });
-      this.#textfield.classList.add('raise-label');
-      this.ariaExpanded = true;
-      // TODO scroll selected into view
-    } else {
-      window.removeEventListener('keydown', this.#onKeyDown_bound);
-      this.removeEventListener('click', this.#optionClick_bound);
-
-      if (this.#touched) {
-        this.#updateValidity();
-        this.#updateValidityDisplay();
-        this.#dirty = false;
-      }
-
-      if (this.#isFilter) this.value = this.value;
-      this.#textfield.classList.toggle('raise-label', !!this.value);
-      this.ariaExpanded = false;
-    }
   }
 
   #onKeyDown(event) {
@@ -285,6 +260,8 @@ class MCSelectElement extends HTMLComponentElement {
       && this.#previousFocusOption === firstOption
     ) {
       this.#textfield.focus();
+      event.stopImmediatePropagation();
+      event.preventDefault();
 
     // move from select input to first option
     } else if (
@@ -295,13 +272,16 @@ class MCSelectElement extends HTMLComponentElement {
       )
     ) {
       firstOption.focus();
-
+      event.stopImmediatePropagation();
+      event.preventDefault();
 
     } else if (event.key === 'Enter' && document.activeElement.nodeName === 'MC-OPTION') {
       document.activeElement.click();
     }
 
-    this.#previousFocusOption = document.activeElement;
+    setTimeout(() => {
+      this.#previousFocusOption = document.activeElement;
+    });
   }
 
   #preventContextMenuClose(event) {

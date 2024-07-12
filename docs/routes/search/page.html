@@ -1,0 +1,185 @@
+<article>
+  <header>
+    <h1>Search</h1>
+    <div class="page-subheader mc-font-title-medium">Search allows users to enter a keyword or phrase and get relevant information. It’s an alternative to other forms of navigation</div>
+    <a href="https://m3.material.io/components/search/overview" target="_new">Material Design Guidelines: Search</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#basic">Basic</a></li>
+        <li><a href="#history">History</a></li>
+        <li><a href="#speech">Speech</a></li>
+        <li><a href="#sections">Containers</a></li>
+        <li><a href="#filter">Filter chips</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="basic" aria-label="Search example">
+        <mc-card>
+          <div slot="headline">Standard</div>
+          <div slot="supporting-text">By default the search event only triggers on enter key. Look at next example for how to
+            change that.</div>
+        
+          <mc-search id="one" placeholder="search" incremental>
+            <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+            <mc-search-option-group id="secondary" label="Secondary"></mc-search-option-group>
+          </mc-search>
+        
+          <pre>
+            <code class="language-html">
+  ${`<!-- incremental debounces the input and fires the search
+    If not present then the enter key will fire the search -->
+  <mc-search id="one" placeholder="search" incremental>
+    <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+    <mc-search-option-group id="secondary" label="Secondary"></mc-search-option-group>
+  </mc-search>`}
+            </code>
+          </pre>
+        
+          <pre>
+            <code class="language-javascript">
+  // get selected value and object
+  searchOne.addEventListener('change', () => console.log(searchOne.selected, searchOne.selectedObject));
+    console.log('okokokko')
+  document.querySelector('mc-search#one').addEventListener('search', event => {
+    // set results
+    event.target.results = [{
+      value: 'one',
+      display: 'One',
+    },{
+      value: 'two',
+      display: 'Two',
+
+      // specify container to place in mc-search-option-group#secondary
+      container: 'secondary'
+    }].filter(v => v.display.toLocaleLowerCase().includes(event.target.value));
+
+
+    // set suggestions for searches
+    event.target.suggestions = [{
+      value: 'one'
+    },{
+      value: 'two'
+    }].filter(v => v.display.toLocaleLowerCase().includes(event.target.value));
+  });
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="history" aria-label="Search history">
+        <mc-card>
+          <h2 slot="headline">History</h2>
+          <div slot="supporting-text">Sow historical suggestions. History is stored in localstorage to maintains across refreshes
+          </div>
+        
+          <mc-search id="two" placeholder="search" incremental history>
+            <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+          </mc-search>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-search placeholder="search" incremental history>
+    <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+  </mc-search>
+  
+  <!-- set history id to use the same history for multiple searches -->
+  <mc-search placeholder="search" incremental history="id">
+    <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+  </mc-search>
+  
+  <!-- set history max. Default: 100 -->
+  <mc-search placeholder="search" incremental history history-max="100">
+    <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+  </mc-search>`}
+            </code>
+          </pre>
+        
+          <pre>
+            <code class="javascript">
+  ${`// clear search history
+  document.querySelector('mc-search').clearHistory();`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="speech" aria-label="Search with speech">
+        <mc-card>
+          <h2 slot="headline">Speech</h2>
+          <div slot="subhead">Speech recognition will only show if browser supports it</div>
+        
+          <mc-search id="three" placeholder="search" incremental speech>
+            <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+          </mc-search>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-search placeholder="search" incremental speech>
+    <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+  </mc-search>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="sections" aria-label="Search option groups">
+        <mc-card>
+          <h2 slot="headline">Option groups</h2>
+          <div slot="subhead">You can show results in multiple groups with headers</div>
+        
+          <mc-search id="four" placeholder="search" incremental>
+            <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+            <mc-search-option-group id="primary" label="Primary"></mc-search-option-group>
+            <mc-search-option-group id="secondary" label="Secondary"></mc-search-option-group>
+          </mc-search>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-search id="four" placeholder="search" incremental>
+    <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+    <mc-search-option-group id="primary" label="Primary"></mc-search-option-group>
+    <mc-search-option-group id="secondary" label="Secondary"></mc-search-option-group>
+  </mc-search>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="filter" aria-label="Search filter chips">
+        <mc-card>
+          <h2 slot="headline">Filter chips</h2>
+          <div slot="subhead">Add chip filters to search component</div>
+        
+          <mc-search id="five" placeholder="search" incremental>
+            <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+            <mc-chip filter label="Event numbers" slot="chips"></mc-chip>
+            <mc-search-container id="primary" label="Primary"></mc-search-container>
+            <mc-search-container id="secondary" label="Secondary"></mc-search-container>
+          </mc-search>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-search id="five" placeholder="search" incremental>
+    <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+    <mc-chip filter label="Event numbers" slot="chips"></mc-chip>
+    <mc-search-container id="primary" label="Primary"></mc-search-container>
+    <mc-search-container id="secondary" label="Secondary"></mc-search-container>
+  </mc-search>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

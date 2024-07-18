@@ -1,0 +1,266 @@
+<article>
+  <header>
+    <h1>Side sheets</h1>
+    <div class="page-subheader mc-font-title-medium">Side sheets are surfaces containing supplementary content or actions to support tasks as part of a flow</div>
+    <a href="https://m3.material.io/components/side-sheets/overview" target="_new">Material Design Guidelines: Side sheets</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#local">Local</a></li>
+        <li><a href="#global">Global</a></li>
+        <li><a href="#forms">Forms</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="local" aria-label="Side sheet example">
+        <mc-card>
+          <h2 slot="headline">Local</h2>
+          <div slot="subhead">Contained inside of div</div>
+        
+          <div class="example">
+            <div style="display: flex; flex-direction: column; width: 190px;">
+              <mc-switch onchange="page.oneOpen.value = this.checked" checked="${page.oneOpen}" label="Toggle"></mc-switch>
+              <mc-switch onchange="document.querySelector('#one').hideClose = this.checked" label="Close button hide"></mc-switch>
+              <mc-switch onchange="document.querySelector('#one').back = this.checked" label="back arrow"></mc-switch>
+              <mc-switch onchange="document.querySelector('#one').modal = this.checked" label="Modal"></mc-switch>
+              <mc-switch onchange="document.querySelector('#one').scrim = this.checked" label="Scrim (backdrop)"></mc-switch>
+            </div>
+            <div id="local-container"
+              style="display: flex; position: relative; height: 380px; overflow: hidden; margin: -16px; border-top: 1px solid var(--mc-outline); margin-top: 16px; padding-top: 0">
+              <div style="padding: 16px;">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna
+                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat. Duis
+                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna
+                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat. Duis
+                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+              </div>
+              <mc-side-sheet id="one" open="${page.oneOpen}" onchange="page.oneOpen.value = this.open"  onback="this.close();">
+                <div slot="headline">Headline</div>
+        
+                <div>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna
+                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                  Duis
+                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+        
+                <mc-button slot="action" onclick="this.parentElement.close()">cancel</mc-button>
+                <mc-button slot="action" onclick="this.parentElement.close()">save</mc-button>
+              </mc-side-sheet>
+            </div>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<div style="display: flex">
+    <div>
+      content...
+    </div>
+    <mc-side-sheet id="one" open="\${page.oneOpen}" onchange="page.oneOpen = this.open" onback="this.close();">
+      <div slot="headline">Headline</div>
+    
+      <div>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis
+        aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </div>
+    
+      <mc-button slot="action" onclick="this.parentElement.close()">cancel</mc-button>
+      <mc-button slot="action" onclick="this.parentElement.close()">save</mc-button>
+    </mc-side-sheet>
+  </div>
+  
+  
+  <!-- Attributes
+      hideClose - Hide close icon button
+      back - show back arrow
+      modal - use modal
+      scrom - show scrim (backdrop) when open
+      onback - event attribute for back button
+  -->
+  <mc-side-sheet open hideClose back modal scrim onback="this.close();"></mc-side-sheet>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="global" aria-label="Side sheet global">
+        <mc-card>
+          <h2 slot="headline">Global</h2>
+          <div slot="subhead">Place side sheet at the top level of the document, from any page</div>
+        
+          <div class="example">
+            <div style="display: flex; flex-direction: column; width: 190px;">
+              <mc-switch onchange="page.twoOpen.value = this.checked" checked="${page.twoOpen}" label="Toggle"></mc-switch>
+              <mc-switch onchange="document.querySelector('#two').inset = this.checked" label="Inset"></mc-switch>
+              <mc-switch onchange="document.querySelector('#two').scrim = this.checked" label="Scrim (backdrop)"></mc-switch>
+            </div>
+            <div style="display: flex">
+              <mc-side-sheet id="two" open="${page.twoOpen}" onchange="page.twoOpen.value = this.open" global>
+                <div slot="headline">Headline</div>
+        
+                <div class="font-size: 20px">One</div>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna
+                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                  Duis
+                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+        
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna
+                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                  Duis
+                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+        
+                <div class="font-size: 20px">Two</div>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna
+                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                  Duis
+                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+        
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna
+                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                  Duis
+                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+        
+                <mc-button slot="action" onclick="this.parentElement.close()">cancel</mc-button>
+                <mc-button slot="action" onclick="this.parentElement.close()">save</mc-button>
+              </mc-side-sheet>
+            </div>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<div style="display: flex">
+    <div>
+      content...
+    </div>
+    <mc-side-sheet global modal>
+      <div slot="headline">Headline</div>
+    
+      <h5>One</h5>
+      <p>
+        Lorem ipsum ...
+      </p>
+    
+      <mc-button slot="action" onclick="this.parentElement.close()">cancel</mc-button>
+      <mc-button slot="action" onclick="this.parentElement.close()">save</mc-button>
+    </mc-side-sheet>
+  </div>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="forms" aria-label="Side sheet with forms">
+        <mc-card>
+          <h2 slot="headline">Form with change detection</h2>
+          <div slot="supporting-text">Invalid forms prevent form submission. Cancel button will prevent click actions and show
+            dialog when form has changes.</div>
+        
+          <div class="example">
+            <div style="display: flex; flex-direction: column; width: 190px;">
+              <mc-switch onchange="page.threeOpen.value = this.checked" checked="${page.threeOpen}">Toggle</mc-switch>
+            </div>
+        
+            <div id="local-container"
+              style="display: flex; position: relative; height: 380px; overflow: hidden; margin: -16px; border-top: 1px solid var(--mc-outline); margin-top: 16px; padding-top: 0">
+              <div style="padding: 16px">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna
+                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                  Duis
+                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna
+                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                  Duis
+                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+              </div>
+              <mc-side-sheet id="formdialog" open="${page.threeOpen}" onchange="page.threeOpen.value = this.open" hide-close>
+                <div slot="headline">Headline</div>
+                <form id="test" method="dialog">
+                  <div style="font-size: 14px; margin-bottom: 8px;"><strong>Cancel</strong> checks for form changes and presents dialog</div>
+                  <div style="font-size: 14px; margin-bottom: 24px;"><strong>Save</strong> will validate the form</div>
+                  <div style="font-size: 14px; margin-bottom: 24px;"><strong>Close</strong> will disregard the form and close the sheet</div>
+                  <mc-textfield label="Required" supporting-test="Required" required value="one"
+                    class="outlined"></mc-textfield>
+                </form>
+                <mc-button slot="action" onclick="formdialog.close()">close</mc-button>
+                <mc-button slot="action" form="test" type="cancel">cancel</mc-button>
+                <mc-button slot="action" form="test" type="submit">save</mc-button>
+              </mc-side-sheet>
+            </div>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-side-sheet id="formdialog" hide-close>
+    <div slot="headline">Headline</div>
+    <form id="test" method="dialog">
+      <div style="font-size: 14px; margin-bottom: 8px;"><strong>Cancel</strong> checks for form changes and presents dialog</div>
+      <div style="font-size: 14px; margin-bottom: 24px;"><strong>Save</strong> will validate the form</div>
+      <div style="font-size: 14px; margin-bottom: 24px;"><strong>Close</strong> will disregard the form and close the sheet</div>
+      <mc-textfield label="Required" supporting-test="Required" required value="one"
+        class="outlined"></mc-textfield>
+    </form>
+    <mc-button slot="action" onclick="formdialog.close()">close</mc-button>
+    <mc-button slot="action" form="test" type="cancel">cancel</mc-button>
+    <mc-button slot="action" form="test" type="submit">save</mc-button>
+  </mc-side-sheet>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

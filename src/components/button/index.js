@@ -1,7 +1,7 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import '../state-layer/index.js';
-// import dialog from '../dialog/service.js';
+import dialog from '../dialog/service.js';
 
 const targetValues = ['_blank', '_parent', '_self', '_top'];
 
@@ -159,14 +159,14 @@ export default class MCButtonElement extends HTMLComponentElement {
 
   // prevent onclick attribute from firing when form invalid
   #formMouseDown() {
-    if (this.#type === 'cancel' && this.onclick && this.#formState !== undefined && this.#getFormState() !== this.#formState) {
+    if (this.type === 'cancel' && this.onclick && this.#formState !== undefined && this.#getFormState() !== this.#formState) {
       this.#onclickValue = this.onclick;
       this.onclick = undefined;
     }
   }
 
   #formMouseUp() {
-    if (this.#type === 'cancel' && this.#onclickValue) {
+    if (this.type === 'cancel' && this.#onclickValue) {
       setTimeout(() => {
         this.onclick = this.#onclickValue;
         this.#onclickValue = undefined;
@@ -175,7 +175,8 @@ export default class MCButtonElement extends HTMLComponentElement {
   }
 
   async #formClick(event) {
-    switch (this.#button.type) {
+    const type = this.type || this.#button.type;
+    switch (type) {
       case 'reset':
         this.form.reset();
         break;
@@ -197,26 +198,29 @@ export default class MCButtonElement extends HTMLComponentElement {
         }
         break;
 
-      // TODO
-      // case 'cancel':
-      //   if (this.#formState !== undefined && this.#getFormState() !== this.#formState) {
-      //     event.preventDefault();
-      //     event.stopPropagation();
-      //     event.stopImmediatePropagation();
+      case 'cancel':
+        if (this.#formState !== undefined && this.#getFormState() !== this.#formState) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
 
-      //     dialog.simple({
-      //       message: 'Discard changes?',
-      //       actionConfirm: true,
-      //       actionConfirmLabel: 'Cancel',
-      //       actionCancel: true,
-      //       actionCancelLabel: 'Discard'
-      //     }).then(action => {
-      //       if (action !== 'cancel') return;
-      //       this.#formState = undefined;
-      //       this.click();
-      //     });
-      //   }
-      //   break;
+          dialog.simple({
+            message: 'Discard changes?',
+            actionConfirm: true,
+            actionConfirmLabel: 'Cancel',
+            actionCancel: true,
+            actionCancelLabel: 'Discard'
+          }).then(action => {
+            if (action !== 'cancel') return;
+            this.#formState = undefined;
+            this.click();
+            this.dispatchEvent(new Event('cancel'));
+          });
+        } else {
+          this.click();
+          this.dispatchEvent(new Event('cancel'));
+        }
+        break;
 
       default:
         if (this.form.method === 'dialog') {

@@ -1,4 +1,5 @@
 import MCSideSheetElement from '../side-sheet/index.js';
+import sideSheetStyles from '../side-sheet/component.css';
 import styles from './component.css' assert { type: 'css' };
 import device from '../../helpers/device.js';
 
@@ -8,9 +9,8 @@ import device from '../../helpers/device.js';
 
 class MCNavigationDrawerElement extends MCSideSheetElement {
   static tag = 'mc-navigation-drawer';
-  static {
-    this.styleSheets.push(styles);
-  }
+  static styleSheets = [sideSheetStyles, styles];
+
 
   #locationchange_bound = this.#locationchange.bind(this);
   #windowStateChange_bound = this.#windowStateChange.bind(this);

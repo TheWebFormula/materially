@@ -3,6 +3,14 @@
   pointer-events: none;
 }
 
+:host([global]) {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  z-index: 10;
+}
+
 .surface {
   z-index: 22;
   overflow: hidden;
@@ -16,7 +24,11 @@
   pointer-events: none;
 }
 
-:host([open]) .surface {
+:host(.open) {
+  flex-shrink: 0;
+}
+
+:host(.open) .surface {
   pointer-events: all;
   width: var(--mc-side-sheet-width);
   transition: width;
@@ -38,7 +50,7 @@
   animation-timing-function: var(--mc-motion-easing-standard);
 }
 
-:host([modal][open]) .surface {
+:host([modal].open) .surface {
   box-shadow: var(--mc-elevation-2);
   animation-duration: var(--mc-motion-duration-medium3);
   animation-timing-function: var(--mc-motion-easing-standard-decelerate);
@@ -59,7 +71,7 @@
   transition-timing-function: var(--mc-motion-easing-standard);
 }
 
-:host([open][inset][modal]) .surface {
+:host(.open[inset][modal]) .surface {
   right: 16px;
   width: var(--mc-side-sheet-width);
   transition: width, right;
@@ -94,7 +106,8 @@
   padding-top: 8px;
 }
 
-:host([modal][scrim]) .scrim {
+:host([modal][scrim]) .scrim,
+:host([global][scrim]) .scrim {
   display: none;
   position: absolute;
   top: 0;
@@ -102,7 +115,7 @@
   right: 0;
   bottom: 0;
   pointer-events: none;
-  z-index: 20;
+  z-index: 9;
   opacity: 0;
   background-color: var(--mc-scrim);
   animation: scrim-close-animation;
@@ -110,7 +123,8 @@
   animation-timing-function: var(--mc-motion-easing-standard);
 }
 
-:host([modal][open][scrim]) .scrim {
+:host([modal].open[scrim]) .scrim,
+:host([global].open[scrim]) .scrim {
   display: block;
   overscroll-behavior: contain;
   opacity: 0.16;
@@ -120,11 +134,17 @@
   animation-timing-function: var(--mc-motion-easing-standard);
 }
 
+:host([global][scrim]) .scrim {
+  position: fixed;
+  z-index: -1;
+}
+
 
 .header {
   display: flex;
-  align-items: end;
+  align-items: center;
   justify-content: end;
+  margin-top: 12px;
 }
 
 slot[name="headline"] {
@@ -162,16 +182,12 @@ slot[name="headline"] {
 
 :host([back]) .back {
   display: inline-flex;
-  margin: 24px;
-  margin-right: 0;
-  margin-bottom: 8px;
+  margin-left: 12px;
 }
 
 :host(:not([hide-close])) .close {
   display: inline-flex;
-  margin: 24px;
-  margin-left: 12px;
-  margin-bottom: 8px;
+  margin-right: 12px;
 }
 
 .actions {

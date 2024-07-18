@@ -3,8 +3,7 @@ import styles from './component.css' assert { type: 'css' };
 import device from '../../helpers/device.js';
 import {
   close_FILL0_wght400_GRAD0_opsz24,
-  arrow_back_FILL1_wght300_GRAD0_opsz24,
-  arrow_back_ios_FILL1_wght300_GRAD0_opsz24
+  arrow_back_FILL1_wght300_GRAD0_opsz24
 } from '../../helpers/svgs.js';
 
 // TODO predictive back
@@ -16,12 +15,13 @@ export default class MCSideSheetElement extends HTMLComponentElement {
   static styleSheets = [styles];
 
   #abort;
+  #open = false;
   #openSet = false;
   #modalSet = false;
   #windowStateChange_bound = this.#windowStateChange.bind(this);
-  #scrimClick_bound = this.#scrimClick.bind(this);
-  #close_bound = this.#close.bind(this);
+  #close_bound = this.close.bind(this);
   #redispatchBack_bound = this.#redispatchBack.bind(this);
+  #formSubmit_bound = this.#formSubmit.bind(this);
 
   constructor() {
     super();
@@ -69,7 +69,6 @@ export default class MCSideSheetElement extends HTMLComponentElement {
       ['hide-close', 'boolean'],
       ['back', 'boolean'],
       ['onback', 'event']
-      // ['global', 'boolean'],
     ];
   }
 
@@ -82,9 +81,17 @@ export default class MCSideSheetElement extends HTMLComponentElement {
     if (!this.hideClose) this.shadowRoot.querySelector('.close').addEventListener('click', this.#close_bound, { signal: this.#abort.signal });
     if (this.back) this.shadowRoot.querySelector('.back').addEventListener('click', this.#redispatchBack_bound, { signal: this.#abort.signal });
     if (this.allowClose && this.scrim) {
-      this.shadowRoot.querySelector('.scrim').addEventListener('click', this.#scrimClick_bound, { signal: this.#abort.signal });
+      this.shadowRoot.querySelector('.scrim').addEventListener('click', this.#close_bound, { signal: this.#abort.signal });
     }
     window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound, { signal: this.#abort.signal });
+
+    let form = this.querySelector('form[method=dialog]');
+    if (form) {
+      form.addEventListener('submit', this.#formSubmit_bound, { signal: this.#abort.signal });
+
+      let cancelButton = this.querySelector('mc-button[form][type=cancel]');
+      if (cancelButton) cancelButton.addEventListener('cancel', this.#close_bound, { signal: this.#abort.signal });
+    }
   }
 
   disconnectedCallback() {
@@ -92,10 +99,11 @@ export default class MCSideSheetElement extends HTMLComponentElement {
   }
 
   get open() {
-    return this.hasAttribute('open');
+    return this.#open;
   }
   set open(value) {
-    this.toggleAttribute('open', !!value);
+    this.#open = !!value;
+    this.classList.toggle('open', this.#open);
   }
 
   get modal() {
@@ -138,7 +146,20 @@ export default class MCSideSheetElement extends HTMLComponentElement {
   }
 
   toggle() {
-    this.open = !this.open;
+    if (this.open) this.close();
+    else this.show();
+  }
+
+  show() {
+    const change = this.open === false;
+    this.open = true;
+    if (change) this.dispatchEvent(new CustomEvent('change'));
+  }
+
+  close() {
+    const change = this.open === true;
+    this.open = false;
+    if (change) this.dispatchEvent(new CustomEvent('change'));
   }
 
   #windowStateChange({ detail }) {
@@ -148,16 +169,13 @@ export default class MCSideSheetElement extends HTMLComponentElement {
     if (!this.#openSet) this.open = state !== device.COMPACT;
   }
 
-  #scrimClick() {
-    this.open = false;
-  }
-
-  #close() {
-    this.open = false;
-  }
-
   #redispatchBack() {
     this.dispatchEvent(new CustomEvent('back'));
+  }
+
+  #formSubmit(event) {
+    console.log(event);
+    this.close();
   }
 }
 

@@ -5,6 +5,7 @@ import './src/components/side-sheet/index.js';
 import './src/components/top-app-bar/index.js';
 import './src/components/button/index.js';
 import './src/components/card/index.js';
+import './src/components/carousel/index.js';
 import './src/components/navigation-bar/index.js';
 import './src/components/navigation-rail/index.js';
 import './src/components/pane/index.js';

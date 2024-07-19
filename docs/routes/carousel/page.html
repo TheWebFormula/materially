@@ -1,0 +1,333 @@
+<article>
+  <header>
+    <h1>Carousel</h1>
+    <div class="page-subheader mc-font-title-medium">Carousels show a collection of items that can be scrolled on and off the screen</div>
+    <a href="https://m3.material.io/components/carousel/overview" target="_new">Material Design Guidelines:
+      Carousel</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#standard">Basic</a></li>
+        <li><a href="#strategies">Strategies</a></li>
+        <li><a href="#text">Images and text</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="standard" aria-label="Carousel example">
+        <mc-card id="standard">
+          <h2 slot="headline" style="padding-left: 16px;">Basic</h2>
+        
+          <mc-carousel style="height: 180px; max-width: 400px; margin: 0 auto; margin-top: 24px;">
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+          </mc-carousel>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-carousel>
+    <mc-carousel-item width="170">
+      <img alt="landscape" loading="lazy"
+        src="..." />
+    </mc-carousel-item>
+    <mc-carousel-item width="170">
+      <img alt="landscape" loading="lazy"
+        src="..." />
+    </mc-carousel-item>
+  </mc-carousel>
+  
+  
+  <!-- Set width directly on item -->
+  <mc-carousel-item width="170"></mc-carousel-item>
+
+  <!-- If no width set and an img is used, then the image width will be used -->
+  <mc-carousel-item>
+    <img src="..." />
+  </mc-carousel-item>
+  
+  <!-- If no width is set, the offsetWidth will be used -->
+  <mc-carousel-item>
+    ...
+  </mc-carousel-item>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="strategies" aria-label="Carousel strategies">
+        <mc-card>
+          <h2 slot="headline" style="padding-left: 16px;">Strategies</h2>
+          <div slot="subhead" style="padding-left: 16px;">There are 3 strategies: multi-browser, hero-start, hero-centered
+          </div>
+        
+          <div class="supporting-text" style="text-align: center; margin-top: 56px;">multi-browser</div>
+          <mc-carousel style="height: 180px; max-width: 400px; margin: 0 auto; margin-top: 24px;">
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+          </mc-carousel>
+        
+          <div class="supporting-text" style="text-align: center; margin-top: 56px;">hero-start</div>
+          <mc-carousel strategy="hero-start" style="height: 180px; max-width: 400px; margin: 0 auto; margin-top: 24px;">
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+          </mc-carousel>
+        
+          <div class="supporting-text" style="text-align: center; margin-top: 56px;">hero-center</div>
+          <mc-carousel strategy="hero-center" style="height: 180px; max-width: 400px; margin: 0 auto; margin-top: 24px; margin-bottom: 24px;">
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+          </mc-carousel>
+        
+          <pre>
+            <code class="language-html">
+  ${`<!-- multi-browser -->
+  <mc-carousel>
+    <mc-carousel-item width="170">
+      <img alt="landscape" loading="lazy"
+        src="..." />
+    </mc-carousel-item>
+  </mc-carousel>
+  
+  <!-- hero-start -->
+  <mc-carousel strategy="hero-start">
+    <mc-carousel-item>
+      <img alt="landscape" loading="lazy"
+        src="..." />
+    </mc-carousel-item>
+  </mc-carousel>
+  
+  <!-- hero-center -->
+  <mc-carousel strategy="hero-center">
+    <mc-carousel-item>
+      <img alt="landscape" loading="lazy"
+        src="..." />
+    </mc-carousel-item>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="text" aria-label="Carousel with text">
+        <mc-card>
+          <h2 slot="headline" style="padding-left: 16px;">Images and text</h2>
+        
+          <mc-carousel mc-item-width="170" style="height: 180px; max-width: 400px; margin: 0 auto; margin-top: 24px;">
+            <mc-carousel-item width="170">
+              <div slot="title">Title</div>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <div slot="title">Title</div>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <div slot="title">Title</div>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <div slot="title">Title</div>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <div slot="title">Title</div>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <div slot="title">Title</div>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <div slot="title">Title</div>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <div slot="title">Title</div>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+            <mc-carousel-item width="170">
+              <div slot="title">Title</div>
+              <img alt="landscape" loading="lazy"
+                src="https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg" />
+            </mc-carousel-item>
+          </mc-carousel>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-carousel mc-item-width="170" style="height: 180px;">
+    <mc-carousel-item width="170">
+      <div class="mc-text">
+        <div>Title</div>
+      </div>
+      <img alt="landscape" loading="lazy" src="./img.jpg"/>
+    </mc-carousel-item>
+    <mc-carousel-item width="170">
+      <div class="mc-text">
+        <div>Title</div>
+      </div>
+      <img alt="landscape" loading="lazy" src="./img.jpg"/>
+    </mc-carousel-item>
+    <mc-carousel-item width="170">
+      <div class="mc-text">
+        <div>Title</div>
+      </div>
+      <img alt="landscape" loading="lazy" src="./img.jpg"/>
+    </mc-carousel-item>
+  </mc-carousel>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

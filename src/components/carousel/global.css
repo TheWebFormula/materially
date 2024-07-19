@@ -1,0 +1,25 @@
+mc-carousel {
+  display: flex;
+  background-color: var(--mc-surface);
+  margin: 8px 16px;
+  min-height: 80px;
+  overflow-x: auto;
+  border-radius: var(--mc-shape-extra-large);
+  opacity: 0;
+}
+
+mc-carousel::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background-color: transparent;
+}
+
+mc-carousel.loaded {
+  opacity: 1;
+  transition: opacity 240ms;
+}
+
+mc-carousel .carousel-front-padding,
+mc-carousel .carousel-back-padding {
+  flex-shrink: 0;
+}

@@ -1,0 +1,160 @@
+<article>
+  <header>
+    <h1>Navigation: Draws, rails, bottom bars</h1>
+    <div class="page-subheader mc-font-title-medium">Navigation drawers provide ergonomic access to destinations in an app. Navigation rails provide access to primary destinations in apps when using tablet and
+    desktop screens. Navigation bars let people switch between UI views on smaller devices</div>
+    <div style="display: flex; flex-direction: column;">
+      <a href="https://m3.material.io/components/navigation-drawer/overview" target="_new">Material Design Guidelines:
+        Navigation drawer</a>
+      <a href="https://m3.material.io/components/navigation-rail/overview" target="_new">Material Design Guidelines:
+        Navigation rail</a>
+      <a href="https://m3.material.io/components/navigation-bar/overview" target="_new">Material Design Guidelines:
+        Navigation bar</a>
+    </div>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#drawer">Drawer</a></li>
+        <li><a href="#rail">Rail</a></li>
+        <li><a href="#bar">Bar</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="drawer" aria-label="Navigation drawer">
+        <mc-card>
+          <h2 slot="headline">Drawer</h2>
+          <div slot="supporting-text">Navigation drawer will auto hide based on screen size if there is also navigation rail
+            / bar</div>
+          
+          <div class="example">
+            <iframe src="./routes/navigation/drawer-index.html" title="navigation-drawer" style="height: 360px;"></iframe>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<body>
+    <!-- you can change the width by setting this css var on the BODY style="--mc-navigation-drawer-width: 290px;" default: 360px -->
+
+    <mc-navigation-drawer>
+      <div slot="header" class="headline">Headline</div>
+    
+      <mc-anchor href="/">
+        <mc-icon slot="leading-icon">home</mc-icon>
+        Welcome
+      </mc-anchor>
+      <mc-anchor href="/mail" badge="9999">
+        <mc-icon slot="leading-icon">mail</mc-icon>
+        mail
+      </mc-anchor>
+      <mc-anchor href="/one">One</mc-anchor>
+      <mc-anchor href="/two">Two</mc-anchor>
+    </mc-navigation-drawer>
+  
+    <!-- page-content -->
+  </body>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="rail" aria-label="Navigation rail">
+        <mc-card>
+          <h2 slot="headline">Navigation rail</h2>
+          <div slot="supporting-text">Navigation rail will auto hide based on screen size if there is also navigation drawer
+            / bar</div>
+        
+          <div class="example">
+            <iframe src="./routes/navigation/rail-index.html" title="navigation-rail" style="height: 360px;"></iframe>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<body>
+    <mc-navigation-drawer>
+      ...
+    </mc-navigation-drawer>
+    
+    <mc-navigation-rail>
+      <mc-anchor href="/">
+        <mc-icon slot="leading-icon">home</mc-icon>
+      </mc-anchor>
+    
+      <mc-anchor href="/one">
+        <mc-icon slot="leading-icon">apps</mc-icon>
+        One
+      </mc-anchor>
+    
+      <mc-anchor href="/two">
+        <mc-icon slot="leading-icon">palette</mc-icon>
+        Two
+      </mc-anchor>
+    </mc-navigation-rail>
+    
+    <!-- page-content -->
+    
+    <!--optional  -->
+    <mc-navigation-bar>
+      ...
+    </mc-navigation-bar>
+  </body>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="bar" aria-label="Navigation bar">
+        <mc-card>
+          <h2 slot="headline">Navigation bar</h2>
+          <div slot="supporting-text">Navigation bars will auto hide based on screen size if there is also navigation drawer /
+            rail</div>
+
+          <div class="example">
+            <iframe src="./routes/navigation/bar-index.html" title="navigation-bar" style="height: 360px; max-width: 500px; margin: 0 auto;"></iframe>
+          </div>
+
+          <pre>
+            <code class="language-html">
+  ${`<body>    
+    <!-- optional -->
+    <mc-navigation-drawer>
+      ...
+    </mc-navigation-drawer>
+
+    <!-- optional -->
+    <mc-navigation-rail>
+      ...
+    </mc-navigation-rail>
+  
+    <!-- page-content -->
+    
+    <!-- can add auto-hide class to hide on scroll -->
+    <mc-navigation-bar auto-hide>
+      <mc-icon-button onclick="document.querySelector('mc-navigation-drawer').toggle()">
+        <mc-icon>menu</mc-icon>
+      </mc-icon-button>
+    
+      <mc-anchor href="/">
+        <mc-icon slot="leading-icon">home</mc-icon>
+      </mc-anchor>
+    
+      <mc-anchor href="/getting-started">
+        <mc-icon slot="leading-icon">apps</mc-icon>
+        Get started
+      </mc-anchor>
+    </mc-navigation-bar>
+  </body>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

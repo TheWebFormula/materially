@@ -18,6 +18,7 @@ class MCSwitchElement extends HTMLComponentElement {
   #abort;
   #checked = false;
   #initiating = true;
+  #touched = false;
   #updateValue_bound = this.#updateValue.bind(this);
 
   
@@ -173,15 +174,18 @@ class MCSwitchElement extends HTMLComponentElement {
   }
 
   formResetCallback() {
+    this.#touched = false;
+    this.#updateValidityDisplay(true);
     this.checked = this.hasAttribute('checked');
     this.#input.classList.remove('touched');
   }
 
-  #updateValidityDisplay() {
-    this.#input.classList.add('touched');
+  #updateValidityDisplay(valid = this.#input.checkValidity()) {
+    this.#input.classList.add('touched', valid);
   }
 
   #updateValidity() {
+    this.#touched = true;
     this.#internals.setValidity(this.#input.validity, this.#input.validationMessage || '', this.#input);
   }
 
@@ -189,8 +193,10 @@ class MCSwitchElement extends HTMLComponentElement {
     this.#checked = this.#input.checked;
     this.setAttribute('aria-checked', this.#checked.toString());
     this.#internals.setFormValue(this.#checked ? this.value : null, this.#checked ? 'checked' : undefined);
-    this.#updateValidity();
-    this.#updateValidityDisplay();
+    if (this.#touched) {
+      this.#updateValidity();
+      this.#updateValidityDisplay();
+    }
     if (!this.#initiating) this.dispatchEvent(new Event('change', { bubbles: true }));
   }
 }

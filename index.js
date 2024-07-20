@@ -38,5 +38,6 @@ export {
   mcDevice,
   mcDialog,
   mcUtil,
-  mcSnackbar
+  mcSnackbar,
+  MCSwipe
 } from './src/services.js';

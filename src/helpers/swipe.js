@@ -1,12 +1,4 @@
-const directions = [
-  'right',
-  'down',
-  'left',
-  'up'
-];
-
-
-export default class Swipe {
+const MCSwipe = class MCSwipe {
   #abort;
   #enabled = false;
   #element;
@@ -255,3 +247,7 @@ class SwipeEndEvent extends TouchEvent {
     this.clientY = event.clientY;
   }
 }
+
+
+window.MCSwipe = MCSwipe;
+export default MCSwipe;

@@ -51,7 +51,7 @@ dialog {
   overscroll-behavior: contain;
   clip-path: inherit;
 
-  padding-top: var(--mc-padding-top, 0);
+  padding-top: var(--mc-padding-top, var(--mc-padding));
 
 
   &::backdrop {

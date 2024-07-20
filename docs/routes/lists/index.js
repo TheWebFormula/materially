@@ -19,7 +19,8 @@ export default class extends Component {
   }
 
   disconnectedCallback() {
-    document.querySelector('#list-reorder').removeEventListener('reorder', this.#listReorder_bound);
+    const list = document.querySelector('#list-reorder');
+    if (list) list.removeEventListener('reorder', this.#listReorder_bound);
   }
 
   #listReorder(event) {

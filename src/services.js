@@ -1,15 +1,15 @@
-// import mcDate from './core/dateUtil.js';
-// import mcDevice from './core/device.js';
+import mcDate from './helpers/date.js';
+import mcDevice from './helpers/device.js';
 import mcDialog from './components/dialog/service.js';
 import mcSnackbar from './components/snackbar/service.js';
-// import mcUtil from './core/util.js';
+import mcUtil from './helpers/util.js';
 import mcSwipe from './helpers/Swipe.js';
 
 export {
-  // mcDate,
-  // mcDevice,
+  mcDate,
+  mcDevice,
   mcDialog,
-  // mcUtil,
+  mcUtil,
   mcSnackbar,
   mcSwipe
 }

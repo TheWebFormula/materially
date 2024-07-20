@@ -43,6 +43,10 @@ const mcDate = new class MCDate {
     this.#setFormatters();
   }
 
+  get hourCycle() {
+    return Intl.DateTimeFormat(this.#locale, { hour: 'numeric' }).resolvedOptions().hourCycle;
+  }
+
   parse(value) {
     if (value === undefined) return undefined;
 

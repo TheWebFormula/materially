@@ -21,6 +21,12 @@ const mcUtil = new class MCUtil {
     };
   }
 
+  toggleColorScheme(scheme) {
+    const isDark = ['dark', 'light'].includes(scheme) ? scheme === 'dark' : !document.documentElement.classList.contains('mc-theme-dark');
+    document.documentElement.classList.toggle('mc-theme-dark', isDark);
+    return isDark ? 'dark' : 'light';
+  }
+
   // can use array of strings ['one', 'two']
   // can also use array of objects with label property [{ label: 'one' }, { label: 'two' }] || [{ value: 'one' }, { value: 'two' }]
   fuzzySearch(searchTerm, items = [], distanceCap = 0.2) {
@@ -55,26 +61,6 @@ const mcUtil = new class MCUtil {
 
     return walker.nextNode();
   }
-
-  // getFocusableElements(parent, excludeCB = () => { }) {
-  //   const walker = document.createTreeWalker(parent, NodeFilter.SHOW_ELEMENT);
-  //   let node;
-  //   let elements = [];
-  //   while (node = walker.nextNode()) {
-  //     if (!excludeCB(node) && this.#isElementFocusable(node)) elements.push(node);
-  //   }
-  //   return elements;
-  // }
-
-  // #isElementFocusable(element) {
-  //   if (!element) return false;
-  //   return !element.hasAttribute('disabled') && (
-  //     element.nodeName === 'MC-TEXTFIELD'
-  //     || element.role === 'menuitem'
-  //     || element.role === 'option'
-  //     || element.tabindex > -1
-  //   );
-  // }
 
   // <div>one<div></div></div> === one
   getTextFromNode(element) {

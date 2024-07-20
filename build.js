@@ -3,7 +3,7 @@ import esbuild from 'esbuild';
 import { readFile, writeFile } from 'node:fs/promises';
 import { gzip } from 'node:zlib';
 import { promisify } from 'node:util';
-// import generate from '@webformula/material/themeGenerator';
+// import generate from '@thewebformula/materially/themeGenerator';
 
 const asyncGzip = promisify(gzip);
 const cssFilterRegex = /\.css$/;

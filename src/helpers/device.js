@@ -50,6 +50,16 @@ const mcDevice = new class MCDevice {
     return this.#state;
   }
 
+  get orientation() {
+    // screen.orientation does not work on chrome ios. window.orientation is deprecated but works on chrom ios for now
+    if (screen?.orientation ? screen.orientation.type.startsWith('portrait') : Math.abs(window.orientation) !== 90) return 'portrait';
+    return 'landscape';
+  }
+
+  get hasTouchScreen() {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  }
+
   get hasNavigationDrawer() {
     return this.#hasNavigationDrawer;
   }
@@ -81,15 +91,6 @@ const mcDevice = new class MCDevice {
         document.body.classList.add('window-expanded');
         break;
     }
-
-    // if (!this.#lastState || state !== this.#lastState.state) {
-    //   window.dispatchEvent(new CustomEvent('mcwindowstatechange', {
-    //     detail: {
-    //       state,
-    //       lastState: this.#lastState?.state
-    //     }
-    //   }));
-    // }
 
     window.dispatchEvent(new CustomEvent('mcwindowstatechange', {
       detail: {

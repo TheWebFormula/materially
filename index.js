@@ -34,9 +34,9 @@ import './src/components/time-picker/index.js';
 import './src/components/search/index.js';
 
 export {
-  // mcDate,
-  // mcDevice,
+  mcDate,
+  mcDevice,
   mcDialog,
-  // mcUtil,
-  // mcSnackbar
+  mcUtil,
+  mcSnackbar
 } from './src/services.js';

@@ -55,16 +55,19 @@ class MCNavigationBarElement extends HTMLComponentElement {
   get hide() {
     return this.#hide;
   }
-  set hide (value) {
+  set hide(value) {
     this.#hide = !!value;
     this.classList.toggle('hide', !!value);
-    this.#stateCallbacks.forEach(cb => cb(this.#hide));
+
+    const hidden = this.#autoHide ? device.state !== device.COMPACT || this.#hide : this.#hide;
+    this.#stateCallbacks.forEach(cb => cb(hidden));
   }
 
 
   onState(callback) {
     this.#stateCallbacks.push(callback);
-    callback(this.hide)
+    const hidden = this.#autoHide ? device.state !== device.COMPACT || this.#hide : this.#hide;
+    callback(hidden);
   }
 
   offState(callback) {
@@ -106,7 +109,8 @@ class MCNavigationBarElement extends HTMLComponentElement {
   }
 
   #windowStateChange({ detail }) {
-    this.classList.toggle('window-compact', detail.state === device.COMPACT);
+    const compact = detail.state === device.COMPACT;
+    this.classList.toggle('window-compact', compact);
   }
 }
 customElements.define(MCNavigationBarElement.tag, MCNavigationBarElement);

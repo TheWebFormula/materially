@@ -174,7 +174,6 @@ export default class MCSideSheetElement extends HTMLComponentElement {
   }
 
   #formSubmit(event) {
-    console.log(event);
     this.close();
   }
 }

@@ -176,7 +176,6 @@ export default class MCBottomSheetElement extends HTMLComponentElement {
       return;
     }
 
-    // console.log(this.#isScrolling, this.#position >= this.#topPosition, event.directionY === -1);
     if (this.#isScrolling) return;
 
     // container has been drag to top and needs to be converted to scroll

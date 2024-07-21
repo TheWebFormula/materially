@@ -62,7 +62,6 @@ export default class MCCardGroupElement extends HTMLComponentElement {
     this.classList.toggle('window-compact', device.state === device.COMPACT);
     requestAnimationFrame(() => {
       this.#layout(); 
-      console.log('layout')
     });
   }
 

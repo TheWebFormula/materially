@@ -20,6 +20,8 @@ const MCSwipe = class MCSwipe {
 
   #startX;
   #startY;
+  #lastX;
+  #lastY;
   #startTime;
   #endX;
   #endY;
@@ -34,7 +36,8 @@ const MCSwipe = class MCSwipe {
     moveStartThreshold: 10,
     horizontalScrollThreshold: 20,
     maxTimeMS: 200,
-    includeMouse: false
+    includeMouse: false,
+    disableScroll: false
   }) {
     if (!(element instanceof HTMLElement)) throw Error('HTMLElement required');
 
@@ -54,6 +57,11 @@ const MCSwipe = class MCSwipe {
       this.#moveEvent = 'pointermove';
       this.#endEvent = 'pointerup';
     }
+  }
+
+  get disableScroll() { return this.#disableScroll; }
+  set disableScroll(value) {
+    this.#disableScroll = !!value;
   }
 
 
@@ -87,6 +95,8 @@ const MCSwipe = class MCSwipe {
     this.#element.classList.add('swipe-active');
     this.#startX = this.#getClientX(event);
     this.#startY = this.#getClientY(event);
+    this.#lastX = this.#startX;
+    this.#lastY = this.#startY;
     this.#startTime = Date.now();
     window.addEventListener(this.#endEvent, this.#end_bound, { signal: this.#abort.signal });
     window.addEventListener(this.#moveEvent, this.#move_bound, { signal: this.#abort.signal });
@@ -159,8 +169,10 @@ const MCSwipe = class MCSwipe {
   }
 
   #move(event) {
-    let dx = this.#getClientX(event) - this.#startX;
-    let dy = this.#getClientY(event) - this.#startY;
+    let clientX = this.#getClientX(event);
+    let clientY = this.#getClientY(event);
+    let dx = clientX - this.#startX;
+    let dy = clientY - this.#startY;
     
     // end if user is scrolling
     if (this.#horizontalOnly && Math.abs(dy) > this.#horizontalScrollThreshold && Math.abs(dx) < this.#moveStartThreshold) {
@@ -170,11 +182,17 @@ const MCSwipe = class MCSwipe {
     
     // TODO lock page scroll?
     let distance = Math.sqrt(dx * dx + dy * dy);
+    let deltaDistanceX = clientX - this.#lastX;
+    let deltaDistanceY = clientY - this.#lastY;
+    this.#lastX = clientX;
+    this.#lastY = clientY;
     let swipeEvent = new SwipeMoveEvent(
       event,
       distance,
       dx,
-      dy
+      dy,
+      deltaDistanceX,
+      deltaDistanceY
     );
     this.#element.dispatchEvent(swipeEvent);
   }
@@ -198,7 +216,7 @@ class SwipeEvent extends TouchEvent {
 }
 
 class SwipeMoveEvent extends TouchEvent {
-  constructor(event, distance, distanceX, distanceY) {
+  constructor(event, distance, distanceX, distanceY, deltaDistanceX, deltaDistanceY) {
     super('swipemove', {
       bubbles: true,
       changedTouches: event.changedTouches,
@@ -209,6 +227,10 @@ class SwipeMoveEvent extends TouchEvent {
     this.distance = distance;
     this.distanceX = distanceX;
     this.distanceY = distanceY;
+    this.deltaDistanceX = deltaDistanceX;
+    this.deltaDistanceY = deltaDistanceY;
+    this.directionX = distanceX === 0 ? 0 : distanceX > 0 ? 1 : -1;
+    this.directionY = distanceY === 0 ? 0 : distanceY > 0 ? 1 : -1;
     this.clientX = event.clientX;
     this.clientY = event.clientY;
   }
@@ -241,6 +263,8 @@ class SwipeEndEvent extends TouchEvent {
     this.distance = distance;
     this.distanceX = distanceX;
     this.distanceY = distanceY;
+    this.directionX = distanceX === 0 ? 0 : distanceX > 0 ? 1 : -1;
+    this.directionY = distanceY === 0 ? 0 : distanceY > 0 ? 1 : -1;
     this.velocity = velocity;
     this.swipe = isSwipe;
     this.clientX = event.clientX;

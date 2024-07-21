@@ -3,6 +3,7 @@ import './src/components/icon/index.js';
 import './src/components/navigation-drawer/index.js';
 import './src/components/side-sheet/index.js';
 import './src/components/top-app-bar/index.js';
+import './src/components/bottom-sheet/index.js';
 import './src/components/button/index.js';
 import './src/components/card/index.js';
 import './src/components/carousel/index.js';

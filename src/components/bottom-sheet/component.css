@@ -1,0 +1,83 @@
+:host {
+  position: relative;
+  display: contents;
+  max-width: 640px;
+  min-height: 100%;
+  height: 100%;
+  max-height: 100%;
+
+  border-radius: var(--mc-shape-extra-large-top);
+}
+
+:host(:not(.window-compact)) {
+  display: none;
+}
+
+:host(.fullscreen) {
+  border-radius: 0;
+}
+
+.handle {
+  flex-shrink: 0;
+  align-self: center;
+  width: 36px;
+  height: 4px;
+  border-radius: var(--mc-shape-extra-small);
+  margin-top: 8px;
+  margin-bottom: 12px;
+  background-color: var(--mc-on-surface-variant);
+}
+
+:host([fixed-height]) .handle {
+  display: none;
+}
+
+.surface-container {
+  height: 100%;
+  max-height: 100%;
+  overflow: visible;
+  overscroll-behavior: contain;
+  background-color: var(--mc-surface-container-low);
+  box-shadow: var(--mc-elevation-3);
+}
+
+.surface {
+  position: fixed;
+  bottom: var(--mc-bottom-sheet-bottom, 100%);
+  right: 0;
+  left: 0;
+  height: 100%;
+  /* max-height: inherit; */
+  margin-right: auto;
+  margin-left: auto;
+  overflow: visible;
+  z-index: 8;
+}
+
+:host(:not(.open)) .surface {
+  bottom: 100%;
+}
+
+.surface-content {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  padding-top: 12px;
+}
+
+:host(.has-bottom-app-bar) .surface-content,
+:host(.has-navigation-bar.window-compact) .surface-content {
+  margin-bottom: 80px;
+}
+
+:host([fixed-height]) .surface-content {
+  padding-top: 24px;
+}
+
+.surface.animate-position {
+  transition: bottom 300ms cubic-bezier(0, 0.55, 0.45, 1);
+}
+
+.predictive-back-icon {
+  top: 50px;
+}

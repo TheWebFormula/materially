@@ -18,6 +18,7 @@
 }
 
 ::slotted(mc-pane) {
+  max-width: 100%;
   padding: 16px;
   box-sizing: border-box;
   border-radius: var(--mc-shape-large);

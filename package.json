@@ -1,12 +1,52 @@
 {
-  "name": "materially",
+  "name": "@thewebformula/materially",
   "version": "0.1.0",
   "description": "Material design web components",
   "type": "module",
-  "main": "index.js",
+  "main": "./src/index.js",
   "exports": {
     ".": "./index.js",
-    "./services": "./src/services.js"
+    "./theme-generator": "./src/theme-generator.js",
+    "./services": "./src/services.js",
+    "./services/date": "./src/helpers/date.js",
+    "./services/device": "./src/helpers/device.js",
+    "./services/dialog": "./src/components/dialog/service.js",
+    "./services/snackbar": "./src/components/snackbar/service.js",
+    "./services/util": "./src/helpers/util.js",
+    "./components/anchor": "./src/components/anchor/index.js",
+    "./components/avatar": "./src/components/avatar/index.js",
+    "./components/badge": "./src/components/badge/index.js",
+    "./components/bottom-app-bar": "./src/components/bottom-app-bar/index.js",
+    "./components/bottom-sheet": "./src/components/bottom-sheet/index.js",
+    "./components/button": "./src/components/button/index.js",
+    "./components/card": "./src/components/card/index.js",
+    "./components/checkbox": "./src/components/checkbox/index.js",
+    "./components/chip": "./src/components/chip/index.js",
+    "./components/date-picker": "./src/components/date-picker/index.js",
+    "./components/dialog": "./src/components/dialog/index.js",
+    "./components/fab": "./src/components/fab/index.js",
+    "./components/form": "./src/components/form/index.js",
+    "./components/icon": "./src/components/icon/index.js",
+    "./components/list": "./src/components/list/index.js",
+    "./components/menu": "./src/components/menu/index.js",
+    "./components/navigation-bar": "./src/components/navigation-bar/index.js",
+    "./components/navigation-drawer": "./src/components/navigation-drawer/index.js",
+    "./components/navigation-rail": "./src/components/navigation-rail/index.js",
+    "./components/progress-circular": "./src/components/progress-circular/index.js",
+    "./components/progress-linear": "./src/components/progress-linear/index.js",
+    "./components/radio": "./src/components/radio/index.js",
+    "./components/search": "./src/components/search/index.js",
+    "./components/segmented-button": "./src/components/segmented-button-group/index.js",
+    "./components/select": "./src/components/select/index.js",
+    "./components/side-sheet": "./src/components/side-sheet/index.js",
+    "./components/slider": "./src/components/slider/index.js",
+    "./components/snackbar": "./src/components/snackbar/index.js",
+    "./components/switch": "./src/components/switch/index.js",
+    "./components/tab": "./src/components/tab/index.js",
+    "./components/textfield": "./src/components/textfield/index.js",
+    "./components/time-picker": "./src/components/time-picker/index.js",
+    "./components/tooltip": "./src/components/tooltip/index.js",
+    "./components/top-app-bar": "./src/components/top-app-bar/index.js"
   },
   "scripts": {
     "start": "node --watch-path=./src --watch-path=./docs build.js",
@@ -31,8 +71,11 @@
   },
   "homepage": "https://github.com/TheWebFormula/materially#readme",
   "devDependencies": {
-    "esbuild": "^0.21.3",
     "@thewebformula/lithe": "^0.6.1",
-    "@thewebformula/materially": "file:./"
+    "@thewebformula/materially": "file:./",
+    "esbuild": "^0.21.3"
+  },
+  "dependencies": {
+    "@material/material-color-utilities": "^0.3.0"
   }
 }

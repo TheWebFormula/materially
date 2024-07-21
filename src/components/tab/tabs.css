@@ -1,0 +1,35 @@
+:host {
+  position: relative;
+  align-items: end;
+  display: flex;
+  height: 100%;
+  overflow: inherit;
+  justify-content: space-between;
+  width: 100%;
+}
+
+:host::-webkit-scrollbar {
+  display: none;
+}
+
+.indicator {
+  position: absolute;
+  box-sizing: border-box;
+  transform-origin: bottom left;
+  border-radius: 3px;
+  height: 3px;
+  background-color: var(--mc-primary);
+
+  transition: left, right;
+  transition-timing-function: var(--mc-motion-easing-standard), var(--mc-motion-easing-standard);
+  transition-duration: var(--mc-motion-duration-medium2);
+  transition-delay: 40ms, 0ms;
+}
+
+.indicator.left {
+  transition-delay: 0ms, 40ms;
+}
+
+::slotted(*) {
+  flex: 1;
+}

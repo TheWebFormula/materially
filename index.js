@@ -30,6 +30,7 @@ import './src/components/segmented-button/index.js';
 import './src/components/tooltip/index.js';
 import './src/components/chip/index.js';
 import './src/components/date-picker/index.js';
+import './src/components/tab/index.js';
 import './src/components/time-picker/index.js';
 import './src/components/search/index.js';
 

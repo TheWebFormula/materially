@@ -1,0 +1,96 @@
+<article>
+  <header>
+    <h1>Tabs</h1>
+    <div class="page-subheader mc-font-title-medium">Tabs organize content across different screens, data sets, and other interactions</div>
+    <a href="https://m3.material.io/components/tabs/overview" target="_new">Material Design Guidelines: Tabs</a>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#basic">Example</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="basic" aria-label="Tab example">
+        <mc-card>
+          <h2 slot="headline">Example</h2>
+        
+          <div class="example" title="test">
+            <mc-tabs>
+              <mc-tab id="tab-1" aria-controls="panel-1">One</mc-tab>
+              <mc-tab id="tab-2" aria-controls="panel-2">Two</mc-tab>
+              <mc-tab id="tab-3" aria-controls="panel-3">Three</mc-tab>
+            </mc-tabs>
+
+            <mc-tab-panel-group>
+              <div
+                role="tabpanel"
+                id="panel-1"
+                aria-labelledby="tab-1"
+                style="padding: 24px 12px">
+                One content
+              </div>
+              <div
+                role="tabpanel"
+                id="panel-2"
+                aria-labelledby="tab-2"
+                style="padding: 24px 12px"
+                hidden>
+                Two content
+              </div>
+              <div
+                role="tabpanel"
+                id="panel-3"
+                aria-labelledby="tab-3"
+                style="padding: 24px 12px"
+                hidden>
+                Three content
+              </div>
+            </mc-tab-panel-group>
+          </div>
+        
+          <pre>
+            <code class="language-html">
+  ${`<mc-tabs>
+    <mc-tab id="tab-1" aria-controls="panel-1">One</mc-tab>
+    <mc-tab id="tab-2" aria-controls="panel-2">Two</mc-tab>
+    <mc-tab id="tab-3" aria-controls="panel-3">Three</mc-tab>
+  </mc-tabs>
+  
+  <!-- mc-tab-panel-group provides sliding animations on tab change. It is not required to make panels work -->
+  <mc-tab-panel-group>
+    <div
+      role="tabpanel"
+      id="panel-1"
+      aria-labelledby="tab-1"
+      style="padding: 24px 12px">
+      One content
+    </div>
+    <div
+      role="tabpanel"
+      id="panel-2"
+      aria-labelledby="tab-2"
+      style="padding: 24px 12px"
+      hidden>
+      Two content
+    </div>
+    <div
+      role="tabpanel"
+      id="panel-3"
+      aria-labelledby="tab-3"
+      style="padding: 24px 12px"
+      hidden>
+      Three content
+    </div>
+  </mc-tab-panel-group>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

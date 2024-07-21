@@ -1,0 +1,47 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  padding: 0 16px;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  vertical-align: middle;
+  user-select: none;
+  cursor: pointer;
+  font-size: var(--mc-font-small-title-size);
+  font-weight: var(--mc-font-small-title-weight);
+  letter-spacing: var(--mc-font-small-title-tracking);
+  line-height: var(--mc-font-small-title-line-height);
+  color: var(--mc-on-surface-variant);
+  background-color: var(--mc-surface);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+}
+
+.container.has-icon {
+  height: 64px
+}
+
+::slotted([slot='icon']) {
+  display: inline-flex;
+  position: relative;
+  writing-mode: horizontal-tb;
+  fill: currentColor;
+  color: var(--mc-on-surface-variant);
+}
+
+mc-state-layer {
+  border-radius: 24px;
+  margin: 8px;
+  box-sizing: border-box;
+  --mc-state-layer-focus-color: var(--mc-on-surface);
+  --mc-state-layer-hover-color: var(--mc-primary);
+  --mc-state-layer-ripple-color: var(--mc-primary);
+}

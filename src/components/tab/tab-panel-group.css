@@ -1,0 +1,41 @@
+mc-tab-panel-group {
+  display: block;
+  position: relative;
+  overflow-x: hidden;
+}
+
+mc-tab-panel-group [role=tabpanel] {
+  width: 100%;
+  animation: tabopanelfromHidden;
+  animation-timing-function: var(--mc-motion-easing-standard-decelerate);
+  animation-duration: var(--mc-motion-duration-extra-long1);
+}
+
+mc-tab-panel-group [role=tabpanel][hidden] {
+  position: absolute;
+  top: 0;
+  display: none;
+  animation: tabpaneltoHidden;
+  animation-timing-function: var(--mc-motion-easing-standard-decelerate);
+  animation-duration: var(--mc-motion-duration-long4);
+}
+
+@keyframes tabopanelfromHidden {
+  from {
+    transform: translateX(var(--mc-tab-panel-from-x));
+  }
+  to {
+    transform: translateX(var(--mc-tab-panel-to-x));
+  }
+}
+
+@keyframes tabpaneltoHidden {
+  from {
+    display: revert;
+    transform: translateX(var(--mc-tab-panel-from-x));
+  }
+  to {
+    display: revert;
+    transform: translateX(var(--mc-tab-panel-to-x));
+  }
+}

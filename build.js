@@ -64,20 +64,20 @@ build({
   devWarnings: false,
   spa: true,
   chunks: false,
+  gzip: false,
   basedir: 'docs/',
   outdir: 'dist/',
   securityLevel: 0,
   copyFiles: [
     { from: 'docs/favicon.ico', to: 'dist/' },
-    { from: 'docs/woman.jpg', to: 'dist/', gzip: true },
-    { from: 'docs/icons.woff2', to: 'dist/', gzip: true },
-    { from: 'docs/outlined-icons-variable.woff2', to: 'dist/', gzip: true },
-    { from: 'docs/rounded-icons.woff2', to: 'dist/', gzip: true },
-    { from: 'docs/highlight-11.8.0.js', to: 'dist/', gzip: true },
+    { from: 'docs/woman.jpg', to: 'dist/' },
+    { from: 'docs/icons.woff2', to: 'dist/' },
+    { from: 'docs/outlined-icons-variable.woff2', to: 'dist/' },
+    { from: 'docs/rounded-icons.woff2', to: 'dist/' },
+    { from: 'docs/highlight-11.8.0.js', to: 'dist/' },
     {
       from: 'docs/routes/**/(?!page)*.html',
       to: 'dist/routes/',
-      gzip: true,
       transform({ content, outputFileNames }) {
         if (outputFileNames) return content.replace(cssTagRegex, () => {
           const filename = outputFileNames
@@ -88,8 +88,8 @@ build({
         return content;
       }
     },
-    { from: 'docs/manifest.json', to: 'dist/', gzip: true },
-    { from: 'docs/icons/*', to: 'dist/icons/', gzip: true }
+    { from: 'docs/manifest.json', to: 'dist/' },
+    { from: 'docs/icons/*', to: 'dist/icons/' }
   ],
   onStart() {
     // build separate file for iframe pages without app code.

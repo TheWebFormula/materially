@@ -1,6 +1,6 @@
 {
-  "name": "Material Webformula",
-  "short_name": "mc-material",
+  "name": "@thewebformula/materially",
+  "short_name": "materially",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#fdf8fd",
@@ -8,78 +8,13 @@
   "description": "Material design v3 web components. Performant, light-weight, full features, optimized for multiple devices",
   "icons": [
     {
-      "src": "icons/mc48.png",
-      "sizes": "48x48",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/mc72.png",
-      "sizes": "72x72",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/mc96.png",
-      "sizes": "96x96",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/mc144.png",
-      "sizes": "144x144",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/mc168.png",
-      "sizes": "168x168",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/mc192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/mc512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/mc48.png",
-      "sizes": "48x48",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "icons/mc72.png",
-      "sizes": "72x72",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "icons/mc96.png",
-      "sizes": "96x96",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "icons/mc144.png",
-      "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "icons/mc168.png",
-      "sizes": "168x168",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "icons/mc192.png",
+      "src": "/icons/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "icons/mc512.png",
+      "src": "/icons/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

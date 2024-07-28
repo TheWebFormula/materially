@@ -71,7 +71,7 @@
   },
   "homepage": "https://github.com/TheWebFormula/materially#readme",
   "devDependencies": {
-    "@thewebformula/lithe": "^0.6.1",
+    "@thewebformula/lithe": "^0.7.2",
     "@thewebformula/materially": "file:./",
     "esbuild": "^0.21.3"
   },

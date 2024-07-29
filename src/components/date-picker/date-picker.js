@@ -31,6 +31,7 @@ class MCDatePickerElement extends MCSurfaceElement {
   #isNextDrag = false;
   #nextDragDate;
   #previousDragDate;
+  #dirty = false;
   #textfieldFocus_bound = this.#textfieldFocus.bind(this);
   #textfieldBlur_bound = this.#textfieldBlur.bind(this);
   #handleClose_bound = this.#handleClose.bind(this);
@@ -215,6 +216,7 @@ class MCDatePickerElement extends MCSurfaceElement {
 
   get selectedDate() { return this.#selectedDate; }
   set selectedDate(value) {
+    this.#dirty = this.open && this.#selectedDate !== value;
     this.#selectedDate = value;
     this.#textfield.value = this.#selectedDate ? dateUtil.format(this.#selectedDate, 'YYYY-MM-dd') : '';
   }
@@ -253,6 +255,7 @@ class MCDatePickerElement extends MCSurfaceElement {
 
 
   show() {
+    this.#dirty = false;
     this.classList.remove('input-view');
 
     if (this.#modal) super.showModal();
@@ -415,13 +418,19 @@ class MCDatePickerElement extends MCSurfaceElement {
   }
 
   #okClick() {
+    if (this.#dirty) {
+      this.dispatchEvent(new Event('change', { bubbles: true }));
+      this.#dirty = false;
+    }
     this.close();
   }
 
   #clearClick() {
     this.displayDate = dateUtil.parse(dateUtil.today());
+    const change = !!this.#selectedDate;
     this.selectedDate = undefined;
     this.#changeDate();
+    if (this.open && change) this.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
   #monthListClick(event) {

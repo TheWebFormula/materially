@@ -23,14 +23,14 @@
         <mc-card>
           <h2 slot="headline">Time</h2>
         
-          <mc-textfield label="Time" type="time">
+          <mc-textfield label="Time" type="time" value="12:30" onchange="page.tv.value = value;">
             <mc-icon slot="leading-icon">schedule</mc-icon>
             <mc-time-picker slot="picker"></mc-time-picker>
           </mc-textfield>
         
           <pre>
             <code class="language-html">
-  ${`<mc-textfield label="Time" type="time">
+  ${`<mc-textfield label="Time" type="time" value="12:30">
     <mc-icon slot="leading-icon">schedule</mc-icon>
     <mc-time-picker slot="picker"></mc-time-picker>
   </mc-textfield>`}

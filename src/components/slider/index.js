@@ -108,7 +108,12 @@ class MCSliderElement extends HTMLComponentElement {
       this.valueEnd = this.valueEnd;
       this.#inputEnd.addEventListener('input', this.#onInputEnd_bound, { signal: this.#abort.signal });
     } else {
-      this.#onInputStart();
+      if (!this.#range) {
+        this.#value = this.#inputStart.value;
+        this.#updateValue();
+      } else {
+        this.#valueStart = this.#inputStart.value;
+      }
     }
     this.#updateValidity();
   }
@@ -125,18 +130,25 @@ class MCSliderElement extends HTMLComponentElement {
     if (this.#range) return;
 
     this.#value = value;
-    this.#inputStart.value = value;
+    this.#updateValue();
+  }
+
+  #updateValue() {
+    this.#inputStart.value = this.#value;
     this.#internals.setFormValue(this.#inputStart.value);
     this.#valueLabelStart.innerHTML = this.#value;
     let percent = parseInt(((this.#value - this.min) / (this.max - this.min)) * 100);
     if (percent <= 0) percent = 0;
     else if (percent >= 100) percent = 100;
-    else this.dispatchEvent(new Event('change', { bubbles: true }));
     this.shadowRoot.querySelector('.container').style.setProperty('--mc-slider-active-end', `${percent}%`);
   }
 
   get valueStart() { return this.#valueStart; }
   set valueStart(value) {
+    this.#updateStartValue(value);
+  }
+
+  #updateStartValue(value) {
     value = parseFloat(value);
 
     if (value >= this.valueEnd) value = this.#valueEnd;
@@ -151,7 +163,6 @@ class MCSliderElement extends HTMLComponentElement {
     let percent = ((this.#valueStart - this.min) / (this.max - this.min)) * 100;
     if (percent <= 0) percent = 0;
     else if (percent >= 100) percent = 100;
-    else this.dispatchEvent(new Event('change', { bubbles: true }));
     this.shadowRoot.querySelector('.container').style.setProperty('--mc-slider-active-start', `${percent}%`);
 
     this.#updateRangeDisplay();
@@ -159,6 +170,10 @@ class MCSliderElement extends HTMLComponentElement {
 
   get valueEnd() { return this.#valueEnd; }
   set valueEnd(value) {
+    this.#updateEndValue(value);
+  }
+
+  #updateEndValue(value) {
     value = parseFloat(value);
 
     if (value <= this.valueStart) value = this.#valueStart;
@@ -173,7 +188,6 @@ class MCSliderElement extends HTMLComponentElement {
     let percent = parseInt(((this.#valueEnd - this.min) / (this.max - this.min)) * 100);
     if (percent <= 0) percent = 0;
     else if (percent >= 100) percent = 100;
-    else this.dispatchEvent(new Event('change', { bubbles: true }));
     this.shadowRoot.querySelector('.container').style.setProperty('--mc-slider-active-end', `${percent}%`);
 
     this.#updateRangeDisplay(true);
@@ -253,18 +267,26 @@ class MCSliderElement extends HTMLComponentElement {
 
 
   #onInputStart() {
+    let change = false;
+
     if (!this.#range) {
-      this.value = this.#inputStart.value;
+      change = this.#value !== this.#inputStart.value;
+      this.#value = this.#inputStart.value;
+      this.#updateValue();
     } else {
-      this.valueStart = this.#inputStart.value;
+      change = this.#valueStart !== this.#inputStart.value;
+      this.#updateStartValue(this.#inputStart.value);
     }
 
     this.#updateValidity();
+    if (change) this.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
   #onInputEnd() {
-    this.valueEnd = this.#inputEnd.value;
+    let change = this.#valueEnd !== this.#inputEnd.value;
+    this.#updateEndValue(this.#inputEnd.value);
     this.#updateValidity();
+    if (change) this.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
   #updateValidity() {

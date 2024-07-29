@@ -262,7 +262,10 @@ class MCTimePickerElement extends MCSurfaceElement {
   }
 
   #ok() {
-    this.#textfield.value = `${this.paddedHour24}:${this.paddedMinute}`;
+    let newValue = `${this.paddedHour24}:${this.paddedMinute}`;
+    let change = this.#textfield.value !== newValue;
+    this.#textfield.value = newValue;
+    if (this.open && change) this.dispatchEvent(new Event('change', { bubbles: true }));
     this.close();
   }
 

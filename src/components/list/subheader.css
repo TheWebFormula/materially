@@ -9,7 +9,7 @@
   font-size: var(--mc-font-small-body-size);
   font-weight: var(--mc-font-small-body-weight);
   letter-spacing: var(--mc-font-small-body-tracking);
-  color: var(--mc-on-surface-variant-alpha-76);
+  color: rgba(from var(--mc-on-surface-variant) r g b / 76%);
 
   background-color: var(--mc-surface);
   transition: background-color;

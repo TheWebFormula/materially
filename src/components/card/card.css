@@ -385,7 +385,7 @@
   border-radius: var(--mc-shape-medium) 0 0 var(--mc-shape-medium);
   box-sizing: border-box;
 
-  background-color: var(--mc-surface-tint-alpha-16);
+  background-color: rgba(from var(--mc-surface-tint) r g b / 16%);
   color: var(--mc-on-surface-variant);
 }
 
@@ -403,7 +403,7 @@
 }
 
 [name="swipe-action"][checked] {
-  background-color: var(--mc-surface-tint-alpha-38);
+  background-color: rgba(from var(--mc-surface-tint) r g b / 38%);
 }
 
 [name="swipe-action"][checked]::slotted(mc-icon) {

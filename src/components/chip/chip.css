@@ -131,7 +131,7 @@ button {
   display: block;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-bottom: 5px solid var(--mc-on-surface-alpha-60);
+  border-bottom: 5px solid rgba(from var(--mc-on-surface) r g b / 60%);
   margin-left: 8px;
   margin-right: -4px;
   transform-origin: center;
@@ -198,7 +198,7 @@ input {
 
 @media (hover: hover) {
   :host([input]) .clear:hover::after {
-    background-color: var(--mc-on-surface-alpha-12);
+    background-color: rgba(from var(--mc-on-surface) r g b / 12%);
   }
 }
 

@@ -66,7 +66,7 @@ slot[name="trailing-icon"] {
   font-size: var(--mc-font-large-label-size);
   font-weight: var(--mc-font-large-label-weight);
   letter-spacing: var(--mc-font-large-label-tracking);
-  color: var(--mc-on-surface-variant-alpha-76);
+  color: rgba(from var(--mc-on-surface-variant) r g b / 76%);
 }
 
 .filter-no-results .no-results {

@@ -3,7 +3,7 @@ import esbuild from 'esbuild';
 import { readFile, writeFile } from 'node:fs/promises';
 import { gzip } from 'node:zlib';
 import { promisify } from 'node:util';
-// import generate from '@thewebformula/materially/themeGenerator';
+import generate from '@thewebformula/materially/theme-generator';
 
 const asyncGzip = promisify(gzip);
 const cssFilterRegex = /\.css$/;
@@ -43,22 +43,22 @@ const context = await esbuild.context({
   minify: true
 });
 
-// if (process.env.NODE_ENV === 'production') generate({
-//   coreColors: {
-//     primary: '#6750A4',
-//     // secondary: '#625B71',
-//     // tertiary: '#7D5260',
-//     // neutral: '#67616f',
-//     // neutralVariant: '#605666',
-//     // error: '#B3261E'
-//   },
-//   // customColors: [
-//   //   {
-//   //     name: 'customColor',
-//   //     color: '#5b7166'
-//   //   }
-//   // ]
-// }, './docs/colorTokens.css');
+if (process.env.NODE_ENV === 'production') generate({
+  coreColors: {
+    primary: '#6750A4',
+    // secondary: '#625B71',
+    // tertiary: '#7D5260',
+    // neutral: '#67616f',
+    // neutralVariant: '#605666',
+    // error: '#B3261E'
+  },
+  // customColors: [
+  //   {
+  //     name: 'customColor',
+  //     color: '#5b7166'
+  //   }
+  // ]
+}, './docs/colorTokens.css');
 
 build({
   devWarnings: false,

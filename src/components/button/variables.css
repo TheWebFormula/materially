@@ -6,8 +6,8 @@
   --mc-button-color-filled: var(--mc-on-primary);
   --mc-button-container-color-filled: var(--mc-primary);
 
-  --mc-button-color-disabled: var(--mc-on-surface-alpha-38);
-  --mc-button-container-color-disabled: var(--mc-on-surface-alpha-12);
+  --mc-button-color-disabled: rgba(from var(--mc-on-surface) r g b / 38%);
+  --mc-button-container-color-disabled: rgba(from var(--mc-on-surface) r g b / 12%);
 
   --mc-button-color-elevated: var(--mc-primary);
   --mc-button-container-color-elevated: var(--mc-surface-container-low);

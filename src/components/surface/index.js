@@ -24,7 +24,7 @@ export default class MCSurfaceElement extends HTMLComponentElement {
   #closeIgnoreElements = [];
   #handleCancel_bound = this.#handleCancel.bind(this);
   #handleClose_bound = this.#handleClose.bind(this);
-  #preventEsc_bound = this.#preventEsc.bind(this);
+  #handleEsc_bound = this.#handleEsc.bind(this);
   #clickOutsideClose_bound = this.#clickOutsideClose.bind(this);
   #scroll_bound = this.#scroll.bind(this);
 
@@ -166,15 +166,23 @@ export default class MCSurfaceElement extends HTMLComponentElement {
     this.#dialog.addEventListener('cancel', this.#handleCancel_bound, { signal: this.#abort.signal });
     this.#dialog.addEventListener('close', this.#handleClose_bound, { signal: this.#abort.signal });
 
-    if (this.#allowClose) {
-      window.addEventListener('keydown', this.#preventEsc_bound, { signal: this.#abort.signal });
+    window.addEventListener('keydown', this.#handleEsc_bound, { signal: this.#abort.signal });
 
-      // prevent immediate close because of click propagation
-      window.addEventListener('click', () => {
+    if (this.#allowClose) {
+      
+      if (util.pointerDown) {
+        // prevent immediate close because of click propagation
+        window.addEventListener('click', () => {
+          console.log('click');
+          setTimeout(() => {
+            if (this.open) window.addEventListener('click', this.#clickOutsideClose_bound, { signal: this.#abort.signal });
+          });
+        }, { once: true });
+      } else {
         setTimeout(() => {
-          if (this.open) window.addEventListener('click', this.#clickOutsideClose_bound, { signal: this.#abort.signal });
+          window.addEventListener('click', this.#clickOutsideClose_bound, { signal: this.#abort.signal });
         });
-      }, { once: true });
+      }
     }
     this.dispatchEvent(new Event('open', { bubbles: true }));
   }
@@ -218,15 +226,18 @@ export default class MCSurfaceElement extends HTMLComponentElement {
     else this.#dialog.style.left = `${left}px`;
   }
 
-  #preventEsc(event) {
-    if (event.key === 'Escape') this.close();
+  #handleEsc(event) {
+    if (event.key === 'Escape') {
+      if (this.#allowClose) this.close();
+      else event.preventDefault();
+    }
   }
 
   async #handleClose() {
     this.removeAttribute('open');
     this.#dialog.removeEventListener('cancel', this.#handleCancel_bound);
     this.#dialog.removeEventListener('close', this.#handleClose_bound);
-    window.removeEventListener('keydown', this.#preventEsc_bound);
+    window.removeEventListener('keydown', this.#handleEsc_bound);
     window.removeEventListener('click', this.#clickOutsideClose_bound);
     window.removeEventListener('scroll', this.#scroll_bound);
     if (this.removeOnClose) {

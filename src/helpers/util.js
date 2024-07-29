@@ -1,11 +1,27 @@
 import fuzzySearch from './fuzzySearch.js';
 
 
+let pointerDown = false;
+window.addEventListener('pointerdown', () =>  pointerDown = true);
+window.addEventListener('pointerup', () => pointerDown = false);
+
 const mcUtil = new class MCUtil {
   #textWidthCanvas;
   #scrollHandler_bound = this.#scrollHandler.bind(this);
 
+  /**
+  * Globally tracked mouse down state
+  * @return {Boolean}
+  */
+  get pointerDown() {
+    return pointerDown;
+  }
 
+  /**
+   * Throttling controlled by requestAnimationFrame
+   * @function
+   * @param {String} fn - Callback function
+   */
   rafThrottle(fn) {
     let alreadyQueued;
     return function throttled() {
@@ -21,18 +37,45 @@ const mcUtil = new class MCUtil {
     };
   }
 
+  /**
+   * Toggle color scheme between dark and light
+   * @function
+   * @param {String} scheme - 'dark' or 'light'
+   */
   toggleColorScheme(scheme) {
     const isDark = ['dark', 'light'].includes(scheme) ? scheme === 'dark' : !document.documentElement.classList.contains('mc-theme-dark');
     document.documentElement.classList.toggle('mc-theme-dark', isDark);
     return isDark ? 'dark' : 'light';
   }
 
-  // can use array of strings ['one', 'two']
-  // can also use array of objects with label property [{ label: 'one' }, { label: 'two' }] || [{ value: 'one' }, { value: 'two' }]
+  /**
+   * Fuzzy search using Jaro winkler distance
+   * can use array of strings ['one', 'two']
+   * can also use array of objects with label property [{ label: 'one' }, { label: 'two' }] || [{ value: 'one' }, { value: 'two' }]
+   * @function
+   * @param {String} searchTerm - String used for searching
+   * @param {Array.<{value:String, label:String}> | Array.<String>} items - String used for searching
+   * @param {Number} distanceCap - 0 - 1
+   * @return {Array.<{value:String, label:String}> | Array.<String>} - filtered array
+   */
   fuzzySearch(searchTerm, items = [], distanceCap = 0.2) {
     return fuzzySearch(searchTerm, items, distanceCap);
   }
 
+
+  /**
+  * @callback acceptFilter
+  * @param  {HTMLElement} node - current node to run logic on
+  * @return {boolean}
+  */
+  /**
+   * Get next / previous focusable element based on parent element
+   * @function
+   * @param {HTMLElement} containerElement - Parent element containing focus children
+   * @param {Boolean} previous - switch to previous element
+   * @param {acceptFilter} acceptFilter - function with custom filtering logic
+   * @return {Array.<{value:String, label:String}> | Array.<String>} - filtered array
+   */
   getNextFocusableElement(containerElement, previous = false, acceptFilter = () => { return true; }) {
     let walker = document.createNodeIterator(
       containerElement,
@@ -62,7 +105,13 @@ const mcUtil = new class MCUtil {
     return walker.nextNode();
   }
 
-  // <div>one<div></div></div> === one
+  /**
+   * Get text from node recursively
+   * Example: <div>one<div></div></div> === one
+   * @function
+   * @param {HTMLElement} element - element to get text from
+   * @return {String}
+   */
   getTextFromNode(element) {
     let nextNode;
     let hasHitTextNode = false;
@@ -79,6 +128,12 @@ const mcUtil = new class MCUtil {
       .trim();
   }
 
+  /**
+   * Async function for animationend event
+   * @function
+   * @param {HTMLElement} element
+   * @return {Promise}
+   */
   async animationendAsync(element) {
     return new Promise(resolve => {
       function onAnimationend(e) {
@@ -92,6 +147,12 @@ const mcUtil = new class MCUtil {
     });
   }
 
+  /**
+   * Async function for transitionend event
+   * @function
+   * @param {HTMLElement} element
+   * @return {Promise}
+   */
   async transitionendAsync(element) {
     return new Promise(resolve => {
       function onTransitionend() {
@@ -105,6 +166,12 @@ const mcUtil = new class MCUtil {
     });
   }
 
+  /**
+   * Async function for nextAnimationFrameAsync
+   * @function
+   * @param {HTMLElement} element
+   * @return {Promise}
+   */
   async nextAnimationFrameAsync() {
     return new Promise(resolve => {
       requestAnimationFrame(() => {
@@ -113,6 +180,12 @@ const mcUtil = new class MCUtil {
     });
   }
 
+  /**
+   * Debounce function
+   * @function
+   * @param {Function} fn - Callback function
+   * @param {Int} wait - Milliseconds. Default is 10ms
+   */
   debounce(fn, wait) {
     let timer;
     return function debounced() {
@@ -132,6 +205,12 @@ const mcUtil = new class MCUtil {
   #lastScrollTop;
   #lastScrollDirection;
   #distanceFromDirectionChange = 0;
+
+  /**
+   * Global page scroll tracking
+   * @function
+   * @param {Function} callback - Callback function
+   */
   trackPageScroll(callback = () => { }) {
     if (this.#scrollCallbacks.length === 0) {
       if (!this.#initialScroll) this.#lastScrollTop = document.documentElement.scrollTop;
@@ -141,6 +220,11 @@ const mcUtil = new class MCUtil {
     this.#scrollCallbacks.push(callback);
   }
 
+  /**
+   * Untrack Global page scroll tracking
+   * @function
+   * @param {Function} callback - Callback function
+   */
   untrackPageScroll(callback = () => { }) {
     this.#scrollCallbacks = this.#scrollCallbacks.filter(c => c !== callback);
     if (this.#scrollCallbacks.length === 0) window.removeEventListener('scroll', this.#scrollHandler_bound);
@@ -170,6 +254,12 @@ const mcUtil = new class MCUtil {
   }
 
 
+  /**
+   * Get input text width
+   * @function
+   * @param {HTMLInputElement} inputElement
+   * @return {Int}
+   */
   getTextWidthFromInput(inputElement) {
     if (!inputElement || inputElement.nodeName !== 'INPUT') throw Error('requires input element');
     if (!this.#textWidthCanvas) this.#textWidthCanvas = document.createElement('canvas');
@@ -184,6 +274,20 @@ const mcUtil = new class MCUtil {
 
 
   #longPressListeners = [];
+  /**
+   * @typedef {Object} addLongPressListenerConfig
+   * @property  {Int} ms - How long to wait till considered pressed
+   * @property  {Boolean} disableMouseEvents
+   * @property  {Boolean} disableTouchEvents
+   * @property  {Boolean} once - Auto remove after first event
+   */
+  /**
+   * Get input text width
+   * @function
+   * @param {HTMLInputElement} element
+   * @param {String} listener
+   * @param {addLongPressListenerConfig} config
+   */
   addLongPressListener(element, listener, config = {
     ms: 450,
     disableMouseEvents: false,
@@ -257,6 +361,11 @@ const mcUtil = new class MCUtil {
     });
   }
 
+  /**
+   * Remove long press event listener
+   * @function
+   * @param {HTMLInputElement} element
+   */
   removeLongPressListener(element) {
     this.#longPressListeners = this.#longPressListeners.filter(v => {
       if (v.element === element) {
@@ -269,6 +378,17 @@ const mcUtil = new class MCUtil {
 
 
   #clickTimeoutListeners = [];
+  /**
+   * @typedef {Object} addClickTimeoutEventOptions
+   * @property  {Signal} signal - AbortController signal
+   */
+  /**
+   * Click event that auto remove after period of time
+   * @function
+   * @param {HTMLInputElement} element
+   * @param {String} listener
+   * @param {addClickTimeoutEventOptions} options
+   */
   addClickTimeoutEvent(element, listener, options) {
     let timer;
 
@@ -304,6 +424,12 @@ const mcUtil = new class MCUtil {
     });
   }
 
+  /**
+   * Remove click timeout event listener
+   * @function
+   * @param {HTMLInputElement} element
+   * @param {String} listener
+   */
   removeClickTimeoutEvent(element, listener) {
     this.#clickTimeoutListeners = this.#clickTimeoutListeners.filter(v => {
       if (v.element === element && v.listener === listener) {

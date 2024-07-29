@@ -12,7 +12,6 @@ import Drag from '../../helpers/Drag.js';
 import Swipe from '../../helpers/Swipe.js';
 
 
-// TODO window state change
 // TODO variables.css
 
 export default class MCCardElement extends HTMLComponentElement {

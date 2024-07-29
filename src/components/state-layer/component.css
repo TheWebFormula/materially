@@ -55,6 +55,12 @@
   outline-offset: var(--mc-state-layer-focus-indicator-offset);
 }
 
+:host(.focus[noring]) {
+  box-shadow: var(--mc-state-layer-focus-box-shadow);
+  outline: none;
+  outline-offset: 0;
+}
+
 :host(.hover) {
   box-shadow: var(--mc-state-layer-hover-box-shadow);
 }

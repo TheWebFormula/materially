@@ -15,6 +15,7 @@ export default class MCStateLayer extends HTMLComponentElement {
   #ripple;
   #rippleEnabled;
   #preventFocus = false;
+  #preventfocusnodename;
   #onFocus_bound = this.#onFocus.bind(this);
   #onBlur_bound = this.#onBlur.bind(this);
   #mouseEnter_bound = this.#mouseEnter.bind(this);
@@ -34,7 +35,8 @@ export default class MCStateLayer extends HTMLComponentElement {
     return [
       ['for', 'string'],
       ['enabled', 'boolean'],
-      ['ripple', 'boolean']
+      ['ripple', 'boolean'],
+      ['preventfocusnodename', 'string']
     ];
   }
 
@@ -79,6 +81,13 @@ export default class MCStateLayer extends HTMLComponentElement {
     }
   }
 
+  get preventfocusnodename() {
+    return this.#preventfocusnodename;
+  }
+  set preventfocusnodename(value) {
+    this.#preventfocusnodename = value;
+  }
+
   template() {
     return '<div class="background"></div><div class="ripple"></div>';
   }
@@ -120,13 +129,16 @@ export default class MCStateLayer extends HTMLComponentElement {
     if (this.#ripple) this.#ripple.destroy();
   }
 
-  #onFocus() {
+  #onFocus(event) {
     if (this.#preventFocus) {
       this.#preventFocus = false;
       return;
     }
     this.#forElement.addEventListener('focusout', this.#onBlur_bound);
-    this.classList.add('focus');
+
+    // implemented to handle dialogs automatically focusing on last element for some components (mc-button from mc-menu-item)
+    const relatedTargetNodeName = event.relatedTarget && event.relatedTarget.nodeName;
+    if (!relatedTargetNodeName || this.#preventfocusnodename !== relatedTargetNodeName) this.classList.add('focus');
   }
 
   #onBlur() {

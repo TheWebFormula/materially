@@ -165,7 +165,6 @@ export default class MCSideSheetElement extends HTMLComponentElement {
   #windowStateChange({ detail }) {
     const state = detail.state;
     if (!this.#modalSet) this.modal = state === device.COMPACT;
-    // TODO medium with rail
     if (!this.#openSet) this.open = state !== device.COMPACT;
   }
 

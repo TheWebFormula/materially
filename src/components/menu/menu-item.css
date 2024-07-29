@@ -4,7 +4,6 @@
   box-sizing: border-box;
   display: inline-flex;
   gap: 12px;
-  /* overflow: hidden; */
   padding: 12px 16px;
   position: relative;
   text-overflow: ellipsis;
@@ -22,7 +21,7 @@
   -webkit-tap-highlight-color: transparent;
 
 
-  border-radius: var(--mc-shape-extra-small);
+  border-radius: none;
 }
 
 :host([disabled]) {
@@ -48,7 +47,6 @@ button {
   color: inherit;
   padding: 0;
   gap: 8px;
-  /* padding: 0 16px; */
 }
 
 :host(.selected) {

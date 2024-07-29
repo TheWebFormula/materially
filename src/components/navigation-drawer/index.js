@@ -4,7 +4,11 @@ import styles from './component.css' assert { type: 'css' };
 import device from '../../helpers/device.js';
 
 
-// TODO fix top position when on mobile.
+/* TODO fix top position when on mobile.
+ *    This is caused when grid main area is wider than available space.
+ *    I added max width restrictions to the page-container so this may be fixed
+ *    I was seeing this on some doc pages in mobile view
+ */
 
 
 class MCNavigationDrawerElement extends MCSideSheetElement {

@@ -187,7 +187,7 @@ class MCSelectElement extends HTMLComponentElement {
 
     this.#menu.addEventListener('open', this.#open_bound, { signal: this.#abort.signal });
 
-    // this.addEventListener('mousedown', this.#rightClick_bound, { signal: this.#abort.signal });
+    this.addEventListener('mousedown', this.#rightClick_bound, { signal: this.#abort.signal });
     this.shadowRoot.querySelector('.options-container').addEventListener('slotchange', this.#slotChange_bound, { signal: this.#abort.signal });
 
     requestAnimationFrame(() => {

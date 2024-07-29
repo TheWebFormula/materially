@@ -53,7 +53,7 @@ export default class MCButtonElement extends HTMLComponentElement {
         <slot class="default-slot"></slot>
       </button>
       <div class="spinner"></div>
-      <mc-state-layer ripple></mc-state-layer>
+      <mc-state-layer ripple preventfocusnodename="MC-MENU-ITEM"></mc-state-layer>
     `;
   }
 

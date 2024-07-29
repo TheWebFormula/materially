@@ -165,12 +165,14 @@ export default class MCSurfaceElement extends HTMLComponentElement {
   #showAfter() {
     this.#dialog.addEventListener('cancel', this.#handleCancel_bound, { signal: this.#abort.signal });
     this.#dialog.addEventListener('close', this.#handleClose_bound, { signal: this.#abort.signal });
-    if (!this.#allowClose) window.addEventListener('keydown', this.#preventEsc_bound, { signal: this.#abort.signal });
-    else {
+
+    if (this.#allowClose) {
+      window.addEventListener('keydown', this.#preventEsc_bound, { signal: this.#abort.signal });
+
       // prevent immediate close because of click propagation
-      window.addEventListener('pointerup', () => {
+      window.addEventListener('click', () => {
         setTimeout(() => {
-          window.addEventListener('pointerup', this.#clickOutsideClose_bound, { signal: this.#abort.signal });
+          if (this.open) window.addEventListener('click', this.#clickOutsideClose_bound, { signal: this.#abort.signal });
         });
       }, { once: true });
     }
@@ -217,10 +219,7 @@ export default class MCSurfaceElement extends HTMLComponentElement {
   }
 
   #preventEsc(event) {
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+    if (event.key === 'Escape') this.close();
   }
 
   async #handleClose() {
@@ -228,7 +227,7 @@ export default class MCSurfaceElement extends HTMLComponentElement {
     this.#dialog.removeEventListener('cancel', this.#handleCancel_bound);
     this.#dialog.removeEventListener('close', this.#handleClose_bound);
     window.removeEventListener('keydown', this.#preventEsc_bound);
-    window.removeEventListener('pointerup', this.#clickOutsideClose_bound);
+    window.removeEventListener('click', this.#clickOutsideClose_bound);
     window.removeEventListener('scroll', this.#scroll_bound);
     if (this.removeOnClose) {
       await util.animationendAsync(this.#dialog);
@@ -249,8 +248,11 @@ export default class MCSurfaceElement extends HTMLComponentElement {
 
   #clickOutsideClose(event) {
     let ignore = this.#closeIgnoreElements.find(e => e === event.target || e.contains(event.target));
-    // setTimeout lets click go through before removal
-    if (!ignore && event.target !== this && !this.contains(event.target)) setTimeout(() => { this.close(); });
+    const shouldClose = !ignore && event.target !== this && !this.contains(event.target);
+    if (shouldClose) {
+      window.removeEventListener('click', this.#clickOutsideClose_bound);
+      this.close();
+    }
   }
 
   #scroll() {

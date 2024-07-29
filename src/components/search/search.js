@@ -241,7 +241,6 @@ class MCSearchElement extends HTMLComponentElement {
     this.ariaExpanded = true;
     if (this.#menu.fullscreen) this.#preShowFullscreen();
     this.classList.add('open');
-    // TODO scroll selected into view
 
     this.#showAbort = new AbortController();
     this.#input.selectionStart = 10000;

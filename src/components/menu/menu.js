@@ -96,12 +96,15 @@ export default class MCMenuElement extends MCSurfaceElement {
 
 
   #anchorFocus(event) {
-    // dialogs will focus back on the input after close. We want to prevent this so the dialog does not re open
-    if (this.open) {
-      event.preventDefault();
-      return;
+    let host = this.getRootNode().host;
+    if (host && (host.nodeName === 'MC-SELECT' || host.nodeName === 'MC-SEARCH')) {
+      // dialogs will focus back on the input after close. We want to prevent this so the dialog does not re open
+      if (this.open) {
+        event.preventDefault();
+        return;
+      }
+      this.show();
     }
-    this.show();
   }
 
   #anchorClick(event) {
@@ -111,7 +114,7 @@ export default class MCMenuElement extends MCSurfaceElement {
 
   #click(event) {
     if (event.target.nesting || event.target === this || event.target.nodeName === 'MC-CHIP') return;
-    
+
     this.close();
     if (this.#parentMenu) setTimeout(() => this.#parentMenu.close(), 120);
   }

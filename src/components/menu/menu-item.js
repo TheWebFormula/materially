@@ -27,7 +27,7 @@ export default class MCMenuItemElement extends HTMLComponentElement {
         <slot name="start"></slot>
         <slot class="default-slot"></slot>
         <slot name="end"></slot>
-        <mc-state-layer ripple></mc-state-layer>
+        <mc-state-layer ripple noring></mc-state-layer>
       <button>
     `;
   }

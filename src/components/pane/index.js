@@ -2,7 +2,7 @@ import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import device from '../../helpers/device.js';
 
-// TODO save pane resize
+// TODO save pane width on resize
 
 export default class MCPaneContainerElement extends HTMLComponentElement {
   static tag = 'mc-pane-container';

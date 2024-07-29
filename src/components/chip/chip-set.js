@@ -2,8 +2,6 @@ import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './chip-set.css' assert { type: 'css' };
 
 
-// TODO horizontal swipe / scroll for search
-
 class MCChipSetElement extends HTMLComponentElement {
   static tag = 'mc-chip-set';
   static useShadowRoot = true;

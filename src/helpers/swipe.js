@@ -180,7 +180,6 @@ const MCSwipe = class MCSwipe {
       return;
     }
     
-    // TODO lock page scroll?
     let distance = Math.sqrt(dx * dx + dy * dy);
     let deltaDistanceX = clientX - this.#lastX;
     let deltaDistanceY = clientY - this.#lastY;

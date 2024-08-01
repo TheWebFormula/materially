@@ -1,8 +1,18 @@
 :host {
+  --mc-card-shape-local: var(--mc-card-shape, var(--mc-shape-medium));
+  --mc-card-container-color-local: var(--mc-card-container-color, var(--mc-surface-container-low));
+  --mc-card-text-color-local: var(--mc-card-text-color, var(--mc-on-surface));
+  --mc-card-container-color-outlined-local: var(--mc-card-container-color-outlined, var(--mc-surface));
+  --mc-card-container-color-filled-local: var(--mc-card-container-color-filled, var(--mc-surface-container-highest));
+  --mc-card-text-color-filled-local: var(--mc-card-text-color-filled, var(--mc-on-surface-variant));
+  --mc-card-header-text-color-local: var(--mc-card-header-text-color, var(--mc-on-surface));
+  --mc-card-subhead-text-color-local: var(--mc-card-subhead-text-color, var(--mc-on-surface-variant));
+  --mc-card-supporting-text-color-local: var(--mc-card-supporting-text-color, var(--mc-on-surface-variant));
+
   --mc-card-swipe-action-position: 0;
 
   display: block;
-  border-radius: var(--mc-shape-medium);
+  border-radius: var(--mc-card-shape-local);
   position: relative;
   width: inherit;
 
@@ -42,8 +52,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: var(--mc-surface-container-low);
-  color: var(--mc-on-surface);
+  background-color: var(--mc-card-container-color-local);
+  color: var(--mc-card-text-color-local);
   box-sizing: border-box;
   border-radius: inherit;
   padding: 16px;
@@ -78,14 +88,14 @@
 }
 
 :host([outlined]) .container {
-  background-color: var(--mc-surface);
+  background-color: var(--mc-card-container-color-outlined-local);
   /* use outline because box-sizing with border-radius does not prevent hight change */
   outline: 1px solid var(--mc-outline);
 }
 
 :host([filled]) .container {
-  color: var(--mc-on-surface-variant);
-  background-color: var(--mc-surface-container-highest);
+  color: var(--mc-card-text-color-filled-local);
+  background-color: var(--mc-card-container-color-filled-local);
 }
 
 [name="headline"] {
@@ -95,7 +105,7 @@
   font-weight: var(--mc-font-small-headline-weight);
   line-height: var(--mc-font-small-headline-line-height);
   letter-spacing: var(--mc-font-small-headline-tracking);
-  color: var(--mc-on-surface);
+  color: var(--mc-card-header-text-color-local);
 }
 
 [name="subhead"] {
@@ -103,7 +113,7 @@
   font-weight: var(--mc-font-small-title-weight);
   line-height: var(--mc-font-small-title-line-height);
   letter-spacing: var(--mc-font-small-title-tracking);
-  color: var(--mc-on-surface-variant);
+  color: var(--mc-card-subhead-text-color-local);
 }
 
 [name="supporting-text"] {
@@ -111,7 +121,7 @@
   font-weight: var(--mc-font-medium-body-weight);
   line-height: var(--mc-font-medium-body-line-height);
   letter-spacing: var(--mc-font-medium-body-tracking);
-  color: var(--mc-on-surface-variant);
+  color: var(--mc-card-supporting-text-color-local);
 }
 
 [name="supporting-text"].has-content {

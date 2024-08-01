@@ -108,7 +108,6 @@ export default class HTMLComponentElement extends HTMLElement {
       case 'string':
         return value || '';
       case 'event':
-        // TODO remove window.page?
         return !value ? null : () => new Function('page', value).call(this, window.page);
       default:
         return value;

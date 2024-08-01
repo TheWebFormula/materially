@@ -9,7 +9,8 @@
     <nav class="links-nav">
       <h2>Links</h2>
       <ul class="links">
-        <li><a href="#basic">Basic</a></li>
+        <li><a href="#basic">Example</a></li>
+        <li><a href="#style">Style</a></li>
       </ul>
     </nav>
 
@@ -17,7 +18,7 @@
 
       <section id="basic" aria-label="badge examples">
         <mc-card>
-          <h2 slot="headline">Basic</h2>
+          <h2 slot="headline">Example</h2>
           
           <div class="example">
             <mc-icon-button>
@@ -121,6 +122,21 @@
       </section>
 
 
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+    
+  --mc-badge-container-color: var(--mc-error);
+  --mc-badge-text-color: var(--mc-on-error);`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
     </div>
   </div>
 </article>

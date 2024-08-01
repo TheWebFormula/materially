@@ -103,7 +103,6 @@ class MCTimePickerElement extends MCSurfaceElement {
     super.connectedCallback();
     this.#abort = new AbortController();
     this.#textfield.addEventListener('focusin', this.#textfieldFocus_bound, { signal: this.#abort.signal });
-    // TODO is this correct?
     this.hour24 = this.hasAttribute('hour24') || Intl.DateTimeFormat('en-US', { hour: 'numeric' }).resolvedOptions().hour12 === false;
 
     const timeHour = this.shadowRoot.querySelector('input.time-hour');

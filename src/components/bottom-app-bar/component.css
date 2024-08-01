@@ -1,4 +1,6 @@
 :host {
+  --mc-bottom-app-bar-container-color-local: var(--mc-bottom-app-bar-container-color, var(--mc-surface-container));
+
   grid-area: footer;
 
   position: sticky;
@@ -9,7 +11,7 @@
   width: 100%;
   padding: 0 12px;
   box-sizing: border-box;
-  background-color: var(--mc-surface-container);
+  background-color: var(--mc-bottom-app-bar-container-color-local);
   z-index: 9;
   align-items: center;
 }

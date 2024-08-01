@@ -14,6 +14,7 @@
         <li><a href="#types">Button types</a></li>
         <li><a href="#icon_button">Button with icon</a></li>
         <li><a href="#async_button">Async button</a></li>
+        <li><a href="#style">Style</a></li>
       </ul>
     </nav>
 
@@ -89,6 +90,34 @@
             <code class="language-html">
   ${`<mc-button id="async-button" async filled>Example</mc-button>
   <mc-button onclick="document.querySelector('#async-button').resolve()">Resolve</mc-button>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+    
+  --mc-button-shape: var(--mc-shape-extra-large);
+  --mc-button-color: var(--mc-primary);
+  --mc-button-color-filled: var(--mc-on-primary);
+  --mc-button-container-color-filled: var(--mc-primary);
+  --mc-button-color-disabled: rgba(from var(--mc-on-surface) r g b / 38%);
+  --mc-button-container-color-disabled: rgba(from var(--mc-on-surface) r g b / 12%);
+  --mc-button-color-elevated: var(--mc-primary);
+  --mc-button-container-color-elevated: var(--mc-surface-container-low);
+  --mc-button-color-filled-tonal: var(--mc-on-secondary-container);
+  --mc-button-container-color-filled-tonal: var(--mc-secondary-container);
+  --mc-button-color-outlined: var(--mc-primary);
+  --mc-button-container-color-outlined: var(--mc-button-outlined-container-color);
+  --mc-button-outline-color-outlined: var(--mc-outline);`}
             </code>
           </pre>
         </mc-card>

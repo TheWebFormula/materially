@@ -1,7 +1,21 @@
 :host {
+  --mc-button-shape-local: var(--mc-button-shape, var(--mc-shape-extra-large));
+  --mc-button-color-local: var(--mc-button-color, var(--mc-primary));
+  --mc-button-color-filled-local: var(--mc-button-color-filled, var(--mc-on-primary));
+  --mc-button-container-color-filled-local: var(--mc-button-container-color-filled, var(--mc-primary));
+  --mc-button-color-disabled-local: var(--mc-button-color-disabled, rgba(from var(--mc-on-surface) r g b / 38%));
+  --mc-button-container-color-disabled-local: var(--mc-button-container-color-disabled, rgba(from var(--mc-on-surface) r g b / 12%));
+  --mc-button-color-elevated-local: var(--mc-button-color-elevated, var(--mc-primary));
+  --mc-button-container-color-elevated-local: var(--mc-button-container-color-elevated, var(--mc-surface-container-low));
+  --mc-button-color-filled-tonal-local: var(--mc-button-color-filled-tonal, var(--mc-on-secondary-container));
+  --mc-button-container-color-filled-tonal-local: var(--mc-button-container-color-filled-tonal, var(--mc-secondary-container));
+  --mc-button-color-outlined-local: var(--mc-button-color-outlined, var(--mc-primary));
+  --mc-button-container-color-outlined-local: var(--mc-button-container-color-outlined, var(--mc-button-outlined-container-color));
+  --mc-button-outline-color-outlined-local: var(--mc-button-outline-color-outlined, var(--mc-outline));
+
   position: relative;
   display: inline-flex;
-  border-radius: var(--mc-button-shape);
+  border-radius: var(--mc-button-shape-local);
   box-sizing: border-box;
   cursor: pointer;
   outline: none;
@@ -18,7 +32,7 @@
   font-size: var(--mc-font-large-label-size);
   font-weight: var(--mc-font-large-label-weight);
   letter-spacing: var(--mc-font-large-label-tracking);
-  color: var(--mc-button-color);
+  color: var(--mc-button-color-local);
 }
 
 :host([disabled]) {
@@ -54,44 +68,44 @@ button {
 }
 
 :host([filled]) {
-  color: var(--mc-button-color-filled);
-  background-color: var(--mc-button-container-color-filled);
+  color: var(--mc-button-color-filled-local);
+  background-color: var(--mc-button-container-color-filled-local);
 }
 
 :host([disabled][filled]) {
-  background-color: var(--mc-button-container-color-disabled);
-  color: var(--mc-button-color-disabled);
+  background-color: var(--mc-button-container-color-disabled-local);
+  color: var(--mc-button-color-disabled-local);
 }
 
 :host([elevated]) {
-  color: var(--mc-button-color-elevated);
-  background-color: var(--mc-button-container-color-elevated);
+  color: var(--mc-button-color-elevated-local);
+  background-color: var(--mc-button-container-color-elevated-local);
 }
 
 :host([disabled][elevated]) {
-  background-color: var(--mc-button-container-color-disabled);
-  color: var(--mc-button-color-disabled);
+  background-color: var(--mc-button-container-color-disabled-local);
+  color: var(--mc-button-color-disabled-local);
 }
 
 :host([filled-tonal]) {
-  color: var(--mc-button-color-filled-tonal);
-  background-color: var(--mc-button-container-color-filled-tonal);
+  color: var(--mc-button-color-filled-tonal-local);
+  background-color: var(--mc-button-container-color-filled-tonal-local);
 }
 
 :host([disabled][filled-tonal]) {
-  background-color: var(--mc-button-container-color-disabled);
-  color: var(--mc-button-color-disabled);
+  background-color: var(--mc-button-container-color-disabled-local);
+  color: var(--mc-button-color-disabled-local);
 }
 
 :host([outlined]) {
-  color: var(--mc-button-color-outlined);
-  background-color: var(--mc-button-container-color-outlined);
-  border: 1px solid var(--mc-button-outline-color-outlined);
+  color: var(--mc-button-color-outlined-local);
+  background-color: var(--mc-button-container-color-outlined-local);
+  border: 1px solid var(--mc-button-outline-color-outlined-local);
 }
 
 :host([disabled][outlined]) {
-  color: var(--mc-button-color-disabled);
-  border: 1px solid var(--mc-button-container-color-disabled);
+  color: var(--mc-button-color-disabled-local);
+  border: 1px solid var(--mc-button-container-color-disabled-local);
 }
 
 
@@ -143,7 +157,7 @@ mc-state-layer {
 }
 
 :host([elevated]) mc-state-layer {
-  --mc-state-layer-focus-color: var(--mc-button-elevate-state-layer-color);
+  --mc-state-layer-focus-color: var(--mc-button-elevate-state-layer-color-local);
   --mc-state-layer-hover-color: var(--mc-primary);
   --mc-state-layer-ripple-color: var(--mc-primary);
 }

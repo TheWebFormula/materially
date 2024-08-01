@@ -1,6 +1,0 @@
-:root {
-  /* Override variables */
-  --mc-anchor-color: var(--mc-on-surface-variant);
-  --mc-anchor-shape: var(--mc-shape-extra-large);
-  --mc-anchor-current-container-color: var(--mc-secondary-container);
-}

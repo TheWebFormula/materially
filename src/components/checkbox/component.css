@@ -1,4 +1,13 @@
 :host {
+  --mc-checkbox-background-color-local: var(--mc-checkbox-background-color, var(--mc-primary));
+  --mc-checkbox-background-disabled-color-local: var(--mc-checkbox-background-disabled-color, var(--mc-on-surface));
+  --mc-checkbox-icon-color-local: var(--mc-checkbox-icon-color, var(--mc-on-primary));
+  --mc-checkbox-icon-disabled-color-local: var(--mc-checkbox-icon-disabled-color, var(--mc-surface));
+  --mc-checkbox-outline-color-local: var(--mc-checkbox-outline-color, var(--mc-on-surface-variant));
+  --mc-checkbox-outline-disabled-color-local: var(--mc-checkbox-outline-disabled-color, var(--mc-on-surface));
+  --mc-checkbox-label-disabled-color-local: var(--mc-checkbox-label-disabled-color, var(--mc-on-surface));
+
+
   display: inline-flex;
   position: relative;
   vertical-align: top;
@@ -63,7 +72,7 @@ input {
 }
 
 .outline {
-  border-color: var(--mc-checkbox-outline-color);
+  border-color: var(--mc-checkbox-outline-color-local);
   border-style: solid;
   border-width: 2px;
   box-sizing: border-box;
@@ -129,12 +138,12 @@ input {
 
 :host([disabled].checked) .container {
   .background {
-    background-color: var(--mc-checkbox-background-disabled-color);
+    background-color: var(--mc-checkbox-background-disabled-color-local);
     opacity: 0.38;
   }
 
   .icon {
-    fill: var(--mc-checkbox-icon-disabled-color);
+    fill: var(--mc-checkbox-icon-disabled-color-local);
     /* opacity: 0.38; */
     opacity: 0.6;
   }
@@ -142,24 +151,24 @@ input {
 
 :host([disabled]) {
   .outline {
-    border-color: var(--mc-checkbox-outline-disabled-color);
+    border-color: var(--mc-checkbox-outline-disabled-color-local);
     opacity: 0.38;
   }
 
   label {
-    color: var(--mc-checkbox-label-disabled-color);
+    color: var(--mc-checkbox-label-disabled-color-local);
     opacity: 0.38;
   }
 
   .container:has(input:checked),
   .container:has(input:indeterminate) {
     .background {
-      background-color: var(--mc-checkbox-background-disabled-color);
+      background-color: var(--mc-checkbox-background-disabled-color-local);
       opacity: 0.38;
     }
 
     .icon {
-      fill: var(--mc-checkbox-icon-disabled-color);
+      fill: var(--mc-checkbox-icon-disabled-color-local);
       /* opacity: 0.38; */
       opacity: 0.6;
     }
@@ -167,11 +176,11 @@ input {
 }
 
 .background {
-  background-color: var(--mc-checkbox-background-color);
+  background-color: var(--mc-checkbox-background-color-local);
 }
 
 .icon {
-  fill: var(--mc-checkbox-icon-color);
+  fill: var(--mc-checkbox-icon-color-local);
   height: 18px;
   width: 18px;
 }

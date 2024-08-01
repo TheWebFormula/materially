@@ -1,4 +1,7 @@
 :host {
+  --mc-badge-container-color-local: var(--mc-badge-container-color, var(--mc-error));
+  --mc-badge-text-color-local: var(--mc-badge-text-color, var(--mc-on-error));
+
   inset-inline-start: 50%;
   margin-inline-start: 6px;
   margin-block-start: 4px;
@@ -9,7 +12,7 @@
   min-height: 6px;
   display: none;
   pointer-events: none;
-  background-color: var(--mc-error);
+  background-color: var(--mc-badge-container-color-local);
 }
 
 :host(.has-value) {
@@ -26,7 +29,7 @@
   font-size: var(--mc-font-small-label-weight);
   letter-spacing: var(--mc-font-small-label-tracking);
   line-height: var(--mc-font-small-label-line-height);
-  color: var(--mc-on-error);
+  color: var(--mc-badge-text-color-local);
 
   slot {
     display: contents;

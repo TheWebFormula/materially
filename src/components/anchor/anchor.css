@@ -1,4 +1,9 @@
 :host {
+  --mc-anchor-text-color-local: var(--mc-anchor-text-color, var(--mc-on-surface-variant));
+  --mc-anchor-shape-local: var(--mc-anchor-shape, var(--mc-shape-extra-large));
+  --mc-anchor-current-container-color-local: var(--mc-anchor-current-container-color, var(--mc-secondary-container));
+
+
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -17,8 +22,8 @@
   font-size: var(--mc-font-large-label-size);
   font-weight: var(--mc-font-large-label-weight);
   letter-spacing: var(--mc-font-large-label-tracking);
-  border-radius: var(--mc-anchor-shape);
-  color: var(--mc-anchor-color);
+  border-radius: var(--mc-anchor-shape-local);
+  color: var(--mc-anchor-text-color-local);
   text-decoration: none;
 
   &::before {
@@ -29,7 +34,7 @@
     right: -16px;
     height: 56px;
     z-index: 0;
-    border-radius: var(--mc-anchor-shape);
+    border-radius: var(--mc-anchor-shape-local);
   }
 
   &::after {
@@ -40,7 +45,7 @@
     right: -16px;
     height: 56px;
     pointer-events: none;
-    border-radius: var(--mc-anchor-shape);
+    border-radius: var(--mc-anchor-shape-local);
   }
 
   &::after,
@@ -53,7 +58,7 @@
 
 :host(.current)::before {
   pointer-events: none;
-  background-color: var(--mc-anchor-current-container-color);
+  background-color: var(--mc-anchor-current-container-color-local);
 }
 
 a {

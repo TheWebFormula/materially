@@ -1,4 +1,9 @@
 :host {
+  --mc-menu-item-text-color-local: var(--mc-menu-item-text-color, var(--mc-on-surface));
+  --mc-menu-selected-container-color-local: var(--mc-menu-item-selected-container-color, var(--mc-secondary-container));
+  --mc-menu-selected-text-color-local: var(--mc-menu-item-selected-text-color, var(--mc-on-secondary-container));
+
+
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
@@ -13,7 +18,7 @@
   font-size: var(--mc-font-large-label-size);
   font-weight: var(--mc-font-large-label-weight);
   letter-spacing: var(--mc-font-large-label-tracking);
-  color: var(--mc-on-surface);
+  color: var(--mc-menu-item-text-color-local);
   
   cursor: pointer;
   white-space: nowrap;
@@ -50,8 +55,8 @@ button {
 }
 
 :host(.selected) {
-  color: var(--mc-on-secondary-container);
-  background-color: var(--mc-secondary-container);
+  color: var(--mc-menu-selected-text-color-local);
+  background-color: var(--mc-menu-selected-container-color-local);
 }
 
 :host(.filtered) {

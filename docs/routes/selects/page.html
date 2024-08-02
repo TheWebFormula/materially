@@ -14,6 +14,7 @@
         <li><a href="#filter">Filter</a></li>
         <li><a href="#async-filter">Async filter</a></li>
         <li><a href="#bottomsheet">Bottom sheet</a></li>
+        <li><a href="#style">Style</a></li>
       </ul>
     </nav>
 
@@ -209,6 +210,26 @@
       { label: 'Two', value: 2}
     ]);
   });`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+  
+  --mc-select-container-color: var(--mc-surface-container);
+  --mc-select-shape: var(--mc-shape-extra-small);
+  --mc-select-item-text-color-local: var(--mc-on-surface);
+  --mc-select-selected-container-color-local: var(--mc-secondary-container);
+  --mc-select-selected-text-color-local: var(--mc-on-secondary-container);`}
             </code>
           </pre>
         </mc-card>

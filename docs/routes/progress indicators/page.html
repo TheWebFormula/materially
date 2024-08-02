@@ -11,6 +11,7 @@
       <ul class="links">
         <li><a href="#linear">Linear</a></li>
         <li><a href="#circular">Circular</a></li>
+        <li><a href="#style">Style</a></li>
       </ul>
     </nav>
 
@@ -78,6 +79,28 @@
   
   <!-- Indeterminate -->
   <mc-progress-circular indeterminate></mc-progress-circular>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+  
+  --mc-progress-circular-color: var(--mc-primary);
+
+  /* percentage without (%) symbol so calc can work. 8.3333 is roughly equal to 4px */
+  --mc-progress-circular-width: 8.3333;
+  
+  --mc-progress-linear-color: var(--mc-primary);
+  --mc-progress-linear-height: 4px;`}
             </code>
           </pre>
         </mc-card>

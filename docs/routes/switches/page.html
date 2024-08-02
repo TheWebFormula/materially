@@ -12,6 +12,7 @@
         <li><a href="#basic">Basic</a></li>
         <li><a href="#labels">Labels</a></li>
         <li><a href="#icon">Icons</a></li>
+        <li><a href="#style">Style</a></li>
       </ul>
     </nav>
 
@@ -19,17 +20,21 @@
 
       <section id="basic" aria-label="Example switches">
         <mc-card>  
-          <h2 slot="headline">Sizes</h2>
+          <h2 slot="headline">Examples</h2>
 
           <div class="example" style="flex-direction: column; display: flex; max-width: 360px; margin: 0 auto;">
-            <mc-switch name="one" label="label" required></mc-switch>
+            <mc-switch name="one" label="label"></mc-switch>
             <mc-switch name="two" checked label-right="Label"></mc-switch>
+            <mc-switch name="three" disabled label-right="Disabled"></mc-switch>
+            <mc-switch name="four" checked disabled label-right="Disabled"></mc-switch>
           </div>
 
           <pre>
             <code class="language-html">
-  ${`<mc-switch>Label</mc-switch>
-  <mc-switch checked>Label</mc-switch>`}
+  ${`<mc-switch label="Label"></mc-switch>
+  <mc-switch checked label-right="Label"></mc-switch>
+  <mc-switch disabled label-right="Disabled"></mc-switch>
+  <mc-switch checked disabled label-right="Disabled"></mc-switch>`}
             </code>
           </pre>
         </mc-card>
@@ -79,6 +84,27 @@
       <mc-switch checked checked-icon label="Checked icon"></mc-switch>
       <mc-switch unchecked-icon label="Unchecked icon"></mc-switch>
       <mc-switch icon label="Both icons"></mc-switch>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+  
+  --mc-switch-track-color: var(--mc-surface-container-highest);
+  --mc-switch-selected-track-color: var(--mc-primary);
+  --mc-switch-handle-color: var(--mc-outline);
+  --mc-switch-selected-handle-color: var(--mc-on-primary);
+  --mc-switch-icon-color: var(--mc-surface-container-highest);
+  --mc-switch-selected-icon-color: var(--mc-primary);`}
             </code>
           </pre>
         </mc-card>

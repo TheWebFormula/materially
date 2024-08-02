@@ -1,4 +1,19 @@
 :host {
+  --mc-fab-shape-local: var(--mc-fab-shape, var(--mc-shape-large));
+  --mc-fab-shape-large-local: var(--mc-fab-shape-large, var(--mc-shape-extra-large));
+  --mc-fab-shape-small-local: var(--mc-fab-shape-small, var(--mc-shape-medium));
+  --mc-fab-color-local: var(--mc-fab-color, var(--mc-on-primary-container));
+  --mc-fab-container-color-local: var(--mc-fab-container-color, var(--mc-primary-container));
+  --mc-fab-color-surface-local: var(--mc-fab-color-surface, var(--mc-primary));
+  --mc-fab-container-color-surface-local: var(--mc-fab-container-color-surface, var(--mc-surface-container-hight));
+  --mc-fab-color-surface-lowered-local: var(--mc-fab-color-surface-lowered, var(--mc-on-secondary-container));
+  --mc-fab-container-color-surface-lowered-local: var(--mc-fab-container-color-surface-lowered, var(--mc-secondary-container));
+  --mc-fab-color-secondary-local: var(--mc-fab-color-secondary, var(--mc-on-secondary-container));
+  --mc-fab-container-color-secondary-local: var(--mc-fab-container-color-secondary, var(--mc-secondary-container));
+  --mc-fab-color-tertiary-local: var(--mc-fab-color-tertiary, var(--mc-on-tertiary-container));
+  --mc-fab-container-color-tertiary-local: var(--mc-fab-container-color-tertiary, var(--mc-tertiary-container));
+
+
   position: relative;
   display: inline-flex;
   cursor: pointer;
@@ -7,7 +22,7 @@
   max-width: 100%;
   height: 56px;
   box-sizing: border-box;
-  border-radius: var(--mc-fab-shape);
+  border-radius: var(--mc-fab-shape-local);
 
   transition: max-width;
   transition-duration: var(--mc-motion-duration-medium2);
@@ -28,7 +43,7 @@
   height: 96px;
   max-width: 96px;
   justify-content: center;
-  border-radius: var(--mc-fab-shape-large);
+  border-radius: var(--mc-fab-shape-large-local);
 
   slot.icon::slotted(mc-icon) {
     width: var(--mc-font-large-icon-size);
@@ -42,7 +57,7 @@
   min-width: 40px;
   max-width: 40px;
   height: 40px;
-  border-radius: var(--mc-fab-shape-small);
+  border-radius: var(--mc-fab-shape-small-local);
 
   button {
     padding: 8px;
@@ -104,29 +119,29 @@ button {
   border-radius: inherit;
   cursor: inherit;
 
-  color: var(--mc-fab-color);
-  background-color: var(--mc-fab-container-color);
+  color: var(--mc-fab-color-local);
+  background-color: var(--mc-fab-container-color-local);
 }
 
 
 :host([surface]) button {
-  color: var(--mc-fab-color-surface);
-  background-color: var(--mc-fab-container-color-surface);
+  color: var(--mc-fab-color-surface-local);
+  background-color: var(--mc-fab-container-color-surface-local);
 }
 
 :host([surface][lowered]) button {
-  color: var(--mc-fab-color-surface-lowered);
-  background-color: var(--mc-fab-container-color-surface-lowered);
+  color: var(--mc-fab-color-surface-lowered-local);
+  background-color: var(--mc-fab-container-color-surface-lowered-local);
 }
 
 :host([secondary]) button {
-  color: var(--mc-fab-color-secondary);
-  background-color: var(--mc-fab-container-color-secondary);
+  color: var(--mc-fab-color-secondary-local);
+  background-color: var(--mc-fab-container-color-secondary-local);
 }
 
 :host([tertiary]) button {
-  color: var(--mc-fab-color-tertiary);
-  background-color: var(--mc-fab-container-color-tertiary);
+  color: var(--mc-fab-color-tertiary-local);
+  background-color: var(--mc-fab-container-color-tertiary-local);
 }
 
 :host(.hide-label) {

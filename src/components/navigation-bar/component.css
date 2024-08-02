@@ -1,4 +1,7 @@
 :host {
+  --mc-navigation-container-color-local: var(--mc-navigation-container-color, var(--mc-surface-container));
+  --mc-navigation-bar-container-color-local: var(--mc-navigation-bar-container-color, var(--mc-navigation-container-color-local));
+
   grid-area: footer;
 
   position: sticky;
@@ -16,8 +19,8 @@
   z-index: 9;
   gap: 8px;
 
-  background-color: var(--mc-navigation-bar-container-color);
-  box-shadow: var(--mc-navigation-bar-elevation);
+  background-color: var(--mc-navigation-bar-container-color-local);
+  box-shadow: var(--mc-elevation-2);
 }
 
 :host(.window-compact) {

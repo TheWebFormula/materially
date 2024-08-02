@@ -1,4 +1,10 @@
 :host {
+  --mc-textfield-shape-local: var(--mc-textfield-shape, var(--mc-shape-extra-small-top));
+  --mc-textfield-container-color-local: var(--mc-textfield-container-color, var(--mc-surface-container-highest));
+  --mc-textfield-input-text-color-local: var(--mc-textfield-input-text-color, var(--mc-on-surface));
+  --mc-textfield-label-text-color-local: var(--mc-textfield-label-text-color, var(--mc-on-surface-variant));
+  --mc-textfield-active-indicator-color-local: var(--mc-textfield-active-indicator-color, var(--mc-primary));
+
   display: inline-flex;
   position: relative;
   outline: none;
@@ -21,11 +27,6 @@
   width: 100%;
 }
 
-:host([type="textarea"]) .text-field {
-  /* padding-bottom: 0; */
-  /* padding-top: 0; */
-}
-
 .text-field::after {
   content: "";
   position: absolute;
@@ -34,16 +35,16 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  border-radius: var(--mc-shape-extra-small-top);
+  border-radius: var(--mc-textfield-shape-local);
   border-bottom: 1px solid;
   border-bottom-color: var(--mc-on-surface-variant);
-  background-color: var(--mc-surface-container-highest);
+  background-color: var(--mc-textfield-container-color-local);
 }
 
 :host(:not(.outlined):focus) .text-field::after {
   height: calc(100% - 1px);
   border-bottom: 2px solid;
-  border-bottom-color: var(--mc-primary);
+  border-bottom-color: var(--mc-textfield-active-indicator-color-local);
 }
 
 .input {
@@ -69,8 +70,8 @@
   font-weight: var(--mc-font-large-body-weight);
   line-height: var(--mc-font-large-body-line-height);
   letter-spacing: var(--mc-font-large-body-tracking);
-  color: var(--mc-on-surface);
-  caret-color: var(--mc-primary);
+  color: var(--mc-textfield-input-text-color-local);
+  caret-color: var(--mc-textfield-active-indicator-color-local);
 
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -219,7 +220,7 @@ textarea[rows="1"] {
   text-decoration: inherit;
   text-transform: inherit;
 
-  color: var(--mc-on-surface-variant);
+  color: var(--mc-textfield-label-text-color-local);
 
   transform-origin: left top;
   animation: mc-textfield-label-reverse;
@@ -241,7 +242,7 @@ textarea[rows="1"] {
 }
 
 :host(:focus:not(.invalid)) .text-field label {
-  color: var(--mc-primary);
+  color: var(--mc-textfield-active-indicator-color-local);
 }
 
 .text-field .input::placeholder {
@@ -472,7 +473,7 @@ textarea[rows="1"] {
 :host(:focus) .text-field .outlined-border-container .outlined-notch,
 :host(:focus) .text-field .outlined-border-container .outlined-trailing {
   border-width: 2px;
-  border-color: var(--mc-primary);
+  border-color: var(--mc-textfield-active-indicator-color-local);
 }
 
 .text-field.leading-icon .outlined-border-container .outlined-leading {

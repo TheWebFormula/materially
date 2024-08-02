@@ -1,4 +1,7 @@
 :host {
+  --mc-list-subheader-container-color-local: var(--mc-list-subheader-container-color, var(--mc-surface-container));
+  --mc-list-subheader-text-color-local: var(--mc-list-subheader-text-color, var(--mc-on-surface-variant));
+
   display: flex;
   position: sticky;
   top: 0;
@@ -9,9 +12,9 @@
   font-size: var(--mc-font-small-body-size);
   font-weight: var(--mc-font-small-body-weight);
   letter-spacing: var(--mc-font-small-body-tracking);
-  color: rgba(from var(--mc-on-surface-variant) r g b / 76%);
+  color: rgba(from var(--mc-list-subheader-text-color-loca) r g b / 76%);
 
-  background-color: var(--mc-surface);
+  background-color: var(--mc-list-item-container-color, var(--mc-surface));
   transition: background-color;
   transition-duration: 0ms;
 }
@@ -21,8 +24,8 @@
 }
 
 :host(.stuck) {
-  background-color: var(--mc-surface-container);
-  color: var(--mc-on-surface-variant);
+  background-color: var(--mc-list-subheader-container-color-local);
+  color: var(--mc-list-subheader-text-color-local);
 }
 
 :host([shadow].stuck) {

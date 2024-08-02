@@ -1,4 +1,12 @@
 :host {
+  /* leverages menu component so we set its vars */
+  --mc-menu-item-text-color: var(--mc-select-item-text-color, var(--mc-on-surface));
+  --mc-menu-selected-container-color: var(--mc-select-item-selected-container-color, var(--mc-secondary-container));
+  --mc-menu-selected-text-color: var(--mc-select-item-selected-text-color, var(--mc-on-secondary-container));
+  --mc-menu-container-color: var(--mc-select-container-color, var(--mc-surface-container));
+  --mc-menu-border-radius: var(--mc-select-border-radius, var(--mc-shape-extra-small));
+
+
   min-width: 210px;
   display: inline-flex;
   border-radius: var(--mc-shape-extra-small);

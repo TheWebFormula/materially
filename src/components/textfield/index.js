@@ -359,7 +359,7 @@ class MCTextfieldElement extends HTMLComponentElement {
   set type(value) {
     this.#type = value;
     this.setAttribute('type', value);
-    this.#input.type = value;
+    this.#input.setAttribute('type', value);
     if (this.type === 'search' && this.#abort) this.#input.addEventListener('search', this.#dispatchSearch_bound, { signal: this.#abort.signal });
   }
 

@@ -17,6 +17,7 @@
         <li><a href="#sizes">Sizes</a></li>
         <li><a href="#label">Label</a></li>
         <li><a href="#fixed">Fixed</a></li>
+        <li><a href="#style">Style</a></li>
       </ul>
     </nav>
 
@@ -284,6 +285,34 @@
     <mc-icon>edit</mc-icon>
     <span slot="label">Example</span>
   </mc-fab>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+    
+  --mc-fab-shape: var(--mc-shape-large);
+  --mc-fab-shape-large: var(--mc-shape-extra-large);
+  --mc-fab-shape-small: var(--mc-shape-medium);
+  --mc-fab-color: var(--mc-on-primary-container);
+  --mc-fab-container-color: var(--mc-primary-container);
+  --mc-fab-color-surface: var(--mc-primary);
+  --mc-fab-container-color-surface: var(--mc-surface-container-hight);
+  --mc-fab-color-surface-lowered: var(--mc-on-secondary-container);
+  --mc-fab-container-color-surface-lowered: var(--mc-secondary-container);
+  --mc-fab-color-secondary: var(--mc-on-secondary-container);
+  --mc-fab-container-color-secondary: var(--mc-secondary-container);
+  --mc-fab-color-tertiary: var(--mc-on-tertiary-container);
+  --mc-fab-container-color-tertiary: var(--mc-tertiary-container);`}
             </code>
           </pre>
         </mc-card>

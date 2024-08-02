@@ -1,7 +1,9 @@
 :host {
+  --mc-navigation-container-color-local: var(--mc-navigation-container-color, var(--mc-surface));
+
   --mc-side-sheet-width: var(--mc-navigation-drawer-width);
-  --mc-side-sheet-container-color: var(--mc-navigation-drawer-container-color);
-  --mc-side-sheet-shape: var(--mc-navigation-drawer-sheet-shape);
+  --mc-side-sheet-container-color: var(--mc-navigation-drawer-container-color, var(--mc-navigation-container-color-local));
+  --mc-side-sheet-shape: var(--mc-navigation-drawer-shape, var(--mc-shape-large));
 
   /* use sticky to ignore page scroll */
   position: sticky;

@@ -1,5 +1,0 @@
-:root {
-  /* --mc-navigation-drawer-width - set globally */
-  --mc-navigation-drawer-container-color: var(--mc-navigation-container-color, var(--mc-surface));
-  --mc-navigation-drawer-sheet-shape: var(--mc-shape-large);
-}

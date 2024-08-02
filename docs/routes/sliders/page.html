@@ -13,6 +13,7 @@
         <li><a href="#discrete">Discrete</a></li>
         <li><a href="#range">Range</a></li>
         <li><a href="#range-discrete">Range discrete</a></li>
+        <li><a href="#style">Style</a></li>
       </ul>
     </nav>
 
@@ -114,6 +115,25 @@
     <mc-icon slot="leading-icon">volume_up</mc-icon>
     volume
   </mc-slider>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+  
+  --mc-slider-handle-color: var(--mc-primary);
+  --mc-slider-active-track-color: var(--mc-primary);
+  --mc-slider-inactive-track-color: var(--mc-primary-container);`}
             </code>
           </pre>
         </mc-card>

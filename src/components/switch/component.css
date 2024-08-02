@@ -1,4 +1,12 @@
 :host {
+  --mc-switch-track-color-local: var(--mc-switch-track-color, var(--mc-surface-container-highest));
+  --mc-switch-selected-track-color-local: var(--mc-switch-selected-track-color, var(--mc-primary));
+  --mc-switch-handle-color-local: var(--mc-switch-handle-color, var(--mc-outline));
+  --mc-switch-selected-handle-color-local: var(--mc-switch-selected-handle-color, var(--mc-on-primary));
+  --mc-switch-icon-color-local: var(--mc-switch-icon-color, var(--mc-surface-container-highest));
+  --mc-switch-selected-icon-color-local: var(--mc-switch-selected-icon-color, var(--mc-primary));
+
+
   display: inline-flex;
   outline: none;
   vertical-align: top;
@@ -26,13 +34,13 @@
     .track {
       &::before {     
         opacity: 0.12; 
-        background-color: var(--mc-switch-track-disabled-color);
-        border-color: var(--mc-switch-track-border-disabled-color);
+        background-color: var(--mc-surface-container-highest);
+        border-color: var(--mc-on-surface);
       }
 
       .thumb::before {
         opacity: 0.38; 
-        background-color: var(--mc-switch-thumb-disabled-color);
+        background-color: var(--mc-on-surface);
       }
     }
   }
@@ -40,17 +48,17 @@
   .container:has(input:checked) {
     .track {
       &::before {      
-        background-color: var(--mc-switch-track-disabled-checked-color);
+        background-color: var(--mc-on-surface);
       }
 
       .thumb::before {
-        background-color: var(--mc-switch-thumb-disabled-checked-color);
+        background-color: var(--mc-on-surface);
       }
     }
   }
 
   label {
-    color: var(--mc-switch-label-disabled-color);
+    color: var(--mc-on-surface);
     opacity: 0.38;
   }
 }
@@ -97,9 +105,9 @@ input {
     transition-property: opacity, background-color;
     transition-duration: var(--mc-motion-duration-short1);
   
-    background-color: var(--mc-switch-track-color);
+    background-color: var(--mc-switch-track-color-local);
     border: 2px solid;
-    border-color: var(--mc-switch-track-border-color);
+    border-color: var(--mc-outline);
   }
 
   .thumb-container {
@@ -136,7 +144,7 @@ input {
       transition: background-color;
       transition-duration: var(--mc-motion-duration-short1);
     
-      background-color: var(--mc-switch-thumb-color);
+      background-color: var(--mc-switch-handle-color-local);
     }
   }
 }
@@ -144,7 +152,7 @@ input {
 .container:has(input:checked) {
   .track {
     &::before {
-      background-color: var(--mc-switch-track-checked-color);
+      background-color: var(--mc-switch-selected-track-color-local);
     }
 
     .thumb-container {
@@ -157,7 +165,7 @@ input {
       height: 24px;
 
       &::before {
-        background-color: var(--mc-switch-thumb-checked-color);
+        background-color: var(--mc-switch-selected-handle-color-local);
       }
     }
   }
@@ -235,13 +243,13 @@ label:has(~ .container input:invalid.touched) {
 .icon.icon-checked {
   width: 16px;
   height: 16px;
-  color: var(--mc-switch-icon-checked-color);
+  color: var(--mc-switch-selected-icon-color-local);
 }
 
 .icon.icon-unchecked {
   width: 16px;
   height: 16px;
-  color: var(--mc-switch-icon-color);
+  color: var(--mc-switch-icon-color-local);
 }
 
 :host([checked-icon]),

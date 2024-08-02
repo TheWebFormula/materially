@@ -1,4 +1,0 @@
-:root {
-  --mc-navigation-bar-container-color: var(--mc-navigation-container-color, var(--mc-surface-container));
-  --mc-navigation-bar-elevation: var(--mc-elevation-2);
-}

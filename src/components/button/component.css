@@ -123,7 +123,7 @@ slot[name="leading-icon"]::slotted(mc-icon) {
 .spinner {
   position: absolute;
   top: 5px;
-  --mc-progress-circular-stroke-width: 6;
+  --mc-progress-circular-width: 12.49999;
 }
 
 :host(.async-pending) {

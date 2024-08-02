@@ -1,7 +1,7 @@
 mc-snackbar {
-  --mc-snackbar-container-color: var(--mc-surface-inverse);
-  --mc-snackbar-text-color: var(--mc-on-surface-inverse);
-  --mc-snackbar-action-color: var(--mc-primary-container);
+  --mc-snackbar-container-color-local: var(--mc-snackbar-container-color, var(--mc-surface-inverse));
+  --mc-snackbar-text-color-local: var(--mc-snackbar-text-color, var(--mc-on-surface-inverse));
+  --mc-snackbar-action-color-local: var(--mc-snackbar-action-color, var(--mc-primary-container));
 
   display: flex;
   align-items: center;
@@ -17,13 +17,13 @@ mc-snackbar {
   border: none;
 
   box-shadow: var(--mc-elevation-1);
-  background-color: var(--mc-snackbar-container-color);
+  background-color: var(--mc-snackbar-container-color-local);
   font-size: var(--mc-font-medium-body-size);
   font-weight: var(--mc-font-medium-body-weight);
   line-height: 24px;
   letter-spacing: var(--mc-font-medium-body-tracking);
   border-radius: var(--mc-shape-extra-small);
-  color: var(--mc-snackbar-text-color);
+  color: var(--mc-snackbar-text-color-local);
 
   animation: show-snackbar;
   animation-duration: var(--mc-motion-duration-medium1);
@@ -53,7 +53,7 @@ mc-snackbar.two-line {
 
 mc-snackbar mc-button,
 mc-snackbar mc-icon {
-  color: var(--mc-snackbar-action-color);
+  color: var(--mc-snackbar-action-color-local);
 }
 
 mc-snackbar .mc-text {

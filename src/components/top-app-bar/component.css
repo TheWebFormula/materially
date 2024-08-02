@@ -1,4 +1,8 @@
 :host {
+  --mc-navigation-container-color-local: var(--mc-navigation-container-color, var(--mc-surface));
+  --mc-top-app-bar-container-color-local: var(--mc-top-app-bar-container-color, var(--mc-navigation-container-color-local));
+  --mc-top-app-bar-container-scrolled-color-local: var(--mc-top-app-bar-container-scrolled-color, var(--mc-surface-container));
+  
   --mc-top-app-bar-alt-headline-opacity: 1;
 
   grid-area: header;
@@ -10,7 +14,7 @@
   width: 100%;
   padding: 0 16px;
   box-sizing: border-box;
-  background-color: var(--mc-top-app-bar-container-color);
+  background-color: var(--mc-top-app-bar-container-color-local);
   z-index: 4;
 }
 
@@ -21,7 +25,7 @@
 }
 
 :host(.scrolled:not([compress])) {
-  background-color: var(--mc-top-app-bar-container-scrolled-color);
+  background-color: var(--mc-top-app-bar-container-scrolled-color-local);
 }
 
 .container {

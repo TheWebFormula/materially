@@ -20,9 +20,9 @@ function mouseover(event) {
     mouseX = event.clientX;
     mouseY = event.clientY;
     currentElement = event.target;
+    showTooltip();
     window.addEventListener('mouseover', globalMouseOver);
     window.addEventListener('mousemove', mousemoveThrottled);
-    showTooltip();
   }
 }
 
@@ -61,6 +61,7 @@ function removeTooltip() {
   window.removeEventListener('mouseover', globalMouseOver);
   window.removeEventListener('mousemove', mousemoveThrottled);
   if (currentTooltipElement.hasAttribute('rich')) currentTooltipElement.removeEventListener('click', actionClick);
+  currentTooltipElement = undefined;
   currentElement = undefined;
   selectedTooltipElement = undefined;
 }

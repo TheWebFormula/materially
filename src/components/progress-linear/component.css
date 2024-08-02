@@ -1,4 +1,8 @@
 :host {
+  --mc-progress-linear-color-local: var(--mc-progress-linear-color, var(--mc-primary));
+  --mc-progress-linear-height-local: var(--mc-progress-linear-height, 4px);
+
+
   display: flex;
   position: relative;
   min-width: 80px;
@@ -14,12 +18,12 @@
   display: flex;
   width: 100%;
   inset: 0;
-  height: 4px;
+  height: var(--mc-progress-linear-height-local);
   transform-origin: left center;
 }
 
 .active-bar {
-  background-color: var(--mc-primary);
+  background-color: var(--mc-progress-linear-color-local);
 }
 
 .active-bar > .inner-bar {
@@ -61,7 +65,7 @@
   width: 4px;
   height: 4px;
   border-radius: 4px;
-  background-color: var(--mc-primary);
+  background-color: var(--mc-progress-linear-color-local);
   justify-content: flex-end;
 }
 

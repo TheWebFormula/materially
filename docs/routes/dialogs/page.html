@@ -19,6 +19,7 @@
         <li><a href="#scrollable">Scrollable</a></li>
         <li><a href="#fullscreen">Fullscreen</a></li>
         <li><a href="#prevent-navigation">Prevent navigation</a></li>
+        <li><a href="#style">Style</a></li>
       </ul>
     </nav>
 
@@ -388,6 +389,24 @@
     allowClose: false, // default false
     preventNavigation: true // default false
   });
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+      
+
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+    
+  --mc-dialog-container-color: var(--mc-surface-container-high);
+  --mc-dialog-headline-color: var(--mc-on-surface);
+  --mc-dialog-supporting-text-color: var(--mc-on-surface-variant);`}
             </code>
           </pre>
         </mc-card>

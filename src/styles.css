@@ -2,13 +2,4 @@
 @import url(./styles/core.css);
 @import url(./styles/typography.css);
 @import url(./styles/anchor.css);
-
 @import url(./components/anchor/global.css);
-@import url(./components/fab/variables.css);
-@import url(./components/icon-button/variables.css);
-@import url(./components/navigation-bar/variables.css);
-@import url(./components/navigation-drawer/variables.css);
-@import url(./components/navigation-rail/variables.css);
-@import url(./components/side-sheet/variables.css);
-@import url(./components/switch/variables.css);
-@import url(./components/top-app-bar/variables.css);

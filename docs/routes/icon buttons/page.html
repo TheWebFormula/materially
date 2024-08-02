@@ -17,6 +17,7 @@
       <ul class="links">
         <li><a href="#icon_button">Icon button</a></li>
         <li><a href="#icon_toggle_button">Icon toggle button</a></li>
+        <li><a href="#style">Style</a></li>
       </ul>
     </nav>
 
@@ -123,6 +124,36 @@
     <mc-icon style="font-family: Material Symbols Outlined alt">favorite</mc-icon>
     <mc-icon slot="selected">settings</mc-icon>
   </mc-icon-button>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+    
+  --mc-icon-button-icon-color: var(--mc-on-surface-variant);
+  --mc-icon-button-toggle-icon-selected-color: var(--mc-primary);
+  --mc-icon-button-icon-filled-color: var(--mc-on-primary);
+  --mc-icon-button-toggle-icon-filled-color: var(--mc-primary);
+  --mc-icon-button-toggle-icon-filled-selected-color: var(--mc-on-primary);
+  --mc-icon-button-icon-filled-tonal-color: var(--mc-on-secondary-container);
+  --mc-icon-button-toggle-icon-filled-tonal-color: var(--mc-on-surface-variant);
+  --mc-icon-button-toggle-icon-filled-tonal-selected-color: var(--mc-on-secondary-container);
+  --mc-icon-button-background-filled-color: var(--mc-primary);
+  --mc-icon-button-toggle-background-filled-color: var(--mc-surface-container-highest);
+  --mc-icon-button-toggle-background-filled-selected-color: var(--mc-primary);
+  --mc-icon-button-background-filled-tonal-color: var(--mc-secondary-container);
+  --mc-icon-button-toggle-background-filled-tonal-color: var(--mc-surface-container-highest);
+  --mc-icon-button-toggle-background-filled-tonal-selected-color: var(--mc-secondary-container);
+  --mc-icon-button-outline-color: var(--mc-outline);`}
             </code>
           </pre>
         </mc-card>

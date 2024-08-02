@@ -1,4 +1,6 @@
 :host {
+  /* TODO style variables? */
+  
   --mc-padding: 12px;
   --mc-container-color: var(--mc-surface-container-high);
   --mc-elevation: var(--mc-elevation-3);

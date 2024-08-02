@@ -16,6 +16,7 @@
         <li><a href="#states">States and ripple</a></li>
         <li><a href="#swipe-actions">Swipe actions</a></li>
         <li><a href="#reorder">Drag reorder</a></li>
+        <li><a href="#style">Style</a></li>
       </ul>
     </nav>
 
@@ -707,6 +708,29 @@
     // list elements are in new order
     console.log(list.children);
   });`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+    
+  --mc-list-item-container-color: var(--mc-surface);
+  --mc-list-item-text-color: var(--mc-on-surface);
+  --mc-list-item-selected-container-color: var(--mc-primary-container);
+  --mc-list-item-supporting-text-color: var(--mc-on-surface-variant);
+  --mc-list-item-trailing-supporting-text-color: var(--mc-on-surface-variant);
+  --mc-list-item-overline-text-color: var(--mc-on-surface-variant);
+  --mc-list-subheader-container-color: var(--mc-surface-container);
+  --mc-list-subheader-text-color: var(--mc-on-surface-variant);`}
             </code>
           </pre>
         </mc-card>

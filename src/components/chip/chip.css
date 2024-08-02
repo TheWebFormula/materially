@@ -1,4 +1,10 @@
 :host {
+  --mc-chip-elevated-container-color-local: var(--mc-chip-elevated-container-color, var(--mc-surface-container-low));
+  --mc-chip-checked-container-color-local: var(--mc-chip-elevated-container-color, var(--mc-secondary-container));
+  --mc-chip-text-color-local: var(--mc-chip-text-color, var(--mc-on-surface));
+  --mc-chip-check-color-local: var(--mc-chip-check-color, var(--mc-primary));
+
+
   display: inline-flex;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -41,12 +47,12 @@ button {
 
 :host(.elevated) {
   border: none;
-  background-color: var(--mc-surface-container-low);
+  background-color: var(--mc-chip-elevated-container-color-local);
 }
 
 :host(.checked),
 :host(.elevated.checked) {
-  background-color: var(--mc-secondary-container);
+  background-color: var(--mc-chip-checked-container-color-local);
 }
 
 .label {
@@ -54,7 +60,7 @@ button {
   font-weight: var(--mc-font-large-label-weight);
   letter-spacing: var(--mc-font-large-label-tracking);
   line-height: var(--mc-font-large-label-line-height);
-  color: var(--mc-on-surface);
+  color: var(--mc-chip-text-color-local);
   text-overflow: ellipsis;
 }
 
@@ -81,7 +87,7 @@ button {
 :host([input]) .clear,
 :host([filter]) .check {
   position: relative;
-  color: var(--mc-primary);
+  color: var(--mc-chip-check-color-local);
   width: 18px;
   height: 18px;
   align-self: center;
@@ -131,7 +137,7 @@ button {
   display: block;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-bottom: 5px solid rgba(from var(--mc-on-surface) r g b / 60%);
+  border-bottom: 5px solid rgba(from var(--mc-chip-text-color-local) r g b / 60%);
   margin-left: 8px;
   margin-right: -4px;
   transform-origin: center;
@@ -165,7 +171,7 @@ input {
   font-size: var(--mc-font-large-label-size);
   font-weight: var(--mc-font-large-label-weight);
   letter-spacing: var(--mc-font-large-label-tracking);
-  color: var(--mc-on-surface);
+  color: var(--mc-chip-text-color-local);
   caret-color: var(--mc-primary);
 
   -webkit-appearance: none;

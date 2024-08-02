@@ -13,6 +13,7 @@
         <li><a href="#basic">Basic</a></li>
         <li><a href="#nested">Nested menu</a></li>
         <li><a href="#context-menu">Context menu</a></li>
+        <li><a href="#style">Style</a></li>
       </ul>
     </nav>
 
@@ -167,6 +168,24 @@
         </mc-card>
       </section>
 
+
+
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+  
+  --mc-menu-container-color: var(--mc-surface-container);
+  --mc-menu-shape: var(--mc-shape-extra-small);
+  --mc-menu-item-text-color-local: var(--mc-on-surface);`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
     </div>
   </div>
 </article>

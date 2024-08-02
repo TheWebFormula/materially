@@ -1,7 +1,7 @@
 :host {
+  --mc-container-color: var(--mc-menu-container-color, var(--mc-surface-container));
+  --mc-shape: var(--mc-menu-border-radius, var(--mc-shape-extra-small));
   --mc-padding: 8px 0px;
-  --mc-container-color: var(--mc-surface-container);
-  --mc-shape: var(--mc-border-radius, var(--mc-shape-extra-small));
 
   
   min-width: 112px;

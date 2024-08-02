@@ -1,4 +1,12 @@
 :host {
+  --mc-list-item-container-color-local: var(--mc-list-item-container-color, var(--mc-surface));
+  --mc-list-item-text-color-local: var(--mc-list-item-text-color, var(--mc-on-surface));
+  --mc-list-item-selected-container-color-local: var(--mc-list-item-selected-container-color, var(--mc-primary-container));
+  --mc-list-item-supporting-text-color-local: var(--mc-list-item-supporting-text-color, var(--mc-on-surface-variant));
+  --mc-list-item-trailing-supporting-text-color-local: var(--mc-list-item-trailing-supporting-text-color, var(--mc-on-surface-variant));
+  --mc-list-item-overline-text-color-local: var(--mc-list-item-overline-text-color, var(--mc-on-surface-variant));
+
+
   display: flex;
   box-sizing: border-box;
   gap: 16px;
@@ -12,10 +20,8 @@
   font-weight: var(--mc-font-large-body-weight);
   line-height: var(--mc-font-large-body-line-height);
   letter-spacing: var(--mc-font-large-body-tracking);
-  background-color: var(--mc-surface);
-
-  color: var(--mc-on-surface);
-  background-color: var(--mc-surface);
+  background-color: var(--mc-list-item-container-color-local);
+  color: var(--mc-list-item-text-color-local);
   outline: none;
 }
 
@@ -28,7 +34,7 @@
 }
 
 :host(.selected) {
-  background-color: var(--mc-primary-container);
+  background-color: var(--mc-list-item-selected-container-color-local);
 }
 
 :host(.remove) {
@@ -64,7 +70,7 @@
 }
 
 [name='overline'] {
-  color: var(--mc-on-surface-variant);
+  color: var(--mc-list-item-overline-text-color-local);
   font-size: var(--mc-font-small-label-size);
   font-weight: var(--mc-font-small-label-weight);
   line-height: var(--mc-font-small-label-line-height);
@@ -72,7 +78,7 @@
 }
 
 [name='supporting-text'] {
-  color: var(--mc-on-surface-variant);
+  color: var(--mc-list-item-supporting-text-color-local);
   font-size: var(--mc-font-medium-body-size);
   font-weight: var(--mc-font-medium-body-weight);
   line-height: var(--mc-font-medium-body-line-height);
@@ -81,7 +87,7 @@
 
 [name='trailing-supporting-text'] {
   display: flex;
-  color: var(--mc-on-surface-variant);
+  color: var(--mc-list-item-trailing-supporting-text-color-local);
   font-size: var(--mc-font-small-label-size);
   font-weight: var(--mc-font-small-label-weight);
   line-height: var(--mc-font-small-label-line-height);
@@ -126,11 +132,11 @@
 }
 
 [slot='start'] {
-  color: var(--mc-on-surface-variant);
+  color: var(--mc-list-item-supporting-text-color-local);
 }
 
 [slot='end'] {
-  color: var(--mc-on-surface-variant);
+  color: var(--mc-list-item-supporting-text-color-local);
 }
 
 ::slotted(mc-switch) {

@@ -1,4 +1,20 @@
 :host {
+  --mc-icon-button-icon-color-local: var(--mc-icon-button-icon-color, var(--mc-on-surface-variant));
+  --mc-icon-button-toggle-icon-selected-color-local: var(--mc-icon-button-toggle-icon-selected-color, var(--mc-primary));
+  --mc-icon-button-icon-filled-color-local: var(--mc-icon-button-icon-filled-color, var(--mc-on-primary));
+  --mc-icon-button-toggle-icon-filled-color-local: var(--mc-icon-button-toggle-icon-filled-color, var(--mc-primary));
+  --mc-icon-button-toggle-icon-filled-selected-color-local: var(--mc-icon-button-toggle-icon-filled-selected-color, var(--mc-on-primary));
+  --mc-icon-button-icon-filled-tonal-color-local: var(--mc-icon-button-icon-filled-tonal-color, var(--mc-on-secondary-container));
+  --mc-icon-button-toggle-icon-filled-tonal-color-local: var(--mc-icon-button-toggle-icon-filled-tonal-color, var(--mc-on-surface-variant));
+  --mc-icon-button-toggle-icon-filled-tonal-selected-color-local: var(--mc-icon-button-toggle-icon-filled-tonal-selected-color, var(--mc-on-secondary-container));
+  --mc-icon-button-background-filled-color-local: var(--mc-icon-button-background-filled-color, var(--mc-primary));
+  --mc-icon-button-toggle-background-filled-color-local: var(--mc-icon-button-toggle-background-filled-color, var(--mc-surface-container-highest));
+  --mc-icon-button-toggle-background-filled-selected-color-local: var(--mc-icon-button-toggle-background-filled-selected-color, var(--mc-primary));
+  --mc-icon-button-background-filled-tonal-color-local: var(--mc-icon-button-background-filled-tonal-color, var(--mc-secondary-container));
+  --mc-icon-button-toggle-background-filled-tonal-color-local: var(--mc-icon-button-toggle-background-filled-tonal-color, var(--mc-surface-container-highest));
+  --mc-icon-button-toggle-background-filled-tonal-selected-color-local: var(--mc-icon-button-toggle-background-filled-tonal-selected-color, var(--mc-secondary-container));
+  --mc-icon-button-outline-color-local: var(--mc-icon-button-outline-color, var(--mc-outline));
+
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
@@ -8,11 +24,11 @@
   width: 40px;
   justify-content: center;
   border-radius: var(--mc-shape-full);
-  color: var(--mc-icon-button-icon-color);
+  color: var(--mc-icon-button-icon-color-local);
 }
 
 :host(.selected) {
-  color: var(--mc-icon-button-toggle-icon-selected-color);
+  color: var(--mc-icon-button-toggle-icon-selected-color-local);
 }
 
 :host([disabled]) {
@@ -40,33 +56,33 @@ button {
 }
 
 :host([filled]) {
-  color: var(--mc-icon-button-icon-filled-color);
-  background-color: var(--mc-icon-button-background-filled-color);
+  color: var(--mc-icon-button-icon-filled-color-local);
+  background-color: var(--mc-icon-button-background-filled-color-local);
 }
 :host([filled][toggle]) {
-  color: var(--mc-icon-button-toggle-icon-filled-color);
-  background-color: var(--mc-icon-button-toggle-background-filled-color);
+  color: var(--mc-icon-button-toggle-icon-filled-color-local);
+  background-color: var(--mc-icon-button-toggle-background-filled-color-local);
 }
 :host([filled][toggle].selected) {
-  color: var(--mc-icon-button-toggle-icon-filled-selected-color);
-  background-color: var(--mc-icon-button-toggle-background-filled-selected-color);
+  color: var(--mc-icon-button-toggle-icon-filled-selected-color-local);
+  background-color: var(--mc-icon-button-toggle-background-filled-selected-color-local);
 }
 
 :host([filled-tonal]) {
-  color: var(--mc-icon-button-icon-filled-tonal-color);
-  background-color: var(--mc-icon-button-background-filled-tonal-color);
+  color: var(--mc-icon-button-icon-filled-tonal-color-local);
+  background-color: var(--mc-icon-button-background-filled-tonal-color-local);
 }
 :host([filled-tonal][toggle]) {
-  color: var(--mc-icon-button-toggle-icon-filled-tonal-color);
-  background-color: var(--mc-icon-button-toggle-background-filled-tonal-color);
+  color: var(--mc-icon-button-toggle-icon-filled-tonal-color-local);
+  background-color: var(--mc-icon-button-toggle-background-filled-tonal-color-local);
 }
 :host([filled-tonal][toggle].selected) {
-  color: var(--mc-icon-button-toggle-icon-filled-tonal-selected-color);
-  background-color: var(--mc-icon-button-toggle-background-filled-tonal-selected-color);
+  color: var(--mc-icon-button-toggle-icon-filled-tonal-selected-color-local);
+  background-color: var(--mc-icon-button-toggle-background-filled-tonal-selected-color-local);
 }
 
 :host([outlined]) {
-  border: 1px solid var(--mc-icon-button-outline-color);
+  border: 1px solid var(--mc-icon-button-outline-color-local);
 }
 
 :host(.selected:not(.selected-icon)) ::slotted(mc-icon) {

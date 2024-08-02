@@ -13,6 +13,7 @@
         <li><a href="#standard">Standard</a></li>
         <li><a href="#select-icon">No checkmarks</a></li>
         <li><a href="#multi-select">Multiple select</a></li>
+        <li><a href="#style">Style</a></li>
     </nav>
 
     <div class="article-content">
@@ -98,6 +99,25 @@
           <pre>
             <code class="language-javascript">
   ${`console.log(document.querySelector('#multi-select').value); // "one,two"`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+  
+  --mc-segmented-button-text-color: var(--mc-on-surface);
+  --mc-segmented-button-icon-color: var(--mc-primary);
+  --mc-segmented-button-selected-container-color: var(--mc-secondary-container);
+  --mc-segmented-button-selected-text-color: var(--mc-on-secondary-container);`}
             </code>
           </pre>
         </mc-card>

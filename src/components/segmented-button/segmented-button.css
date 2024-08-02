@@ -1,6 +1,12 @@
 :host {
+  --mc-segmented-button-text-color-local: var(--mc-segmented-button-text-color, var(--mc-on-surface));
+  --mc-segmented-button-icon-color-local: var(--mc-segmented-button-icon-color, var(--mc-primary));
+  --mc-segmented-button-selected-container-color-local: var(--mc-segmented-button-selected-container, var(--mc-secondary-container));
+  --mc-segmented-button-selected-text-color-local: var(--mc-segmented-button-selected-text, var(--mc-on-secondary-container));
+
+
   border-radius: 0;
-  color: var(--mc-on-surface);
+  color: var(--mc-segmented-button-text-color-local);
   border-left: 1px solid var(--mc-outline);
   border-top: 1px solid var(--mc-outline);
   border-bottom: 1px solid var(--mc-outline);
@@ -17,8 +23,8 @@
 
 
 :host(.checked) {
-  color: var(--mc-on-secondary-container);
-  background-color: var(--mc-secondary-container);
+  color: var(--mc-segmented-button-selected-text-color-local);
+  background-color: var(--mc-segmented-button-selected-container-color-local);
 }
 
 :host(.check-icon.checked) .check {
@@ -51,7 +57,7 @@
     display: block;
     width: 18px;
     height: 18px;
-    stroke: var(--mc-primary);
+    stroke: var(--mc-segmented-button-icon-color-local);
     stroke-width: 4;
 
     path {

@@ -16,6 +16,7 @@
         <li><a href="#format">Formatting and masking</a></li>
         <li><a href="#count">Character count</a></li>
         <li><a href="#textarea">Textarea</a></li>
+        <li><a href="#style">Style</a></li>
       </ul>
     </nav>
 
@@ -307,6 +308,26 @@
   ${`<mc-textfield label="Textarea" type="textarea" character-count maxlength="255"></mc-textfield>
   <mc-textfield label="Min / max height" type="textarea" style="min-height: 80px; max-height: 120px;"></mc-textfield>
   <mc-textfield label="Rows 3" type="textarea" rows="3"></mc-textfield>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+  
+  --mc-textfield-shape: ar(--mc-shape-extra-small-top);
+  --mc-textfield-container-color: var(--mc-surface-container-highest);
+  --mc-textfield-input-text-color: var(--mc-on-surface);
+  --mc-textfield-label-text-color: var(--mc-on-surface-variant);
+  --mc-textfield-active-indicator-color: var(--mc-primary);`}
             </code>
           </pre>
         </mc-card>

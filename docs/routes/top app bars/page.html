@@ -16,6 +16,7 @@
         <li><a href="#medium">Medium</a></li>
         <li><a href="#large">Large</a></li>
         <li><a href="#compress">Compress</a></li>
+        <li><a href="#style">Style</a></li>
       </ul>
     </nav>
 
@@ -149,6 +150,27 @@
     <mc-icon slot="trailing-icon">inbox</mc-icon>
     <mc-icon slot="trailing-icon">account_circle</mc-icon>
   </mc-top-app-bar>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+
+  --mc-top-app-bar-container-color: var(--mc-navigation-container-color);
+  --mc-top-app-bar-container-scrolled-color: var(--mc-surface-container);
+  
+  
+  /* controls all navigation's (drawer, bar, top, bottom, rail) */
+  --mc-navigation-container-color: var(--mc-surface);`}
             </code>
           </pre>
         </mc-card>

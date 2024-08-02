@@ -11,6 +11,7 @@
       <ul class="links">
         <li><a href="#standard">Standard</a></li>
         <li><a href="#rich">Rich</a></li>
+        <li><a href="#style">Style</a></li>
     </nav>
 
     <div class="article-content">
@@ -49,6 +50,26 @@
     Use rich tooltips to provide more details, like describing the value of a feature
     <mc-button slot="actions">action</mc-button>
   </mc-tooltip>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+  
+  --mc-textfield-shape: ar(--mc-shape-extra-small-top);
+  --mc-textfield-container-color: var(--mc-surface-container-highest);
+  --mc-textfield-input-text-color: var(--mc-on-surface);
+  --mc-textfield-label-text-color: var(--mc-on-surface-variant);
+  --mc-textfield-active-indicator-color: var(--mc-primary);`}
             </code>
           </pre>
         </mc-card>

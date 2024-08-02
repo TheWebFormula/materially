@@ -1,4 +1,7 @@
 :host {
+  --mc-progress-circular-color-local: var(--mc-progress-circular-color, var(--mc-primary));
+  --mc-progress-circular-width-local: var(--mc-progress-circular-width, 8.3333);
+
   display: inline-flex;
   width: 48px;
   height: 48px;
@@ -20,18 +23,18 @@ svg {
 circle {
   cx: 50%;
   cy: 50%;
-  r: calc(50% * (1 - ((var(--mc-progress-circular-stroke-width, 4) / var(--mc-progress-circular-size, 48)) * 100) / 100));
+  r: calc((50 * (1 - var(--mc-progress-circular-width-local) / 100)) * 1%);
   fill: transparent;
   stroke-dasharray: 100;
   transform-origin: center;
-  stroke-width: calc(((var(--mc-progress-circular-stroke-width, 4) / var(--mc-progress-circular-size, 48)) * 100) * 1%);
+  stroke-width: calc(var(--mc-progress-circular-width-local) * 1%);
 }
 
 .active-track {
   transition: stroke-dashoffset;
   transition-duration: var(--mc-motion-duration-long2);
   transition-timing-function: var(--mc-motion-easing-standard-decelerate);
-  stroke: var(--mc-primary);
+  stroke: var(--mc-progress-circular-color-local);
 }
 
 :host(.on-filled) .active-track {

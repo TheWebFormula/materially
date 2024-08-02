@@ -1,4 +1,7 @@
 :host {
+  --mc-navigation-container-color-local: var(--mc-navigation-container-color, var(--mc-surface));
+  --mc-navigation-rail-container-color-local: var(--mc-navigation-rail-container-color, var(--mc-navigation-container-color-local));
+
   grid-area: navigation;
 
   position: sticky;
@@ -14,7 +17,7 @@
 
 .surface {
   display: block;
-  background-color: var(--mc-navigation-rail-container-color);
+  background-color: var(--mc-navigation-rail-container-color-local);
   position: fixed;
   top: 0;
   bottom: 0;

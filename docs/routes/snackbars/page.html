@@ -12,6 +12,7 @@
         <li><a href="#basic">Examples</a></li>
         <li><a href="#action">Action</a></li>
         <li><a href="#no-close">No close and longer time</a></li>
+        <li><a href="#style">Style</a></li>
       </ul>
     </nav>
 
@@ -81,6 +82,24 @@
     closeButton: false,
     ms: 6000
   });`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+  
+  --mc-snackbar-container-color: var(--mc-surface-inverse);
+  --mc-snackbar-text-color: var(--mc-on-surface-inverse);
+  --mc-snackbar-action-color: var(--mc-primary-container);`}
             </code>
           </pre>
         </mc-card>

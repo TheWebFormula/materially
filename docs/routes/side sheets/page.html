@@ -12,6 +12,7 @@
         <li><a href="#local">Local</a></li>
         <li><a href="#global">Global</a></li>
         <li><a href="#forms">Forms</a></li>
+        <li><a href="#style">Style</a></li>
       </ul>
     </nav>
 
@@ -257,6 +258,23 @@
     <mc-button slot="action" form="test" type="cancel">cancel</mc-button>
     <mc-button slot="action" form="test" type="submit">save</mc-button>
   </mc-side-sheet>`}
+            </code>
+          </pre>
+        </mc-card>
+      </section>
+
+
+      <section id="style" aria-label="Style">
+        <mc-card>
+          <h2 slot="headline">Style</h2>
+          <div slot="supporting-text">CSS variables that allow you override default values</div>
+      
+          <pre>
+            <code class="language-css">
+  ${`/* Optional variables for overriding */
+
+  --mc-side-sheet-shape: var(--mc-shape-large);
+  --mc-side-sheet-container-color: var(--mc-surface);`}
             </code>
           </pre>
         </mc-card>

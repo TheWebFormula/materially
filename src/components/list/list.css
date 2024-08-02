@@ -1,5 +1,5 @@
 :host {
-  background: var(--mc-surface);
+  background: var(--mc-list-item-container-color, var(--mc-surface));
   color: unset;
   display: flex;
   flex-direction: column;

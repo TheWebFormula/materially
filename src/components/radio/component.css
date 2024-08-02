@@ -1,4 +1,7 @@
 :host {
+  --mc-radio-color-local: var(--mc-radio-color, var(--mc-primary));
+
+
   display: inline-flex;
   height: 20px;
   width: 20px;
@@ -44,7 +47,7 @@ input {
   height: 20px;
   border-radius: var(--mc-shape-full);
   box-sizing: border-box;
-  border: 2px solid var(--mc-primary);
+  border: 2px solid var(--mc-radio-color-local);
 
   &::after {
     content: '';
@@ -54,7 +57,7 @@ input {
     width: 10px;
     height: 10px;
     border-radius: var(--mc-shape-full);
-    background-color: var(--mc-primary);
+    background-color: var(--mc-radio-color-local);
     opacity: 0;
     transition: opacity var(--mc-motion-duration-short2);
   }
@@ -99,12 +102,12 @@ label.has-label {
 mc-state-layer {
   --mc-state-layer-hover-color: var(--mc-on-surface);
   --mc-state-layer-focus-color: var(--mc-on-surface);
-  --mc-state-layer-ripple-color: var(--mc-primary);
+  --mc-state-layer-ripple-color: var(--mc-radio-color-local);
 }
 
 input:checked ~ mc-state-layer {
-  --mc-state-layer-hover-color: var(--mc-primary);
-  --mc-state-layer-focus-color: var(--mc-primary);
+  --mc-state-layer-hover-color: var(--mc-radio-color-local);
+  --mc-state-layer-focus-color: var(--mc-radio-color-local);
   --mc-state-layer-ripple-color: var(--mc-on-surface);
 }
 

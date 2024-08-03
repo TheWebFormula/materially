@@ -74,7 +74,7 @@ build({
     { from: 'docs/icons.woff2', to: 'dist/' },
     { from: 'docs/outlined-icons-variable.woff2', to: 'dist/' },
     { from: 'docs/rounded-icons.woff2', to: 'dist/' },
-    { from: 'docs/highlight-11.8.0.js', to: 'dist/' },
+    { from: 'docs/highlight-11.10.0.js', to: 'dist/' },
     {
       from: 'docs/routes/**/(?!page)*.html',
       to: 'dist/routes/',

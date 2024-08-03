@@ -3,6 +3,8 @@ document.adoptedStyleSheets.push(styles);
 
 const templateElements = {};
 const dashCaseRegex = /-([a-z])/g;
+const onRegex = /^on/;
+let templates = new Map();
 
 export default class HTMLComponentElement extends HTMLElement {
   static tag = 'none';
@@ -29,6 +31,7 @@ export default class HTMLComponentElement extends HTMLElement {
 
   constructor() {
     super();
+    
     this.#attributesLookup = Object.fromEntries(this.constructor.observedAttributesExtended);
 
     if (this.constructor.useShadowRoot) {
@@ -46,12 +49,12 @@ export default class HTMLComponentElement extends HTMLElement {
     name = name.replace(dashCaseRegex, (_, s) => s.toUpperCase());
     if (type === 'event') {
       if (this.#attributeEvents[name]) {
-        this.removeEventListener(name.replace(/^on/, ''), this.#attributeEvents[name]);
+        this.removeEventListener(name.replace(onRegex, ''), this.#attributeEvents[name]);
         this.#attributeEvents[name] = undefined;
       }
       if (newValue) {
         this.#attributeEvents[name] = this.#attributeDescriptorTypeConverter(newValue, type);
-        this.addEventListener(name.replace(/^on/, ''), this.#attributeEvents[name]);
+        this.addEventListener(name.replace(onRegex, ''), this.#attributeEvents[name]);
       }
     } else {
       this.attributeChangedCallbackExtended(
@@ -69,7 +72,6 @@ export default class HTMLComponentElement extends HTMLElement {
   render() {
     if (typeof this.template !== 'function') throw Error('Cannot render without a template method');
     if (!this.#prepared) this.#prepareRender();
-
     if (!this.constructor.useTemplate) this.#templateElement.innerHTML = this.template(); // always re-render
     if (this.constructor.useShadowRoot) this.shadowRoot.replaceChildren(this.#templateElement.content.cloneNode(true));
     else this.replaceChildren(this.#templateElement.content.cloneNode(true));
@@ -79,15 +81,17 @@ export default class HTMLComponentElement extends HTMLElement {
   #prepareRender() {
     this.#prepared = true;
 
-    if (this.constructor.useTemplate) {
-      if (!templateElements[this.constructor.tag]) {
-        templateElements[this.constructor.tag] = document.createElement('template');
-        templateElements[this.constructor.tag].innerHTML = this.template();
-      }
-      this.#templateElement = templateElements[this.constructor.tag];
-    } else {
-      this.#templateElement = document.createElement('template');
+    // get or create template element
+    let template = templates.get(this.constructor);
+    if (!template) {
+      template = document.createElement('template');
+      templates.set(this.constructor, template);
+
+      // only render once
+      if (this.constructor.useTemplate) template.innerHTML = this.template();
     }
+
+    this.#templateElement = template;
 
     if (this.constructor.useShadowRoot && this.constructor.styleSheets[0] instanceof CSSStyleSheet) {
       this.shadowRoot.adoptedStyleSheets = this.constructor.styleSheets;
@@ -108,7 +112,7 @@ export default class HTMLComponentElement extends HTMLElement {
       case 'string':
         return value || '';
       case 'event':
-        return !value ? null : () => new Function('page', value).call(this, window.page);
+        return !value ? null : () => new Function('page', value).call(this, this);
       default:
         return value;
     }

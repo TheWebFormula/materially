@@ -17,13 +17,14 @@ class MCAnchorGroupElement extends HTMLComponentElement {
   constructor() {
     super();
 
+    this.role = 'menu';
     this.render();
     this.#control = this.shadowRoot.querySelector('[control]');
   }
 
   template() {
     return /*html*/`
-      <a control>
+      <a control role="button">
         <slot name="control"></slot>
         <span slot="trailing-icon" class="arrow">${expand_more_FILL0_wght400_GRAD0_opsz24}</span>
       </a>

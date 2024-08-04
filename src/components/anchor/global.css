@@ -1,12 +1,120 @@
+a[control],
+mc-navigation-rail a,
+mc-navigation-bar a,
+mc-navigation-drawer a {
+  --mc-anchor-text-color-local: var(--mc-anchor-text-color, var(--mc-on-surface-variant));
+  --mc-anchor-shape-local: var(--mc-anchor-shape, var(--mc-shape-extra-large));
+  --mc-anchor-current-container-color-local: var(--mc-anchor-current-container-color, var(--mc-secondary-container));
+
+  display: grid;
+  grid-template-columns: minmax(0, max-content)  minmax(0, 1fr) min-content;
+  grid-template-rows: 1fr;
+  grid-template-areas: "leading text trailing";
+  align-items: center;
+
+
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  border-radius: inherit;
+  line-height: inherit;
+  height: inherit;
+  color: inherit;
+  text-decoration: inherit;
+  border: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  height: 56px;
+  line-height: 56px;
+  margin-bottom: 2px;
+  width: 100%;
+  z-index: 0;
+
+  font-size: var(--mc-font-large-label-size);
+  font-weight: var(--mc-font-large-label-weight);
+  letter-spacing: var(--mc-font-large-label-tracking);
+  border-radius: var(--mc-anchor-shape-local);
+  color: var(--mc-anchor-text-color-local);
+  text-decoration: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 0;
+    right: -16px;
+    height: 56px;
+    z-index: -1;
+    border-radius: var(--mc-anchor-shape-local);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 0;
+    right: -16px;
+    height: 56px;
+    pointer-events: none;
+    border-radius: var(--mc-anchor-shape-local);
+    z-index: -1;
+  }
+
+  &::after,
+  &::before {
+    transition: left, right;
+    transition-duration: var(--mc-motion-duration-medium1);
+    transition-timing-function: var(--mc-motion-easing-standard);
+  }
+
+  &.current::before {
+    pointer-events: none;
+    background-color: var(--mc-anchor-current-container-color-local);
+  }
+  
+  &.animate::after,
+  &.animate::before {
+    left: 40%;
+    right: 40%;
+    transition-duration: 0s;
+  }
+
+  &:focus::after {
+    opacity: var(--mc-state-layer-opacity-focus);
+    background-color: var(--mc-on-surface);
+  }
+
+  &.current:focus::after {
+    background-color: var(--mc-on-secondary-container);
+  }
+
+  [slot=leading-icon] {
+    grid-area: leading;
+    pointer-events: none;
+    margin-right: 12px;
+  }
+
+  mc-badge,
+  [slot=trailing-icon] {
+    grid-area: trailing;
+    justify-self: start;
+    pointer-events: none;
+  }
+}
+
+
+
 mc-navigation-bar,
 mc-navigation-rail {
-  mc-anchor {
+  a {
+    display: inline-flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     margin: 0;
-    width: 100%;
-    height: 56px;
-    margin-bottom: 2px;
+    /* width: 64px; */
+    height: 64px;
+    /* margin-bottom: 2px; */
   
     font-size: var(--mc-font-medium-label-size);
     font-weight: var(--mc-font-medium-label-weight);
@@ -16,7 +124,7 @@ mc-navigation-rail {
     &::before {
       left: unset;
       right: unset;
-      top: 3px;
+      /* top: 3px; */
       width: 64px;
       height: 32px;
       border-radius: var(--mc-shape-extra-large);
@@ -25,7 +133,7 @@ mc-navigation-rail {
     &::after {
       left: unset;
       right: unset;
-      top: 3px;
+      /* top: 3px; */
       width: 64px;
       height: 32px;
       border-radius: var(--mc-shape-extra-large);
@@ -54,26 +162,52 @@ mc-navigation-rail {
       &::after,
       &::before {
         top: 0px;
-        height: 56px;
-        width: 56px;
+        height: 64px;
+        width: 64px;
         border-radius: var(--mc-shape-full);
+      }
+    }
+
+    [slot=leading-icon] {
+      margin-right: 0;
+    }
+
+    &:not(.no-text) {
+      line-height: 20px;
+      flex-direction: column;
+
+      mc-icon {
+        margin-right: 0px;
+        margin-top: 3px;
+        height: 32px;
+        line-height: 32px;
+        margin-top: 12px;
+      }
+
+      &::after,
+      &::before {
+        top: 11px;
       }
     }
   }
 }
 
-mc-navigation-rail mc-anchor::part(a) {
-  line-height: 20px;
-  flex-direction: column;
-}
 
-mc-navigation-rail mc-anchor mc-icon {
-  margin-right: 0px;
-  margin-top: 3px;
-  height: 32px;
-  line-height: 32px;
-}
+@media (hover: hover) {
+  mc-navigation-bar a:hover,
+  mc-navigation-rail a:hover,
+  mc-navigation-drawer a:hover {
+    &::after {
+      opacity: var(--mc-state-layer-opacity-hover);
+      background-color: var(--mc-on-surface);
+    }
 
-mc-navigation-rail mc-anchor.no-text mc-icon {
-  margin-top: 12px;
+    &.current::after {
+      background-color: var(--mc-on-secondary-container);
+    }
+
+    &:not(.current) mc-icon {
+      color: var(--mc-on-surface);
+    }
+  }
 }

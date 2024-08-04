@@ -43,7 +43,6 @@ slot {
 
 :host(.in-mc-button) {
   position: relative;
-  order: 100;
   margin-inline-start: 0px;
   margin-block-start: 0px;
   margin-block-end: 0px;
@@ -52,4 +51,9 @@ slot {
 
 :host(.in-mc-button.has-value:not([hide-value])) {
   margin-block-end: 3px;
+}
+
+:host(.in-anchor) {
+  position: relative;
+  inset-inline-start: 0px;
 }

@@ -41,6 +41,7 @@ class MCBadgeElement extends HTMLComponentElement {
 
   connectedCallback() {
     if (this.parentElement.nodeName === 'MC-BUTTON') this.classList.add('in-mc-button');
+    else if (this.parentElement.nodeName === 'A') this.classList.add('in-anchor');
   }
 
   get value() { return this.#value; }
@@ -58,6 +59,7 @@ class MCBadgeElement extends HTMLComponentElement {
     if (!this.#parentType) this.#parentType = this.parentElement.nodeName.toLowerCase();
     if (!this.#ariaLabelOriginal) {
       if (this.#parentType === 'mc-icon-button') this.#ariaLabelOriginal = this.parentElement.querySelector('mc-icon').innerText;
+      else if (this.#parentType === 'a') this.#ariaLabelOriginal = this.parentElement.href;
       else this.#ariaLabelOriginal = this.parentElement.ariaLabel || util.getTextFromNode(this.parentElement);
     }
 

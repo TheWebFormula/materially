@@ -1,5 +1,37 @@
 :host {
+  position: relative;
   --mc-navigation-drawer-group-height: 0px;
+}
+
+:host a[control]::after {
+  z-index: 0;
+}
+
+
+:host a[control] .arrow {
+  display: block;
+  height: 42px;
+  transition: transform 0ms;
+  transition-duration: var(--mc-motion-duration-short3);
+}
+  
+:host a[control].open .arrow {
+  transform: rotate(180deg);
+}
+
+@media (hover: hover) {
+  :host(:hover) a[control]::after {
+    opacity: var(--mc-state-layer-opacity-hover);
+    background-color: var(--mc-on-surface);
+  }
+
+  :host(.current:hover) a[control]::after {
+    background-color: var(--mc-on-secondary-container);
+  }
+
+  :host(:not(.current):hover) a[control] mc-icon {
+    color: var(--mc-on-surface);
+  }
 }
 
 .default-slot {

@@ -1,6 +1,7 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import device from './../../helpers/device.js';
+import util from '../../helpers/util.js';
 
 
 class MCNavigationBarElement extends HTMLComponentElement {
@@ -19,6 +20,7 @@ class MCNavigationBarElement extends HTMLComponentElement {
   #scroll_bound = this.#scroll.bind(this);
   #locationchange_bound = this.#locationchange.bind(this);
   #windowStateChange_bound = this.#windowStateChange.bind(this);
+  #click_bound = this.#click.bind(this);
 
 
   constructor() {
@@ -45,6 +47,10 @@ class MCNavigationBarElement extends HTMLComponentElement {
     window.addEventListener('locationchange', this.#locationchange_bound, { signal: this.#abort.signal });
     window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound, { signal: this.#abort.signal });
     if (this.#autoHide) document.addEventListener('scroll', this.#scroll_bound, { signal: this.#abort.signal });
+    [...this.querySelectorAll('a')].forEach(anchor => {
+      if (!util.getTextFromNode(anchor)) anchor.classList.add('no-text');
+    });
+    this.addEventListener('click', this.#click_bound);
   }
 
   disconnectedCallback() {
@@ -111,6 +117,16 @@ class MCNavigationBarElement extends HTMLComponentElement {
   #windowStateChange({ detail }) {
     const compact = detail.state === device.COMPACT;
     this.classList.toggle('window-compact', compact);
+  }
+
+  #click(event) {
+    if (event.target.nodeName === 'A') {
+      event.target.classList.add('animate');
+      requestAnimationFrame(() => {
+        event.target.classList.remove('animate');
+        event.target.blur();
+      });
+    }
   }
 }
 customElements.define(MCNavigationBarElement.tag, MCNavigationBarElement);

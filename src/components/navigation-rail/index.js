@@ -1,6 +1,7 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import device from './../../helpers/device.js';
+import util from '../../helpers/util.js';
 
 class MCNavigationRailElement extends HTMLComponentElement {
   static tag = 'mc-navigation-rail';
@@ -10,6 +11,7 @@ class MCNavigationRailElement extends HTMLComponentElement {
 
   #locationchange_bound = this.#locationchange.bind(this);
   #windowStateChange_bound = this.#windowStateChange.bind(this);
+  #click_bound = this.#click.bind(this);
 
 
   constructor() {
@@ -33,6 +35,10 @@ class MCNavigationRailElement extends HTMLComponentElement {
   connectedCallback() {
     window.addEventListener('locationchange', this.#locationchange_bound);
     window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound);
+    [...this.querySelectorAll('a')].forEach(anchor => {
+      if (!util.getTextFromNode(anchor)) anchor.classList.add('no-text');
+    });
+    this.addEventListener('click', this.#click_bound);
   }
 
   disconnectedCallback() {
@@ -70,6 +76,16 @@ class MCNavigationRailElement extends HTMLComponentElement {
       case device.COMPACT:
         this.classList.add('hide');
         break;
+    }
+  }
+
+  #click(event) {
+    if (event.target.nodeName === 'A') {
+      event.target.classList.add('animate');
+      requestAnimationFrame(() => {
+        event.target.classList.remove('animate');
+        event.target.blur();
+      });
     }
   }
 }

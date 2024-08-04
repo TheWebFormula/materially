@@ -44,16 +44,17 @@
     <mc-navigation-drawer>
       <div slot="header" class="headline">Headline</div>
     
-      <mc-anchor href="/">
+      <a href="/">
         <mc-icon slot="leading-icon">home</mc-icon>
         Welcome
-      </mc-anchor>
-      <mc-anchor href="/mail" badge="9999">
+      </a>
+      <a href="/mail">
         <mc-icon slot="leading-icon">mail</mc-icon>
+        <mc-badge>1</mc-badge>
         mail
-      </mc-anchor>
-      <mc-anchor href="/one">One</mc-anchor>
-      <mc-anchor href="/two">Two</mc-anchor>
+      </a>
+      <a href="/one">One</a>
+      <a href="/two">Two</a>
     </mc-navigation-drawer>
   
     <!-- page-content -->
@@ -82,19 +83,19 @@
     </mc-navigation-drawer>
     
     <mc-navigation-rail>
-      <mc-anchor href="/">
+      <a href="/">
         <mc-icon slot="leading-icon">home</mc-icon>
-      </mc-anchor>
+      </a>
     
-      <mc-anchor href="/one">
+      <a href="/one">
         <mc-icon slot="leading-icon">apps</mc-icon>
         One
-      </mc-anchor>
+      </a>
     
-      <mc-anchor href="/two">
+      <a href="/two">
         <mc-icon slot="leading-icon">palette</mc-icon>
         Two
-      </mc-anchor>
+      </a>
     </mc-navigation-rail>
     
     <!-- page-content -->
@@ -142,14 +143,14 @@
         <mc-icon>menu</mc-icon>
       </mc-icon-button>
     
-      <mc-anchor href="/">
+      <a href="/">
         <mc-icon slot="leading-icon">home</mc-icon>
-      </mc-anchor>
+      </a>
     
-      <mc-anchor href="/getting-started">
+      <a href="/getting-started">
         <mc-icon slot="leading-icon">apps</mc-icon>
         Get started
-      </mc-anchor>
+      </a>
     </mc-navigation-bar>
   </body>`}
             </code>

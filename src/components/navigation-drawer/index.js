@@ -11,6 +11,8 @@ import device from './../../helpers/device.js';
  */
 
 
+// TODO keyboard navigation pulled from mc-anchor
+
 class MCNavigationDrawerElement extends MCSideSheetElement {
   static tag = 'mc-navigation-drawer';
   static styleSheets = [sideSheetStyles, styles];
@@ -18,6 +20,7 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
 
   #locationchange_bound = this.#locationchange.bind(this);
   #windowStateChange_bound = this.#windowStateChange.bind(this);
+  #click_bound = this.#click.bind(this);
 
 
   constructor() {
@@ -37,6 +40,7 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
     super.connectedCallback();
     window.addEventListener('locationchange', this.#locationchange_bound);
     window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound);
+    this.addEventListener('click', this.#click_bound);
   }
 
 
@@ -76,6 +80,17 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
       case device.COMPACT:
         this.open = false;
         break;
+    }
+  }
+
+
+  #click(event) {
+    if (event.target.nodeName === 'A') {
+      event.target.classList.add('animate');
+      requestAnimationFrame(() => {
+        event.target.classList.remove('animate');
+        event.target.blur();
+      });
     }
   }
 }

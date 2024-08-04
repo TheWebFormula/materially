@@ -1,5 +1,6 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './anchor-group.css' assert { type: 'css' };
+import stylesAnchor from './global.css' assert { type: 'css' };
 import { expand_more_FILL0_wght400_GRAD0_opsz24 } from './../../helpers/svgs.js';
 
 
@@ -7,7 +8,7 @@ class MCAnchorGroupElement extends HTMLComponentElement {
   static tag = 'mc-anchor-group';
   static useShadowRoot = true;
   static useTemplate = true;
-  static styleSheets = [styles];
+  static styleSheets = [styles, stylesAnchor];
 
   #control;
   #open = false;
@@ -22,10 +23,10 @@ class MCAnchorGroupElement extends HTMLComponentElement {
 
   template() {
     return /*html*/`
-      <mc-anchor control>
+      <a control>
         <slot name="control"></slot>
         <span slot="trailing-icon" class="arrow">${expand_more_FILL0_wght400_GRAD0_opsz24}</span>
-      </mc-anchor>
+      </a>
       <slot class="default-slot"></slot>
     `;
   }
@@ -55,7 +56,7 @@ class MCAnchorGroupElement extends HTMLComponentElement {
   }
 
   get #fullHeight() {
-    return [...this.querySelectorAll('mc-anchor')].length * 58;
+    return [...this.querySelectorAll('a')].length * 58;
   }
 
   #controlClick(event) {

@@ -49,23 +49,24 @@
   <mc-navigation-drawer style="--mc-navigation-drawer-width: 260px;">
     <div slot="header" class="headline">Headline</div>
     
-    <mc-anchor href="/routes/navigations/examples/basic.html">
+    <a href="/routes/navigations/examples/basic.html">
       <mc-icon slot="leading-icon">home</mc-icon>
       Welcome
-    </mc-anchor>
-    <mc-anchor href="/mail" badge="9999">
+    </a>
+    <a href="/mail">
       <mc-icon slot="leading-icon">mail</mc-icon>
+      <mc-badge>9999</mc-badge>
       mail
-    </mc-anchor>
-    <mc-anchor href="/one">One</mc-anchor>
-    <mc-anchor href="/two">Two</mc-anchor>
+    </a>
+    <a href="/one">One</a>
+    <a href="/two">Two</a>
 
-    <mc-anchor-group>
+    <a-group>
       <div slot="control">Group</div>
 
-      <mc-anchor href="/three">Three</mc-anchor>
-      <mc-anchor href="/four">Four</mc-anchor>
-    </mc-anchor-group>
+      <a href="/three">Three</a>
+      <a href="/four">Four</a>
+    </a-group>
   </mc-navigation-drawer>
 
   <mc-pane-container>

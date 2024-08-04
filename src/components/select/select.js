@@ -1,6 +1,6 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
-import fuzzySearch from '../../helpers/fuzzySearch.js'
+import fuzzySearch from './../../helpers/fuzzySearch.js'
 import '../textfield/index.js';
 import '../menu/index.js';
 

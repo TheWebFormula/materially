@@ -1,6 +1,6 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './anchor-group.css' assert { type: 'css' };
-import { expand_more_FILL0_wght400_GRAD0_opsz24 } from '../../helpers/svgs.js';
+import { expand_more_FILL0_wght400_GRAD0_opsz24 } from './../../helpers/svgs.js';
 
 
 class MCAnchorGroupElement extends HTMLComponentElement {

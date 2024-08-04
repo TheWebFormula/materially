@@ -1,6 +1,6 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './anchor.css' assert { type: 'css' };
-import util from '../../helpers/util.js';
+import util from './../../helpers/util.js';
 
 const targetValues = ['_blank', '_parent', '_self', '_top'];
 

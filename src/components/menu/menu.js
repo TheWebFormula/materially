@@ -1,7 +1,7 @@
 import MCSurfaceElement from '../surface/index.js';
 import surfaceStyles from '../surface/component.css' assert { type: 'css' };
 import styles from './menu.css' assert { type: 'css' };
-import util from '../../helpers/util.js'
+import util from './../../helpers/util.js'
 
 
 export default class MCMenuElement extends MCSurfaceElement {

@@ -1,4 +1,4 @@
-import dateUtil from '../../helpers/date.js';
+import dateUtil from './../../helpers/date.js';
 
 
 const monthDaysTemplateCache = {};

@@ -1,7 +1,7 @@
 import MCSideSheetElement from '../side-sheet/index.js';
 import sideSheetStyles from '../side-sheet/component.css';
 import styles from './component.css' assert { type: 'css' };
-import device from '../../helpers/device.js';
+import device from './../../helpers/device.js';
 
 
 /* TODO fix top position when on mobile.

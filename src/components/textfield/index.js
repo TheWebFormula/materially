@@ -1,7 +1,7 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
-import util from '../../helpers/util.js';
-import { error_FILL1_wght400_GRAD0_opsz24 } from '../../helpers/svgs.js';
+import util from './../../helpers/util.js';
+import { error_FILL1_wght400_GRAD0_opsz24 } from './../../helpers/svgs.js';
 import formatter from './formatter.js';
 
 // TODO css variables

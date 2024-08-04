@@ -1,7 +1,7 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
-import Ripple from '../../helpers/Ripple.js';
-import device from '../../helpers/device.js';
+import Ripple from './../../helpers/Ripple.js';
+import device from './../../helpers/device.js';
 
 export default class MCStateLayer extends HTMLComponentElement {
   static tag = 'mc-state-layer';

@@ -1,6 +1,6 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './group.css' assert { type: 'css' };
-import device from '../../helpers/device.js';
+import device from './../../helpers/device.js';
 
 // TODO fix wonkyness when resizing
 

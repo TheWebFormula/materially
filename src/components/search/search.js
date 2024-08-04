@@ -1,6 +1,6 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './search.css' assert { type: 'css' };
-import fuzzySearch from '../../helpers/fuzzySearch.js'
+import fuzzySearch from './../../helpers/fuzzySearch.js'
 import '../textfield/index.js';
 import '../menu/index.js';
 import {
@@ -9,9 +9,9 @@ import {
   history_FILL0_wght400_GRAD0_opsz24,
   arrow_back_ios_FILL1_wght300_GRAD0_opsz24,
   mic_FILL1_wght400_GRAD0_opsz24
-} from '../../helpers/svgs.js';
-import device from '../../helpers/device.js';
-import util from '../../helpers/util.js';
+} from './../../helpers/svgs.js';
+import device from './../../helpers/device.js';
+import util from './../../helpers/util.js';
 
 const isIncrementalSupported = 'incremental' in document.createElement('input');
 const speechRecognitionSupported = 'SpeechRecognition' in window || 'webkitSpeechRecognition' in window;

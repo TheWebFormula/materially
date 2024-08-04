@@ -4,8 +4,8 @@ import styles from './component.css' assert { type: 'css' };
 import {
   keyboard_FILL0_wght400_GRAD0_opsz24,
   schedule_FILL0_wght400_GRAD0_opsz24
-} from '../../helpers/svgs.js';
-import device from '../../helpers/device.js';
+} from './../../helpers/svgs.js';
+import device from './../../helpers/device.js';
 
 // TODO landscape
 

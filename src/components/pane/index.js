@@ -1,6 +1,6 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
-import device from '../../helpers/device.js';
+import device from './../../helpers/device.js';
 
 // TODO save pane width on resize
 

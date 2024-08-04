@@ -9,7 +9,6 @@
 
   display: inline-flex;
   outline: none;
-  vertical-align: top;
   -webkit-tap-highlight-color: transparent;
   cursor: pointer;
   margin: 9px 0;

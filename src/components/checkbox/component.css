@@ -10,7 +10,6 @@
 
   display: inline-flex;
   position: relative;
-  vertical-align: top;
   cursor: pointer;
   outline: none;
   border-radius: 2px;

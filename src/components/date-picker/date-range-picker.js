@@ -5,11 +5,11 @@ import {
   close_FILL1_wght400_GRAD0_opsz24,
   edit_FILL1_wght400_GRAD0_opsz24,
   calendar_today_FILL0_wght400_GRAD0_opsz24
-} from './../../helpers/svgs.js';
-import device from './../../helpers/device.js';
+} from '../../helpers/svgs.js';
+import device from '../../helpers/device.js';
 import { monthDaysTemplate } from './helper.js';
-import util from './../../helpers/util.js';
-import dateUtil from './../../helpers/date.js';
+import util from '../../helpers/util.js';
+import dateUtil from '../../helpers/date.js';
 
 // TODO keyboard controls
 

@@ -1,8 +1,8 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
-import util from './../../helpers/util.js';
+import util from '../../helpers/util.js';
 import styles from './carousel.css';
 
-import Swipe from './../../helpers/Swipe.js';
+import Swipe from '../../helpers/Swipe.js';
 
 
 export default class MCCarouselElement extends HTMLComponentElement {

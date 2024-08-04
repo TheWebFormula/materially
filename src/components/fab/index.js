@@ -1,7 +1,7 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import '../state-layer/index.js';
-import util from './../../helpers/util.js';
+import util from '../../helpers/util.js';
 
 
 class MCFabElement extends HTMLComponentElement {

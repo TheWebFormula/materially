@@ -1,7 +1,7 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './anchor-group.css' assert { type: 'css' };
 import stylesAnchor from './global.css' assert { type: 'css' };
-import { expand_more_FILL0_wght400_GRAD0_opsz24 } from './../../helpers/svgs.js';
+import { expand_more_FILL0_wght400_GRAD0_opsz24 } from '../../helpers/svgs.js';
 
 
 class MCAnchorGroupElement extends HTMLComponentElement {
@@ -24,7 +24,7 @@ class MCAnchorGroupElement extends HTMLComponentElement {
 
   template() {
     return /*html*/`
-      <a control role="button">
+      <a control role="button" tabIndex="-1">
         <slot name="control"></slot>
         <span slot="trailing-icon" class="arrow">${expand_more_FILL0_wght400_GRAD0_opsz24}</span>
       </a>

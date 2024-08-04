@@ -1,4 +1,4 @@
-import util from './../../helpers/util.js';
+import util from '../../helpers/util.js';
 
 let mouseX;
 let mouseY;

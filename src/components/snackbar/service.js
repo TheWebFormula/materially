@@ -1,5 +1,5 @@
-import { close_FILL1_wght400_GRAD0_opsz24 } from './../../helpers/svgs.js';
-import util from './../../helpers/util.js';
+import { close_FILL1_wght400_GRAD0_opsz24 } from '../../helpers/svgs.js';
+import util from '../../helpers/util.js';
 
 const mcSnackbar = new class mcSnackbar {
   defaultTime = 3000;

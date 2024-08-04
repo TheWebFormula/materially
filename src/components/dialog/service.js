@@ -1,4 +1,4 @@
-import util from './../../helpers/util.js';
+import util from '../../helpers/util.js';
 
 const mcDialog = new class mcDialog {
   #idCounter = 0;

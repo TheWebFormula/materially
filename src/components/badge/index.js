@@ -1,6 +1,6 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
-import util from './../../helpers/util.js';
+import util from '../../helpers/util.js';
 
 
 // TODO variables.css

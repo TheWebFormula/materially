@@ -2,9 +2,9 @@ import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './list-item.css' assert { type: 'css' };
 import '../state-layer/index.js';
 import '../avatar/index.js';
-import util from './../../helpers/util.js';
-import Swipe from './../../helpers/Swipe.js';
-import Drag from './../../helpers/Drag.js';
+import util from '../../helpers/util.js';
+import Swipe from '../../helpers/Swipe.js';
+import Drag from '../../helpers/Drag.js';
 
 
 class MCListItemElement extends HTMLComponentElement {

@@ -1,10 +1,10 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
-import device from './../../helpers/device.js';
+import device from '../../helpers/device.js';
 import {
   close_FILL0_wght400_GRAD0_opsz24,
   arrow_back_FILL1_wght300_GRAD0_opsz24
-} from './../../helpers/svgs.js';
+} from '../../helpers/svgs.js';
 
 // TODO predictive back
 

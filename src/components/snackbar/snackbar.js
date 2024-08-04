@@ -1,6 +1,6 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
-import Swipe from './../../helpers/Swipe.js';
+import Swipe from '../../helpers/Swipe.js';
 
 // TODO css variables
 

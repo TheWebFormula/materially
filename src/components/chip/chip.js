@@ -4,8 +4,8 @@ import '../state-layer/index.js';
 import {
   check_FILL1_wght400_GRAD0_opsz20,
   close_FILL1_wght400_GRAD0_opsz20
-} from './../../helpers/svgs.js';
-import util from './../../helpers/util.js';
+} from '../../helpers/svgs.js';
+import util from '../../helpers/util.js';
 
 
 const inputValueRegex = /^(.+)<(.+)>$/;

@@ -1,15 +1,15 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './card.css' assert { type: 'css' };
 import '../state-layer/index.js';
-import device from './../../helpers/device.js';
-import util from './../../helpers/util.js';
+import device from '../../helpers/device.js';
+import util from '../../helpers/util.js';
 import {
   expand_more_FILL0_wght400_GRAD0_opsz24,
   arrow_back_ios_FILL1_wght300_GRAD0_opsz24
-} from './../../helpers/svgs.js';
+} from '../../helpers/svgs.js';
 
-import Drag from './../../helpers/Drag.js';
-import Swipe from './../../helpers/Swipe.js';
+import Drag from '../../helpers/Drag.js';
+import Swipe from '../../helpers/Swipe.js';
 
 
 // TODO variables.css

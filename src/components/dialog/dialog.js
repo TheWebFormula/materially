@@ -1,7 +1,7 @@
 import MCSurfaceElement from '../surface/index.js';
 import surfaceStyles from '../surface/component.css' assert { type: 'css' };
 import styles from './component.css' assert { type: 'css' };
-import { close_FILL0_wght400_GRAD0_opsz24 } from './../../helpers/svgs.js';
+import { close_FILL0_wght400_GRAD0_opsz24 } from '../../helpers/svgs.js';
 
 
 export default class MCDialogElement extends MCSurfaceElement {

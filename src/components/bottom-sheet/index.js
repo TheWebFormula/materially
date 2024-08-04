@@ -1,8 +1,8 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
-import device from './../../helpers/device.js';
-import Swipe from './../../helpers/Swipe.js';
-import util from './../../helpers/util.js';
+import device from '../../helpers/device.js';
+import Swipe from '../../helpers/Swipe.js';
+import util from '../../helpers/util.js';
 
 
 // TODO predictive back

@@ -1,5 +1,5 @@
 import MCMenuItemElement from '../menu/menu-item.js';
-import util from './../../helpers/util.js';
+import util from '../../helpers/util.js';
 
 
 class MCSearchOptionElement extends MCMenuItemElement {

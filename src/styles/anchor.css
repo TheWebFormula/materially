@@ -4,6 +4,7 @@ a {
   cursor: pointer;
   outline: none;
   -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
 
   font-size: var(--mc-font-large-label-size);
   font-weight: var(--mc-font-large-label-weight);
@@ -16,26 +17,12 @@ a:-webkit-any-link:active {
   color: inherit;
 }
 
-a:focus {
-  /* opacity: var(--mc-state-layer-opacity-focus);
-  background-color: var(--mc-on-surface); */
-}
-
-
-a::after {
-  position: absolute;
-  content: "";
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  border-radius: inherit;
+a:focus-visible {
+  text-decoration: underline;
 }
 
 @media (hover: hover) {
-  a:hover::after {
-    /* opacity: var(--mc-state-layer-opacity-hover); */
-    background-color: var(--mc-primary);
-    mix-blend-mode: color;
+  a:hover {
+    text-decoration: underline;
   }
 }

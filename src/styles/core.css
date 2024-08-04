@@ -18,7 +18,6 @@ body {
     "navigation header header"
     "navigation main side"
     "navigation footer footer";
-  /* overflow: auto; */
   overflow: hidden;
   overflow-y: auto;
 }
@@ -32,37 +31,6 @@ body:has([role=dialog][open]:not([anchor])),
 body.window-compact:has(mc-search.open) {
   overflow: hidden
 }
-
-/* main {
-  padding: 16px;
-} */
-
-
-/* html {
-  font-size: 16px;
-  height: 100%;
-  overflow-anchor: none;
-} */
-
-/* body {
-  display: flex;
-  min-height: 100%;
-  width: 100%;
-  margin: 0;
-
-  background-color: var(--mc-background);
-  color: var(--mc-on-background);
-} */
-
-/* body page-content,
-body #page-content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  box-sizing: border-box;
-  padding: 12px;
-  max-width: 100dvw;
-} */
 
 mc-pane::-webkit-resizer {
   border: 2px solid black;

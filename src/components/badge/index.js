@@ -3,8 +3,6 @@ import styles from './component.css' assert { type: 'css' };
 import util from '../../helpers/util.js';
 
 
-// TODO variables.css
-
 class MCBadgeElement extends HTMLComponentElement {
   static tag = 'mc-badge';
   static useShadowRoot = true;

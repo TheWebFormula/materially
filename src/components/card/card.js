@@ -12,8 +12,6 @@ import Drag from '../../helpers/Drag.js';
 import Swipe from '../../helpers/Swipe.js';
 
 
-// TODO variables.css
-
 export default class MCCardElement extends HTMLComponentElement {
   static tag = 'mc-card';
   static useShadowRoot = true;

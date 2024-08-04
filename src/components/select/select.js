@@ -4,7 +4,6 @@ import fuzzySearch from '../../helpers/fuzzySearch.js'
 import '../textfield/index.js';
 import '../menu/index.js';
 
-// TODO css variables
 
 class MCSelectElement extends HTMLComponentElement {
   static tag = 'mc-select';

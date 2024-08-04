@@ -2,7 +2,6 @@ import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import '../state-layer/index.js';
 
-// TODO css variables
 
 class MCSliderElement extends HTMLComponentElement {
   static tag = 'mc-slider';

@@ -2,7 +2,6 @@ import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import Swipe from '../../helpers/Swipe.js';
 
-// TODO css variables
 
 export default class MCSnackbarElement extends HTMLComponentElement {
   static tag = 'mc-snackbar';

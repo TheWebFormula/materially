@@ -19,7 +19,6 @@ jobs:
           node-version: '22.x'
 
       - name: Build
-        working-directory: ./
         run: |
           mkdir dist
           npm install && npm run build
@@ -29,7 +28,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: 'materially'
-          directory: 'dist'
+          projectName: materially
+          directory: dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           branch: main

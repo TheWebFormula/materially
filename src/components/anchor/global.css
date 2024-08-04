@@ -37,13 +37,15 @@ mc-navigation-drawer a {
   color: var(--mc-anchor-text-color-local);
   text-decoration: none;
 
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
   &::before {
     content: '';
     position: absolute;
-    left: -16px;
     top: 0;
-    right: -16px;
-    height: 56px;
     z-index: -1;
     border-radius: var(--mc-anchor-shape-local);
   }
@@ -51,37 +53,20 @@ mc-navigation-drawer a {
   &::after {
     content: '';
     position: absolute;
-    left: -16px;
     top: 0;
-    right: -16px;
-    height: 56px;
     pointer-events: none;
     border-radius: var(--mc-anchor-shape-local);
     z-index: -1;
   }
 
-  &::after,
-  &::before {
-    transition: left, right;
-    transition-duration: var(--mc-motion-duration-medium1);
-    transition-timing-function: var(--mc-motion-easing-standard);
+  &:focus::after {
+    opacity: var(--mc-state-layer-opacity-focus);
+    background-color: var(--mc-on-surface);
   }
 
   &.current::before {
     pointer-events: none;
     background-color: var(--mc-anchor-current-container-color-local);
-  }
-  
-  &.animate::after,
-  &.animate::before {
-    left: 40%;
-    right: 40%;
-    transition-duration: 0s;
-  }
-
-  &:focus::after {
-    opacity: var(--mc-state-layer-opacity-focus);
-    background-color: var(--mc-on-surface);
   }
 
   &.current:focus::after {
@@ -91,7 +76,6 @@ mc-navigation-drawer a {
   [slot=leading-icon] {
     grid-area: leading;
     pointer-events: none;
-    margin-right: 12px;
   }
 
   mc-badge,
@@ -99,6 +83,39 @@ mc-navigation-drawer a {
     grid-area: trailing;
     justify-self: start;
     pointer-events: none;
+  }
+}
+
+a[control],
+mc-navigation-drawer a {
+  &::before {
+    left: -16px;
+    right: -16px;
+    height: 56px;
+  }
+
+  &::after {
+    left: -16px;
+    right: -16px;
+    height: 56px;
+  }
+  
+  &::after,
+  &::before {
+    transition: left, right;
+    transition-duration: var(--mc-motion-duration-medium1);
+    transition-timing-function: var(--mc-motion-easing-standard);
+  }
+
+  &.animate::after,
+  &.animate::before {
+    left: 40%;
+    right: 40%;
+    transition-duration: 0s;
+  }
+
+  [slot=leading-icon] {
+    margin-right: 12px;
   }
 }
 
@@ -112,9 +129,11 @@ mc-navigation-rail {
     justify-content: center;
     align-items: center;
     margin: 0;
-    /* width: 64px; */
     height: 64px;
-    /* margin-bottom: 2px; */
+    min-width: 64px;
+    width: min-content;
+    overflow: visible;
+    white-space: nowrap;
   
     font-size: var(--mc-font-medium-label-size);
     font-weight: var(--mc-font-medium-label-weight);
@@ -122,18 +141,12 @@ mc-navigation-rail {
     border-radius: var(--mc-shape-extra-medium);
 
     &::before {
-      left: unset;
-      right: unset;
-      /* top: 3px; */
       width: 64px;
       height: 32px;
       border-radius: var(--mc-shape-extra-large);
     }
 
     &::after {
-      left: unset;
-      right: unset;
-      /* top: 3px; */
       width: 64px;
       height: 32px;
       border-radius: var(--mc-shape-extra-large);
@@ -168,17 +181,12 @@ mc-navigation-rail {
       }
     }
 
-    [slot=leading-icon] {
-      margin-right: 0;
-    }
-
     &:not(.no-text) {
       line-height: 20px;
       flex-direction: column;
 
       mc-icon {
         margin-right: 0px;
-        margin-top: 3px;
         height: 32px;
         line-height: 32px;
         margin-top: 12px;
@@ -190,6 +198,11 @@ mc-navigation-rail {
       }
     }
   }
+}
+
+mc-navigation-rail a {
+  min-width: 88px;
+  width: 88px;
 }
 
 

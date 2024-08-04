@@ -1,6 +1,6 @@
 import build from '@thewebformula/lithe/build';
 import esbuild from 'esbuild';
-import { readFile, writeFile } from 'node:fs/promises';
+// import { readFile, writeFile } from 'node:fs/promises';
 import { gzip } from 'node:zlib';
 import { promisify } from 'node:util';
 import generate from '@thewebformula/materially/theme-generator';
@@ -27,9 +27,9 @@ const plugin = {
         export default styles;`;
       return { contents };
     })
-    build.onEnd(async () => {
-      await gzipFile('dist/material.js', 'dist/material.js.gz');
-    })
+    // build.onEnd(async () => {
+    //   await gzipFile('dist/material.js', 'dist/material.js.gz');
+    // })
   }
 };
 const context = await esbuild.context({
@@ -107,7 +107,7 @@ build({
     if (process.env.NODE_ENV === 'production') process.exit();
   });
 
-async function gzipFile(file, rename) {
-  const result = await asyncGzip(await readFile(file));
-  await writeFile(rename, result);
-}
+// async function gzipFile(file, rename) {
+//   const result = await asyncGzip(await readFile(file));
+//   await writeFile(rename, result);
+// }

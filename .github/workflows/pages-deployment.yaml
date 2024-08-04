@@ -19,7 +19,7 @@ jobs:
           node-version: '22.x'
 
       - name: Build
-        working-directory: ./src
+        working-directory: ./
         run: |
           mkdir dist
           npm install && npm run build

@@ -13,6 +13,7 @@
     "./services/dialog": "./src/components/dialog/service.js",
     "./services/snackbar": "./src/components/snackbar/service.js",
     "./services/util": "./src/helpers/util.js",
+    "./services/Swipe": "./src/helpers/Swipe.js",
     "./components/anchor": "./src/components/anchor/index.js",
     "./components/avatar": "./src/components/avatar/index.js",
     "./components/badge": "./src/components/badge/index.js",

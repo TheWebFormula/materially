@@ -69,6 +69,7 @@ build({
   outdir: 'dist/',
   securityLevel: 0,
   copyFiles: [
+    { from: 'docs/_headers', to: 'dist/' },
     { from: 'docs/favicon.ico', to: 'dist/' },
     { from: 'docs/woman.jpg', to: 'dist/' },
     { from: 'docs/icons.woff2', to: 'dist/' },

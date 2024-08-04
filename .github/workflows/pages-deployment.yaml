@@ -32,12 +32,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      # - name: Download Artifact
-      #   uses: actions/download-artifact@master
-      #   with:
-      #     name: build
-      #     path: build
-
       - name: Publish
         uses: cloudflare/pages-action@v1
         with:

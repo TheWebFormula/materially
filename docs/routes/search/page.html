@@ -30,45 +30,41 @@
             <mc-search-option-group id="secondary" label="Secondary"></mc-search-option-group>
           </mc-search>
         
-          <pre>
-            <code class="language-html">
-  ${`<!-- incremental debounces the input and fires the search
-    If not present then the enter key will fire the search -->
-  <mc-search id="one" placeholder="search" incremental>
-    <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
-    <mc-search-option-group id="secondary" label="Secondary"></mc-search-option-group>
-  </mc-search>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<!-- incremental debounces the input and fires the search
+  If not present then the enter key will fire the search -->
+<mc-search id="one" placeholder="search" incremental>
+  <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+  <mc-search-option-group id="secondary" label="Secondary"></mc-search-option-group>
+</mc-search>`}
+            </pre></code-block>
         
-          <pre>
-            <code class="language-javascript">
-  // get selected value and object
-  searchOne.addEventListener('change', () => console.log(searchOne.selected, searchOne.selectedObject));
-    console.log('okokokko')
-  document.querySelector('mc-search#one').addEventListener('search', event => {
-    // set results
-    event.target.results = [{
-      value: 'one',
-      display: 'One',
-    },{
-      value: 'two',
-      display: 'Two',
+          <code-block language="javascript"><pre>
+// get selected value and object
+searchOne.addEventListener('change', () => console.log(searchOne.selected, searchOne.selectedObject));
+  console.log('okokokko')
+document.querySelector('mc-search#one').addEventListener('search', event => {
+  // set results
+  event.target.results = [{
+    value: 'one',
+    display: 'One',
+  },{
+    value: 'two',
+    display: 'Two',
 
-      // specify container to place in mc-search-option-group#secondary
-      container: 'secondary'
-    }].filter(v => v.display.toLocaleLowerCase().includes(event.target.value));
+    // specify container to place in mc-search-option-group#secondary
+    container: 'secondary'
+  }].filter(v => v.display.toLocaleLowerCase().includes(event.target.value));
 
 
-    // set suggestions for searches
-    event.target.suggestions = [{
-      value: 'one'
-    },{
-      value: 'two'
-    }].filter(v => v.display.toLocaleLowerCase().includes(event.target.value));
-  });
-            </code>
-          </pre>
+  // set suggestions for searches
+  event.target.suggestions = [{
+    value: 'one'
+  },{
+    value: 'two'
+  }].filter(v => v.display.toLocaleLowerCase().includes(event.target.value));
+});
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -84,30 +80,26 @@
             <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
           </mc-search>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-search placeholder="search" incremental history>
-    <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
-  </mc-search>
-  
-  <!-- set history id to use the same history for multiple searches -->
-  <mc-search placeholder="search" incremental history="id">
-    <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
-  </mc-search>
-  
-  <!-- set history max. Default: 100 -->
-  <mc-search placeholder="search" incremental history history-max="100">
-    <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
-  </mc-search>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-search placeholder="search" incremental history>
+  <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+</mc-search>
+
+<!-- set history id to use the same history for multiple searches -->
+<mc-search placeholder="search" incremental history="id">
+  <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+</mc-search>
+
+<!-- set history max. Default: 100 -->
+<mc-search placeholder="search" incremental history history-max="100">
+  <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+</mc-search>`}
+            </pre></code-block>
         
-          <pre>
-            <code class="javascript">
-  ${`// clear search history
-  document.querySelector('mc-search').clearHistory();`}
-            </code>
-          </pre>
+          <code-block language="javascript"><pre>
+${`// clear search history
+document.querySelector('mc-search').clearHistory();`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -121,13 +113,11 @@
             <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
           </mc-search>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-search placeholder="search" incremental speech>
-    <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
-  </mc-search>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-search placeholder="search" incremental speech>
+  <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+</mc-search>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -143,15 +133,13 @@
             <mc-search-option-group id="secondary" label="Secondary"></mc-search-option-group>
           </mc-search>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-search id="four" placeholder="search" incremental>
-    <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
-    <mc-search-option-group id="primary" label="Primary"></mc-search-option-group>
-    <mc-search-option-group id="secondary" label="Secondary"></mc-search-option-group>
-  </mc-search>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-search id="four" placeholder="search" incremental>
+  <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+  <mc-search-option-group id="primary" label="Primary"></mc-search-option-group>
+  <mc-search-option-group id="secondary" label="Secondary"></mc-search-option-group>
+</mc-search>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -168,16 +156,14 @@
             <mc-search-container id="secondary" label="Secondary"></mc-search-container>
           </mc-search>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-search id="five" placeholder="search" incremental>
-    <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
-    <mc-chip filter label="Event numbers" slot="chips"></mc-chip>
-    <mc-search-container id="primary" label="Primary"></mc-search-container>
-    <mc-search-container id="secondary" label="Secondary"></mc-search-container>
-  </mc-search>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-search id="five" placeholder="search" incremental>
+  <mc-avatar slot="trailing"><img alt="photo" src="../../woman.jpg"></img></mc-avatar>
+  <mc-chip filter label="Event numbers" slot="chips"></mc-chip>
+  <mc-search-container id="primary" label="Primary"></mc-search-container>
+  <mc-search-container id="secondary" label="Secondary"></mc-search-container>
+</mc-search>`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

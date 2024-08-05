@@ -34,21 +34,19 @@
             </mc-segmented-button>
           </mc-segmented-button-set>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-segmented-button-set>
-    <mc-segmented-button checked value="1">
-      <mc-icon>format_align_right</mc-icon>
-    </mc-segmented-button>
-    <mc-segmented-button value="2">
-      <mc-icon>format_align_center</mc-icon>
-    </mc-segmented-button>
-    <mc-segmented-button value="3">
-      <mc-icon>format_align_left</mc-icon>
-    </mc-segmented-button>
-  </mc-segmented-button-set>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-segmented-button-set>
+  <mc-segmented-button checked value="1">
+    <mc-icon>format_align_right</mc-icon>
+  </mc-segmented-button>
+  <mc-segmented-button value="2">
+    <mc-icon>format_align_center</mc-icon>
+  </mc-segmented-button>
+  <mc-segmented-button value="3">
+    <mc-icon>format_align_left</mc-icon>
+  </mc-segmented-button>
+</mc-segmented-button-set>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -63,15 +61,13 @@
             <mc-segmented-button value="three">Three</mc-segmented-button>
           </mc-segmented-button-set>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-segmented-button-set check-icon>
-    <mc-segmented-button checked value="one">One</mc-segmented-button>
-    <mc-segmented-button value="two">Two</mc-segmented-button>
-    <mc-segmented-button value="three">Three</mc-segmented-button>
-  </mc-segmented-button-set>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-segmented-button-set check-icon>
+  <mc-segmented-button checked value="one">One</mc-segmented-button>
+  <mc-segmented-button value="two">Two</mc-segmented-button>
+  <mc-segmented-button value="three">Three</mc-segmented-button>
+</mc-segmented-button-set>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -86,21 +82,17 @@
             <mc-segmented-button value="three">Three</mc-segmented-button>
           </mc-segmented-button-set>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-segmented-button-set id="multi-select" multiple>
-    <mc-segmented-button checked value="one">One</mc-segmented-button>
-    <mc-segmented-button checked value="two">Two</mc-segmented-button>
-    <mc-segmented-button value="three">Three</mc-segmented-button>
-  </mc-segmented-button-set>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-segmented-button-set id="multi-select" multiple>
+  <mc-segmented-button checked value="one">One</mc-segmented-button>
+  <mc-segmented-button checked value="two">Two</mc-segmented-button>
+  <mc-segmented-button value="three">Three</mc-segmented-button>
+</mc-segmented-button-set>`}
+            </pre></code-block>
         
-          <pre>
-            <code class="language-javascript">
-  ${`console.log(document.querySelector('#multi-select').value); // "one,two"`}
-            </code>
-          </pre>
+          <code-block language="javascript"><pre>
+${`console.log(document.querySelector('#multi-select').value); // "one,two"`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -110,16 +102,14 @@
           <h2 slot="headline">Style</h2>
           <div slot="supporting-text">CSS variables that allow you override default values</div>
       
-          <pre>
-            <code class="language-css">
-  ${`/* Optional variables for overriding */
-  
-  --mc-segmented-button-text-color: var(--mc-on-surface);
-  --mc-segmented-button-icon-color: var(--mc-primary);
-  --mc-segmented-button-selected-container-color: var(--mc-secondary-container);
-  --mc-segmented-button-selected-text-color: var(--mc-on-secondary-container);`}
-            </code>
-          </pre>
+          <code-block language="css"><pre>
+${`/* Optional variables for overriding */
+
+--mc-segmented-button-text-color: var(--mc-on-surface);
+--mc-segmented-button-icon-color: var(--mc-primary);
+--mc-segmented-button-selected-container-color: var(--mc-secondary-container);
+--mc-segmented-button-selected-text-color: var(--mc-on-secondary-container);`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

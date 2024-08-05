@@ -22,11 +22,9 @@
         
           <mc-button tooltip="tooltip text">Hover me</mc-button>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-button tooltip="tooltip text">Hover me</mc-button>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-button tooltip="tooltip text">Hover me</mc-button>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -42,16 +40,14 @@
             <mc-button slot="actions">action</mc-button>
           </mc-tooltip>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-button tooltip-target="one">Hover me</mc-button>
-  <mc-tooltip id="one" rich>
-    <div slot="subhead">Subhead</div>
-    Use rich tooltips to provide more details, like describing the value of a feature
-    <mc-button slot="actions">action</mc-button>
-  </mc-tooltip>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-button tooltip-target="one">Hover me</mc-button>
+<mc-tooltip id="one" rich>
+  <div slot="subhead">Subhead</div>
+  Use rich tooltips to provide more details, like describing the value of a feature
+  <mc-button slot="actions">action</mc-button>
+</mc-tooltip>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -61,17 +57,15 @@
           <h2 slot="headline">Style</h2>
           <div slot="supporting-text">CSS variables that allow you override default values</div>
       
-          <pre>
-            <code class="language-css">
-  ${`/* Optional variables for overriding */
-  
-  --mc-textfield-shape: ar(--mc-shape-extra-small-top);
-  --mc-textfield-container-color: var(--mc-surface-container-highest);
-  --mc-textfield-input-text-color: var(--mc-on-surface);
-  --mc-textfield-label-text-color: var(--mc-on-surface-variant);
-  --mc-textfield-active-indicator-color: var(--mc-primary);`}
-            </code>
-          </pre>
+          <code-block language="css"><pre>
+${`/* Optional variables for overriding */
+
+--mc-textfield-shape: ar(--mc-shape-extra-small-top);
+--mc-textfield-container-color: var(--mc-surface-container-highest);
+--mc-textfield-input-text-color: var(--mc-on-surface);
+--mc-textfield-label-text-color: var(--mc-on-surface-variant);
+--mc-textfield-active-indicator-color: var(--mc-primary);`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

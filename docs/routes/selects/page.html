@@ -66,43 +66,42 @@
             </div>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-select
-    label="Label"
-    placeholder="Placeholder..."
-  >
-    <mc-option value="1">one</mc-option>
-    <mc-option value="2">two</mc-option>
-  </mc-select>
+          <code-block language="html"><pre>
+${`<mc-select
+  label="Label"
+  placeholder="Placeholder..."
+>
+  <mc-option value="1">one</mc-option>
+  <mc-option value="2">two</mc-option>
+</mc-select>
 
-  
-  <mc-select
-    label="Filter"
-    filter
-  >
-    <mc-icon slot="leading-icon">search</mc-icon>
-    <mc-option value="1">one</mc-option>
-    <mc-option value="2">two</mc-option>
-  </mc-select>
 
-  
-  <mc-select
-    label="Value attr"
-    value="1"
-  >
-    <mc-option value="1">one</mc-option>
-    <mc-option value="2">two</mc-option>
-  </mc-select>
+<mc-select
+  label="Filter"
+  filter
+>
+  <mc-icon slot="leading-icon">search</mc-icon>
+  <mc-option value="1">one</mc-option>
+  <mc-option value="2">two</mc-option>
+</mc-select>
 
-  
-  <mc-select
-    label="Selected attr (outlined)"
-    class="outlined"
-  >
-    <mc-option value="1" selected>one</mc-option>
-    <mc-option value="2">two</mc-option>
-  </mc-select>`}
+
+<mc-select
+  label="Value attr"
+  value="1"
+>
+  <mc-option value="1">one</mc-option>
+  <mc-option value="2">two</mc-option>
+</mc-select>
+
+
+<mc-select
+  label="Selected attr (outlined)"
+  class="outlined"
+>
+  <mc-option value="1" selected>one</mc-option>
+  <mc-option value="2">two</mc-option>
+</mc-select>`}
         </code>
       </pre>
         </mc-card>
@@ -131,22 +130,20 @@
             </mc-select>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-select filter label="Label">
-    <mc-option value="1">one</mc-option>
-    <mc-option value="2">two</mc-option>
-    <mc-option value="3">three</mc-option>
-    <mc-option value="4">four</mc-option>
-    <mc-option value="5">five</mc-option>
-    <mc-option value="6">six</mc-option>
-    <mc-option value="7">seven</mc-option>
-    <mc-option value="8">eight</mc-option>
-    <mc-option value="9">nine</mc-option>
-    <mc-option value="10">ten</mc-option>
-  </mc-select>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-select filter label="Label">
+  <mc-option value="1">one</mc-option>
+  <mc-option value="2">two</mc-option>
+  <mc-option value="3">three</mc-option>
+  <mc-option value="4">four</mc-option>
+  <mc-option value="5">five</mc-option>
+  <mc-option value="6">six</mc-option>
+  <mc-option value="7">seven</mc-option>
+  <mc-option value="8">eight</mc-option>
+  <mc-option value="9">nine</mc-option>
+  <mc-option value="10">ten</mc-option>
+</mc-select>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -173,45 +170,41 @@
               </mc-select>
             </div>
         
-          <pre>
-                <code class="language-html">
-          ${`<mc-select filter async label="Label" id="async-filter-select">
-            <mc-option value="1">one</mc-option>
-            <mc-option value="2">two</mc-option>
-            <mc-option value="3">three</mc-option>
-            <mc-option value="4">four</mc-option>
-            <mc-option value="5">five</mc-option>
-            <mc-option value="6">six</mc-option>
-            <mc-option value="7">seven</mc-option>
-            <mc-option value="8">eight</mc-option>
-            <mc-option value="9">nine</mc-option>
-            <mc-option value="10">ten</mc-option>
-          </mc-select>`}
-                </code>
-              </pre>
+            <code-block language="html"><pre>
+${`<mc-select filter async label="Label" id="async-filter-select">
+  <mc-option value="1">one</mc-option>
+  <mc-option value="2">two</mc-option>
+  <mc-option value="3">three</mc-option>
+  <mc-option value="4">four</mc-option>
+  <mc-option value="5">five</mc-option>
+  <mc-option value="6">six</mc-option>
+  <mc-option value="7">seven</mc-option>
+  <mc-option value="8">eight</mc-option>
+  <mc-option value="9">nine</mc-option>
+  <mc-option value="10">ten</mc-option>
+</mc-select>`}
+          </pre></code-block>
         
-          <pre>
-            <code class="language-javascript">
-  ${`// do some async stuff
-  const select = document.querySelector('#async-filter-select');
-  
-  // Incremental search is enabled
-  // You will receive debounced events as you type
-  select.addEventListener('search', e => {
-    console.log(select.displayValue); // what is being typed
+          <code-block language="javascript"><pre>
+${`// do some async stuff
+const select = document.querySelector('#async-filter-select');
 
-    // You can reset the select to the initial options
-    select.initialOptions();
+// Incremental search is enabled
+// You will receive debounced events as you type
+select.addEventListener('search', e => {
+  console.log(select.displayValue); // what is being typed
 
-    // You can either append new mc-option elements to the DOM
-    // Or you can use this helper method
-    select.setOptions([
-      { label: 'One', value: 1 },
-      { label: 'Two', value: 2}
-    ]);
-  });`}
-            </code>
-          </pre>
+  // You can reset the select to the initial options
+  select.initialOptions();
+
+  // You can either append new mc-option elements to the DOM
+  // Or you can use this helper method
+  select.setOptions([
+    { label: 'One', value: 1 },
+    { label: 'Two', value: 2}
+  ]);
+});`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -221,17 +214,15 @@
           <h2 slot="headline">Style</h2>
           <div slot="supporting-text">CSS variables that allow you override default values</div>
       
-          <pre>
-            <code class="language-css">
-  ${`/* Optional variables for overriding */
-  
-  --mc-select-container-color: var(--mc-surface-container);
-  --mc-select-shape: var(--mc-shape-extra-small);
-  --mc-select-item-text-color-local: var(--mc-on-surface);
-  --mc-select-selected-container-color-local: var(--mc-secondary-container);
-  --mc-select-selected-text-color-local: var(--mc-on-secondary-container);`}
-            </code>
-          </pre>
+          <code-block language="css"><pre>
+${`/* Optional variables for overriding */
+
+--mc-select-container-color: var(--mc-surface-container);
+--mc-select-shape: var(--mc-shape-extra-small);
+--mc-select-item-text-color-local: var(--mc-on-surface);
+--mc-select-selected-container-color-local: var(--mc-secondary-container);
+--mc-select-selected-text-color-local: var(--mc-on-secondary-container);`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

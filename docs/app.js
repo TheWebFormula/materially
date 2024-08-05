@@ -1,4 +1,5 @@
 import '@thewebformula/materially';
+import './code-block.js';
 
 if (typeof hljs === 'undefined') {
   const hljsTag = document.querySelector('#hljsscript');
@@ -12,7 +13,7 @@ if (typeof hljs === 'undefined') {
 }
 
 function initHLJS() {
-  hljs.configure({ ignoreUnescapedHTML: true });
+  hljs.configure({ ignoreUnescapedHTML: true, cssSelector: 'code-block pre' });
   hljs.highlightAll();
 }
 

@@ -24,17 +24,15 @@
 
           <mc-button onclick="page.basic();">Show</mc-button>
 
-          <pre>
-            <code class="language-javascript">
-  ${`// also available globally on window
-  import { mcSnackbar } from '@thewebformula/materially/services';
-  // import { mcSnackbar } from '@thewebformula/materially
-  
-  mcSnackbar.show({
-    message: 'Message goes here'
-  });`}
-            </code>
-          </pre>
+          <code-block language="javascript"><pre>
+${`// also available globally on window
+import { mcSnackbar } from '@thewebformula/materially/services';
+// import { mcSnackbar } from '@thewebformula/materially
+
+mcSnackbar.show({
+  message: 'Message goes here'
+});`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -46,21 +44,19 @@
         
           <mc-button onclick="page.action();">Show</mc-button>
         
-          <pre>
-            <code class="language-javascript">
-  ${`// also available globally on window
-  import { mcSnackbar } from '@thewebformula/materially/services';
-  // import { mcSnackbar } from '@thewebformula/materially
-  
-  // Promise will resolve when the Snackbar is dismissed automatically or when action is pressed
-  await mcSnackbar.show({
-    message: 'Message goes here',
-    action: true,
-    actionLabel: 'Done' // default 'Dismiss'
-  });
-  console.log('Snackbar dismissed');`}
-            </code>
-          </pre>
+          <code-block language="javascript"><pre>
+${`// also available globally on window
+import { mcSnackbar } from '@thewebformula/materially/services';
+// import { mcSnackbar } from '@thewebformula/materially
+
+// Promise will resolve when the Snackbar is dismissed automatically or when action is pressed
+await mcSnackbar.show({
+  message: 'Message goes here',
+  action: true,
+  actionLabel: 'Done' // default 'Dismiss'
+});
+console.log('Snackbar dismissed');`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -71,19 +67,17 @@
         
           <mc-button onclick="page.noClose();">Show</mc-button>
         
-          <pre>
-            <code class="language-javascript">
-  ${`// also available globally on window
-  import { mcSnackbar } from '@thewebformula/materially/services';
-  // import { mcSnackbar } from '@thewebformula/materially
-  
-  mcSnackbar.show({
-    message: 'Message goes here',
-    closeButton: false,
-    ms: 6000
-  });`}
-            </code>
-          </pre>
+          <code-block language="javascript"><pre>
+${`// also available globally on window
+import { mcSnackbar } from '@thewebformula/materially/services';
+// import { mcSnackbar } from '@thewebformula/materially
+
+mcSnackbar.show({
+  message: 'Message goes here',
+  closeButton: false,
+  ms: 6000
+});`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -93,15 +87,13 @@
           <h2 slot="headline">Style</h2>
           <div slot="supporting-text">CSS variables that allow you override default values</div>
       
-          <pre>
-            <code class="language-css">
-  ${`/* Optional variables for overriding */
-  
-  --mc-snackbar-container-color: var(--mc-surface-inverse);
-  --mc-snackbar-text-color: var(--mc-on-surface-inverse);
-  --mc-snackbar-action-color: var(--mc-primary-container);`}
-            </code>
-          </pre>
+          <code-block language="css"><pre>
+${`/* Optional variables for overriding */
+
+--mc-snackbar-container-color: var(--mc-surface-inverse);
+--mc-snackbar-text-color: var(--mc-on-surface-inverse);
+--mc-snackbar-action-color: var(--mc-primary-container);`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

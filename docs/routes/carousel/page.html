@@ -61,34 +61,32 @@
             </mc-carousel-item>
           </mc-carousel>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-carousel>
-    <mc-carousel-item width="170">
-      <img alt="landscape" loading="lazy"
-        src="..." />
-    </mc-carousel-item>
-    <mc-carousel-item width="170">
-      <img alt="landscape" loading="lazy"
-        src="..." />
-    </mc-carousel-item>
-  </mc-carousel>
-  
-  
-  <!-- Set width directly on item -->
-  <mc-carousel-item width="170"></mc-carousel-item>
-
-  <!-- If no width set and an img is used, then the image width will be used -->
-  <mc-carousel-item>
-    <img src="..." />
+          <code-block language="html"><pre>
+${`<mc-carousel>
+  <mc-carousel-item width="170">
+    <img alt="landscape" loading="lazy"
+      src="..." />
   </mc-carousel-item>
-  
-  <!-- If no width is set, the offsetWidth will be used -->
-  <mc-carousel-item>
-    ...
-  </mc-carousel-item>`}
-            </code>
-          </pre>
+  <mc-carousel-item width="170">
+    <img alt="landscape" loading="lazy"
+      src="..." />
+  </mc-carousel-item>
+</mc-carousel>
+
+
+<!-- Set width directly on item -->
+<mc-carousel-item width="170"></mc-carousel-item>
+
+<!-- If no width set and an img is used, then the image width will be used -->
+<mc-carousel-item>
+  <img src="..." />
+</mc-carousel-item>
+
+<!-- If no width is set, the offsetWidth will be used -->
+<mc-carousel-item>
+  ...
+</mc-carousel-item>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -219,32 +217,30 @@
             </mc-carousel-item>
           </mc-carousel>
         
-          <pre>
-            <code class="language-html">
-  ${`<!-- multi-browser -->
-  <mc-carousel>
-    <mc-carousel-item width="170">
-      <img alt="landscape" loading="lazy"
-        src="..." />
-    </mc-carousel-item>
-  </mc-carousel>
-  
-  <!-- hero-start -->
-  <mc-carousel strategy="hero-start">
-    <mc-carousel-item>
-      <img alt="landscape" loading="lazy"
-        src="..." />
-    </mc-carousel-item>
-  </mc-carousel>
-  
-  <!-- hero-center -->
-  <mc-carousel strategy="hero-center">
-    <mc-carousel-item>
-      <img alt="landscape" loading="lazy"
-        src="..." />
-    </mc-carousel-item>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<!-- multi-browser -->
+<mc-carousel>
+  <mc-carousel-item width="170">
+    <img alt="landscape" loading="lazy"
+      src="..." />
+  </mc-carousel-item>
+</mc-carousel>
+
+<!-- hero-start -->
+<mc-carousel strategy="hero-start">
+  <mc-carousel-item>
+    <img alt="landscape" loading="lazy"
+      src="..." />
+  </mc-carousel-item>
+</mc-carousel>
+
+<!-- hero-center -->
+<mc-carousel strategy="hero-center">
+  <mc-carousel-item>
+    <img alt="landscape" loading="lazy"
+      src="..." />
+  </mc-carousel-item>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -302,30 +298,28 @@
             </mc-carousel-item>
           </mc-carousel>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-carousel mc-item-width="170" style="height: 180px;">
-    <mc-carousel-item width="170">
-      <div class="mc-text">
-        <div>Title</div>
-      </div>
-      <img alt="landscape" loading="lazy" src="./img.jpg"/>
-    </mc-carousel-item>
-    <mc-carousel-item width="170">
-      <div class="mc-text">
-        <div>Title</div>
-      </div>
-      <img alt="landscape" loading="lazy" src="./img.jpg"/>
-    </mc-carousel-item>
-    <mc-carousel-item width="170">
-      <div class="mc-text">
-        <div>Title</div>
-      </div>
-      <img alt="landscape" loading="lazy" src="./img.jpg"/>
-    </mc-carousel-item>
-  </mc-carousel>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-carousel mc-item-width="170" style="height: 180px;">
+  <mc-carousel-item width="170">
+    <div class="mc-text">
+      <div>Title</div>
+    </div>
+    <img alt="landscape" loading="lazy" src="./img.jpg"/>
+  </mc-carousel-item>
+  <mc-carousel-item width="170">
+    <div class="mc-text">
+      <div>Title</div>
+    </div>
+    <img alt="landscape" loading="lazy" src="./img.jpg"/>
+  </mc-carousel-item>
+  <mc-carousel-item width="170">
+    <div class="mc-text">
+      <div>Title</div>
+    </div>
+    <img alt="landscape" loading="lazy" src="./img.jpg"/>
+  </mc-carousel-item>
+</mc-carousel>`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

@@ -43,31 +43,29 @@
             <mc-button onclick="page.openSimple(false, true, 'settings')">open</mc-button>
           </div>
 
-          <pre>
-            <code class="language-javascript">
-  // also available globally on window
-  import { mcDialog } from '@thewebformula/materially/services';
-  // import { mcDialog } from '@thewebformula/materially';
+          <code-block language="javascript"><pre>
+// also available globally on window
+import { mcDialog } from '@thewebformula/materially/services';
+// import { mcDialog } from '@thewebformula/materially';
 
-  const answer = await mcDialog.simple({
-    icon: 'settings',
-    headline: 'Question',
-    message: 'Are you sure?',
-    allowClose: false, // clicking outside of dialog will close it
+const answer = await mcDialog.simple({
+  icon: 'settings',
+  headline: 'Question',
+  message: 'Are you sure?',
+  allowClose: false, // clicking outside of dialog will close it
 
-    // If prevent navigation is not set then it will be the opposite of allowClose
-    preventNavigation: true, // default false
-    
-    actionConfirm: true, // default true
-    actionConfirm: 'OK', // default OK
-    actionCancel: true, // default false
-    actionCancelLabel: 'Cancel' // default Cancel
-  });
+  // If prevent navigation is not set then it will be the opposite of allowClose
+  preventNavigation: true, // default false
+  
+  actionConfirm: true, // default true
+  actionConfirm: 'OK', // default OK
+  actionCancel: true, // default false
+  actionCancelLabel: 'Cancel' // default Cancel
+});
 
-  if (answer === 'confirm') console.log('User pressed ok');
-  if (answer === 'cancel') console.log('User pressed cancel');
-            </code>
-          </pre>
+if (answer === 'confirm') console.log('User pressed ok');
+if (answer === 'cancel') console.log('User pressed cancel');
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -78,29 +76,25 @@
 
           <mc-button onclick="page.openTemplate()" style="margin-top: 12px;">Open</mc-button>
 
-          <pre>
-            <code class="language-html">
-  ${`// templateString
-  <div slot="headline">Headline</div>
-  <div>Here is some content for the dialog.</div>
-  <mc-button slot="actions" value="response value">Close</mc-button>`}
-      </code>
-    </pre>
-    <pre>
-      <code class="language-javascript">
-  // also available globally on window
-  import { mcDialog } from '@thewebformula/materially/services';
-  // import { mcDialog } from '@thewebformula/materially';
+          <code-block language="html"><pre>
+${`// templateString
+<div slot="headline">Headline</div>
+<div>Here is some content for the dialog.</div>
+<mc-button slot="actions" value="response value">Close</mc-button>`}
+    </pre></code-block>
+    <code-block language="javascript"><pre>
+// also available globally on window
+import { mcDialog } from '@thewebformula/materially/services';
+// import { mcDialog } from '@thewebformula/materially';
 
-  const value = await mcDialog.template({
-    template: templateString,
-    allowClose: false
-  });
+const value = await mcDialog.template({
+  template: templateString,
+  allowClose: false
+});
 
-  // value is passed in when closing the dialog: mcDialog.close('response value')
-  console.log(value);
-            </code>
-          </pre>
+// value is passed in when closing the dialog: mcDialog.close('response value')
+console.log(value);
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -122,49 +116,45 @@
           
           <mc-button onclick="document.querySelector('#html-only-dialog').showModal()" style="margin-top: 12px;">Open</mc-button>
         
-          <pre>
-            <code class="language-html">
-  ${`<!-- Added directly to document
-  Adding the 'open' attribute will automatically show the dialog -->
-  <mc-dialog id="html-only-dialog">
-    <div slot="headline">Headline</div>
-    <form id="one" method="dialog" slot="content">
-      <mc-textfield required label="Required input"></mc-textfield>
-    </form>
-    <mc-button slot="actions" form="one" value="submit" type="submit">Submit</mc-button>
-    <mc-button slot="actions" form="one" type="reset">Reset</mc-button>
-    <mc-button slot="actions" form="one" formnovalidate value="cancel">Cancel (with formnovalidate)</mc-button>
-  </mc-dialog>
-  
+          <code-block language="html"><pre>
+${`<!-- Added directly to document
+Adding the 'open' attribute will automatically show the dialog -->
+<mc-dialog id="html-only-dialog">
+  <div slot="headline">Headline</div>
+  <form id="one" method="dialog" slot="content">
+    <mc-textfield required label="Required input"></mc-textfield>
+  </form>
+  <mc-button slot="actions" form="one" value="submit" type="submit">Submit</mc-button>
+  <mc-button slot="actions" form="one" type="reset">Reset</mc-button>
+  <mc-button slot="actions" form="one" formnovalidate value="cancel">Cancel (with formnovalidate)</mc-button>
+</mc-dialog>
 
-  <!-- attributes to control allowClose (ESC) -->
-  <mc-dialog allow-close></mc-dialog>`}
-            </code>
-          </pre>
-          <pre>
-            <code class="language-javascript">
-  const dialog = document.querySelector('#html-only-dialog');
-  dialog.scrim = true;
-  dialog.allowClose = true; // allow clicking scrim to close dialog. Default false
-  dialog.show();
-  console.log(dialog.open);
 
-  dialog.addEventListener('close', event => {
-    console.log('close', event.target.returnValue);
-  });
+<!-- attributes to control allowClose (ESC) -->
+<mc-dialog allow-close></mc-dialog>`}
+            </pre></code-block>
+          <code-block language="javascript"><pre>
+const dialog = document.querySelector('#html-only-dialog');
+dialog.scrim = true;
+dialog.allowClose = true; // allow clicking scrim to close dialog. Default false
+dialog.show();
+console.log(dialog.open);
 
-  dialog.addEventListener('cancel', event => {
-  console.log('cancel', event.target.returnValue);
-  });
+dialog.addEventListener('close', event => {
+  console.log('close', event.target.returnValue);
+});
 
-  dialog.addEventListener('submit', event => {
-    console.log('submit', event.target.returnValue);
-  });
+dialog.addEventListener('cancel', event => {
+console.log('cancel', event.target.returnValue);
+});
 
-  dialog.close('returnValue string');
-  console.log(dialog.returnValue);
-            </code>
-          </pre>
+dialog.addEventListener('submit', event => {
+  console.log('submit', event.target.returnValue);
+});
+
+dialog.close('returnValue string');
+console.log(dialog.returnValue);
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -266,17 +256,15 @@
           
           <mc-button onclick="document.querySelector('#scrollable-dialog').showModal()" style="margin-top: 12px;">Open</mc-button>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-dialog id="scrollable-dialog">
-    <div slot="headline">Headline</div>
-    <div slot="content">
-      ...large content
-    </div>
-    <mc-button slot="actions" onclick="mcDialog.close()">Close</mc-button>
-  </mc-dialog>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-dialog id="scrollable-dialog">
+  <div slot="headline">Headline</div>
+  <div slot="content">
+    ...large content
+  </div>
+  <mc-button slot="actions" onclick="mcDialog.close()">Close</mc-button>
+</mc-dialog>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -349,16 +337,14 @@
           
           <mc-button onclick="document.querySelector('#fullscreen-dialog').showModal()" style="margin-top: 12px;">Open</mc-button>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-dialog id="fullscreen-dialog" fullscreen>
-    <div slot="headline">Headline</div>
-    <div slot="content">
-      ...content
-    </div>
-  </mc-dialog>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-dialog id="fullscreen-dialog" fullscreen>
+  <div slot="headline">Headline</div>
+  <div slot="content">
+    ...content
+  </div>
+</mc-dialog>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -377,20 +363,18 @@
           </div>
           <mc-button onclick="page.openSimple(page.allowClose, page.preventNavigation)">Open</mc-button>
         
-          <pre>
-            <code class="language-javascript">
-  // also available globally on window
-  import { mcDialog } from '@thewebformula/materially/services';
-  // import { mcDialog } from '@thewebformula/materially';
+          <code-block language="javascript"><pre>
+// also available globally on window
+import { mcDialog } from '@thewebformula/materially/services';
+// import { mcDialog } from '@thewebformula/materially';
 
-  const answer = await mcDialog.simple({
-    headline: 'Question',
-    message: 'Are you sure?',
-    allowClose: false, // default false
-    preventNavigation: true // default false
-  });
-            </code>
-          </pre>
+const answer = await mcDialog.simple({
+  headline: 'Question',
+  message: 'Are you sure?',
+  allowClose: false, // default false
+  preventNavigation: true // default false
+});
+            </pre></code-block>
         </mc-card>
       </section>
       
@@ -400,15 +384,13 @@
           <h2 slot="headline">Style</h2>
           <div slot="supporting-text">CSS variables that allow you override default values</div>
       
-          <pre>
-            <code class="language-css">
-  ${`/* Optional variables for overriding */
-    
-  --mc-dialog-container-color: var(--mc-surface-container-high);
-  --mc-dialog-headline-color: var(--mc-on-surface);
-  --mc-dialog-supporting-text-color: var(--mc-on-surface-variant);`}
-            </code>
-          </pre>
+          <code-block language="css"><pre>
+${`/* Optional variables for overriding */
+  
+--mc-dialog-container-color: var(--mc-surface-container-high);
+--mc-dialog-headline-color: var(--mc-on-surface);
+--mc-dialog-supporting-text-color: var(--mc-on-surface-variant);`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

@@ -62,45 +62,43 @@
             <mc-chip input edit value="My Name <myname@gmail.com>" label="My Name"></mc-chip>
           </mc-chip-set>
         
-          <pre>
-            <code class="language-html">
-  ${`<!-- Assist -->
-  <mc-chip-set onchange="console.log(this.values)">
-    <mc-chip label="One"></mc-chip>
-    <mc-chip label="Two">
-      <mc-icon slot="leading-icon">settings</mc-icon>
-    </mc-chip>
-  </mc-chip-set>
-  
-  <!-- Filter -->
-  <mc-chip-set onchange="console.log(this.values)">
-    <mc-chip filter class="elevated" checked label="One"></mc-chip>
-    <mc-chip filter class="elevated" label="Two">
-      <mc-icon slot="leading-icon">settings</mc-icon>
-    </mc-chip>
-  </mc-chip-set>
-  
-  <!-- Filter menu -->
-  <mc-chip-set onchange="console.log(this.values)">
-    <mc-chip filter name="a" label="One"></mc-chip>
-    <mc-chip filter name="b" value="One">
-      <mc-menu slot="menu" anchor-parent>
-        <mc-menu-item>
-          <mc-icon slot="start">home</mc-icon>
-          One
-        </mc-menu-item>
-        <mc-menu-item>Two</mc-menu-item>
-        <mc-menu-item>Three</mc-menu-item>
-      </mc-menu>
-    </mc-chip>
-  </mc-chip-set>
-  
-  <!-- Input -->
-  <mc-chip-set label="Label" input edit onchange="console.log(this.values)">
-    <mc-chip input edit value="My Name <myname@gmail.com>" label="My Name"></mc-chip>
-  </mc-chip-set>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<!-- Assist -->
+<mc-chip-set onchange="console.log(this.values)">
+  <mc-chip label="One"></mc-chip>
+  <mc-chip label="Two">
+    <mc-icon slot="leading-icon">settings</mc-icon>
+  </mc-chip>
+</mc-chip-set>
+
+<!-- Filter -->
+<mc-chip-set onchange="console.log(this.values)">
+  <mc-chip filter class="elevated" checked label="One"></mc-chip>
+  <mc-chip filter class="elevated" label="Two">
+    <mc-icon slot="leading-icon">settings</mc-icon>
+  </mc-chip>
+</mc-chip-set>
+
+<!-- Filter menu -->
+<mc-chip-set onchange="console.log(this.values)">
+  <mc-chip filter name="a" label="One"></mc-chip>
+  <mc-chip filter name="b" value="One">
+    <mc-menu slot="menu" anchor-parent>
+      <mc-menu-item>
+        <mc-icon slot="start">home</mc-icon>
+        One
+      </mc-menu-item>
+      <mc-menu-item>Two</mc-menu-item>
+      <mc-menu-item>Three</mc-menu-item>
+    </mc-menu>
+  </mc-chip>
+</mc-chip-set>
+
+<!-- Input -->
+<mc-chip-set label="Label" input edit onchange="console.log(this.values)">
+  <mc-chip input edit value="My Name <myname@gmail.com>" label="My Name"></mc-chip>
+</mc-chip-set>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -117,17 +115,15 @@
             <mc-chip label="Three" onclick="console.log('do something')"></mc-chip>
           </mc-chip-set>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-chip-set>
-    <mc-chip label="One" onclick="console.log('do something')"></mc-chip>
-    <mc-chip label="Two" onclick="console.log('do something')">
-      <mc-icon slot="leading-icon">inbox</mc-icon>
-    </mc-chip>
-    <mc-chip label="Three" onclick="console.log('do something')"></mc-chip>
-  </mc-chip-set>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-chip-set>
+  <mc-chip label="One" onclick="console.log('do something')"></mc-chip>
+  <mc-chip label="Two" onclick="console.log('do something')">
+    <mc-icon slot="leading-icon">inbox</mc-icon>
+  </mc-chip>
+  <mc-chip label="Three" onclick="console.log('do something')"></mc-chip>
+</mc-chip-set>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -160,40 +156,36 @@
             </mc-chip>
           </mc-chip-set>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-chip-set>
-    <mc-chip filter label="one"></mc-chip>
-    <mc-chip filter label="two" checked></mc-chip>
-    <mc-chip filter label="three">
-      <mc-icon slot="leading-icon">inbox</mc-icon>
-    </mc-chip>
-  
-    <!-- No default value -->
-    <mc-chip filter label="number">
-      <mc-menu slot="menu" anchor-parent>
-        <mc-menu-item>One</mc-menu-item>
-        <mc-menu-item>Two</mc-menu-item>
-      </mc-menu>
-    </mc-chip>
-  
-    <!-- Default value -->
-    <mc-chip filter value="on">
-      <mc-menu slot="menu" anchor-parent>
-        <mc-menu-item>On</mc-menu-item>
-        <mc-menu-item>Off</mc-menu-item>
-      </mc-menu>
-    </mc-chip>
-  </mc-chip-set>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-chip-set>
+  <mc-chip filter label="one"></mc-chip>
+  <mc-chip filter label="two" checked></mc-chip>
+  <mc-chip filter label="three">
+    <mc-icon slot="leading-icon">inbox</mc-icon>
+  </mc-chip>
+
+  <!-- No default value -->
+  <mc-chip filter label="number">
+    <mc-menu slot="menu" anchor-parent>
+      <mc-menu-item>One</mc-menu-item>
+      <mc-menu-item>Two</mc-menu-item>
+    </mc-menu>
+  </mc-chip>
+
+  <!-- Default value -->
+  <mc-chip filter value="on">
+    <mc-menu slot="menu" anchor-parent>
+      <mc-menu-item>On</mc-menu-item>
+      <mc-menu-item>Off</mc-menu-item>
+    </mc-menu>
+  </mc-chip>
+</mc-chip-set>`}
+            </pre></code-block>
         
-          <pre>
-            <code class="language-javascript">
-  ${`// set value
-  document.querySelector('mc-chip-group.filter').value = 'one,status:on';`}
-            </code>
-          </pre>
+          <code-block language="javascript"><pre>
+${`// set value
+document.querySelector('mc-chip-group.filter').value = 'one,status:on';`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -214,21 +206,19 @@
             <mc-chip input edit value="Other Guy <guy@email.com>"></mc-chip>
           </mc-chip-set>
         
-          <pre>
-            <code class="language-html">
-  ${`<!-- Input -->
-  <mc-chip-set input label="Label">
-    <mc-chip input value="Ben Rubin <ben@email.com>"></mc-chip>
-    <mc-chip input value="Other Guy <guy@email.com>"></mc-chip>
-  </mc-chip-set>
-  
-  <!-- Input with chip editing -->
-  <mc-chip-set input edit label="With edit">
-    <mc-chip input edit value="Ben Rubin <ben@email.com>"></mc-chip>
-    <mc-chip input edit value="Other Guy <guy@email.com>"></mc-chip>
-  </mc-chip-set>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<!-- Input -->
+<mc-chip-set input label="Label">
+  <mc-chip input value="Ben Rubin <ben@email.com>"></mc-chip>
+  <mc-chip input value="Other Guy <guy@email.com>"></mc-chip>
+</mc-chip-set>
+
+<!-- Input with chip editing -->
+<mc-chip-set input edit label="With edit">
+  <mc-chip input edit value="Ben Rubin <ben@email.com>"></mc-chip>
+  <mc-chip input edit value="Other Guy <guy@email.com>"></mc-chip>
+</mc-chip-set>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -245,30 +235,26 @@
             <mc-button onclick="page.updateValues()">Add chip</mc-button>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-chip-set id="chip-set-1">
-    <mc-chip name="one" filter value="0ne" label="one" checked></mc-chip>
-  </mc-chip-set>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-chip-set id="chip-set-1">
+  <mc-chip name="one" filter value="0ne" label="one" checked></mc-chip>
+</mc-chip-set>`}
+            </pre></code-block>
         
-          <pre>
-            <code>
-  ${`function updateValues() {
-    // get current set values
-    console.log(document.querySelector('#chip-set-1').values);
+          <code-block language="javascript"><pre>
+${`function updateValues() {
+  // get current set values
+  console.log(document.querySelector('#chip-set-1').values);
 
-    document.querySelector('#chip-set-1').addChip({
-      type: 'filter',
-      name: ++this.#counter,
-      label: this.#counter,
-      value: this.#counter,
-      checked: false
-    });
-  }`}
-            </code>
-          </pre>
+  document.querySelector('#chip-set-1').addChip({
+    type: 'filter',
+    name: ++this.#counter,
+    label: this.#counter,
+    value: this.#counter,
+    checked: false
+  });
+}`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -278,16 +264,14 @@
           <h2 slot="headline">Style</h2>
           <div slot="supporting-text">CSS variables that allow you override default values</div>
       
-          <pre>
-            <code class="language-css">
-  ${`/* Optional variables for overriding */
-    
-  --mc-chip-elevated-container-color: var(--mc-surface-container-low);
-  --mc-chip-checked-container-color: var(--mc-secondary-container);
-  --mc-chip-text-color: var(--mc-on-surface);
-  --mc-chip-check-color:  var(--mc-primary);`}
-            </code>
-          </pre>
+          <code-block language="css"><pre>
+${`/* Optional variables for overriding */
+  
+--mc-chip-elevated-container-color: var(--mc-surface-container-low);
+--mc-chip-checked-container-color: var(--mc-secondary-container);
+--mc-chip-text-color: var(--mc-on-surface);
+--mc-chip-check-color:  var(--mc-primary);`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

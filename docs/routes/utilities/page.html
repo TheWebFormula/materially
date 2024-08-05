@@ -21,26 +21,24 @@
           <h2 slot="headline">Util</h2>
           <div slot="subhead">Methods for various use cases</div>
         
-          <pre>
-            <code class="language-javascript">
-  ${`import { mcUtil } from '@thewebformula/materially/services';
-  // import { mcUtil } from '@thewebformula/materially';
-  
-  // --- Below are some of the more useful methods ---
+          <code-block language="javascript"><pre>
+${`import { mcUtil } from '@thewebformula/materially/services';
+// import { mcUtil } from '@thewebformula/materially';
 
-  // debounce function calls by milliseconds
-  mcUtil.debounce(() => {}, 200);
+// --- Below are some of the more useful methods ---
 
-  // throttle function calls by request animations frames
-  mcUtil.rafThrottle(() => {});
+// debounce function calls by milliseconds
+mcUtil.debounce(() => {}, 200);
 
-  // Jaro Winkler based fuzzy searching
-  mcUtil.fuzzySearch('search term', [ { label: 'One', value: 1 }, { label: 'Two', value: 2 } ], distanceCap /* defaults to 0.2 */ );
+// throttle function calls by request animations frames
+mcUtil.rafThrottle(() => {});
 
-  // toggle between dark and light color schemes. This can also be done via css
-  mcUtil.toggleColorScheme();`}
-            </code>
-          </pre>
+// Jaro Winkler based fuzzy searching
+mcUtil.fuzzySearch('search term', [ { label: 'One', value: 1 }, { label: 'Two', value: 2 } ], distanceCap /* defaults to 0.2 */ );
+
+// toggle between dark and light color schemes. This can also be done via css
+mcUtil.toggleColorScheme();`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -50,55 +48,53 @@
           <h2 slot="headline">Date</h2>
           <div slot="subhead">Wrapper class around Date and Intl.DateTimeFormat, used by date pickers</div>
         
-          <pre>
-            <code class="language-javascript">
-  ${`import { mcDate } from '@thewebformula/materially/services';
-  // import { mcDate } from '@thewebformula/materially';
-  
-  // --- Below are some of the more useful methods ---
+          <code-block language="javascript"><pre>
+${`import { mcDate } from '@thewebformula/materially/services';
+// import { mcDate } from '@thewebformula/materially';
 
-  // Set local for anything using this util, including date pickers
-  mcDate.locale = 'EN-US';
+// --- Below are some of the more useful methods ---
 
-  // Set timezone for anything using this util, including date pickers
-  mcDate.timeZone = 'GMT';
+// Set local for anything using this util, including date pickers
+mcDate.locale = 'EN-US';
 
-  mcDate.hourCycle; // h12 - h24
+// Set timezone for anything using this util, including date pickers
+mcDate.timeZone = 'GMT';
 
-  // Parse accepts strings (yyyy-mm-dd) and Date objects
-  // returns Date object
-  mcDate.parse('2023-01-20');
+mcDate.hourCycle; // h12 - h24
 
-  // build on top of Intl.DateTimeFormat, using the utils locale and timezone
-  // returns String
-  // ddd, MMM DD = Thu, Dec 12
-  // YYYY-MMMM-dddd = 2019-month-wednesday
-  // YY/MMM/ddd = 19/10/22
-  mcDate.format(new Date(), 'yyyy-mm-dd');
+// Parse accepts strings (yyyy-mm-dd) and Date objects
+// returns Date object
+mcDate.parse('2023-01-20');
 
-  // returns Date object
-  mcDate.buildFromParts({ year: '2023', month: '01', day: '20' });
+// build on top of Intl.DateTimeFormat, using the utils locale and timezone
+// returns String
+// ddd, MMM DD = Thu, Dec 12
+// YYYY-MMMM-dddd = 2019-month-wednesday
+// YY/MMM/ddd = 19/10/22
+mcDate.format(new Date(), 'yyyy-mm-dd');
 
-  mcDate.getYear(new Date());
-  mcDate.getMonth(new Date());
-  mcDate.getWeekDay(new Date());
-  mcDate.getMonthDay(new Date());
-  mcDate.getFirstDateOfMonth(new Date());
-  mcDate.getParts(new Date()); // { year, month, day }
+// returns Date object
+mcDate.buildFromParts({ year: '2023', month: '01', day: '20' });
 
-  mcDate.getMonthNames();
-  mcDate.getMonthNamesShort();
-  mcDate.getDayNames('long | short | narrow'); // mon, tue, wed, thur, fri
+mcDate.getYear(new Date());
+mcDate.getMonth(new Date());
+mcDate.getWeekDay(new Date());
+mcDate.getMonthDay(new Date());
+mcDate.getFirstDateOfMonth(new Date());
+mcDate.getParts(new Date()); // { year, month, day }
 
-  // Add to individual parts of date, use negative numbers to subtract
-  // returns Date object
-  mcDate.addToDateByParts(new Date(), { year: 1, month: 1, day: 1 });
+mcDate.getMonthNames();
+mcDate.getMonthNamesShort();
+mcDate.getDayNames('long | short | narrow'); // mon, tue, wed, thur, fri
 
-  // Set individual parts of date
-  // returns Date object
-  mcDate.setDateByParts(new Date(), { year: 1, month: 1, day: 1 });`}
-            </code>
-          </pre>
+// Add to individual parts of date, use negative numbers to subtract
+// returns Date object
+mcDate.addToDateByParts(new Date(), { year: 1, month: 1, day: 1 });
+
+// Set individual parts of date
+// returns Date object
+mcDate.setDateByParts(new Date(), { year: 1, month: 1, day: 1 });`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -108,29 +104,27 @@
           <h2 slot="headline">Device</h2>
           <div slot="subhead">Used to determine information about current device</div>
         
-          <pre>
-            <code class="language-javascript">
-  ${`import { mcDevice } from '@thewebformula/materially/services';
-  // import { mcDevice } from '@thewebformula/materially';
+          <code-block language="javascript"><pre>
+${`import { mcDevice } from '@thewebformula/materially/services';
+// import { mcDevice } from '@thewebformula/materially';
 
-  mcDevice.state; // expanded - medium - compact
-  // mcDevice.COMPACT
-  // mcDevice.MEDIUM
-  // mcDevice.EXPANDED
-  if (mcDevice.state === mcDevice.COMPACT) {
-    // do work
-  }
-  
-  mcDevice.orientation; // landscape - portrait
-  mcDevice.hasTouchScreen; // true - false
-  
-  window.addEventListener('mcwindowstatechange', event => {
-    // listen for state changes
-    // there will be no lastState on initial event
-    console.log(event.detail.state, event.detail.lastState);
-  })`}
-            </code>
-          </pre>
+mcDevice.state; // expanded - medium - compact
+// mcDevice.COMPACT
+// mcDevice.MEDIUM
+// mcDevice.EXPANDED
+if (mcDevice.state === mcDevice.COMPACT) {
+  // do work
+}
+
+mcDevice.orientation; // landscape - portrait
+mcDevice.hasTouchScreen; // true - false
+
+window.addEventListener('mcwindowstatechange', event => {
+  // listen for state changes
+  // there will be no lastState on initial event
+  console.log(event.detail.state, event.detail.lastState);
+})`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

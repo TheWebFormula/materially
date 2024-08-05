@@ -31,15 +31,13 @@
             <mc-checkbox checked disabled label="Checked disabled"></mc-checkbox>
           </div>
 
-          <pre>
-            <code class="language-html">
-  ${`<mc-checkbox aria-label="checkbox"></mc-checkbox>
-  <mc-checkbox checked label="Checked"></mc-checkbox>
-  <mc-checkbox indeterminate label="Indeterminate"></mc-checkbox>
-  <mc-checkbox disabled label="Disabled"></mc-checkbox>
-  <mc-checkbox checked disabled label="Checked disabled"></mc-checkbox>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-checkbox aria-label="checkbox"></mc-checkbox>
+<mc-checkbox checked label="Checked"></mc-checkbox>
+<mc-checkbox indeterminate label="Indeterminate"></mc-checkbox>
+<mc-checkbox disabled label="Disabled"></mc-checkbox>
+<mc-checkbox checked disabled label="Checked disabled"></mc-checkbox>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -56,15 +54,13 @@
             <mc-checkbox class="full-width" label-left="Left label full width"></mc-checkbox>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-checkbox label="label"></mc-checkbox>
-  <mc-checkbox label-left="Left label"></mc-checkbox>
-  <mc-divider style="margin: 24px 0;"></mc-divider>
-  <mc-checkbox class="full-width" label="label full width"></mc-checkbox>
-  <mc-checkbox class="full-width" label-left="Left label full width"></mc-checkbox>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-checkbox label="label"></mc-checkbox>
+<mc-checkbox label-left="Left label"></mc-checkbox>
+<mc-divider style="margin: 24px 0;"></mc-divider>
+<mc-checkbox class="full-width" label="label full width"></mc-checkbox>
+<mc-checkbox class="full-width" label-left="Left label full width"></mc-checkbox>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -75,11 +71,9 @@
         
           <mc-checkbox required label="Click twice to make invalid"></mc-checkbox>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-checkbox required label="Click twice to make invalid"></mc-checkbox>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-checkbox required label="Click twice to make invalid"></mc-checkbox>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -92,11 +86,9 @@
         
           <mc-checkbox indeterminate label="Indeterminate"></mc-checkbox>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-checkbox indeterminate label="Indeterminate"></mc-checkbox>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-checkbox indeterminate label="Indeterminate"></mc-checkbox>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -106,19 +98,17 @@
           <h2 slot="headline">Style</h2>
           <div slot="supporting-text">CSS variables that allow you override default values</div>
       
-          <pre>
-            <code class="language-css">
-  ${`/* Optional variables for overriding */
-    
-  --mc-checkbox-background-color: var(--mc-primary);
-  --mc-checkbox-background-disabled-color: var(--mc-on-surface);
-  --mc-checkbox-icon-color: var(--mc-on-primary);
-  --mc-checkbox-icon-disabled-color: var(--mc-surface);
-  --mc-checkbox-outline-color: var(--mc-on-surface-variant);
-  --mc-checkbox-outline-disabled-color: var(--mc-on-surface);
-  --mc-checkbox-label-disabled-color: var(--mc-on-surface);`}
-            </code>
-          </pre>
+          <code-block language="css"><pre>
+${`/* Optional variables for overriding */
+  
+--mc-checkbox-background-color: var(--mc-primary);
+--mc-checkbox-background-disabled-color: var(--mc-on-surface);
+--mc-checkbox-icon-color: var(--mc-on-primary);
+--mc-checkbox-icon-disabled-color: var(--mc-surface);
+--mc-checkbox-outline-color: var(--mc-on-surface-variant);
+--mc-checkbox-outline-disabled-color: var(--mc-on-surface);
+--mc-checkbox-label-disabled-color: var(--mc-on-surface);`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

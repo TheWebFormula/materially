@@ -70,39 +70,37 @@
             </div>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<div style="display: flex">
-    <div>
-      content...
-    </div>
-    <mc-side-sheet id="one" open="\${page.oneOpen}" onchange="page.oneOpen = this.open" onback="this.close();">
-      <div slot="headline">Headline</div>
-    
-      <div>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis
-        aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
-    
-      <mc-button slot="action" onclick="this.parentElement.close()">cancel</mc-button>
-      <mc-button slot="action" onclick="this.parentElement.close()">save</mc-button>
-    </mc-side-sheet>
+          <code-block language="html"><pre>
+${`<div style="display: flex">
+  <div>
+    content...
   </div>
+  <mc-side-sheet id="one" open="\${page.oneOpen}" onchange="page.oneOpen = this.open" onback="this.close();">
+    <div slot="headline">Headline</div>
   
+    <div>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+      aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis
+      aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+      occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
   
-  <!-- Attributes
-      hideClose - Hide close icon button
-      back - show back arrow
-      modal - use modal
-      scrom - show scrim (backdrop) when open
-      onback - event attribute for back button
-  -->
-  <mc-side-sheet open hideClose back modal scrim onback="this.close();"></mc-side-sheet>`}
-            </code>
-          </pre>
+    <mc-button slot="action" onclick="this.parentElement.close()">cancel</mc-button>
+    <mc-button slot="action" onclick="this.parentElement.close()">save</mc-button>
+  </mc-side-sheet>
+</div>
+
+
+<!-- Attributes
+    hideClose - Hide close icon button
+    back - show back arrow
+    modal - use modal
+    scrom - show scrim (backdrop) when open
+    onback - event attribute for back button
+-->
+<mc-side-sheet open hideClose back modal scrim onback="this.close();"></mc-side-sheet>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -170,26 +168,24 @@
             </div>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<div style="display: flex">
-    <div>
-      content...
-    </div>
-    <mc-side-sheet global modal>
-      <div slot="headline">Headline</div>
-    
-      <h5>One</h5>
-      <p>
-        Lorem ipsum ...
-      </p>
-    
-      <mc-button slot="action" onclick="this.parentElement.close()">cancel</mc-button>
-      <mc-button slot="action" onclick="this.parentElement.close()">save</mc-button>
-    </mc-side-sheet>
-  </div>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<div style="display: flex">
+  <div>
+    content...
+  </div>
+  <mc-side-sheet global modal>
+    <div slot="headline">Headline</div>
+  
+    <h5>One</h5>
+    <p>
+      Lorem ipsum ...
+    </p>
+  
+    <mc-button slot="action" onclick="this.parentElement.close()">cancel</mc-button>
+    <mc-button slot="action" onclick="this.parentElement.close()">save</mc-button>
+  </mc-side-sheet>
+</div>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -243,23 +239,21 @@
             </div>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-side-sheet id="formdialog" hide-close>
-    <div slot="headline">Headline</div>
-    <form id="test" method="dialog">
-      <div style="font-size: 14px; margin-bottom: 8px;"><strong>Cancel</strong> checks for form changes and presents dialog</div>
-      <div style="font-size: 14px; margin-bottom: 24px;"><strong>Save</strong> will validate the form</div>
-      <div style="font-size: 14px; margin-bottom: 24px;"><strong>Close</strong> will disregard the form and close the sheet</div>
-      <mc-textfield label="Required" supporting-test="Required" required value="one"
-        class="outlined"></mc-textfield>
-    </form>
-    <mc-button slot="action" onclick="formdialog.close()">close</mc-button>
-    <mc-button slot="action" form="test" type="cancel">cancel</mc-button>
-    <mc-button slot="action" form="test" type="submit">save</mc-button>
-  </mc-side-sheet>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-side-sheet id="formdialog" hide-close>
+  <div slot="headline">Headline</div>
+  <form id="test" method="dialog">
+    <div style="font-size: 14px; margin-bottom: 8px;"><strong>Cancel</strong> checks for form changes and presents dialog</div>
+    <div style="font-size: 14px; margin-bottom: 24px;"><strong>Save</strong> will validate the form</div>
+    <div style="font-size: 14px; margin-bottom: 24px;"><strong>Close</strong> will disregard the form and close the sheet</div>
+    <mc-textfield label="Required" supporting-test="Required" required value="one"
+      class="outlined"></mc-textfield>
+  </form>
+  <mc-button slot="action" onclick="formdialog.close()">close</mc-button>
+  <mc-button slot="action" form="test" type="cancel">cancel</mc-button>
+  <mc-button slot="action" form="test" type="submit">save</mc-button>
+</mc-side-sheet>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -269,14 +263,12 @@
           <h2 slot="headline">Style</h2>
           <div slot="supporting-text">CSS variables that allow you override default values</div>
       
-          <pre>
-            <code class="language-css">
-  ${`/* Optional variables for overriding */
+          <code-block language="css"><pre>
+${`/* Optional variables for overriding */
 
-  --mc-side-sheet-shape: var(--mc-shape-large);
-  --mc-side-sheet-container-color: var(--mc-surface);`}
-            </code>
-          </pre>
+--mc-side-sheet-shape: var(--mc-shape-large);
+--mc-side-sheet-container-color: var(--mc-surface);`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

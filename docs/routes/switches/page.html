@@ -29,14 +29,12 @@
             <mc-switch name="four" checked disabled label-right="Disabled"></mc-switch>
           </div>
 
-          <pre>
-            <code class="language-html">
-  ${`<mc-switch label="Label"></mc-switch>
-  <mc-switch checked label-right="Label"></mc-switch>
-  <mc-switch disabled label-right="Disabled"></mc-switch>
-  <mc-switch checked disabled label-right="Disabled"></mc-switch>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-switch label="Label"></mc-switch>
+<mc-switch checked label-right="Label"></mc-switch>
+<mc-switch disabled label-right="Disabled"></mc-switch>
+<mc-switch checked disabled label-right="Disabled"></mc-switch>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -53,14 +51,12 @@
             <mc-switch class="min-width" checked label-right="Label right min width"></mc-switch>
           </div>
 
-          <pre>
-            <code class="language-html">
-  ${`<mc-switch label="Label"></mc-switch>
-  <mc-switch checked label-right="Label right"></mc-switch>
-  <mc-switch class="min-width" label="Label min width"></mc-switch>
-  <mc-switch class="min-width" checked label-right="Label right min width"></mc-switch>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-switch label="Label"></mc-switch>
+<mc-switch checked label-right="Label right"></mc-switch>
+<mc-switch class="min-width" label="Label min width"></mc-switch>
+<mc-switch class="min-width" checked label-right="Label right min width"></mc-switch>`}
+            </pre></code-block>
         </mc-card>
       </section>
       
@@ -77,15 +73,13 @@
             <mc-switch icon label="Both icons"></mc-switch>
           </div>
         
-          <pre>
-            <code class="language-html">
-      ${`<mc-switch label="No icons unchecked"></mc-switch>
-      <mc-switch checked label="No icons checked"></mc-switch>
-      <mc-switch checked checked-icon label="Checked icon"></mc-switch>
-      <mc-switch unchecked-icon label="Unchecked icon"></mc-switch>
-      <mc-switch icon label="Both icons"></mc-switch>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-switch label="No icons unchecked"></mc-switch>
+<mc-switch checked label="No icons checked"></mc-switch>
+<mc-switch checked checked-icon label="Checked icon"></mc-switch>
+<mc-switch unchecked-icon label="Unchecked icon"></mc-switch>
+<mc-switch icon label="Both icons"></mc-switch>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -95,18 +89,16 @@
           <h2 slot="headline">Style</h2>
           <div slot="supporting-text">CSS variables that allow you override default values</div>
       
-          <pre>
-            <code class="language-css">
-  ${`/* Optional variables for overriding */
-  
-  --mc-switch-track-color: var(--mc-surface-container-highest);
-  --mc-switch-selected-track-color: var(--mc-primary);
-  --mc-switch-handle-color: var(--mc-outline);
-  --mc-switch-selected-handle-color: var(--mc-on-primary);
-  --mc-switch-icon-color: var(--mc-surface-container-highest);
-  --mc-switch-selected-icon-color: var(--mc-primary);`}
-            </code>
-          </pre>
+          <code-block language="css"><pre>
+${`/* Optional variables for overriding */
+
+--mc-switch-track-color: var(--mc-surface-container-highest);
+--mc-switch-selected-track-color: var(--mc-primary);
+--mc-switch-handle-color: var(--mc-outline);
+--mc-switch-selected-handle-color: var(--mc-on-primary);
+--mc-switch-icon-color: var(--mc-surface-container-highest);
+--mc-switch-selected-icon-color: var(--mc-primary);`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

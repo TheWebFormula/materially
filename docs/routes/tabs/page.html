@@ -53,42 +53,40 @@
             </mc-tab-panel-group>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-tabs>
-    <mc-tab id="tab-1" aria-controls="panel-1">One</mc-tab>
-    <mc-tab id="tab-2" aria-controls="panel-2">Two</mc-tab>
-    <mc-tab id="tab-3" aria-controls="panel-3">Three</mc-tab>
-  </mc-tabs>
-  
-  <!-- mc-tab-panel-group provides sliding animations on tab change. It is not required to make panels work -->
-  <mc-tab-panel-group>
-    <div
-      role="tabpanel"
-      id="panel-1"
-      aria-labelledby="tab-1"
-      style="padding: 24px 12px">
-      One content
-    </div>
-    <div
-      role="tabpanel"
-      id="panel-2"
-      aria-labelledby="tab-2"
-      style="padding: 24px 12px"
-      hidden>
-      Two content
-    </div>
-    <div
-      role="tabpanel"
-      id="panel-3"
-      aria-labelledby="tab-3"
-      style="padding: 24px 12px"
-      hidden>
-      Three content
-    </div>
-  </mc-tab-panel-group>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-tabs>
+  <mc-tab id="tab-1" aria-controls="panel-1">One</mc-tab>
+  <mc-tab id="tab-2" aria-controls="panel-2">Two</mc-tab>
+  <mc-tab id="tab-3" aria-controls="panel-3">Three</mc-tab>
+</mc-tabs>
+
+<!-- mc-tab-panel-group provides sliding animations on tab change. It is not required to make panels work -->
+<mc-tab-panel-group>
+  <div
+    role="tabpanel"
+    id="panel-1"
+    aria-labelledby="tab-1"
+    style="padding: 24px 12px">
+    One content
+  </div>
+  <div
+    role="tabpanel"
+    id="panel-2"
+    aria-labelledby="tab-2"
+    style="padding: 24px 12px"
+    hidden>
+    Two content
+  </div>
+  <div
+    role="tabpanel"
+    id="panel-3"
+    aria-labelledby="tab-3"
+    style="padding: 24px 12px"
+    hidden>
+    Three content
+  </div>
+</mc-tab-panel-group>`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

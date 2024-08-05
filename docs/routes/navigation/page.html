@@ -36,31 +36,29 @@
             <iframe src="./routes/navigation/drawer-index.html" title="navigation-drawer" style="height: 360px;"></iframe>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<body>
-    <!-- you can change the width by setting this css var on the BODY style="--mc-navigation-drawer-width: 290px;" default: 360px -->
+          <code-block language="html"><pre>
+${`<body>
+  <!-- you can change the width by setting this css var on the BODY style="--mc-navigation-drawer-width: 290px;" default: 360px -->
 
-    <mc-navigation-drawer>
-      <div slot="header" class="headline">Headline</div>
-    
-      <a href="/">
-        <mc-icon slot="leading-icon">home</mc-icon>
-        Welcome
-      </a>
-      <a href="/mail">
-        <mc-icon slot="leading-icon">mail</mc-icon>
-        <mc-badge>9999</mc-badge>
-        mail
-      </a>
-      <a href="/one">One</a>
-      <a href="/two">Two</a>
-    </mc-navigation-drawer>
+  <mc-navigation-drawer>
+    <div slot="header" class="headline">Headline</div>
   
-    <!-- page-content -->
-  </body>`}
-            </code>
-          </pre>
+    <a href="/">
+      <mc-icon slot="leading-icon">home</mc-icon>
+      Welcome
+    </a>
+    <a href="/mail">
+      <mc-icon slot="leading-icon">mail</mc-icon>
+      <mc-badge>9999</mc-badge>
+      mail
+    </a>
+    <a href="/one">One</a>
+    <a href="/two">Two</a>
+  </mc-navigation-drawer>
+
+  <!-- page-content -->
+</body>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -75,38 +73,36 @@
             <iframe src="./routes/navigation/rail-index.html" title="navigation-rail" style="height: 360px;"></iframe>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<body>
-    <mc-navigation-drawer>
-      ...
-    </mc-navigation-drawer>
-    
-    <mc-navigation-rail>
-      <a href="/">
-        <mc-icon slot="leading-icon">home</mc-icon>
-      </a>
-    
-      <a href="/one">
-        <mc-icon slot="leading-icon">apps</mc-icon>
-        One
-      </a>
-    
-      <a href="/two">
-        <mc-icon slot="leading-icon">palette</mc-icon>
-        Two
-      </a>
-    </mc-navigation-rail>
-    
-    <!-- page-content -->
-    
-    <!--optional  -->
-    <mc-navigation-bar>
-      ...
-    </mc-navigation-bar>
-  </body>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<body>
+  <mc-navigation-drawer>
+    ...
+  </mc-navigation-drawer>
+  
+  <mc-navigation-rail>
+    <a href="/">
+      <mc-icon slot="leading-icon">home</mc-icon>
+    </a>
+  
+    <a href="/one">
+      <mc-icon slot="leading-icon">apps</mc-icon>
+      One
+    </a>
+  
+    <a href="/two">
+      <mc-icon slot="leading-icon">palette</mc-icon>
+      Two
+    </a>
+  </mc-navigation-rail>
+  
+  <!-- page-content -->
+  
+  <!--optional  -->
+  <mc-navigation-bar>
+    ...
+  </mc-navigation-bar>
+</body>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -122,39 +118,37 @@
             <iframe src="./routes/navigation/bar-index.html" title="navigation-bar" style="height: 360px; max-width: 500px; margin: 0 auto;"></iframe>
           </div>
 
-          <pre>
-            <code class="language-html">
-  ${`<body>    
-    <!-- optional -->
-    <mc-navigation-drawer>
-      ...
-    </mc-navigation-drawer>
+          <code-block language="html"><pre>
+${`<body>    
+  <!-- optional -->
+  <mc-navigation-drawer>
+    ...
+  </mc-navigation-drawer>
 
-    <!-- optional -->
-    <mc-navigation-rail>
-      ...
-    </mc-navigation-rail>
+  <!-- optional -->
+  <mc-navigation-rail>
+    ...
+  </mc-navigation-rail>
+
+  <!-- page-content -->
   
-    <!-- page-content -->
-    
-    <!-- can add auto-hide class to hide on scroll -->
-    <mc-navigation-bar auto-hide>
-      <mc-icon-button onclick="document.querySelector('mc-navigation-drawer').toggle()">
-        <mc-icon>menu</mc-icon>
-      </mc-icon-button>
-    
-      <a href="/">
-        <mc-icon slot="leading-icon">home</mc-icon>
-      </a>
-    
-      <a href="/getting-started">
-        <mc-icon slot="leading-icon">apps</mc-icon>
-        Get started
-      </a>
-    </mc-navigation-bar>
-  </body>`}
-            </code>
-          </pre>
+  <!-- can add auto-hide class to hide on scroll -->
+  <mc-navigation-bar auto-hide>
+    <mc-icon-button onclick="document.querySelector('mc-navigation-drawer').toggle()">
+      <mc-icon>menu</mc-icon>
+    </mc-icon-button>
+  
+    <a href="/">
+      <mc-icon slot="leading-icon">home</mc-icon>
+    </a>
+  
+    <a href="/getting-started">
+      <mc-icon slot="leading-icon">apps</mc-icon>
+      Get started
+    </a>
+  </mc-navigation-bar>
+</body>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -164,29 +158,27 @@
           <h2 slot="headline">Style</h2>
           <div slot="supporting-text">CSS variables that allow you override default values</div>
       
-          <pre>
-            <code class="language-css">
-  ${`/* Optional variables for overriding */
-    
-  --mc-anchor-text-color: var(--mc-on-surface-variant);
-  --mc-anchor-shape: var(--mc-shape-extra-large);
-  --mc-anchor-current-container-color: var(--mc-secondary-container);
-
+          <code-block language="css"><pre>
+${`/* Optional variables for overriding */
   
-  /* controls all navigation's (drawer, bar, top, bottom, rail) */
-  --mc-navigation-container-color: var(--mc-surface-container);
+--mc-anchor-text-color: var(--mc-on-surface-variant);
+--mc-anchor-shape: var(--mc-shape-extra-large);
+--mc-anchor-current-container-color: var(--mc-secondary-container);
 
-  
-  --mc-navigation-drawer-width: 360px;
-  --mc-navigation-drawer-container-color: var(--mc-surface);
-  --mc-navigation-drawer-shape-local: var(--mc-shape-large);
 
-  --mc-navigation-rail-width: 88px;
-  --mc-navigation-rail-container-color: var(--mc-surface);
-  
-  --mc-navigation-bar-container-color: var(--mc-surface-container);`}
-            </code>
-          </pre>
+/* controls all navigation's (drawer, bar, top, bottom, rail) */
+--mc-navigation-container-color: var(--mc-surface-container);
+
+
+--mc-navigation-drawer-width: 360px;
+--mc-navigation-drawer-container-color: var(--mc-surface);
+--mc-navigation-drawer-shape-local: var(--mc-shape-large);
+
+--mc-navigation-rail-width: 88px;
+--mc-navigation-rail-container-color: var(--mc-surface);
+
+--mc-navigation-bar-container-color: var(--mc-surface-container);`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

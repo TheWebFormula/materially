@@ -77,23 +77,21 @@
             </mc-card>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-card style="max-width: 320px">
-    <img slot="image" class="rounded medium" alt="landscape" src="..." />
-    <div slot="headline">Headline</div>
-    <div slot="subhead">Subhead</div>
-    <div slot="supporting-text">Supporting text. Contrary to popular belief, Lorem Ipsum is not simply random text.</div>
-    <div>Some other content. Just add your content without specifying slots</div>
-  </mc-card>
-  
-  <mc-card style="width: 220px; height: 120px;" onclick="console.log('action')">
-    <div slot="headline">Actionable</div>
-    <div slot="subhead">Ripple</div>
-    <div slot="supporting-text">Click to see ripple</div>
-  </mc-card>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-card style="max-width: 320px">
+  <img slot="image" class="rounded medium" alt="landscape" src="..." />
+  <div slot="headline">Headline</div>
+  <div slot="subhead">Subhead</div>
+  <div slot="supporting-text">Supporting text. Contrary to popular belief, Lorem Ipsum is not simply random text.</div>
+  <div>Some other content. Just add your content without specifying slots</div>
+</mc-card>
+
+<mc-card style="width: 220px; height: 120px;" onclick="console.log('action')">
+  <div slot="headline">Actionable</div>
+  <div slot="subhead">Ripple</div>
+  <div slot="supporting-text">Click to see ripple</div>
+</mc-card>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -119,24 +117,22 @@
             </mc-card>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-card>
-    <div slot="headline">Regular</div>
-    <div slot="subhead">card</div>
-  </mc-card>
-  
-  <mc-card filled>
-    <div slot="headline">Filled</div>
-    <div slot="subhead">card</div>
-  </mc-card>
-  
-  <mc-card outlined>
-    <div slot="headline">Outlined</div>
-    <div slot="subhead">card</div>
-  </mc-card>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-card>
+  <div slot="headline">Regular</div>
+  <div slot="subhead">card</div>
+</mc-card>
+
+<mc-card filled>
+  <div slot="headline">Filled</div>
+  <div slot="subhead">card</div>
+</mc-card>
+
+<mc-card outlined>
+  <div slot="headline">Outlined</div>
+  <div slot="subhead">card</div>
+</mc-card>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -202,39 +198,37 @@
             </mc-card>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-card>
-    <img slot="image" class="medium rounded" alt="landscape"
-      src="..." />
-  
-    <div slot="headline">Headline</div>
-    <div slot="subhead">Subhead</div>
-  
-    <div slot="expanded">
-      <div class="supporting-text">
-        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-        Latin literature
-      </div>
+          <code-block language="html"><pre>
+${`<mc-card>
+  <img slot="image" class="medium rounded" alt="landscape"
+    src="..." />
+
+  <div slot="headline">Headline</div>
+  <div slot="subhead">Subhead</div>
+
+  <div slot="expanded">
+    <div class="supporting-text">
+      Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+      Latin literature
     </div>
-  </mc-card>
-  
-  <mc-card style="max-width: 320px">
-    <img slot="image" class="rounded medium" alt="landscape"
-      src="..." />
-  
-    <div slot="headline">Expanding with scroll</div>
-    <div slot="subhead">Subhead</div>
-  
-    <div slot="expanded">
-      <div class="supporting-text">
-        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-        Latin
-      </div>
+  </div>
+</mc-card>
+
+<mc-card style="max-width: 320px">
+  <img slot="image" class="rounded medium" alt="landscape"
+    src="..." />
+
+  <div slot="headline">Expanding with scroll</div>
+  <div slot="subhead">Subhead</div>
+
+  <div slot="expanded">
+    <div class="supporting-text">
+      Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+      Latin
     </div>
-  </mc-card>`}
-            </code>
-          </pre>
+  </div>
+</mc-card>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -313,28 +307,26 @@
             </div>
           </mc-card>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-card fullscreen>
-    <img slot="image" class="rounded medium" alt="landscape"
-      src="..." />
-  
-    <div slot="headline">Fullscreen</div>
-    <div slot="subhead">card</div>
-  
-    <div slot="expanded">
-      <div class="supporting-text">
-        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-        Latin
-      </div>
-  
-      <div class="supporting-text">
-        ...
-      </div>
+          <code-block language="html"><pre>
+${`<mc-card fullscreen>
+  <img slot="image" class="rounded medium" alt="landscape"
+    src="..." />
+
+  <div slot="headline">Fullscreen</div>
+  <div slot="subhead">card</div>
+
+  <div slot="expanded">
+    <div class="supporting-text">
+      Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+      Latin
     </div>
-  </mc-card>`}
-            </code>
-          </pre>
+
+    <div class="supporting-text">
+      ...
+    </div>
+  </div>
+</mc-card>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -366,15 +358,13 @@
             `)}
           </mc-card-group>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-card-group>
-    ${page.cardArray.map((_, i) => `
-      <mc-card></mc-card>
-    `).join('\n')}
-  </mc-card-group>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-card-group>
+  ${page.cardArray.map((_, i) => `
+    <mc-card></mc-card>
+  `).join('\n')}
+</mc-card-group>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -399,15 +389,13 @@
             `)}
           </mc-card-group>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-card-group reorder>
-    <mc-card></mc-card>
-    <mc-card></mc-card>
-    <mc-card></mc-card>
-  </mc-card-group>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-card-group reorder>
+  <mc-card></mc-card>
+  <mc-card></mc-card>
+  <mc-card></mc-card>
+</mc-card-group>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -433,23 +421,21 @@
             <div slot="supporting-text">one two three four five six.</div>
           </mc-card>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-card style="max-width: 320px;" value="favorite" onchange="console.log(event.detail)">
-    <mc-icon slot="swipe-action" action="favorite" toggle>favorite</mc-icon>
-    <div slot="headline">Favorite toggle</div>
-    <div slot="subhead">Subhead</div>
-    <div slot="supporting-text">one two three four five six.</div>
-  </mc-card>
-  
-  <mc-card style="max-width: 320px;" value="favorite" onchange="console.log(event.detail)">
-    <mc-icon slot="swipe-action" action="remove" action-remove>delete</mc-icon>
-    <div slot="headline">Remove</div>
-    <div slot="subhead">Subhead</div>
-    <div slot="supporting-text">one two three four five six.</div>
-  </mc-card>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-card style="max-width: 320px;" value="favorite" onchange="console.log(event.detail)">
+  <mc-icon slot="swipe-action" action="favorite" toggle>favorite</mc-icon>
+  <div slot="headline">Favorite toggle</div>
+  <div slot="subhead">Subhead</div>
+  <div slot="supporting-text">one two three four five six.</div>
+</mc-card>
+
+<mc-card style="max-width: 320px;" value="favorite" onchange="console.log(event.detail)">
+  <mc-icon slot="swipe-action" action="remove" action-remove>delete</mc-icon>
+  <div slot="headline">Remove</div>
+  <div slot="subhead">Subhead</div>
+  <div slot="supporting-text">one two three four five six.</div>
+</mc-card>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -459,21 +445,19 @@
           <h2 slot="headline">Style</h2>
           <div slot="supporting-text">CSS variables that allow you override default values</div>
       
-          <pre>
-            <code class="language-css">
-  ${`/* Optional variables for overriding */
-    
-  --mc-card-shape: var(--mc-shape-medium);
-  --mc-card-container-color: var(--mc-surface-container-low);
-  --mc-card-text-color: var(--mc-on-surface);
-  --mc-card-container-color-outlined: var(--mc-surface);
-  --mc-card-container-color-filled: var(--mc-surface-container-highest);
-  --mc-card-text-color-filled: var(--mc-on-surface-variant);
-  --mc-card-header-text-color: var(--mc-on-surface);
-  --mc-card-subhead-text-color: var(--mc-on-surface-variant);
-  --mc-card-supporting-text-color: var(--mc-on-surface-variant);`}
-            </code>
-          </pre>
+          <code-block language="css"><pre>
+${`/* Optional variables for overriding */
+  
+--mc-card-shape: var(--mc-shape-medium);
+--mc-card-container-color: var(--mc-surface-container-low);
+--mc-card-text-color: var(--mc-on-surface);
+--mc-card-container-color-outlined: var(--mc-surface);
+--mc-card-container-color-filled: var(--mc-surface-container-highest);
+--mc-card-text-color-filled: var(--mc-on-surface-variant);
+--mc-card-header-text-color: var(--mc-on-surface);
+--mc-card-subhead-text-color: var(--mc-on-surface-variant);
+--mc-card-supporting-text-color: var(--mc-on-surface-variant);`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

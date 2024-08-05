@@ -27,27 +27,25 @@
             <iframe src="./routes/bottom app bars/basic-index.html" title="bottom-app-bar Basic" style="height: 360px;"></iframe>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-bottom-app-bar>
-    <mc-icon-button>
-      <mc-icon>more_vert</mc-icon>
-    </mc-icon-button>
-  
-    <mc-icon-button>
-      <mc-icon>search</mc-icon>
-    </mc-icon-button>
-  
-    <mc-icon-button>
-      <mc-icon>delete</mc-icon>
-    </mc-icon-button>
-  
-    <mc-fab>
-      <mc-icon>add</mc-icon>
-    </mc-fab>
-  </mc-bottom-app-bar>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-bottom-app-bar>
+  <mc-icon-button>
+    <mc-icon>more_vert</mc-icon>
+  </mc-icon-button>
+
+  <mc-icon-button>
+    <mc-icon>search</mc-icon>
+  </mc-icon-button>
+
+  <mc-icon-button>
+    <mc-icon>delete</mc-icon>
+  </mc-icon-button>
+
+  <mc-fab>
+    <mc-icon>add</mc-icon>
+  </mc-fab>
+</mc-bottom-app-bar>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -60,23 +58,21 @@
             <iframe src="./routes/bottom app bars/auto-hide-index.html" title="bottom-app-bar auto hide" style="height: 360px;"></iframe>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-bottom-app-bar auto-hide>
-    <mc-icon-button>
-      <mc-icon>search</mc-icon>
-    </mc-icon-button>
-  
-    <mc-icon-button>
-      <mc-icon>delete</mc-icon>
-    </mc-icon-button>
-  
-    <mc-fab>
-      <mc-icon>add</mc-icon>
-    </mc-fab>
-  </mc-bottom-app-bar>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-bottom-app-bar auto-hide>
+  <mc-icon-button>
+    <mc-icon>search</mc-icon>
+  </mc-icon-button>
+
+  <mc-icon-button>
+    <mc-icon>delete</mc-icon>
+  </mc-icon-button>
+
+  <mc-fab>
+    <mc-icon>add</mc-icon>
+  </mc-fab>
+</mc-bottom-app-bar>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -89,45 +85,41 @@
             <iframe src="./routes/bottom app bars/secondary-bar-index.html" title="bottom-app-bar secondary bar" style="height: 360px;"></iframe>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-bottom-app-bar>
-    <mc-icon-button>
-      <mc-icon>search</mc-icon>
-    </mc-icon-button>
-  
-    <mc-icon-button>
-      <mc-icon>delete</mc-icon>
-    </mc-icon-button>
-  
-    <mc-icon-button slot="secondary">
-      <mc-icon>add</mc-icon>
-    </mc-icon-button>
-  
-    <mc-icon-button slot="secondary">
-      <mc-icon>edit</mc-icon>
-    </mc-icon-button>
-  
-    <mc-icon-button slot="secondary">
-      <mc-icon>favorite</mc-icon>
-    </mc-icon-button>
-  </mc-bottom-app-bar>
-  
-  
-  <!-- you can also trigger secondary based on url hash -->
-  <mc-bottom-app-bar secondary-hash="#one">`}
-        </code>
-      </pre>
+          <code-block language="html"><pre>
+${`<mc-bottom-app-bar>
+  <mc-icon-button>
+    <mc-icon>search</mc-icon>
+  </mc-icon-button>
 
-      <pre>
-        <code class="language-javascript">
-  ${`document.querySelector('mc-bottom-app-bar').showAlt('bottom-ap-bar-secondary-one');
-  
-  // calling showSecondary with no id will revert back to primary
-  document.querySelector('mc-bottom-app-bar').showPrimary();
-  document.querySelector('mc-bottom-app-bar').showAlt();`}
-            </code>
-          </pre>
+  <mc-icon-button>
+    <mc-icon>delete</mc-icon>
+  </mc-icon-button>
+
+  <mc-icon-button slot="secondary">
+    <mc-icon>add</mc-icon>
+  </mc-icon-button>
+
+  <mc-icon-button slot="secondary">
+    <mc-icon>edit</mc-icon>
+  </mc-icon-button>
+
+  <mc-icon-button slot="secondary">
+    <mc-icon>favorite</mc-icon>
+  </mc-icon-button>
+</mc-bottom-app-bar>
+
+
+<!-- you can also trigger secondary based on url hash -->
+<mc-bottom-app-bar secondary-hash="#one">`}
+        </pre></code-block>
+
+      <code-block language="javascript"><pre>
+${`document.querySelector('mc-bottom-app-bar').showAlt('bottom-ap-bar-secondary-one');
+
+// calling showSecondary with no id will revert back to primary
+document.querySelector('mc-bottom-app-bar').showPrimary();
+document.querySelector('mc-bottom-app-bar').showAlt();`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -137,13 +129,11 @@
           <h2 slot="headline">Style</h2>
           <div slot="supporting-text">CSS variables that allow you override default values</div>
       
-          <pre>
-            <code class="language-css">
-  ${`/* Optional variables for overriding */
-    
-  --mc-bottom-app-bar-container-color: var(--mc-surface-container);`}
-            </code>
-          </pre>
+          <code-block language="css"><pre>
+${`/* Optional variables for overriding */
+  
+--mc-bottom-app-bar-container-color: var(--mc-surface-container);`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

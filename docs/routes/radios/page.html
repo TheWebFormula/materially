@@ -25,14 +25,12 @@
             <mc-radio id="2" name="one" value="two">Two</mc-radio>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<div>
-    <mc-radio name="one" checked value="one">One</mc-radio>
-    <mc-radio name="one" value="two">Two</mc-radio>
-  </div>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<div>
+  <mc-radio name="one" checked value="one">One</mc-radio>
+  <mc-radio name="one" value="two">Two</mc-radio>
+</div>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -45,14 +43,12 @@
             <mc-radio name="two" value="two" label-left>Two</mc-radio>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<div>
-    <mc-radio name="two" checked value="one" label-left>One</mc-radio>
-    <mc-radio name="two" value="two" label-left>Two</mc-radio>
-  </div>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<div>
+  <mc-radio name="two" checked value="one" label-left>One</mc-radio>
+  <mc-radio name="two" value="two" label-left>Two</mc-radio>
+</div>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -62,13 +58,11 @@
           <h2 slot="headline">Style</h2>
           <div slot="supporting-text">CSS variables that allow you override default values</div>
       
-          <pre>
-            <code class="language-css">
-  ${`/* Optional variables for overriding */
-  
-  --mc-radio-color: var(--mc-primary);`}
-            </code>
-          </pre>
+          <code-block language="css"><pre>
+${`/* Optional variables for overriding */
+
+--mc-radio-color: var(--mc-primary);`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

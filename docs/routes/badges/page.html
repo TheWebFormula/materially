@@ -64,60 +64,56 @@
             </div>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-icon-button>
-    <!-- 0 === no value -->
-    <mc-badge>0</mc-badge>
-    <mc-icon>inbox</mc-icon>
-  </mc-icon-button>
-  
-  <mc-icon-button>
-    <mc-badge hide-value>1</mc-badge>
-    <mc-icon>inbox</mc-icon>
-  </mc-icon-button>
-  
-  <mc-icon-button>
-    <mc-badge value="99"></mc-badge>
-    <mc-icon>inbox</mc-icon>
-  </mc-icon-button>
-  
-  <mc-icon-button>
-    <mc-badge>1000</mc-badge>
-    <mc-icon>inbox</mc-icon>
-  </mc-icon-button>
-  
-  <mc-button>
-    <mc-badge>0</mc-badge>
-    Label
-  </mc-button>
-  
-  <mc-button>
-    <mc-badge hide-value>1</mc-badge>
-    Label
-  </mc-button>
-  
-  <mc-button>
-    <mc-badge>99</mc-badge>
-    Label
-  </mc-button>
-  
-  <mc-button>
-    <mc-badge>1000</mc-badge>
-    Label
-  </mc-button>`}
-            </code>
-          </pre>
-        
-          <pre>
-            <code class="language-javascript">
-  ${`// Update using value
-  document.querySelector('mc-badge').value = 99;
+          <code-block language="html"><pre>
+${`<mc-icon-button>
+  <!-- 0 === no value -->
+  <mc-badge>0</mc-badge>
+  <mc-icon>inbox</mc-icon>
+</mc-icon-button>
 
-  // Update using value. 1000 -> 999+
-  document.querySelector('mc-badge').value = 1000;`}
-            </code>
-          </pre>
+<mc-icon-button>
+  <mc-badge hide-value>1</mc-badge>
+  <mc-icon>inbox</mc-icon>
+</mc-icon-button>
+
+<mc-icon-button>
+  <mc-badge value="99"></mc-badge>
+  <mc-icon>inbox</mc-icon>
+</mc-icon-button>
+
+<mc-icon-button>
+  <mc-badge>1000</mc-badge>
+  <mc-icon>inbox</mc-icon>
+</mc-icon-button>
+
+<mc-button>
+  <mc-badge>0</mc-badge>
+  Label
+</mc-button>
+
+<mc-button>
+  <mc-badge hide-value>1</mc-badge>
+  Label
+</mc-button>
+
+<mc-button>
+  <mc-badge>99</mc-badge>
+  Label
+</mc-button>
+
+<mc-button>
+  <mc-badge>1000</mc-badge>
+  Label
+</mc-button>`}
+            </pre></code-block>
+        
+          <code-block language="javascript"><pre>
+${`// Update using value
+document.querySelector('mc-badge').value = 99;
+
+// Update using value. 1000 -> 999+
+document.querySelector('mc-badge').value = 1000;`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -127,14 +123,12 @@
           <h2 slot="headline">Style</h2>
           <div slot="supporting-text">CSS variables that allow you override default values</div>
       
-          <pre>
-            <code class="language-css">
-  ${`/* Optional variables for overriding */
-    
-  --mc-badge-container-color: var(--mc-error);
-  --mc-badge-text-color: var(--mc-on-error);`}
-            </code>
-          </pre>
+          <code-block language="css"><pre>
+${`/* Optional variables for overriding */
+  
+--mc-badge-container-color: var(--mc-error);
+--mc-badge-text-color: var(--mc-on-error);`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

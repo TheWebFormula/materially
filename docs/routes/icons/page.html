@@ -47,38 +47,34 @@
           <mc-icon large>mail</mc-icon>
           <mc-icon extra-large>mail</mc-icon>
 
-          <pre>
-            <code class="language-html">
-  ${`<mc-icon small>mail</mc-icon>
-  <mc-icon>mail</mc-icon>
-  <mc-icon large>mail</mc-icon>
-  <mc-icon extra-large>mail</mc-icon>`}
-            </code>
-          </pre>
-        </mc-card>
-      </section>
+          <code-block language="html"><pre>
+${`<mc-icon small>mail</mc-icon>
+<mc-icon>mail</mc-icon>
+<mc-icon large>mail</mc-icon>
+<mc-icon extra-large>mail</mc-icon>`}
+          </pre></code-block>
+      </mc-card>
+    </section>
 
 
 
-      <section id="variations" aria-label="Icon variations">
-        <mc-card>
-          <h2 slot="headline">Variations</h2>
-        
-          <mc-icon extra-large>home</mc-icon>
-          <mc-icon extra-large rounded>home</mc-icon>
-          <mc-icon extra-large rounded bold>home</mc-icon>
-          <mc-icon extra-large filled>home</mc-icon>
-          <mc-icon extra-large rounded filled>home</mc-icon>
-        
-          <pre>
-            <code class="language-html">
-  ${`<mc-icon extra-large>home</mc-icon>
-  <mc-icon extra-large rounded>home</mc-icon>
-  <mc-icon extra-large rounded bold>home</mc-icon>
-  <mc-icon extra-large filled>home</mc-icon>
-  <mc-icon extra-large rounded filled>home</mc-icon>`}
-            </code>
-          </pre>
+    <section id="variations" aria-label="Icon variations">
+      <mc-card>
+        <h2 slot="headline">Variations</h2>
+      
+        <mc-icon extra-large>home</mc-icon>
+        <mc-icon extra-large rounded>home</mc-icon>
+        <mc-icon extra-large rounded bold>home</mc-icon>
+        <mc-icon extra-large filled>home</mc-icon>
+        <mc-icon extra-large rounded filled>home</mc-icon>
+      
+        <code-block language="html"><pre>
+${`<mc-icon extra-large>home</mc-icon>
+<mc-icon extra-large rounded>home</mc-icon>
+<mc-icon extra-large rounded bold>home</mc-icon>
+<mc-icon extra-large filled>home</mc-icon>
+<mc-icon extra-large rounded filled>home</mc-icon>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -90,11 +86,9 @@
 
           <mc-icon large filled style="color: var(--mc-primary)">favorite</mc-icon>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-icon large filled style="color: var(--mc-primary)">favorite</mc-icon>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-icon large filled style="color: var(--mc-primary)">favorite</mc-icon>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -106,42 +100,38 @@
           <div slot="subhead">You can use google icons or other font icon libraries for icons</div>
           <div slot="supporting-text">If you are not using a variable font then <strong>mc-fill</strong> will not work</div>
         
-          <pre>
-            <code class="language-html">
-  ${`<!--
-      Loading from google fonts
+          <code-block language="html"><pre>
+${`<!--
+    Loading from google fonts
 
-      you can add \`&text=favorite,home,mail\`
-      to the url to load an icon subset for smaller file size.
-      Although the size changes are inconsistent and non-linear
-  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />`}
-            </code>
-          </pre>
+    you can add \`&text=favorite,home,mail\`
+    to the url to load an icon subset for smaller file size.
+    Although the size changes are inconsistent and non-linear
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />`}
+            </pre></code-block>
 
-          <pre>
-            <code class="language-css">
-  ${`/* load font file directly */
-  @font-face {
-    font-family: 'Material Symbols Outlined';
-    font-style: normal;
-    font-weight: 100 700;
-    /* Using block to prevent text from showing before load */
-    font-display: block;
-    src: url(./outlined-icons.woff2) format('woff2');
-  }
-  @font-face {
-    font-family: 'Material Symbols Rounded';
-    font-style: normal;
-    font-weight: 100 700;
-    font-display: block;
-    src: url(./rounded-icons.woff2) format('woff2');
-  }`}
-            </code>
-          </pre>
+          <code-block language="css"><pre>
+${`/* load font file directly */
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 100 700;
+  /* Using block to prevent text from showing before load */
+  font-display: block;
+  src: url(./outlined-icons.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Material Symbols Rounded';
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: block;
+  src: url(./rounded-icons.woff2) format('woff2');
+}`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

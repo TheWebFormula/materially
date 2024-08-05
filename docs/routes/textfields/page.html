@@ -40,12 +40,10 @@
             </mc-textfield>
           </div>
 
-          <pre>
-            <code class="language-html">
-  ${`<mc-switch>Label</mc-switch>
-  <mc-switch checked>Label</mc-switch>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-switch>Label</mc-switch>
+<mc-switch checked>Label</mc-switch>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -59,18 +57,16 @@
             <mc-textfield label="Label" class="outlined"></mc-textfield>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-textfield
-    label="Label"
-    ></mc-textfield>
-    
-  <mc-textfield
-    label="Label"
-    class="outlined"
-    ></mc-textfield>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-textfield
+  label="Label"
+  ></mc-textfield>
+  
+<mc-textfield
+  label="Label"
+  class="outlined"
+  ></mc-textfield>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -86,14 +82,12 @@
             </mc-textfield>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-textfield label="Label">
-    <mc-icon slot="leading-icon">search</mc-icon>
-    <mc-icon slot="trailing-icon">person</mc-icon>
-  </mc-textfield>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-textfield label="Label">
+  <mc-icon slot="leading-icon">search</mc-icon>
+  <mc-icon slot="trailing-icon">person</mc-icon>
+</mc-textfield>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -114,38 +108,36 @@
             </div>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-textfield
-    label="Supporting text"
-    supporting-text="Supporting text"
-    ></mc-textfield>
+          <code-block language="html"><pre>
+${`<mc-textfield
+  label="Supporting text"
+  supporting-text="Supporting text"
+  ></mc-textfield>
 
-  <mc-textfield
-    label="Required"
-    required
-    ></mc-textfield>
+<mc-textfield
+  label="Required"
+  required
+  ></mc-textfield>
 
-  <mc-textfield
-    label="Number min max"
-    type="number"
-    min="1"
-    max="9"
-    ></mc-textfield>
+<mc-textfield
+  label="Number min max"
+  type="number"
+  min="1"
+  max="9"
+  ></mc-textfield>
 
-  <mc-textfield
-    label="Custom error"
-    required
-    error-text="Required* (custom)"
-    ></mc-textfield>
+<mc-textfield
+  label="Custom error"
+  required
+  error-text="Required* (custom)"
+  ></mc-textfield>
 
-  <mc-textfield 
-    label="With supporting text"
-    required
-    supporting-text="Supporting text"
-    ></mc-textfield>`}
-            </code>
-          </pre>
+<mc-textfield 
+  label="With supporting text"
+  required
+  supporting-text="Supporting text"
+  ></mc-textfield>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -158,15 +150,13 @@
             <mc-textfield oninput="console.log(this.value)" label="Suggestion" placeholder="Type suggestion" suggestion="suggestion"></mc-textfield>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-textfield
-    label="Suggestion"
-    placeholder="Type suggestion"
-    suggestion="suggestion"
-    ></mc-textfield>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-textfield
+  label="Suggestion"
+  placeholder="Type suggestion"
+  suggestion="suggestion"
+  ></mc-textfield>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -216,56 +206,52 @@
               pattern="^\\(?([0-9]{3})(?:[\\)\\.\\-\\s]+)?([0-9]{3})[\\.\\-\\s]?([0-9]{4})$"></mc-textfield>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<!-- Social Security Number -->
-  <!-- converts (123121234, 123-12-1234, 123 12 1234) into 123-12-1234 -->
-  <mc-textfield
-    id="ssn"
-    label="SSN"
-    format="$1-$2-$3"
-    pattern-restrict
-    \pattern="^([0-9]{3})[\\\\-\\\\s]?([0-9]{2})[\\\\-\\\\s]?([0-9]{4})$"
-    ></mc-textfield>
-  
-  <!-- Social Security Number with mask -->
-  <mc-textfield
-    id="ssnmask"
-    label="SSN masked"
-    format="$1-$2-$3"
-    mask="xxx-xx-$3"
-    pattern-restrict
-    \pattern="^([0-9]{3})[\\\\-\\\\s]?([0-9]{2})[\\\\-\\\\s]?([0-9]{4})$"
-    ></mc-textfield>
-  
-  <!-- US Phone -->
-  <!-- converts (1231231234, 123 123 1234, 123-123-1234, (123) 123 1234, 123.123.1234) into (123) 123 1234 -->
-  <!-- NOTE if escaping(backslash) in pattern attribute you need to double escape (\s -> \\s) -->
-  <mc-textfield
-    id="phone"
-    label="Phone"
-    format="($1) $2 $3"
-    pattern-restrict
-    \pattern="^\\\\(?([0-9]{3})(?:[\\\\)\\\\.\\\\-\\\\s]+)?([0-9]{3})[\\\\.\\\\-\\\\s]?([0-9]{4})$"
-    ></mc-textfield>`}
-            </code>
-          </pre>
-          <pre>
-            <code class="language-javascript">
-  ${`const inputSSN = document.querySelector('input#ssn');
-  console.log(inputSSN.value); // the typed input 123121234
-  console.log(inputSSN.formattedValue); // the formatted input 123-12-1234
+          <code-block language="html"><pre>
+${`<!-- Social Security Number -->
+<!-- converts (123121234, 123-12-1234, 123 12 1234) into 123-12-1234 -->
+<mc-textfield
+  id="ssn"
+  label="SSN"
+  format="$1-$2-$3"
+  pattern-restrict
+  \pattern="^([0-9]{3})[\\\\-\\\\s]?([0-9]{2})[\\\\-\\\\s]?([0-9]{4})$"
+  ></mc-textfield>
 
-  const inputSSNMasked = document.querySelector('input#ssnmasked');
-  console.log(inputSSN.value); // the typed input 123121234
-  console.log(inputSSN.formattedValue); // the formatted input 123-12-1234
-  console.log(inputSSN.maskedValue); // the masked input xxx-xx-1234
-  
-  const inputPhone = document.querySelector('input#ssn');
-  console.log(inputPhone.value); // the typed input 1231231234
-  console.log(inputPhone.formattedValue); // the formatted input (123) 123 1234`}
-            </code>
-          </pre>
+<!-- Social Security Number with mask -->
+<mc-textfield
+  id="ssnmask"
+  label="SSN masked"
+  format="$1-$2-$3"
+  mask="xxx-xx-$3"
+  pattern-restrict
+  \pattern="^([0-9]{3})[\\\\-\\\\s]?([0-9]{2})[\\\\-\\\\s]?([0-9]{4})$"
+  ></mc-textfield>
+
+<!-- US Phone -->
+<!-- converts (1231231234, 123 123 1234, 123-123-1234, (123) 123 1234, 123.123.1234) into (123) 123 1234 -->
+<!-- NOTE if escaping(backslash) in pattern attribute you need to double escape (\s -> \\s) -->
+<mc-textfield
+  id="phone"
+  label="Phone"
+  format="($1) $2 $3"
+  pattern-restrict
+  \pattern="^\\\\(?([0-9]{3})(?:[\\\\)\\\\.\\\\-\\\\s]+)?([0-9]{3})[\\\\.\\\\-\\\\s]?([0-9]{4})$"
+  ></mc-textfield>`}
+            </pre></code-block>
+          <code-block language="javascript"><pre>
+${`const inputSSN = document.querySelector('input#ssn');
+console.log(inputSSN.value); // the typed input 123121234
+console.log(inputSSN.formattedValue); // the formatted input 123-12-1234
+
+const inputSSNMasked = document.querySelector('input#ssnmasked');
+console.log(inputSSN.value); // the typed input 123121234
+console.log(inputSSN.formattedValue); // the formatted input 123-12-1234
+console.log(inputSSN.maskedValue); // the masked input xxx-xx-1234
+
+const inputPhone = document.querySelector('input#ssn');
+console.log(inputPhone.value); // the typed input 1231231234
+console.log(inputPhone.formattedValue); // the formatted input (123) 123 1234`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -279,12 +265,10 @@
             <mc-textfield label="With max" character-count maxlength="10" supporting-text="supporting test"></mc-textfield>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-textfield label="No max" character-count></mc-textfield>
-  <mc-textfield label="With max" character-count maxlength="10" supporting-text="supporting test"></mc-textfield>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-textfield label="No max" character-count></mc-textfield>
+<mc-textfield label="With max" character-count maxlength="10" supporting-text="supporting test"></mc-textfield>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -303,13 +287,11 @@
             </div>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-textfield label="Textarea" type="textarea" character-count maxlength="255"></mc-textfield>
-  <mc-textfield label="Min / max height" type="textarea" style="min-height: 80px; max-height: 120px;"></mc-textfield>
-  <mc-textfield label="Rows 3" type="textarea" rows="3"></mc-textfield>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-textfield label="Textarea" type="textarea" character-count maxlength="255"></mc-textfield>
+<mc-textfield label="Min / max height" type="textarea" style="min-height: 80px; max-height: 120px;"></mc-textfield>
+<mc-textfield label="Rows 3" type="textarea" rows="3"></mc-textfield>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -319,17 +301,15 @@
           <h2 slot="headline">Style</h2>
           <div slot="supporting-text">CSS variables that allow you override default values</div>
       
-          <pre>
-            <code class="language-css">
-  ${`/* Optional variables for overriding */
-  
-  --mc-textfield-shape: ar(--mc-shape-extra-small-top);
-  --mc-textfield-container-color: var(--mc-surface-container-highest);
-  --mc-textfield-input-text-color: var(--mc-on-surface);
-  --mc-textfield-label-text-color: var(--mc-on-surface-variant);
-  --mc-textfield-active-indicator-color: var(--mc-primary);`}
-            </code>
-          </pre>
+          <code-block language="css"><pre>
+${`/* Optional variables for overriding */
+
+--mc-textfield-shape: ar(--mc-shape-extra-small-top);
+--mc-textfield-container-color: var(--mc-surface-container-highest);
+--mc-textfield-input-text-color: var(--mc-on-surface);
+--mc-textfield-label-text-color: var(--mc-on-surface-variant);
+--mc-textfield-active-indicator-color: var(--mc-primary);`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

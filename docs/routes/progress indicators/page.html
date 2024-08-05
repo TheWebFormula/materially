@@ -26,12 +26,10 @@
             <mc-progress-circular value="0.4" style="margin: 0 auto;"></mc-progress-circular>
           </div>
 
-          <pre>
-            <code class="language-html">
-  ${`<mc-progress-linear value="0.4"></mc-progress-linear>
-  <mc-progress-circular value="0.4" style="margin: 0 auto;"></mc-progress-circular>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-progress-linear value="0.4"></mc-progress-linear>
+<mc-progress-circular value="0.4" style="margin: 0 auto;"></mc-progress-circular>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -47,15 +45,13 @@
             <mc-progress-linear indeterminate></mc-progress-linear>
           </div>
 
-          <pre>
-            <code class="language-html">
-  ${`<!-- Determinate: 'max' attribute default = 1 -->
-  <mc-progress-linear value="0.3" max="1"></mc-progress-linear>
-  
-  <!-- Indeterminate -->
-  <mc-progress-linear indeterminate></mc-progress-linear>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<!-- Determinate: 'max' attribute default = 1 -->
+<mc-progress-linear value="0.3" max="1"></mc-progress-linear>
+
+<!-- Indeterminate -->
+<mc-progress-linear indeterminate></mc-progress-linear>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -72,15 +68,13 @@
             <mc-progress-circular indeterminate></mc-progress-circular>
           </div>
 
-          <pre>
-            <code class="language-html">
-  ${`<!-- Determinate: 'max' attribute default = 1 -->
-  <mc-progress-circular value="0.3" max="1"></mc-progress-circular>
-  
-  <!-- Indeterminate -->
-  <mc-progress-circular indeterminate></mc-progress-circular>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<!-- Determinate: 'max' attribute default = 1 -->
+<mc-progress-circular value="0.3" max="1"></mc-progress-circular>
+
+<!-- Indeterminate -->
+<mc-progress-circular indeterminate></mc-progress-circular>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -90,19 +84,17 @@
           <h2 slot="headline">Style</h2>
           <div slot="supporting-text">CSS variables that allow you override default values</div>
       
-          <pre>
-            <code class="language-css">
-  ${`/* Optional variables for overriding */
-  
-  --mc-progress-circular-color: var(--mc-primary);
+          <code-block language="css"><pre>
+${`/* Optional variables for overriding */
 
-  /* percentage without (%) symbol so calc can work. 8.3333 is roughly equal to 4px */
-  --mc-progress-circular-width: 8.3333;
-  
-  --mc-progress-linear-color: var(--mc-primary);
-  --mc-progress-linear-height: 4px;`}
-            </code>
-          </pre>
+--mc-progress-circular-color: var(--mc-primary);
+
+/* percentage without (%) symbol so calc can work. 8.3333 is roughly equal to 4px */
+--mc-progress-circular-width: 8.3333;
+
+--mc-progress-linear-color: var(--mc-primary);
+--mc-progress-linear-height: 4px;`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

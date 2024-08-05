@@ -28,14 +28,12 @@
             <mc-date-picker slot="picker"></mc-date-picker>
           </mc-textfield>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-textfield type="date" label="date">
-    <mc-icon slot="leading-icon">calendar_today</mc-icon>
-    <mc-date-picker slot="picker"></mc-date-picker>
-  </mc-textfield>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-textfield type="date" label="date">
+  <mc-icon slot="leading-icon">calendar_today</mc-icon>
+  <mc-date-picker slot="picker"></mc-date-picker>
+</mc-textfield>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -49,14 +47,12 @@
             <mc-date-picker slot="picker"></mc-date-picker>
           </mc-textfield>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-textfield type="date" label="date" min="${page.min}" max="${page.max}">
-    <mc-icon slot="leading-icon">calendar_today</mc-icon>
-    <mc-date-picker slot="picker"></mc-date-picker>
-  </mc-textfield>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-textfield type="date" label="date" min="${page.min}" max="${page.max}">
+  <mc-icon slot="leading-icon">calendar_today</mc-icon>
+  <mc-date-picker slot="picker"></mc-date-picker>
+</mc-textfield>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -75,19 +71,17 @@
         
           <mc-date-range-picker start-textfield="start" end-textfield="end"></mc-date-range-picker>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-textfield id="start" class="hide-date-icon" value="2024-01-01" type="date" label="Start">
-    <mc-icon slot="leading-icon">calendar_today</mc-icon>
-  </mc-textfield>
-  
-  <mc-textfield id="end" class="hide-date-icon" value="2024-02-01" type="date" label="End">
-    <mc-icon slot="leading-icon">calendar_today</mc-icon>
-  </mc-textfield>
-  
-  <mc-date-range-picker start-textfield="start" end-textfield="end"></mc-date-range-picker>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-textfield id="start" class="hide-date-icon" value="2024-01-01" type="date" label="Start">
+  <mc-icon slot="leading-icon">calendar_today</mc-icon>
+</mc-textfield>
+
+<mc-textfield id="end" class="hide-date-icon" value="2024-02-01" type="date" label="End">
+  <mc-icon slot="leading-icon">calendar_today</mc-icon>
+</mc-textfield>
+
+<mc-date-range-picker start-textfield="start" end-textfield="end"></mc-date-range-picker>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -99,11 +93,9 @@
         
           <mc-textfield type="date" label="Modal"></mc-textfield>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-textfield type="date" label="date"></mc-textfield>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-textfield type="date" label="date"></mc-textfield>`}
+            </pre></code-block>
         </mc-card>
       </section>
       
@@ -115,11 +107,9 @@
         
           <mc-textfield class="hide-date-icon" type="date" label="No modal"></mc-textfield>
         
-          <pre>
-            <code class="language-html">
-  ${`<mc-textfield class="hide-date-icon" type="date" label="date"></mc-textfield>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<mc-textfield class="hide-date-icon" type="date" label="date"></mc-textfield>`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

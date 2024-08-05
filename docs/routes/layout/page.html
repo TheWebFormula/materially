@@ -26,48 +26,46 @@
             <iframe src="./routes/layout/basic-layout.html" title="Layout Basic" style="height: 360px; width: 100%;"></iframe>
           </div>
 
-          <pre>
-            <code class="language-html">
-  ${`<!--
-      Components automatically assign to grid areas
-      Grid areas are not visible if empty
-    -->
-  <!DOCTYPE html>
-  <html lang="en">
-    <header>...</header>
+          <code-block language="html"><pre>
+${`<!--
+    Components automatically assign to grid areas
+    Grid areas are not visible if empty
+  -->
+<!DOCTYPE html>
+<html lang="en">
+  <header>...</header>
 
-    <!-- Hide content while site loads to prevent layout shifts -->
-    <style>    
-      body:not(.mc-initiated) { visibility: hidden; }
-    </style>
+  <!-- Hide content while site loads to prevent layout shifts -->
+  <style>    
+    body:not(.mc-initiated) { visibility: hidden; }
+  </style>
 
-    <body>
-      <mc-top-app-bar>...</mc-top-app-bar>
-      <mc-navigation-drawer>...</mc-navigation-drawer>
-      
-      <mc-pane-container>
-        <mc-pane>...</mc-pane>
-      </mc-pane-container>
+  <body>
+    <mc-top-app-bar>...</mc-top-app-bar>
+    <mc-navigation-drawer>...</mc-navigation-drawer>
+    
+    <mc-pane-container>
+      <mc-pane>...</mc-pane>
+    </mc-pane-container>
 
-      <mc-navigation-bar>...</mc-navigation-bar>
-    </body>
-  </html>
-  
-  
-  
-  <!-- Custom grid area assignment -->
-  <!DOCTYPE html>
-  <html lang="en">
-    <header>...</header>
-    <body>
-      <div style="grid-area: header;">...</div>
-      <div style="grid-area: navigation;">...</div>
-      <main>...</main>
-      <div style="grid-area: footer;">...</div>
-    </body>
-  </html>`}
-            </code>
-          </pre>
+    <mc-navigation-bar>...</mc-navigation-bar>
+  </body>
+</html>
+
+
+
+<!-- Custom grid area assignment -->
+<!DOCTYPE html>
+<html lang="en">
+  <header>...</header>
+  <body>
+    <div style="grid-area: header;">...</div>
+    <div style="grid-area: navigation;">...</div>
+    <main>...</main>
+    <div style="grid-area: footer;">...</div>
+  </body>
+</html>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -82,74 +80,72 @@
             <iframe src="./routes/layout/panes.html" title="Layout Basic" style="height: 360px; width: 100%;"></iframe>
           </div>
 
-          <pre>
-            <code class="language-html">
-  ${`<!DOCTYPE html>
-  <html lang="en">
-    <header>...</header>
-    <body>
-      <mc-top-app-bar>...</mc-top-app-bar>
-      <mc-navigation-drawer>...</mc-navigation-drawer>
-      
-      <mc-pane-container>
+          <code-block language="html"><pre>
+${`<!DOCTYPE html>
+<html lang="en">
+  <header>...</header>
+  <body>
+    <mc-top-app-bar>...</mc-top-app-bar>
+    <mc-navigation-drawer>...</mc-navigation-drawer>
+    
+    <mc-pane-container>
+      <mc-pane>...</mc-pane>
+      <!--
+        You can have multiple panes
         <mc-pane>...</mc-pane>
-        <!--
-          You can have multiple panes
-          <mc-pane>...</mc-pane>
-        -->
-      </mc-pane-container>
+      -->
+    </mc-pane-container>
 
-      <mc-navigation-bar>...</mc-navigation-bar>
-    </body>
-  </html>
+    <mc-navigation-bar>...</mc-navigation-bar>
+  </body>
+</html>
 
 
 
+<!--
+  Make panes scroll in stead of document
+  This means your document body will always be 100vh
+  This also means top an bottom app bars will always show.
+-->
+<mc-pane-container scroll>
+  <mc-pane>...</mc-pane>
+</mc-pane-container>
+
+
+
+<!-- Fixed panes lock pane width based on content -->
+<mc-pane-container>
+  <mc-pane>...</mc-pane>
+  <mc-pane fixed>...</mc-pane>
+</mc-pane-container>
+
+
+
+<!-- Resizable panes -->
+<mc-pane-container resize>
+  <mc-pane>...</mc-pane>
+  <mc-pane>...</mc-pane>
+</mc-pane-container>
+
+
+
+<!-- Collapsable panes -->
+<mc-pane-container resize>
+  <mc-pane>...</mc-pane>
+  <mc-pane collapsible>...</mc-pane>
   <!--
-    Make panes scroll in stead of document
-    This means your document body will always be 100vh
-    This also means top an bottom app bars will always show.
+    You can mix collapsable and fixed
+    <mc-pane fixed collapsible>...</mc-pane>
   -->
-  <mc-pane-container scroll>
-    <mc-pane>...</mc-pane>
-  </mc-pane-container>
+</mc-pane-container>
 
 
 
-  <!-- Fixed panes lock pane width based on content -->
-  <mc-pane-container>
-    <mc-pane>...</mc-pane>
-    <mc-pane fixed>...</mc-pane>
-  </mc-pane-container>
-  
-
-  
-  <!-- Resizable panes -->
-  <mc-pane-container resize>
-    <mc-pane>...</mc-pane>
-    <mc-pane>...</mc-pane>
-  </mc-pane-container>
-  
-
-  
-  <!-- Collapsable panes -->
-  <mc-pane-container resize>
-    <mc-pane>...</mc-pane>
-    <mc-pane collapsible>...</mc-pane>
-    <!--
-      You can mix collapsable and fixed
-      <mc-pane fixed collapsible>...</mc-pane>
-    -->
-  </mc-pane-container>
-  
-
-  
-  <!-- Remove padding -->
-  <mc-pane-container>
-    <mc-pane no-padding>...</mc-pane>
-  </mc-pane-container>`}
-            </code>
-          </pre>
+<!-- Remove padding -->
+<mc-pane-container>
+  <mc-pane no-padding>...</mc-pane>
+</mc-pane-container>`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -170,36 +166,30 @@
             
           </div>
 
-          <pre>
-            <code class="language-html">
-  ${`<!-- Class names are added to the body for the current window size -->
-    <body class="window-compact"></body>
-    <body class="window-medium"></body>
-    <body class="window-exapnded"></body>`}
-            </code>
-          </pre>
+          <code-block language="html"><pre>
+${`<!-- Class names are added to the body for the current window size -->
+<body class="window-compact"></body>
+<body class="window-medium"></body>
+<body class="window-exapnded"></body>`}
+            </pre></code-block>
 
-          <pre>
-            <code class="language-javascript">
-  ${`
-    
-    // Interact with mcDevice
-    import { mcDevice } from '@theWebformaula/materially/services';
-    // import { mcDevice } from '@theWebformaula/materially';
+          <code-block language="javascript"><pre>
+${`// Interact with mcDevice
+import { mcDevice } from '@theWebformaula/materially/services';
+// import { mcDevice } from '@theWebformaula/materially';
 
-    console.log(mcDevice.state); // current state
-    
-    window.addEventListener('mcwindowstatechange', ({ detail }) => {
-      console.log(detail.lastState);
+console.log(mcDevice.state); // current state
 
-      switch (detail.state) {
-        case mcDevice.COMPACT;
-        case mcDevice.MEDIUM;
-        case mcDevice.EXPANDED;
-      }
-    });`}
-            </code>
-          </pre>
+window.addEventListener('mcwindowstatechange', ({ detail }) => {
+  console.log(detail.lastState);
+
+  switch (detail.state) {
+    case mcDevice.COMPACT;
+    case mcDevice.MEDIUM;
+    case mcDevice.EXPANDED;
+  }
+});`}
+            </pre></code-block>
         </mc-card>
       </section>
 

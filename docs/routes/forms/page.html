@@ -49,44 +49,40 @@
             </form>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<!-- method="dialog" Will prevent any page redirects or endpoint calls -->
-  <form id="one" method="dialog" style="display: inline-grid;" onsubmit="submit(this)">
-    <mc-textfield name="name" label="Name" supporting-text="Enter name" required></mc-textfield>
-  
-    <mc-textfield name="email" label="Email" supporting-text="Enter email" type="email"></mc-textfield>
-  
-    <mc-select name="favnum" label="Pick a number" required supporting-text>
-      <mc-option value="1">one</mc-option>
-      <mc-option value="2">two</mc-option>
-      <mc-option value="3">three</mc-option>
-    </mc-select>
-  
-    <mc-checkbox name="agree" required label="Agree"></mc-checkbox>
-    
-    <!-- The buttons do not need to be inside the from element -->
-    <mc-button type="submit">Submit</mc-button>
-    <mc-button type="reset" style="color: var(--mc-error);">reset</mc-button>
-    <!-- type="cancel" is not available on native buttons -->
-    <mc-button type="cancel" style="color: var(--mc-error);" onclick="console.log('Called on discard or no change')">Cancel</mc-button>
-  </form>`}
-        </code>
-      </pre>
+          <code-block language="html"><pre>
+${`<!-- method="dialog" Will prevent any page redirects or endpoint calls -->
+<form id="one" method="dialog" style="display: inline-grid;" onsubmit="submit(this)">
+  <mc-textfield name="name" label="Name" supporting-text="Enter name" required></mc-textfield>
 
-  <pre>
-        <code class="language-javascript">
-  ${`// submit method
-  //   in example it is called from the form onsubmit attribute
-  function submit(form) {
-    const formData = new FormData(form);
-    console.log([...formData.entries()])
-  }
+  <mc-textfield name="email" label="Email" supporting-text="Enter email" type="email"></mc-textfield>
 
-  // You can also use the submit event
-  document.querySelector('#one').addEventListener('submit', submit);`}
-            </code>
-          </pre>
+  <mc-select name="favnum" label="Pick a number" required supporting-text>
+    <mc-option value="1">one</mc-option>
+    <mc-option value="2">two</mc-option>
+    <mc-option value="3">three</mc-option>
+  </mc-select>
+
+  <mc-checkbox name="agree" required label="Agree"></mc-checkbox>
+  
+  <!-- The buttons do not need to be inside the from element -->
+  <mc-button type="submit">Submit</mc-button>
+  <mc-button type="reset" style="color: var(--mc-error);">reset</mc-button>
+  <!-- type="cancel" is not available on native buttons -->
+  <mc-button type="cancel" style="color: var(--mc-error);" onclick="console.log('Called on discard or no change')">Cancel</mc-button>
+</form>`}
+        </pre></code-block>
+
+        <code-block language="javascript"><pre>
+${`// submit method
+//   in example it is called from the form onsubmit attribute
+function submit(form) {
+  const formData = new FormData(form);
+  console.log([...formData.entries()])
+}
+
+// You can also use the submit event
+document.querySelector('#one').addEventListener('submit', submit);`}
+            </pre></code-block>
         </mc-card>
       </section>
 
@@ -113,37 +109,33 @@
             </form>
           </div>
         
-          <pre>
-            <code class="language-html">
-  ${`<!-- method="dialog" Will prevent any page redirects or endpoint calls -->
-  <form id="two" method="dialog" style="display: inline-grid;" onsubmit="page.submit(this)">
-    <mc-textfield name="name" label="Name" supporting-text="Enter name" required></mc-textfield>
-  
-    <mc-checkbox name="agree" required label="Agree"></mc-checkbox>
-  
-    <!-- The buttons do not need to be inside the from element -->
-    <div style="display: flex; justify-self: end;">
-      <mc-button form="two" type="submit">Submit</mc-button>
-      <!-- type="cancel" is custom and does not natively exist -->
-      <mc-button form="two" type="cancel" onclick="two.reset(); console.log('Called on discard, or when from has no changes');">Cancel</mc-button>
-    </div>
-  </form>`}
-            </code>
-          </pre>
-    
-          <pre>
-            <code class="language-javascript">
-  ${`// submit method
-  //   in example it is called from the form onsubmit attribute
-  function submit(form) {
-    const formData = new FormData(form);
-    console.log([...formData.entries()])
-  }
+          <code-block language="html"><pre>
+${`<!-- method="dialog" Will prevent any page redirects or endpoint calls -->
+<form id="two" method="dialog" style="display: inline-grid;" onsubmit="page.submit(this)">
+  <mc-textfield name="name" label="Name" supporting-text="Enter name" required></mc-textfield>
 
-  // You can also use the submit event
-  document.querySelector('#one').addEventListener('submit', submit);`}
-            </code>
-          </pre>
+  <mc-checkbox name="agree" required label="Agree"></mc-checkbox>
+
+  <!-- The buttons do not need to be inside the from element -->
+  <div style="display: flex; justify-self: end;">
+    <mc-button form="two" type="submit">Submit</mc-button>
+    <!-- type="cancel" is custom and does not natively exist -->
+    <mc-button form="two" type="cancel" onclick="two.reset(); console.log('Called on discard, or when from has no changes');">Cancel</mc-button>
+  </div>
+</form>`}
+            </pre></code-block>
+    
+          <code-block language="javascript"><pre>
+${`// submit method
+//   in example it is called from the form onsubmit attribute
+function submit(form) {
+  const formData = new FormData(form);
+  console.log([...formData.entries()])
+}
+
+// You can also use the submit event
+document.querySelector('#one').addEventListener('submit', submit);`}
+            </pre></code-block>
         </mc-card>
       </section>
     </div>

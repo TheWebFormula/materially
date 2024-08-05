@@ -27,94 +27,72 @@ section {
   margin-top: 36px;
 }
 
-pre {
-  display: flex;
+code-block pre {
+  position: relative;
   margin: 0;
   white-space: pre-wrap;
+  font-family: monospace;
+  font-weight: bold;
+  unicode-bidi: isolate;
+  padding-left: 22px !important;
+  padding-top: 36px !important;
 }
 
-body.window-compact pre {
+code-block {
+  display: block;
+  position: relative;
+}
+
+code-block button {
+  position: absolute;
+  right: 0px;
+  top: 8px;
+  outline: 0;
+  background-color: transparent;
+  color: white;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1;
+}
+
+code-block button:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+body.window-compact code-block pre {
   font-size: 12px;
   max-width: 358px;
 }
 
-pre > code {
-  flex-grow: 1;
-}
-
-mc-card pre,
-mc-card pre {
+mc-card code-block pre {
   margin: 0 -16px;
-  margin-bottom: -16px;
 }
 
-pre > code {
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-mc-card > pre:first-of-type > code,
-mc-card > pre:first-of-type > code {
+mc-card > code-block:first-of-type pre {
   margin-top: 24px;
 }
 
-mc-card > pre:last-of-type > code,
-mc-card > pre:last-of-type > code {
+mc-card > code-block:last-of-type pre {
   border-radius: 0 0 var(--mc-shape-medium) var(--mc-shape-medium);
+}
+
+mc-card > code-block:last-child pre {
+  margin-bottom: -16px;
 }
 
 mc-card .example {
   margin-top: 18px;
 }
 
-.code-collapse-top code {
-  margin-top: 0;
-  padding-top: 0;
-}
-
-.code-collapse-top code::before {
-  content: '';
-  display: block;
-  height: 0;
-  width: 0;
-  margin-top: -20px;
-}
-
-.code-collapse-bottom code {
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.code-collapse-bottom code::before {
-  content: '';
-  display: block;
-  height: 0;
-  width: 0;
-  margin-bottom: -20px;
-}
-
-.code-collapse code {
-  margin-top: 0;
-  padding-top: 0;
-
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.code-collapse code::before {
-  content: '';
-  display: block;
-  height: 0;
-  width: 0;
-  margin-top: -20px;
-  margin-bottom: -20px;
-}
-
-
 .article-main {
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
+  padding-bottom: 24px;
 }
 
 @media (width < 1100px) {

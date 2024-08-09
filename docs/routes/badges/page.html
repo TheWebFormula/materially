@@ -2,7 +2,7 @@
   <header>
     <h1>Badges</h1>
     <div class="page-subheader mc-font-title-medium">Badges convey dynamic information, such as counts or status. A badge can include labels or numbers</div>
-    <a href="https://m3.material.io/components/badges/overview" target="_new">Material Design Guidelines: Buttons</a>
+    <a href="https://m3.material.io/components/badges/overview" target="_new">Material Design Guidelines: Badges</a>
   </header>
 
   <div class="article-main">
@@ -22,12 +22,12 @@
           
           <div class="example">
             <mc-icon-button>
-              <mc-badge>0</mc-badge>
+              <mc-badge value="0"></mc-badge>
               <mc-icon>inbox</mc-icon>
             </mc-icon-button>
             
             <mc-icon-button>
-              <mc-badge hide-value>1</mc-badge>
+              <mc-badge hide-value value="1"></mc-badge>
               <mc-icon>inbox</mc-icon>
             </mc-icon-button>
             
@@ -37,29 +37,29 @@
             </mc-icon-button>
             
             <mc-icon-button>
-              <mc-badge>1000</mc-badge>
+              <mc-badge value="1000"></mc-badge>
               <mc-icon>inbox</mc-icon>
             </mc-icon-button>
             
             <div style="display: flex; flex-wrap: wrap; gap: 4px;">
               <mc-button>
-                <mc-badge>0</mc-badge>
                 Label
+                <mc-badge value="0"></mc-badge>
               </mc-button>
             
               <mc-button>
-                <mc-badge hide-value>1</mc-badge>
                 Label
+                <mc-badge hide-value value="1"></mc-badge>
               </mc-button>
             
               <mc-button>
-                <mc-badge>99</mc-badge>
                 Label
+                <mc-badge value="99"></mc-badge>
               </mc-button>
             
               <mc-button>
-                <mc-badge>1000</mc-badge>
                 Label
+                <mc-badge value="1000"></mc-badge>
               </mc-button>
             </div>
           </div>
@@ -67,12 +67,12 @@
           <code-block language="html"><pre>
 ${`<mc-icon-button>
   <!-- 0 === no value -->
-  <mc-badge>0</mc-badge>
+  <mc-badge value="0"></mc-badge>
   <mc-icon>inbox</mc-icon>
 </mc-icon-button>
 
 <mc-icon-button>
-  <mc-badge hide-value>1</mc-badge>
+  <mc-badge hide-value value="0"></mc-badge>
   <mc-icon>inbox</mc-icon>
 </mc-icon-button>
 
@@ -82,28 +82,28 @@ ${`<mc-icon-button>
 </mc-icon-button>
 
 <mc-icon-button>
-  <mc-badge>1000</mc-badge>
+  <mc-badge value="1000"></mc-badge>
   <mc-icon>inbox</mc-icon>
 </mc-icon-button>
 
 <mc-button>
-  <mc-badge>0</mc-badge>
   Label
+  <mc-badge value="0"></mc-badge>
 </mc-button>
 
 <mc-button>
-  <mc-badge hide-value>1</mc-badge>
   Label
+  <mc-badge hide-value value="1"></mc-badge>
 </mc-button>
 
 <mc-button>
-  <mc-badge>99</mc-badge>
   Label
+  <mc-badge value="99"></mc-badge>
 </mc-button>
 
 <mc-button>
-  <mc-badge>1000</mc-badge>
   Label
+  <mc-badge value="1000"></mc-badge>
 </mc-button>`}
             </pre></code-block>
         

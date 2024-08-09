@@ -19,7 +19,6 @@ class MCBadgeElement extends HTMLComponentElement {
     super();
 
     this.render();
-    this.value = this.innerText;
     this.ariaHidden = true;
   }
 
@@ -52,11 +51,11 @@ class MCBadgeElement extends HTMLComponentElement {
     else this.#displayValue = `${num}`;
 
     this.classList.toggle('has-value', !!this.#displayValue);
-    super.innerText = this.#displayValue;
+    this.innerText = this.#displayValue;
 
     if (!this.#parentType) this.#parentType = this.parentElement.nodeName.toLowerCase();
     if (!this.#ariaLabelOriginal) {
-      if (this.#parentType === 'mc-icon-button') this.#ariaLabelOriginal = this.parentElement.querySelector('mc-icon').innerText;
+      if (this.#parentType === 'mc-icon-button') this.#ariaLabelOriginal = this.parentElement.querySelector('mc-icon').textContent;
       else if (this.#parentType === 'a') this.#ariaLabelOriginal = this.parentElement.href;
       else this.#ariaLabelOriginal = this.parentElement.ariaLabel || util.getTextFromNode(this.parentElement);
     }
@@ -68,11 +67,5 @@ class MCBadgeElement extends HTMLComponentElement {
       } else this.parentElement.ariaLabel = `[${this.#ariaLabelOriginal}] ${this.#displayValue} New ${parseInt(value) === 1 ? 'notification' : 'notifications'}`;
     }
   }
-
-  get innerHTML() { return super.innerHTML; }
-  set innerHTML(value) { this.value = value; }
-
-  get innerText() { return super.innerText; }
-  set innerText(value) { this.value = value; }
 }
 customElements.define(MCBadgeElement.tag, MCBadgeElement);

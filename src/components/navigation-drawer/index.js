@@ -72,9 +72,9 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
     switch (detail.state) {
       case device.EXPANDED:
         this.open = true;
-        // requestAnimationFrame(() => {
-        //   this.querySelector('.current').scrollIntoView({ behavior: 'instant', block: 'center' });
-        // });
+        requestAnimationFrame(() => {
+          this.querySelector('.current').scrollIntoView({ behavior: 'instant', block: 'center' });
+        });
         break;
       case device.MEDIUM:
         this.open = !device.hasNavigationRail;

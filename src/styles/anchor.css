@@ -13,10 +13,6 @@ a {
   color: var(--mc-primary);
 }
 
-a:-webkit-any-link:active {
-  color: inherit;
-}
-
 a:focus-visible {
   text-decoration: underline;
 }

@@ -3,6 +3,7 @@ import sideSheetStyles from '../side-sheet/component.css';
 import styles from './component.css' assert { type: 'css' };
 import device from '../../helpers/device.js';
 import util from '../../helpers/util.js';
+import '../anchor/index.js';
 
 
 /* TODO fix top position when on mobile.

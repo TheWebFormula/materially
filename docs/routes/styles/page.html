@@ -10,6 +10,7 @@
       <h2>Links</h2>
       <ul class="links">
         <li><a href="#colors">Colors</a></li>
+        <li><a href="#font">Fonts and icons</a></li>
         <li><a href="#customize">Customize</a></li>
       </ul>
     </nav>
@@ -19,16 +20,13 @@
       <section id="colors" aria-label="Colors">
         <mc-card>
           <h2 slot="headline">Colors</h2>
-          <div slot="supporting-text">You can generate theme colors using the themeGenerator</div>
-
-          <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap;">
-          </div>
+          <div slot="supporting-text">You can generate theme colors using the theme-generator</div>
+          <a target="_blank" href="https://github.com/TheWebFormula/materially/blob/main/src/styles/variables.css">Materailly CSS variables</a>
 
           <code-block language="javascript"><pre>
-${`import generate from '@thewebformula/materially/themeGenerator';
+${`import generateTheme from '@thewebformula/materially/theme-generator';
 
-// generate(input path, output path)
-generate({
+generateTheme({
   coreColors: {
     // primary is the only required color
     primary: '#6750A4',
@@ -42,15 +40,62 @@ generate({
     error: '#B3261E'
   },
 
-  // Specify custom colors to use in app
+  // Specify custom colors
   customColors: [
     {
-      name: 'customColor',
+      name: 'name',
       color: '#5b7166'
     }
   ]
-}, './colorTokens.css');`}
+}, './color-tokens.css');`}
           </pre></code-block>
+          <code-block language="css">
+            <pre>
+${`/* Import the generated color tokens to your app */
+@import url(./color-tokens.css);
+
+
+/* Custom color variables */
+color: var(--mc-custom-color-name-color);
+color: var(--mc-custom-color-name-on-color);
+color: var(--mc-custom-color-name-color-container);
+color: var(--mc-custom-color-name-on-color-container);`}
+            </pre>
+          </code-block>
+        </mc-card>
+      </section>
+
+
+      <section id="font" aria-label="Fonts">
+        <mc-card>
+          <h2 slot="headline">Fonts and icons</h2>
+          <div slot="supporting-text">There are two fonts you can set <strong>brand</strong> and <string>plain</string>. If these are not set then fonts will inherit from root</div>
+      
+          <code-block language="css">
+            <pre>
+${`/* Set font families. Default to inherit */
+--mc-font-brand: Noto;
+--mc-font-plain: roboto;`}
+            </pre>
+          </code-block>
+          <code-block language="html">
+            <pre>
+${`<!-- Loading fronts and icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,500&display=swap"
+  rel="stylesheet">
+
+<!--
+  Load material icons via google fonts.
+  All component required icons are packaged with materially.
+-->
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+  media="print" onload="this.media='all'" />`}
+            </pre>
+          </code-block>
         </mc-card>
       </section>
 
@@ -85,23 +130,7 @@ ${`
 <mc-navigation-drawer
   style="--mc-navigation-drawer-container-color: var(--mc-surface-container-low)"
 ></mc-navigation-drawer>`}
-          </pre></code-block>
-
-
-          <code-block language="css"><pre>
-${`
-  
-/* Set font families */
-
-:root {
-  --mc-font-brand: 'Roboto';
-  --mc-font-plain: 'Roboto';
-}`}
         </pre></code-block>
-        <code-block language="html"><pre>
-${`<!-- TODO setting font -->`}
-          </pre></code-block>
-        </mc-card>
       </section>
     </div>
   </div>

@@ -1,0 +1,112 @@
+<article>
+  <header>
+    <h1>Getting started</h1>
+    <div class="page-subheader mc-font-title-medium">Installation and quick start guide</div>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#install">Installation</a></li>
+        <li><a href="#imports">Imports</a></li>
+        <li><a href="#theme">Generate theme</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+
+      <section id="install" aria-label="Installation">
+        <mc-card>
+          <h2 slot="headline">Installation</h2>
+
+          <code-block language="bash">
+            <pre>
+npm install @thewebformula/materially
+          </pre>
+          </code-block>
+        </mc-card>
+      </section>
+
+
+      <section id="imports" aria-label="Imports">
+        <mc-card>
+          <h2 slot="headline">Imports</h2>
+      
+          <code-block language="javascript">
+            <pre>
+// Everything
+import '@thewebformula/materially';
+
+
+// Individual components
+import '@thewebformula/materially/components/navigation-drawer';
+import '@thewebformula/materially/components/button';
+
+...
+
+// Utilities
+import {
+  mcDate,
+  mcDevice,
+  mcDialog,
+  mcUtil,
+  mcSnackbar,
+  MCSwipe
+} from '@thewebformula/materially/services';
+
+
+// Individual Utilities
+import mcDialog from '@thewebformula/materially/services/dialog';
+...
+            </pre>
+          </code-block>
+        </mc-card>
+      </section>
+      
+
+      <section id="colors" aria-label="Colors">
+        <mc-card>
+          <h2 slot="headline">Colors</h2>
+          <div slot="supporting-text">You can generate theme colors using the theme-generator. It's recommended to add this to your build process</div>
+          <div slot="supporting-text">More information on <a href="/styles">Styles page</a></div>
+      
+          <code-block language="javascript">
+            <pre>
+${`import generateTheme from '@thewebformula/materially/theme-generator';
+
+generateTheme({
+  coreColors: {
+    // primary is the only required color
+    primary: '#6750A4',
+
+    // By default these generate from the primary
+    // You can override them here
+    secondary: '#625B71',
+    tertiary: '#7D5260',
+    neutral: '#67616f',
+    neutralVariant: '#605666',
+    error: '#B3261E'
+  },
+
+  // Specify custom colors
+  customColors: [
+    {
+      name: 'name',
+      color: '#5b7166'
+    }
+  ]
+}, './color-tokens.css');`}
+            </pre>
+          </code-block>
+          <code-block language="css">
+            <pre>
+${`/* Import the generated color tokens to your app */
+@import url(./color-tokens.css);`}
+            </pre>
+          </code-block>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

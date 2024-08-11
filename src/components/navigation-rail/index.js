@@ -2,6 +2,7 @@ import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import device from '../../helpers/device.js';
 import util from '../../helpers/util.js';
+import '../anchor/index.js';
 
 class MCNavigationRailElement extends HTMLComponentElement {
   static tag = 'mc-navigation-rail';

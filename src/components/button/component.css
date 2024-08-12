@@ -33,6 +33,7 @@
   font-weight: var(--mc-font-large-label-weight);
   letter-spacing: var(--mc-font-large-label-tracking);
   color: var(--mc-button-color-local);
+  margin: 4px 0px;
 }
 
 :host([disabled]) {
@@ -40,10 +41,6 @@
   color: var(--mc-on-surface);
   opacity: 0.38;
   pointer-events: none;
-
-  button {
-    pointer-events: none;
-  }
 }
 
 button {
@@ -64,6 +61,7 @@ button {
   padding: 0;
   gap: 8px;
   padding: 0 16px;
+  pointer-events: none;
 }
 
 :host([filled]) {
@@ -123,6 +121,7 @@ slot[name="leading-icon"]::slotted(mc-icon) {
   position: absolute;
   top: 5px;
   --mc-progress-circular-width: 12.49999;
+  pointer-events: none;
 }
 
 :host(.async-pending) {

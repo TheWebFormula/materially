@@ -60,6 +60,7 @@ export default class MCButtonElement extends HTMLComponentElement {
 
   static get observedAttributesExtended() {
     return [
+      ['aria-label', 'string'],
       ['href', 'string'],
       ['target', 'string'],
       ['async', 'boolean'],
@@ -128,6 +129,11 @@ export default class MCButtonElement extends HTMLComponentElement {
   get async() { return this.#async }
   set async(value) {
     this.#async = !!value;
+  }
+
+  get ariaLabel() { return this.#button.ariaLabel; }
+  set ariaLabel(value) {
+    this.#button.ariaLabel = value;
   }
 
   pending() {

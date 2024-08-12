@@ -51,6 +51,7 @@ class MCCheckboxElement extends HTMLComponentElement {
 
   static get observedAttributesExtended() {
     return [
+      ['aria-label', 'string'],
       ['label', 'string'],
       ['label-left', 'string'],
       ['checked', 'boolean'],
@@ -107,6 +108,11 @@ class MCCheckboxElement extends HTMLComponentElement {
   get indeterminate() { return this.#input.indeterminate; }
   set indeterminate(value) {
     this.#input.indeterminate = value;
+  }
+
+  get ariaLabel() { return this.#input.ariaLabel; }
+  set ariaLabel(value) {
+    this.#input.ariaLabel = value;
   }
 
   get label() { return this.#label; }

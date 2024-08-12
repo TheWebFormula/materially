@@ -51,6 +51,7 @@ class MCDateRangePickerElement extends MCSurfaceElement {
     super();
 
     this.role = 'dialog';
+    this.ariaLabel = 'date range picker';
 
     if (this.hasAttribute('start-textfield')) this.startTextfield = this.getAttribute('start-textfield')
     if (this.hasAttribute('end-textfield')) this.endTextfield = this.getAttribute('end-textfield')

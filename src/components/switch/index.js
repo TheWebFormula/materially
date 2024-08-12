@@ -62,6 +62,7 @@ class MCSwitchElement extends HTMLComponentElement {
 
   static get observedAttributesExtended() {
     return [
+      ['aria-label', 'string'],
       ['label', 'string'],
       ['label-right', 'string'],
       ['checked', 'boolean'],
@@ -109,6 +110,11 @@ class MCSwitchElement extends HTMLComponentElement {
     this.#checked = !!value;
     this.#input.checked = this.#checked;
     this.#updateValue();
+  }
+
+  get ariaLabel() { return this.#input.ariaLabel; }
+  set ariaLabel(value) {
+    this.#input.ariaLabel = value;
   }
 
   get label() { return this.#label; }

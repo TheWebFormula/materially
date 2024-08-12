@@ -8,6 +8,10 @@
   gap: 16px;
 }
 
+:host(.top-app-bar-exists) {
+  padding-top: 0;
+}
+
 :host([scroll]) {
   height: 100%;
 }

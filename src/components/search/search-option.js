@@ -13,7 +13,7 @@ class MCSearchOptionElement extends MCMenuItemElement {
   constructor() {
     super();
 
-    this.role = 'option';
+    // this.role = 'option';
   }
 
 

@@ -4,6 +4,7 @@ import fuzzySearch from '../../helpers/fuzzySearch.js'
 import '../textfield/index.js';
 import '../menu/index.js';
 
+// TODO aria role. seems dialog is causing issues
 
 class MCSelectElement extends HTMLComponentElement {
   static tag = 'mc-select';
@@ -43,7 +44,7 @@ class MCSelectElement extends HTMLComponentElement {
   constructor() {
     super();
 
-    this.role = 'combobox';
+    // this.role = 'combobox';
     this.#internals = this.attachInternals();
     this.render();
     this.#textfield = this.shadowRoot.querySelector('mc-textfield');
@@ -70,7 +71,7 @@ class MCSelectElement extends HTMLComponentElement {
   template() {
     return /*html*/`
       <div class="select">
-        <mc-textfield aria-controls="listbox">
+        <mc-textfield>
           <slot slot="leading-icon" name="leading-icon"></slot>
           <slot slot="trailing-icon" name="trailing-icon">
             <svg height="5" viewBox="7 10 10 5" focusable="false" class="drop-arrow">
@@ -219,7 +220,7 @@ class MCSelectElement extends HTMLComponentElement {
     window.addEventListener('keydown', this.#onKeyDown_bound, { signal: this.#abort.signal });
     this.#menu.addEventListener('click', this.#optionClick_bound, { signal: this.#abort.signal });
     this.#textfield.classList.add('raise-label');
-    this.ariaExpanded = true;
+    // this.ariaExpanded = true;
 
     if (this.#isFilter) {
       this.#textfield.addEventListener('input', this.#filterInput_bound, { signal: this.#abort.signal });
@@ -241,7 +242,7 @@ class MCSelectElement extends HTMLComponentElement {
 
     if (this.#isFilter) this.value = this.value;
     this.#textfield.classList.toggle('raise-label', !!this.value);
-    this.ariaExpanded = false;
+    // this.ariaExpanded = false;
   }
 
   #blur() {

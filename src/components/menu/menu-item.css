@@ -51,6 +51,7 @@ button {
   color: inherit;
   padding: 0;
   gap: 8px;
+  pointer-events: none;
 }
 
 :host(.selected) {

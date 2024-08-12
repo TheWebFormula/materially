@@ -122,7 +122,11 @@ class MCSliderElement extends HTMLComponentElement {
   }
 
 
-
+  get ariaLabel() { return this.#inputStart.ariaLabel; }
+  set ariaLabel(value) {
+    this.#inputStart.ariaLabel = value;
+    this.#inputEnd.ariaLabel = value + ' end';
+  }
 
   get value() { return this.#value; }
   set value(value) {

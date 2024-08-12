@@ -22,6 +22,7 @@
   -webkit-tap-highlight-color: transparent;
   height: 40px;
   width: 40px;
+  margin: 4px;
   justify-content: center;
   border-radius: var(--mc-shape-full);
   color: var(--mc-icon-button-icon-color-local);
@@ -53,6 +54,7 @@ button {
   flex: 1;
   border-radius: inherit;
   color: inherit;
+  pointer-events: none;
 }
 
 :host([filled]) {

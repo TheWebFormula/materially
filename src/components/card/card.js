@@ -57,7 +57,7 @@ export default class MCCardElement extends HTMLComponentElement {
       <div class="placeholder"></div>
       <slot name="swipe-action"></slot>
       <div class="container">
-        <mc-icon-button filled class="fullscreen-close">
+        <mc-icon-button filled class="fullscreen-close" aria-label="fullscreen-close">
           <mc-icon>${arrow_back_ios_FILL1_wght300_GRAD0_opsz24}</mc-icon>
         </mc-icon-button>
         <slot name="image"></slot>

@@ -16,7 +16,7 @@ export default class MCMenuItemElement extends HTMLComponentElement {
   constructor() {
     super();
 
-    this.role = 'menu-item';
+    this.role = 'button';
     this.tabIndex = this.hasAttribute('tabindex') ? this.getAttribute('tabindex') : 0;
     this.render();
   }
@@ -28,7 +28,7 @@ export default class MCMenuItemElement extends HTMLComponentElement {
         <slot class="default-slot"></slot>
         <slot name="end"></slot>
         <mc-state-layer ripple noring></mc-state-layer>
-      <button>
+      </button>
     `;
   }
 

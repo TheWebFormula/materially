@@ -14,12 +14,15 @@ export default class MCIconButtonElement extends MCButtonElement {
 
   #toggle;
   #checked;
+  #button;
   #click_bound = this.#click.bind(this);
   #slotChange_bound = this.#slotChange.bind(this);
 
 
   constructor() {
     super();
+
+    this.#button = this.shadowRoot.querySelector('button');
   }
 
   template() {
@@ -56,6 +59,11 @@ export default class MCIconButtonElement extends MCButtonElement {
   set checked(value) {
     this.#checked = !!value;
     this.classList.toggle('selected', this.#checked);
+  }
+
+  get ariaLabel() { return this.#button.ariaLabel; }
+  set ariaLabel(value) {
+    this.#button.ariaLabel = value;
   }
 
   connectedCallback() {

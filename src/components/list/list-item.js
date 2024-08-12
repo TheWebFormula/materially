@@ -32,6 +32,7 @@ class MCListItemElement extends HTMLComponentElement {
   #swipeMove_bound = this.#swipeMove.bind(this);
   #swipeEnd_bound = this.#swipeEnd.bind(this);
   #dragState_bound = this.#dragState.bind(this);
+  #slotchange_bound = this.#slotchange.bind(this);
 
  
   constructor() {
@@ -91,7 +92,6 @@ class MCListItemElement extends HTMLComponentElement {
     this.#selected = !!value;
     // Without this the checked property breaks
     if (this.#selectionControl) requestAnimationFrame(() => this.#selectionControl.checked = this.#selected);
-    this.ariaSelected = this.#selected;
   }
 
   get states() { return this.#states; }
@@ -135,6 +135,8 @@ class MCListItemElement extends HTMLComponentElement {
       this.#selectionControl.addEventListener('change', this.#onChange_bound, { signal: this.#abort.signal });
       if (this.#states === undefined) this.states = true;
     }
+
+    this.shadowRoot.addEventListener('slotchange', this.#slotchange_bound, { signal: this.#abort.signal });
   }
 
   disconnectedCallback() {
@@ -160,7 +162,6 @@ class MCListItemElement extends HTMLComponentElement {
 
   #onChange(event) {
     this.#selected = this.#selectionControl.checked;
-    this.ariaSelected = this.#selected;
     if (event.bubbles) event.stopPropagation();
     const copy = Reflect.construct(event.constructor, [event.type, event]);
     const dispatched = this.dispatchEvent(copy);
@@ -223,6 +224,17 @@ class MCListItemElement extends HTMLComponentElement {
 
   #dragState(event) {
     this.#dragging = event.type === 'dragstart';
+  }
+
+  #slotchange(event) {
+    const slotName = event.target.getAttribute('name');
+    if (slotName === 'end' || slotName === 'start') {
+      for (const element of event.target.assignedElements()) {
+        if (!element.ariaLabel && (element.role === 'checkbox' || element.role === 'switch')) {
+          element.ariaLabel = 'selection control';
+        }
+      }
+    }
   }
 }
 customElements.define(MCListItemElement.tag, MCListItemElement);

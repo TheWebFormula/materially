@@ -60,6 +60,7 @@ class MCDatePickerElement extends MCSurfaceElement {
     super();
 
     this.role = 'dialog';
+    this.ariaLabel = 'date picker';
     this.#textfield = this.parentElement;
 
     this.closeIgnoreElements = [this.#textfield];

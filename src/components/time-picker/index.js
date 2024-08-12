@@ -54,6 +54,7 @@ class MCTimePickerElement extends MCSurfaceElement {
     super();
 
     this.role = 'dialog';
+    this.ariaLabel = 'time picker';
     this.#textfield = this.parentElement;
     this.#selector = this.shadowRoot.querySelector('.selector-container');
   }

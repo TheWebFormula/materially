@@ -32,7 +32,6 @@ export default class MCSurfaceElement extends HTMLComponentElement {
   constructor() {
     super();
 
-    this.role = 'dialog';
     this.render();
     this.#dialog = this.shadowRoot.querySelector('dialog');
   }

@@ -17,7 +17,7 @@ class MCAnchorGroupElement extends HTMLComponentElement {
   constructor() {
     super();
 
-    this.role = 'menu';
+    this.role = 'group';
     this.render();
     this.#control = this.shadowRoot.querySelector('[control]');
   }

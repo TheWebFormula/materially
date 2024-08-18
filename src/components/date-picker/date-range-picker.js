@@ -11,6 +11,8 @@ import { monthDaysTemplate } from './helper.js';
 import util from '../../helpers/util.js';
 import dateUtil from '../../helpers/date.js';
 
+// TODO fix
+// TODO handle anchor on both start and end
 // TODO keyboard controls
 
 class MCDateRangePickerElement extends MCSurfaceElement {
@@ -33,18 +35,20 @@ class MCDateRangePickerElement extends MCSurfaceElement {
   #scrollContainer;
   #monthScrollContainer;
   #monthScrollContainerHeightThird;
-  #textfieldFocus_bound = this.#textfieldFocus.bind(this);
-  #handleClose_bound = this.#handleClose.bind(this);
 
   #onScroll_bound = util.rafThrottle(this.#onScroll.bind(this));
   #cancelClick_bound = this.#cancelClick.bind(this);
-  #close_bound = this.close.bind(this);
+  #close_bound = this.hidePopover.bind(this);
   #dayClick_bound = this.#dayClick.bind(this);
   #startInput_bound = this.#startInput.bind(this);
   #endInput_bound = this.#endInput.bind(this);
   #toggleInputView_bound = this.#toggleInputView.bind(this);
   #onInputStartView_bound = this.#onInputStartView.bind(this);
   #onInputEndView_bound = this.#onInputEndView.bind(this);
+  #toggle_bound = this.#toggle.bind(this);
+  #clickOutside_bound = this.#clickOutside.bind(this);
+  #escClose_bound = this.#escClose.bind(this);
+  #windowStateChange_bound = this.#windowStateChange.bind(this);
 
 
   constructor() {
@@ -53,20 +57,13 @@ class MCDateRangePickerElement extends MCSurfaceElement {
     this.role = 'dialog';
     this.ariaLabel = 'date range picker';
 
-    if (this.hasAttribute('start-textfield')) this.startTextfield = this.getAttribute('start-textfield')
-    if (this.hasAttribute('end-textfield')) this.endTextfield = this.getAttribute('end-textfield')
+    if (this.hasAttribute('start-textfield')) this.startTextfield = this.getAttribute('start-textfield');
+    if (this.hasAttribute('end-textfield')) this.endTextfield = this.getAttribute('end-textfield');
 
-    if (this.#modal) {
-      this.anchor = null;
-      this.allowClose = false;
-      this.noScrim = false;
-      this.fullscreen = true;
-    } else {
-      this.anchor = this.startTextfield || this.endTextfield;
-      this.allowClose = true;
-      this.noScrim = true;
-      this.fullscreen = false;
-    }
+    this.preventClose = true;
+    this.anchor = this.startTextfield || this.endTextfield;
+    this.#windowStateChange();
+    // this.fullscreen = this.modal;
 
     this.#monthElements = [...this.shadowRoot.querySelectorAll('.month')];
     this.#scrollContainer = this.shadowRoot.querySelector('.month-days-container');
@@ -76,51 +73,50 @@ class MCDateRangePickerElement extends MCSurfaceElement {
 
   template() {
     return /*html*/`
-      <dialog>
-        <div class="header">
-          <mc-icon-button class="close">
-            <mc-icon>${close_FILL1_wght400_GRAD0_opsz24}</mc-icon>
+      <div class="scrim"></div>
+      <div class="header">
+        <mc-icon-button class="close">
+          <mc-icon>${close_FILL1_wght400_GRAD0_opsz24}</mc-icon>
+        </mc-icon-button>
+
+        <div class="header-center">
+          <div class="select-date">Select dates</div>
+          <div class="display-date"></div>
+        </div>
+
+        <div class="header-right">
+          <mc-button class="save">Save</mc-button>
+
+          <mc-icon-button toggle class="input-view-toggle">
+            <mc-icon>${edit_FILL1_wght400_GRAD0_opsz24}</mc-icon>
+            <mc-icon slot="selected">${calendar_today_FILL0_wght400_GRAD0_opsz24}</mc-icon>
           </mc-icon-button>
-
-          <div class="header-center">
-            <div class="select-date">Select dates</div>
-            <div class="display-date"></div>
-          </div>
-
-          <div class="header-right">
-            <mc-button class="save">Save</mc-button>
-
-            <mc-icon-button toggle class="input-view-toggle">
-              <mc-icon>${edit_FILL1_wght400_GRAD0_opsz24}</mc-icon>
-              <mc-icon slot="selected">${calendar_today_FILL0_wght400_GRAD0_opsz24}</mc-icon>
-            </mc-icon-button>
-          </div>
         </div>
+      </div>
 
-        <div class="week-header">
-          ${dateUtil.getDayNames('narrow').map(n => `<span>${n}</span>`).join('\n')}
-        </div>
+      <div class="week-header">
+        ${dateUtil.getDayNames('narrow').map(n => `<span>${n}</span>`).join('\n')}
+      </div>
 
-        <div class="divider"></div>
+      <div class="divider"></div>
 
-        <div class="inputs">
-          <mc-textfield label="Start" type="date" class="start outlined hide-date-icon"></mc-textfield>
-          <mc-textfield label="End" type="date" class="end outlined hide-date-icon"></mc-textfield>
+      <div class="inputs">
+        <mc-textfield label="Start" type="date" class="start outlined hide-date-icon"></mc-textfield>
+        <mc-textfield label="End" type="date" class="end outlined hide-date-icon"></mc-textfield>
+      </div>
+      
+      <div class="month-days-container">
+        <div class="scroll-spacer"></div>
+        <div class="months-scroll-container">
+          ${[...new Array(36)].map((_, i) => `<div class="month" month="${(i % 12) + 1}"></div>`).join('')}
         </div>
-        
-        <div class="month-days-container">
-          <div class="scroll-spacer"></div>
-          <div class="months-scroll-container">
-            ${[...new Array(36)].map((_, i) => `<div class="month" month="${(i % 12) + 1}"></div>`).join('')}
-          </div>
-        </div>
+      </div>
 
-        <div class="divider bottom"></div>
-        <div class="actions">
-          <mc-button class="cancel">Cancel</mc-button>
-          <mc-button class="ok">OK</mc-button>
-        </div>
-      </dialog>
+      <div class="divider bottom"></div>
+      <div class="actions">
+        <mc-button class="cancel">Cancel</mc-button>
+        <mc-button class="ok">OK</mc-button>
+      </div>
     `;
   }
 
@@ -128,16 +124,19 @@ class MCDateRangePickerElement extends MCSurfaceElement {
     super.connectedCallback();
     this.#abort = new AbortController();
 
+    window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound, { signal: this.#abort.signal });
+    
     if (this.#startTextfield) {
       this.closeIgnoreElements.push(this.#startTextfield)
-      if (!this.#modal) this.anchorElement = this.#startTextfield;
-      this.#startTextfield.addEventListener('focus', this.#textfieldFocus_bound, { signal: this.#abort .signal });
+      // if (!this.modal) this.anchorElement = this.#startTextfield;
+
+      this.addEventListener('toggle', this.#toggle_bound, { signal: this.#abort.signal });
     }
 
     if (this.#endTextfield) {
       this.closeIgnoreElements.push(this.#endTextfield)
-      if (!this.#modal && !this.anchorElement) this.anchorElement = this.#endTextfield;
-      this.#endTextfield.addEventListener('focus', this.#textfieldFocus_bound, { signal: this.#abort.signal });
+      // if (!this.modal && !this.anchorElement) this.anchorElement = this.#endTextfield;
+      // this.#endTextfield.addEventListener('focus', this.#textfieldFocus_bound, { signal: this.#abort.signal });
     }
   }
 
@@ -171,16 +170,17 @@ class MCDateRangePickerElement extends MCSurfaceElement {
     return dateUtil.parse(typeof this.#endTextfield.max === 'string' ? this.#startTextfield.max : this.#endTextfield.max);
   }
 
-  get #modal() {
-    return device.state === device.COMPACT;
+
+  #toggle(event) {
+    if (event.newState === 'open') {
+      this.#show();
+    } else {
+      this.#hide();
+    }
   }
 
-
-  show() {
+  #show() {
     this.classList.remove('input-view');
-
-    if (this.#modal) super.showModal();
-    else super.show();
 
     if (this.#startTextfield) {
       this.#selectedDateStart = this.#startTextfield.value && dateUtil.parse(this.#startTextfield.value);
@@ -207,32 +207,29 @@ class MCDateRangePickerElement extends MCSurfaceElement {
     this.#scrollToFocused();
 
     this.#showAbort = new AbortController();
-    this.addEventListener('close', this.#handleClose_bound, { signal: this.#showAbort.signal });
     this.#scrollContainer.addEventListener('scroll', this.#onScroll_bound, { signal: this.#showAbort.signal });
     this.shadowRoot.querySelector('.cancel').addEventListener('click', this.#cancelClick_bound, { signal: this.#showAbort.signal });
     this.shadowRoot.querySelector('.ok').addEventListener('click', this.#close_bound, { signal: this.#showAbort.signal });
     this.#monthScrollContainer.addEventListener('click', this.#dayClick_bound, { signal: this.#showAbort.signal, capture: true });
     if (this.#startTextfield) this.#startTextfield.addEventListener('input', this.#startInput_bound, { signal: this.#showAbort.signal });
     if (this.#endTextfield) this.#endTextfield.addEventListener('input', this.#endInput_bound, { signal: this.#showAbort.signal });
-    if (this.#modal) {
+    if (this.modal) {
       this.shadowRoot.querySelector('.input-view-toggle').addEventListener('click', this.#toggleInputView_bound, { signal: this.#showAbort.signal });
       this.shadowRoot.querySelector('.close').addEventListener('click', this.#cancelClick_bound, { signal: this.#showAbort.signal });
       this.shadowRoot.querySelector('.save').addEventListener('click', this.#close_bound, { signal: this.#showAbort.signal });
+    } else {
+      window.addEventListener('click', this.#clickOutside_bound, { signal: this.#showAbort.signal });
+      window.addEventListener('keydown', this.#escClose_bound, { signal: this.#showAbort.signal });
     }
   }
 
-  // show handles both states
-  showModal() {
-    this.show();
-  }
 
-
-  #handleClose() {
+  #hide() {
     if (this.#showAbort) {
       this.#showAbort.abort();
       this.#showAbort = undefined;
     }
-    if (this.#modal) {
+    if (this.modal) {
       setTimeout(() => {
         this.#startTextfield.blur();
         this.#endTextfield.blur();
@@ -240,25 +237,6 @@ class MCDateRangePickerElement extends MCSurfaceElement {
     }
     // if (this.#swipe) this.#swipe.disable();
   }
-
-
-  #textfieldFocus(event) {
-    // this.#textfield.addEventListener('blur', this.#textfieldBlur_bound, { signal: this.#abort.signal });
-    // window.addEventListener('keydown', this.#spaceInterceptor_bound, { signal: this.#abort.signal });
-
-    // dialogs will focus back on the input after close. We want to prevent this so the dialog does not re open
-    if (this.open) {
-      event.preventDefault();
-      return;
-    }
-    this.show();
-  }
-
-  // #textfieldBlur() {
-  //   this.#textfield.removeEventListener('blur', this.#textfieldBlur);
-  //   window.removeEventListener('keydown', this.#spaceInterceptor_bound);
-  // }
-
 
   #updateMonths() {
     const startParts = this.#selectedDateStart && dateUtil.getParts(this.#selectedDateStart);
@@ -328,7 +306,7 @@ class MCDateRangePickerElement extends MCSurfaceElement {
     }
 
     if (this.#selectedDateStart && this.#selectedDateEnd) {
-      this.shadowRoot.querySelector('.display-date').innerText = `${dateUtil.format(this.#selectedDateStart, 'MMM DD')} - ${dateUtil.format(this.#selectedDateEnd, 'MMM DD')}`;
+      this.shadowRoot.querySelector('.display-date').textContent = `${dateUtil.format(this.#selectedDateStart, 'MMM DD')} - ${dateUtil.format(this.#selectedDateEnd, 'MMM DD')}`;
 
       const startMonthTime = dateUtil.buildFromParts({
         year: startParts.year,
@@ -412,7 +390,7 @@ class MCDateRangePickerElement extends MCSurfaceElement {
   #cancelClick() {
     if (this.#startTextfield) this.#startTextfield.value = this.#initialStartTextFieldValue;
     if (this.#endTextfield) this.#endTextfield.value = this.#initialEndTextFieldValue;
-    this.close();
+    this.hidePopover();
   }
 
   #dayClick(event) {
@@ -502,6 +480,31 @@ class MCDateRangePickerElement extends MCSurfaceElement {
 
     if (oldYear && !date || (date && oldYear !== date.getFullYear())) this.#updateMonths();
     else this.#renderSelectedDisplay();
+  }
+
+  #escClose(event) {
+    if (event.key === 'Escape' && this.matches(':popover-open')) {
+      this.hidePopover();
+    }
+  }
+
+  #clickOutside(event) {
+    if (this.contains(event.target)
+      || this.#startTextfield === event.target || this.#startTextfield.contains(event.target)
+      || this.#endTextfield === event.target || this.#endTextfield.contains(event.target)) {
+      return;
+    }
+    this.hidePopover();
+  }
+
+  #windowStateChange() {
+    switch (device.state) {
+      case device.COMPACT:
+        this.modal = true;
+        break;
+      default:
+        this.modal = false;
+    }
   }
 }
 customElements.define(MCDateRangePickerElement.tag, MCDateRangePickerElement);

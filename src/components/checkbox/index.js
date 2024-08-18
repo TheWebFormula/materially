@@ -124,7 +124,7 @@ class MCCheckboxElement extends HTMLComponentElement {
       label.setAttribute('for', id);
     }
     this.#label = value;
-    label.innerText = this.#label || '';
+    label.textContent = this.#label || '';
     this.ariaLabel = value;
     label.classList.toggle('show', !!value);
     label.classList.remove('right');
@@ -140,7 +140,7 @@ class MCCheckboxElement extends HTMLComponentElement {
     }
 
     this.#label = value;
-    label.innerText = this.#label || '';
+    label.textContent = this.#label || '';
     this.ariaLabel = value;
     label.classList.toggle('show', !!value);
     label.classList.toggle('left', !!value);

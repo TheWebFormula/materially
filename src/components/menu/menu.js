@@ -18,103 +18,58 @@ export default class MCMenuElement extends MCSurfaceElement {
   #click_bound = this.#click.bind(this);
   #textSearchOver_debounced = util.debounce(this.#textSearchOver, 240);
   #rightClick_bound = this.#rightClick.bind(this);
-  #anchorFocus_bound = this.#anchorFocus.bind(this);
-  #anchorClick_bound = this.#anchorClick.bind(this);
-  #handleClose_bound = this.#handleClose.bind(this);
 
 
   constructor() {
     super();
 
-    this.allowClose = true;
-    this.noScrim = true;
+    this.role = 'menu';
   }
 
   connectedCallback() {
     super.connectedCallback();
+
     this.#abort = new AbortController();
     this.#contextMenu = this.getAttribute('context-menu');
-
     if (this.#contextMenu) {
       document.addEventListener('contextmenu', this.#rightClick_bound, { signal: this.#abort.signal });
-    } else if (this.hasAttribute('anchor-parent')) {
-      this.anchor = this.parentElement;
-    } else if (this.hasAttribute('anchor')) {
-      this.anchor = document.querySelector(`#${this.getAttribute('anchor')}`);
     }
 
-    this.#initAnchor();
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    if (this.#abort) this.#abort.abort();
-  }
-
-  get anchor() { return super.anchor; }
-  set anchor(value) {
-    super.anchor = value;
-    if (this.isConnected) setTimeout(() => this.#initAnchor());
-  }
-
-  get disableLetterFocus() { return this.#disableLetterFocus; }
-  set disableLetterFocus(value) {
-    this.#disableLetterFocus = !!value;
-  }
-
-  #initAnchor() {
-    if (!this.anchor) return;
-    if (this.anchor.nodeName === 'MC-MENU-ITEM') {
+    if (this.anchor?.nodeName === 'MC-MENU-ITEM') {
       this.anchor.nesting = true;
       this.offsetY = -48;
       this.anchorRight = true;
     }
-    
-    this.anchor.addEventListener('focusin', this.#anchorFocus_bound, { signal: this.#abort.signal });
-    this.anchor.addEventListener('click', this.#anchorClick_bound, { signal: this.#abort.signal });
   }
 
-  showModal() {
-    super.showModal();
+  disconnectedCallback() {
+    super.disconnectedCallback();
+
+    if (this.#abort) this.#abort.abort();
   }
 
-  show() {
-    super.show();
-
-    this.addEventListener('close', this.#handleClose_bound, { signal: this.#abort.signal });
-    this.addEventListener('click', this.#click_bound, { signal: this.#abort.signal });
+  onShow() {
+    super.onShow();
+    let focusItem = this.querySelector('[selected]') || this.querySelector('[tabindex]:not([tabindex="-1"])');
+    if (focusItem) focusItem.focus();
     window.addEventListener('keydown', this.#openKeydown_bound, { signal: this.#abort.signal });
+    this.addEventListener('click', this.#click_bound, { signal: this.#abort.signal });
   }
 
-  #handleClose() {
-    this.removeEventListener('close', this.#handleClose_bound);
+  onHide() {
+    super.onHide();
+
     this.removeEventListener('click', this.#click_bound);
     window.removeEventListener('keydown', this.#openKeydown_bound);
   }
 
 
-  #anchorFocus(event) {
-    let host = this.getRootNode().host;
-    if (host && (host.nodeName === 'MC-SELECT' || host.nodeName === 'MC-SEARCH')) {
-      // dialogs will focus back on the input after close. We want to prevent this so the dialog does not re open
-      if (this.open) {
-        event.preventDefault();
-        return;
-      }
-      this.show();
-    }
-  }
-
-  #anchorClick(event) {
-    if (!this.open && document.activeElement === this.anchor || event.composedPath()[0] == this.anchor) this.show();
-  }
-
 
   #click(event) {
     if (event.target.nesting || event.target === this || event.target.nodeName === 'MC-CHIP') return;
 
-    this.close();
-    if (this.#parentMenu) setTimeout(() => this.#parentMenu.close(), 120);
+    this.hidePopover();
+    if (this.#parentMenu) setTimeout(() => this.#parentMenu.hidePopover(), 120);
   }
 
   #openKeydown(e) {
@@ -162,13 +117,21 @@ export default class MCMenuElement extends MCSurfaceElement {
 
   #rightClick(event) {
     if (!this.#iscontextMenuParent(event.target)) {
-      this.close();
+      this.hidePopover();
       return;
     }
 
     this.anchor = event.target;
-    if (!this.open) this.show();
+    this.showPopover();
     event.preventDefault();
+    
+    // mimic behavior of system right click
+    // If right click is held down for more then 400ms the menu auto closes
+    // By default the menu will not stay open without calling showPopover again
+    let startTime = Date.now();
+    this.anchor.addEventListener('pointerup', () => {
+      if (Date.now() - startTime < 400) this.showPopover();
+    }, { once: true });
   }
 
   #iscontextMenuParent(node) {

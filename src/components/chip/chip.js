@@ -81,7 +81,7 @@ class MCChipElement extends HTMLComponentElement {
   get label() { return this.#label; }
   set label(value) {
     this.#label = value;
-    this.shadowRoot.querySelector('.label').innerText = value;
+    this.shadowRoot.querySelector('.label').textContent = value;
     this.ariaLabel = value;
   }
 

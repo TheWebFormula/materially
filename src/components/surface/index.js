@@ -11,43 +11,36 @@ export default class MCSurfaceElement extends HTMLComponentElement {
   static styleSheets = [styles];
 
   #abort;
-  #dialog;
   #anchor;
+  #modal = false;
   #height;
+  #fullscreen;
   #offsetY = 0;
   #offsetX = 0;
   #anchorRight = false;
   #overlay = true;
-  #allowClose = false;
   #alwaysBelow = false;
   #removeOnClose = false;
   #closeIgnoreElements = [];
-  #handleCancel_bound = this.#handleCancel.bind(this);
-  #handleClose_bound = this.#handleClose.bind(this);
-  #handleEsc_bound = this.#handleEsc.bind(this);
-  #clickOutsideClose_bound = this.#clickOutsideClose.bind(this);
-  #scroll_bound = this.#scroll.bind(this);
+  #toggle_bound = this.#toggle.bind(this);
 
 
   constructor() {
     super();
 
+    this.popover = 'auto';
     this.render();
-    this.#dialog = this.shadowRoot.querySelector('dialog');
   }
 
   template() {
-    return /*html*/`
-      <dialog>
-        <slot></slot>
-      </dialog>
-    `;
+    return /*html*/`<slot></slot>`;
   }
 
   static get observedAttributesExtended() {
     return [
       ['anchor', 'string'],
-      ['allow-close', 'boolean'],
+      ['modal', 'string'],
+      ['prevent-close', 'boolean'],
       ['always-below', 'boolean'],
       ['remove-on-close', 'boolean'],
       ['fullscreen', 'boolean']
@@ -61,6 +54,7 @@ export default class MCSurfaceElement extends HTMLComponentElement {
 
   connectedCallback() {
     this.#abort = new AbortController();
+    this.addEventListener('toggle', this.#toggle_bound, { signal: this.#abort.signal });
   }
 
   disconnectedCallback() {
@@ -77,24 +71,39 @@ export default class MCSurfaceElement extends HTMLComponentElement {
     else if (value === '') this.#anchor = this.parentElement;
     else if (value instanceof HTMLElement) this.#anchor = value;
     else this.#anchor = document.querySelector(`#${value}`);
+    this.classList.toggle('anchor', !!this.#anchor);
 
-    this.toggleAttribute('anchor', value !== null);
+    if (this.#anchor) {
+      let id = this.getAttribute('id') || `surface_${parseInt(Math.random() * 999)}`;
+      if (!this.hasAttribute('id')) this.setAttribute('id', id);
+
+      let anchorId = this.#anchor.getAttribute('id') || `anchor_${id}`;
+      if (!this.#anchor.hasAttribute('id')) this.#anchor.setAttribute('id', anchorId);
+
+      // this.#anchor.setAttribute('popovertarget', id);
+      this.#anchor.popoverTargetElement = this;
+      this.setAttribute('aria-labelledby', anchorId);
+      this.#anchor.ariaHasPopup = true;
+      this.#anchor.setAttribute('aria-controls', id);
+    }
   }
 
-  get allowClose() { return this.#allowClose; }
-  set allowClose(value) {
-    this.#allowClose = !!value;
-    this.toggleAttribute('allow-close', this.#allowClose);
+  get modal() { return this.#modal; }
+  set modal(value) {
+    this.#modal = !!value;
+    this.classList.toggle('modal', this.#modal);
+  }
+
+  get preventClose() { return this.popover === 'manual'; }
+  set preventClose(value) {
+    this.popover = !!value ? 'manual' : 'auto';
   }
 
   get removeOnClose() { return this.#removeOnClose; }
   set removeOnClose(value) { this.#removeOnClose = !!value; }
 
-  get fullscreen() { return this.hasAttribute('fullscreen'); }
-  set fullscreen(value) { this.toggleAttribute('fullscreen', !!value); }
-
-  get noScrim() { return this.hasAttribute('no-scrim'); }
-  set noScrim(value) { this.toggleAttribute('no-scrim', !!value); }
+  get fullscreen() { return this.#fullscreen; }
+  set fullscreen(value) { this.#fullscreen = !!value; }
 
   get closeIgnoreElements() { return this.#closeIgnoreElements; }
   set closeIgnoreElements(value) {
@@ -117,77 +126,43 @@ export default class MCSurfaceElement extends HTMLComponentElement {
   set alwaysBelow(value) { this.#alwaysBelow = !!value; }
 
 
-  show() {
-    if (this.open) return;
-    this.#showBefore();
-    this.#dialog.show();
-    this.#setAnchorPosition();
-    window.addEventListener('scroll', this.#scroll_bound, { signal: this.#abort.signal });
-    this.#showAfter();
-  }
-
-  showModal() {
-    if (this.open) return;
-    this.#showBefore();
-    this.#dialog.showModal();
-    this.#showAfter();
-  }
-
-  close(returnValue) {
-    if (!this.open) return;
-    const previousReturnValue = this.returnValue;
-    this.returnValue = returnValue;
-
-    const preventClose = !this.dispatchEvent(new Event('close', { cancelable: true }));
-    if (preventClose) {
-      this.returnValue = previousReturnValue;
-      return;
-    }
-
-    this.#dialog.close(returnValue);
-  }
-
   setPosition() {
-    this.style.maxHeight = '';
-    this.#height = this.#dialog.offsetHeight;
-    this.#setAnchorPosition();
+    if (this.modal) this.#setModalPosition();
+    else this.#setAnchorPosition();
   }
 
-  #showBefore() {
-    this.style.maxHeight = '';
-    this.#dialog.classList.add('get-height');
-    this.#height = this.#dialog.offsetHeight;
-    this.setAttribute('open', '');
-    this.#dialog.classList.remove('get-height');
-  }
-
-  #showAfter() {
-    this.#dialog.addEventListener('cancel', this.#handleCancel_bound, { signal: this.#abort.signal });
-    this.#dialog.addEventListener('close', this.#handleClose_bound, { signal: this.#abort.signal });
-
-    window.addEventListener('keydown', this.#handleEsc_bound, { signal: this.#abort.signal });
-
-    if (this.#allowClose) {
-      
-      if (util.pointerDown) {
-        // prevent immediate close because of click propagation
-        window.addEventListener('click', () => {
-          console.log('click');
-          setTimeout(() => {
-            if (this.open) window.addEventListener('click', this.#clickOutsideClose_bound, { signal: this.#abort.signal });
-          });
-        }, { once: true });
-      } else {
-        setTimeout(() => {
-          window.addEventListener('click', this.#clickOutsideClose_bound, { signal: this.#abort.signal });
-        });
-      }
+  #toggle(event) {
+    if (event.newState === 'open') {
+      this.onShow();
+    } else {
+      this.onHide();
     }
-    this.dispatchEvent(new Event('open', { bubbles: true }));
   }
 
+  onShow() {
+    // get height and set css var for animation and positioning
+    this.style.setProperty('--mc-surface-height', '0');
+    this.#height = this.offsetHeight;
+    this.style.setProperty('--mc-surface-height', `${this.#height}px`);
+    this.setPosition();
+  }
+
+  onHide() {
+    if (this.removeOnClose) {
+      util.animationendAsync(this).then(() => {
+        this.parentElement.removeChild(this);
+     });
+    }
+  }
+
+  #setModalPosition() {
+    this.style.top = '';
+    this.style.bottom = '';
+    this.style.left = '';
+  }
+  
   #setAnchorPosition() {
-    if (!this.#anchor || this.fullscreen) return;
+    if (!this.#anchor || this.#fullscreen) return;
 
     const bounds = this.#anchor.getBoundingClientRect();
     let top = bounds.bottom;
@@ -196,77 +171,33 @@ export default class MCSurfaceElement extends HTMLComponentElement {
     let right = bounds.right + this.#offsetX;
     let belowOutOfBounds = top + this.#height > window.innerHeight;
     let aboveOutOfBounds = (bounds.top - this.#height) < 0;
-
+    
     if (this.#alwaysBelow) {
       // adjust height to keep on screen
       if (belowOutOfBounds && this.#height > 0) {
         this.style.maxHeight = `${this.#height - ((top + this.#height) - window.innerHeight)}px`;
       }
 
-      top = `${top + this.#offsetY}px`;
+      top = `${top + document.documentElement.scrollTop + this.#offsetY}px`;
     // shift above
     } else if (belowOutOfBounds && !aboveOutOfBounds) {
-      bottom = `${window.innerHeight - bounds.top + this.#offsetY}px`;
+      bottom = `${window.innerHeight - bounds.top - document.documentElement.scrollTop + this.#offsetY}px`;
       top = 'unset';
 
     // shift up and overlay
     } else if (belowOutOfBounds && this.#overlay) {
-      top -= (top + this.#height) - (window.innerHeight);
+      top -= (top - document.documentElement.scrollTop + this.#height) - (window.innerHeight);
       top = `${top}px`;
 
     // keep below
     } else {
-      top = `${top + this.#offsetY}px`;
+      top = `${top + document.documentElement.scrollTop  + this.#offsetY}px`;
     }
 
-    this.#dialog.style.top = top;
-    this.#dialog.style.bottom = bottom;
-    if (this.#anchorRight) this.#dialog.style.left = `${right}px`;
-    else this.#dialog.style.left = `${left}px`;
-  }
-
-  #handleEsc(event) {
-    if (event.key === 'Escape') {
-      if (this.#allowClose) this.close();
-      else event.preventDefault();
-    }
-  }
-
-  async #handleClose() {
-    this.removeAttribute('open');
-    this.#dialog.removeEventListener('cancel', this.#handleCancel_bound);
-    this.#dialog.removeEventListener('close', this.#handleClose_bound);
-    window.removeEventListener('keydown', this.#handleEsc_bound);
-    window.removeEventListener('click', this.#clickOutsideClose_bound);
-    window.removeEventListener('scroll', this.#scroll_bound);
-    if (this.removeOnClose) {
-      await util.animationendAsync(this.#dialog);
-      this.parentElement.removeChild(this);
-    }
-  }
-
-  #handleCancel(event) {
-    const preventClose = !this.dispatchEvent(new Event('close', { cancelable: true }));
-    if (preventClose) {
-      event.preventDefault();
-      return;
-    }
-
-    const preventCancel = !this.dispatchEvent(new Event('cancel', { cancelable: true }));
-    if (preventCancel) event.preventDefault();
-  }
-
-  #clickOutsideClose(event) {
-    let ignore = this.#closeIgnoreElements.find(e => e === event.target || e.contains(event.target));
-    const shouldClose = !ignore && event.target !== this && !this.contains(event.target);
-    if (shouldClose) {
-      window.removeEventListener('click', this.#clickOutsideClose_bound);
-      this.close();
-    }
-  }
-
-  #scroll() {
-    this.#setAnchorPosition();
+    this.style.top = top;
+    this.style.bottom = bottom;
+    if (this.#anchorRight) this.style.left = `${right}px`;
+    else this.style.left = `${left}px`;
   }
 }
 customElements.define(MCSurfaceElement.tag, MCSurfaceElement);

@@ -127,7 +127,7 @@ class MCSwitchElement extends HTMLComponentElement {
     }
 
     this.#label = value;
-    label.innerText = this.#label || '';
+    label.textContent = this.#label || '';
     this.ariaLabel = value;
     label.classList.toggle('show', !!value);
     label.classList.remove('right');
@@ -143,7 +143,7 @@ class MCSwitchElement extends HTMLComponentElement {
     }
 
     this.#label = value;
-    label.innerText = this.#label || '';
+    label.textContent = this.#label || '';
     this.ariaLabel = value;
     label.classList.toggle('show', !!value);
     label.classList.toggle('right', !!value);

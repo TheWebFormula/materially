@@ -30,27 +30,26 @@ class MCSelectElement extends HTMLComponentElement {
   #previousFocusOption;
   // #lastOptionsOnSelect = '';
 
-  #blur_bound = this.#blur.bind(this);
   #onKeyDown_bound = this.#onKeyDown.bind(this);
   #preventContextMenuClose_bound = this.#preventContextMenuClose.bind(this);
   #optionClick_bound = this.#optionClick.bind(this);
   #rightClick_bound = this.#rightClick.bind(this);
   #filterInput_bound = this.#filterInput.bind(this);
   #slotChange_bound = this.#slotChange.bind(this);
-  #open_bound = this.#open.bind(this);
-  #handleClose_bound = this.#handleClose.bind(this);
+  #toggle_bound = this.#toggle.bind(this);
+  #clickOutside_bound = this.#clickOutside.bind(this);
 
 
   constructor() {
     super();
 
-    // this.role = 'combobox';
     this.#internals = this.attachInternals();
     this.render();
     this.#textfield = this.shadowRoot.querySelector('mc-textfield');
     this.#input = this.#textfield.shadowRoot.querySelector('input');
     this.#menu = this.shadowRoot.querySelector('mc-menu');
     this.#menu.anchor = this.#textfield;
+    this.#menu.role = 'listbox';
 
     this.#isFilter = this.hasAttribute('filter');
     this.#isAsync = this.hasAttribute('async');
@@ -62,6 +61,8 @@ class MCSelectElement extends HTMLComponentElement {
     if (this.#isFilter) {
       this.#textfield.setAttribute('incremental', '');
       this.#textfield.setAttribute('type', 'search');
+    } else {
+      this.#input.readOnly = true;
     }
     if (this.hasAttribute('supporting-text')) {
       this.#textfield.setAttribute('supporting-text', this.getAttribute('supporting-text'));
@@ -92,7 +93,7 @@ class MCSelectElement extends HTMLComponentElement {
         <span class="focus-holder" tabIndex="0"></span>
 
 
-        <mc-menu anchor-parent>
+        <mc-menu prevent-close>
           <mc-progress-linear indeterminate disabled></mc-progress-linear>
           <slot class="options-container"></slot>
           <div class="no-results">No items</div>
@@ -184,9 +185,6 @@ class MCSelectElement extends HTMLComponentElement {
     this.#abort = new AbortController();
 
     this.#options = [...this.querySelectorAll('mc-option')];
-
-    this.#menu.addEventListener('open', this.#open_bound, { signal: this.#abort.signal });
-
     this.addEventListener('mousedown', this.#rightClick_bound, { signal: this.#abort.signal });
     this.shadowRoot.querySelector('.options-container').addEventListener('slotchange', this.#slotChange_bound, { signal: this.#abort.signal });
 
@@ -194,6 +192,10 @@ class MCSelectElement extends HTMLComponentElement {
       this.#setInitialValue();
       this.#internals.setValidity(this.#textfield.validity, this.#textfield.validationMessage, this.#textfield);
     });
+
+    if (this.#textfield.popoverTargetElement) {
+      this.#textfield.popoverTargetElement.addEventListener('toggle', this.#toggle_bound, { signal: this.#abort.signal });
+    }
   }
 
   disconnectedCallback() {
@@ -214,23 +216,33 @@ class MCSelectElement extends HTMLComponentElement {
   }
 
 
-  #open() {
-    this.#menu.style.minWidth = `${this.offsetWidth}px`;
-    this.#menu.addEventListener('close', this.#handleClose_bound, { signal: this.#abort.signal });
-    window.addEventListener('keydown', this.#onKeyDown_bound, { signal: this.#abort.signal });
-    this.#menu.addEventListener('click', this.#optionClick_bound, { signal: this.#abort.signal });
-    this.#textfield.classList.add('raise-label');
-    // this.ariaExpanded = true;
-
-    if (this.#isFilter) {
-      this.#textfield.addEventListener('input', this.#filterInput_bound, { signal: this.#abort.signal });
-      this.#textfield.addEventListener('blur', this.#blur_bound, { signal: this.#abort.signal });
-      this.#textfield.focus();
+  #toggle(event) {
+    if (event.newState === 'open') {
+      this.#show();
+    } else {
+      this.#hide();
     }
   }
 
-  #handleClose() {
-    this.#menu.removeEventListener('close', this.#handleClose_bound);
+  // TODO reset option from filter?
+  #show() {
+    this.#menu.style.minWidth = `${this.offsetWidth}px`;
+    window.addEventListener('click', this.#clickOutside_bound, { signal: this.#abort.signal });
+    window.addEventListener('keydown', this.#onKeyDown_bound, { signal: this.#abort.signal });
+    this.#menu.addEventListener('click', this.#optionClick_bound, { signal: this.#abort.signal });
+    this.#textfield.classList.add('raise-label');
+    this.ariaExpanded = true;
+
+    if (this.#isFilter) {
+      this.#textfield.addEventListener('input', this.#filterInput_bound, { signal: this.#abort.signal });
+    } else {
+      let focusItem = this.querySelector('mc-option.selected') || this.querySelector('mc-option');
+      focusItem.focus();
+    }
+  }
+
+  #hide() {
+    window.removeEventListener('click', this.#clickOutside_bound);
     window.removeEventListener('keydown', this.#onKeyDown_bound);
     this.#menu.removeEventListener('click', this.#optionClick_bound);
 
@@ -240,14 +252,17 @@ class MCSelectElement extends HTMLComponentElement {
       this.#dirty = false;
     }
 
-    if (this.#isFilter) this.value = this.value;
+    if (this.#isFilter) {
+      this.#textfield.removeEventListener('input', this.#filterInput_bound);
+      this.value = this.value;
+    }
     this.#textfield.classList.toggle('raise-label', !!this.value);
-    // this.ariaExpanded = false;
+    this.ariaExpanded = false;
   }
 
-  #blur() {
-    this.#textfield.removeEventListener('blur', this.#blur_bound);
-    this.#textfield.removeEventListener('input', this.#filterInput_bound);
+  #clickOutside(event) {
+    if (this.contains(event.target)) return;
+    this.#menu.hidePopover();
   }
 
   #onKeyDown(event) {
@@ -275,8 +290,15 @@ class MCSelectElement extends HTMLComponentElement {
       event.stopImmediatePropagation();
       event.preventDefault();
 
-    } else if (event.key === 'Enter' && document.activeElement.nodeName === 'MC-OPTION') {
-      document.activeElement.click();
+    } else if (event.key === 'Enter') {
+
+      if (document.activeElement.nodeName === 'MC-OPTION') document.activeElement.click();
+      else if (this.#isFilter) {
+        let firstOption = this.querySelector('mc-option');
+        if (firstOption) firstOption.click();
+      }
+    } else if (event.key === 'Escape' && this.#menu.matches(':popover-open')) {
+      this.#menu.hidePopover();
     }
 
     setTimeout(() => {

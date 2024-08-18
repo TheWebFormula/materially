@@ -7,7 +7,7 @@ const mcDialog = new class mcDialog {
     headline: '',
     icon: '',
     message: '',
-    allowClose: false,
+    preventClose: false,
     preventNavigation: false,
     actionConfirm: true,
     actionConfirmLabel: 'OK',
@@ -30,7 +30,7 @@ const mcDialog = new class mcDialog {
     `);
     const element = document.body.querySelector(`#${id}`);
     element.removeOnClose = true;
-    element.allowClose = params.allowClose;
+    element.preventClose = params.preventClose;
     // element.noScrim = params.noScrim === undefined ? false : params.noScrim;
     element.preventNavigation = !!params.preventNavigation;
     await util.nextAnimationFrameAsync();
@@ -49,7 +49,7 @@ const mcDialog = new class mcDialog {
   async template(params = {
     template,
     scrim: true,
-    allowClose: false,
+    preventClose: false,
     preventNavigation: true
   }) {
     const id = `mc-dialog-${this.#idCounter++}`;
@@ -60,7 +60,7 @@ const mcDialog = new class mcDialog {
     `);
     const element = document.body.querySelector(`#${id}`);
     element.removeOnClose = true;
-    element.allowClose = params.allowClose;
+    element.preventClose = params.preventClose;
     element.scrim = params.scrim === undefined ? true : params.scrim;
     element.preventNavigation = !!params.preventNavigation;
     await util.nextAnimationFrameAsync();

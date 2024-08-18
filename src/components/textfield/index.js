@@ -153,6 +153,7 @@ class MCTextfieldElement extends HTMLComponentElement {
       this.shadowRoot.querySelector('label').classList.remove('no-animation');
       this.shadowRoot.querySelector('.outlined-notch').classList.remove('no-animation');
     }, 150);
+
   }
 
   disconnectedCallback() {
@@ -168,8 +169,8 @@ class MCTextfieldElement extends HTMLComponentElement {
   set label(value) {
     this.#label = value;
     this.shadowRoot.querySelector('.text-field').classList.toggle('label', !!this.#label);
-    this.shadowRoot.querySelector('label').innerText = this.#label;
-    if (this.classList.contains('outlined')) this.shadowRoot.querySelector('.outlined-notch').innerText = this.#label;
+    this.shadowRoot.querySelector('label').textContent = this.#label;
+    if (this.classList.contains('outlined')) this.shadowRoot.querySelector('.outlined-notch').textContent = this.#label;
     if (!this.ariaLabel) this.ariaLabel = this.#label;
   }
 
@@ -201,7 +202,7 @@ class MCTextfieldElement extends HTMLComponentElement {
     this.#errorText = value || '';
     if (!this.checkValidity()) {
       const el = this.shadowRoot.querySelector('.text-field .supporting-text');
-      el.innerText = this.#errorText;
+      el.textContent = this.#errorText;
       el.setAttribute('title', this.#errorText)
     }
   }
@@ -288,7 +289,7 @@ class MCTextfieldElement extends HTMLComponentElement {
   get prefixText() { return this.getAttribute('prefix-text'); }
   set prefixText(value) {
     this.setAttribute('prefix-text', value);
-    this.shadowRoot.querySelector('.prefix-text').innerText = value || '';
+    this.shadowRoot.querySelector('.prefix-text').textContent = value || '';
   }
 
   get readonly() { return this.hasAttribute('readonly'); }
@@ -334,7 +335,7 @@ class MCTextfieldElement extends HTMLComponentElement {
   get suffixText() { return this.getAttribute('suffix-text'); }
   set suffixText(value) {
     this.setAttribute('suffix-text', value);
-    this.shadowRoot.querySelector('.suffix-text').innerText = value || '';
+    this.shadowRoot.querySelector('.suffix-text').textContent = value || '';
   }
 
   get suggestion() { return this.#suggestion; }
@@ -348,7 +349,7 @@ class MCTextfieldElement extends HTMLComponentElement {
     this.#supportingText = value || '';
     if (!this.#errorText || this.checkValidity()) {
       const el = this.shadowRoot.querySelector('.text-field .supporting-text');
-      el.innerText = this.#supportingText;
+      el.textContent = this.#supportingText;
       el.setAttribute('title', this.#supportingText)
     }
   }
@@ -376,6 +377,13 @@ class MCTextfieldElement extends HTMLComponentElement {
   get validationMessage() { return this.#internals.validationMessage; }
   get validity() { return this.#internals.validity; }
   get willValidate() { return this.#internals.willValidate; }
+
+  get popoverTargetElement() {
+    return this.#input.popoverTargetElement
+  }
+  set popoverTargetElement(value) {
+    this.#input.popoverTargetElement = value;
+  }
 
 
   clear() {
@@ -441,7 +449,7 @@ class MCTextfieldElement extends HTMLComponentElement {
   #setSupportingText(valid = this.checkValidity()) {
     const supportingTextElement = this.shadowRoot.querySelector('.text-field .supporting-text');
     const value = valid ? this.#supportingText : this.#errorText || this.#input.validationMessage;
-    supportingTextElement.innerText = value;
+    supportingTextElement.textContent = value;
     supportingTextElement.setAttribute('title', value)
   }
 
@@ -452,7 +460,7 @@ class MCTextfieldElement extends HTMLComponentElement {
     const match = this.#suggestion.match(new RegExp(`^${this.#input.value}(.*)`, 'i'));
     const value = !match || match[0] === match[1] ? '' : match[1];
     this.#hasSuggestion = !!value;
-    suggestionElement.innerText = value;
+    suggestionElement.textContent = value;
     const offset = util.getTextWidthFromInput(this.#input);
     suggestionElement.style.left = `${offset + 16}px`;
   }
@@ -462,7 +470,7 @@ class MCTextfieldElement extends HTMLComponentElement {
 
     const count = (this.#value || '').length;
     const display = !!this.maxlength ? `${count}/${this.maxlength}` : `${!count ? '' : count}`;
-    this.shadowRoot.querySelector('.character-count').innerText = display;
+    this.shadowRoot.querySelector('.character-count').textContent = display;
   }
 
   #updateTextareaHeight() {
@@ -518,6 +526,10 @@ class MCTextfieldElement extends HTMLComponentElement {
   #onFocus() {
     if (this.readonly) return;
     this.#focusValue = this.value;
+
+    if (this.popoverTargetElement instanceof HTMLElement) {
+      this.popoverTargetElement.showPopover();
+    }
 
     this.addEventListener('blur', this.#onBlur_bound, { signal: this.#abort.signal });
     this.addEventListener('keydown', this.#onKeydown_bound, { signal: this.#abort.signal });

@@ -59,7 +59,7 @@ class MCChipSetElement extends HTMLComponentElement {
   set label(value) {
     this.#label = value;
     const label = this.shadowRoot.querySelector('.label');
-    label.innerText = value;
+    label.textContent = value;
     label.classList.toggle('has-label', !!value);
     if (this.#inputElement) this.#inputElement.ariaLabel = value;
   }

@@ -6,13 +6,13 @@
   --mc-elevation: var(--mc-elevation-3);
   --mc-shape: var(--mc-shape-large);
 
-  
+  flex-direction: column;
   width: 328px;
   height: 428px;
   max-height: 428px;
 }
 
-:host(:not([anchor])) {
+:host(.modal) {
   --mc-padding: 16px;
 
   height: 512px;
@@ -40,7 +40,7 @@
   }
 }
 
-:host(:not([anchor]).input-view) {
+:host(.modal.input-view) {
   max-height: 258px;
 }
 
@@ -229,10 +229,10 @@
   display: none;
   height: 336px;
 }
-:host(:not([anchor]):not(.input-view)) .month-days-container-modal {
+:host(.modal:not(.input-view)) .month-days-container-modal {
   display: flex;
 }
-:host(:not([anchor])) .month-days-container {
+:host(.modal) .month-days-container {
   display: none;
 }
 

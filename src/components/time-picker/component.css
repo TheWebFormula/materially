@@ -4,7 +4,7 @@
   --mc-elevation: var(--mc-elevation-3);
   --mc-shape: var(--mc-shape-large);
 
-  
+  flex-direction: column;
   width: 328px;
   height: 538px;
   max-height: 538px;

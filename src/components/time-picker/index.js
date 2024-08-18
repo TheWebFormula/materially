@@ -7,6 +7,7 @@ import {
 } from '../../helpers/svgs.js';
 import device from '../../helpers/device.js';
 
+// TODO desktop (select list, picker)
 // TODO landscape
 
 class MCTimePickerElement extends MCSurfaceElement {
@@ -30,12 +31,9 @@ class MCTimePickerElement extends MCSurfaceElement {
   #view = 'hour';
   #hourData = [];
   #minuteData = [];
-  #handleClose_bound = this.#handleClose.bind(this);
-  #textfieldFocus_bound = this.#textfieldFocus.bind(this);
-  #textfieldBlur_bound = this.#textfieldBlur.bind(this);
   #spaceInterceptor_bound = this.#spaceInterceptor.bind(this);
   #ok_bound = this.#ok.bind(this);
-  #close_bound = this.close.bind(this);
+  #close_bound = this.hidePopover.bind(this);
   #keyboardClick_bound = this.#keyboardClick.bind(this);
   #selectMouseDown_bound = this.#selectMouseDown.bind(this);
   #selectMouseUp_bound = this.#selectMouseUp.bind(this);
@@ -48,6 +46,9 @@ class MCTimePickerElement extends MCSurfaceElement {
   #inputBlur_bound = this.#inputBlur.bind(this);
   #inputKeydown_bound = this.#inputKeydown.bind(this);
   #onInput_bound = this.#onInput.bind(this);
+  #toggle_bound = this.#toggle.bind(this);
+  #clickOutside_bound = this.#clickOutside.bind(this);
+  #escClose_bound = this.#escClose.bind(this);
 
 
   constructor() {
@@ -57,53 +58,55 @@ class MCTimePickerElement extends MCSurfaceElement {
     this.ariaLabel = 'time picker';
     this.#textfield = this.parentElement;
     this.#selector = this.shadowRoot.querySelector('.selector-container');
+    this.preventClose = true;
+    this.anchor = this.#textfield;
+    this.modal = true;
   }
 
   template() {
     return /*html*/`
-      <dialog>
-        <div class="headline">Select time</div>
+      <div class="scrim"></div>
+      <div class="headline">Select time</div>
 
-        <div class="time-container">
-          <input class="time-hour selected" aria-label="time hour" type="number">
-          <div class="time-separator">:</div>
-          <input class="time-minute" aria-label="time minute" type="number" min="0" max="59">
+      <div class="time-container">
+        <input class="time-hour selected" aria-label="time hour" type="number">
+        <div class="time-separator">:</div>
+        <input class="time-minute" aria-label="time minute" type="number" min="0" max="59">
 
-          <div class="meridiem-container">
-            <div class="am" aria-label="am" tabindex="0">AM</div>
-            <div class="pm" aria-label="pm" tabindex="0">PM</div>
-          </div>
+        <div class="meridiem-container">
+          <div class="am" aria-label="am" tabindex="0">AM</div>
+          <div class="pm" aria-label="pm" tabindex="0">PM</div>
         </div>
+      </div>
 
-        <div class="dial-container">
-          <div class="dial-container-background"></div>
-          <div class="dial-hour"></div>
-          <div class="dial-hour-secondary"></div>
-          <div class="dial-minute"></div>
-          <div class="selector-container">
-            <div class="selector-center"></div>
-            <div class="selector-line"></div>
-            <div class="selector"></div>
-          </div>
+      <div class="dial-container">
+        <div class="dial-container-background"></div>
+        <div class="dial-hour"></div>
+        <div class="dial-hour-secondary"></div>
+        <div class="dial-minute"></div>
+        <div class="selector-container">
+          <div class="selector-center"></div>
+          <div class="selector-line"></div>
+          <div class="selector"></div>
         </div>
+      </div>
 
-        <div class="actions">
-          <mc-icon-button class="keyboard" toggle>
-            <mc-icon>${keyboard_FILL0_wght400_GRAD0_opsz24}</mc-icon>
-            <mc-icon slot="selected">${schedule_FILL0_wght400_GRAD0_opsz24}</mc-icon>
-          </mc-icon-button>
-          <span style="flex: 1"></span>
-          <mc-button class="cancel">cancel</mc-button>
-          <mc-button class="ok">ok</mc-button>
-        </div>
-      </dialog>
+      <div class="actions">
+        <mc-icon-button class="keyboard" toggle>
+          <mc-icon>${keyboard_FILL0_wght400_GRAD0_opsz24}</mc-icon>
+          <mc-icon slot="selected">${schedule_FILL0_wght400_GRAD0_opsz24}</mc-icon>
+        </mc-icon-button>
+        <span style="flex: 1"></span>
+        <mc-button class="cancel">cancel</mc-button>
+        <mc-button class="ok">ok</mc-button>
+      </div>
     `;
   }
 
   connectedCallback() {
     super.connectedCallback();
     this.#abort = new AbortController();
-    this.#textfield.addEventListener('focusin', this.#textfieldFocus_bound, { signal: this.#abort.signal });
+    this.addEventListener('toggle', this.#toggle_bound, { signal: this.#abort.signal });
     this.hour24 = this.hasAttribute('hour24') || Intl.DateTimeFormat('en-US', { hour: 'numeric' }).resolvedOptions().hour12 === false;
 
     const timeHour = this.shadowRoot.querySelector('input.time-hour');
@@ -207,15 +210,17 @@ class MCTimePickerElement extends MCSurfaceElement {
   }
 
 
-
-  show() {
-    this.showModal();
+  #toggle(event) {
+    if (event.newState === 'open') {
+      this.#show();
+    } else {
+      this.#hide();
+    }
   }
 
   // show handles both states
-  showModal() {
+  #show() {
     this.classList.remove('input-view');
-    super.showModal();
 
     this.#setInitialTime();
     this.#parseTime();
@@ -223,10 +228,12 @@ class MCTimePickerElement extends MCSurfaceElement {
     this.#updateDisplay();
 
     this.#showAbort = new AbortController();
-    this.addEventListener('close', this.#handleClose_bound, { signal: this.#showAbort.signal });
     this.shadowRoot.querySelector('.ok').addEventListener('click', this.#ok_bound, { signal: this.#showAbort.signal });
     this.shadowRoot.querySelector('.cancel').addEventListener('click', this.#close_bound, { signal: this.#showAbort.signal });
     this.shadowRoot.querySelector('.keyboard').addEventListener('click', this.#keyboardClick_bound, { signal: this.#showAbort.signal });
+    window.addEventListener('click', this.#clickOutside_bound, { signal: this.#showAbort.signal });
+    window.addEventListener('keydown', this.#escClose_bound, { signal: this.#showAbort.signal });
+    this.#textfield.addEventListener('keydown', this.#spaceInterceptor_bound, { signal: this.#showAbort.signal });
 
     const dialContainer = this.shadowRoot.querySelector('.dial-container');
     dialContainer.addEventListener('mousedown', this.#selectMouseDown_bound, { signal: this.#showAbort.signal });
@@ -248,13 +255,13 @@ class MCTimePickerElement extends MCSurfaceElement {
       pm.addEventListener('focus', this.#inputFocus_bound, { signal: this.#showAbort.signal });
     }
 
-    const compact = device.state === device.COMPACT;
-    this.classList.toggle('window-compact', compact);
-    if (!compact) this.#inputFocus({ target: timeHour });
+    // const compact = device.state === device.COMPACT;
+    // this.classList.toggle('window-compact', compact);
+    // if (!compact) this.#inputFocus({ target: timeHour });
   }
 
 
-  #handleClose() {
+  #hide() {
     if (this.#showAbort) {
       this.#showAbort.abort();
       this.#showAbort = undefined;
@@ -266,24 +273,7 @@ class MCTimePickerElement extends MCSurfaceElement {
     let change = this.#textfield.value !== newValue;
     this.#textfield.value = newValue;
     if (this.open && change) this.dispatchEvent(new Event('change', { bubbles: true }));
-    this.close();
-  }
-
-  #textfieldFocus(event) {
-    this.#textfield.addEventListener('blur', this.#textfieldBlur_bound, { signal: this.#abort.signal });
-    window.addEventListener('keydown', this.#spaceInterceptor_bound, { signal: this.#abort.signal });
-
-    // dialogs will focus back on the input after close. We want to prevent this so the dialog does not re open
-    if (this.open) {
-      event.preventDefault();
-      return;
-    }
-    this.show();
-  }
-
-  #textfieldBlur() {
-    this.#textfield.removeEventListener('blur', this.#textfieldBlur);
-    window.removeEventListener('keydown', this.#spaceInterceptor_bound);
+    this.hidePopover();
   }
 
   #spaceInterceptor(event) {
@@ -599,7 +589,7 @@ class MCTimePickerElement extends MCSurfaceElement {
         this.#ok();
       }
     } else if (event.key === 'Escape') {
-      this.close();
+      this.hidePopover();
     }
   }
 
@@ -640,6 +630,19 @@ class MCTimePickerElement extends MCSurfaceElement {
     } else if (view === 'input') {
       this.classList.add('input-view');
     }
+  }
+
+  #escClose(event) {
+    if (event.key === 'Escape' && this.matches(':popover-open')) {
+      this.hidePopover();
+    }
+  }
+
+  #clickOutside(event) {
+    if (this.contains(event.target) || this.#textfield === event.target || this.#textfield.contains(event.target)) {
+      return;
+    }
+    this.hidePopover();
   }
 }
 customElements.define(MCTimePickerElement.tag, MCTimePickerElement);

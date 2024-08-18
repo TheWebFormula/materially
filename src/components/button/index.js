@@ -19,10 +19,10 @@ export default class MCButtonElement extends HTMLComponentElement {
   #abort;
   #target = 'test';
   #href;
-  #type;
   #button;
   #formState;
   #onclickValue;
+  #popovertarget;
   #async = false;
   #focus_bound = this.#focus.bind(this);
   #blur_bound = this.#blur.bind(this);
@@ -51,9 +51,9 @@ export default class MCButtonElement extends HTMLComponentElement {
       <button>
         <slot name="leading-icon"></slot>
         <slot class="default-slot"></slot>
+        <div class="spinner"></div>
+        <mc-state-layer ripple preventfocusnodename="MC-MENU-ITEM"></mc-state-layer>
       </button>
-      <div class="spinner"></div>
-      <mc-state-layer ripple preventfocusnodename="MC-MENU-ITEM"></mc-state-layer>
     `;
   }
 
@@ -65,7 +65,9 @@ export default class MCButtonElement extends HTMLComponentElement {
       ['target', 'string'],
       ['async', 'boolean'],
       ['disabled', 'boolean'],
-      ['type', 'string']
+      ['type', 'string'],
+      ['popovertarget', 'string'],
+      ['popoverTargetAction', 'string']
     ];
   }
 
@@ -135,6 +137,37 @@ export default class MCButtonElement extends HTMLComponentElement {
   set ariaLabel(value) {
     this.#button.ariaLabel = value;
   }
+
+  get popovertarget() {
+    return this.#popovertarget;
+  }
+  set popovertarget(value) {
+    this.#popovertarget = value;
+    this.popoverTargetElement = document.querySelector(`#${value}`);
+  }
+
+  get popoverTargetElement() {
+    return this.#button.popoverTargetElement
+  }
+  set popoverTargetElement(value) {
+    this.#button.popoverTargetElement = value;
+  }
+
+  // There are two versions because for some reason this is camel cased in html unlike almost every other attribute that is all lowercased
+  get popoverTargetAction() {
+    return this.#button.popoverTargetAction;
+  }
+  set popoverTargetAction(value) {
+    this.#button.popoverTargetAction = value;
+  }
+
+  get popovertargetaction() {
+    return this.#button.popoverTargetAction;
+  }
+  set popovertargetaction(value) {
+    this.#button.popoverTargetAction = value;
+  }
+
 
   pending() {
     this.classList.add('async-pending');

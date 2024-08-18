@@ -1,170 +1,93 @@
-
 :host {
   --mc-padding: 24px;
   --mc-container-color: var(--mc-surface-container-high);
   --mc-elevation: var(--mc-elevation-3);
   --mc-shape: var(--mc-shape-large);
+  --mc-surface-height: 0;
 
-  display: contents;
-  margin: auto;
+  position: absolute;
+  margin: 0;
+  border: 0;
+  padding: var(--mc-padding);
   max-height: inherit;
   max-width: inherit;
   min-height: inherit;
   min-width: inherit;
-  height: inherit;
   width: inherit;
   border-radius: var(--mc-shape);
   overscroll-behavior: contain;
-}
-
-:host([anchor]) {
-  margin: 0;
-
-  dialog {
-    position: fixed;
-    overflow-y: auto;
-  }
-}
-
-
-dialog {
-  display: none;
-  border: none;
-  border-radius: inherit;
-  flex-direction: column;
-  height: inherit;
-  margin: inherit;
-  max-height: inherit;
-  max-width: inherit;
-  min-height: inherit;
-  min-width: inherit;
-  outline: none;
-  overflow: hidden;
-  padding: var(--mc-padding);
-  width: inherit;
+  overflow-y: auto;
   box-sizing: border-box;
   background-color: var(--mc-container-color);
   box-shadow: var(--mc-elevation);
-  opacity: 0;
-  z-index: 9;
-  pointer-events: none;
-  overscroll-behavior: contain;
-  clip-path: inherit;
-
   padding-top: var(--mc-padding-top, var(--mc-padding));
-
-
-  &::backdrop {
-    pointer-events: none;
-    opacity: 0;
-    background-color: var(--mc-scrim);
-    transition: opacity;
-    transition-duration: var(--mc-motion-duration-short3);
-  }
-
-  &.get-height {
-    display: flex;
-  }
-
-  &[open] {
-    display: flex;
-    opacity: 1;
-    pointer-events: initial;
-
-    &::backdrop {
-      opacity: 32%;
-      transition-duration: var(--mc-motion-duration-medium2);
-    }
-  }
+  clip-path: inherit;
 }
 
-:host([no-scrim]) {
-  dialog {
-    &::backdrop {
-      display: none;
-      transition: none;
-    }
-  
-    &[open]::backdrop {
-      display: none;
-      transition: none;
-    }
-  }
+:host(.modal) {
+  margin: auto;
+  position: fixed;
 }
+
+:host([popover]:popover-open) {
+  display: flex;
+}
+
 
 @starting-style {
-  dialog[open]::backdrop {
+  :host([popover]:popover-open) {
     opacity: 0;
   }
 }
 
 
-:host([fullscreen]) {
-  max-height: 100dvh;
-  max-width: 100dvw;
-  width: 100dvw;
-  height: 100dvh;
-  border-radius: 0px;
+:host(.anchor[popover]:not(:popover-open)) {
+  animation: hide-max-height;
+  animation-duration: var(--mc-motion-duration-short3);
+  animation-timing-function: var(--mc-motion-easing-emphasized-accelerate);
 
-  dialog {
-    transform: translateY(0px);
-    top: 0px;
-    transform-origin: center;
-    transform: none;
-
-    &[open] {
-      transform-origin: center;
-      transform: none;
-    }
-  }
+  transition:
+    display allow-discrete,
+    overlay allow-discrete;
+  transition-duration: var(--mc-motion-duration-short3);
+  transition-timing-function: var(--mc-motion-easing-emphasized-accelerate);
 }
 
-:host([open][fullscreen]) {
-  height: 100dvh;
-  width: 100dvw;
+:host(.anchor[popover]:popover-open) {
+  animation: show-max-height;
+  animation-duration: var(--mc-motion-duration-medium3);
+  animation-timing-function: var(--mc-motion-easing-emphasized);
 }
 
+:host(.modal[popover]:not(:popover-open)) {
+  animation: hide-translate-y;
+  animation-duration: var(--mc-motion-duration-short3);
+  animation-timing-function: var(--mc-motion-easing-emphasized-accelerate);
 
-:host(:not([anchor]):not([fullscreen])) {
-  dialog {
-    animation: hide-translate-y;
-    animation-duration: var(--mc-motion-duration-short3);
-    animation-timing-function: var(--mc-motion-easing-emphasized-accelerate);
-
-    &[open] {
-      animation: show-translate-y;
-      animation-duration: var(--mc-motion-duration-medium2);
-      animation-timing-function: var(--mc-motion-easing-emphasized);
-    }
-  }
+  transition:
+    display allow-discrete,
+    overlay allow-discrete;
+  transition-duration: var(--mc-motion-duration-short3);
+  transition-timing-function: var(--mc-motion-easing-emphasized-accelerate);
 }
 
-:host([anchor]) {
-  dialog {
-    animation: hide-max-height;
-    animation-duration: var(--mc-motion-duration-short3);
-    animation-timing-function: var(--mc-motion-easing-emphasized-accelerate);
-
-    &[open] {
-      animation: show-max-height;
-      animation-duration: var(--mc-motion-duration-medium3);
-      animation-timing-function: var(--mc-motion-easing-emphasized);
-    }
-  }
+:host(.modal[popover]:popover-open) {
+  animation: show-translate-y;
+  animation-duration: var(--mc-motion-duration-medium3);
+  animation-timing-function: var(--mc-motion-easing-emphasized);
 }
 
-:host([fullscreen]) {
-  dialog {
-    animation: hide-fullscreen;
-    animation-duration: var(--mc-motion-duration-short3);
-    animation-timing-function: var(--mc-motion-easing-emphasized-accelerate);
+.scrim {
+  display: none;
+}
 
-    &[open] {
-      animation: show-fullscreen;
-      animation-duration: var(--mc-motion-duration-medium2);
-      animation-timing-function: var(--mc-motion-easing-emphasized);
-    }
-  }
+:host(.modal[popover]:popover-open) .scrim {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background-color: transparent;
+  z-index: 0;
+  border-radius: 0;
 }
 
 
@@ -196,73 +119,20 @@ dialog {
 
 @keyframes hide-translate-y {
   0% {
-    display: flex;
     opacity: 1;
   }
 
   100% {
-    display: flex;
     opacity: 0;
   }
 }
-
-@keyframes show-fullscreen {
-  0% {
-    overflow: hidden;
-    opacity: 0;
-    height: 30dvh;
-    top: calc(50% - 15dvh);
-    width: 70dvw;
-    margin: 0 auto;
-  }
-
-  60% {
-    opacity: 1;
-  }
-
-  100% {
-    top: 0;
-    overflow: hidden;
-    height: 100dvh;
-    width: 100dvw;
-    margin: 0 auto;
-  }
-}
-
-@keyframes hide-fullscreen {
-  0% {
-    position: fixed;
-    display: flex;
-    overflow: hidden;
-    opacity: 1;
-    height: 100dvh;
-    width: 100dvw;
-    margin: 0 auto;
-    top: 0;
-  }
-
-  80% {
-    opacity: 0;
-  }
-
-  100% {
-    position: fixed;
-    display: flex;
-    overflow: hidden;
-    opacity: 0;
-    height: 60dvh;
-    width: 70dvw;
-    margin: 0 auto;
-    top: calc(50% - 30dvh);
-  }
-}
-
 
 @keyframes show-max-height {
   0% {
     opacity: 0;
-    max-height: 30%;
+    max-height: calc(var(--mc-surface-height) * 0.3);
     overflow: hidden;
+    display: flex;
   }
 
   50% {
@@ -270,16 +140,16 @@ dialog {
   }
 
   100% {
-    max-height: inherit;
+    max-height: var(--mc-surface-height);
     overflow: hidden;
+    display: flex;
   }
 }
 
 @keyframes hide-max-height {
   0% {
-    display: flex;
     opacity: 1;
-    max-height: inherit;
+    max-height: var(--mc-surface-height);
     overflow: hidden;
   }
 
@@ -288,9 +158,8 @@ dialog {
   }
 
   100% {
-    display: flex;
     overflow: hidden;
     opacity: 0;
-    max-height: 30%;
+    max-height: calc(var(--mc-surface-height) * 0.3);
   }
 }

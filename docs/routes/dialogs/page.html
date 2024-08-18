@@ -52,9 +52,9 @@ const answer = await mcDialog.simple({
   icon: 'settings',
   headline: 'Question',
   message: 'Are you sure?',
-  allowClose: false, // clicking outside of dialog will close it
+  preventClose: false, // clicking outside of dialog will close it
 
-  // If prevent navigation is not set then it will be the opposite of allowClose
+  // If prevent navigation is not set then it will be the opposite of preventClose
   preventNavigation: true, // default false
   
   actionConfirm: true, // default true
@@ -89,7 +89,7 @@ import { mcDialog } from '@thewebformula/materially/services';
 
 const value = await mcDialog.template({
   template: templateString,
-  allowClose: false
+  preventClose: false
 });
 
 // value is passed in when closing the dialog: mcDialog.close('response value')
@@ -130,13 +130,13 @@ Adding the 'open' attribute will automatically show the dialog -->
 </mc-dialog>
 
 
-<!-- attributes to control allowClose (ESC) -->
+<!-- attributes to control preventClose (ESC) -->
 <mc-dialog allow-close></mc-dialog>`}
             </pre></code-block>
           <code-block language="javascript"><pre>
 const dialog = document.querySelector('#html-only-dialog');
 dialog.scrim = true;
-dialog.allowClose = true; // allow clicking scrim to close dialog. Default false
+dialog.preventClose = true; // allow clicking scrim to close dialog. Default false
 dialog.show();
 console.log(dialog.open);
 
@@ -358,10 +358,10 @@ ${`<mc-dialog id="fullscreen-dialog" fullscreen>
             navigate away</div>
         
           <div style="display: flex; flex-direction: column;">
-            <mc-switch onchange="page.allowClose = this.checked" label="allowClose"></mc-switch>
+            <mc-switch onchange="page.preventClose = this.checked" label="preventClose"></mc-switch>
             <mc-switch checked onchange="page.preventNavigation = this.checked" label="preventNavigation"></mc-switch>
           </div>
-          <mc-button onclick="page.openSimple(page.allowClose, page.preventNavigation)">Open</mc-button>
+          <mc-button onclick="page.openSimple(page.preventClose, page.preventNavigation)">Open</mc-button>
         
           <code-block language="javascript"><pre>
 // also available globally on window
@@ -371,7 +371,7 @@ import { mcDialog } from '@thewebformula/materially/services';
 const answer = await mcDialog.simple({
   headline: 'Question',
   message: 'Are you sure?',
-  allowClose: false, // default false
+  preventClose: false, // default false
   preventNavigation: true // default false
 });
             </pre></code-block>

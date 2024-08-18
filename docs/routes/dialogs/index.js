@@ -6,20 +6,20 @@ export default class extends Component {
   static title = 'Dialogs';
   static htmlTemplate = htmlTemplate;
 
-  allowClose = false;
+  preventClose = false;
   preventNavigation = true;
 
   constructor() {
     super();
   }
 
-  async openSimple(allowClose = false, preventNavigation = true, icon) {
+  async openSimple(preventClose = false, preventNavigation = true, icon) {
     const answer = await mcDialog.simple({
       icon,
       headline: 'Question',
       message: 'Are you sure?',
       actionCancel: true,
-      allowClose,
+      preventClose,
       preventNavigation
     });
 

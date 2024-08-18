@@ -14,7 +14,7 @@ class MCOptionElement extends MCMenuItemElement {
   constructor() {
     super();
 
-    // this.role = 'option';
+    this.role = 'option';
   }
 
 

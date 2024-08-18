@@ -32,9 +32,6 @@ class MCDatePickerElement extends MCSurfaceElement {
   #nextDragDate;
   #previousDragDate;
   #dirty = false;
-  #textfieldFocus_bound = this.#textfieldFocus.bind(this);
-  #textfieldBlur_bound = this.#textfieldBlur.bind(this);
-  #handleClose_bound = this.#handleClose.bind(this);
   #updateDate_bound = this.#updateDate.bind(this);
   #nextMonth_bound = this.#nextMonth.bind(this);
   #previousMonth_bound = this.#previousMonth.bind(this);
@@ -54,6 +51,10 @@ class MCDatePickerElement extends MCSurfaceElement {
   #swipeStart_bound = this.#swipeStart.bind(this);
   #swipeEnd_bound = this.#swipeEnd.bind(this);
   #swipeMove_bound = this.#swipeMove.bind(this);
+  #toggle_bound = this.#toggle.bind(this);
+  #clickOutside_bound = this.#clickOutside.bind(this);
+  #escClose_bound = this.#escClose.bind(this);
+  #windowStateChange_bound = this.#windowStateChange.bind(this);
 
 
   constructor() {
@@ -61,127 +62,116 @@ class MCDatePickerElement extends MCSurfaceElement {
 
     this.role = 'dialog';
     this.ariaLabel = 'date picker';
+    this.preventClose = true;
     this.#textfield = this.parentElement;
-
-    this.closeIgnoreElements = [this.#textfield];
-    if (this.#modal) {
-      this.anchor = null;
-      this.allowClose = false;
-      this.noScrim = false;
-    } else {
-      this.anchor = this.#textfield;
-      this.allowClose = true;
-      this.noScrim = true;
-    }
+    this.anchor = this.#textfield;
   }
 
   template() {
     return /*html*/`
-      <dialog>
-        <div class="container">
-          <div class="controls">
-            <div class="control-group">
-              <div class="month-previous">${chevron_left_FILL1_wght400_GRAD0_opsz24}</div>
-              <div class="month-select">
-                <div class="month-select-label"></div>
-                <div class="drop-arrow">${arrow_drop_down_FILL1_wght400_GRAD0_opsz24}</div>
-              </div>
-              <div class="month-next">${chevron_left_FILL1_wght400_GRAD0_opsz24}</div>
+      <div class="scrim"></div>
+      <div class="container">
+        <div class="controls">
+          <div class="control-group">
+            <div class="month-previous">${chevron_left_FILL1_wght400_GRAD0_opsz24}</div>
+            <div class="month-select">
+              <div class="month-select-label"></div>
+              <div class="drop-arrow">${arrow_drop_down_FILL1_wght400_GRAD0_opsz24}</div>
             </div>
-            
-            <div class="control-group">
-              <div class="year-previous">${chevron_left_FILL1_wght400_GRAD0_opsz24}</div>
+            <div class="month-next">${chevron_left_FILL1_wght400_GRAD0_opsz24}</div>
+          </div>
+          
+          <div class="control-group">
+            <div class="year-previous">${chevron_left_FILL1_wght400_GRAD0_opsz24}</div>
+            <div class="year-select">
+              <div class="year-select-label"></div>
+              <div class="drop-arrow">${arrow_drop_down_FILL1_wght400_GRAD0_opsz24}</div>
+            </div>
+            <div class="year-next">${chevron_left_FILL1_wght400_GRAD0_opsz24}</div>
+          </div>
+        </div>
+
+        <div class="month-days-container">
+          <div class="week-header">
+            ${dateUtil.getDayNames('narrow').map(n => `<span>${n}</span>`).join('\n')}
+          </div>
+
+          <div class="days-container active"></div>
+          <div class="days-container"></div>
+        </div>
+
+        <div class="modal-header">
+          <div class="select-date">Select date</div>
+          <div class="display-date-container">
+            <div class="display-date"></div>
+            <div class="display-date-input">Enter dates</div>
+
+            <mc-icon-button toggle>
+              <mc-icon>${edit_FILL1_wght400_GRAD0_opsz24}</mc-icon>
+              <mc-icon slot="selected">${calendar_today_FILL0_wght400_GRAD0_opsz24}</mc-icon>
+            </mc-icon-button>
+          </div>
+
+          <div class="divider"></div>
+          
+          <mc-textfield label="Date" type="date" class="outlined hide-date-icon"></mc-textfield>
+        </div>
+
+        <div class="month-days-container-modal">
+          <div class="days-container-modal active">
+            <div class="days-controls">
               <div class="year-select">
+                <div class="month-select-label"></div>
                 <div class="year-select-label"></div>
                 <div class="drop-arrow">${arrow_drop_down_FILL1_wght400_GRAD0_opsz24}</div>
               </div>
-              <div class="year-next">${chevron_left_FILL1_wght400_GRAD0_opsz24}</div>
-            </div>
-          </div>
 
-          <div class="month-days-container">
+              <div class="month-previous">${chevron_left_FILL1_wght400_GRAD0_opsz24}</div>
+              <div class="month-next">${chevron_left_FILL1_wght400_GRAD0_opsz24}</div>
+            </div>
             <div class="week-header">
               ${dateUtil.getDayNames('narrow').map(n => `<span>${n}</span>`).join('\n')}
             </div>
-
-            <div class="days-container active"></div>
-            <div class="days-container"></div>
+            <div class="days-inner"></div>
           </div>
 
-          <div class="modal-header">
-            <div class="select-date">Select date</div>
-            <div class="display-date-container">
-              <div class="display-date"></div>
-              <div class="display-date-input">Enter dates</div>
+          <div class="days-container-modal">
+            <div class="days-controls">
+              <div class="year-select">
+                <div class="month-select-label"></div>
+                <div class="year-select-label"></div>
+                <div class="drop-arrow">${arrow_drop_down_FILL1_wght400_GRAD0_opsz24}</div>
+              </div>
 
-              <mc-icon-button toggle>
-                <mc-icon>${edit_FILL1_wght400_GRAD0_opsz24}</mc-icon>
-                <mc-icon slot="selected">${calendar_today_FILL0_wght400_GRAD0_opsz24}</mc-icon>
-              </mc-icon-button>
+              <div class="month-previous">${chevron_left_FILL1_wght400_GRAD0_opsz24}</div>
+              <div class="month-next">${chevron_left_FILL1_wght400_GRAD0_opsz24}</div>
             </div>
-
-            <div class="divider"></div>
-            
-            <mc-textfield label="Date" type="date" class="outlined hide-date-icon"></mc-textfield>
+            <div class="week-header">
+              ${dateUtil.getDayNames('narrow').map(n => `<span>${n}</span>`).join('\n')}
+            </div>
+            <div class="days-inner"></div>
           </div>
-
-          <div class="month-days-container-modal">
-            <div class="days-container-modal active">
-              <div class="days-controls">
-                <div class="year-select">
-                  <div class="month-select-label"></div>
-                  <div class="year-select-label"></div>
-                  <div class="drop-arrow">${arrow_drop_down_FILL1_wght400_GRAD0_opsz24}</div>
-                </div>
-
-                <div class="month-previous">${chevron_left_FILL1_wght400_GRAD0_opsz24}</div>
-                <div class="month-next">${chevron_left_FILL1_wght400_GRAD0_opsz24}</div>
-              </div>
-              <div class="week-header">
-                ${dateUtil.getDayNames('narrow').map(n => `<span>${n}</span>`).join('\n')}
-              </div>
-              <div class="days-inner"></div>
-            </div>
-
-            <div class="days-container-modal">
-              <div class="days-controls">
-                <div class="year-select">
-                  <div class="month-select-label"></div>
-                  <div class="year-select-label"></div>
-                  <div class="drop-arrow">${arrow_drop_down_FILL1_wght400_GRAD0_opsz24}</div>
-                </div>
-
-                <div class="month-previous">${chevron_left_FILL1_wght400_GRAD0_opsz24}</div>
-                <div class="month-next">${chevron_left_FILL1_wght400_GRAD0_opsz24}</div>
-              </div>
-              <div class="week-header">
-                ${dateUtil.getDayNames('narrow').map(n => `<span>${n}</span>`).join('\n')}
-              </div>
-              <div class="days-inner"></div>
-            </div>
-          </div>
-
-          <div class="actions">
-            <mc-button class="clear">Clear</mc-button>
-
-            <mc-button class="cancel">Cancel</mc-button>
-            <mc-button class="ok">OK</mc-button>
-          </div>
-
-          <div class="month-list">${dateUtil.getMonthNames().map((name, i) => `
-            <div class="month-item" month="${i + 1}">
-              <mc-icon>${check_FILL1_wght400_GRAD0_opsz24}</mc-icon>
-              ${name}
-            </div>
-          `).join('')}</div>
-          <div class="year-list">${dateUtil.defaultYearRange().map(year => `
-            <div class="year-item" year="${year}">
-              ${year}
-            </div>
-          `).join('')}</div>
-
         </div>
-        </dialog>
+
+        <div class="actions">
+          <mc-button class="clear">Clear</mc-button>
+
+          <mc-button class="cancel">Cancel</mc-button>
+          <mc-button class="ok">OK</mc-button>
+        </div>
+
+        <div class="month-list">${dateUtil.getMonthNames().map((name, i) => `
+          <div class="month-item" month="${i + 1}">
+            <mc-icon>${check_FILL1_wght400_GRAD0_opsz24}</mc-icon>
+            ${name}
+          </div>
+        `).join('')}</div>
+        <div class="year-list">${dateUtil.defaultYearRange().map(year => `
+          <div class="year-item" year="${year}">
+            ${year}
+          </div>
+        `).join('')}</div>
+      </div>
     `;
   }
 
@@ -189,14 +179,11 @@ class MCDatePickerElement extends MCSurfaceElement {
   connectedCallback() {
     super.connectedCallback();
     this.#abort = new AbortController();
-    this.#textfield.addEventListener('focusin', this.#textfieldFocus_bound, { signal: this.#abort.signal });
-
+    this.addEventListener('toggle', this.#toggle_bound, { signal: this.#abort.signal });
+    window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound, { signal: this.#abort.signal });
     this.displayDate = dateUtil.parse(this.#textfield.value || dateUtil.today());
-    this.#getDaysContainer().innerHTML = monthDaysTemplate(this.#displayDate, this.minDate, this.maxDate);
-    this.#getYearsSelectLabel().innerHTML = this.displayDate.getFullYear();
-    this.#getMonthSelectLabel().innerHTML = dateUtil.format(this.displayDate, 'MMMM');
-
-    if (this.#modal) this.#swipe = new Swipe(this, { horizontalOnly: true });
+    this.#windowStateChange();
+    if (this.modal) this.#swipe = new Swipe(this, { horizontalOnly: true });
   }
 
   disconnectedCallback() {
@@ -250,17 +237,20 @@ class MCDatePickerElement extends MCSurfaceElement {
     }
   }
 
-  get #modal() {
-    return device.state === device.COMPACT;
+
+  #toggle(event) {
+    if (event.newState === 'open') {
+      this.#show();
+    } else {
+      this.#hide();
+    }
   }
 
-
-  show() {
+  // TODO reset option from filter?
+  #show() {
     this.#dirty = false;
     this.classList.remove('input-view');
 
-    if (this.#modal) super.showModal();
-    else super.show();
 
     this.#initialTextFieldValue = this.#textfield.value;
     this.#updateDate();
@@ -268,7 +258,6 @@ class MCDatePickerElement extends MCSurfaceElement {
     this.#showAbort = new AbortController();
 
     this.#textfield.addEventListener('input', this.#updateDate_bound, { signal: this.#showAbort.signal });
-    this.addEventListener('close', this.#handleClose_bound, { signal: this.#showAbort.signal });
     this.#getMonthNext().addEventListener('click', this.#nextMonth_bound, { signal: this.#showAbort.signal });
     this.#getMonthPrevious().addEventListener('click', this.#previousMonth_bound, { signal: this.#showAbort.signal });
     this.#getMonthDaysContainer().addEventListener('click', this.#dayClick_bound, { signal: this.#showAbort.signal, capture: true });
@@ -279,10 +268,12 @@ class MCDatePickerElement extends MCSurfaceElement {
     this.shadowRoot.querySelector('.ok').addEventListener('click', this.#okClick_bound, { signal: this.#showAbort.signal });
     if (this.clear) this.shadowRoot.querySelector('.clear').addEventListener('click', this.#clearClick_bound, { signal: this.#showAbort.signal });
 
-    if (!this.#modal) {
+    if (!this.modal) {
       this.shadowRoot.querySelector('.year-next').addEventListener('click', this.#nextYear_bound, { signal: this.#showAbort.signal });
       this.shadowRoot.querySelector('.year-previous').addEventListener('click', this.#previousYear_bound, { signal: this.#showAbort.signal });
       this.shadowRoot.querySelector('.month-select').addEventListener('click', this.#monthSelectClick_bound, { signal: this.#showAbort.signal });
+      window.addEventListener('click', this.#clickOutside_bound, { signal: this.#showAbort.signal });
+      window.addEventListener('keydown', this.#escClose_bound, { signal: this.#showAbort.signal });
     } else {
       this.#getMonthNext(false).addEventListener('click', this.#nextMonth_bound, { signal: this.#showAbort.signal });
       this.#getMonthPrevious(false).addEventListener('click', this.#previousMonth_bound, { signal: this.#showAbort.signal });
@@ -293,27 +284,23 @@ class MCDatePickerElement extends MCSurfaceElement {
       this.addEventListener('swipeend', this.#swipeEnd_bound, { signal: this.#showAbort.signal });
       this.addEventListener('swipemove', this.#swipeMove_bound, { signal: this.#showAbort.signal });
     }
+
+    this.#textfield.addEventListener('keydown', this.#spaceInterceptor_bound, { signal: this.#showAbort.signal });
   }
 
-  // show handles both states
-  showModal() {
-    this.show();
-  }
-
-
-
-  #handleClose() {
+  #hide() {
     if (this.#showAbort) {
       this.#showAbort.abort();
       this.#showAbort = undefined;
     }
-    if (this.#modal) {
+    if (this.modal) {
       setTimeout(() => {
         this.#textfield.blur();
       });
     }
     if (this.#swipe) this.#swipe.disable();
   }
+
 
   #updateDate() {
     this.displayDate = dateUtil.parse(this.#textfield.value || dateUtil.today());
@@ -335,7 +322,7 @@ class MCDatePickerElement extends MCSurfaceElement {
     if (params.force || activeDisplayParts.year !== displayDateParts.year || activeDisplayParts.month !== displayDateParts.month) {
       const daysContainerAnimatable = this.#getDaysContainerAnimatable(false);
       monthToBeActive = daysContainerAnimatable;
-      if (this.#modal) {
+      if (this.modal) {
         daysContainerAnimatable.querySelector('.days-inner').innerHTML = monthDaysTemplate(this.displayDate, this.minDate, this.maxDate);
       } else {
         daysContainerAnimatable.innerHTML = monthDaysTemplate(this.displayDate, this.minDate, this.maxDate);
@@ -375,7 +362,7 @@ class MCDatePickerElement extends MCSurfaceElement {
     if (selectedMonth) selectedMonth.classList.remove('selected');
     const selectedYear = this.shadowRoot.querySelector('.year-item.selected');
     if (selectedYear) selectedYear.classList.remove('selected');
-    if (this.#modal) this.shadowRoot.querySelector('.modal-header .display-date').innerText = dateUtil.format(this.selectedDate || dateUtil.today(), 'ddd, MMM DD');
+    if (this.modal) this.shadowRoot.querySelector('.modal-header .display-date').textContent = dateUtil.format(this.selectedDate || dateUtil.today(), 'ddd, MMM DD');
 
     if (this.selectedDate) {
       const selectedParts = dateUtil.getParts(this.selectedDate);
@@ -415,7 +402,7 @@ class MCDatePickerElement extends MCSurfaceElement {
 
   #cancelClick() {
     this.#textfield.value = this.#initialTextFieldValue;
-    this.close();
+    this.hidePopover();
   }
 
   #okClick() {
@@ -423,7 +410,7 @@ class MCDatePickerElement extends MCSurfaceElement {
       this.dispatchEvent(new Event('change', { bubbles: true }));
       this.#dirty = false;
     }
-    this.close();
+    this.hidePopover();
   }
 
   #clearClick() {
@@ -491,23 +478,6 @@ class MCDatePickerElement extends MCSurfaceElement {
     this.#changeDate();
   }
 
-  #textfieldFocus(event) {
-    this.#textfield.addEventListener('blur', this.#textfieldBlur_bound, { signal: this.#abort.signal });
-    window.addEventListener('keydown', this.#spaceInterceptor_bound, { signal: this.#abort.signal });
-
-    // dialogs will focus back on the input after close. We want to prevent this so the dialog does not re open
-    if (this.open) {
-      event.preventDefault();
-      return;
-    }
-    this.show();
-  }
-
-  #textfieldBlur() {
-    this.#textfield.removeEventListener('blur', this.#textfieldBlur);
-    window.removeEventListener('keydown', this.#spaceInterceptor_bound);
-  }
-
   async #toggleInputView() {
     const isInputView = this.classList.contains('input-view');
     this.classList.add('animate-view');
@@ -543,9 +513,15 @@ class MCDatePickerElement extends MCSurfaceElement {
     }
   }
 
+  #escClose(event) {
+    if (event.key === 'Escape' && this.matches(':popover-open')) {
+      this.hidePopover();
+    }
+  }
+
 
   #getDaysContainer(active = true) {
-    if (this.#modal) {
+    if (this.modal) {
       if (active) return this.shadowRoot.querySelector('.days-container-modal.active .days-inner');
       return this.shadowRoot.querySelector('.days-container-modal:not(.active) .days-inner');
     } else {
@@ -555,7 +531,7 @@ class MCDatePickerElement extends MCSurfaceElement {
   }
 
   #getDaysContainerAnimatable(active = true) {
-    if (this.#modal) {
+    if (this.modal) {
       if (active) return this.shadowRoot.querySelector('.days-container-modal.active');
       return this.shadowRoot.querySelector('.days-container-modal:not(.active)');
     } else {
@@ -565,7 +541,7 @@ class MCDatePickerElement extends MCSurfaceElement {
   }
 
   #getMonthDaysContainer() {
-    if (this.#modal) {
+    if (this.modal) {
       return this.shadowRoot.querySelector('.month-days-container-modal');
     } else {
       return this.shadowRoot.querySelector('.month-days-container');
@@ -573,7 +549,7 @@ class MCDatePickerElement extends MCSurfaceElement {
   }
 
   #getYearsSelectLabel(active = true) {
-    if (this.#modal) {
+    if (this.modal) {
       if (active) return this.shadowRoot.querySelector('.days-container-modal.active .year-select-label');
       return this.shadowRoot.querySelector('.days-container-modal:not(.active) .year-select-label');
     } else {
@@ -582,7 +558,7 @@ class MCDatePickerElement extends MCSurfaceElement {
   }
 
   #getMonthSelectLabel(active = true) {
-    if (this.#modal) {
+    if (this.modal) {
       if (active) return this.shadowRoot.querySelector('.days-container-modal.active .month-select-label');
       return this.shadowRoot.querySelector('.days-container-modal:not(.active) .month-select-label');
     } else {
@@ -591,7 +567,7 @@ class MCDatePickerElement extends MCSurfaceElement {
   }
 
   #getMonthNext(active = true) {
-    if (this.#modal) {
+    if (this.modal) {
       if (active) return this.shadowRoot.querySelector('.days-container-modal.active .month-next');
       return this.shadowRoot.querySelector('.days-container-modal:not(.active) .month-next');
     } else {
@@ -600,7 +576,7 @@ class MCDatePickerElement extends MCSurfaceElement {
   }
 
   #getMonthPrevious(active = true) {
-    if (this.#modal) {
+    if (this.modal) {
       if (active) return this.shadowRoot.querySelector('.days-container-modal.active .month-previous');
       return this.shadowRoot.querySelector('.days-container-modal:not(.active) .month-previous');
     } else {
@@ -609,7 +585,7 @@ class MCDatePickerElement extends MCSurfaceElement {
   }
 
   #getYearSelect(active = true) {
-    if (this.#modal) {
+    if (this.modal) {
       if (active) return this.shadowRoot.querySelector('.days-container-modal.active .year-select');
       return this.shadowRoot.querySelector('.days-container-modal:not(.active) .year-select');
     } else {
@@ -706,6 +682,27 @@ class MCDatePickerElement extends MCSurfaceElement {
       active.style.left = `${event.distanceX}px`;
       alt.style.left = `calc(-100% + ${event.distanceX}px)`;
     }
+  }
+
+  #clickOutside(event) {
+    if (this.contains(event.target) || this.#textfield === event.target || this.#textfield.contains(event.target)) {
+      return;
+    }
+    this.hidePopover();
+  }
+
+  #windowStateChange() {
+    switch (device.state) {
+      case device.COMPACT:
+        this.modal = true;
+        break;
+      default:
+        this.modal = false;
+    }
+
+    this.#getDaysContainer().innerHTML = monthDaysTemplate(this.#displayDate, this.minDate, this.maxDate);
+    this.#getYearsSelectLabel().innerHTML = this.displayDate.getFullYear();
+    this.#getMonthSelectLabel().innerHTML = dateUtil.format(this.displayDate, 'MMMM');
   }
 }
 customElements.define(MCDatePickerElement.tag, MCDatePickerElement);

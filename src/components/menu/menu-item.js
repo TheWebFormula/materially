@@ -11,14 +11,16 @@ export default class MCMenuItemElement extends HTMLComponentElement {
   static styleSheets = [styles];
 
   #nesting = false;
+  #button;
 
 
   constructor() {
     super();
 
-    this.role = 'button';
+    this.role = 'menuitem';
     this.tabIndex = this.hasAttribute('tabindex') ? this.getAttribute('tabindex') : 0;
     this.render();
+    this.#button = this.shadowRoot.querySelector('button');
   }
 
   template() {
@@ -51,6 +53,14 @@ export default class MCMenuItemElement extends HTMLComponentElement {
     } else if (arrow) {
       arrow.remove();
     }
+  }
+
+
+  get popoverTargetElement() {
+    return this.#button.popoverTargetElement
+  }
+  set popoverTargetElement(value) {
+    this.#button.popoverTargetElement = value;
   }
 }
 customElements.define(MCMenuItemElement.tag, MCMenuItemElement);

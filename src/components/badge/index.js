@@ -51,7 +51,7 @@ class MCBadgeElement extends HTMLComponentElement {
     else this.#displayValue = `${num}`;
 
     this.classList.toggle('has-value', !!this.#displayValue);
-    this.innerText = this.#displayValue;
+    this.textContent = this.#displayValue;
 
     if (!this.#parentType) this.#parentType = this.parentElement.nodeName.toLowerCase();
     if (!this.#ariaLabelOriginal) {

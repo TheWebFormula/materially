@@ -64,7 +64,7 @@ export default class MCSideSheetElement extends HTMLComponentElement {
       ['align-left', 'boolean'],
       ['modal', 'boolean'],
       ['scrim', 'boolean'],
-      ['allow-close', 'boolean'],
+      ['prevent-close', 'boolean'],
       ['inset', 'boolean'],
       ['hide-close', 'boolean'],
       ['back', 'boolean'],
@@ -80,7 +80,7 @@ export default class MCSideSheetElement extends HTMLComponentElement {
     this.#abort = new AbortController();
     if (!this.hideClose) this.shadowRoot.querySelector('.close').addEventListener('click', this.#close_bound, { signal: this.#abort.signal });
     if (this.back) this.shadowRoot.querySelector('.back').addEventListener('click', this.#redispatchBack_bound, { signal: this.#abort.signal });
-    if (this.allowClose && this.scrim) {
+    if (!this.preventClose && this.scrim) {
       this.shadowRoot.querySelector('.scrim').addEventListener('click', this.#close_bound, { signal: this.#abort.signal });
     }
     window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound, { signal: this.#abort.signal });
@@ -125,9 +125,9 @@ export default class MCSideSheetElement extends HTMLComponentElement {
     this.toggleAttribute('scrim', !!value);
   }
 
-  get allowClose() { return this.hasAttribute('allow-close'); }
-  set allowClose(value) {
-    this.toggleAttribute('allow-close', !!value);
+  get preventClose() { return this.hasAttribute('prevent-close'); }
+  set preventClose(value) {
+    this.toggleAttribute('prevent-close', !!value);
   }
 
   get inset() { return this.hasAttribute('inset'); }

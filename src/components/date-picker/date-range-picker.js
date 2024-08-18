@@ -11,8 +11,6 @@ import { monthDaysTemplate } from './helper.js';
 import util from '../../helpers/util.js';
 import dateUtil from '../../helpers/date.js';
 
-// TODO fix
-// TODO handle anchor on both start and end
 // TODO keyboard controls
 
 class MCDateRangePickerElement extends MCSurfaceElement {
@@ -35,6 +33,7 @@ class MCDateRangePickerElement extends MCSurfaceElement {
   #scrollContainer;
   #monthScrollContainer;
   #monthScrollContainerHeightThird;
+  #opened = false;
 
   #onScroll_bound = util.rafThrottle(this.#onScroll.bind(this));
   #cancelClick_bound = this.#cancelClick.bind(this);
@@ -49,6 +48,7 @@ class MCDateRangePickerElement extends MCSurfaceElement {
   #clickOutside_bound = this.#clickOutside.bind(this);
   #escClose_bound = this.#escClose.bind(this);
   #windowStateChange_bound = this.#windowStateChange.bind(this);
+  #endTextfieldFocus_bound = this.#endTextfieldFocus.bind(this);
 
 
   constructor() {
@@ -63,7 +63,6 @@ class MCDateRangePickerElement extends MCSurfaceElement {
     this.preventClose = true;
     this.anchor = this.startTextfield || this.endTextfield;
     this.#windowStateChange();
-    // this.fullscreen = this.modal;
 
     this.#monthElements = [...this.shadowRoot.querySelectorAll('.month')];
     this.#scrollContainer = this.shadowRoot.querySelector('.month-days-container');
@@ -128,15 +127,11 @@ class MCDateRangePickerElement extends MCSurfaceElement {
     
     if (this.#startTextfield) {
       this.closeIgnoreElements.push(this.#startTextfield)
-      // if (!this.modal) this.anchorElement = this.#startTextfield;
-
       this.addEventListener('toggle', this.#toggle_bound, { signal: this.#abort.signal });
     }
 
     if (this.#endTextfield) {
-      this.closeIgnoreElements.push(this.#endTextfield)
-      // if (!this.modal && !this.anchorElement) this.anchorElement = this.#endTextfield;
-      // this.#endTextfield.addEventListener('focus', this.#textfieldFocus_bound, { signal: this.#abort.signal });
+      this.#endTextfield.addEventListener('focus', this.#endTextfieldFocus_bound, { signal: this.#abort.signal });
     }
   }
 
@@ -179,6 +174,10 @@ class MCDateRangePickerElement extends MCSurfaceElement {
     }
   }
 
+  #endTextfieldFocus() {
+    this.showPopover();
+  }
+
   #show() {
     this.classList.remove('input-view');
 
@@ -192,7 +191,10 @@ class MCDateRangePickerElement extends MCSurfaceElement {
     }
 
     this.#displayDate = dateUtil.parse(this.#selectedDateStart || dateUtil.today());
-    this.#updateMonths();
+    if (!this.#opened) {
+      this.#updateMonths();
+      this.#opened = true;
+    }
 
     // Center both scroll container and month container
     //  This will setup the months container to have the same scroll distance in both directions
@@ -505,6 +507,8 @@ class MCDateRangePickerElement extends MCSurfaceElement {
       default:
         this.modal = false;
     }
+
+    this.fullscreen = this.modal;
   }
 }
 customElements.define(MCDateRangePickerElement.tag, MCDateRangePickerElement);

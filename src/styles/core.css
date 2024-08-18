@@ -63,9 +63,12 @@ mc-pane::-webkit-resizer {
 /* For some reason i cannot set ::backdrop on :host */
 .modal[popover]::backdrop {
   pointer-events: none;
-  opacity: 0;
   background-color: var(--mc-scrim);
-  transition: opacity;
+  opacity: 0;
+  transition:
+    display allow-discrete,
+    overlay allow-discrete,
+    opacity;
   transition-duration: var(--mc-motion-duration-short3);
 }
 
@@ -73,4 +76,10 @@ mc-pane::-webkit-resizer {
   pointer-events: all !important;
   opacity: 32%;
   transition-duration: var(--mc-motion-duration-medium2);
+}
+
+@starting-style {
+  .modal[popover]:popover-open::backdrop {
+    opacity: 0;
+  }
 }

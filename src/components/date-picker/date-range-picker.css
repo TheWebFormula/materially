@@ -39,6 +39,8 @@
 }
 
 :host(.modal) .header {
+  flex-shrink: 0;
+  min-width: 296px;
   display: flex;
   height: 104px;
   padding: 0 12px;

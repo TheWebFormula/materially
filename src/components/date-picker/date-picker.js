@@ -183,7 +183,7 @@ class MCDatePickerElement extends MCSurfaceElement {
     window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound, { signal: this.#abort.signal });
     this.displayDate = dateUtil.parse(this.#textfield.value || dateUtil.today());
     this.#windowStateChange();
-    if (this.modal) this.#swipe = new Swipe(this, { horizontalOnly: true });
+    this.#swipe = new Swipe(this, { horizontalOnly: true });
   }
 
   disconnectedCallback() {

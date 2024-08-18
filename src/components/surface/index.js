@@ -103,7 +103,10 @@ export default class MCSurfaceElement extends HTMLComponentElement {
   set removeOnClose(value) { this.#removeOnClose = !!value; }
 
   get fullscreen() { return this.#fullscreen; }
-  set fullscreen(value) { this.#fullscreen = !!value; }
+  set fullscreen(value) {
+    this.#fullscreen = !!value;
+    this.classList.toggle('fullscreen', this.#fullscreen);
+  }
 
   get closeIgnoreElements() { return this.#closeIgnoreElements; }
   set closeIgnoreElements(value) {
@@ -141,9 +144,11 @@ export default class MCSurfaceElement extends HTMLComponentElement {
 
   onShow() {
     // get height and set css var for animation and positioning
-    this.style.setProperty('--mc-surface-height', '0');
-    this.#height = this.offsetHeight;
-    this.style.setProperty('--mc-surface-height', `${this.#height}px`);
+    if (!this.#height) {
+      this.style.setProperty('--mc-surface-height', '0');
+      this.#height = this.offsetHeight;
+      this.style.setProperty('--mc-surface-height', `${this.#height}px`);
+    }
     this.setPosition();
   }
 

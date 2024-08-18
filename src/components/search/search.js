@@ -45,8 +45,6 @@ class MCSearchElement extends HTMLComponentElement {
   #historyItems = [];
   #searchTimeout;
   #searchTimeoutSeconds = 3;
-  #open_bound = this.#open.bind(this);
-  #handleClose_bound = this.#handleClose.bind(this);
   #slotChange_bound = this.#slotChange.bind(this);
   #onInput_bound = this.#onInput.bind(this);
   #onSearch_bound = this.#onSearch.bind(this);
@@ -57,6 +55,9 @@ class MCSearchElement extends HTMLComponentElement {
   #micClick_bound = this.#micClick.bind(this);
   #renderSuggestions_debounced = util.debounce(this.#renderSuggestions, 50).bind(this);
   #incrementalPolyfill_debounced = util.debounce(this.#onSearch, 300).bind(this);
+  #inputFocus_bound = this.#inputFocus.bind(this);
+  #toggle_bound = this.#toggle.bind(this);
+  #clickOutside_bound = this.#clickOutside.bind(this);
 
 
   constructor() {
@@ -69,12 +70,9 @@ class MCSearchElement extends HTMLComponentElement {
     this.#menu = this.shadowRoot.querySelector('mc-menu');
     this.#menu.anchor = this.#input;
     this.#menu.disableLetterFocus = true;
-    this.#menu.closeIgnoreElements = [this];
     let compact = device.state === device.COMPACT;
     this.classList.toggle('window-compact', compact);
     this.#menu.fullscreen = compact;
-    if (compact) this.#menu.allowClose = false;
-    
     this.#menu.offsetX = -this.#input.offsetLeft;
   }
 
@@ -96,7 +94,7 @@ class MCSearchElement extends HTMLComponentElement {
           <mc-divider></mc-divider>
         </div>
 
-        <mc-menu always-below>
+        <mc-menu prevent-close always-below>
           <mc-progress-linear indeterminate disabled></mc-progress-linear>
           <mc-chip-set scroll class="hide">
             <slot name="chips"></slot>
@@ -199,8 +197,9 @@ class MCSearchElement extends HTMLComponentElement {
     super.connectedCallback();
 
     this.#abort = new AbortController();
-    this.#menu.addEventListener('open', this.#open_bound, { signal: this.#abort.signal });
+    this.#menu.addEventListener('toggle', this.#toggle_bound, { signal: this.#abort.signal });
     this.shadowRoot.addEventListener('slotchange', this.#slotChange_bound, { signal: this.#abort.signal });
+    this.#input.addEventListener('focus', this.#inputFocus_bound, { signal: this.#abort.signal });
   }
 
   disconnectedCallback() {
@@ -236,8 +235,19 @@ class MCSearchElement extends HTMLComponentElement {
   }
 
 
-  #open() {
-    this.#menu.addEventListener('close', this.#handleClose_bound, { signal: this.#abort.signal });
+  #inputFocus() {
+    this.#menu.showPopover();
+  }
+
+  #toggle(event) {
+    if (event.newState === 'open') {
+      this.#show();
+    } else {
+      this.#hide();
+    }
+  }
+
+  #show() {
     this.#menu.style.minWidth = `${this.offsetWidth}px`;
     this.ariaExpanded = true;
     if (this.#menu.fullscreen) this.#preShowFullscreen();
@@ -251,11 +261,11 @@ class MCSearchElement extends HTMLComponentElement {
     this.shadowRoot.querySelector('.clear').addEventListener('click', this.#clear_bound, { signal: this.#showAbort.signal });
     window.addEventListener('keydown', this.#onKeyDown_bound, { signal: this.#showAbort.signal });
     if (this.#menu.fullscreen) this.shadowRoot.querySelector('.back').addEventListener('click', this.#back_bound, { capture: true, signal: this.#showAbort.signal });
+    else window.addEventListener('click', this.#clickOutside_bound, { signal: this.#showAbort.signal });
     this.#input.focus();
   }
 
-  #handleClose() {
-    this.#menu.removeEventListener('close', this.#handleClose_bound);
+  #hide() {
     if (this.#showAbort) {
       this.#showAbort.abort();
       this.#showAbort = undefined;
@@ -360,7 +370,7 @@ class MCSearchElement extends HTMLComponentElement {
   #back(event) {
     const target = event.composedPath()[0];
     if (target.classList.contains('back')) {
-      this.#menu.close();
+      this.#menu.hidePopover();
     }
   }
 
@@ -498,6 +508,11 @@ class MCSearchElement extends HTMLComponentElement {
         input.classList.remove('animate');
       }, 300);
     });
+  }
+
+  #clickOutside(event) {
+    if (this.contains(event.target)) return;
+    this.#menu.hidePopover();
   }
 }
 customElements.define(MCSearchElement.tag, MCSearchElement);

@@ -193,9 +193,7 @@ class MCSelectElement extends HTMLComponentElement {
       this.#internals.setValidity(this.#textfield.validity, this.#textfield.validationMessage, this.#textfield);
     });
 
-    if (this.#textfield.popoverTargetElement) {
-      this.#textfield.popoverTargetElement.addEventListener('toggle', this.#toggle_bound, { signal: this.#abort.signal });
-    }
+    this.#menu.addEventListener('toggle', this.#toggle_bound, { signal: this.#abort.signal });
   }
 
   disconnectedCallback() {

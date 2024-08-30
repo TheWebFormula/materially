@@ -87,7 +87,8 @@ const mcUtil = new class MCUtil {
       }
     );
 
-    const activeElement = document.activeElement;
+    let activeElement = document.activeElement;
+    if (activeElement.shadowRoot) activeElement = activeElement.shadowRoot.activeElement;
     const containsFocus = containerElement.contains(activeElement);
     if (!containsFocus) return walker.nextNode();
 

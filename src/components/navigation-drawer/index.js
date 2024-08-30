@@ -73,8 +73,15 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
     switch (detail.state) {
       case device.EXPANDED:
         this.open = true;
+
+        // scroll anchor into view if needed
         requestAnimationFrame(() => {
-          this.querySelector('.current').scrollIntoView({ behavior: 'instant', block: 'center' });
+          let current = this.querySelector('.current');
+          let scrollContainer = this.shadowRoot.querySelector('.surface-content');
+          let bounds = current.offsetTop - scrollContainer.offsetHeight + 56;
+          if (bounds > 0) {
+            scrollContainer.scrollTop = current.offsetTop - (scrollContainer.offsetHeight / 2) + 28;
+          }
         });
         break;
       case device.MEDIUM:

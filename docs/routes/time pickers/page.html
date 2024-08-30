@@ -11,6 +11,8 @@
       <h2>Links</h2>
       <ul class="links">
         <li><a href="#basic">Time</a></li>
+        <li><a href="#modal">Modal</a></li>
+        <li><a href="#compactonly">Compact only</a></li>
         <li><a href="#hour24">24 Format</a></li>
         <li><a href="#step">Time step</a></li>
         <li><a href="#native">Native component</a></li>
@@ -23,20 +25,89 @@
         <mc-card>
           <h2 slot="headline">Time</h2>
         
-          <mc-textfield label="Time" type="time" value="12:30" onchange="page.tv.value = value;">
+          <mc-textfield label="Time" type="time" value="03:30">
             <mc-icon slot="leading-icon">schedule</mc-icon>
             <mc-time-picker slot="picker"></mc-time-picker>
           </mc-textfield>
+
+          <mc-textfield label="Time modal" type="time" value="03:30">
+            <mc-icon slot="leading-icon">schedule</mc-icon>
+            <mc-time-picker modal slot="picker"></mc-time-picker>
+          </mc-textfield>
+
+          <mc-textfield label="Compact only" type="time" value="03:30">
+            <mc-icon slot="leading-icon">schedule</mc-icon>
+            <mc-time-picker compact-only slot="picker"></mc-time-picker>
+          </mc-textfield>
         
           <code-block language="html"><pre>
-${`<mc-textfield label="Time" type="time" value="12:30">
+${`<mc-textfield label="Time" type="time" value="03:30">
   <mc-icon slot="leading-icon">schedule</mc-icon>
   <mc-time-picker slot="picker"></mc-time-picker>
+</mc-textfield>
+
+<mc-textfield label="Time modal" type="time" value="03:30">
+  <mc-icon slot="leading-icon">schedule</mc-icon>
+  <mc-time-picker modal slot="picker"></mc-time-picker>
+</mc-textfield>
+
+<mc-textfield label="Time compact only" type="time" value="03:30">
+  <mc-icon slot="leading-icon">schedule</mc-icon>
+  <mc-time-picker compact-only slot="picker"></mc-time-picker>
 </mc-textfield>`}
             </pre></code-block>
         </mc-card>
       </section>
 
+      <section id="modal" aria-label="Time picker modal">
+        <mc-card>
+          <h2 slot="headline">Modal</h2>
+          <div slot="supporting-text">Modals are automatically used when on compact screens. You can set the time picker to always use modals</div>
+          
+          <div class="example">
+            <mc-textfield label="Time modal" type="time" value="03:30">
+              <mc-icon slot="leading-icon">schedule</mc-icon>
+              <mc-time-picker modal slot="picker"></mc-time-picker>
+            </mc-textfield>
+          </div>
+      
+          <code-block language="html">
+            <pre>
+${`<mc-textfield label="Time modal" type="time" value="03:30">
+  <mc-icon slot="leading-icon">schedule</mc-icon>
+
+  <!-- add modal attribute -->
+  <mc-time-picker modal slot="picker"></mc-time-picker>
+</mc-textfield>`}
+            </pre>
+          </code-block>
+        </mc-card>
+      </section>
+
+      <section id="compactonly" aria-label="Time picker compact only">
+        <mc-card>
+          <h2 slot="headline">Compact only</h2>
+          <div slot="supporting-text">This will make it so the timepicker only shows when on compact screens</div>
+      
+          <div class="example">
+            <mc-textfield label="Time" type="time" value="03:30">
+              <mc-icon slot="leading-icon">schedule</mc-icon>
+              <mc-time-picker compact-only slot="picker"></mc-time-picker>
+            </mc-textfield>
+          </div>
+      
+          <code-block language="html">
+            <pre>
+      ${`<mc-textfield label="Time" type="time" value="03:30">
+        <mc-icon slot="leading-icon">schedule</mc-icon>
+      
+        <!-- add compact-only attribute -->
+        <mc-time-picker compact-only slot="picker"></mc-time-picker>
+      </mc-textfield>`}
+                  </pre>
+          </code-block>
+        </mc-card>
+      </section>
 
 
       <section id="hour24" aria-label="Time picker hour 24">
@@ -44,22 +115,30 @@ ${`<mc-textfield label="Time" type="time" value="12:30">
           <h2 slot="headline">Time formatted in 24 hours</h2>
           <div slot="supporting-text">The browser controls the input formate based on locale. You can force the time picker to be
             24 hour format.</div>
-        
+            
           <mc-textfield label="Time" type="time">
             <mc-icon slot="leading-icon">schedule</mc-icon>
             <mc-time-picker hour24 slot="picker"></mc-time-picker>
+          </mc-textfield>
+
+          <mc-textfield label="Time modal" type="time">
+            <mc-icon slot="leading-icon">schedule</mc-icon>
+            <mc-time-picker modal hour24 slot="picker"></mc-time-picker>
           </mc-textfield>
         
           <code-block language="html"><pre>
 ${`<mc-textfield label="Time" type="time">
   <mc-icon slot="leading-icon">schedule</mc-icon>
   <mc-time-picker hour24 slot="picker"></mc-time-picker>
+</mc-textfield>
+
+<mc-textfield label="Time modal" type="time">
+  <mc-icon slot="leading-icon">schedule</mc-icon>
+  <mc-time-picker modal hour24 slot="picker"></mc-time-picker>
 </mc-textfield>`}
             </pre></code-block>
         </mc-card>
       </section>
-
-
 
       <section id="step" aria-label="Time picker steps">
         <mc-card>
@@ -75,6 +154,16 @@ ${`<mc-textfield label="Time" type="time">
             <mc-icon slot="leading-icon">schedule</mc-icon>
             <mc-time-picker slot="picker"></mc-time-picker>
           </mc-textfield>
+
+          <mc-textfield label="10 min step modal" type="time" step="600">
+            <mc-icon slot="leading-icon">schedule</mc-icon>
+            <mc-time-picker modal slot="picker"></mc-time-picker>
+          </mc-textfield>
+          
+          <mc-textfield label="2 hour step modal" type="time" step="7200">
+            <mc-icon slot="leading-icon">schedule</mc-icon>
+            <mc-time-picker modal slot="picker"></mc-time-picker>
+          </mc-textfield>
         
           <code-block language="html"><pre>
 ${`<mc-textfield label="10 min step" type="time" step="600">
@@ -85,6 +174,16 @@ ${`<mc-textfield label="10 min step" type="time" step="600">
 <mc-textfield label="2 hour step" type="time" step="7200">
   <mc-icon slot="leading-icon">schedule</mc-icon>
   <mc-time-picker slot="picker"></mc-time-picker>
+</mc-textfield>
+
+<mc-textfield label="10 min step modal" type="time" step="600">
+  <mc-icon slot="leading-icon">schedule</mc-icon>
+  <mc-time-picker modal slot="picker"></mc-time-picker>
+</mc-textfield>
+
+<mc-textfield label="2 hour step modal" type="time" step="7200">
+  <mc-icon slot="leading-icon">schedule</mc-icon>
+  <mc-time-picker modal slot="picker"></mc-time-picker>
 </mc-textfield>`}
             </pre></code-block>
         </mc-card>

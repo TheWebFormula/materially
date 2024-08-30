@@ -150,9 +150,11 @@ export default class MCSurfaceElement extends HTMLComponentElement {
       this.style.setProperty('--mc-surface-height', `${this.#height}px`);
     }
     this.setPosition();
+    this.setAttribute('open', '');
   }
 
   onHide() {
+    this.removeAttribute('open');
     if (this.removeOnClose) {
       util.animationendAsync(this).then(() => {
         this.parentElement.removeChild(this);

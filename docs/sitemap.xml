@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+  <loc>https://materially.dev/</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://materially.dev/getting-started</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/layout</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/styles</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/badges</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/bottom-app-bars</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/top-app-bars</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/buttons</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/fabs</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/icon-buttons</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/segmented-buttons</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/cards</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/carousel</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/checkboxes</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/chips</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/date-pickers</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/dialogs</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/forms</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/icons</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/lists</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/menus</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/navigation</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/progress-indicators</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/radios</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/search</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/selects</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/bottom-sheets</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/side-sheets</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/sliders</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/snackbars</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/switches</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/tabs</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/textfields</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/time-pickers</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/tooltips</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/utilities</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/two</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://materially.dev/routes/layout/basic-layout</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://materially.dev/routes/layout/panes</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://materially.dev/routes/bottom%20app%20bars/basic-index</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://materially.dev/routes/bottom%20app%20bars/auto-hide-index</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://materially.dev/routes/bottom%20app%20bars/secondary-bar-index</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://materially.dev/routes/top%20app%20bars/basic-index</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://materially.dev/routes/top%20app%20bars/hide-index</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://materially.dev/routes/top%20app%20bars/centered-index</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://materially.dev/routes/top%20app%20bars/medium-index</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://materially.dev/routes/top%20app%20bars/large-index</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://materially.dev/routes/top%20app%20bars/compress-index</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://materially.dev/routes/navigation/drawer-index</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://materially.dev/routes/navigation/rail-index</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://materially.dev/routes/navigation/bar-index</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://materially.dev/one</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://materially.dev/routes/navigations/examples/basic.html</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://materially.dev/mail</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://materially.dev/three</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://materially.dev/four</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://materially.dev/routes/navigations/bar-index.html</loc>
+  <lastmod>2024-08-31T20:12:09+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
+</urlset>

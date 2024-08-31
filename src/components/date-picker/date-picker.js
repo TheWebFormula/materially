@@ -106,7 +106,7 @@ class MCDatePickerElement extends MCSurfaceElement {
             <div class="display-date"></div>
             <div class="display-date-input">Enter dates</div>
 
-            <mc-icon-button toggle>
+            <mc-icon-button toggle aria-label="Input edit">
               <mc-icon>${edit_FILL1_wght400_GRAD0_opsz24}</mc-icon>
               <mc-icon slot="selected">${calendar_today_FILL0_wght400_GRAD0_opsz24}</mc-icon>
             </mc-icon-button>

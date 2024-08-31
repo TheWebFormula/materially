@@ -76,7 +76,7 @@ const mcUtil = new class MCUtil {
    * @param {acceptFilter} acceptFilter - function with custom filtering logic
    * @return {Array.<{value:String, label:String}> | Array.<String>} - filtered array
    */
-  getNextFocusableElement(containerElement, previous = false, acceptFilter = () => { return true; }) {
+  getNextFocusableElement(containerElement, previous = false, acceptFilter = () => { return true; }, allowShadowRoot = false) {
     let walker = document.createNodeIterator(
       containerElement,
       NodeFilter.SHOW_ELEMENT,
@@ -88,7 +88,8 @@ const mcUtil = new class MCUtil {
     );
 
     let activeElement = document.activeElement;
-    if (activeElement.shadowRoot) activeElement = activeElement.shadowRoot.activeElement;
+    console.log(activeElement)
+    if (allowShadowRoot && activeElement.shadowRoot) activeElement = activeElement.shadowRoot.activeElement;
     const containsFocus = containerElement.contains(activeElement);
     if (!containsFocus) return walker.nextNode();
 

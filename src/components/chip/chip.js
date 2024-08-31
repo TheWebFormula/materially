@@ -32,6 +32,9 @@ class MCChipElement extends HTMLComponentElement {
   #onFocus_bound = this.#onFocus.bind(this);
   #onBlur_bound = this.#onBlur.bind(this);
   #focusKeydown_bound = this.#focusKeydown.bind(this);
+  #clickOutside_bound = this.#clickOutside.bind(this);
+  #onKeyDown_bound = this.#onKeyDown.bind(this);
+  #toggleMenu_bound = this.#toggleMenu.bind(this);
 
 
   constructor() {
@@ -53,9 +56,10 @@ class MCChipElement extends HTMLComponentElement {
         <div class="label"></div>
         <div class="menu-arrow"></div>
         <div class="clear">${close_FILL1_wght400_GRAD0_opsz20}</div>
-        <input tabIndex="-1" />
+        <input tabIndex="-1" aria-label="filter input" />
         <mc-state-layer ripple></mc-state-layer>
         <slot name="menu"></slot>
+        <span class="touch-target-fix"></span>
       </button>
     `;
   }
@@ -63,7 +67,6 @@ class MCChipElement extends HTMLComponentElement {
 
   static get observedAttributesExtended() {
     return [
-      // ['aria-label', 'string'],
       ['label', 'string'],
       ['value', 'string'],
       ['checked', 'boolean'],
@@ -83,6 +86,7 @@ class MCChipElement extends HTMLComponentElement {
     this.#label = value;
     this.shadowRoot.querySelector('.label').textContent = value;
     this.ariaLabel = value;
+    this.setAttribute('aria-label', value);
   }
 
   get value() { return this.#value || this.label; }
@@ -121,7 +125,13 @@ class MCChipElement extends HTMLComponentElement {
   }
 
   get filter() { return this.#filter; }
-  set filter(value) { this.#filter = value; }
+  set filter(value) {
+    this.#filter = value;
+    if (this.#filter) {
+      this.role = 'radio';
+      if (this.#checked === undefined) this.checked = false;
+    }
+  }
 
   get input() { return this.#input; }
   set input(value) { this.#input = value; }
@@ -162,7 +172,9 @@ class MCChipElement extends HTMLComponentElement {
 
   connectedCallback() {
     this.#abort = new AbortController();
-    if (this.#filter) util.addClickTimeoutEvent(this, this.#filterClick_bound, { signal: this.#abort.signal });
+    if (this.#filter) {
+      util.addClickTimeoutEvent(this, this.#filterClick_bound, { signal: this.#abort.signal });
+    }
     if (this.#input) {
       this.shadowRoot.querySelector('.clear').addEventListener('click', this.#clearClick_bound, { signal: this.#abort.signal });
     }
@@ -213,6 +225,9 @@ class MCChipElement extends HTMLComponentElement {
       if (!this.#menu) return;
 
       this.classList.add('menu');
+      this.#menu.preventClose = true;
+      this.#menu.anchor = this;
+      this.#menu.addEventListener('toggle', this.#toggleMenu_bound, { signal: this.#abort.signal });
       this.#updateMenuSelection();
     }
   }
@@ -292,6 +307,32 @@ class MCChipElement extends HTMLComponentElement {
       if (!this.label || this.label === this.value) this.label = label;
       this.#checked = true;
       this.classList.add('checked');
+    }
+
+    requestAnimationFrame(() => {
+      if (this.#menu.open) this.#menu.hidePopover();
+    });
+  }
+
+  #toggleMenu(event) {
+    if (event.newState === 'open') {
+      window.addEventListener('click', this.#clickOutside_bound, { signal: this.#abort.signal });
+      window.addEventListener('keydown', this.#onKeyDown_bound, { signal: this.#abort.signal });
+    } else {
+      window.removeEventListener('click', this.#clickOutside_bound);
+      window.removeEventListener('keydown', this.#onKeyDown_bound);
+    }
+  }
+
+  #clickOutside() {
+    this.#menu.hidePopover();
+  }
+
+  #onKeyDown(event) {
+    if (event.key === 'Enter') {
+      this.#filterClick({ target: document.activeElement });
+    } else if (event.key === 'Escape') {
+      this.#menu.hidePopover();
     }
   }
 }

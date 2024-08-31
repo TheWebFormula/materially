@@ -40,6 +40,14 @@ button {
   padding-inline: 16px;
 }
 
+.touch-target-fix {
+  height: 48px;
+  inset: 50% 0 0;
+  position: absolute;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
 :host([disabled]) {
   pointer-events: none;
 }

@@ -7,7 +7,7 @@ import {
 } from '../../helpers/svgs.js';
 import device from '../../helpers/device.js';
 
-// TODO desktop (select list, picker)
+
 // TODO landscape
 
 class MCTimePickerMobileElement extends MCSurfaceElement {

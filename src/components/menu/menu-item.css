@@ -40,7 +40,11 @@ button {
   line-height: inherit;
   font: inherit;
   color: inherit;
-  padding: 12px 16px;
+
+  /* Hack to fix aria touch target size. Not sure why this works */
+  margin: 1px 0px;
+  padding: 11px 16px;
+
   gap: inherit;
   white-space: nowrap;
   text-overflow: ellipsis;

@@ -46,7 +46,7 @@
           <mc-chip-set onchange="console.log(this.values)">
             <mc-chip filter name="a" label="One"></mc-chip>
             <mc-chip filter name="b" value="One">
-              <mc-menu slot="menu" anchor-parent>
+              <mc-menu slot="menu">
                 <mc-menu-item>
                   <mc-icon slot="start">home</mc-icon>
                   One
@@ -83,7 +83,7 @@ ${`<!-- Assist -->
 <mc-chip-set onchange="console.log(this.values)">
   <mc-chip filter name="a" label="One"></mc-chip>
   <mc-chip filter name="b" value="One">
-    <mc-menu slot="menu" anchor-parent>
+    <mc-menu slot="menu">
       <mc-menu-item>
         <mc-icon slot="start">home</mc-icon>
         One
@@ -141,7 +141,7 @@ ${`<mc-chip-set>
         
             <!-- No default value -->
             <mc-chip filter label="number">
-              <mc-menu slot="menu" anchor-parent>
+              <mc-menu slot="menu">
                 <mc-menu-item>One</mc-menu-item>
                 <mc-menu-item>Two</mc-menu-item>
               </mc-menu>
@@ -149,7 +149,7 @@ ${`<mc-chip-set>
         
             <!-- Default value -->
             <mc-chip filter value="on">
-              <mc-menu slot="menu" anchor-parent>
+              <mc-menu slot="menu">
                 <mc-menu-item>On</mc-menu-item>
                 <mc-menu-item>Off</mc-menu-item>
               </mc-menu>
@@ -166,7 +166,7 @@ ${`<mc-chip-set>
 
   <!-- No default value -->
   <mc-chip filter label="number">
-    <mc-menu slot="menu" anchor-parent>
+    <mc-menu slot="menu">
       <mc-menu-item>One</mc-menu-item>
       <mc-menu-item>Two</mc-menu-item>
     </mc-menu>
@@ -174,7 +174,7 @@ ${`<mc-chip-set>
 
   <!-- Default value -->
   <mc-chip filter value="on">
-    <mc-menu slot="menu" anchor-parent>
+    <mc-menu slot="menu">
       <mc-menu-item>On</mc-menu-item>
       <mc-menu-item>Off</mc-menu-item>
     </mc-menu>

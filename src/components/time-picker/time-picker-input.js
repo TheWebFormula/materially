@@ -90,9 +90,9 @@ class MCTimePickerInputElement extends MCSurfaceElement {
     this.#abort = new AbortController();
     let hourData = getHourData(this.step, this.hasAttribute('hour24'));
     let minuteData = getMinuteData(this.step);
-    if (hourData.length) this.shadowRoot.querySelector('.hours').innerHTML = hourData.sort((a, b) => a.hour > b.hour ? 1 : -1).map(v => `<button class="hour" value="${v.hour}">${v.paddedHour}</button>`).join('\n');
+    if (hourData.length) this.shadowRoot.querySelector('.hours').innerHTML = hourData.sort((a, b) => a.hour > b.hour ? 1 : -1).map(v => `<button class="hour" aria-label="${v.hour} hour" value="${v.hour}">${v.paddedHour}</button>`).join('\n');
     // else this.shadowRoot.querySelector('.hours').style.width = 0;
-    if (minuteData.length) this.shadowRoot.querySelector('.minutes').innerHTML = minuteData.map(v => `<button class="minute" value="${v.minute}">${v.display ? v.paddedMinute : ''}</button>`).join('\n');
+    if (minuteData.length) this.shadowRoot.querySelector('.minutes').innerHTML = minuteData.map(v => `<button class="minute" aria-label="${v.minute} minute" value="${v.minute}">${v.display ? v.paddedMinute : ''}</button>`).join('\n');
     // else this.shadowRoot.querySelector('.minutes').style.width = 0;
   }
 
@@ -184,9 +184,9 @@ class MCTimePickerInputElement extends MCSurfaceElement {
 
     // move from first option to select input
     if (event.key === 'ArrowUp') {
-      next = util.getNextFocusableElement(container, true, this.#acceptFilter);
+      next = util.getNextFocusableElement(container, true, this.#acceptFilter, true);
     } if (event.key === 'ArrowDown') {
-      next = util.getNextFocusableElement(container, false, this.#acceptFilter);
+      next = util.getNextFocusableElement(container, false, this.#acceptFilter, true);
     } else if (event.key === 'ArrowLeft' && type !== 'hour') {
       const nextContainer = container.previousElementSibling;
       next = nextContainer.querySelector('.selected') || nextContainer.children[0];

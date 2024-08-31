@@ -1,0 +1,36 @@
+:host {
+  display: block;
+  visibility: hidden;
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  background-color: var(--mc-surface);
+  box-shadow: var(--mc-elevation-1);
+  z-index: 11;
+  top: -34px;
+  left: calc(50% - 16px);
+  border-radius: 50%;
+  pointer-events: none;
+
+  transition: top, visibility;
+  transition-duration: var(--mc-motion-duration-short3);
+  transition-timing-function: var(--mc-motion-easing-standard-accelerate);
+  transition-behavior: allow-discrete;
+  transition-delay: 1s;
+}
+
+:host(.show) {
+  visibility: visible;
+  top: 12px;
+
+  transition: top;
+  transition-duration: var(--mc-motion-duration-medium2);
+  transition-timing-function: var(--mc-motion-easing-standard-decelerate);
+  transition-delay: 250ms;
+}
+
+mc-progress-circular {
+  width: 24px;
+  height: 24px;
+  margin: 4px;
+}

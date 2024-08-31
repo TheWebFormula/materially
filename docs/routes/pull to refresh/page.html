@@ -1,0 +1,31 @@
+<mc-pull-to-refresh onrefresh="console.log('refresh')"></mc-pull-to-refresh>
+
+<article>
+  <header>
+    <h1>Pull to refresh</h1>
+    <div class="page-subheader mc-font-title-medium">Pull to refresh allows you to trigger a refresh event and shows a spinner when you scroll past the top of the page on touch devices</div>
+  </header>
+
+  <div class="article-main">
+    <div class="article-content">
+
+      <section id="sizes" aria-label="Icon sizes">
+        <mc-card>  
+          <h2 slot="headline">Example</h2>
+          <div slot="subhead">Pull down on page to see! (touch device only)</div>
+
+          <code-block language="html"><pre>
+${`<mc-pull-to-refresh onrefresh="console.log('refresh')"></mc-pull-to-refresh>`}
+          </pre></code-block>
+          <code-block language="javascript">
+            <pre>
+${`document.querySelector('mc-pull-to-refresh').addEventListener('refresh', () => {
+  // Do work
+})`}
+          </pre>
+          </code-block>
+        </mc-card>
+      </section>
+    </div>
+  </div>
+</article>

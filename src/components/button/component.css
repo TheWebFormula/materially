@@ -10,7 +10,7 @@
   --mc-button-color-filled-tonal-local: var(--mc-button-color-filled-tonal, var(--mc-on-secondary-container));
   --mc-button-container-color-filled-tonal-local: var(--mc-button-container-color-filled-tonal, var(--mc-secondary-container));
   --mc-button-color-outlined-local: var(--mc-button-color-outlined, var(--mc-primary));
-  --mc-button-container-color-outlined-local: var(--mc-button-container-color-outlined, var(--mc-button-outlined-container-color));
+  --mc-button-container-color-outlined-local: var(--mc-button-container-color-outlined, transparent);
   --mc-button-outline-color-outlined-local: var(--mc-button-outline-color-outlined, var(--mc-outline));
 
   display: inline-flex;
@@ -176,4 +176,144 @@ mc-state-layer {
 
 :host([disabled]) mc-state-layer {
   --mc-state-layer-box-shadow: none;
+}
+
+
+
+
+@supports (background: paint(cut-corners)) {
+  :host([cut]) button {
+    position: relative;
+    border-radius: 0;
+    background-color: transparent;
+    --corner-radius: var(--mc-button-shape-local);
+    --stroke-weight: 1;
+  }
+
+  :host([cut]) button::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+
+  :host([cut]) mc-state-layer {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    --mc-state-layer-focus-color: none !important;
+    --mc-state-layer-hover-color: none !important;
+    --mc-state-layer-box-shadow: none !important;
+    --mc-state-layer-focus-box-shadow: none !important;
+    --mc-state-layer-hover-box-shadow: none !important;
+    --paint-color: black;
+    mask: paint(cut-corners);
+  }
+
+
+  :host(:not([disabled])[cut]:hover) button::before {
+    --paint-color: rgba(from var(--mc-primary) r g b / 8%);
+    background: paint(cut-corners);
+  }
+
+  :host(:not([disabled])[cut]:focus-visible) button::before {
+    --paint-color: rgba(from var(--mc-primary) r g b / 10%);
+    background: paint(cut-corners);
+  }
+
+
+
+  :host([filled][cut]) button {
+    --paint-color: var(--mc-button-container-color-filled-local);
+    background: paint(cut-corners);
+  }
+
+  :host(:not([disabled])[filled][cut]:hover) button {
+    filter: var(--mc-elevation-1-drop);
+  }
+
+  :host(:not([disabled])[filled][cut]:hover) button::before {
+    --paint-color: rgba(from var(--mc-on-primary) r g b / 8%);
+    background: paint(cut-corners);
+  }
+
+  :host(:not([disabled])[filled][cut]:focus-visible) button::before {
+    --paint-color: rgba(from var(--mc-on-primary) r g b / 10%);
+    background: paint(cut-corners);
+  }
+
+
+  :host([elevated][cut]) button {
+    --paint-color: var(--mc-button-container-color-elevated-local);
+    background: paint(cut-corners);
+    filter: var(--mc-elevation-1-drop);
+  }
+
+  :host(:not([disabled])[elevated][cut]:hover) button {
+    filter: var(--mc-elevation-2-drop);
+  }
+
+  :host(:not([disabled])[elevated][cut]:hover) button::before {
+    --paint-color: rgba(from var(--mc-primary) r g b / 8%);
+    background: paint(cut-corners);
+  }
+
+  :host(:not([disabled])[elevated][cut]:focus-visible) button::before {
+    --paint-color: rgba(from var(--mc-on-surface) r g b / 10%);
+    background: paint(cut-corners);
+  }
+
+
+  :host([filled-tonal][cut]) button {
+    --paint-color: var(--mc-button-container-color-filled-tonal-local);
+    background: paint(cut-corners);
+  }
+
+  :host(:not([disabled])[filled-tonal][cut]:hover) button {
+    filter: var(--mc-elevation-1-drop);
+  }
+
+  :host(:not([disabled])[filled-tonal][cut]:hover) button::before {
+    --paint-color: rgba(from var(--mc-on-secondary-container) r g b / 8%);
+    background: paint(cut-corners);
+  }
+
+  :host(:not([disabled])[filled-tonal][cut]:focus-visible) button::before {
+    --paint-color: rgba(from var(--mc-on-secondary-container) r g b / 10%);
+    background: paint(cut-corners);
+  }
+
+
+  :host([outlined][cut]) button {
+    --stroke-weight: 1;
+    --stroke-color: var(--mc-button-outline-color-outlined-local);
+    --paint-color: var(--mc-button-container-color-outlined-local);
+    background: paint(cut-corners);
+    background-color: transparent;
+    border: none;
+  }
+
+  :host(:not([disabled])[outlined][cut]:hover) button::before {
+    --stroke-weight: 1;
+    --stroke-color: transparent;
+    --paint-color: rgba(from var(--mc-primary) r g b / 8%);
+    background: paint(cut-corners);
+  }
+
+  :host(:not([disabled])[outlined][cut]:focus-visible) button::before {
+    --stroke-weight: 1;
+    --stroke-color: none;
+    --paint-color: rgba(from var(--mc-primary) r g b / 10%);
+    background: paint(cut-corners);
+  }
+
+  :host([disabled][filled][cut]) button,
+  :host([disabled][elevated][cut]) button,
+  :host([disabled][filled-tonal][cut]) button,
+  :host([disabled][outlined][cut]) button {
+    --paint-color: var(--mc-button-container-color-disabled-local);
+    background: paint(cut-corners);
+  }
 }

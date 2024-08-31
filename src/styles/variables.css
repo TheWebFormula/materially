@@ -54,6 +54,7 @@
   --mc-state-layer-opacity-pressed: 0.1;
   --mc-state-layer-opacity-dragged: 0.16;
   
+  --mc-shape-cut: 0;
   --mc-shape-extra-small: 4px;
   --mc-shape-extra-small-top: 4px 4px 0 0;
   --mc-shape-small: 8px;
@@ -206,9 +207,23 @@
     0px 1px 2px 0px rgba(from var(--mc-shadow) r g b / 30%),
     0px 1px 3px 1px rgba(from var(--mc-shadow) r g b / 15%);
 
+  --mc-elevation-1-drop:
+    drop-shadow(0px 1px 1px rgba(from var(--mc-shadow) r g b / 15%))
+    drop-shadow(0px 1px 1px rgba(from var(--mc-shadow) r g b / 15%))
+    drop-shadow(0px 1px 2px rgba(from var(--mc-shadow) r g b / 15%))
+    drop-shadow(0px 2px 1px rgba(from var(--mc-shadow) r g b / 15%));
+
   --mc-elevation-2:
     0px 1px 2px 0px rgba(from var(--mc-shadow) r g b / 30%),
     0px 2px 6px 2px rgba(from var(--mc-shadow) r g b / 15%);
+
+  --mc-elevation-2-drop:
+    drop-shadow(0px 1px 1px rgba(from var(--mc-shadow) r g b / 15%))
+    drop-shadow(0px 1px 1px rgba(from var(--mc-shadow) r g b / 15%))
+    drop-shadow(0px 2px 3px rgba(from var(--mc-shadow) r g b / 15%))
+    drop-shadow(0px 2px 2px rgba(from var(--mc-shadow) r g b / 15%))
+    drop-shadow(0px 2px 1px rgba(from var(--mc-shadow) r g b / 15%))
+    drop-shadow(0px 2px 1px rgba(from var(--mc-shadow) r g b / 15%));
 
   /* shift shadow vertically. Used for filter selects when surface is above textfield to reduce shadow covering */
   --mc-elevation-2-reverse:

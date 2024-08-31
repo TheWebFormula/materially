@@ -2,8 +2,10 @@ import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import '../state-layer/index.js';
 import dialog from '../dialog/service.js';
+import './angled-corners.js';
 
 const targetValues = ['_blank', '_parent', '_self', '_top'];
+let isCut;
 
 export default class MCButtonElement extends HTMLComponentElement {
   static tag = 'mc-button';
@@ -42,6 +44,8 @@ export default class MCButtonElement extends HTMLComponentElement {
     this.role = 'button';
     this.tabIndex = this.hasAttribute('tabindex') ? this.getAttribute('tabindex') : 0;
     this.#internals = this.attachInternals();
+    if (isCut === undefined) isCut = getComputedStyle(this).getPropertyValue('--mc-shape-cut') === '1';
+    else if (isCut) this.setAttribute('cut', '');
     this.render();
     this.#button = this.shadowRoot.querySelector('button');
   }

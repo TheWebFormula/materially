@@ -102,17 +102,6 @@ ${`<!DOCTYPE html>
 
 
 
-<!--
-  Make panes scroll in stead of document
-  This means your document body will always be 100vh
-  This also means top an bottom app bars will always show.
--->
-<mc-pane-container scroll>
-  <mc-pane>...</mc-pane>
-</mc-pane-container>
-
-
-
 <!-- Fixed panes lock pane width based on content -->
 <mc-pane-container>
   <mc-pane>...</mc-pane>
@@ -120,10 +109,33 @@ ${`<!DOCTYPE html>
 </mc-pane-container>
 
 
-
 <!-- Resizable panes -->
 <mc-pane-container resize>
   <mc-pane>...</mc-pane>
+  <mc-pane>...</mc-pane>
+</mc-pane-container>
+
+
+<!-- Default percent based size -->
+<mc-pane-container default-percent="75">
+  <mc-pane>...</mc-pane> <!-- 75% -->
+  <mc-pane>...</mc-pane> <!-- 25% -->
+</mc-pane-container>
+
+
+<!-- Remember resize state. Stored in local storage -->
+<mc-pane-container resize remember>
+  <mc-pane>...</mc-pane>
+  <mc-pane>...</mc-pane>
+</mc-pane-container>
+
+
+<!--
+  Make panes scroll in stead of document
+  This means your document body will always be 100vh
+  This also means top an bottom app bars will always show.
+-->
+<mc-pane-container scroll>
   <mc-pane>...</mc-pane>
 </mc-pane-container>
 

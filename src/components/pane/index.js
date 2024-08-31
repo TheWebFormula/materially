@@ -16,6 +16,7 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
   #pane2;
   #initialPageX;
   #initialWidth;
+  #memory = [];
   #pointerUp_bound = this.#pointerUp.bind(this);
   #pointerDown_bound = this.#pointerDown.bind(this);
   #pointerMove_bound = this.#pointerMove.bind(this);
@@ -47,7 +48,9 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
 
   static get observedAttributesExtended() {
     return [
-      ['resize', 'boolean']
+      ['resize', 'boolean'],
+      ['remember', 'boolean'],
+      ['default-percent', 'int']
     ];
   }
 
@@ -66,7 +69,7 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
     this.toggleAttribute('resize', !!value);
     if (!!value && this.#pane2) {
       this.#resizeHandle.addEventListener('pointerdown', this.#pointerDown_bound);
-      this.#resizeObserver = new ResizeObserver((entries) => {
+      this.#resizeObserver = new ResizeObserver(() => {
         this.#resize();
       });
       this.#resizeObserver.observe(this.#pane2);
@@ -80,6 +83,36 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
       window.removeEventListener('pointerup', this.#pointerDown_bound);
       window.removeEventListener('pointermove', this.#pointerMove_bound);
     }
+  }
+
+  get remember() {
+    return this.hasAttribute('remember');
+  }
+  set remember(value) {
+    if (!!value) this.#retrieveMemory();
+  }
+
+  get hasMemory() {
+    if (!this.remember) return false;
+    return !!localStorage.getItem('mc_pane_memory');
+  }
+
+  get defaultPercent() {
+    return this.getAttribute('resize');
+  }
+  set defaultPercent(value) {
+    if (!value || this.hasMemory) return;
+
+    const one = parseInt(value);
+    const two = 100 - one;
+    this.#pane1.style.flexBasis = `${one * 100}%`;
+    if (this.#pane2) this.#pane2.style.flexBasis = `${two * 100}%`;
+  }
+
+  resetMemory() {
+    this.#pane1.style.flexBasis = '';
+    if (this.#pane2) this.#pane2.style.flexBasis = '';
+    this.#storeMemory();
   }
 
   #resize() {
@@ -110,10 +143,39 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
     }
 
     this.#resizeHandle.style.left = `${this.#pane1.offsetWidth + 12}px`;
+    this.#storeMemory();
   }
 
   #windowStateChange({ detail }) {
     this.classList.toggle('window-compact', detail.state === device.COMPACT);
+  }
+
+  #retrieveMemory() {
+    this.#memory = JSON.parse(localStorage.getItem('mc_pane_memory') || '[]');
+    this.#memory.forEach(v => {
+      if (v.id === '1') this.#pane1.style.flexBasis = v.flexBasis;
+      else if (this.#pane2 && v.id === '2') this.#pane2.style.flexBasis = v.flexBasis;
+    });
+  }
+
+  #storeMemory() {
+    let pane1Memory = this.#memory.find(v => v.id === '1');
+    if (!pane1Memory) {
+      pane1Memory = { id: '1' };
+      this.#memory.push(pane1Memory);
+    }
+    pane1Memory.flexBasis = this.#pane1.style.flexBasis;
+
+    if (this.#pane2) {
+      let pane2Memory = this.#memory.find(v => v.id === '2');
+      if (!pane2Memory) {
+        pane2Memory = { id: '2' };
+        this.#memory.push(pane2Memory);
+      }
+      pane2Memory.flexBasis = this.#pane2.style.flexBasis;
+    }
+
+    localStorage.setItem('mc_pane_memory', JSON.stringify(this.#memory));
   }
 }
 

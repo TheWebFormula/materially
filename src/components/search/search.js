@@ -17,8 +17,6 @@ const isIncrementalSupported = 'incremental' in document.createElement('input');
 const speechRecognitionSupported = 'SpeechRecognition' in window || 'webkitSpeechRecognition' in window;
 
 
-// TODO filter chip scroll
-
 class MCSearchElement extends HTMLComponentElement {
   static tag = 'mc-search';
   static useShadowRoot = true;

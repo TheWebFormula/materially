@@ -6,12 +6,6 @@ import util from '../../helpers/util.js';
 import '../anchor/index.js';
 
 
-/* TODO fix top position when on mobile.
- *    This is caused when grid main area is wider than available space.
- *    I added max width restrictions to the page-container so this may be fixed
- *    I was seeing this on some doc pages in mobile view
- */
-
 class MCNavigationDrawerElement extends MCSideSheetElement {
   static tag = 'mc-navigation-drawer';
   static styleSheets = [sideSheetStyles, styles];

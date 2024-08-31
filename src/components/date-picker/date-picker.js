@@ -246,7 +246,6 @@ class MCDatePickerElement extends MCSurfaceElement {
     }
   }
 
-  // TODO reset option from filter?
   #show() {
     this.#dirty = false;
     this.classList.remove('input-view');

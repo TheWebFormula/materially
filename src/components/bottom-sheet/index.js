@@ -117,7 +117,7 @@ export default class MCBottomSheetElement extends HTMLComponentElement {
       this.#surface.addEventListener('swipeend', this.#swipeEnd_bound, { signal: this.#abort.signal });
     }
 
-    // TODO figure why this is needed if page containing is initial load vs spa navigated to
+    // TODO figure why this is needed. Fixes page is initial load vs spa navigated to
     setTimeout(() => {
       this.#position = this.#initialPosition;
     }, 10);

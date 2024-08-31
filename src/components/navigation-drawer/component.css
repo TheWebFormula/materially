@@ -14,7 +14,7 @@
 }
 
 :host([modal]) {
-  z-index: 10;
+  z-index: 23;
 }
 
 slot[name="header"] {

@@ -4,7 +4,6 @@ import fuzzySearch from '../../helpers/fuzzySearch.js'
 import '../textfield/index.js';
 import '../menu/index.js';
 
-// TODO aria role. seems dialog is causing issues
 
 class MCSelectElement extends HTMLComponentElement {
   static tag = 'mc-select';

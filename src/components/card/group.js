@@ -2,7 +2,8 @@ import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './group.css' assert { type: 'css' };
 import device from '../../helpers/device.js';
 
-// TODO fix wonkyness when resizing
+// TODO fix wonkyness when resizing. Card placement can get messed up (empty gaps)
+// TODO fix fullscreen transition
 
 export default class MCCardGroupElement extends HTMLComponentElement {
   static tag = 'mc-card-group';

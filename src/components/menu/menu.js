@@ -3,7 +3,7 @@ import surfaceStyles from '../surface/component.css' assert { type: 'css' };
 import styles from './menu.css' assert { type: 'css' };
 import util from '../../helpers/util.js'
 
-// TODO figure out aria role. Seems using dialog is problematic
+
 export default class MCMenuElement extends MCSurfaceElement {
   static tag = 'mc-menu';
   static styleSheets = [surfaceStyles, styles];

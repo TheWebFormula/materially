@@ -18,7 +18,6 @@ const speechRecognitionSupported = 'SpeechRecognition' in window || 'webkitSpeec
 
 
 // TODO filter chip scroll
-// TODO aria role. Seems dialog is causing issues
 
 class MCSearchElement extends HTMLComponentElement {
   static tag = 'mc-search';

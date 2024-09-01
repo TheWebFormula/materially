@@ -19,8 +19,11 @@ ${`<mc-pull-to-refresh onrefresh="console.log('refresh')"></mc-pull-to-refresh>`
           </pre></code-block>
           <code-block language="javascript">
             <pre>
-${`document.querySelector('mc-pull-to-refresh').addEventListener('refresh', () => {
+${`const element = document.querySelector('mc-pull-to-refresh');
+
+element.addEventListener('refresh', () => {
   // Do work
+  element.resolve();
 })`}
           </pre>
           </code-block>

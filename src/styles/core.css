@@ -83,3 +83,14 @@ mc-pane::-webkit-resizer {
     opacity: 0;
   }
 }
+
+
+/* Used to simulate overscroll without triggering browser refresh */
+html.pull-to-refresh-active {
+  overscroll-behavior: none;
+}
+
+html.pull-to-refresh-inactive body {
+  transition: margin-top;
+  transition-duration: 200ms;
+}

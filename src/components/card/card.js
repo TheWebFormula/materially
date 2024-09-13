@@ -54,7 +54,6 @@ export default class MCCardElement extends HTMLComponentElement {
 
   template() {
     return /*html*/`
-      <div class="placeholder"></div>
       <slot name="swipe-action"></slot>
       <div class="container">
         <mc-icon-button filled class="fullscreen-close" aria-label="fullscreen-close">
@@ -151,6 +150,7 @@ export default class MCCardElement extends HTMLComponentElement {
     } else if (name === 'image') {
       const hasContent = event.target.assignedElements().length > 0;
       this.classList.toggle('has-image', hasContent);
+      this.#getImageSize();
     } else if (name === 'swipe-action') {
       const hasSwipeAction = event.target.assignedElements().length > 0;
       event.target.classList.toggle('has-swipe-action', hasSwipeAction);
@@ -166,12 +166,13 @@ export default class MCCardElement extends HTMLComponentElement {
       event.target.classList.toggle('has-content', event.target.assignedElements().length > 0);
     }
   }
-
+  
 
   #expandedClick() {
     const isCompact = device.state === 'compact';
     const expanded = this.shadowRoot.querySelector('[name="expanded"]');
     if (!this.hasAttribute('open')) {
+      const initialHeight = this.offsetHeight;
       const { clientHeight } = document.documentElement;
       const bounds = expanded.getBoundingClientRect();
       let height = expanded.scrollHeight + 16;
@@ -185,13 +186,16 @@ export default class MCCardElement extends HTMLComponentElement {
       if (height < 80) height = 80;
 
       expanded.style.height = `${height}px`;
-      if (!isCompact) this.style.marginBottom = `${-height}px`;
+      console.log(bounds);
+      if (!isCompact) this.style.height = `${initialHeight}px`;
 
       window.addEventListener('keydown', this.#keydown_bound, { signal: this.#abort.signal });
       window.addEventListener('click', this.#clickOutside_bound, { signal: this.#abort.signal });
     } else {
       expanded.style.height = '';
-      if (!isCompact) this.style.marginBottom = '';
+      if (!isCompact) util.transitionendAsync(this).then(() => {
+        this.style.height = '';
+      });
       window.removeEventListener('keydown', this.#keydown_bound);
       window.removeEventListener('click', this.#clickOutside_bound);
     }
@@ -216,9 +220,9 @@ export default class MCCardElement extends HTMLComponentElement {
     window.removeEventListener('keydown', this.#keydown_bound);
     this.shadowRoot.querySelector('.fullscreen-close').removeEventListener('click', this.#fullscreenCloseClick_bound);
 
+
+    const bounds = this.getBoundingClientRect();
     const container = this.shadowRoot.querySelector('.container');
-    const placeholder = this.shadowRoot.querySelector('.placeholder');
-    const bounds = placeholder.getBoundingClientRect();
     container.style.top = `${bounds.top}px`;
     container.style.left = `${bounds.left}px`;
     container.style.width = `${bounds.width}px`;
@@ -226,7 +230,6 @@ export default class MCCardElement extends HTMLComponentElement {
 
     this.classList.add('fullscreen-closing');
     await util.transitionendAsync(container);
-
 
     container.style.top = '';
     container.style.left = '';
@@ -239,16 +242,16 @@ export default class MCCardElement extends HTMLComponentElement {
   #fullscreenClick() {
     if (this.hasAttribute('open')) return;
 
-    this.style.setProperty('--mc-card-fullscreen-img-height-previous', `${this.querySelector('img').offsetHeight}px`);
+    const maxHeight = Math.min(this.querySelector('img').offsetHeight, 300);
+    this.style.setProperty('--mc-card-fullscreen-img-height-max', `${maxHeight}px`);
+    const bounds = this.getBoundingClientRect();
+    this.style.height = `${bounds.height}px`;
+    this.style.width = `${bounds.width}px`;
     const container = this.shadowRoot.querySelector('.container');
-    const bounds = container.getBoundingClientRect();
     container.style.top = `${bounds.top}px`;
     container.style.left = `${bounds.left}px`;
     container.style.width = `${bounds.width}px`;
     container.style.height = `${bounds.height}px`;
-    const placeholder = this.shadowRoot.querySelector('.placeholder');
-    placeholder.style.width = `${bounds.width}px`;
-    placeholder.style.height = `${bounds.height}px`;
 
     this.setAttribute('open', '');
 
@@ -317,6 +320,23 @@ export default class MCCardElement extends HTMLComponentElement {
 
   #windowStateChange() {
     this.classList.toggle('window-compact', device.state === device.COMPACT);
+  }
+
+  #getImageSize() {
+    const img = this.querySelector('img');
+    if (!img.complete) {
+      img.onload = () => this.#getImageSize();
+      return;
+    }
+    const height = img.height;
+    const width = img.width;
+    const aspectRatio = height / width;
+    const adjustedHeight = this.offsetWidth * aspectRatio;
+    const minHeight = Math.min(120, adjustedHeight);
+    this.style.setProperty('--mc-card-fullscreen-img-height-min', `${minHeight}px`);
+    requestAnimationFrame(() => {
+      this.shadowRoot.querySelector('[name=image]').classList.add('animate');
+    });
   }
 }
 

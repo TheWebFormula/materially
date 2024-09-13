@@ -33,6 +33,7 @@
     "./components/navigation-bar": "./src/components/navigation-bar/index.js",
     "./components/navigation-drawer": "./src/components/navigation-drawer/index.js",
     "./components/navigation-rail": "./src/components/navigation-rail/index.js",
+    "./components/pane": "./src/components/pane/index.js",
     "./components/progress-circular": "./src/components/progress-circular/index.js",
     "./components/progress-linear": "./src/components/progress-linear/index.js",
     "./components/radio": "./src/components/radio/index.js",
@@ -72,7 +73,7 @@
   },
   "homepage": "https://github.com/TheWebFormula/materially#readme",
   "devDependencies": {
-    "@thewebformula/lithe": "^0.7.10",
+    "@thewebformula/lithe": "^0.8.0",
     "@thewebformula/materially": "file:./",
     "esbuild": "^0.23.1"
   },

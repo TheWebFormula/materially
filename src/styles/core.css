@@ -94,3 +94,9 @@ html.pull-to-refresh-inactive body {
   transition: margin-top;
   transition-duration: 200ms;
 }
+
+/* Fix for view transition stacking order. This includes the elements into the new stacking order */
+mc-top-app-bar,
+mc-bottom-app-bar {
+  view-transition-name: stacking-order-fix;
+}

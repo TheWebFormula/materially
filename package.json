@@ -1,6 +1,6 @@
 {
   "name": "@thewebformula/materially",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Material design web components",
   "type": "module",
   "main": "./src/index.js",

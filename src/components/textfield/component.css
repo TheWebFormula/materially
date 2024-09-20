@@ -226,6 +226,10 @@ textarea[rows="1"] {
   animation: mc-textfield-label-reverse;
   animation-duration: var(--mc-motion-duration-short3);
   animation-timing-function: var(--mc-motion-easing-standard);
+
+  &.no-animation {
+    animation-duration: 0s !important;
+  }
 }
 
 .text-field.trailing-icon label,
@@ -259,13 +263,14 @@ textarea[rows="1"] {
 .text-field .input:not(:placeholder-shown) + label {
   font-size: var(--mc-font-small-body-size);
   top: 4px;
+
   animation: mc-textfield-label;
   animation-duration: var(--mc-motion-duration-short3);
   animation-timing-function: var(--mc-motion-easing-standard);
-}
 
-.text-field label.no-animation {
-  animation-duration: 0ms !important;
+  &.no-animation {
+    animation-duration: 0s !important;
+  }
 }
 
 :host .text-field slot[name="leading-icon"]::slotted(mc-icon) {
@@ -378,8 +383,13 @@ textarea[rows="1"] {
 
 :host(.outlined) .text-field label {
   transform-origin: left top;
-  animation: mc-textfield-label-outlined-reverse var(--mc-motion-duration-short3);
+  animation: mc-textfield-label-outlined-reverse;
+  animation-duration: var(--mc-motion-duration-short3);
   animation-timing-function: var(--mc-motion-easing-standard);
+
+  &.no-animation {
+    animation-duration: 0s !important;
+  }
 }
 
 :host(.outlined.raise-label) .text-field label,
@@ -389,8 +399,14 @@ textarea[rows="1"] {
   font-size: var(--mc-font-small-body-size);
   top: -12px;
   left: 14px;
-  animation: mc-textfield-label-outlined var(--mc-motion-duration-short3);
+
+  animation: mc-textfield-label-outlined;
+  animation-duration: var(--mc-motion-duration-short3);
   animation-timing-function: var(--mc-motion-easing-standard);
+
+  &.no-animation {
+    animation-duration: 0s !important;
+  }
 }
 
 .text-field .outlined-border-container {

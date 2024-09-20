@@ -19,11 +19,12 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
   #focusKeydown_bound = this.#focusKeydown.bind(this);
 
 
+
   constructor() {
     super();
 
     device.hasNavigationDrawer = true;
-    
+
     this.role = 'navigation';
     this.alignLeft = true;
     this.scrim = true;
@@ -60,7 +61,7 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
       }
     }
 
-    if (this.modal && this.open) setTimeout(() => this.open = false, 100); 
+    if (this.modal && this.open) setTimeout(() => this.open = false, 100);
   }
 
   #windowStateChange({ detail }) {
@@ -68,13 +69,14 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
       case device.EXPANDED:
         this.open = true;
 
-        // scroll anchor into view if needed
         requestAnimationFrame(() => {
-          let current = this.querySelector('.current');
-          let scrollContainer = this.shadowRoot.querySelector('.surface-content');
-          let bounds = current.offsetTop - scrollContainer.offsetHeight + 56;
-          if (bounds > 0) {
-            scrollContainer.scrollTop = current.offsetTop - (scrollContainer.offsetHeight / 2) + 28;
+          const current = this.querySelector('.current');
+          if (current) {
+            let bounds = current.offsetTop - this.offsetHeight + 56;
+            if (bounds > 0) {
+              let scrollContainer = this.shadowRoot.querySelector('.surface-content');
+              scrollContainer.scrollTop = current.offsetTop - (this.offsetHeight / 2) + 28;
+            }
           }
         });
         break;

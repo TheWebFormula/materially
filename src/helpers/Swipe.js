@@ -173,13 +173,13 @@ const MCSwipe = class MCSwipe {
     let clientY = this.#getClientY(event);
     let dx = clientX - this.#startX;
     let dy = clientY - this.#startY;
-    
+
     // end if user is scrolling
     if (this.#horizontalOnly && Math.abs(dy) > this.#horizontalScrollThreshold && Math.abs(dx) < this.#moveStartThreshold) {
       this.#end(event);
       return;
     }
-    
+
     let distance = Math.sqrt(dx * dx + dy * dy);
     let deltaDistanceX = clientX - this.#lastX;
     let deltaDistanceY = clientY - this.#lastY;
@@ -197,7 +197,7 @@ const MCSwipe = class MCSwipe {
   }
 }
 
-class SwipeEvent extends TouchEvent {
+class SwipeEvent extends PointerEvent {
   constructor(event, direction, distance, velocity) {
     super('swipe', {
       bubbles: true,
@@ -214,7 +214,7 @@ class SwipeEvent extends TouchEvent {
   }
 }
 
-class SwipeMoveEvent extends TouchEvent {
+class SwipeMoveEvent extends PointerEvent {
   constructor(event, distance, distanceX, distanceY, deltaDistanceX, deltaDistanceY) {
     super('swipemove', {
       bubbles: true,
@@ -235,7 +235,7 @@ class SwipeMoveEvent extends TouchEvent {
   }
 }
 
-class SwipeStartEvent extends TouchEvent {
+class SwipeStartEvent extends PointerEvent {
   constructor(event) {
     super('swipestart', {
       bubbles: true,
@@ -249,7 +249,7 @@ class SwipeStartEvent extends TouchEvent {
   }
 }
 
-class SwipeEndEvent extends TouchEvent {
+class SwipeEndEvent extends PointerEvent {
   constructor(event, direction, distance, distanceX, distanceY, velocity, isSwipe) {
     super('swipeend', {
       bubbles: true,

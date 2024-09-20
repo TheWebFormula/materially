@@ -53,8 +53,7 @@
   --mc-state-layer-opacity-focus: 0.1;
   --mc-state-layer-opacity-pressed: 0.1;
   --mc-state-layer-opacity-dragged: 0.16;
-  
-  --mc-shape-cut: 0;
+
   --mc-shape-extra-small: 4px;
   --mc-shape-extra-small-top: 4px 4px 0 0;
   --mc-shape-small: 8px;
@@ -204,7 +203,7 @@
 
 
   /* TODO There seems to be a bug with relative color syntax on ios chrome. Need to check this */
-  
+
   /* --mc-elevation-1:
     0px 1px 2px 0px rgba(from var(--mc-shadow) r g b / 30%),
     0px 1px 3px 1px rgba(from var(--mc-shadow) r g b / 15%); */

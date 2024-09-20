@@ -152,7 +152,7 @@ class MCTextfieldElement extends HTMLComponentElement {
     setTimeout(() => {
       this.shadowRoot.querySelector('label').classList.remove('no-animation');
       this.shadowRoot.querySelector('.outlined-notch').classList.remove('no-animation');
-    }, 150);
+    }, 200);
 
   }
 

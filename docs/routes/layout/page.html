@@ -18,10 +18,10 @@
     <div class="article-content">
 
       <section id="regions" aria-label="Reagions">
-        <mc-card>
+        <mc-card style="--mc-card-container-color: var(--mc-surface-container-highest);">
           <h2 slot="headline">Layout regions</h2>
           <div slot="supporting-text">There are four main regions. Page layout is controlled with a CSS grid. The components will automatically assign themselves to the correct region.</div>
-          
+
           <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap;">
             <iframe src="./routes/layout/basic-layout.html" title="Layout Basic" style="height: 360px; width: 100%;"></iframe>
           </div>
@@ -36,14 +36,14 @@ ${`<!--
   <header>...</header>
 
   <!-- Hide content while site loads to prevent layout shifts -->
-  <style>    
+  <style>
     body:not(.mc-initiated) { visibility: hidden; }
   </style>
 
   <body>
     <mc-top-app-bar>...</mc-top-app-bar>
     <mc-navigation-drawer>...</mc-navigation-drawer>
-    
+
     <mc-pane-container>
       <mc-pane>...</mc-pane>
     </mc-pane-container>
@@ -72,7 +72,7 @@ ${`<!--
 
 
       <section id="panes" aria-label="Panes">
-        <mc-card>
+        <mc-card style="--mc-card-container-color: var(--mc-surface-container-highest);">
           <h2 slot="headline">Panes</h2>
           <div slot="supporting-text">Panes are used to group the UI</div>
 
@@ -87,12 +87,24 @@ ${`<!DOCTYPE html>
   <body>
     <mc-top-app-bar>...</mc-top-app-bar>
     <mc-navigation-drawer>...</mc-navigation-drawer>
-    
-    <mc-pane-container>
+
+    <!--
+      [scroll]
+      makes the panes scroll individually. Otherwise they will scroll as one.
+
+      [default-percent]
+      Percentage width of pane 1
+
+      [resize]
+      Adds draggable bar between pane 1 and pane 2
+    -->
+    <mc-pane-container resize default-percent="75" scroll>
       <mc-pane>...</mc-pane>
       <!--
-        You can have multiple panes
-        <mc-pane>...</mc-pane>
+        You can have 2 panes
+
+        Allow collaspable second pane
+        <mc-pane collapsible>...</mc-pane>
       -->
     </mc-pane-container>
 
@@ -175,7 +187,7 @@ ${`<!DOCTYPE html>
             <li>Exapnded</li>
           </ul>
           <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap;">
-            
+
           </div>
 
           <code-block language="html"><pre>

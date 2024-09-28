@@ -16,6 +16,7 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
   #pane2;
   #initialPageX;
   #initialWidth;
+  #collapsiblePane2 = false;
   #memory = [];
   #pointerUp_bound = this.#pointerUp.bind(this);
   #pointerDown_bound = this.#pointerDown.bind(this);
@@ -37,6 +38,8 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
     if (panes.length > 2 && this.resize) console.warn('mc-pane-container only supports resizing for 2 mc-pane elements');
 
     if (document.querySelector('mc-top-app-bar')) this.classList.add('top-app-bar-exists');
+
+    this.#collapsiblePane2 = this.#pane2?.hasAttribute('collapsible');
   }
 
   template() {
@@ -60,6 +63,12 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
 
   connectedCallback() {
     // window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound);
+
+    if (this.resize) {
+      // for simplicity we are subtracking 80px for bottom app bar
+      const top = (((window.innerHeight - 80) - this.offsetTop) / 2) - 28;
+      this.#resizeHandle.style.top = `${top}px`;
+    }
   }
 
   get resize() {
@@ -138,8 +147,14 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
     this.#pane1.style.flexBasis = `${one * 100}%`;
     this.#pane2.style.flexBasis = `${two * 100}%`;
 
-    if (this.#pane2.hasAttribute('collapsible') && this.#pane2.offsetWidth < 64) {
-      this.#pane2.style.flexBasis = 0;
+    if (this.#collapsiblePane2) {
+      this.#pane2.style.minWidth = 0;
+
+      if (this.#pane2.offsetWidth <= 32) {
+        this.#pane2.style.flexBasis = '0%';
+        this.#pane1.style.flexBasis = '100%';
+        this.#pane2.style.padding = 0;
+      }
     }
 
     this.#resizeHandle.style.left = `${this.#pane1.offsetWidth + 12}px`;

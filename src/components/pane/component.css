@@ -16,11 +16,6 @@
   height: 100%;
 }
 
-:host(.window-compact) {
-  padding: 0;
-  gap: 0;
-}
-
 ::slotted(mc-pane) {
   max-width: 100%;
   padding: 16px;
@@ -38,7 +33,7 @@
   overflow: auto;
 }
 
-:host(:not([resize])) ::slotted(mc-pane:not([fixed])) {
+/* :host(:not([resize])) ::slotted(mc-pane:not([fixed])) {
   flex: 1;
 }
 
@@ -48,12 +43,7 @@
 
 :host([resize]) ::slotted(mc-pane[fixed]) {
   max-width: max-content;
-}
-
-:host([resize]) ::slotted(mc-pane[collapsible]) {
-  flex-shrink: 0;
-  min-width: 0;
-}
+} */
 
 :host([resize]) ::slotted(mc-pane[collapsible]:not([scroll])) {
   overflow: hidden;

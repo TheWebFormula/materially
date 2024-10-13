@@ -96,7 +96,7 @@ html.pull-to-refresh-inactive body {
 }
 
 /* Fix for view transition stacking order. This includes the elements into the new stacking order */
-mc-top-app-bar,
+/* mc-top-app-bar,
 mc-bottom-app-bar {
   view-transition-name: stacking-order-fix;
-}
+} */

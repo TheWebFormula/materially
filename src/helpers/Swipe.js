@@ -209,8 +209,6 @@ class SwipeEvent extends PointerEvent {
     this.direction = direction;
     this.distance = distance;
     this.velocity = velocity;
-    this.clientX = event.clientX;
-    this.clientY = event.clientY;
   }
 }
 
@@ -230,8 +228,6 @@ class SwipeMoveEvent extends PointerEvent {
     this.deltaDistanceY = deltaDistanceY;
     this.directionX = distanceX === 0 ? 0 : distanceX > 0 ? 1 : -1;
     this.directionY = distanceY === 0 ? 0 : distanceY > 0 ? 1 : -1;
-    this.clientX = event.clientX;
-    this.clientY = event.clientY;
   }
 }
 
@@ -243,9 +239,6 @@ class SwipeStartEvent extends PointerEvent {
       targetTouches: event.targetTouches,
       touches: event.touches
     });
-
-    this.clientX = event.clientX;
-    this.clientY = event.clientY;
   }
 }
 
@@ -266,8 +259,6 @@ class SwipeEndEvent extends PointerEvent {
     this.directionY = distanceY === 0 ? 0 : distanceY > 0 ? 1 : -1;
     this.velocity = velocity;
     this.swipe = isSwipe;
-    this.clientX = event.clientX;
-    this.clientY = event.clientY;
   }
 }
 

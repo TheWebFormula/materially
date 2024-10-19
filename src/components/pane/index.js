@@ -1,8 +1,8 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import device from '../../helpers/device.js';
+import util from '../../helpers/util.js';
 
-// TODO save pane width on resize
 
 export default class MCPaneContainerElement extends HTMLComponentElement {
   static tag = 'mc-pane-container';
@@ -23,6 +23,7 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
   #pointerMove_bound = this.#pointerMove.bind(this);
   #resizeObserver;
   #windowStateChange_bound = this.#windowStateChange.bind(this);
+  #storeMemory_debounced = util.debounce(this.#storeMemory.bind(this), 200);
 
 
   constructor() {
@@ -158,7 +159,7 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
     }
 
     this.#resizeHandle.style.left = `${this.#pane1.offsetWidth + 12}px`;
-    this.#storeMemory();
+    this.#storeMemory_debounced();
   }
 
   #windowStateChange({ detail }) {
@@ -191,6 +192,7 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
     }
 
     localStorage.setItem('mc_pane_memory', JSON.stringify(this.#memory));
+    window.dispatchEvent(new CustomEvent('mcpaneresived', { detail: structuredClone(this.#memory) }));
   }
 }
 

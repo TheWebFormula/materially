@@ -13,6 +13,8 @@ class MCProgressLinearElement extends HTMLComponentElement {
   #indeterminate = false;
   #activeBar;
   #inactiveBar;
+  #percent = 0;
+  #firstUpdate = true;
 
 
   constructor() {
@@ -76,9 +78,17 @@ class MCProgressLinearElement extends HTMLComponentElement {
       this.#activeBar.style.transform = '';
       this.#inactiveBar.style.left = '';
     } else {
-      const percent = this.value / this.max;
-      this.#activeBar.style.transform = `scaleX(${percent})`;
-      this.#inactiveBar.style.left = `${percent * 100}%`;
+      // calculate animation duration for change in percent
+      const newPercent = this.value / this.max;
+      const diff = newPercent - this.#percent;
+      this.#percent = newPercent;
+      const widthChange = Math.max(0, diff * this.offsetWidth);
+      const duration = this.#firstUpdate ? 0 : Math.min(Math.round(widthChange * 4), 700);
+      this.#firstUpdate = false;
+
+      this.style.setProperty('--mc-progress-linear-transition-duration', `${duration}ms`);
+      this.#activeBar.style.transform = `scaleX(${newPercent})`;
+      this.#inactiveBar.style.left = `${newPercent * 100}%`;
     }
   }
 }

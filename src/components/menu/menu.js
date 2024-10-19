@@ -50,8 +50,6 @@ export default class MCMenuElement extends MCSurfaceElement {
 
   onShow() {
     super.onShow();
-    let focusItem = this.querySelector('[selected]') || this.querySelector('[tabindex]:not([tabindex="-1"])');
-    if (focusItem) focusItem.focus();
     window.addEventListener('keydown', this.#openKeydown_bound, { signal: this.#abort.signal });
     this.addEventListener('click', this.#click_bound, { signal: this.#abort.signal });
   }
@@ -73,7 +71,14 @@ export default class MCMenuElement extends MCSurfaceElement {
   }
 
   #openKeydown(e) {
-    if (e.key === 'Enter' || e.keyCode === 32) {
+    // focus on first element and disable tab if focus exists inside menu
+    if (e.key === 'Tab') {
+      e.preventDefault();
+
+      if (document.activeElement && this.contains(document.activeElement)) return;
+      let focusItem = this.querySelector('[selected]') || this.querySelector('[tabindex]:not([tabindex="-1"])');
+      if (focusItem) focusItem.focus();
+    } else if (e.key === 'Enter' || e.keyCode === 32) {
       if (e.target.nodeName === 'MC-MENU-ITEM' || e.target.nodeName === 'MC-OPTION' || e.target.nodeName === 'MC-SEARCH-OPTION') e.target.shadowRoot.querySelector('mc-state-layer').triggerRipple();
     } else if (e.code === 'ArrowDown') {
       let parent = this;

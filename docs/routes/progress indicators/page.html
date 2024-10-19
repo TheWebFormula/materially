@@ -22,8 +22,8 @@
           <div slot="supporting-text">There are two types of progress indicators: Linear and circular</div>
 
           <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap; flex-direction: column;">
-            <mc-progress-linear value="0.4"></mc-progress-linear>
-            <mc-progress-circular value="0.4" style="margin: 0 auto;"></mc-progress-circular>
+            <mc-progress-linear value="${this.linearPercent}"></mc-progress-linear>
+            <mc-progress-circular value="${this.linearPercent}" style="margin: 0 auto;"></mc-progress-circular>
           </div>
 
           <code-block language="html"><pre>

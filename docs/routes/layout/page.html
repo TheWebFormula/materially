@@ -170,6 +170,13 @@ ${`<!DOCTYPE html>
   <mc-pane no-padding>...</mc-pane>
 </mc-pane-container>`}
             </pre></code-block>
+
+            <code-block language="javascript">
+              <pre>
+${`// capture pane positions for storing
+// Panes will store their sized in localstorage also
+window.addEventListener('mcpaneresived', e => console.log(e.details));`}
+          </pre></code-block>
         </mc-card>
       </section>
 

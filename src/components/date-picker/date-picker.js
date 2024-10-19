@@ -608,7 +608,7 @@ class MCDatePickerElement extends MCSurfaceElement {
     const active = this.#getDaysContainerAnimatable(true);
     const alt = this.#getDaysContainerAnimatable(false);
     
-    // TODO fix this. Accounts for some weird behavior with quick swipes and small distanceX
+    // TODO fix this. hack for some weird behavior with quick swipes and small distanceX
     if (Math.abs(event.distanceX) <= 46) {
       active.style.left = '';
       alt.style.left = '';

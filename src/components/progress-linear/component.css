@@ -48,6 +48,17 @@
 }
 
 
+:host(:not([indeterminate])) .active-bar {
+  transition: transform linear;
+  transition-duration: var(--mc-progress-linear-transition-duration);
+}
+
+:host(:not([indeterminate])) .inactive-bar {
+  transition: left linear;
+  transition-duration: var(--mc-progress-linear-transition-duration);
+}
+
+
 :host([indeterminate]) .active-bar {
   inset-inline-start: -100%;
   animation: linear infinite 2s;

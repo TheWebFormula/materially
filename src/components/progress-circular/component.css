@@ -31,9 +31,6 @@ circle {
 }
 
 .active-track {
-  transition: stroke-dashoffset;
-  transition-duration: var(--mc-motion-duration-long2);
-  transition-timing-function: var(--mc-motion-easing-standard-decelerate);
   stroke: var(--mc-progress-circular-color-local);
 }
 
@@ -47,6 +44,16 @@ circle {
 
 .inactive-track {
   stroke: var(--mc-surface-container-highest);
+}
+
+:host(:not([indeterminate])) .active-track {
+  transition: stroke-dashoffset linear;
+  transition-duration: var(--mc-progress-circular-transition-duration);
+}
+
+:host(:not([indeterminate])) .inactive-track {
+  transition: transform linear, stroke-dashoffset linear;
+  transition-duration: var(--mc-progress-circular-transition-duration);
 }
 
 :host([indeterminate]) .active-track {

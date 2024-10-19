@@ -7,6 +7,7 @@ let tooltipTimer;
 let globalTooltipElement;
 let selectedTooltipElement;
 let currentTooltipElement;
+let actionElement;
 const mousemoveThrottled = util.rafThrottle(mousemove);
 function mouseover(event) {
   const hasTarget = event.target.hasAttribute('tooltip-target');
@@ -49,11 +50,24 @@ function showTooltip() {
     const bottomDiff = (y + currentTooltipElement.height) - (window.innerHeight - 12);
     if (bottomDiff > 0) y -= bottomDiff;
     currentTooltipElement.style.top = `${y}px`;
+    actionElement = currentTooltipElement.querySelector('[slot=actions]');
+    if (actionElement) {
+      window.addEventListener('keydown', captureTab);
+    }
   }, 1000);
+}
+
+function captureTab(event) {
+  if (event.key === 'Tab') {
+    actionElement.focus();
+    event.preventDefault();
+  }
 }
 
 function removeTooltip() {
   if (!tooltipTimer) return;
+  window.removeEventListener('keydown', captureTab);
+  actionElement = undefined;
   currentTooltipElement.classList.remove('show');
   clearTimeout(tooltipTimer);
   tooltipTimer = undefined;

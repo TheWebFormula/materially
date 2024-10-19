@@ -12,6 +12,8 @@ class MCProgressCircularElement extends HTMLComponentElement {
   #indeterminate = false;
   #activeTrack;
   #inactiveTrack;
+  #percent = 0;
+  #firstUpdate = true;
 
 
   constructor() {
@@ -73,14 +75,24 @@ class MCProgressCircularElement extends HTMLComponentElement {
       this.#inactiveTrack.style.strokeDashoffset = '';
       this.#inactiveTrack.style.transform = '';
     } else {
-      const percent = this.value / this.max;
-      const dashOffset = (1 - percent) * 100;
+      // calculate animation duration for change in percent
+      const newPercent = this.value / this.max;
+      const diff = newPercent - this.#percent;
+      this.#percent = newPercent;
+      const circumference = 2 * Math.PI * (this.offsetWidth / 2);
+      const circumferenceChange = Math.max(0, diff * circumference);
+      const duration = this.#firstUpdate ? 0 : Math.min(Math.round(circumferenceChange * 14), 700);
+      this.#firstUpdate = false;
+
+      const dashOffset = (1 - newPercent) * 100;
       this.#activeTrack.style.strokeDashoffset = dashOffset;
 
       // Adjust percent to allow a gap between the active and inactive
-      const adjustedPercent = Math.max(0, percent + 0.04);
+      const adjustedPercent = Math.max(0, newPercent + 0.04);
       const dashOffsetInactive = adjustedPercent * 100;
-      const rotateInactive = (percent + ((adjustedPercent - percent) / 2)) * 360;
+      const rotateInactive = (newPercent + ((adjustedPercent - newPercent) / 2)) * 360;
+
+      this.style.setProperty('--mc-progress-circular-transition-duration', `${duration}ms`);
       this.#inactiveTrack.style.strokeDashoffset = dashOffsetInactive;
       this.#inactiveTrack.style.transform = `rotate(${rotateInactive}deg)`;
     }

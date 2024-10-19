@@ -1,13 +1,12 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import '../state-layer/index.js';
-import dialog from '../dialog/service.js';
 import './angled-corners.js';
+import FormState from '../../helpers/form.js';
+
 
 const targetValues = ['_blank', '_parent', '_self', '_top'];
 let isCut;
-
-let d = performance.now();
 
 export default class MCButtonElement extends HTMLComponentElement {
   static tag = 'mc-button';
@@ -24,9 +23,9 @@ export default class MCButtonElement extends HTMLComponentElement {
   #target = 'test';
   #href;
   #button;
-  #formState;
   #onclickValue;
   #popovertarget;
+  #formState;
   #async = false;
   #focus_bound = this.#focus.bind(this);
   #blur_bound = this.#blur.bind(this);
@@ -103,6 +102,7 @@ export default class MCButtonElement extends HTMLComponentElement {
     this.addEventListener('focus', this.#focus_bound, { signal: this.#abort.signal });
 
     if (this.form) {
+      this.#formState = new FormState(this.form);
       this.addEventListener('click', this.#formClick_bound, { signal: this.#abort.signal });
       this.addEventListener('mousedown', this.#formMouseDown_bound, { signal: this.#abort.signal });
       this.addEventListener('mouseup', this.#formMouseUp_bound, { signal: this.#abort.signal });
@@ -219,7 +219,8 @@ export default class MCButtonElement extends HTMLComponentElement {
 
   // prevent onclick attribute from firing when form invalid
   #formMouseDown() {
-    if (this.type === 'cancel' && this.onclick && this.#formState !== undefined && this.#getFormState() !== this.#formState) {
+    const formHasChange = this.#formState.formHasChanges();
+    if (this.type === 'cancel' && this.onclick && formHasChange) {
       this.#onclickValue = this.onclick;
       this.onclick = undefined;
     }
@@ -238,80 +239,36 @@ export default class MCButtonElement extends HTMLComponentElement {
     const type = this.type || this.#button.type;
     switch (type) {
       case 'reset':
-        this.form.reset();
+        this.#formState.reset();
         break;
 
       case 'submit':
-        const shouldValidate = !this.form.hasAttribute('novalidate') && !this.hasAttribute('formnovalidate') && !this.form.checkValidity();
-        if (shouldValidate) {
-          const formElements = [...this.form.elements].filter(e => e.checkValidity);
-
-          formElements.forEach(element => element.reportValidity());
-          const firstInvalid = formElements.find(e => !e.checkValidity());
-          const bounds = firstInvalid.getBoundingClientRect();
-          if (!(bounds.y >= 0 && (bounds.y + bounds.height) <= window.innerHeight)) {
-            firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-          firstInvalid.focus({ preventScroll: true });
-        } else {
-          this.#formRequestSubmit();
+        const canSubmit = this.#formState.canSubmitForm(event);
+        if (canSubmit) {
+          this.#internals.setFormValue(this.value);
+          this.#formState.formRequestSubmit(event);
         }
         break;
 
       case 'cancel':
-        if (this.#formState !== undefined && this.#getFormState() !== this.#formState) {
-          event.preventDefault();
-          event.stopPropagation();
-          event.stopImmediatePropagation();
-
-          dialog.simple({
-            message: 'Discard changes?',
-            actionConfirm: true,
-            actionConfirmLabel: 'Cancel',
-            actionCancel: true,
-            actionCancelLabel: 'Discard'
-          }).then(action => {
-            if (action !== 'cancel') return;
-            this.#formState = undefined;
-            this.click();
-            this.dispatchEvent(new Event('cancel'));
-          });
+        const prevent = await this.#formState.preventUnsavedChanges(event);
+        if (prevent) {
+          return;
         } else {
-          this.click();
           this.dispatchEvent(new Event('cancel'));
         }
         break;
 
       default:
         if (this.form.method === 'dialog') {
-          this.#formRequestSubmit();
+          this.#internals.setFormValue(this.value);
+          this.#formState.formRequestSubmit(event);
         }
     }
   }
 
-  #formRequestSubmit() {
-    // const previousNoValidate = this.form.noValidate;
-    // if (this.hasAttribute('formnovalidate')) this.form.noValidate = true;
-    // intercept submit so we can inject submitter
-    this.form.addEventListener('submit', (submitEvent) => {
-      Object.defineProperty(submitEvent, 'submitter', {
-        configurable: true,
-        enumerable: true,
-        get: () => this,
-      });
-    }, { capture: true, once: true });
-    this.#internals.setFormValue(this.value);
-    this.form.requestSubmit();
-    // this.form.noValidate = previousNoValidate;
-  }
-
-  // used to track changes based on values
-  #getFormState() {
-    return [...this.form.elements].map(e => e.type === 'checkbox' ? e.checked : e.value).toString();
-  }
-
   #formFocusIn() {
-    if (this.#formState === undefined) this.#formState = this.#getFormState();
+    this.#formState.setInitialFormState();
   }
 
   #hrefClick() {

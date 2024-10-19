@@ -2,6 +2,7 @@ import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import util from '../../helpers/util.js';
 import { close_FILL0_wght400_GRAD0_opsz24 } from '../../helpers/svgs.js';
+import FormState from '../../helpers/form.js';
 
 
 export default class MCDialogElement extends HTMLComponentElement {
@@ -19,12 +20,14 @@ export default class MCDialogElement extends HTMLComponentElement {
   #handleSubmit_bound = this.#handleSubmit.bind(this);
   #beforeUnload_bound = this.#beforeUnload.bind(this);
   #handleActionsClick_bound = this.#handleActionsClick.bind(this);
-  #close_bound = this.close.bind(this);
+  #fullscreenClose_bound = this.#fullscreenClose.bind(this);
+  #fullscreenSave_bound = this.#fullscreenSave.bind(this);
 
   #handleCancel_bound = this.#handleCancel.bind(this);
   #handleClose_bound = this.#handleClose.bind(this);
   #handleEsc_bound = this.#handleEsc.bind(this);
   #clickOutsideClose_bound = this.#clickOutsideClose.bind(this);
+  #formState;
 
 
   constructor() {
@@ -43,8 +46,9 @@ export default class MCDialogElement extends HTMLComponentElement {
         <!-- <div class="background"></div> -->
         <div class="header">
           <slot name="icon"></slot>
-          <slot name="headline"></slot>
           <mc-icon class="close-fullscreen">${close_FILL0_wght400_GRAD0_opsz24}</mc-icon>
+          <slot name="headline"></slot>
+          <mc-button class="save-fullscreen-form">Save</mc-button>
         </div>
         <slot name="content"></slot>
         <slot name="actions"></slot>
@@ -78,7 +82,11 @@ export default class MCDialogElement extends HTMLComponentElement {
   }
 
   get fullscreen() { return this.hasAttribute('fullscreen'); }
-  set fullscreen(value) { this.toggleAttribute('fullscreen', !!value); }
+  set fullscreen(value) {
+    this.toggleAttribute('fullscreen', !!value);
+    const form = !value ? undefined : this.querySelector('form');
+    if (form) this.#formState = new FormState(form);
+  }
 
   get removeOnClose() { return this.#removeOnClose; }
   set removeOnClose(value) { this.#removeOnClose = !!value; }
@@ -93,6 +101,7 @@ export default class MCDialogElement extends HTMLComponentElement {
     this.#abort = new AbortController();
     this.#preventNavigation = this.hasAttribute('prevent-navigation');
   }
+  
 
   disconnectedCallback() {
     super.disconnectedCallback();
@@ -123,6 +132,22 @@ export default class MCDialogElement extends HTMLComponentElement {
     this.#dialog.close(returnValue);
   }
 
+  async #fullscreenClose(event) {
+    if (this.#formState) {
+      const prevent = await this.#formState.preventUnsavedChanges(event);
+      if (prevent) return;
+      this.#formState.reset();
+    }
+    
+    this.close();
+  }
+
+  async #fullscreenSave(event) {
+    if (!this.#formState.canSubmitForm(event)) return;
+    this.#formState.formRequestSubmit(event);
+    this.close();
+  }
+
   #showAfter() {
     this.#dialog.addEventListener('cancel', this.#handleCancel_bound, { signal: this.#abort.signal });
     this.#dialog.addEventListener('close', this.#handleClose_bound, { signal: this.#abort.signal });
@@ -133,9 +158,8 @@ export default class MCDialogElement extends HTMLComponentElement {
     }
 
     const content = this.shadowRoot.querySelector('[name="content"]');
-    const dialog = this.shadowRoot.querySelector('dialog');
     const isScroll = content.scrollHeight > 0 && content.offsetHeight !== content.scrollHeight;
-    dialog.classList.toggle('scroll', isScroll);
+    this.#dialog.classList.toggle('scroll', isScroll);
 
     if (this.querySelector('form')) {
       this.addEventListener('submit', this.#handleSubmit_bound, { signal: this.#abort.signal });
@@ -146,10 +170,14 @@ export default class MCDialogElement extends HTMLComponentElement {
       }
     }
 
-    dialog.addEventListener('close', this.#handleClose_bound, { signal: this.#abort.signal });
     if (this.#preventNavigation) window.addEventListener('beforeunload', this.#beforeUnload_bound, { signal: this.#abort.signal });
-    if (this.fullscreen) this.shadowRoot.querySelector('.close-fullscreen').addEventListener('click', this.#close_bound, { signal: this.#abort.signal });
-
+    if (this.fullscreen) {
+      this.shadowRoot.querySelector('.close-fullscreen').addEventListener('click', this.#fullscreenClose_bound, { signal: this.#abort.signal });
+      if (this.#formState) {
+        this.shadowRoot.querySelector('.save-fullscreen-form').addEventListener('click', this.#fullscreenSave_bound, { signal: this.#abort.signal });
+        this.#formState.setInitialFormState();
+      }
+    }
     this.dispatchEvent(new Event('open', { bubbles: true }));
   }
 
@@ -162,7 +190,6 @@ export default class MCDialogElement extends HTMLComponentElement {
   }
 
   #handleActionsClick(event) {
-    console.log(event.target)
     this.close(event.target.getAttribute('value') ?? this.returnValue);
   }
 
@@ -180,7 +207,7 @@ export default class MCDialogElement extends HTMLComponentElement {
     window.removeEventListener('click', this.#clickOutsideClose_bound);
 
     if (this.#preventNavigation) window.removeEventListener('beforeunload', this.#beforeUnload_bound);
-    if (this.fullscreen) this.shadowRoot.querySelector('.close-fullscreen').removeEventListener('click', this.#close_bound);
+    if (this.fullscreen) this.shadowRoot.querySelector('.close-fullscreen').removeEventListener('click', this.#fullscreenClose_bound);
 
     if (this.querySelector('form')) {
       this.removeEventListener('submit', this.#handleSubmit_bound);

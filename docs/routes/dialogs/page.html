@@ -18,6 +18,7 @@
         <li><a href="#html">HTML Only</a></li>
         <li><a href="#scrollable">Scrollable</a></li>
         <li><a href="#fullscreen">Fullscreen</a></li>
+        <li><a href="#fullscreen-form">Fullscreen with form</a></li>
         <li><a href="#prevent-navigation">Prevent navigation</a></li>
         <li><a href="#style">Style</a></li>
       </ul>
@@ -130,8 +131,8 @@ Adding the 'open' attribute will automatically show the dialog -->
 </mc-dialog>
 
 
-<!-- attributes to control preventClose (ESC) -->
-<mc-dialog allow-close></mc-dialog>`}
+<!-- Prevent dialog close on ESC key and clicking outside of dialog -->
+<mc-dialog prevent-close></mc-dialog>`}
             </pre></code-block>
           <code-block language="javascript"><pre>
 const dialog = document.querySelector('#html-only-dialog');
@@ -274,7 +275,7 @@ ${`<mc-dialog id="scrollable-dialog">
           <h2 slot="headline">Fullscreen</h2>
           <div slot="subhead">Fullscreen dialogs are for compact window sizes only</div>
 
-          <mc-dialog id="fullscreen-dialog" aria-label="[dialog] fullscreen" allow-close fullscreen>
+          <mc-dialog id="fullscreen-dialog" aria-label="[dialog] fullscreen" prevent-close fullscreen>
             <div slot="headline">Headline</div>
             <div slot="content">
               <div class="supporting-text">
@@ -349,11 +350,50 @@ ${`<mc-dialog id="fullscreen-dialog" fullscreen>
       </section>
 
 
+      <section id="fullscreen-form" aria-label="Fullscreen dialog">
+        <mc-card>
+          <h2 slot="headline">Fullscreen with form</h2>
+          <div slot="subhead">Fullscreen dialogs with forms can prevent closing based on changes</div>
+      
+          <mc-dialog id="fullscreen-dialog-form" aria-label="[dialog] fullscreen form" prevent-close fullscreen>
+            <div slot="headline">Change form</div>
+            <div slot="content">
+              <form id="fullscreen-form" method="dialog" onsubmit="console.log('submitted')">
+                <div style="font-size: 14px; margin-bottom: 8px;"><strong>X</strong> checks for form changes and presents dialog</div>
+                <div style="font-size: 14px; margin-bottom: 24px;"><strong>Save</strong> will validate the form</div>
+                <mc-textfield label="Required" supporting-test="Required" required value="one"
+                  class="outlined"></mc-textfield>
+              </form>
+            </div>
+          </mc-dialog>
+      
+          <mc-button onclick="document.querySelector('#fullscreen-dialog-form').showModal()" style="margin-top: 12px;">Open</mc-button>
+      
+          <code-block language="html">
+            <pre>
+      ${`<mc-dialog id="fullscreen-dialog" prevent-close fullscreen>
+        <div slot="headline">Change form</div>
+        <div slot="content">
+          <!-- form[id] required -->
+          <form id="fullscreen-form" method="dialog" onsubmit="console.log('submitted')">
+            <div style="font-size: 14px; margin-bottom: 8px;"><strong>X</strong> checks for form changes and presents dialog</div>
+            <div style="font-size: 14px; margin-bottom: 24px;"><strong>Save</strong> will validate the form</div>
+            <mc-textfield label="Required" supporting-test="Required" required value="one"
+              class="outlined"></mc-textfield>
+          </form>
+        </div>
+      </mc-dialog>`}
+                  </pre>
+          </code-block>
+        </mc-card>
+      </section>
+
+
       <section id="prevent-navigation" aria-label="Prevent navigation">
         <mc-card>
-          <h2 slot="headline">Allow close and prevent navigation</h2>
-          <div slot="supporting-text"><b>Allow close</b> will prevent the dialog from being closed when scrim (backdrop) is
-            clicked</div>
+          <h2 slot="headline">Prevent close and prevent navigation</h2>
+          <div slot="supporting-text"><b>Prevent close</b> will prevent the dialog from being closed when scrim (backdrop) is
+            clicked and ESC key is pressed</div>
           <div slot="supporting-text"><b>Prevent navigation</b> will show a confirm dialog, asking the user if they want to
             navigate away</div>
         

@@ -98,17 +98,19 @@ dialog {
     }
   }
 
+  slot[name='headline'] {
+    display: flex;
+    flex: 1;
+  }
+
   .close-fullscreen {
     display: block;
+    cursor: pointer;
+    color: var(--mc-on-surface);
+  }
 
-    &::after {
-      position: absolute;
-      content: '';
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
+  .save-fullscreen-form {
+    display: block;
   }
 
   /* prevent layout shifting on animation */
@@ -161,8 +163,9 @@ dialog.scroll [name=actions].has-actions::after {
   position: relative;
   align-items: center;
   box-sizing: border-box;
-  gap: 8px;
-  padding-bottom: 16px;
+  gap: 16px;
+  padding-bottom: 12px;
+  margin-top: -10px;
 
   &.has-icon {
     flex-direction: column;
@@ -170,13 +173,9 @@ dialog.scroll [name=actions].has-actions::after {
   }
 }
 
-.close-fullscreen {
+.close-fullscreen,
+.save-fullscreen-form {
   display: none;
-  position: absolute;
-  right: 16px;
-  top: 6px;
-  cursor: pointer;
-  color: var(--mc-on-surface);
 }
 
 
@@ -189,6 +188,14 @@ slot[name='headline']::slotted(*) {
   font-weight: var(--mc-font-small-headline-weight);
   line-height: var(--mc-font-small-headline-line-height);
   letter-spacing: var(--mc-font-small-headline-tracking);
+  color: var(--mc-dialog-headline-color-local);
+}
+
+:host([fullscreen]) slot[name='headline']::slotted(*) {
+  font-size: var(--mc-font-large-title-size);
+  font-weight: var(--mc-font-large-title-weight);
+  line-height: var(--mc-font-large-title-line-height);
+  letter-spacing: var(--mc-font-large-title-tracking);
   color: var(--mc-dialog-headline-color-local);
 }
 

@@ -1,7 +1,6 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import util from '../../helpers/util.js';
 import styles from './carousel.css';
-
 import Swipe from '../../helpers/Swipe.js';
 
 
@@ -39,7 +38,7 @@ export default class MCCarouselElement extends HTMLComponentElement {
     this.addEventListener('mccarouselitemchange', this.#calculateLayout_debounce, { signal: this.#abort.signal });
     this.addEventListener('scroll', this.#calculateLayout_bound, { signal: this.#abort.signal });
 
-    this.#swipe = new Swipe(this, { horizontalOnly: true, includeMouse: true });
+    this.#swipe = new Swipe(this, { horizontalOnly: true, includeMouse: true, preventClick: true });
     this.#swipe.enable();
     this.addEventListener('swipestart', this.#swipeStart_bound, { signal: this.#abort.signal });
     this.addEventListener('swipemove', this.#swipeMove_bound, { signal: this.#abort.signal });
@@ -228,9 +227,6 @@ export default class MCCarouselElement extends HTMLComponentElement {
       behavior: 'smooth'
     });
   }
-
-
-
 
 
 

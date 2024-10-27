@@ -41,6 +41,24 @@
 }
 
 
+:host(.bottom-sheet) {
+  position: fixed;
+  top: unset;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  border-radius: 0;
+  overflow-y: scroll;
+}
+
+:host(.bottom-sheet:not(.swipe-active)) {
+  transition: bottom;
+  transition-duration: var(--mc-motion-duration-short3);
+  transition-timing-function: var(--mc-motion-easing-emphasized-accelerate);
+}
+
+
 :host(.anchor[popover]:not(:popover-open)) {
   animation: hide-max-height;
   animation-duration: var(--mc-motion-duration-short3);

@@ -156,7 +156,7 @@ export default class MCCardElement extends HTMLComponentElement {
       event.target.classList.toggle('has-swipe-action', hasSwipeAction);
 
       if (hasSwipeAction) {
-        this.#swipe = new Swipe(this, { horizontalOnly: true });
+        this.#swipe = new Swipe(this, { horizontalOnly: true, disableScroll: true });
         this.#swipe.enable();
         this.addEventListener('swipemove', this.#swipeMove_bound, { signal: this.#abort.signal });
         this.addEventListener('swipeend', this.#swipeEnd_bound, { signal: this.#abort.signal });
@@ -186,7 +186,6 @@ export default class MCCardElement extends HTMLComponentElement {
       if (height < 80) height = 80;
 
       expanded.style.height = `${height}px`;
-      console.log(bounds);
       if (!isCompact) this.style.height = `${initialHeight}px`;
 
       window.addEventListener('keydown', this.#keydown_bound, { signal: this.#abort.signal });

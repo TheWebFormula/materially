@@ -8,12 +8,13 @@ const MCSwipe = class MCSwipe {
   #velocityThreshold = 0.3;
   #distanceThreshold = 10;
   #maxTimeMS = 200;
-  #moveStartThreshold = 10;
-  #horizontalScrollThreshold = 20;
+  #threshold = 6; // This came from testing and making sure the touchmove event did not misfire(prevent default error) when horizontal swipe
   #includeMouse = false;
   #start_bound = this.#start.bind(this);
   #end_bound = this.#end.bind(this);
   #move_bound = this.#move.bind(this);
+  #preventClickHandler_bound = this.#preventClickHandler.bind(this);
+  #preventScroll_bound = this.#preventScroll.bind(this);
   #startEvent = 'touchstart';
   #moveEvent = 'touchmove';
   #endEvent = 'touchend';
@@ -26,6 +27,8 @@ const MCSwipe = class MCSwipe {
   #endX;
   #endY;
   #endTime;
+  #preventClick;
+  #isSwiping = false;
 
 
   constructor(element, options = {
@@ -33,11 +36,10 @@ const MCSwipe = class MCSwipe {
     verticalOnly: false,
     velocityThreshold: 0.3,
     distanceThreshold: 10,
-    moveStartThreshold: 10,
-    horizontalScrollThreshold: 20,
     maxTimeMS: 200,
     includeMouse: false,
-    disableScroll: false
+    disableScroll: false,
+    preventClick: false
   }) {
     if (!(element instanceof HTMLElement)) throw Error('HTMLElement required');
 
@@ -48,9 +50,8 @@ const MCSwipe = class MCSwipe {
     this.#velocityThreshold = options.velocityThreshold || 0.3;
     this.#maxTimeMS = options.maxTimeMS || 200;
     this.#disableScroll = options.disableScroll || false;
-    this.#moveStartThreshold = options.moveStartThreshold || 10;
-    this.#horizontalScrollThreshold = options.horizontalScrollThreshold || 20;
     this.#includeMouse = options.includeMouse || false;
+    this.#preventClick = options.preventClick || false;
 
     if (this.#includeMouse) {
       this.#startEvent = 'pointerdown';
@@ -70,6 +71,7 @@ const MCSwipe = class MCSwipe {
     this.#enabled = true;
     this.#abort = new AbortController();
     this.#element.addEventListener(this.#startEvent, this.#start_bound, { signal: this.#abort.signal });
+    if (this.#preventClick) this.#element.addEventListener('click', this.#preventClickHandler_bound, { capture: true, signal: this.#abort.signal });
   }
 
   disable() {
@@ -91,7 +93,20 @@ const MCSwipe = class MCSwipe {
   }
 
 
+  #preventClickHandler(event) {
+    if (this.#isSwiping) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+
+  #preventScroll(event) {
+    if (this.#isSwiping) event.preventDefault();
+  }
+
+
   #start(event) {
+    this.#isSwiping = false;
     this.#element.classList.add('swipe-active');
     this.#startX = this.#getClientX(event);
     this.#startY = this.#getClientY(event);
@@ -103,8 +118,10 @@ const MCSwipe = class MCSwipe {
 
     let swipeEvent = new SwipeStartEvent(event);
     this.#element.dispatchEvent(swipeEvent);
-
-    if (this.#disableScroll) event.preventDefault();
+    
+    if (this.#disableScroll) {
+      document.body.addEventListener('touchmove', this.#preventScroll_bound, { passive: false, signal: this.#abort.signal });
+    }
   }
 
   #end(event) {
@@ -115,6 +132,9 @@ const MCSwipe = class MCSwipe {
     this.#endY = this.#getClientY(event);
     this.#endTime = Date.now();
     this.#handleSwipe(event);
+    if (this.#disableScroll) {
+      document.body.removeEventListener('touchmove', this.#preventScroll_bound);
+    }
   }
 
 
@@ -174,10 +194,19 @@ const MCSwipe = class MCSwipe {
     let dx = clientX - this.#startX;
     let dy = clientY - this.#startY;
 
-    // end if user is scrolling
-    if (this.#horizontalOnly && Math.abs(dy) > this.#horizontalScrollThreshold && Math.abs(dx) < this.#moveStartThreshold) {
-      this.#end(event);
-      return;
+    // used to control touchmove preventDefault. If the page is scrolling and we try to preventDefault then an error will through
+    // You can see this happen if you raise this.#threshold, the start to drag down till the page scroll a couple pixels, then drag horizontally
+    if (this.#isSwiping === false) {
+      if (this.#horizontalOnly) {
+        if (Math.abs(dy) > this.#threshold) {
+          this.#end(event);
+          return;
+        } else if (Math.abs(dx) > this.#threshold) this.#isSwiping = true;
+
+        // if we are swiping vertically we want to prevent scroll immediately
+      } else {
+        this.#isSwiping = true;
+      }
     }
 
     let distance = Math.sqrt(dx * dx + dy * dy);
@@ -185,6 +214,11 @@ const MCSwipe = class MCSwipe {
     let deltaDistanceY = clientY - this.#lastY;
     this.#lastX = clientX;
     this.#lastY = clientY;
+    
+    // Do not fire move if axis is locked and no movement
+    if (this.#horizontalOnly && deltaDistanceX === 0) return;
+    else if (this.#verticalOnly && deltaDistanceY === 0) return;
+
     let swipeEvent = new SwipeMoveEvent(
       event,
       distance,

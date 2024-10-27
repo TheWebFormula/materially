@@ -11,6 +11,7 @@
       <h2>Links</h2>
       <ul class="links">
         <li><a href="#basic">Basic</a></li>
+        <li><a href="#compact">Compact window</a></li>
         <li><a href="#nested">Nested menu</a></li>
         <li><a href="#context-menu">Context menu</a></li>
         <li><a href="#style">Style</a></li>
@@ -76,6 +77,135 @@ ${`<mc-button id="controlid">Control</mc-button>
   <mc-menu-item>plain</mc-menu-item>
 </mc-menu>`}
             </pre></code-block>
+        </mc-card>
+      </section>
+
+
+
+      <section id="compact" aria-label="Compact window menu">
+        <mc-card>
+          <h2 slot="headline">Compact window menu</h2>
+          <div slot="supporting-text"><strong>(Must be compact window size)</strong> Menus will default to a bottom sheet when open on compact view. You can disable this.</div>
+      
+          <div class="example">
+            <mc-button id="compactcontrol" class="filled">Default</mc-button>
+            <mc-menu anchor="compactcontrol">
+              <mc-menu-item>
+                <mc-icon slot="start">content_copy</mc-icon>
+                copy
+              </mc-menu-item>
+              <mc-menu-item>
+                <mc-icon slot="start">content_paste</mc-icon>
+                paste
+              </mc-menu-item>
+              <mc-menu-item>plain</mc-menu-item>
+              <mc-menu-item>plain</mc-menu-item>
+            </mc-menu>
+      
+      
+            <mc-button id="compactpreventcontrol" class="filled">Prevent bottom sheet</mc-button>
+            <mc-menu anchor="compactpreventcontrol" prevent-bottom-sheet>
+              <mc-menu-item>
+                <mc-icon slot="start">content_copy</mc-icon>
+                copy
+              </mc-menu-item>
+              <mc-menu-item>
+                <mc-icon slot="start">content_paste</mc-icon>
+                paste
+              </mc-menu-item>
+              <mc-menu-item>plain</mc-menu-item>
+              <mc-menu-item>plain</mc-menu-item>
+            </mc-menu>
+
+            <mc-button id="nested-compact" class="filled">Nested compact</mc-button>
+            <mc-menu anchor="nested-compact">
+              <mc-menu-item>
+                <mc-icon slot="start">content_copy</mc-icon>
+                copy
+              </mc-menu-item>
+              <mc-menu-item>
+                <mc-icon slot="start">content_paste</mc-icon>
+                paste
+              </mc-menu-item>
+              <mc-menu-item id="nested-item-compact">Nested item</mc-menu-item>
+            
+              <mc-menu anchor="nested-item-compact">
+                <mc-menu-item>
+                  <mc-icon slot="start">content_copy</mc-icon>
+                  copy
+                </mc-menu-item>
+                <mc-menu-item>
+                  <mc-icon slot="start">content_paste</mc-icon>
+                  paste
+                </mc-menu-item>
+                <mc-menu-item>plain</mc-menu-item>
+                <mc-menu-item>plain</mc-menu-item>
+              </mc-menu>
+            </mc-menu>
+          </div>
+      
+          <code-block language="html">
+            <pre>
+${`<!-- default will be a bottom sheet when compact -->
+<mc-button id="compactcontrol" class="filled">Default</mc-button>
+<mc-menu anchor="compactcontrol">
+  <mc-menu-item>
+    <mc-icon slot="start">content_copy</mc-icon>
+    copy
+  </mc-menu-item>
+  <mc-menu-item>
+    <mc-icon slot="start">content_paste</mc-icon>
+    paste
+  </mc-menu-item>
+  <mc-menu-item>plain</mc-menu-item>
+  <mc-menu-item>plain</mc-menu-item>
+</mc-menu>
+
+
+<!-- Use [prevent-bottom-sheet] to keep a popover -->
+<mc-button id="compactpreventcontrol" class="filled">Prevent bottom sheet</mc-button>
+<mc-menu anchor="compactpreventcontrol" prevent-bottom-sheet>
+  <mc-menu-item>
+    <mc-icon slot="start">content_copy</mc-icon>
+    copy
+  </mc-menu-item>
+  <mc-menu-item>
+    <mc-icon slot="start">content_paste</mc-icon>
+    paste
+  </mc-menu-item>
+  <mc-menu-item>plain</mc-menu-item>
+  <mc-menu-item>plain</mc-menu-item>
+</mc-menu>
+
+
+<!-- Nested menus cannot use bottom sheets -->
+<mc-button id="nested-compact" class="filled">Nested compact</mc-button>
+<mc-menu anchor="nested-compact">
+  <mc-menu-item>
+    <mc-icon slot="start">content_copy</mc-icon>
+    copy
+  </mc-menu-item>
+  <mc-menu-item>
+    <mc-icon slot="start">content_paste</mc-icon>
+    paste
+  </mc-menu-item>
+  <mc-menu-item id="nested-item-compact">Nested item</mc-menu-item>
+
+  <mc-menu anchor="nested-item-compact">
+    <mc-menu-item>
+      <mc-icon slot="start">content_copy</mc-icon>
+      copy
+    </mc-menu-item>
+    <mc-menu-item>
+      <mc-icon slot="start">content_paste</mc-icon>
+      paste
+    </mc-menu-item>
+    <mc-menu-item>plain</mc-menu-item>
+    <mc-menu-item>plain</mc-menu-item>
+  </mc-menu>
+</mc-menu>`}
+                  </pre>
+          </code-block>
         </mc-card>
       </section>
 

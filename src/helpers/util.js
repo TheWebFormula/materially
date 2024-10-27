@@ -17,6 +17,10 @@ const mcUtil = new class MCUtil {
     return pointerDown;
   }
 
+  overscrollEase(y, scale = 45) {
+    return scale * Math.log(y + scale) - scale * Math.log(scale);
+  }
+
   /**
    * Throttling controlled by requestAnimationFrame
    * @function

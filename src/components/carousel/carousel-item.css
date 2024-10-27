@@ -12,7 +12,6 @@
   margin: 0;
   background-color: var(--mc-surface);
   margin-right: 8px;
-  pointer-events: none;
   user-select: none;
   -webkit-user-select: none;
 

@@ -123,6 +123,7 @@ class MCTextfieldElement extends HTMLComponentElement {
       ['suggestion', 'string'],
       ['supporting-text', 'string'],
       ['type', 'string'],
+      ['inputmode', 'string'],
       ['value', 'string']
     ];
   }
@@ -360,6 +361,12 @@ class MCTextfieldElement extends HTMLComponentElement {
     this.setAttribute('type', value);
     this.#input.setAttribute('type', value);
     if (this.type === 'search' && this.#abort) this.#input.addEventListener('search', this.#dispatchSearch_bound, { signal: this.#abort.signal });
+  }
+
+  get inputmode() { return this.getAttribute('inputmode'); }
+  set inputmode(value) {
+    this.setAttribute('inputmode', value);
+    this.#input.setAttribute('inputmode', value);
   }
 
   get value() {

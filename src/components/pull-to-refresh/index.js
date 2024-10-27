@@ -1,5 +1,6 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css';
+import util from '../../helpers/util.js';
 
 
 class MCPullToRefreshElement extends HTMLComponentElement {
@@ -81,7 +82,7 @@ class MCPullToRefreshElement extends HTMLComponentElement {
       this.style.transform = `translateY(-${y}px)`;
       this.#progress.value = percent;
 
-      document.body.style.marginTop = `${this.#overscrollEase(position)}px`;
+      document.body.style.marginTop = `${util.overscrollEase(position)}px`;
 
       if (touchDiff > 0) {
         event.preventDefault();
@@ -123,11 +124,6 @@ class MCPullToRefreshElement extends HTMLComponentElement {
     document.body.style.marginTop = '';
     document.documentElement.classList.add('pull-to-refresh-inactive');
     document.documentElement.classList.remove('pull-to-refresh-active');
-  }
-
-  #overscrollEase(y) {
-    const scale = 45;
-    return scale * Math.log(y + scale) - scale * Math.log(scale);
   }
 }
 customElements.define(MCPullToRefreshElement.tag, MCPullToRefreshElement);

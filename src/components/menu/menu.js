@@ -2,6 +2,7 @@ import MCSurfaceElement from '../surface/index.js';
 import surfaceStyles from '../surface/component.css' assert { type: 'css' };
 import styles from './menu.css' assert { type: 'css' };
 import util from '../../helpers/util.js'
+import device from '../../helpers/device.js'
 
 
 export default class MCMenuElement extends MCSurfaceElement {
@@ -39,6 +40,9 @@ export default class MCMenuElement extends MCSurfaceElement {
       this.anchor.nesting = true;
       this.offsetY = -48;
       this.anchorRight = true;
+    } else {
+      // is compact, does not have prevent attr, is not nested
+      this.bottomSheet = device.state === device.COMPACT && !this.hasAttribute('prevent-bottom-sheet') && this.querySelector(':scope [anchor]') == null;
     }
   }
 

@@ -55,7 +55,7 @@
 }
 
 :host(:not(.open)) .surface {
-  bottom: 100%;
+  bottom: -100%;
 }
 
 .surface-content {

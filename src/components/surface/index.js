@@ -1,6 +1,7 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import util from '../../helpers/util.js';
+import Swipe from '../../helpers/Swipe.js';
 
 // TODO make fullscreen start from anchor
 
@@ -19,10 +20,15 @@ export default class MCSurfaceElement extends HTMLComponentElement {
   #offsetX = 0;
   #anchorRight = false;
   #overlay = true;
+  #bottomSheet = false;
+  #swipe;
   #alwaysBelow = false;
   #removeOnClose = false;
   #closeIgnoreElements = [];
   #toggle_bound = this.#toggle.bind(this);
+  
+  #swipeEnd_bound = this.#swipeEnd.bind(this);
+  #swipeMove_bound = this.#swipeMove.bind(this);
 
 
   constructor() {
@@ -59,6 +65,11 @@ export default class MCSurfaceElement extends HTMLComponentElement {
 
   disconnectedCallback() {
     if (this.#abort) this.#abort.abort();
+    if (this.#swipe) {
+      this.removeEventListener('swipeend', this.#swipeEnd_bound);
+      this.removeEventListener('swipemove', this.#swipeMove_bound);
+      this.#swipe.destroy();
+    }
   }
 
 
@@ -128,9 +139,27 @@ export default class MCSurfaceElement extends HTMLComponentElement {
   get alwaysBelow() { return this.#alwaysBelow; }
   set alwaysBelow(value) { this.#alwaysBelow = !!value; }
 
+  get bottomSheet() { return this.#bottomSheet; }
+  set bottomSheet(value) {
+    this.#bottomSheet = !!value;
+    this.classList.toggle('bottom-sheet', this.#bottomSheet);
+    if (this.#bottomSheet) {
+      this.#swipe = new Swipe(this, { verticalOnly: true, disableScroll: true });
+      this.addEventListener('swipeend', this.#swipeEnd_bound);
+      this.addEventListener('swipemove', this.#swipeMove_bound);
+    } else if (this.#swipe) {
+      this.removeEventListener('swipeend', this.#swipeEnd_bound);
+      this.removeEventListener('swipemove', this.#swipeMove_bound);
+      this.#swipe.destroy();
+      this.#swipe = undefined;
+    }
+  }
+
+
 
   setPosition() {
-    if (this.modal) this.#setModalPosition();
+    if (this.#bottomSheet) return;
+    else if (this.modal) this.#setModalPosition();
     else this.#setAnchorPosition();
   }
 
@@ -151,10 +180,12 @@ export default class MCSurfaceElement extends HTMLComponentElement {
     }
     this.setPosition();
     this.setAttribute('open', '');
+    if (this.#swipe) this.#swipe.enable();
   }
 
   onHide() {
     this.removeAttribute('open');
+    if (this.#swipe) this.#swipe.disable();
     if (this.removeOnClose) {
       util.animationendAsync(this).then(() => {
         this.parentElement.removeChild(this);
@@ -205,6 +236,18 @@ export default class MCSurfaceElement extends HTMLComponentElement {
     this.style.bottom = bottom;
     if (this.#anchorRight) this.style.left = `${right}px`;
     else this.style.left = `${left}px`;
+  }
+
+  #swipeMove(event) {
+    this.style.bottom = `-${util.overscrollEase(event.distanceY, 65) }px`;
+  }
+
+  #swipeEnd(event) {
+    if (event.directionY === 1 && event.swipe === true) {
+      this.hidePopover();
+    } else {
+      this.style.bottom = '';
+    }
   }
 }
 customElements.define(MCSurfaceElement.tag, MCSurfaceElement);

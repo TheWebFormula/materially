@@ -26,9 +26,13 @@ export default class MCCarouselItemElement extends HTMLComponentElement {
   }
 
   connectedCallback() {
-    if (!this.width) {
-      const img = this.querySelector('img');
-      if (img) {
+    const img = this.querySelector('img');
+    if (img) {
+      // prevent ghost image drag
+      img.setAttribute('draggable', 'false');
+
+      if (!this.width) {
+        img.setAttribute('draggable', 'false');
         const width = img.getAttribute('width');
         if (width) this.width = width;
         else if (img.complete) this.width = img.offsetWidth;
@@ -37,7 +41,9 @@ export default class MCCarouselItemElement extends HTMLComponentElement {
             this.width = img.offsetWidth;
           };
         }
-      } else this.width = this.offsetWidth;
+      }
+    } else if (this.width === undefined || this.width === null) {
+      this.width = this.offsetWidth;
     }
     if (this.querySelector('[slot=title]')) this.classList.add('has-text');
   }

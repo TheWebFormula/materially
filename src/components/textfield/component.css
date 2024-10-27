@@ -254,7 +254,7 @@ textarea[rows="1"] {
   font-weight: var(--mc-font-large-body-weight);
   line-height: var(--mc-font-large-body-line-height);
   letter-spacing: var(--mc-font-large-body-tracking);
-  color: rgba(from var(--mc-on-surface-variant) r g b / 76%);
+  color: rgb(from var(--mc-on-surface-variant) r g b / 76%);
 }
 
 :host(.raise-label) .text-field label,
@@ -348,19 +348,19 @@ textarea[rows="1"] {
 :host([disabled]) .text-field::after {
   height: 100%;
   border-bottom: 1px solid;
-  border-bottom-color: rgba(from var(--mc-on-surface) r g b / 38%);
-  background-color: rgba(from var(--mc-on-surface) r g b / 4%);
+  border-bottom-color: rgb(from var(--mc-on-surface) r g b / 38%);
+  background-color: rgb(from var(--mc-on-surface) r g b / 4%);
 }
 
 :host([disabled]) .text-field label,
 :host([disabled]) .text-field .input,
 :host([disabled]) .text-field .input::placeholder,
 :host([disabled]) .text-field .supporting-text {
-  color: rgba(from var(--mc-on-surface) r g b / 38%);
+  color: rgb(from var(--mc-on-surface) r g b / 38%);
 }
 
 :host([disabled]) slot::slotted(mc-icon) {
-  color: rgba(from var(--mc-on-surface-variant) r g b / 38%);
+  color: rgb(from var(--mc-on-surface-variant) r g b / 38%);
 }
 
 .input[type="number"]::-webkit-outer-spin-button,

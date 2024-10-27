@@ -75,7 +75,7 @@
   &:hover,
   &:focus {
     &::before {
-      background-color: rgba(from var(--mc-on-surface) r g b / 8%)
+      background-color: rgb(from var(--mc-on-surface) r g b / 8%)
     }
   }
 

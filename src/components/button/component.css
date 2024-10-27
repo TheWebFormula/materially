@@ -3,8 +3,8 @@
   --mc-button-color-local: var(--mc-button-color, var(--mc-primary));
   --mc-button-color-filled-local: var(--mc-button-color-filled, var(--mc-on-primary));
   --mc-button-container-color-filled-local: var(--mc-button-container-color-filled, var(--mc-primary));
-  --mc-button-color-disabled-local: var(--mc-button-color-disabled, rgba(from var(--mc-on-surface) r g b / 38%));
-  --mc-button-container-color-disabled-local: var(--mc-button-container-color-disabled, rgba(from var(--mc-on-surface) r g b / 12%));
+  --mc-button-color-disabled-local: var(--mc-button-color-disabled, rgb(from var(--mc-on-surface) r g b / 38%));
+  --mc-button-container-color-disabled-local: var(--mc-button-container-color-disabled, rgb(from var(--mc-on-surface) r g b / 12%));
   --mc-button-color-elevated-local: var(--mc-button-color-elevated, var(--mc-primary));
   --mc-button-container-color-elevated-local: var(--mc-button-container-color-elevated, var(--mc-surface-container-low));
   --mc-button-color-filled-tonal-local: var(--mc-button-color-filled-tonal, var(--mc-on-secondary-container));
@@ -214,12 +214,12 @@ mc-state-layer {
 
 
   :host(:not([disabled])[cut]:hover) button::before {
-    --paint-color: rgba(from var(--mc-primary) r g b / 8%);
+    --paint-color: rgb(from var(--mc-primary) r g b / 8%);
     background: paint(cut-corners);
   }
 
   :host(:not([disabled])[cut]:focus-visible) button::before {
-    --paint-color: rgba(from var(--mc-primary) r g b / 10%);
+    --paint-color: rgb(from var(--mc-primary) r g b / 10%);
     background: paint(cut-corners);
   }
 
@@ -235,12 +235,12 @@ mc-state-layer {
   }
 
   :host(:not([disabled])[filled][cut]:hover) button::before {
-    --paint-color: rgba(from var(--mc-on-primary) r g b / 8%);
+    --paint-color: rgb(from var(--mc-on-primary) r g b / 8%);
     background: paint(cut-corners);
   }
 
   :host(:not([disabled])[filled][cut]:focus-visible) button::before {
-    --paint-color: rgba(from var(--mc-on-primary) r g b / 10%);
+    --paint-color: rgb(from var(--mc-on-primary) r g b / 10%);
     background: paint(cut-corners);
   }
 
@@ -256,12 +256,12 @@ mc-state-layer {
   }
 
   :host(:not([disabled])[elevated][cut]:hover) button::before {
-    --paint-color: rgba(from var(--mc-primary) r g b / 8%);
+    --paint-color: rgb(from var(--mc-primary) r g b / 8%);
     background: paint(cut-corners);
   }
 
   :host(:not([disabled])[elevated][cut]:focus-visible) button::before {
-    --paint-color: rgba(from var(--mc-on-surface) r g b / 10%);
+    --paint-color: rgb(from var(--mc-on-surface) r g b / 10%);
     background: paint(cut-corners);
   }
 
@@ -276,12 +276,12 @@ mc-state-layer {
   }
 
   :host(:not([disabled])[filled-tonal][cut]:hover) button::before {
-    --paint-color: rgba(from var(--mc-on-secondary-container) r g b / 8%);
+    --paint-color: rgb(from var(--mc-on-secondary-container) r g b / 8%);
     background: paint(cut-corners);
   }
 
   :host(:not([disabled])[filled-tonal][cut]:focus-visible) button::before {
-    --paint-color: rgba(from var(--mc-on-secondary-container) r g b / 10%);
+    --paint-color: rgb(from var(--mc-on-secondary-container) r g b / 10%);
     background: paint(cut-corners);
   }
 
@@ -298,14 +298,14 @@ mc-state-layer {
   :host(:not([disabled])[outlined][cut]:hover) button::before {
     --stroke-weight: 1;
     --stroke-color: transparent;
-    --paint-color: rgba(from var(--mc-primary) r g b / 8%);
+    --paint-color: rgb(from var(--mc-primary) r g b / 8%);
     background: paint(cut-corners);
   }
 
   :host(:not([disabled])[outlined][cut]:focus-visible) button::before {
     --stroke-weight: 1;
     --stroke-color: none;
-    --paint-color: rgba(from var(--mc-primary) r g b / 10%);
+    --paint-color: rgb(from var(--mc-primary) r g b / 10%);
     background: paint(cut-corners);
   }
 

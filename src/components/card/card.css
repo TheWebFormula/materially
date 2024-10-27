@@ -25,13 +25,14 @@
 }
 
 :host(.swipe-action-showing) {
+  /* NOTE does not work on ios overflow-x: clip; it just does overflow: clip */
   overflow-x: clip;
+}
 
-  .container {
-    transform: translateX(var(--mc-card-swipe-action-position));
-    transition: transform;
-    transition-duration: var(--mc-motion-duration-medium1);
-  }
+:host(.swipe-action-showing) .container {
+  transform: translateX(var(--mc-card-swipe-action-position));
+  transition: transform;
+  transition-duration: var(--mc-motion-duration-medium1);
 }
 
 :host(.window-compact.expanding[open]) {
@@ -263,7 +264,7 @@
 }
 
 :host([fullscreen]) .fullscreen-close {
-  --mc-icon-button-background-filled-color: rgba(from var(--mc-on-surface) r g b / 0.4);
+  --mc-icon-button-background-filled-color: rgb(from var(--mc-on-surface) r g b / 0.4);
 
   display: inline-flex;
   position: absolute;
@@ -382,7 +383,7 @@
   border-radius: var(--mc-shape-medium) 0 0 var(--mc-shape-medium);
   box-sizing: border-box;
 
-  background-color: rgba(from var(--mc-surface-tint) r g b / 16%);
+  background-color: rgb(from var(--mc-surface-tint) r g b / 16%);
   color: var(--mc-on-surface-variant);
 }
 
@@ -400,7 +401,7 @@
 }
 
 [name="swipe-action"][checked] {
-  background-color: rgba(from var(--mc-surface-tint) r g b / 38%);
+  background-color: rgb(from var(--mc-surface-tint) r g b / 38%);
 }
 
 [name="swipe-action"][checked]::slotted(mc-icon) {

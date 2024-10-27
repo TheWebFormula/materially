@@ -115,7 +115,7 @@
     margin-bottom: 4px;
     margin-left: -24px;
     margin-right: -12px;
-    border-top: 1px solid rgba(from var(--mc-outline) r g b / 26%);
+    border-top: 1px solid rgb(from var(--mc-outline) r g b / 26%);
   }
 
   mc-textfield {
@@ -347,7 +347,7 @@
   &.out-of-range {
     pointer-events: none;
     cursor: auto;
-    color: rgba(from var(--mc-on-surface) r g b / 60%);
+    color: rgb(from var(--mc-on-surface) r g b / 60%);
   }
 
   &.selected {
@@ -367,7 +367,7 @@
   }
 
   &.today {
-    border: 1px solid rgba(from var(--mc-outline) r g b / 60%);
+    border: 1px solid rgb(from var(--mc-outline) r g b / 60%);
   }
 }
 

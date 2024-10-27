@@ -57,5 +57,5 @@ slot[name="header"] {
   display: flex;
   margin-top: 16px;
   margin-right: -8px;
-  border-top: 1px solid rgba(from var(--mc-outline) r g b / 26%);
+  border-top: 1px solid rgb(from var(--mc-outline) r g b / 26%);
 }

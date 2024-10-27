@@ -12,7 +12,7 @@
   font-size: var(--mc-font-small-body-size);
   font-weight: var(--mc-font-small-body-weight);
   letter-spacing: var(--mc-font-small-body-tracking);
-  color: rgba(from var(--mc-list-subheader-text-color-loca) r g b / 76%);
+  color: rgb(from var(--mc-list-subheader-text-color-loca) r g b / 76%);
 
   background-color: var(--mc-list-item-container-color, var(--mc-surface));
   transition: background-color;

@@ -71,29 +71,29 @@
 
 .container.step .tick-marks::before {
   background-image: radial-gradient(circle at 2px center,
-        rgba(from var(--mc-on-surface-variant) r g b / 38%) 0,
-        rgba(from var(--mc-on-surface-variant) r g b / 38%) 1px,
+        rgb(from var(--mc-on-surface-variant) r g b / 38%) 0,
+        rgb(from var(--mc-on-surface-variant) r g b / 38%) 1px,
         transparent 1px);
 }
 
 :host([disabled]) .container.step .tick-marks::before {
   background-image: radial-gradient(circle at 2px center,
-      rgba(from var(--mc-on-surface) r g b / 38%) 0,
-      rgba(from var(--mc-on-surface) r g b / 38%) 1px,
+      rgb(from var(--mc-on-surface) r g b / 38%) 0,
+      rgb(from var(--mc-on-surface) r g b / 38%) 1px,
       transparent 1px);
 }
 
 .container.step .tick-marks::after {
   background-image: radial-gradient(circle at 2px center,
-        rgba(from var(--mc-on-primary) r g b / 38%) 0,
-        rgba(from var(--mc-on-primary) r g b / 38%) 1px,
+        rgb(from var(--mc-on-primary) r g b / 38%) 0,
+        rgb(from var(--mc-on-primary) r g b / 38%) 1px,
         transparent 1px);
 }
 
 :host([disabled]) .container.step .tick-marks::after {
   background-image: radial-gradient(circle at 2px center,
-      rgba(from var(--mc-on-surface) r g b / 38%) 0,
-      rgba(from var(--mc-on-surface) r g b / 38%) 1px,
+      rgb(from var(--mc-on-surface) r g b / 38%) 0,
+      rgb(from var(--mc-on-surface) r g b / 38%) 1px,
       transparent 1px);
 }
 

@@ -29,6 +29,7 @@ export default class MCSurfaceElement extends HTMLComponentElement {
   
   #swipeEnd_bound = this.#swipeEnd.bind(this);
   #swipeMove_bound = this.#swipeMove.bind(this);
+  #backdropClick_bound = this.#backdropClick.bind(this);
 
 
   constructor() {
@@ -181,6 +182,7 @@ export default class MCSurfaceElement extends HTMLComponentElement {
     this.setPosition();
     this.setAttribute('open', '');
     if (this.#swipe) this.#swipe.enable();
+    if (this.bottomSheet) window.addEventListener('click', this.#backdropClick_bound, { capture: true, signal: this.#abort.signal });
   }
 
   onHide() {
@@ -191,6 +193,11 @@ export default class MCSurfaceElement extends HTMLComponentElement {
         this.parentElement.removeChild(this);
      });
     }
+
+    // If we remove immediately then the click does not get prevented
+    setTimeout(() => {
+      window.removeEventListener('click', this.#backdropClick_bound, { capture: true });
+    }, 50);
   }
 
   #setModalPosition() {
@@ -247,6 +254,14 @@ export default class MCSurfaceElement extends HTMLComponentElement {
       this.hidePopover();
     } else {
       this.style.bottom = '';
+    }
+  }
+
+  #backdropClick(event) {
+    const shouldClose = event.target !== this && !this.contains(event.target);
+    if (shouldClose) {
+      event.stopPropagation();
+      event.preventDefault();
     }
   }
 }

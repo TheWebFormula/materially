@@ -4,6 +4,9 @@ import styles from './menu.css' assert { type: 'css' };
 import util from '../../helpers/util.js'
 import device from '../../helpers/device.js'
 
+const bottomSheetMeta = document.querySelector('meta[name="mc-menu-bottom-sheet"]');
+const bottomSheetDisabled = bottomSheetMeta && bottomSheetMeta.content === 'disable';
+
 
 export default class MCMenuElement extends MCSurfaceElement {
   static tag = 'mc-menu';
@@ -42,7 +45,7 @@ export default class MCMenuElement extends MCSurfaceElement {
       this.anchorRight = true;
     } else {
       // is compact, does not have prevent attr, is not nested
-      this.bottomSheet = device.state === device.COMPACT && !this.hasAttribute('prevent-bottom-sheet') && this.querySelector(':scope [anchor]') == null;
+      this.bottomSheet = !bottomSheetDisabled && device.state === device.COMPACT && !this.hasAttribute('prevent-bottom-sheet') && this.querySelector(':scope [anchor]') == null;
     }
   }
 

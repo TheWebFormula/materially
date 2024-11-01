@@ -52,6 +52,19 @@
   overflow-y: scroll;
 }
 
+:host(.bottom-sheet)::backdrop {
+  opacity: 0;
+  background-color: var(--mc-scrim);
+  animation: surface-backdrop-out;
+  animation-duration: var(--mc-motion-duration-short3);
+}
+
+:host(.bottom-sheet[popover]:popover-open)::backdrop {
+  opacity: 32%;
+  animation: surface-backdrop;
+  animation-duration: var(--mc-motion-duration-medium2);
+}
+
 :host(.bottom-sheet:not(.swipe-active)) {
   transition: bottom;
   transition-duration: var(--mc-motion-duration-short3);
@@ -248,5 +261,26 @@
     width: 70dvw;
     margin: 0 auto;
     top: calc(50% - 30dvh);
+  }
+}
+
+
+@keyframes surface-backdrop {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 32%;
+  }
+}
+
+@keyframes surface-backdrop-out {
+  0% {
+    opacity: 32%;
+  }
+
+  100% {
+    opacity: 0;
   }
 }

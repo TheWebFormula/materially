@@ -146,7 +146,13 @@ ${`<mc-button id="controlid">Control</mc-button>
       
           <code-block language="html">
             <pre>
-${`<!-- default will be a bottom sheet when compact -->
+${`<!-- Prevent menu bottom sheet globally -->
+<head>
+  <meta name="mc-menu-bottom-sheet" content="disable">
+</head>
+
+
+<!-- default will be a bottom sheet when compact -->
 <mc-button id="compactcontrol" class="filled">Default</mc-button>
 <mc-menu anchor="compactcontrol">
   <mc-menu-item>

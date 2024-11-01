@@ -55,6 +55,7 @@ class MCDatePickerElement extends MCSurfaceElement {
   #clickOutside_bound = this.#clickOutside.bind(this);
   #escClose_bound = this.#escClose.bind(this);
   #windowStateChange_bound = this.#windowStateChange.bind(this);
+  #preventDefaultAndOpen_bound = this.#preventDefaultAndOpen.bind(this);
 
 
   constructor() {
@@ -244,6 +245,11 @@ class MCDatePickerElement extends MCSurfaceElement {
     } else {
       this.#hide();
     }
+  }
+
+  #preventDefaultAndOpen(event) {
+    event.preventDefault();
+    this.showPopover();
   }
 
   #show() {
@@ -694,9 +700,11 @@ class MCDatePickerElement extends MCSurfaceElement {
     switch (device.state) {
       case device.COMPACT:
         this.modal = true;
+        this.#textfield.addEventListener('pointerdown', this.#preventDefaultAndOpen_bound, { signal: this.#abort.signal });
         break;
       default:
         this.modal = false;
+        this.#textfield.removeEventListener('pointerdown', this.#preventDefaultAndOpen_bound);
     }
 
     this.#getDaysContainer().innerHTML = monthDaysTemplate(this.#displayDate, this.minDate, this.maxDate);

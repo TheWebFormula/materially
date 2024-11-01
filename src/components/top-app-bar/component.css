@@ -16,6 +16,7 @@
   box-sizing: border-box;
   background-color: var(--mc-top-app-bar-container-color-local);
   z-index: 4;
+  will-change: top;
 }
 
 :host(.animation) {

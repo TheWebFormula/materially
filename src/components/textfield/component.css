@@ -198,6 +198,7 @@ textarea[rows="1"] {
 .has-picker .input[type="time"]::-webkit-clear-button,
 .has-picker .input[type="time"]::-webkit-calendar-picker-indicator {
   display: none;
+  -webkit-appearance: none;
 }
 
 

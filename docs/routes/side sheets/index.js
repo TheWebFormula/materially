@@ -8,6 +8,7 @@ export default class extends Component {
   oneOpen = new Signal(true);
   twoOpen = new Signal(false);
   threeOpen = new Signal(true);
+  predictiveOpen = new Signal(false);
 
   constructor() {
     super();

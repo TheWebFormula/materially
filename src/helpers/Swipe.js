@@ -113,14 +113,18 @@ const MCSwipe = class MCSwipe {
     this.#lastX = this.#startX;
     this.#lastY = this.#startY;
     this.#startTime = Date.now();
-    window.addEventListener(this.#endEvent, this.#end_bound, { signal: this.#abort.signal });
+
+    // pointer up does not work in some conditions when mouse moves
+    window.addEventListener('mouseup', this.#end_bound, { signal: this.#abort.signal });
+    window.addEventListener('touchend', this.#end_bound, { signal: this.#abort.signal });
     window.addEventListener(this.#moveEvent, this.#move_bound, { signal: this.#abort.signal });
 
     let swipeEvent = new SwipeStartEvent(event, this.#startX, this.#startY);
     const cancelled = !this.#element.dispatchEvent(swipeEvent);
     if (cancelled) {
       this.#element.classList.remove('swipe-active');
-      window.removeEventListener(this.#endEvent, this.#end_bound);
+      window.removeEventListener('mouseup', this.#end_bound);
+      window.removeEventListener('touchend', this.#end_bound);
       window.removeEventListener(this.#moveEvent, this.#move_bound);
       return;
     }
@@ -132,7 +136,8 @@ const MCSwipe = class MCSwipe {
 
   #end(event) {
     this.#element.classList.remove('swipe-active');
-    window.removeEventListener(this.#endEvent, this.#end_bound);
+    window.removeEventListener('mouseup', this.#end_bound);
+    window.removeEventListener('touchend', this.#end_bound);
     window.removeEventListener(this.#moveEvent, this.#move_bound);
     this.#endX = this.#getClientX(event);
     this.#endY = this.#getClientY(event);
@@ -152,7 +157,6 @@ const MCSwipe = class MCSwipe {
     let dx = this.#endX - this.#startX;
     let dy = this.#endY - this.#startY;
     let distance = Math.sqrt(dx * dx + dy * dy);
-    if (distance < this.#distanceThreshold) return;
 
     let velocity = distance / time;
     if (Math.abs(velocity) < this.#velocityThreshold) isSwipe = false;
@@ -166,8 +170,11 @@ const MCSwipe = class MCSwipe {
     let direction = left && 'left' || right && 'right' || up && 'up' || down && 'down';
 
     if (
-      (this.#verticalOnly && (left || right))
-      || (this.#horizontalOnly && (up || down))
+      distance >= this.#distanceThreshold
+      && (
+        (this.#verticalOnly && (left || right))
+        || (this.#horizontalOnly && (up || down))
+      )
     ) {
       isSwipe = false;
     }

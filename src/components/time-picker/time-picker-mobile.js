@@ -49,6 +49,7 @@ class MCTimePickerMobileElement extends MCSurfaceElement {
   #toggle_bound = this.#toggle.bind(this);
   #clickOutside_bound = this.#clickOutside.bind(this);
   #escClose_bound = this.#escClose.bind(this);
+  #preventDefaultAndOpen_bound = this.#preventDefaultAndOpen.bind(this);
 
 
   constructor() {
@@ -120,6 +121,8 @@ class MCTimePickerMobileElement extends MCSurfaceElement {
       if (!this.#hour24Touched) this.#hour24 = device.hourCycle === 'h24';
       this.#buildThetaData();
     });
+
+    if (device.state === device.COMPACT) this.#textfield.addEventListener('pointerdown', this.#preventDefaultAndOpen_bound, { signal: this.#abort.signal });
   }
 
   disconnectedCallback() {
@@ -216,6 +219,11 @@ class MCTimePickerMobileElement extends MCSurfaceElement {
     } else {
       this.#hide();
     }
+  }
+
+  #preventDefaultAndOpen(event) {
+    event.preventDefault();
+    this.showPopover();
   }
 
   // show handles both states

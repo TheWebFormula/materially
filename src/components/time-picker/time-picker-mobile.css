@@ -20,12 +20,14 @@
   line-height: var(--mc-font-medium-label-line-height);
   letter-spacing: var(--mc-font-medium-label-tracking);
   color: var(--mc-on-surface-variant);
+  z-index: 1;
 }
 
 .time-container {
   display: flex;
   margin-top: 24px;
   margin-bottom: 36px;
+  z-index: 1;
 }
 
 :host([hour24]) .time-container {
@@ -145,6 +147,7 @@ input[type="number"]::-webkit-outer-spin-button {
   align-self: center;
   height: 256px;
   width: 256px;
+  z-index: 1;
 }
 
 /* keeps background in alignment with labels when animating in */
@@ -271,6 +274,7 @@ input[type="number"]::-webkit-outer-spin-button {
   display: flex;
   align-items: center;
   margin-top: 32px;
+  z-index: 1;
 }
 
 :host(.input-view) .actions {

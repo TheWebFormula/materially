@@ -15,27 +15,27 @@
 
   height: 512px;
   max-height: 512px;
+}
 
-  .controls {
-    display: none;
-  }
+:host(.modal) .controls {
+  display: none;
+}
 
-  .modal-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-sizing: border-box;
-    padding-left: 12px;
-  }
+:host(.modal) .modal-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-left: 12px;
+}
 
-  .week-header {
-    margin-bottom: 12px;
-  }
+:host(.modal) .week-header {
+  margin-bottom: 12px;
+}
 
-  .year-list {
-    top: 172px;
-    height: 339px;
-  }
+:host(.modal) .year-list {
+  top: 172px;
+  height: 339px;
 }
 
 :host(.modal.input-view) {

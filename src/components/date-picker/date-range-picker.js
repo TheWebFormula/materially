@@ -49,6 +49,7 @@ class MCDateRangePickerElement extends MCSurfaceElement {
   #escClose_bound = this.#escClose.bind(this);
   #windowStateChange_bound = this.#windowStateChange.bind(this);
   #endTextfieldFocus_bound = this.#endTextfieldFocus.bind(this);
+  #preventDefaultAndOpen_bound = this.#preventDefaultAndOpen.bind(this);
 
 
   constructor() {
@@ -128,10 +129,12 @@ class MCDateRangePickerElement extends MCSurfaceElement {
     if (this.#startTextfield) {
       this.closeIgnoreElements.push(this.#startTextfield)
       this.addEventListener('toggle', this.#toggle_bound, { signal: this.#abort.signal });
+      if (device.state === device.COMPACT) this.#startTextfield.addEventListener('pointerdown', this.#preventDefaultAndOpen_bound, { signal: this.#abort.signal });
     }
 
     if (this.#endTextfield) {
       this.#endTextfield.addEventListener('focus', this.#endTextfieldFocus_bound, { signal: this.#abort.signal });
+      if (device.state === device.COMPACT) this.#endTextfield.addEventListener('pointerdown', this.#preventDefaultAndOpen_bound, { signal: this.#abort.signal });
     }
   }
 
@@ -175,6 +178,11 @@ class MCDateRangePickerElement extends MCSurfaceElement {
   }
 
   #endTextfieldFocus() {
+    this.showPopover();
+  }
+
+  #preventDefaultAndOpen(event) {
+    event.preventDefault();
     this.showPopover();
   }
 

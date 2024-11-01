@@ -11,6 +11,7 @@
       <ul class="links">
         <li><a href="#local">Local</a></li>
         <li><a href="#global">Global</a></li>
+        <li><a href="#back">Predictive back</a></li>
         <li><a href="#forms">Forms</a></li>
         <li><a href="#style">Style</a></li>
       </ul>
@@ -20,7 +21,7 @@
 
       <section id="local" aria-label="Side sheet example">
         <mc-card>
-          <h2 slot="headline">Local</h2>
+          <h2 slot="headline">Local side sheet</h2>
           <div slot="subhead">Contained inside of div</div>
         
           <div class="example">
@@ -188,6 +189,96 @@ ${`<div style="display: flex">
             </pre></code-block>
         </mc-card>
       </section>
+
+
+
+      <section id="back" aria-label="Side sheet predictive back">
+        <mc-card>
+          <h2 slot="headline">Predictive back</h2>
+          <div slot="subhead">On campact window size (mobile) you can swipe / drag from the edge of the sheet to close it</div>
+      
+          <div class="example">
+            <div style="display: flex; flex-direction: column; width: 190px;">
+              <mc-switch onchange="page.predictiveOpen.value = this.checked" checked="${page.predictiveOpen}" label="Toggle"></mc-switch>
+            </div>
+            <div style="display: flex">
+              <mc-side-sheet id="predictive" open="${page.predictiveOpen}" onchange="page.predictiveOpen.value = this.open" global>
+                <div slot="headline">swipe / drag from the edge to close on campact screen (mobile)</div>
+      
+                <div class="font-size: 20px">One</div>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna
+                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                  Duis
+                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+      
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna
+                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                  Duis
+                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+      
+                <div class="font-size: 20px">Two</div>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna
+                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                  Duis
+                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+      
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna
+                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat.
+                  Duis
+                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+      
+                <mc-button slot="action" onclick="this.parentElement.close()">cancel</mc-button>
+                <mc-button slot="action" onclick="this.parentElement.close()">save</mc-button>
+              </mc-side-sheet>
+            </div>
+          </div>
+      
+          <code-block language="html">
+            <pre>
+  ${`<!-- You can disable predictive back by adding [predictive-back-disable] -->
+  <div style="display: flex">
+    <div>
+      content...
+    </div>
+    <mc-side-sheet predictive-back-disable>
+      <div slot="headline">Headline</div>
+    
+      <h5>One</h5>
+      <p>
+        Lorem ipsum ...
+      </p>
+    
+      <mc-button slot="action" onclick="this.parentElement.close()">cancel</mc-button>
+      <mc-button slot="action" onclick="this.parentElement.close()">save</mc-button>
+    </mc-side-sheet>
+  </div>`}
+                  </pre>
+          </code-block>
+        </mc-card>
+      </section>
+
+
+
 
 
       <section id="forms" aria-label="Side sheet with forms">

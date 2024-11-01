@@ -1,4 +1,5 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
+import util from '../../helpers/util.js';
 import styles from './component.css' assert { type: 'css' };
 
 
@@ -16,7 +17,11 @@ class MCTopAppBarElement extends HTMLComponentElement {
   #large = false;
   #scrollContainer;
   #scrollTopContainer;
-  #scroll_bound = this.#scroll.bind(this);
+  #scrolling = false;
+  #scrollInterval;
+  #scrollEndTimer;
+  #scroll_bound = util.rafThrottle(this.#scroll.bind(this));
+  #scrollEnd_bound = this.#scrollEnd.bind(this);
 
   
   constructor() {
@@ -53,6 +58,8 @@ class MCTopAppBarElement extends HTMLComponentElement {
 
   connectedCallback() {
     this.#scrollContainer.addEventListener('scroll', this.#scroll_bound);
+    this.#scrollContainer.addEventListener('scrollend', this.#scrollEnd_bound);
+    this.#scrollContainer.addEventListener('touchend', this.#scrollEnd_bound);
     if (this.#compress && this.#medium && !this.querySelector('[slot="alt-headline"]')) {
       let headline = this.querySelector('[slot="headline"]');
       let cloned = headline.cloneNode(true);
@@ -69,6 +76,8 @@ class MCTopAppBarElement extends HTMLComponentElement {
 
   disconnectedCallback() {
     this.#scrollContainer.removeEventListener('scroll', this.#scroll_bound);
+    this.#scrollContainer.removeEventListener('scrollend', this.#scrollEnd_bound);
+    this.#scrollContainer.removeEventListener('touchend', this.#scrollEnd_bound);
   }
 
   get autohide() { return this.compress }
@@ -96,26 +105,58 @@ class MCTopAppBarElement extends HTMLComponentElement {
     this.#height = !!value ? 152 : 64;
   }
 
-  #scroll() {
-    if (this.#compress) {
-      let isNormal = !this.#medium && !this.#large;
-      const currentScrollTop = this.#scrollTopContainer.scrollTop;
-      let distance = currentScrollTop - this.#scrollTop;
-      this.#scrollTop = currentScrollTop;
-      this.#position += distance;
-      const minPosition = isNormal ? 64 : this.#height - 64;
-      if (this.#position > minPosition) this.#position = minPosition;
-      if (this.#position < 0) this.#position = 0;
-      this.style.top = `-${this.#position}px`;
-      if (!isNormal) this.style.paddingTop = `${this.#position}px`;
-      this.classList.toggle('scrolled', currentScrollTop > minPosition && this.#position < this.#height);
 
-      const start = Math.max(this.#position, 5);
-      const percent = Math.max(0, 1 - ((start - 5) / (minPosition / 3)));
-      if (!isNormal) this.style.setProperty('--mc-top-app-bar-alt-headline-opacity', percent);
+  /*
+   * Used to kickoff scroll interval and handle scroll end since there is no scrollend event on IOS
+   * We are using an interval to compress the top app bar because the scroll events speed produces choppy movement
+   */
+  #scroll() {
+    if (!this.#scrolling) {
+      this.#scrolling = true;
+      this.#runScroll();
     } else {
-      this.classList.toggle('scrolled', this.#scrollTopContainer.scrollTop > 0);
+      if (this.#scrollEndTimer) clearTimeout(this.#scrollEndTimer);
+      this.#scrollEndTimer = setTimeout(() => {
+        if (this.#scrollInterval) {
+          clearInterval(this.#scrollInterval);
+          this.#scrollInterval = undefined;
+        }
+
+        this.#scrollEndTimer = undefined;
+        this.#scrolling = false;
+      }, 100);
     }
+  }
+
+  #scrollEnd() {
+    this.#scrolling = false;
+    clearInterval(this.#scrollInterval);
+    this.#scrollInterval = undefined;
+  }
+
+  #runScroll() {
+    if (this.#scrollInterval) clearInterval(this.#scrollInterval);
+    this.#scrollInterval = setInterval(() => {
+      if (this.#compress) {
+        let isNormal = !this.#medium && !this.#large;
+        const currentScrollTop = this.#scrollTopContainer.scrollTop;
+        let distance = currentScrollTop - this.#scrollTop;
+        this.#scrollTop = currentScrollTop;
+        this.#position += distance;
+        const minPosition = isNormal ? 64 : this.#height - 64;
+        if (this.#position > minPosition) this.#position = minPosition;
+        if (this.#position < 0) this.#position = 0;
+        this.style.top = `-${this.#position}px`;
+        if (!isNormal) this.style.paddingTop = `${this.#position}px`;
+        this.classList.toggle('scrolled', currentScrollTop > minPosition && this.#position < this.#height);
+
+        const start = Math.max(this.#position, 5);
+        const percent = Math.max(0, 1 - ((start - 5) / (minPosition / 3)));
+        if (!isNormal) this.style.setProperty('--mc-top-app-bar-alt-headline-opacity', percent);
+      } else {
+        this.classList.toggle('scrolled', this.#scrollTopContainer.scrollTop > 0);
+      }
+    }, 8); // 8 is twice every frame at 60 FPS. This produces smooth movement
   }
 }
 

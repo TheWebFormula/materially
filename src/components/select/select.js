@@ -4,6 +4,7 @@ import fuzzySearch from '../../helpers/fuzzySearch.js'
 import '../textfield/index.js';
 import '../menu/index.js';
 
+// TODO compact view (bottom-sheet, fullscreen filter)
 
 class MCSelectElement extends HTMLComponentElement {
   static tag = 'mc-select';
@@ -92,7 +93,7 @@ class MCSelectElement extends HTMLComponentElement {
         <span class="focus-holder" tabIndex="0"></span>
 
 
-        <mc-menu prevent-close>
+        <mc-menu prevent-close prevent-bottom-sheet>
           <mc-progress-linear indeterminate disabled></mc-progress-linear>
           <slot class="options-container"></slot>
           <div class="no-results">No items</div>

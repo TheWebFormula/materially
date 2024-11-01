@@ -116,9 +116,15 @@ const MCSwipe = class MCSwipe {
     window.addEventListener(this.#endEvent, this.#end_bound, { signal: this.#abort.signal });
     window.addEventListener(this.#moveEvent, this.#move_bound, { signal: this.#abort.signal });
 
-    let swipeEvent = new SwipeStartEvent(event);
-    this.#element.dispatchEvent(swipeEvent);
-    
+    let swipeEvent = new SwipeStartEvent(event, this.#startX, this.#startY);
+    const cancelled = !this.#element.dispatchEvent(swipeEvent);
+    if (cancelled) {
+      this.#element.classList.remove('swipe-active');
+      window.removeEventListener(this.#endEvent, this.#end_bound);
+      window.removeEventListener(this.#moveEvent, this.#move_bound);
+      return;
+    }
+
     if (this.#disableScroll) {
       document.body.addEventListener('touchmove', this.#preventScroll_bound, { passive: false, signal: this.#abort.signal });
     }
@@ -266,12 +272,15 @@ class SwipeMoveEvent extends PointerEvent {
 }
 
 class SwipeStartEvent extends PointerEvent {
-  constructor(event) {
+  constructor(event, clientX, clientY) {
     super('swipestart', {
       bubbles: true,
+      cancelable: true,
       changedTouches: event.changedTouches,
       targetTouches: event.targetTouches,
-      touches: event.touches
+      touches: event.touches,
+      clientX,
+      clientY
     });
   }
 }

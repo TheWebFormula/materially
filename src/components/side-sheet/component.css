@@ -244,3 +244,68 @@ slot[name="action"]::slotted(*) {
     opacity: 0;
   }
 }
+
+
+.predictive-back-icon {
+  --mc-predictive-back-stretch: 0px;
+
+  display: flex;
+  position: absolute;
+  top: calc(50% - 18px);
+  width: calc(24px + var(--mc-predictive-back-stretch));
+  height: 32px;
+  border-radius: 18px;
+  background-color: rgb(from var(--mc-scrim) r g b / 76%);
+  opacity: 1;
+  pointer-events: none;
+  color: var(--mc-on-primary);
+  align-items: center;
+  justify-content: center;
+
+  right: 12px;
+  left: unset;
+  transition: right, opacity;
+  transition-duration: var(--mc-motion-duration-medium1);
+}
+
+.predictive-back-icon.hide {
+  opacity: 0;
+  right: -100%;;
+}
+
+.predictive-back-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  /* stroke: var(--mc-on-primary); */
+  /* stroke-width: 1px; */
+  
+  rotate: 180deg;
+  margin-bottom: -1px;
+  margin-left: -6px;
+}
+
+:host([align-left]) .predictive-back-icon {
+  right: unset;
+  left: 12px;
+  transition: left, opacity;
+  transition-duration: var(--mc-motion-duration-medium1);
+}
+
+:host([align-left]) .predictive-back-icon.hide {
+  right: unset;
+  left: -100%;
+  opacity: 0;
+}
+
+:host([align-left]) .predictive-back-icon.hide svg {
+  rotate: unset;
+  margin-bottom: unset;
+  margin-left: unset;
+  margin-top: -3px;
+  margin-right: -4px;
+}
+
+
+
+

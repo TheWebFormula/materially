@@ -82,7 +82,7 @@ class MCPullToRefreshElement extends HTMLComponentElement {
       this.style.transform = `translateY(-${y}px)`;
       this.#progress.value = percent;
 
-      document.body.style.marginTop = `${util.overscrollEase(position)}px`;
+      document.body.style.marginTop = `${util.easeScale(position)}px`;
 
       if (touchDiff > 0) {
         event.preventDefault();

@@ -246,7 +246,7 @@ export default class MCSurfaceElement extends HTMLComponentElement {
   }
 
   #swipeMove(event) {
-    this.style.bottom = `-${util.overscrollEase(event.distanceY, 65) }px`;
+    this.style.bottom = `-${util.easeScale(event.distanceY, 65) }px`;
   }
 
   #swipeEnd(event) {

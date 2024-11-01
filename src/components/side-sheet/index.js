@@ -6,7 +6,7 @@ import util from '../../helpers/util.js';
 import {
   close_FILL0_wght400_GRAD0_opsz24,
   arrow_back_FILL1_wght300_GRAD0_opsz24,
-  arrow_back_ios_FILL1_wght300_GRAD0_opsz24
+  arrow_back_ios_20dp_E8EAED_FILL0_wght700_GRAD200_opsz20
 } from '../../helpers/svgs.js';
 
 
@@ -70,7 +70,7 @@ export default class MCSideSheetElement extends HTMLComponentElement {
             <slot name="action"></div>
           </div>
 
-          <div class="predictive-back-icon right hide">${arrow_back_ios_FILL1_wght300_GRAD0_opsz24}</div>
+          <div class="predictive-back-icon right hide">${arrow_back_ios_20dp_E8EAED_FILL0_wght700_GRAD200_opsz20}</div>
         </div>
       </div>
     `;

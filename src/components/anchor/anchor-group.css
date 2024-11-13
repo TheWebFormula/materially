@@ -3,20 +3,26 @@
   --mc-navigation-drawer-group-height: 0px;
 }
 
-:host a[control]::after {
+a[control]::after {
   z-index: 0;
 }
 
 
-:host a[control] .arrow {
+a[control] .arrow {
   display: block;
   height: 42px;
   transition: transform 0ms;
   transition-duration: var(--mc-motion-duration-short3);
 }
   
-:host a[control].open .arrow {
+a[control].open .arrow {
   transform: rotate(180deg);
+}
+
+a[control] [slot=trailing-icon] {
+  grid-area: trailing;
+  justify-self: start;
+  pointer-events: none;
 }
 
 @media (hover: hover) {

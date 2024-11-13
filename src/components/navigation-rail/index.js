@@ -1,5 +1,6 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
+import stylesAnchor from '../anchor/anchor-bar-rail.css' assert { type: 'css' };
 import device from '../../helpers/device.js';
 import util from '../../helpers/util.js';
 import '../anchor/index.js';
@@ -8,7 +9,7 @@ class MCNavigationRailElement extends HTMLComponentElement {
   static tag = 'mc-navigation-rail';
   static useShadowRoot = true;
   static useTemplate = true;
-  static styleSheets = [styles];
+  static styleSheets = [styles, stylesAnchor];
 
   #locationchange_bound = this.#locationchange.bind(this);
   #windowStateChange_bound = this.#windowStateChange.bind(this);

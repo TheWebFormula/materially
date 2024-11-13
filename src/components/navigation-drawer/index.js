@@ -1,6 +1,7 @@
 import MCSideSheetElement from '../side-sheet/index.js';
 import sideSheetStyles from '../side-sheet/component.css';
 import styles from './component.css' assert { type: 'css' };
+import stylesAnchor from '../anchor/anchor-drawer.css' assert { type: 'css' };
 import device from '../../helpers/device.js';
 import util from '../../helpers/util.js';
 import '../anchor/index.js';
@@ -8,7 +9,7 @@ import '../anchor/index.js';
 
 class MCNavigationDrawerElement extends MCSideSheetElement {
   static tag = 'mc-navigation-drawer';
-  static styleSheets = [sideSheetStyles, styles];
+  static styleSheets = [sideSheetStyles, styles, stylesAnchor];
 
 
   #locationchange_bound = this.#locationchange.bind(this);

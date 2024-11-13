@@ -1,5 +1,6 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
+import stylesAnchor from '../anchor/anchor-bar-rail.css' assert { type: 'css' };
 import device from '../../helpers/device.js';
 import util from '../../helpers/util.js';
 import '../anchor/index.js';
@@ -9,7 +10,7 @@ class MCNavigationBarElement extends HTMLComponentElement {
   static tag = 'mc-navigation-bar';
   static useShadowRoot = true;
   static useTemplate = true;
-  static styleSheets = [styles];
+  static styleSheets = [styles, stylesAnchor];
 
   #abort;
   #autoHide;

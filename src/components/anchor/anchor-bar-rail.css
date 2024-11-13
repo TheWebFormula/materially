@@ -1,0 +1,137 @@
+a,
+::slotted(a) {
+  --mc-anchor-text-color-local: var(--mc-anchor-text-color, var(--mc-on-surface-variant));
+  --mc-anchor-shape-local: var(--mc-anchor-shape, var(--mc-shape-extra-large));
+  --mc-anchor-current-container-color-local: var(--mc-anchor-current-container-color, var(--mc-secondary-container));
+
+
+  line-height: inherit;
+  text-decoration: inherit;
+  border: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  height: 56px;
+  line-height: 56px;
+  z-index: 0;
+  text-decoration: none;
+  color: var(--mc-anchor-text-color-local) !important;
+  font-size: var(--mc-font-medium-label-size) !important;
+  font-weight: var(--mc-font-medium-label-weight) !important;
+  letter-spacing: var(--mc-font-medium-label-tracking) !important;
+  border-radius: var(--mc-shape-extra-medium) !important;
+
+
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  height: 64px;
+  min-width: 64px;
+  width: min-content;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+a::before,
+::slotted(a)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  border-radius: var(--mc-anchor-shape-local);
+  width: 64px;
+  height: 32px;
+  border-radius: var(--mc-shape-extra-large);
+  transition: transform;
+  transition-duration: var(--mc-motion-duration-medium1);
+  transition-timing-function: var(--mc-motion-easing-standard);
+}
+
+a::after,
+::slotted(a)::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+  border-radius: var(--mc-anchor-shape-local);
+  z-index: -1;
+  width: 64px;
+  height: 32px;
+  border-radius: var(--mc-shape-extra-large);
+  transition: transform;
+  transition-duration: var(--mc-motion-duration-medium1);
+  transition-timing-function: var(--mc-motion-easing-standard);
+}
+
+
+a:hover,
+a:focus,
+::slotted(a:hover),
+::slotted(a:focus) {
+  text-decoration: none !important;
+}
+
+::slotted(a:focus)::after,
+a:focus::after {
+  opacity: var(--mc-state-layer-opacity-focus);
+  background-color: var(--mc-on-surface);
+}
+
+::slotted(a.current)::before,
+a.current::before {
+  pointer-events: none;
+  background-color: var(--mc-anchor-current-container-color-local);
+  transform: scale(1);
+}
+
+::slotted(a.current:focus)::after,
+a.current:focus::after {
+  background-color: var(--mc-on-secondary-container);
+}
+
+
+a.animate::after,
+a.animate::before,
+::slotted(a.animate)::after,
+::slotted(a.animate)::before {
+  transform: scale(0);
+  transition-duration: 0s;
+}
+
+a.no-text::after,
+a.no-text::before,
+::slotted(a.no-text)::after,
+::slotted(a.no-text)::before {
+  top: 0px;
+  height: 64px;
+  width: 64px;
+  border-radius: var(--mc-shape-full);
+}
+
+a:not(.no-text)::after,
+a:not(.no-text)::before,
+::slotted(a:not(.no-text))::after,
+::slotted(a:not(.no-text))::before {
+  top: 11px;
+}
+
+a:not(.no-text),
+::slotted(a:not(.no-text)) {
+  line-height: 20px !important;
+  flex-direction: column;
+}
+
+
+@media (hover: hover) {
+  ::slotted(a:hover)::after,
+  a:hover::after {
+    opacity: var(--mc-state-layer-opacity-hover);
+    background-color: var(--mc-on-surface);
+  }
+
+  ::slotted(a:hover.current)::after,
+  a:hover.current::after {
+    background-color: var(--mc-on-secondary-container);
+  }
+}

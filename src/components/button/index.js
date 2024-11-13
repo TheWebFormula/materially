@@ -45,20 +45,21 @@ export default class MCButtonElement extends HTMLComponentElement {
     this.role = 'button';
     this.tabIndex = this.hasAttribute('tabindex') ? this.getAttribute('tabindex') : 0;
 
-    if (isCut === undefined) {
-      const shapeCutRegex = /--mc-shape-cut:\s?1;/g;
-      isCut = false;
-      for (const sheet of document.styleSheets) {
-        for (const rule of sheet.cssRules) {
-          if (rule.selectorText === ':root' && rule.cssText.match(shapeCutRegex)) {
-            isCut = true;
-            break;
-          }
-        }
-        if (isCut) break;
-      }
-    }
-    if (isCut) this.setAttribute('cut', '');
+    // TODO fix - cannot access rule on fresh load
+    // if (isCut === undefined) {
+    //   const shapeCutRegex = /--mc-shape-cut:\s?1;/g;
+    //   isCut = false;
+    //   for (const sheet of document.styleSheets) {
+    //     for (const rule of sheet.cssRules) {
+    //       if (rule.selectorText === ':root' && rule.cssText.match(shapeCutRegex)) {
+    //         isCut = true;
+    //         break;
+    //       }
+    //     }
+    //     if (isCut) break;
+    //   }
+    // }
+    // if (isCut) this.setAttribute('cut', '');
 
 
     this.#internals = this.attachInternals();

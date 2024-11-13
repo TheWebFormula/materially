@@ -25,42 +25,36 @@
   --mc-motion-duration-medium2: 0s;
 }
 
+
 :host([disabled]) {
   cursor: default;
   pointer-events: none;
-  
-  .container {
-    .track {
-      &::before {     
-        opacity: 0.12; 
-        background-color: var(--mc-surface-container-highest);
-        border-color: var(--mc-on-surface);
-      }
-
-      .thumb::before {
-        opacity: 0.38; 
-        background-color: var(--mc-on-surface);
-      }
-    }
-  }
-
-  .container:has(input:checked) {
-    .track {
-      &::before {      
-        background-color: var(--mc-on-surface);
-      }
-
-      .thumb::before {
-        background-color: var(--mc-on-surface);
-      }
-    }
-  }
-
-  label {
-    color: var(--mc-on-surface);
-    opacity: 0.38;
-  }
 }
+
+:host([disabled]) .thumb::before {
+  opacity: 0.38; 
+  background-color: var(--mc-on-surface);
+}
+
+:host([disabled]) .track::before {     
+  opacity: 0.12; 
+  background-color: var(--mc-surface-container-highest);
+  border-color: var(--mc-on-surface);
+}
+
+:host([disabled]) .container:has(input:checked) .track::before {     
+  background-color: var(--mc-on-surface);
+}
+
+:host([disabled]) .container:has(input:checked) .thumb::before {     
+  background-color: var(--mc-on-surface);
+}
+
+:host([disabled]) label {
+  color: var(--mc-on-surface);
+  opacity: 0.38;
+}
+
 
 .container {
   align-items: center;
@@ -93,7 +87,7 @@ input {
   justify-content: center;
   align-items: center;
 
-  &::before {
+  /* &::before {
     content: '';
     display: flex;
     position: absolute;
@@ -107,90 +101,112 @@ input {
     background-color: var(--mc-switch-track-color-local);
     border: 2px solid;
     border-color: var(--mc-outline);
-  }
+  } */
+}
 
-  .thumb-container {
-    display: flex;
-    place-content: center;
-    place-items: center;
-    position: relative;
-    margin-inline-end: 20px;
-    
-    transition: margin;
-    transition-duration: var(--mc-motion-duration-medium2);
-    transition-timing-function: var(--mc-transition-overshoot);
-  }
+.track::before {
+  content: '';
+  display: flex;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  box-sizing: border-box;
+  transition-property: opacity, background-color;
+  transition-duration: var(--mc-motion-duration-short1);
 
-  .thumb {
-    position: relative;
-    border-radius: var(--mc-shape-full);
-    height: 16px;
-    width: 16px;
+  background-color: var(--mc-switch-track-color-local);
+  border: 2px solid;
+  border-color: var(--mc-outline);
+}
+
+.thumb-container {
+  display: flex;
+  place-content: center;
+  place-items: center;
+  position: relative;
+  margin-inline-end: 20px;
   
-    transform-origin: center;
-    transition-property: height, width;
-    transition-duration: var(--mc-motion-duration-medium1), var(--mc-motion-duration-medium1);
-    transition-timing-function: var(--mc-motion-easing-standard), var(--mc-motion-easing-standard);
-    z-index: 0;
-
-    &::before {
-      content: '';
-      display: flex;
-      inset: 0;
-      position: absolute;
-      border-radius: inherit;
-      box-sizing: border-box;
-      transition: background-color;
-      transition-duration: var(--mc-motion-duration-short1);
-    
-      background-color: var(--mc-switch-handle-color-local);
-    }
-  }
+  transition: margin;
+  transition-duration: var(--mc-motion-duration-medium2);
+  transition-timing-function: var(--mc-transition-overshoot);
 }
 
-.container:has(input:checked) {
-  .track {
-    &::before {
-      background-color: var(--mc-switch-selected-track-color-local);
-    }
+.thumb {
+  position: relative;
+  border-radius: var(--mc-shape-full);
+  height: 16px;
+  width: 16px;
 
-    .thumb-container {
-      margin-inline-end: unset;
-      margin-inline-start: 20px;
-    }
+  transform-origin: center;
+  transition-property: height, width;
+  transition-duration: var(--mc-motion-duration-medium1), var(--mc-motion-duration-medium1);
+  transition-timing-function: var(--mc-motion-easing-standard), var(--mc-motion-easing-standard);
+  z-index: 0;
 
-    .thumb {
-      width: 24px;
-      height: 24px;
-
-      &::before {
-        background-color: var(--mc-switch-selected-handle-color-local);
-      }
-    }
-  }
+  /* &::before {
+    content: '';
+    display: flex;
+    inset: 0;
+    position: absolute;
+    border-radius: inherit;
+    box-sizing: border-box;
+    transition: background-color;
+    transition-duration: var(--mc-motion-duration-short1);
+  
+    background-color: var(--mc-switch-handle-color-local);
+  } */
 }
 
-:host([icon]),
-:host([unchecked-icon]) {
-  .track {
-    .thumb {
-      width: 24px;
-      height: 24px;
-    }
-  }
+.thumb::before {
+  content: '';
+  display: flex;
+  inset: 0;
+  position: absolute;
+  border-radius: inherit;
+  box-sizing: border-box;
+  transition: background-color;
+  transition-duration: var(--mc-motion-duration-short1);
+
+  background-color: var(--mc-switch-handle-color-local);
 }
 
 
-.container:has(input:invalid.touched) {
-  .track {
-    &::before {
-      border-color: var(--mc-error);
-    }
+.container:has(input:checked) .track::before {
+  background-color: var(--mc-switch-selected-track-color-local);
+}
 
-    .thumb::before {
-      background-color: var(--mc-error);
-    }
-  }
+.container:has(input:checked) .thumb-container {
+  margin-inline-end: unset;
+  margin-inline-start: 20px;
+}
+
+.container:has(input:checked) .thumb {
+  width: 24px;
+  height: 24px;
+
+  /* &::before {
+    background-color: var(--mc-switch-selected-handle-color-local);
+  } */
+}
+
+.container:has(input:checked) .thumb::before {
+  background-color: var(--mc-switch-selected-handle-color-local);
+}
+
+:host([icon]) .thumb,
+:host([unchecked-icon]) .thumb {
+  width: 24px;
+  height: 24px;
+}
+
+
+.container:has(input:invalid.touched) .track::before {
+  border-color: var(--mc-error);
+}
+
+.container:has(input:invalid.touched) .thumb::before {
+  background-color: var(--mc-error);
 }
 
 label {
@@ -208,7 +224,7 @@ label {
   font-weight: var(--mc-font-large-label-weight);
   letter-spacing: var(--mc-font-large-label-tracking);
 
-  &.show {
+  /* &.show {
     display: inline-flex;
   }
 
@@ -217,7 +233,18 @@ label {
     order: 1;
     margin-right: 0;
     margin-left: 16px;
-  }
+  } */
+}
+
+label.show {
+  display: inline-flex;
+}
+
+label.right {
+  justify-content: flex-end;
+  order: 1;
+  margin-right: 0;
+  margin-left: 16px;
 }
 
 label:has(~ .container input:invalid.touched) {
@@ -269,5 +296,3 @@ mc-state-layer {
   --mc-state-layer-hover-color: var(--mc-on-surface);
   --mc-state-layer-focus-color: var(--mc-on-surface);
 }
-
-/* TODO focus ring color broken? */

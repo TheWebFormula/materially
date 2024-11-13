@@ -97,12 +97,12 @@ textarea[rows="1"] {
   align-self: center;
 }
 
-.text-field .input[type=date] {
+.input[type=date] {
   min-width: 120px;
 }
 
-.text-field .prefix-text,
-.text-field .suffix-text {
+.prefix-text,
+.suffix-text {
   font-family: inherit;
   font-size: var(--mc-font-large-body-size);
   font-weight: var(--mc-font-large-body-weight);
@@ -119,10 +119,10 @@ textarea[rows="1"] {
   min-height: 26px;
 }
 
-.text-field .prefix-text {
+.prefix-text {
   padding-inline-end: 2px;
 }
-.text-field .suffix-text {
+.suffix-text {
   padding-inline-start: 2px;
 }
 :host(.raise-label) .prefix-text,
@@ -134,30 +134,30 @@ textarea[rows="1"] {
   opacity: 1;
 }
 
-.text-field .input::-webkit-search-decoration,
-.text-field .input::-webkit-search-cancel-button {
+.input::-webkit-search-decoration,
+.input::-webkit-search-cancel-button {
   display: none;
   -webkit-appearance: none;
 }
 
-/* .text-field .input::-webkit-date-and-time-value {
+/* .input::-webkit-date-and-time-value {
   text-align: left;
 } */
 
-:host(:not(.outlined)) .text-field .input:-webkit-autofill,
-:host(:not(.outlined)) .text-field .input:-webkit-autofill:hover,
-:host(:not(.outlined)) .text-field .input:-webkit-autofill:focus,
-:host(:not(.outlined)) .text-field .input:-webkit-autofill:active {
+:host(:not(.outlined)) .input:-webkit-autofill,
+:host(:not(.outlined)) .input:-webkit-autofill:hover,
+:host(:not(.outlined)) .input:-webkit-autofill:focus,
+:host(:not(.outlined)) .input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px var(--mc-surface-variant) inset !important;
 }
 
 /* hack to keep autofill background color from showing
  *  The issue is that outline does not have a background color so we cannot use a var
  */
-:host(.outlined) .text-field .input:-webkit-autofill,
-:host(.outlined) .text-field .input:-webkit-autofill:hover,
-:host(.outlined) .text-field .input:-webkit-autofill:focus,
-:host(.outlined) .text-field .input:-webkit-autofill:active {
+:host(.outlined) .input:-webkit-autofill,
+:host(.outlined) .input:-webkit-autofill:hover,
+:host(.outlined) .input:-webkit-autofill:focus,
+:host(.outlined) .input:-webkit-autofill:active {
   transition: background-color 9999s ease-in-out 0s;
 }
 
@@ -227,10 +227,10 @@ textarea[rows="1"] {
   animation: mc-textfield-label-reverse;
   animation-duration: var(--mc-motion-duration-short3);
   animation-timing-function: var(--mc-motion-easing-standard);
+}
 
-  &.no-animation {
-    animation-duration: 0s !important;
-  }
+label.no-animation {
+  animation-duration: 0s !important;
 }
 
 .text-field.trailing-icon label,
@@ -250,7 +250,7 @@ textarea[rows="1"] {
   color: var(--mc-textfield-active-indicator-color-local);
 }
 
-.text-field .input::placeholder {
+.input::placeholder {
   font-size: var(--mc-font-large-body-size);
   font-weight: var(--mc-font-large-body-weight);
   line-height: var(--mc-font-large-body-line-height);
@@ -260,18 +260,14 @@ textarea[rows="1"] {
 
 :host(.raise-label) .text-field label,
 :host(:focus) .text-field label,
-.text-field .input:not([placeholder=" "]) + label,
-.text-field .input:not(:placeholder-shown) + label {
+.input:not([placeholder=" "]) + label,
+.input:not(:placeholder-shown) + label {
   font-size: var(--mc-font-small-body-size);
   top: 4px;
 
   animation: mc-textfield-label;
   animation-duration: var(--mc-motion-duration-short3);
   animation-timing-function: var(--mc-motion-easing-standard);
-
-  &.no-animation {
-    animation-duration: 0s !important;
-  }
 }
 
 :host .text-field slot[name="leading-icon"]::slotted(mc-icon) {
@@ -355,7 +351,7 @@ textarea[rows="1"] {
 
 :host([disabled]) .text-field label,
 :host([disabled]) .text-field .input,
-:host([disabled]) .text-field .input::placeholder,
+:host([disabled]) .input::placeholder,
 :host([disabled]) .text-field .supporting-text {
   color: rgb(from var(--mc-on-surface) r g b / 38%);
 }
@@ -387,16 +383,12 @@ textarea[rows="1"] {
   animation: mc-textfield-label-outlined-reverse;
   animation-duration: var(--mc-motion-duration-short3);
   animation-timing-function: var(--mc-motion-easing-standard);
-
-  &.no-animation {
-    animation-duration: 0s !important;
-  }
 }
 
 :host(.outlined.raise-label) .text-field label,
 :host(.outlined:focus) .text-field label,
-:host(.outlined) .text-field .input:not([placeholder=" "]) + label,
-:host(.outlined) .text-field .input:not(:placeholder-shown) + label {
+:host(.outlined) .input:not([placeholder=" "]) + label,
+:host(.outlined) .input:not(:placeholder-shown) + label {
   font-size: var(--mc-font-small-body-size);
   top: -12px;
   left: 14px;
@@ -404,10 +396,6 @@ textarea[rows="1"] {
   animation: mc-textfield-label-outlined;
   animation-duration: var(--mc-motion-duration-short3);
   animation-timing-function: var(--mc-motion-easing-standard);
-
-  &.no-animation {
-    animation-duration: 0s !important;
-  }
 }
 
 .text-field .outlined-border-container {
@@ -465,8 +453,8 @@ textarea[rows="1"] {
 
 :host(.outlined.raise-label) .outlined-border-container .outlined-notch,
 :host(.outlined:focus) .outlined-border-container .outlined-notch,
-:host(.outlined) .text-field .input:not([placeholder=" "]) ~ .outlined-border-container .outlined-notch,
-:host(.outlined) .text-field .input:not(:placeholder-shown) ~ .outlined-border-container .outlined-notch {
+:host(.outlined) .input:not([placeholder=" "]) ~ .outlined-border-container .outlined-notch,
+:host(.outlined) .input:not(:placeholder-shown) ~ .outlined-border-container .outlined-notch {
   max-width: calc(100% - 12px * 2);
   padding-right: 4px;
 }

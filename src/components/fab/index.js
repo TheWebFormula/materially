@@ -76,10 +76,12 @@ class MCFabElement extends HTMLComponentElement {
 
 
   #enableAutoHide() {
-    this.#maxWidth = this.offsetWidth;
-    this.style.maxWidth = `${this.#maxWidth}px`;
-    util.trackPageScroll(this.#scrollDirectionChange_bound);
-    if (!this.classList.contains('mc-animation')) this.classList.add('mc-animation')
+    requestAnimationFrame(() => {
+      this.#maxWidth = this.offsetWidth;
+      this.style.maxWidth = `${this.#maxWidth}px`;
+      util.trackPageScroll(this.#scrollDirectionChange_bound);
+      if (!this.classList.contains('mc-animation')) this.classList.add('mc-animation');
+    });
   }
 
   #scrollDirectionChange({ direction, directionChange }) {

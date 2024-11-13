@@ -26,6 +26,7 @@ body.pane-layout {
   height: 100vh;
 }
 
+/* TODO see if i can apply this state from the components. Like util.lockPageScroll */
 body:has(dialog[open]),
 body:has([role=dialog][open]:not([anchor])),
 body.window-compact:has(mc-search.open) {

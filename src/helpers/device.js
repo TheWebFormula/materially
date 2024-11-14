@@ -37,7 +37,9 @@ const mcDevice = new class MCDevice {
 
     if (document.readyState !== 'complete') {
       document.addEventListener('DOMContentLoaded', () => {
-        document.body.classList.add('mc-initiated');
+        requestAnimationFrame(() => {
+          document.body.classList.add('mc-initiated');
+        });
       });
     } else {
       window.addEventListener('pageshow', () => {

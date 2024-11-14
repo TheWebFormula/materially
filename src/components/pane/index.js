@@ -29,6 +29,7 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
   constructor() {
     super();
 
+    if (document.querySelector('mc-top-app-bar')) this.classList.add('top-app-bar-exists');
     if (this.hasAttribute('scroll')) document.body.classList.add('pane-layout');
     this.render();
     this.#resizeHandle = this.shadowRoot.querySelector('.resize-handle');
@@ -37,8 +38,6 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
     this.#pane2 = panes[1];
     window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound);
     if (panes.length > 2 && this.resize) console.warn('mc-pane-container only supports resizing for 2 mc-pane elements');
-
-    if (document.querySelector('mc-top-app-bar')) this.classList.add('top-app-bar-exists');
 
     this.#collapsiblePane2 = this.#pane2?.hasAttribute('collapsible');
   }

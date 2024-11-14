@@ -312,17 +312,20 @@ class MCSliderElement extends HTMLComponentElement {
   }
 
   #updateRangeDisplay(isEnd = false) {
-    const diff = ((this.#valueEnd - this.#valueStart) / (this.max - this.min)) / 2 * 100;
-    this.shadowRoot.querySelector('.container').style.setProperty('--mc-slider-range-active-diff', `${diff}%`);
+    // helps to move all style recalculations to one point
+    requestAnimationFrame(() => {
+      const diff = ((this.#valueEnd - this.#valueStart) / (this.max - this.min)) / 2 * 100;
+      this.shadowRoot.querySelector('.container').style.setProperty('--mc-slider-range-active-diff', `${diff}%`);
 
-    const handleStart = this.shadowRoot.querySelector('.handle.start');
-    const handleEnd = this.shadowRoot.querySelector('.handle.end');
-    handleStart.classList.remove('overlap');
-    handleEnd.classList.remove('overlap');
-    if (handleStart.getBoundingClientRect().right > handleEnd.getBoundingClientRect().left) {
-      if (isEnd) handleEnd.classList.add('overlap');
-      else handleStart.classList.add('overlap');
-    }
+      const handleStart = this.shadowRoot.querySelector('.handle.start');
+      const handleEnd = this.shadowRoot.querySelector('.handle.end');
+      handleStart.classList.remove('overlap');
+      handleEnd.classList.remove('overlap');
+      if (handleStart.getBoundingClientRect().right > handleEnd.getBoundingClientRect().left) {
+        if (isEnd) handleEnd.classList.add('overlap');
+        else handleStart.classList.add('overlap');
+      }
+    });
   }
 }
 customElements.define(MCSliderElement.tag, MCSliderElement);

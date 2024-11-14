@@ -24,9 +24,13 @@ const MCSwipe = class MCSwipe {
   #lastX;
   #lastY;
   #startTime;
+  #lastTime;
+  #velocity;
   #endX;
   #endY;
   #endTime;
+  #deltaDistance;
+  #trackVelocityInterval;
   #preventClick;
   #isSwiping = false;
 
@@ -113,6 +117,8 @@ const MCSwipe = class MCSwipe {
     this.#lastX = this.#startX;
     this.#lastY = this.#startY;
     this.#startTime = Date.now();
+    this.#lastTime = Date.now();
+    this.#velocity = 0;
 
     // pointer up does not work in some conditions when mouse moves
     window.addEventListener('mouseup', this.#end_bound, { signal: this.#abort.signal });
@@ -132,9 +138,15 @@ const MCSwipe = class MCSwipe {
     if (this.#disableScroll) {
       document.body.addEventListener('touchmove', this.#preventScroll_bound, { passive: false, signal: this.#abort.signal });
     }
+
+    this.#trackVelocityInterval = setInterval(this.#trackVelocity.bind(this), 100);
   }
 
   #end(event) {
+    if (this.#trackVelocityInterval) {
+      clearInterval(this.#trackVelocityInterval);
+      this.#trackVelocityInterval = undefined;
+    }
     this.#element.classList.remove('swipe-active');
     window.removeEventListener('mouseup', this.#end_bound);
     window.removeEventListener('touchend', this.#end_bound);
@@ -158,8 +170,7 @@ const MCSwipe = class MCSwipe {
     let dy = this.#endY - this.#startY;
     let distance = Math.sqrt(dx * dx + dy * dy);
 
-    let velocity = distance / time;
-    if (Math.abs(velocity) < this.#velocityThreshold) isSwipe = false;
+    if (Math.abs(this.#velocity) < 9) isSwipe = false;
 
     let radians = Math.atan2(dy, dx);
     let angle = radians * 180 / Math.PI;
@@ -184,7 +195,7 @@ const MCSwipe = class MCSwipe {
         event,
         direction,
         distance,
-        velocity
+        this.#velocity
       );
       this.#element.dispatchEvent(swipeEvent);
     }
@@ -195,7 +206,7 @@ const MCSwipe = class MCSwipe {
       distance,
       dx,
       dy,
-      velocity,
+      this.#velocity,
       isSwipe
     );
     this.#element.dispatchEvent(swipeEvent);
@@ -227,6 +238,8 @@ const MCSwipe = class MCSwipe {
     let deltaDistanceY = clientY - this.#lastY;
     this.#lastX = clientX;
     this.#lastY = clientY;
+    this.#deltaDistance = Math.sqrt(deltaDistanceX * deltaDistanceX + deltaDistanceY * deltaDistanceY);
+
     
     // Do not fire move if axis is locked and no movement
     if (this.#horizontalOnly && deltaDistanceX === 0) return;
@@ -241,6 +254,14 @@ const MCSwipe = class MCSwipe {
       deltaDistanceY
     );
     this.#element.dispatchEvent(swipeEvent);
+  }
+
+  #trackVelocity() {
+    const now = Date.now();
+    const elapsed = now - this.#lastTime;
+    this.#lastTime = now;
+    const v = 1000 * this.#deltaDistance / (1 + elapsed);
+    this.#velocity = 0.8 * v + 0.2 * this.#velocity;
   }
 }
 

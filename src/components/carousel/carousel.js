@@ -18,12 +18,17 @@ export default class MCCarouselElement extends HTMLComponentElement {
   #hasCalculated = false;
   #initiated = false;
   #startX;
+  #cancelMomentum = false;
 
   #calculateLayout_debounce = util.debounce(this.#calculateLayout.bind(this), 0);
-  #calculateLayout_bound = this.#calculateLayout.bind(this);
+  #calculateLayout_bound = util.rafThrottle(this.#calculateLayout.bind(this));
   #swipeStart_bound = this.#swipeStart.bind(this);
   #swipeEnd_bound = this.#swipeEnd.bind(this);
   #swipeMove_bound = this.#swipeMove.bind(this);
+
+  #scrolling = false;
+  #scrollInterval;
+  #scrollEndTimer;
 
 
   constructor() {
@@ -73,8 +78,6 @@ export default class MCCarouselElement extends HTMLComponentElement {
   scrollToItem(index, animation = true) {
     this.scrollTo({ left: this.#itemScrollPositions[index], behavior: animation ? 'smooth' : 'instant' });
   }
-  
-
 
   #calculateLayout() {
     switch (this.#strategy) {
@@ -194,6 +197,7 @@ export default class MCCarouselElement extends HTMLComponentElement {
   #swipeStart() {
     this.#hasDragged = true;
     this.#startX = this.scrollLeft;
+    this.#cancelMomentum = true;
   }
 
   #swipeMove(event) {
@@ -201,136 +205,57 @@ export default class MCCarouselElement extends HTMLComponentElement {
   }
 
   #swipeEnd(event) {
-    let closest;
-    let closestIndex = this.#snapPositions.findIndex((position, i) => {
-      const next = this.#snapPositions[i + 1];
-      if (!next) return true;
+    this.#cancelMomentum = false;
+    let elapsed = 16.7;
+    let delta;
+    let target = this.scrollLeft;
+    let deltas = [];
+    let deltaTotal = 0;
+    const shouldScroll = event.velocity > 10 || event.velocity < -10;
 
-      return position <= this.scrollLeft && next > this.scrollLeft;
+    if (shouldScroll) {
+      // Simulate animation at 60 FPS to estimate target position and deltas
+      const amplitude = (0.12 * event.velocity) * event.directionX;
+      do {
+        delta = Math.round(-amplitude * Math.exp(-elapsed / 325));
+        deltaTotal += delta;
+        deltas.push(delta);
+        target = Math.round(target + delta);
+        elapsed += 16.7;
+      } while (delta > 0.5 || delta < -0.5);
+    }
+    
+    // get closest  snap position based on direction
+    let closest = this.#snapPositions.reduce((prev, curr) => {
+      return (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev);
     });
 
-    const velocityReducer = 4;
-    let indexJump = Math.floor(Math.round(event.velocity) / velocityReducer) + 1;
+    const diff = closest - this.scrollLeft;
 
-    if (event.direction === 'left') {
-      const next = this.#snapPositions[closestIndex + indexJump];
-      if (next) closest = next;
-      else closest = this.#snapPositions[this.#snapPositions.length - 1];
+    if (!shouldScroll) {
+      // create linear movement to settle to closest target;
+      const move = 4 * event.directionX;
+      const length = Math.round(diff / move);
+      for (let i = 0; i < length; i += 1) {
+        deltas.push(move);
+      }
     } else {
-      const next = this.#snapPositions[closestIndex - (indexJump - 1)];
-      if (next) closest = next;
-      else closest = this.#snapPositions[0];
+      // adjust deltas to include closest target
+      deltas = deltas.map((v, i) => {
+        return Math.round((v / deltaTotal) * diff);
+      });
     }
 
-    this.scrollTo({
-      left: closest,
-      behavior: 'smooth'
-    });
+    requestAnimationFrame(() => this.#momentumMove(deltas.reverse()));
   }
 
-
-
-  // #startTime;
-  // #lastTime;
-  // #lastX;
-  // #velocity;
-  // #pointerDown = false;
-  // #overflowTimeConstant = 325;
-
-  // #dragStart(event) {
-  //   this.#hasDragged = true;
-  //   this.#pointerDown = true;
-  //   this.#startTime = Date.now();
-  //   this.#lastTime = this.#startTime;
-  //   this.#lastX = this.#getPositionX(event);
-  //   this.#velocity = 0;
-  //   window.addEventListener('pointerup', this.#dragEnd_bound, { signal: this.#abort.signal });
-  //   window.addEventListener('pointermove', this.#dragMove_bound, { signal: this.#abort.signal });
-  // }
-
-  // #dragMove(event) {
-  //   let currentX = this.#getPositionX(event);
-  //   const deltaX = currentX - this.#lastX;
-  //   this.#lastX = currentX;
-
-  //   let currentTime = Date.now();
-  //   let elapsedTime = currentTime - this.#lastTime;
-  //   this.#lastTime = currentTime;
-  //   this.#velocity = 0.8 * (10 * deltaX / (1 + elapsedTime)) + 0.2 * this.#velocity;
-  //   let max = this.scrollWidth - this.offsetWidth;
-  //   let position = Math.max(0, Math.min(max, this.scrollLeft - deltaX));
-  //   this.scrollLeft = position;
-  // }
-
-  // #dragEnd() {
-  //   window.removeEventListener('pointerup', this.#dragEnd_bound);
-  //   window.removeEventListener('pointermove', this.#dragMove_bound);
-
-  //   this.#pointerDown = false;
-  //   if (this.#velocity === 0) return;
-
-  //   const movements = this.#calculateMovements(this.#velocity > 0 ? -1 : 1);
-  //   this.#runOverScroll(movements);
-  // }
-
-  // #runOverScroll(movements) {
-  //   if (movements.length === 0 || this.#pointerDown === true) return;
-
-  //   this.scrollLeft += movements.pop();
-  //   requestAnimationFrame(() => this.#runOverScroll(movements));
-  // }
-
-  // #calculateMovements(direction) {
-  //   let target = Math.round(this.scrollLeft + this.#velocity);
-  //   let elapsed = 17;
-  //   let count = 0;
-  //   let deltaX;
-  //   let adjustedDeltas = [];
-
-  //   // Simulate animation at 60 FPS to estimate target position, to get iteration count
-  //   do {
-  //     deltaX = -this.#velocity * Math.exp(-elapsed / this.#overflowTimeConstant);
-  //     target = Math.round(target + deltaX);
-  //     elapsed += 17;
-  //     count++;
-  //   } while (deltaX > 0.5 || deltaX < -0.5);
-
-  //   // get closest  snap position based on direction
-  //   let closest = this.#snapPositions.reduce((prev, curr) => {
-  //     return (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev);
-  //   });
-
-  //   if (direction === 1 && closest <= this.scrollLeft) {
-  //     const closestIndex = this.#snapPositions.find(v => v === closest);
-  //     const next = this.#snapPositions[closestIndex + 1];
-  //     if (next) closest = next;
-  //   } else if (direction === -1 && closest >= this.scrollLeft) {
-  //     const closestIndex = this.#snapPositions.find(v => v === closest);
-  //     const next = this.#snapPositions[closestIndex - 1];
-  //     if (next) closest = next;
-  //   }
-    
-  //   let closestDistance = closest - this.scrollLeft;
-
-  //   // Prevent snapping when velocity is low
-  //   let averageMovement = Math.abs(closestDistance / count);
-  //   if (averageMovement > 5) count = Math.abs(Math.round(closestDistance / 5));
-    
-  //   // Build array of movements based on estimated run
-  //   for (let i = 0; i < count; i++) {
-  //     const adjusted = Math.round(closestDistance * ((i + 1) / count));
-  //     closestDistance -= adjusted
-  //     adjustedDeltas.push(adjusted);
-  //   }
-
-  //   // make sure larger numbers are first so we can pop
-  //   adjustedDeltas.reverse();
-  //   return adjustedDeltas;
-  // }
-
-  // #getPositionX(event) {
-  //   return event.changedTouches && event.changedTouches[0] ? event.changedTouches[0].clientX : event.clientX;
-  // }
+  #momentumMove(deltas) {
+    if (deltas.length === 0 || this.#cancelMomentum) return;
+    const delta = deltas.pop();
+    this.scrollLeft += delta;
+    this.#calculateLayout();
+    requestAnimationFrame(() => this.#momentumMove(deltas));
+  }
 }
 
 customElements.define(MCCarouselElement.tag, MCCarouselElement);

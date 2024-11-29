@@ -375,8 +375,11 @@ ${`<mc-card-group>
           <div slot="subhead">Press and hold on card to reorder</div>
           <div slot="supporting-text">By default the container will auto swap between grid and list based on screen size. You
             can for it to always be be one or the other by using classes: 'grid' 'mc-list'</div>
-        
-          <mc-card-group reorder>
+          
+          <mc-switch label-right="Swap (default false)" onchange="page.reorderSwap.value = this.checked"></mc-switch>
+          <div class="mc-font-body-medium" style="margin-bottom: 24px;">Reordering has two options shifting all elements (default). Or you can enable swap.</div>
+
+          <mc-card-group reorder swap="${page.reorderSwap}">
             ${page.cardArray.map(({ height }, i) => html`
             <mc-card class="${i}" filled>
               <img slot="image" class="rounded" alt="landscape"
@@ -391,6 +394,13 @@ ${`<mc-card-group>
         
           <code-block language="html"><pre>
 ${`<mc-card-group reorder>
+  <mc-card></mc-card>
+  <mc-card></mc-card>
+  <mc-card></mc-card>
+</mc-card-group>
+
+<!-- Swap -->
+<mc-card-group reorder swap>
   <mc-card></mc-card>
   <mc-card></mc-card>
   <mc-card></mc-card>

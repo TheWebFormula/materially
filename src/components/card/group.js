@@ -29,7 +29,8 @@ export default class MCCardGroupElement extends HTMLComponentElement {
 
   static get observedAttributesExtended() {
     return [
-      ['reorder', 'boolean']
+      ['reorder', 'boolean'],
+      ['swap', 'boolean']
     ];
   }
 
@@ -53,6 +54,15 @@ export default class MCCardGroupElement extends HTMLComponentElement {
   get reorder() { return this.hasAttribute('reorder'); }
   set reorder(value) {
     this.toggleAttribute('reorder', !!value);
+  }
+
+  get swap() { return this.hasAttribute('swap'); }
+  set swap(value) {
+    setTimeout(() => {
+      [...this.querySelectorAll('mc-card')].map((element, i) => {
+        element.swap = value;
+      });
+    });
   }
 
   get #isGrid() {

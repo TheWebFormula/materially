@@ -25,6 +25,7 @@ export default class MCCardElement extends HTMLComponentElement {
   #drag;
   #swipe;
   #swipeActionElement;
+  #swap = false;
   #dragging = false;
   #slotChange_bound = this.#slotChange.bind(this);
   #expandedClick_bound = this.#expandedClick.bind(this);
@@ -102,7 +103,7 @@ export default class MCCardElement extends HTMLComponentElement {
 
     if (this.parentElement.reorder) {
       this.setAttribute('draggable', 'true');
-      this.#drag = new Drag(this);
+      this.#drag = new Drag(this, this.swap);
       this.#drag.listOrderElement = this.parentElement;
       this.#drag.enable();
       this.addEventListener('dragstart', this.#dragState_bound, { signal: this.#abort.signal });
@@ -125,6 +126,13 @@ export default class MCCardElement extends HTMLComponentElement {
 
   get height() {
     return this.shadowRoot.querySelector('.container').offsetHeight;
+  }
+
+  get swap() {
+    return this.#swap;
+  }
+  set swap(value) {
+    if (this.#drag) this.#drag.swap = !!value;
   }
 
   

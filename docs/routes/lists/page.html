@@ -619,8 +619,11 @@ document.querySelector('#swipe-actions').addEventListener('swipeactionend', even
       <section id="reorder" aria-label="List reorder">
         <mc-card>
           <h2 slot="headline">Reorder list items</h2>
-        
-          <mc-list reorder id="list-reorder">
+          
+          <mc-switch label-right="Swap (default false)" onchange="page.reorderSwap.value = this.checked"></mc-switch>
+          <div class="mc-font-body-medium" style="margin-bottom: 24px;">Reordering has two options shifting all elements (default). Or you can enable swap.</div>
+
+          <mc-list reorder swap="${page.reorderSwap}" id="list-reorder">
             <mc-list-item>
               <div slot="headline">One</div>
               <div slot="supporting-text">Click and hold to drag</div>
@@ -651,7 +654,7 @@ document.querySelector('#swipe-actions').addEventListener('swipeactionend', even
           </mc-list>
         
           <code-block language="html"><pre>
-${`<mc-list reorder id="list-reorder">
+${`<mc-list reorder>
   <mc-list-item>
     <div slot="headline">One</div>
     <div slot="supporting-text">Click and hold to drag</div>
@@ -678,6 +681,22 @@ ${`<mc-list reorder id="list-reorder">
     <div slot="supporting-text">Click and hold to drag</div>
     <mc-icon slot="end">drag_handle</mc-icon>
     <mc-divider inset></mc-divider>
+  </mc-list-item>
+</mc-list>
+
+
+<!-- Swap -->
+<mc-list reorder swap>
+  <mc-list-item>
+  </mc-list-item>
+
+  <mc-list-item>
+  </mc-list-item>
+
+  <mc-list-item>
+  </mc-list-item>
+
+  <mc-list-item>
   </mc-list-item>
 </mc-list>`}
             </pre></code-block>

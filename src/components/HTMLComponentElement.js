@@ -1,7 +1,6 @@
 import styles from '../styles.css' assert { type: 'css' };
 document.adoptedStyleSheets.push(styles);
 
-const templateElements = {};
 const dashCaseRegex = /-([a-z])/g;
 const onRegex = /^on/;
 let templates = new Map();

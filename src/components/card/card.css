@@ -24,6 +24,10 @@
   cursor: grab;
 }
 
+:host([draggable=true]) [name="image"]::slotted(img) {
+  pointer-events: none;
+}
+
 :host(.swipe-action-showing) {
   /* NOTE does not work on ios overflow-x: clip; it just does overflow: clip */
   overflow-x: clip;

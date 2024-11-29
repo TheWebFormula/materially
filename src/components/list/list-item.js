@@ -17,6 +17,7 @@ class MCListItemElement extends HTMLComponentElement {
   #swipe;
   #drag;
   #dragging = false;
+  #swap = false;
   #value;
   #states;
   #selected;
@@ -105,6 +106,13 @@ class MCListItemElement extends HTMLComponentElement {
     this.shadowRoot.querySelector('mc-state-layer').ripple = !!value;
   }
 
+  get swap() {
+    return this.#swap;
+  }
+  set swap(value) {
+    if (this.#drag) this.#drag.swap = !!value;
+  }
+
 
   connectedCallback() {
     if (this.#dragging) return;
@@ -122,7 +130,7 @@ class MCListItemElement extends HTMLComponentElement {
     const list = this.parentElement.nodeName === 'SECTION' ? this.parentElement.parentElement : this.parentElement;
     if (list.reorder) {
       this.setAttribute('draggable', 'true');
-      this.#drag = new Drag(this);
+      this.#drag = new Drag(this, this.swap);
       this.#drag.listOrderElement = list;
       this.#drag.enable();
       this.addEventListener('dragstart', this.#dragState_bound, { signal: this.#abort.signal });

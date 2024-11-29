@@ -92,7 +92,6 @@ const mcUtil = new class MCUtil {
     );
 
     let activeElement = document.activeElement;
-    console.log(activeElement)
     if (allowShadowRoot && activeElement.shadowRoot) activeElement = activeElement.shadowRoot.activeElement;
     const containsFocus = containerElement.contains(activeElement);
     if (!containsFocus) return walker.nextNode();

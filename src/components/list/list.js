@@ -26,7 +26,8 @@ class MCListElement extends HTMLComponentElement {
   static get observedAttributesExtended() {
     return [
       ['value', 'string'],
-      ['reorder', 'boolean']
+      ['reorder', 'boolean'],
+      ['swap', 'boolean']
     ];
   }
 
@@ -44,6 +45,15 @@ class MCListElement extends HTMLComponentElement {
     const valueArray = value.split(',');
     [...this.querySelectorAll('mc-list-item')]
       .forEach(item => item.selected = valueArray.includes(item.value));
+  }
+
+  get swap() { return this.hasAttribute('swap'); }
+  set swap(value) {
+    setTimeout(() => {
+      [...this.querySelectorAll('mc-list-item')].map((element, i) => {
+        element.swap = value;
+      });
+    });
   }
 
   connectedCallback() {

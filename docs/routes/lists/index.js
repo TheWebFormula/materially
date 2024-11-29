@@ -1,9 +1,11 @@
-import { Component } from '@thewebformula/lithe';
+import { Component, Signal } from '@thewebformula/lithe';
 import htmlTemplate from './page.html';
 
 export default class extends Component {
   static title = 'Lists';
   static htmlTemplate = htmlTemplate;
+
+  reorderSwap = new Signal(false);
 
   constructor() {
     super();

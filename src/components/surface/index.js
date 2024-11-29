@@ -3,7 +3,6 @@ import styles from './component.css' assert { type: 'css' };
 import util from '../../helpers/util.js';
 import Swipe from '../../helpers/Swipe.js';
 
-// TODO make fullscreen start from anchor
 
 export default class MCSurfaceElement extends HTMLComponentElement {
   static tag = 'mc-surface';

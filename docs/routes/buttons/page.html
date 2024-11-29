@@ -92,12 +92,11 @@ ${`<mc-button id="async-button" async filled>Example</mc-button>
       </section>
 
 
-      <section aria-label="button types">
+      <section aria-label="button types" id="cut">
         <mc-card>
           <h2 id="button-types" slot="headline">Shape cut</h2>
-          <div slot="supporting-text">You can change the button shape to cut globally or per button</div>
       
-          <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap; --mc-button-shape: var(--mc-shape-large)">
+          <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap; --mc-button-shape: var(--mc-shape-large);">
             <mc-button cut>Text</mc-button>
             <mc-button cut elevated>Elevated</mc-button>
             <mc-button cut filled>Filled</mc-button>
@@ -109,30 +108,18 @@ ${`<mc-button id="async-button" async filled>Example</mc-button>
             </mc-button>
             <mc-button cut disabled outlined>Disabled</mc-button>
           </div>
-          
-          <code-block language="css">
-            <pre>
-${`/* Change all buttons
-   For now this only works globally, so you cannot use this in multiple places */
-:root {
-  --mc-shape-cut: 1;
-}`}
-            </pre>
-          </code-block>
 
           <code-block language="html">
             <pre>
 ${`<!-- Add cut attribute to control individual buttons -->
 <mc-button cut>Text</mc-button>
-<mc-button cut elevated>Elevated</mc-button>
-<mc-button cut filled>Filled</mc-button>
-<mc-button cut filled-tonal>Filled tonal</mc-button>
-<mc-button cut outlined>Outlined</mc-button>
-<mc-button cut>
-  <mc-icon slot="leading-icon">home</mc-icon>
-  Icon
-</mc-button>
-<mc-button cut disabled outlined>Disabled</mc-button>`}
+
+<!-- Add cut attribute to parent element to control groups of buttons -->
+<div cut>
+  <div>
+    <mc-button>Text</mc-button>
+  </div>
+</div>`}
             </pre>
           </code-block>
         </mc-card>

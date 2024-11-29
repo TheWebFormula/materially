@@ -4,7 +4,9 @@ import fuzzySearch from '../../helpers/fuzzySearch.js'
 import '../textfield/index.js';
 import '../menu/index.js';
 
-// TODO compact view (bottom-sheet, fullscreen filter)
+// TODO compact view (bottom-sheet, fullscreen filter)? (Im not sure we want this. The menu component does this)
+// TODO ?Handle filter on compact. Do we want to use a fullscreen view (like search)?
+// TODO ?adjust options height for filter on mobile device to handle the keyboard taking up screen space.
 
 class MCSelectElement extends HTMLComponentElement {
   static tag = 'mc-select';
@@ -222,7 +224,6 @@ class MCSelectElement extends HTMLComponentElement {
     }
   }
 
-  // TODO reset option from filter?
   #show() {
     this.#menu.style.minWidth = `${this.offsetWidth}px`;
     window.addEventListener('click', this.#clickOutside_bound, { signal: this.#abort.signal });

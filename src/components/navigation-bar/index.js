@@ -15,9 +15,7 @@ class MCNavigationBarElement extends HTMLComponentElement {
   #abort;
   #autoHide;
   #hide = false;
-  #scrollTop = 0;
-  #movement = 0;
-  #direction = 1;
+  #fistScroll = true;
   #stateCallbacks = [];
   #scroll_bound = this.#scroll.bind(this);
   #locationchange_bound = this.#locationchange.bind(this);
@@ -48,7 +46,7 @@ class MCNavigationBarElement extends HTMLComponentElement {
     this.#abort =  new AbortController();
     window.addEventListener('locationchange', this.#locationchange_bound, { signal: this.#abort.signal });
     window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound, { signal: this.#abort.signal });
-    if (this.#autoHide) document.addEventListener('scroll', this.#scroll_bound, { signal: this.#abort.signal });
+    if (this.#autoHide) util.trackPageScroll(this.#scroll_bound);
     [...this.querySelectorAll('a')].forEach(anchor => {
       if (!util.getTextFromNode(anchor)) anchor.classList.add('no-text');
     });
@@ -56,6 +54,7 @@ class MCNavigationBarElement extends HTMLComponentElement {
   }
 
   disconnectedCallback() {
+    util.untrackPageScroll(this.#scroll_bound);
     if (this.#abort) this.#abort.abort();
     this.#stateCallbacks.length = 0;
   }
@@ -84,18 +83,17 @@ class MCNavigationBarElement extends HTMLComponentElement {
     this.#stateCallbacks.splice(index, 1);
   }
 
-  #scroll() {
-    const currentScrollTop = document.documentElement.scrollTop;
-    const distance = currentScrollTop - this.#scrollTop;
-    if (distance === 0) return;
-
-    const direction = distance >= 1 ? 1 : -1;
-    if (direction !== this.#direction) this.#movement = 0;
-    this.#scrollTop = currentScrollTop;
-    this.#direction = direction;
-    this.#movement += distance;
-    if (this.hide && this.#movement < -30) this.hide = false;
-    if (!this.hide && this.#movement > 30) this.hide = true;
+  #scroll(event) {
+    // skip first scroll event. This prevents unwanted hide when page loads with a scrolled page
+    if (this.#fistScroll) {
+      this.#fistScroll = false;
+      return;
+    }
+    if (!event.isScrolled || (event.direction === 1 && event.distanceFromDirectionChange < -30)) {
+      this.hide = false;
+    } else if (event.distanceFromDirectionChange > 30) {
+      this.hide = true;
+    }
   }
 
   #locationchange() {
@@ -106,13 +104,6 @@ class MCNavigationBarElement extends HTMLComponentElement {
 
     if (match) {
       match.classList.add('current');
-
-      // if (device.animationReady) {
-      //   match.classList.add('animate');
-      //   requestAnimationFrame(() => {
-      //     match.classList.remove('animate');
-      //   });
-      // }
     }
   }
 

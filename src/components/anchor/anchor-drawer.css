@@ -11,16 +11,11 @@ a,
   grid-template-areas: "leading text trailing";
   align-items: center;
 
-
-  line-height: inherit;
-  height: inherit;
-  color: inherit;
-  text-decoration: inherit;
   border: none;
   outline: none;
   -webkit-tap-highlight-color: transparent;
   height: 56px;
-  line-height: 56px;
+  line-height: 56px !important;
   margin-bottom: 2px;
   width: 100%;
   z-index: 0;

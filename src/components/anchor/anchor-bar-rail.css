@@ -4,14 +4,11 @@ a,
   --mc-anchor-shape-local: var(--mc-anchor-shape, var(--mc-shape-extra-large));
   --mc-anchor-current-container-color-local: var(--mc-anchor-current-container-color, var(--mc-secondary-container));
 
-
-  line-height: inherit;
-  text-decoration: inherit;
   border: none;
   outline: none;
   -webkit-tap-highlight-color: transparent;
   height: 56px;
-  line-height: 56px;
+  line-height: 56px !important;
   z-index: 0;
   text-decoration: none;
   color: var(--mc-anchor-text-color-local) !important;

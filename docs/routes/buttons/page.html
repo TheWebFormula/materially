@@ -95,6 +95,7 @@ ${`<mc-button id="async-button" async filled>Example</mc-button>
       <section aria-label="button types" id="cut">
         <mc-card>
           <h2 id="button-types" slot="headline">Shape cut</h2>
+          <div slot="supporting-text">Shape cut uses the CSS paint API <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Painting_API" target="_blank">paintWorklet</a>. This is not supported on all browsers. If not supported the shape will default to rounded</div>
       
           <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap; --mc-button-shape: var(--mc-shape-large);">
             <mc-button cut>Text</mc-button>

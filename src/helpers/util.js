@@ -206,7 +206,6 @@ const mcUtil = new class MCUtil {
 
 
   #scrollCallbacks = [];
-  #initialScroll = false;
   #lastScrollTop;
   #lastScrollDirection;
   #distanceFromDirectionChange = 0;
@@ -218,8 +217,6 @@ const mcUtil = new class MCUtil {
    */
   trackPageScroll(callback = () => { }) {
     if (this.#scrollCallbacks.length === 0) {
-      if (!this.#initialScroll) this.#lastScrollTop = document.documentElement.scrollTop;
-      else this.#initialScroll = false;
       window.addEventListener('scroll', this.#scrollHandler_bound);
     }
     this.#scrollCallbacks.push(callback);

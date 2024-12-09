@@ -468,8 +468,12 @@ class MCTextfieldElement extends HTMLComponentElement {
     const value = !match || match[0] === match[1] ? '' : match[1];
     this.#hasSuggestion = !!value;
     suggestionElement.textContent = value;
-    const offset = util.getTextWidthFromInput(this.#input);
-    suggestionElement.style.left = `${offset + 16}px`;
+
+    // groups style recalculations together and reduces render time
+    queueMicrotask(() => {
+      const offset = util.getTextWidthFromInput(this.#input);
+      suggestionElement.style.left = `${offset + 16}px`;
+    });
   }
   
   #updateCharacterCount() {

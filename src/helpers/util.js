@@ -1,4 +1,4 @@
-import fuzzySearch from './fuzzySearch.js';
+import fuzzySearchModule from './fuzzySearch.js';
 
 
 let pointerDown = false;
@@ -63,7 +63,7 @@ const mcUtil = new class MCUtil {
    * @return {Array.<{value:String, label:String}> | Array.<String>} - filtered array
    */
   fuzzySearch(searchTerm, items = [], distanceCap = 0.2) {
-    return fuzzySearch(searchTerm, items, distanceCap);
+    return fuzzySearchModule(searchTerm, items, distanceCap);
   }
 
 

@@ -33,7 +33,7 @@ const mcDialog = new class mcDialog {
     element.preventClose = params.preventClose;
     // element.noScrim = params.noScrim === undefined ? false : params.noScrim;
     element.preventNavigation = !!params.preventNavigation;
-    await util.nextAnimationFrameAsync();
+    // await util.nextAnimationFrameAsync();
     
     const returnPromise = new Promise((resolve) => {
       element.addEventListener('close', () => {
@@ -52,7 +52,7 @@ const mcDialog = new class mcDialog {
     preventClose: false,
     preventNavigation: true
   }) {
-    const id = `mc-dialog-${this.#idCounter++}`;
+    const id = `mc-dialog-${++this.#idCounter}`;
     document.body.insertAdjacentHTML('beforeend', `
       <mc-dialog id="${id}">
         ${params.template}
@@ -63,7 +63,7 @@ const mcDialog = new class mcDialog {
     element.preventClose = params.preventClose;
     element.scrim = params.scrim === undefined ? true : params.scrim;
     element.preventNavigation = !!params.preventNavigation;
-    await util.nextAnimationFrameAsync();
+    // await util.nextAnimationFrameAsync();
     
     const returnPromise = new Promise((resolve) => {
       element.addEventListener('close', () => {

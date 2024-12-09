@@ -85,6 +85,7 @@ export default class MCDialogElement extends HTMLComponentElement {
   set fullscreen(value) {
     this.toggleAttribute('fullscreen', !!value);
     const form = !value ? undefined : this.querySelector('form');
+    this.shadowRoot.querySelector('.save-fullscreen-form').classList.toggle('show', !!form);
     if (form) this.#formState = new FormState(form);
   }
 

@@ -41,7 +41,7 @@
               <mc-button slot="actions" form="form" value="cancel">ok</mc-button>
               <mc-button slot="actions" form="form">cancel</mc-button>
             </mc-dialog> -->
-            <mc-button onclick="page.openSimple(false, true, 'settings')">open</mc-button>
+            <mc-button onclick="page.openSimple(true, true, 'settings')">open</mc-button>
           </div>
 
           <code-block language="javascript"><pre>
@@ -105,7 +105,7 @@ console.log(value);
           <h2 slot="headline">HTML Only</h2>
           <div slot="subhead">You can interact directly with dialogs added to the DOM</div>
 
-          <mc-dialog id="html-only-dialog" aria-label="[dialog] html only">
+          <mc-dialog id="html-only-dialog" prevent-close aria-label="[dialog] html only">
             <div slot="headline">Headline</div>
             <form id="one" method="dialog" slot="content">
               <mc-textfield required label="Required input"></mc-textfield>
@@ -120,7 +120,7 @@ console.log(value);
           <code-block language="html"><pre>
 ${`<!-- Added directly to document
 Adding the 'open' attribute will automatically show the dialog -->
-<mc-dialog id="html-only-dialog">
+<mc-dialog id="html-only-dialog" prevent-close>
   <div slot="headline">Headline</div>
   <form id="one" method="dialog" slot="content">
     <mc-textfield required label="Required input"></mc-textfield>

@@ -43,6 +43,8 @@ export default class FormState {
   }
 
   canSubmitForm(event) {
+    if (event.target.hasAttribute('formnovalidate')) return true;
+
     const formElements = [...this.#form.elements].filter(e => e.role !== 'button');
     // If form has inputs and there are not changes then prevent submit
     // NOTE: simple dialogs use forms to control the dialog element, that is why we need to check if there are any inputs. If not then the submit would not work
@@ -65,8 +67,8 @@ export default class FormState {
   }
 
   formRequestSubmit(event) {
-    // const previousNoValidate = this.form.noValidate;
-    // if (this.hasAttribute('formnovalidate')) this.form.noValidate = true;
+    const previousNoValidate = this.#form.noValidate;
+    if (this.#form.hasAttribute('formnovalidate') || event.target.hasAttribute('formnovalidate')) this.#form.noValidate = true;
     // intercept submit so we can inject submitter
     this.#form.addEventListener('submit', (submitEvent) => {
       Object.defineProperty(submitEvent, 'submitter', {
@@ -81,7 +83,7 @@ export default class FormState {
 
     this.#form.requestSubmit();
     this.saveFormState();
-    // this.form.noValidate = previousNoValidate;
+    this.#form.noValidate = previousNoValidate;
   }
 
   reset() {

@@ -171,7 +171,7 @@ class MCTextfieldElement extends HTMLComponentElement {
     this.#label = value;
     this.shadowRoot.querySelector('.text-field').classList.toggle('label', !!this.#label);
     this.shadowRoot.querySelector('label').textContent = this.#label;
-    if (this.classList.contains('outlined')) this.shadowRoot.querySelector('.outlined-notch').textContent = this.#label;
+    if (this.hasAttribute('outlined')) this.shadowRoot.querySelector('.outlined-notch').textContent = this.#label;
     if (!this.ariaLabel) this.ariaLabel = this.#label;
   }
 

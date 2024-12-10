@@ -35,14 +35,22 @@
             
             <mc-textfield label="Label" prefix-text="$" suffix-text="@gmail.com"></mc-textfield>
             
-            <mc-textfield label="Label" class="outlined" value="My name" disabled>
+            <mc-textfield label="Label" outlined value="My name" disabled>
               <mc-icon slot="trailing-icon">person</mc-icon>
             </mc-textfield>
           </div>
 
           <code-block language="html"><pre>
-${`<mc-switch>Label</mc-switch>
-<mc-switch checked>Label</mc-switch>`}
+${`<mc-textfield label="Label">
+  <mc-icon slot="leading-icon">search</mc-icon>
+  <mc-icon slot="trailing-icon">cancel</mc-icon>
+</mc-textfield>
+
+<mc-textfield label="Label" prefix-text="$" suffix-text="@gmail.com"></mc-textfield>
+
+<mc-textfield label="Label" outlined value="My name" disabled>
+  <mc-icon slot="trailing-icon">person</mc-icon>
+</mc-textfield>`}
             </pre></code-block>
         </mc-card>
       </section>
@@ -54,7 +62,7 @@ ${`<mc-switch>Label</mc-switch>
         
           <div class="example" style="display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;">
             <mc-textfield label="Label"></mc-textfield>
-            <mc-textfield label="Label" class="outlined"></mc-textfield>
+            <mc-textfield label="Label" outlined></mc-textfield>
           </div>
         
           <code-block language="html"><pre>
@@ -64,7 +72,7 @@ ${`<mc-textfield
   
 <mc-textfield
   label="Label"
-  class="outlined"
+  outlined
   ></mc-textfield>`}
             </pre></code-block>
         </mc-card>

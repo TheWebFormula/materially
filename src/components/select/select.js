@@ -57,7 +57,7 @@ class MCSelectElement extends HTMLComponentElement {
     this.#isAsync = this.hasAttribute('async');
 
     this.#textfield.label = this.label;
-    if (this.classList.contains('outlined')) this.#textfield.classList.add('outlined');
+    if (this.hasAttribute('outlined')) this.#textfield.setAttribute('outlined', '');
     if (this.hasAttribute('placeholder')) this.#textfield.setAttribute('placeholder', this.getAttribute('placeholder'));
     if (this.hasAttribute('required')) this.#textfield.setAttribute('required', '');
     if (this.#isFilter) {

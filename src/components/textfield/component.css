@@ -41,7 +41,7 @@
   background-color: var(--mc-textfield-container-color-local);
 }
 
-:host(:not(.outlined):focus) .text-field::after {
+:host(:not([outlined]):focus) .text-field::after {
   height: calc(100% - 1px);
   border-bottom: 2px solid;
   border-bottom-color: var(--mc-textfield-active-indicator-color-local);
@@ -144,20 +144,20 @@ textarea[rows="1"] {
   text-align: left;
 } */
 
-:host(:not(.outlined)) .input:-webkit-autofill,
-:host(:not(.outlined)) .input:-webkit-autofill:hover,
-:host(:not(.outlined)) .input:-webkit-autofill:focus,
-:host(:not(.outlined)) .input:-webkit-autofill:active {
+:host(:not([outlined])) .input:-webkit-autofill,
+:host(:not([outlined])) .input:-webkit-autofill:hover,
+:host(:not([outlined])) .input:-webkit-autofill:focus,
+:host(:not([outlined])) .input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px var(--mc-surface-variant) inset !important;
 }
 
 /* hack to keep autofill background color from showing
  *  The issue is that outline does not have a background color so we cannot use a var
  */
-:host(.outlined) .input:-webkit-autofill,
-:host(.outlined) .input:-webkit-autofill:hover,
-:host(.outlined) .input:-webkit-autofill:focus,
-:host(.outlined) .input:-webkit-autofill:active {
+:host([outlined]) .input:-webkit-autofill,
+:host([outlined]) .input:-webkit-autofill:hover,
+:host([outlined]) .input:-webkit-autofill:focus,
+:host([outlined]) .input:-webkit-autofill:active {
   transition: background-color 9999s ease-in-out 0s;
 }
 
@@ -368,27 +368,27 @@ label.no-animation {
 
 /* --- outline --- */
 
-:host(.outlined) .text-field::after {
+:host([outlined]) .text-field::after {
   border-radius: var(--mc-shape-extra-small);
   border: none;
   background-color: unset;
 }
 
-:host(.outlined) .text-field .input {
+:host([outlined]) .text-field .input {
   align-self: center;
 }
 
-:host(.outlined) .text-field label {
+:host([outlined]) .text-field label {
   transform-origin: left top;
   animation: mc-textfield-label-outlined-reverse;
   animation-duration: var(--mc-motion-duration-short3);
   animation-timing-function: var(--mc-motion-easing-standard);
 }
 
-:host(.outlined.raise-label) .text-field label,
-:host(.outlined:focus) .text-field label,
-:host(.outlined) .input:not([placeholder=" "]) + label,
-:host(.outlined) .input:not(:placeholder-shown) + label {
+:host([outlined].raise-label) .text-field label,
+:host([outlined]:focus) .text-field label,
+:host([outlined]) .input:not([placeholder=" "]) + label,
+:host([outlined]) .input:not(:placeholder-shown) + label {
   font-size: var(--mc-font-small-body-size);
   top: -12px;
   left: 14px;
@@ -451,10 +451,10 @@ label.no-animation {
   transition-duration: 0ms !important;
 }
 
-:host(.outlined.raise-label) .outlined-border-container .outlined-notch,
-:host(.outlined:focus) .outlined-border-container .outlined-notch,
-:host(.outlined) .input:not([placeholder=" "]) ~ .outlined-border-container .outlined-notch,
-:host(.outlined) .input:not(:placeholder-shown) ~ .outlined-border-container .outlined-notch {
+:host([outlined].raise-label) .outlined-border-container .outlined-notch,
+:host([outlined]:focus) .outlined-border-container .outlined-notch,
+:host([outlined]) .input:not([placeholder=" "]) ~ .outlined-border-container .outlined-notch,
+:host([outlined]) .input:not(:placeholder-shown) ~ .outlined-border-container .outlined-notch {
   max-width: calc(100% - 12px * 2);
   padding-right: 4px;
 }
@@ -514,7 +514,7 @@ label.no-animation {
 /* --- invalid --- */
 
 :host(.invalid:not(:hover)) .text-field::after,
-:host(:not(.outlined).invalid:focus) .text-field::after {
+:host(:not([outlined]).invalid:focus) .text-field::after {
   border-bottom-color: var(--mc-error);
 }
 

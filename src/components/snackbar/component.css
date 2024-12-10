@@ -56,6 +56,10 @@ mc-snackbar mc-icon {
   color: var(--mc-snackbar-action-color-local);
 }
 
+mc-snackbar [aria-label=close] {
+  cursor: pointer;
+}
+
 mc-snackbar .mc-text {
   flex: 1;
 }

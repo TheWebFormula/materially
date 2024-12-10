@@ -86,15 +86,27 @@ dialog {
   height: 100dvh;
   border-radius: 0px;
 
+  .header {
+    max-height: 44px;
+    gap: 16px;
+  }
+
   dialog {
     transform: translateY(0px);
     top: 0px;
     transform-origin: center;
     transform: none;
+    padding-top: 16px;
+    animation: hide-fullscreen;
+    animation-duration: var(--mc-motion-duration-short3);
+    animation-timing-function: var(--mc-motion-easing-emphasized-accelerate);
 
     &[open] {
       transform-origin: center;
       transform: none;
+      animation: show-fullscreen;
+      animation-duration: var(--mc-motion-duration-medium2);
+      animation-timing-function: var(--mc-motion-easing-emphasized);
     }
   }
 
@@ -122,20 +134,6 @@ dialog {
 :host([open][fullscreen]) {
   height: 100dvh;
   width: 100dvw;
-}
-
-:host([fullscreen]) {
-  dialog {
-    animation: hide-fullscreen;
-    animation-duration: var(--mc-motion-duration-short3);
-    animation-timing-function: var(--mc-motion-easing-emphasized-accelerate);
-
-    &[open] {
-      animation: show-fullscreen;
-      animation-duration: var(--mc-motion-duration-medium2);
-      animation-timing-function: var(--mc-motion-easing-emphasized);
-    }
-  }
 }
 
 dialog.scroll .header::after {

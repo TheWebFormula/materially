@@ -6,6 +6,7 @@ export default class extends Component {
   static htmlTemplate = htmlTemplate;
 
   reorderSwap = new Signal(false);
+  items = [...new Array(50)].map((_, i) => ({ headline: i }));
 
   constructor() {
     super();
@@ -18,6 +19,10 @@ export default class extends Component {
       event.target.remove();
     });
     document.querySelector('#list-reorder').addEventListener('reorder', this.#listReorder_bound);
+    document.querySelector('#virtual').virtualTemplate = data => `<mc-list-item>
+      <div slot="headline">${data.headline}</div>
+    </mc-list-item>`;
+    document.querySelector('#virtual').virtualData = this.items;
   }
 
   disconnectedCallback() {

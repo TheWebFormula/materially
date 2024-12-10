@@ -12,7 +12,7 @@ class MCListElement extends HTMLComponentElement {
   #virtualTemplate;
   #itemHeight = 56;
   #isVirtual = false;
-  #virtualList = [];
+  #virtualData = [];
   #blocks = [];
   #pool = [];
   #scroll_bound = util.rafThrottle(this.#scroll.bind(this));
@@ -23,7 +23,6 @@ class MCListElement extends HTMLComponentElement {
     super();
 
     this.role = 'list';
-    // this.render();
   }
 
   template() {
@@ -70,14 +69,14 @@ class MCListElement extends HTMLComponentElement {
     this.#virtualTemplate = value;
   }
 
-  set virtualList(value) {
-    this.#virtualList = value;
+  set virtualData(value) {
+    this.#virtualData = value;
     if (Array.isArray(value)) this.#setupVirtual();
     else this.#cleanupVirtualRepeat();
   }
 
   disconnectedCallback() {
-    if (this.#virtualList) this.#cleanupVirtualRepeat();
+    if (this.#virtualData) this.#cleanupVirtualRepeat();
   }
 
   #setupVirtual() {
@@ -87,7 +86,7 @@ class MCListElement extends HTMLComponentElement {
     
     // get item height
     const template = document.createElement('template');
-    template.innerHTML = this.#virtualTemplate(this.#virtualList[0] || {});
+    template.innerHTML = this.#virtualTemplate(this.#virtualData[0] || {});
     const element = template.content.firstElementChild;
     element.style.visible = 'hidden';
     this.append(element);
@@ -103,7 +102,7 @@ class MCListElement extends HTMLComponentElement {
 
     window.removeEventListener('scroll', this.#scroll_bound);
     this.#virtualTemplate = undefined;
-    this.#virtualList = [];
+    this.#virtualData = [];
     this.#blocks = [];
     this.#pool = [];
   }
@@ -144,7 +143,7 @@ class MCListElement extends HTMLComponentElement {
   #updateBlock(block, dataIndex) {
     if (block.index === dataIndex) return;
     block.index = dataIndex;
-    block.template.innerHTML = this.#virtualTemplate(this.#virtualList[dataIndex]);
+    block.template.innerHTML = this.#virtualTemplate(this.#virtualData[dataIndex]);
     block.element = block.template.content.cloneNode(true).firstElementChild;
   }
 
@@ -164,7 +163,7 @@ class MCListElement extends HTMLComponentElement {
   #updateVirtual() {
     const itemHeight = this.#itemHeight;
     const bounds = this.getBoundingClientRect();
-    const totalHeight = this.#virtualList.length * itemHeight;
+    const totalHeight = this.#virtualData.length * itemHeight;
     const bottom = bounds.top + totalHeight;
     const visibleTop = bounds.top < 0 ? 0 : bounds.top;
     const visibleHeight = Math.max(0, Math.min(window.innerHeight, bottom) - visibleTop);
@@ -174,7 +173,7 @@ class MCListElement extends HTMLComponentElement {
     const adjustedAboveHeight = aboveHeight - aboveOffset;
     const adjustedVisibleHeight = visibleHeight + aboveOffset;
     const aboveItemCount = adjustedAboveHeight / itemHeight;
-    const remainingCount = this.#virtualList.length - aboveItemCount;
+    const remainingCount = this.#virtualData.length - aboveItemCount;
     const visibleHeightCount = Math.ceil(adjustedVisibleHeight / itemHeight) + 4;
     const itemCount = Math.max(0, Math.min(remainingCount, visibleHeightCount));
     if (itemCount === 0) return;

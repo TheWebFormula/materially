@@ -16,6 +16,7 @@
         <li><a href="#states">States and ripple</a></li>
         <li><a href="#swipe-actions">Swipe actions</a></li>
         <li><a href="#reorder">Drag reorder</a></li>
+        <li><a href="#virtualrepeat">Virtual repeat (for large lists)</a></li>
         <li><a href="#style">Style</a></li>
       </ul>
     </nav>
@@ -711,6 +712,49 @@ list.addEventListener('reorder', () => {
             </pre></code-block>
         </mc-card>
       </section>
+
+
+
+
+      <section id="virtualrepeat" aria-label="Virtual repeat examples">
+        <mc-card>
+          <h2 slot="headline">Virtual repeat</h2>
+          <div slot="supporting-test">Virtual repeat lists provide a performant way to handle large lists</div>
+
+          <mc-list id="virtual"></mc-list>
+        
+          <code-block language="html"><pre>
+${`<mc-list id="virtual-list"></mc-list>`}
+            </pre></code-block>
+          <code-block language="javascript">
+            <pre>
+${`import { Component } from '@thewebformula/lithe';
+import htmlTemplate from './page.html';
+
+export default class extends Component {
+  static title = 'Lists';
+  static htmlTemplate = htmlTemplate;
+
+  listItems = [...new Array(100)].map((_, i) => ({ headline: i }));
+
+  constructor() {
+    super();
+  }
+
+  afterRender() {
+    const virtualList = document.querySelector('#virtual-list');
+    virtualList.virtualTemplate = data => \`<mc-list-item>
+      <div slot="headline">\${data.headline}</div>
+    </mc-list-item>\`;
+    virtualList.virtualData = this.listItems;
+  }
+}`}
+            </pre>
+          </code-block>
+        </mc-card>
+      </section>
+
+
 
 
       <section id="style" aria-label="Style">

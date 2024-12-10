@@ -1,4 +1,4 @@
-:host {
+mc-list {
   background: var(--mc-list-item-container-color, var(--mc-surface));
   color: unset;
   display: flex;

@@ -97,6 +97,12 @@ slot[name="end"] {
   top: 50%;
 }
 
+/* :host([aria-controls]) */
+button[popovertarget] {
+  margin-right: 16px;
+  width: calc(100% - 16px);
+}
+
 
 mc-state-layer {
   --mc-state-layer-hover-color: var(--mc-on-surface);

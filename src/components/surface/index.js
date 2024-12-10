@@ -18,7 +18,7 @@ export default class MCSurfaceElement extends HTMLComponentElement {
   #offsetY = 0;
   #offsetX = 0;
   #anchorRight = false;
-  #overlay = true;
+  #overlay = false;
   #bottomSheet = false;
   #swipe;
   #alwaysBelow = false;
@@ -49,7 +49,8 @@ export default class MCSurfaceElement extends HTMLComponentElement {
       ['prevent-close', 'boolean'],
       ['always-below', 'boolean'],
       ['remove-on-close', 'boolean'],
-      ['fullscreen', 'boolean']
+      ['fullscreen', 'boolean'],
+      ['overlay', 'boolean']
     ];
   }
 
@@ -215,7 +216,7 @@ export default class MCSurfaceElement extends HTMLComponentElement {
     let right = bounds.right + this.#offsetX;
     let belowOutOfBounds = top + this.#height > window.innerHeight;
     let aboveOutOfBounds = (bounds.top - this.#height) < 0;
-    
+
     if (this.#alwaysBelow) {
       // adjust height to keep on screen
       if (belowOutOfBounds && this.#height > 0) {
@@ -223,15 +224,16 @@ export default class MCSurfaceElement extends HTMLComponentElement {
       }
 
       top = `${top + document.documentElement.scrollTop + this.#offsetY}px`;
-    // shift above
-    } else if (belowOutOfBounds && !aboveOutOfBounds) {
-      bottom = `${window.innerHeight - bounds.top - document.documentElement.scrollTop + this.#offsetY}px`;
-      top = 'unset';
-
+    
     // shift up and overlay
     } else if (belowOutOfBounds && this.#overlay) {
       top -= (top - document.documentElement.scrollTop + this.#height) - (window.innerHeight);
       top = `${top}px`;
+
+    // shift above
+    } else if (belowOutOfBounds && !aboveOutOfBounds) {
+      bottom = `${window.innerHeight - bounds.top - document.documentElement.scrollTop + this.#offsetY}px`;
+      top = 'unset';
 
     // keep below
     } else {

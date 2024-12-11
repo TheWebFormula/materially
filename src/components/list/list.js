@@ -9,6 +9,7 @@ class MCListElement extends HTMLComponentElement {
   static useTemplate = false;
   static styleSheets = [styles];
 
+  #virtualScrollParent;
   #virtualTemplate;
   #itemHeight = 56;
   #isVirtual = false;
@@ -76,14 +77,14 @@ class MCListElement extends HTMLComponentElement {
   }
 
   disconnectedCallback() {
-    if (this.#virtualData) this.#cleanupVirtualRepeat();
+    if (this.#isVirtual) this.#cleanupVirtualRepeat();
   }
 
   #setupVirtual() {
     if (this.#isVirtual) return;
 
     this.#isVirtual = true;
-    
+
     // get item height
     const template = document.createElement('template');
     template.innerHTML = this.#virtualTemplate(this.#virtualData[0] || {});
@@ -93,14 +94,25 @@ class MCListElement extends HTMLComponentElement {
     this.#itemHeight = element.offsetHeight;
     this.removeChild(element);
 
-    window.addEventListener('scroll', this.#scroll_bound);
+    this.#virtualScrollParent = this.#findScrollContainer();
+    if (this.#virtualScrollParent === this) {
+      console.warn('Virtual repeating does not work correctly when setting overflow: scroll on mc-list. Try wrapping mc-list in a div with overflow: scroll');
+    }
+    this.#virtualScrollParent.addEventListener('scroll', this.#scroll_bound);
     this.#updateVirtual();
+
+    // run it a second time because the bounds could be off the first time
+    setTimeout(() => {
+      if (this.isConnected) this.#updateVirtual();
+    }, 17);
   }
 
   #cleanupVirtualRepeat() {
     if (!this.#isVirtual) return;
 
-    window.removeEventListener('scroll', this.#scroll_bound);
+    this.#isVirtual = false;
+    if (this.#virtualScrollParent) this.#virtualScrollParent.removeEventListener('scroll', this.#scroll_bound);
+    this.#virtualScrollParent = undefined;
     this.#virtualTemplate = undefined;
     this.#virtualData = [];
     this.#blocks = [];
@@ -110,6 +122,16 @@ class MCListElement extends HTMLComponentElement {
   #scroll() {
     this.#updateVirtual();
   }
+
+  #findScrollContainer() {
+    let parent = this;
+    while (parent) {
+      const { overflow } = getComputedStyle(parent);
+      if (overflow.includes('scroll')) return parent;
+      parent = parent.parentElement;
+    }
+    return window;
+  };
 
   #getBlock(i) {
     const block = this.#blocks.find(b => b.index === i);
@@ -163,10 +185,11 @@ class MCListElement extends HTMLComponentElement {
   #updateVirtual() {
     const itemHeight = this.#itemHeight;
     const bounds = this.getBoundingClientRect();
+    const parentBounds = this.#virtualParentBounds();
     const totalHeight = this.#virtualData.length * itemHeight;
     const bottom = bounds.top + totalHeight;
     const visibleTop = bounds.top < 0 ? 0 : bounds.top;
-    const visibleHeight = Math.max(0, Math.min(window.innerHeight, bottom) - visibleTop);
+    const visibleHeight = Math.max(0, Math.min(parentBounds.bottom, bottom) - visibleTop);
     const aboveHeight = bounds.top < 0 ? Math.abs(bounds.top) : 0;
     const belowHeight = totalHeight - aboveHeight - visibleHeight;
     const aboveOffset = aboveHeight % itemHeight;
@@ -190,6 +213,15 @@ class MCListElement extends HTMLComponentElement {
 
     this.style.paddingTop = `${adjustedAboveHeight}px`;
     this.style.paddingBottom = `${belowHeight}px`;
+  }
+
+  #virtualParentBounds() {
+    if (this.#virtualScrollParent) return {
+      top: 0,
+      bottom: window.innerHeight
+    };
+
+    return this.#virtualScrollParent.getBoundingClientRect();
   }
 
   // connectedCallback() {

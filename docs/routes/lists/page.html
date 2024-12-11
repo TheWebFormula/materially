@@ -721,10 +721,18 @@ list.addEventListener('reorder', () => {
           <h2 slot="headline">Virtual repeat</h2>
           <div slot="supporting-test">Virtual repeat lists provide a performant way to handle large lists</div>
 
-          <mc-list id="virtual"></mc-list>
+          <div style="max-height: 300px; overflow-y: scroll;">
+            <mc-list id="virtual"></mc-list>
+          </div>
         
           <code-block language="html"><pre>
-${`<mc-list id="virtual-list"></mc-list>`}
+${`<!-- Full page virtual repeat -->
+<mc-list id="virtual-list"></mc-list>
+
+<!-- Scroll container virtual repeat -->
+<div style="max-height: 300px; overflow-y: scroll;">
+  <mc-list id="virtual"></mc-list>
+</div>`}
             </pre></code-block>
           <code-block language="javascript">
             <pre>

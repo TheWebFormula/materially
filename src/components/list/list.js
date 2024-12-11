@@ -103,8 +103,9 @@ class MCListElement extends HTMLComponentElement {
 
     // run it a second time because the bounds could be off the first time
     setTimeout(() => {
+      console.log(this.isConnected);
       if (this.isConnected) this.#updateVirtual();
-    }, 17);
+    }, 40);
   }
 
   #cleanupVirtualRepeat() {
@@ -216,7 +217,7 @@ class MCListElement extends HTMLComponentElement {
   }
 
   #virtualParentBounds() {
-    if (this.#virtualScrollParent) return {
+    if (this.#virtualScrollParent === window) return {
       top: 0,
       bottom: window.innerHeight
     };

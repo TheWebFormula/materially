@@ -82,7 +82,18 @@ class MCListElement extends HTMLComponentElement {
   }
 
   #setupVirtual() {
-    if (this.#isVirtual) return;
+    if (this.#isVirtual) {
+      let requiresReset = false;
+      for (const block of this.#blocks) {
+        if (this.#virtualData[block.index] !== block.data) {
+          requiresReset = true;
+          break;
+        }
+      }
+      if (requiresReset) this.#resetBlocks();
+      this.#updateVirtual();
+      return;
+    }
 
     this.#isVirtual = true;
 
@@ -106,7 +117,6 @@ class MCListElement extends HTMLComponentElement {
 
     // run it a second time because the bounds could be off the first time
     setTimeout(() => {
-      console.log(this.isConnected);
       if (this.isConnected) this.#updateVirtual();
     }, 40);
   }
@@ -148,6 +158,7 @@ class MCListElement extends HTMLComponentElement {
 
     const newBlock = {
       index: -1,
+      data: {},
       template: document.createElement('template'),
       element: undefined
     };
@@ -169,7 +180,8 @@ class MCListElement extends HTMLComponentElement {
   #updateBlock(block, dataIndex) {
     if (block.index === dataIndex) return;
     block.index = dataIndex;
-    const template = this.#virtualTemplate(this.#virtualData[dataIndex]);
+    block.data = this.#virtualData[dataIndex];
+    const template = this.#virtualTemplate(block.data);
     if (template instanceof DocumentFragment) block.template.content.replaceChildren(template.firstElementChild);
     else block.template.innerHTML = template;
     block.element = block.template.content.cloneNode(true).firstElementChild;
@@ -185,6 +197,13 @@ class MCListElement extends HTMLComponentElement {
       if (firstConnected === -1) this.appendChild(block.element);
       else if (i < firstConnected) this.#blocks[firstConnected].element.insertAdjacentElement('beforebegin', block.element);
       else this.insertAdjacentElement('beforeend', block.element);
+    }
+  }
+
+  #resetBlocks() {
+    for (const block of this.#blocks) {
+      block.index = -1;
+      block.data = {};
     }
   }
 

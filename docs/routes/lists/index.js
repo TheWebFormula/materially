@@ -1,4 +1,4 @@
-import { Component, Signal } from '@thewebformula/lithe';
+import { Component, Signal, html } from '@thewebformula/lithe';
 import htmlTemplate from './page.html';
 
 export default class extends Component {
@@ -19,7 +19,7 @@ export default class extends Component {
       event.target.remove();
     });
     document.querySelector('#list-reorder').addEventListener('reorder', this.#listReorder_bound);
-    document.querySelector('#virtual').virtualTemplate = data => `<mc-list-item>
+    document.querySelector('#virtual').virtualTemplate = data => html`<mc-list-item>
       <div slot="headline">${data.headline}</div>
     </mc-list-item>`;
     document.querySelector('#virtual').virtualData = this.items;

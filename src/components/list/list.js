@@ -2,6 +2,7 @@ import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './list.css' assert { type: 'css' };
 import util from '../../helpers/util.js';
 
+// TODO For virtual repeat do i need intersection observer for when the repeater starts partially off screen? Right now it might not render all elements untill scroll
 
 class MCListElement extends HTMLComponentElement {
   static tag = 'mc-list';
@@ -86,9 +87,11 @@ class MCListElement extends HTMLComponentElement {
     this.#isVirtual = true;
 
     // get item height
-    const template = document.createElement('template');
-    template.innerHTML = this.#virtualTemplate(this.#virtualData[0] || {});
-    const element = template.content.firstElementChild;
+    const templateElement = document.createElement('template');
+    const template = this.#virtualTemplate(this.#virtualData[0] || {});
+    if (template instanceof DocumentFragment) templateElement.content.replaceChildren(template.firstElementChild);
+    else templateElement.innerHTML = template;
+    const element = templateElement.content.firstElementChild;
     element.style.visible = 'hidden';
     this.append(element);
     this.#itemHeight = element.offsetHeight;
@@ -166,7 +169,9 @@ class MCListElement extends HTMLComponentElement {
   #updateBlock(block, dataIndex) {
     if (block.index === dataIndex) return;
     block.index = dataIndex;
-    block.template.innerHTML = this.#virtualTemplate(this.#virtualData[dataIndex]);
+    const template = this.#virtualTemplate(this.#virtualData[dataIndex]);
+    if (template instanceof DocumentFragment) block.template.content.replaceChildren(template.firstElementChild);
+    else block.template.innerHTML = template;
     block.element = block.template.content.cloneNode(true).firstElementChild;
   }
 

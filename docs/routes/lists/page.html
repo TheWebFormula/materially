@@ -736,7 +736,7 @@ ${`<!-- Full page virtual repeat -->
             </pre></code-block>
           <code-block language="javascript">
             <pre>
-${`import { Component } from '@thewebformula/lithe';
+${`import { Component, html } from '@thewebformula/lithe';
 import htmlTemplate from './page.html';
 
 export default class extends Component {
@@ -751,9 +751,12 @@ export default class extends Component {
 
   afterRender() {
     const virtualList = document.querySelector('#virtual-list');
-    virtualList.virtualTemplate = data => \`<mc-list-item>
+
+    // This will take a DocumentFragment or a string
+    virtualList.virtualTemplate = data => html\`<mc-list-item>
       <div slot="headline">\${data.headline}</div>
     </mc-list-item>\`;
+
     virtualList.virtualData = this.listItems;
   }
 }`}

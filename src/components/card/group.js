@@ -87,7 +87,8 @@ export default class MCCardGroupElement extends HTMLComponentElement {
       element.classList.remove('grid');
     });
   }
-
+  
+  // TODO optimize
   #layoutGrid() {
     // this.classList.add('grid');
     // this.classList.remove('list');
@@ -97,7 +98,7 @@ export default class MCCardGroupElement extends HTMLComponentElement {
       element.style.order = i;
       return {
         order: i,
-        height: element.height,
+        height: element.offsetHeight,
         element
       };
     }).sort((a, b) => a.height - b.height);

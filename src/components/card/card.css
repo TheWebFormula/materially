@@ -123,9 +123,9 @@
 
 
 :host(.has-image) [name="image"] {
-  height: var(--mc-card-fullscreen-img-height-min, 80px);
-  min-height: var(--mc-card-fullscreen-img-height-min, 80px);
-
+  container-type: inline-size;
+  container-name: card;
+  width: auto;
   display: flex;
   overflow: hidden;
   align-items: center;
@@ -135,9 +135,17 @@
   border-radius: var(--mc-shape-medium);
 }
 
-[name="image"]::slotted(img) {
+/* TODO figure out css vars for aspect-ratio */
+:host(.has-image) [name="image"]::slotted(img) {
   height: auto;
   width: 100%;
+  aspect-ratio: 2.6666;
+}
+
+@container card (max-width: 260px) {
+  :host(.has-image)[name="image"]::slotted(img) {
+    aspect-ratio: 1.6;
+  }
 }
 
 

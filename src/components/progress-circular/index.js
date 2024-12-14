@@ -26,6 +26,11 @@ class MCProgressCircularElement extends HTMLComponentElement {
     if (!this.ariaLabel) this.ariaLabel = 'progress';
   }
 
+  connectedCallback() {
+    this.setAttribute('aria-valuemin', '0');
+    this.setAttribute('aria-valuemax', '1');
+  }
+
   template() {
     return /*html*/`
       <svg viewBox="0 0 4800 4800">
@@ -52,6 +57,7 @@ class MCProgressCircularElement extends HTMLComponentElement {
   set max(value) {
     this.#max = parseFloat(value);
     if (this.#value > this.#max) this.#value = this.#max;
+    this.setAttribute('aria-valuemax', this.#max);
     this.#updateProgress();
   }
 
@@ -95,6 +101,7 @@ class MCProgressCircularElement extends HTMLComponentElement {
       this.style.setProperty('--mc-progress-circular-transition-duration', `${duration}ms`);
       this.#inactiveTrack.style.strokeDashoffset = dashOffsetInactive;
       this.#inactiveTrack.style.transform = `rotate(${rotateInactive}deg)`;
+      this.setAttribute('aria-valuenow', this.#value);
     }
   }
 }

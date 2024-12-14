@@ -70,16 +70,14 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
       case device.EXPANDED:
         this.open = true;
 
-        requestAnimationFrame(() => {
-          const current = this.querySelector('.current');
-          if (current) {
-            let bounds = current.offsetTop - this.offsetHeight + 56;
-            if (bounds > 0) {
-              let scrollContainer = this.shadowRoot.querySelector('.surface-content');
-              scrollContainer.scrollTop = current.offsetTop - (this.offsetHeight / 2) + 28;
-            }
+        const current = this.querySelector('.current');
+        if (current) {
+          let bounds = current.offsetTop - this.offsetHeight + 56;
+          if (bounds > 0) {
+            let scrollContainer = this.shadowRoot.querySelector('.surface-content');
+            scrollContainer.scrollTop = current.offsetTop - (this.offsetHeight / 2) + 28;
           }
-        });
+        }
         break;
       case device.MEDIUM:
         this.open = !device.hasNavigationRail;

@@ -124,10 +124,6 @@ export default class MCCardElement extends HTMLComponentElement {
     else this.removeEventListener('click', this.#fullscreenClick_bound);
   }
 
-  get height() {
-    return this.shadowRoot.querySelector('.container').offsetHeight;
-  }
-
   get swap() {
     return this.#swap;
   }
@@ -158,7 +154,6 @@ export default class MCCardElement extends HTMLComponentElement {
     } else if (name === 'image') {
       const hasContent = event.target.assignedElements().length > 0;
       this.classList.toggle('has-image', hasContent);
-      this.#getImageSize();
     } else if (name === 'swipe-action') {
       const hasSwipeAction = event.target.assignedElements().length > 0;
       event.target.classList.toggle('has-swipe-action', hasSwipeAction);
@@ -327,23 +322,6 @@ export default class MCCardElement extends HTMLComponentElement {
 
   #windowStateChange() {
     this.classList.toggle('window-compact', device.state === device.COMPACT);
-  }
-
-  #getImageSize() {
-    const img = this.querySelector('img');
-    if (!img.complete) {
-      img.onload = () => this.#getImageSize();
-      return;
-    }
-    const height = img.height;
-    const width = img.width;
-    const aspectRatio = height / width;
-    const adjustedHeight = this.offsetWidth * aspectRatio;
-    const minHeight = Math.min(120, adjustedHeight);
-    this.style.setProperty('--mc-card-fullscreen-img-height-min', `${minHeight}px`);
-    requestAnimationFrame(() => {
-      this.shadowRoot.querySelector('[name=image]').classList.add('animate');
-    });
   }
 }
 

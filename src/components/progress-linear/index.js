@@ -27,6 +27,11 @@ class MCProgressLinearElement extends HTMLComponentElement {
     if (!this.ariaLabel) this.ariaLabel = 'progress';
   }
 
+  connectedCallback() {
+    this.setAttribute('aria-valuemin', '0');
+    this.setAttribute('aria-valuemax', '1');
+  }
+
   template() {
     return /*html*/`
       <div class="dots"></div>
@@ -56,6 +61,7 @@ class MCProgressLinearElement extends HTMLComponentElement {
   set max(value) {
     this.#max = parseFloat(value);
     if (this.#value > this.#max) this.#value = this.#max;
+    this.setAttribute('aria-valuemax', this.#max);
     this.#updateProgress();
   }
 
@@ -89,6 +95,7 @@ class MCProgressLinearElement extends HTMLComponentElement {
       this.style.setProperty('--mc-progress-linear-transition-duration', `${duration}ms`);
       this.#activeBar.style.transform = `scaleX(${newPercent})`;
       this.#inactiveBar.style.left = `${newPercent * 100}%`;
+      this.setAttribute('aria-valuenow', this.#value);
     }
   }
 }

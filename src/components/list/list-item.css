@@ -149,15 +149,17 @@ slot[name='end']::slotted([hover-only]) {
   transition-duration: var(--mc-motion-duration-short1);
 }
 
-
 [name="swipe-start"] {
   display: flex;
   align-items: center;
   position: absolute;
   inset: 1px;
   padding-inline-start: 24px;
-  background-color: var(--mc-primary);
   color: var(--mc-on-primary);
+}
+
+:host(.has-swipe) [name="swipe-start"] {
+  background-color: var(--mc-primary);
 }
 
 [name="swipe-end"] {
@@ -167,8 +169,11 @@ slot[name='end']::slotted([hover-only]) {
   position: absolute;
   inset: 1px;
   padding-inline-end: 24px;
-  background-color: var(--mc-secondary);
   color: var(--mc-on-primary);
+}
+
+:host(.has-swipe) [name="swipe-end"] {
+  background-color: var(--mc-secondary);
 }
 
 [name="swipe-start"],

@@ -121,6 +121,7 @@ class MCListItemElement extends HTMLComponentElement {
     this.#hasSwipeStart = this.querySelector('[slot="swipe-start"]') !== null;
     this.#hasSwipeEnd = this.querySelector('[slot="swipe-end"]') !== null;
     if (this.#hasSwipeStart || this.#hasSwipeEnd) {
+      this.classList.add('has-swipe');
       this.#swipe = new Swipe(this, { horizontalOnly: true });
       this.#swipe.enable();
       this.addEventListener('swipemove', this.#swipeMove_bound, { signal: this.#abort.signal });

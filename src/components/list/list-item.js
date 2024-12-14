@@ -160,7 +160,9 @@ class MCListItemElement extends HTMLComponentElement {
   remove() {
     this.style.height = `${this.offsetHeight}px`;
     this.classList.add('remove');
-    this.style.height = '';
+    setTimeout(() => {
+      this.style.height = '';
+    }, 50);
     setTimeout(() => {
       super.remove();
     }, 150)

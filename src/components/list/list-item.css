@@ -42,7 +42,6 @@
   min-height: 0px;
   transition: height;
   transition-duration: var(--mc-motion-duration-short3);
-  transition-delay: 50ms;
 }
 
 .container {

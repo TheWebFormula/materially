@@ -91,7 +91,7 @@ class MCSearchElement extends HTMLComponentElement {
           <mc-divider></mc-divider>
         </div>
 
-        <mc-menu prevent-close always-below>
+        <mc-menu prevent-close always-below prevent-bottom-sheet>
           <mc-progress-linear indeterminate disabled></mc-progress-linear>
           <mc-chip-set scroll class="hide">
             <slot name="chips"></slot>
@@ -490,6 +490,8 @@ class MCSearchElement extends HTMLComponentElement {
   #preShowFullscreen() {
     const bounds = this.getBoundingClientRect()
     const input = this.shadowRoot.querySelector('.input');
+    this.shadowRoot.querySelector('mc-menu').style.setProperty('--mc-surface-fullscreen-start-top', `${bounds.top}px`);
+    this.shadowRoot.querySelector('mc-menu').style.setProperty('--mc-surface-fullscreen-end-top', '56px');
 
     input.style.top = `${bounds.top}px`;
     input.style.left = `${bounds.left}px`;

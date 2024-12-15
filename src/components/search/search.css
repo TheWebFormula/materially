@@ -65,17 +65,6 @@
   display: none;
 }
 
-:host(.open.loading.window-compact) mc-progress-linear {
-  top: 56px;
-}
-
-:host(.window-compact) .input,
-:host(.open.window-compact) .input,
-:host(.closing.window-compact) .input {
-  border-radius: var(--mc-shape-extra-large);
-  /* transition: none; */
-}
-
 :host(.open.window-compact) .input,
 :host(.closing.window-compact) .input {
   box-shadow: none;
@@ -183,6 +172,10 @@ mc-divider {
   transition-duration: var(--mc-motion-duration-short1);
   transition-timing-function: var(--mc-motion-easing-emphasized);
   transition-delay: 0s;
+}
+
+:host(.window-compact.open) .input {
+  border-radius: 0px;
 }
 
 input {

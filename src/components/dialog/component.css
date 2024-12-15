@@ -85,50 +85,50 @@ dialog {
   width: 100dvw;
   height: 100dvh;
   border-radius: 0px;
+}
 
-  .header {
-    max-height: 44px;
-    gap: 16px;
-  }
+:host([fullscreen]) .header {
+  max-height: 44px;
+  gap: 16px;
+}
 
-  dialog {
-    transform: translateY(0px);
-    top: 0px;
-    transform-origin: center;
-    transform: none;
-    padding-top: 16px;
-    animation: hide-fullscreen;
-    animation-duration: var(--mc-motion-duration-short3);
-    animation-timing-function: var(--mc-motion-easing-emphasized-accelerate);
+:host([fullscreen]) dialog {
+  transform: translateY(0px);
+  top: 0px;
+  transform-origin: center;
+  transform: none;
+  padding-top: 16px;
+  animation: hide-fullscreen;
+  animation-duration: var(--mc-motion-duration-short3);
+  animation-timing-function: var(--mc-motion-easing-emphasized-accelerate);
+}
 
-    &[open] {
-      transform-origin: center;
-      transform: none;
-      animation: show-fullscreen;
-      animation-duration: var(--mc-motion-duration-medium2);
-      animation-timing-function: var(--mc-motion-easing-emphasized);
-    }
-  }
+:host([fullscreen]) dialog[open] {
+  transform-origin: center;
+  transform: none;
+  animation: show-fullscreen;
+  animation-duration: var(--mc-motion-duration-medium2);
+  animation-timing-function: var(--mc-motion-easing-emphasized);
+}
 
-  slot[name='headline'] {
-    display: flex;
-    flex: 1;
-  }
+:host([fullscreen]) slot[name='headline'] {
+  display: flex;
+  flex: 1;
+}
 
-  .close-fullscreen {
-    display: block;
-    cursor: pointer;
-    color: var(--mc-on-surface);
-  }
+:host([fullscreen]) .close-fullscreen {
+  display: block;
+  cursor: pointer;
+  color: var(--mc-on-surface);
+}
 
-  .save-fullscreen-form.show {
-    display: block;
-  }
+:host([fullscreen]) .save-fullscreen-form.show {
+  display: block;
+}
 
-  /* prevent layout shifting on animation */
-  [name=content] {
-    width: calc(100dvw - (var(--mc-padding) * 2));
-  }
+/* prevent layout shifting on animation */
+:host([fullscreen]) [name=content] {
+  width: calc(100dvw - (var(--mc-padding) * 2));
 }
 
 :host([open][fullscreen]) {
@@ -196,13 +196,12 @@ slot[name='headline']::slotted(*) {
   color: var(--mc-dialog-headline-color-local);
 }
 
-slot[name="content"] {
+slot[name=content] {
   display: block;
-  flex: 1;
   overflow-y: auto;
 }
 
-slot[name='content']::slotted(*) {
+slot[name=content]::slotted(*) {
   font-size: var(--mc-font-medium-body-size);
   font-weight: var(--mc-font-medium-body-weight);
   line-height: var(--mc-font-medium-body-line-height);

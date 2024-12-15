@@ -55,7 +55,8 @@ class MCDatePickerElement extends MCSurfaceElement {
   #clickOutside_bound = this.#clickOutside.bind(this);
   #escClose_bound = this.#escClose.bind(this);
   #windowStateChange_bound = this.#windowStateChange.bind(this);
-  #preventDefaultAndOpen_bound = this.#preventDefaultAndOpen.bind(this);
+  #preventDefaultAndOpenModal_bound = this.#preventDefaultAndOpenModal.bind(this);
+  #preventDefaultClick_bound = this.#preventDefaultClick.bind(this);
 
 
   constructor() {
@@ -185,6 +186,7 @@ class MCDatePickerElement extends MCSurfaceElement {
     this.displayDate = dateUtil.parse(this.#textfield.value || dateUtil.today());
     this.#windowStateChange();
     this.#swipe = new Swipe(this, { horizontalOnly: true });
+    this.#textfield.addEventListener('click', this.#preventDefaultClick_bound, { signal: this.#abort.signal });
   }
 
   disconnectedCallback() {
@@ -247,9 +249,15 @@ class MCDatePickerElement extends MCSurfaceElement {
     }
   }
 
-  #preventDefaultAndOpen(event) {
+  // prevents native component on touch
+  #preventDefaultAndOpenModal(event) {
     event.preventDefault();
     this.showPopover();
+  }
+
+  // prevents native component
+  #preventDefaultClick(event) {
+    event.preventDefault();
   }
 
   #show() {
@@ -700,11 +708,11 @@ class MCDatePickerElement extends MCSurfaceElement {
     switch (device.state) {
       case device.COMPACT:
         this.modal = true;
-        this.#textfield.addEventListener('pointerdown', this.#preventDefaultAndOpen_bound, { signal: this.#abort.signal });
+        this.#textfield.addEventListener('pointerdown', this.#preventDefaultAndOpenModal_bound, { signal: this.#abort.signal });
         break;
       default:
         this.modal = false;
-        this.#textfield.removeEventListener('pointerdown', this.#preventDefaultAndOpen_bound);
+        this.#textfield.removeEventListener('pointerdown', this.#preventDefaultAndOpenModal_bound);
     }
 
     this.#getDaysContainer().innerHTML = monthDaysTemplate(this.#displayDate, this.minDate, this.maxDate);

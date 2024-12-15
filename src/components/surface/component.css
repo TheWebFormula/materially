@@ -138,6 +138,20 @@
   animation-timing-function: var(--mc-motion-easing-emphasized);
 }
 
+/* TODO remove this once css overlay and allow-discrete work on safari. This makes sure the popover stays in place when closing */
+@supports not (overlay: auto) {
+  :host(.anchor[popover]:not(:popover-open):not(.modal)) {
+    position: fixed;
+    z-index: 99;
+    margin-top: var(--mc-surface-no-overlay-scroll-offset);
+  }
+
+  :host(.modal[popover]:not(:popover-open)) {
+    position: fixed;
+    z-index: 99;
+  }
+}
+
 .scrim {
   display: none;
 }
@@ -180,10 +194,12 @@
 
 @keyframes hide-translate-y {
   0% {
+    display: flex;
     opacity: 1;
   }
 
   100% {
+    display: flex;
     opacity: 0;
   }
 }
@@ -209,6 +225,7 @@
 
 @keyframes hide-max-height {
   0% {
+    display: flex;
     opacity: 1;
     max-height: var(--mc-surface-height);
     overflow: hidden;
@@ -219,6 +236,7 @@
   }
 
   100% {
+    display: flex;
     overflow: hidden;
     opacity: 0;
     max-height: calc(var(--mc-surface-height) * 0.3);
@@ -289,10 +307,12 @@
 
 @keyframes surface-backdrop-out {
   0% {
+    display: block;
     opacity: 32%;
   }
 
   100% {
+    display: block;
     opacity: 0;
   }
 }

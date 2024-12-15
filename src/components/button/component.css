@@ -123,10 +123,10 @@ slot[name="leading-icon"]::slotted(mc-icon) {
 
 :host(.async-pending) {
   pointer-events: none;
+}
 
-  button .default-slot {
-    color: transparent;
-  }
+:host(.async-pending) button .default-slot {
+  color: transparent;
 }
 
 

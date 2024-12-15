@@ -30,14 +30,14 @@
   letter-spacing: var(--mc-font-small-label-tracking);
   line-height: var(--mc-font-small-label-line-height);
   color: var(--mc-badge-text-color-local);
-
-  slot {
-    display: contents;
-  }
 }
 
 slot {
   display: none;
+}
+
+:host(.has-value:not([hide-value])) slot {
+  display: contents;
 }
 
 

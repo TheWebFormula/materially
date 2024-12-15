@@ -186,6 +186,9 @@ export default class MCSurfaceElement extends HTMLComponentElement {
   }
 
   onHide() {
+    // TODO remove this once css overlay and allow-discrete work on safari. This makes sure the popover stays in place when closing
+    this.style.setProperty('--mc-surface-no-overlay-scroll-offset', `-${document.documentElement.scrollTop}px`);
+    
     this.removeAttribute('open');
     if (this.#swipe) this.#swipe.disable();
     if (this.removeOnClose) {

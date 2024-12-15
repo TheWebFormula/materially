@@ -129,11 +129,22 @@ dialog {
 /* prevent layout shifting on animation */
 :host([fullscreen]) [name=content] {
   width: calc(100dvw - (var(--mc-padding) * 2));
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 :host([open][fullscreen]) {
   height: 100dvh;
   width: 100dvw;
+}
+
+dialog.scroll {
+  padding-bottom: 0px;
+}
+
+dialog.scroll [name=content] {
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 dialog.scroll .header::after {

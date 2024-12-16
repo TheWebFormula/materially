@@ -197,6 +197,7 @@ class MCSearchElement extends HTMLComponentElement {
     this.#menu.addEventListener('toggle', this.#toggle_bound, { signal: this.#abort.signal });
     this.shadowRoot.addEventListener('slotchange', this.#slotChange_bound, { signal: this.#abort.signal });
     this.#input.addEventListener('focus', this.#inputFocus_bound, { signal: this.#abort.signal });
+    this.shadowRoot.querySelector('.clear').addEventListener('click', this.#clear_bound, { signal: this.#abort.signal });
   }
 
   disconnectedCallback() {
@@ -255,7 +256,6 @@ class MCSearchElement extends HTMLComponentElement {
     this.#input.addEventListener('input', this.#onInput_bound, { signal: this.#showAbort.signal });
     this.#input.addEventListener('search', this.#onSearch_bound, { signal: this.#showAbort.signal });
     this.shadowRoot.querySelector('mc-menu').addEventListener('click', this.#optionClick_bound, { signal: this.#showAbort.signal });
-    this.shadowRoot.querySelector('.clear').addEventListener('click', this.#clear_bound, { signal: this.#showAbort.signal });
     window.addEventListener('keydown', this.#onKeyDown_bound, { signal: this.#showAbort.signal });
     if (this.#menu.fullscreen) this.shadowRoot.querySelector('.back').addEventListener('click', this.#back_bound, { capture: true, signal: this.#showAbort.signal });
     else window.addEventListener('click', this.#clickOutside_bound, { signal: this.#showAbort.signal });

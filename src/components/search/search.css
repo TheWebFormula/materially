@@ -4,61 +4,61 @@
   border-radius: var(--mc-shape-extra-large);
 }
 
-:host(.window-compact) {
-  mc-menu {
-    --mc-elevation: none;
-    --mc-shape: 0;
-    --mc-padding-top: 56px;
-    clip-path: none;
-  }
 
-  .item-padding {
-    padding-inline: 8px;
-    padding-top: 76px;
-  }
+:host(.window-compact) mc-menu {
+  --mc-elevation: none;
+  --mc-shape: 0;
+  --mc-padding-top: 56px;
+  clip-path: none;
+}
+
+:host(.window-compact) .item-padding {
+  padding-inline: 8px;
+  padding-top: 76px;
 }
 
 :host(.window-compact.open) {
   /* Keeps height on page same because input is fixed. Not sure why this needs to be 4px less in height */
   height: 52px;
-
-  mc-menu {
-    transition: border-radius;
-    transition-duration: var(--mc-motion-duration-short3);
-    transition-timing-function: var(--mc-motion-easing-emphasized);
-  }
-
-  mc-divider {
-    display: flex;
-    position: absolute;
-    top: 56px;
-    left: 0;
-  }
-
-  .back {
-    display: inline-flex;
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-
-  slot[name="leading"] {
-    display: none;
-  }
-
-  .input {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9;
-
-    &.animate {
-      transition: top, left, width;
-      transition-duration: var(--mc-motion-duration-medium2);
-      transition-timing-function: var(--mc-motion-easing-emphasized);
-    }
-  }
 }
+
+:host(.window-compact.open) mc-menu {
+  transition: border-radius;
+  transition-duration: var(--mc-motion-duration-short3);
+  transition-timing-function: var(--mc-motion-easing-emphasized);
+}
+
+:host(.window-compact.open) mc-divider {
+  display: flex;
+  position: absolute;
+  top: 56px;
+  left: 0;
+}
+
+:host(.window-compact.open) .back {
+  display: inline-flex;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+:host(.window-compact.open) slot[name="leading"] {
+  display: none;
+}
+
+:host(.window-compact.open) .input {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+}
+
+:host(.window-compact.open) .input.animate {
+  transition: top, left, width;
+  transition-duration: var(--mc-motion-duration-medium2);
+  transition-timing-function: var(--mc-motion-easing-emphasized);
+}
+
 
 :host(.open.window-compact) .search-icon,
 .input.has-leading .search-icon {

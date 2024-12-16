@@ -11,6 +11,7 @@ const navigationKeys = [
   'Tab'
 ];
 
+// TODO fix cursor position (check ssn mask example)
 
 export default class Formatter {
   #textfield;

@@ -174,33 +174,27 @@
   box-shadow: none;
 }
 
-:host([range]) {
-  .handle {
-    &.start {
-      left: var(--mc-slider-active-start, 25%);
-    }
+:host([range]) .handle.start {
+  left: var(--mc-slider-active-start, 25%);
+}
 
-    &.overlap {
-      border: 1px solid var(--mc-on-surface-inverse);
-      z-index: 1;
-    }
+:host([range]) .handle.overlap {
+  border: 1px solid var(--mc-on-surface-inverse);
+  z-index: 1;
+}
 
-    &.end {
-      display: block;
-      right: calc(100% - var(--mc-slider-active-end, 25%) - 10px);
-    }
-  }
+:host([range]) .handle.end {
+  display: block;
+  right: calc(100% - var(--mc-slider-active-end, 25%) - 10px);
+}
 
-  input {
-    &.start {
-      --mc-slider-active-end-clip: calc(100% - var(--mc-slider-active-end, 0) + var(--mc-slider-range-active-diff));
-      clip-path: inset(0 var(--mc-slider-active-end-clip) 0 0);
-    }
+:host([range]) input.start {
+  --mc-slider-active-end-clip: calc(100% - var(--mc-slider-active-end, 0) + var(--mc-slider-range-active-diff));
+  clip-path: inset(0 var(--mc-slider-active-end-clip) 0 0);
+}
 
-    &.end {
-      clip-path: inset(0 0 0 calc(var(--mc-slider-active-start, 0) + var(--mc-slider-range-active-diff)));
-    }
-  }
+:host([range]) input.end {
+  clip-path: inset(0 0 0 calc(var(--mc-slider-active-start, 0) + var(--mc-slider-range-active-diff)));
 }
 
 :host(:not([range])) input.end {

@@ -250,15 +250,15 @@ export default class Formatter {
   // adjust cursor so it skips past formatting
   #adjustCursor(backward = false) {
     const selectCheckValue = this.#mask ? this.#formatValue(this.#rawValue) : this.#displayValue;
-    let displayStart = this.#input.selectionStart + (backward ? - 2 : 1);
+    let displayStart = Math.max(0, this.#input.selectionStart + (backward ? -2 : 1));
     let rawIndex = this.#getRawSelection(selectCheckValue, displayStart);
-    let nextDisplayChar = this.#displayValue[displayStart];
+    let nextDisplayChar = selectCheckValue[displayStart];
     let nextRawChar = this.#rawValue[rawIndex];
 
     let adjustedIndex = displayStart;
-    while (nextDisplayChar !== nextRawChar) {
+    while (nextDisplayChar !== nextRawChar && rawIndex > 0) {
       adjustedIndex = this.#selectionAdjustment(adjustedIndex, backward);
-      nextDisplayChar = this.#displayValue[adjustedIndex];
+      nextDisplayChar = selectCheckValue[adjustedIndex];
       rawIndex = this.#getRawSelection(selectCheckValue, adjustedIndex);
       nextRawChar = this.#rawValue[rawIndex];
     }
@@ -282,6 +282,22 @@ export default class Formatter {
     return selection + 1;
   }
 
+  #calculateCursorForValueChange(backwards, rawStart, displayStart) {
+    const selectCheckValue = this.#mask ? this.#formatValue(this.#rawValue) : this.#displayValue;
+    const change = backwards ? -2 : 1;
+    const rc = this.#rawValue[rawStart + change];
+    let index = displayStart + change;
+    let dc = selectCheckValue[index];
+    let count = 1;
+    while (rc !== dc && index < selectCheckValue.length) {
+      index += backwards ? -1 : 1;
+      count += 1;
+      dc = selectCheckValue[index];
+    }
+
+    return count;
+  }
+
   #keyDown(event) {
     // Firefox does not consider the windows key to be a metaKey
     // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/metaKey    
@@ -290,12 +306,14 @@ export default class Formatter {
     // do not do anything on enter
     if (event.key === 'Enter') return;
 
-    const selection = this.#getSelection();
-
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
       this.#adjustCursor(event.key === 'ArrowLeft');
+      return;
+    }
 
-    } else if (!navigationKeys.includes(event.key)) {
+    const selection = this.#getSelection();
+
+    if (!navigationKeys.includes(event.key)) {
       // inset input into correct position
       const arr = this.#rawValue.split('');
       const start = arr.slice(0, selection.rawStart).join('');
@@ -304,7 +322,7 @@ export default class Formatter {
 
       event.target.value = this.#rawValue;
       event.preventDefault();
-
+      
       // if range selected move 1 forward from start
       if (selection.displayStart !== selection.displayEnd) {
         event.target.selectionStart = selection.displayStart + 1;
@@ -312,8 +330,9 @@ export default class Formatter {
 
         // move cursor to end
       } else if (!selection.isAtEnd) {
-        event.target.selectionStart = selection.displayEnd + 1;
-        event.target.selectionEnd = selection.displayEnd + 1;
+        const count = this.#calculateCursorForValueChange(false, selection.rawStart, selection.displayStart);
+        event.target.selectionStart = selection.displayEnd + count;
+        event.target.selectionEnd = selection.displayEnd + count;
       }
 
       this.#updateValidity();
@@ -330,14 +349,18 @@ export default class Formatter {
       }
 
       event.target.value = this.#rawValue;
-      event.preventDefault();
+      event.preventDefault(); 
 
       if (selection.rawStart !== selection.rawEnd) {
         event.target.selectionStart = selection.displayStart;
         event.target.selectionEnd = selection.displayStart;
-      } else {
+      } else if (selection.isAtEnd) {
         event.target.selectionStart = selection.displayStart - 1;
         event.target.selectionEnd = selection.displayStart - 1;
+      } else {
+        const count = this.#calculateCursorForValueChange(true, selection.rawStart, selection.displayStart);
+        event.target.selectionStart = selection.displayStart - count;
+        event.target.selectionEnd = selection.displayStart - count;
       }
 
       this.#updateValidity();
@@ -353,7 +376,7 @@ export default class Formatter {
     const selectCheckValue = this.#mask ? this.#formatValue(this.#rawValue) : this.#displayValue;
     let rawStart = this.#getRawSelection(selectCheckValue, displayStart);
     let rawEnd = this.#getRawSelection(selectCheckValue, displayEnd);
-    const isSelectionAtEnd = rawEnd === this.#displayValue.length;
+    const isSelectionAtEnd = displayEnd === this.#displayValue.length;
 
     return {
       displayStart,

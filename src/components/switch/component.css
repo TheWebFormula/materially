@@ -86,22 +86,6 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* &::before {
-    content: '';
-    display: flex;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    border-radius: inherit;
-    box-sizing: border-box;
-    transition-property: opacity, background-color;
-    transition-duration: var(--mc-motion-duration-short1);
-  
-    background-color: var(--mc-switch-track-color-local);
-    border: 2px solid;
-    border-color: var(--mc-outline);
-  } */
 }
 
 .track::before {
@@ -143,19 +127,6 @@ input {
   transition-duration: var(--mc-motion-duration-medium1), var(--mc-motion-duration-medium1);
   transition-timing-function: var(--mc-motion-easing-standard), var(--mc-motion-easing-standard);
   z-index: 0;
-
-  /* &::before {
-    content: '';
-    display: flex;
-    inset: 0;
-    position: absolute;
-    border-radius: inherit;
-    box-sizing: border-box;
-    transition: background-color;
-    transition-duration: var(--mc-motion-duration-short1);
-  
-    background-color: var(--mc-switch-handle-color-local);
-  } */
 }
 
 .thumb::before {
@@ -184,10 +155,6 @@ input {
 .container:has(input:checked) .thumb {
   width: 24px;
   height: 24px;
-
-  /* &::before {
-    background-color: var(--mc-switch-selected-handle-color-local);
-  } */
 }
 
 .container:has(input:checked) .thumb::before {
@@ -223,17 +190,6 @@ label {
   font-size: var(--mc-font-large-label-size);
   font-weight: var(--mc-font-large-label-weight);
   letter-spacing: var(--mc-font-large-label-tracking);
-
-  /* &.show {
-    display: inline-flex;
-  }
-
-  &.right {
-    justify-content: flex-end;
-    order: 1;
-    margin-right: 0;
-    margin-left: 16px;
-  } */
 }
 
 label.show {

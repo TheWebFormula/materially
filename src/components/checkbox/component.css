@@ -77,7 +77,7 @@ input {
   box-sizing: border-box;
 }
 
-/* :has input:checked broken in safari */
+/* TODO rework :has input:checked broken in safari */
 
 :host(.checked) .container,
 .container:has(input:checked),

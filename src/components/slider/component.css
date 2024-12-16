@@ -243,7 +243,7 @@ slot[name="leading-icon"].has-label::slotted(mc-icon) {
     transition: opacity var(--mc-motion-duration-short4);
   }
 
-    input.start:hover ~ .handle-padding .handle.start .value-container {
+  input.start:hover ~ .handle-padding .handle.start .value-container {
     opacity: 1;
     transition: opacity var(--mc-motion-duration-short4);
   }

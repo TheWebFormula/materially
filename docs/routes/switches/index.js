@@ -1,7 +1,7 @@
 import { Component } from '@thewebformula/lithe';
 import htmlTemplate from './page.html';
 
-export default class extends Component {
+class SwitchesPage extends Component {
   static title = 'Switches';
   static htmlTemplate = htmlTemplate;
 
@@ -9,3 +9,4 @@ export default class extends Component {
     super();
   }
 }
+customElements.define('switches-page', SwitchesPage);

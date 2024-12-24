@@ -168,6 +168,14 @@ class MCListItemElement extends HTMLComponentElement {
     }, 150)
   }
 
+  // Example of view transition on remove. CSS in list.css
+  // remove() {
+  //   this.style.viewTransitionName = 'img-expand';
+  //   document.startViewTransition(() => {
+  //     super.remove();
+  //   });
+  // }
+
 
 
   #onChange(event) {

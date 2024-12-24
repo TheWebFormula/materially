@@ -1,7 +1,7 @@
 import { Component } from '@thewebformula/lithe';
 import htmlTemplate from './page.html';
 
-export default class extends Component {
+class SearchPage extends Component {
   static title = 'Search';
   static htmlTemplate = htmlTemplate;
 
@@ -486,3 +486,4 @@ export default class extends Component {
     });
   }
 }
+customElements.define('search-page', SearchPage);

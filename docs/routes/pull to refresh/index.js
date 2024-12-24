@@ -1,7 +1,7 @@
 import { Component } from '@thewebformula/lithe';
 import htmlTemplate from './page.html';
 
-export default class extends Component {
+class PullToRefreshPage extends Component {
   static title = 'Pull to refresh';
   static htmlTemplate = htmlTemplate;
 
@@ -20,3 +20,4 @@ export default class extends Component {
     })
   }
 }
+customElements.define('pull-to-refresh-page', PullToRefreshPage);

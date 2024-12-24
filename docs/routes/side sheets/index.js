@@ -1,7 +1,7 @@
 import { Component, Signal } from '@thewebformula/lithe';
 import htmlTemplate from './page.html';
 
-export default class extends Component {
+class SideSheetsPage extends Component {
   static title = 'Side sheets';
   static htmlTemplate = htmlTemplate;
 
@@ -14,3 +14,4 @@ export default class extends Component {
     super();
   }
 }
+customElements.define('side-sheets-page', SideSheetsPage);

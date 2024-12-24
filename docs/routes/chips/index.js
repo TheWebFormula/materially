@@ -1,7 +1,7 @@
 import { Component } from '@thewebformula/lithe';
 import htmlTemplate from './page.html';
 
-export default class extends Component {
+class ChipsPage extends Component {
   static title = 'Chips';
   static htmlTemplate = htmlTemplate;
 
@@ -21,3 +21,4 @@ export default class extends Component {
     });
   }
 }
+customElements.define('chips-page', ChipsPage);

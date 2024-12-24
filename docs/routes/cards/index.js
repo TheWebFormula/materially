@@ -1,7 +1,7 @@
 import { Component, Signal } from '@thewebformula/lithe';
 import htmlTemplate from './page.html';
 
-export default class extends Component {
+class CardsPage extends Component {
   static title = 'Cards';
   static htmlTemplate = htmlTemplate;
 
@@ -17,3 +17,4 @@ export default class extends Component {
     console.log('checked', element.hasAttribute('checked'));
   }
 }
+customElements.define('cards-page', CardsPage);

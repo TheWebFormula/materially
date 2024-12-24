@@ -1,5 +1,5 @@
 import { glob } from 'node:fs/promises';
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import build from '@thewebformula/lithe/build';
 import esbuild from 'esbuild';
 import generate from '@thewebformula/materially/theme-generator';
@@ -89,6 +89,10 @@ build({
           .find(([out, item]) => item.entryPoint.endsWith('app.css'))[0].split('/').pop();
         return `<link href="/${filename}" rel="stylesheet">`;
       });
+      const path = entry.replace(/^docs/, 'dist');
+      let pathSplit = path.split('/');
+      pathSplit.pop();
+      await mkdir(pathSplit.join('/'), { recursive: true });
       await writeFile(entry.replace(/^docs/, 'dist'), contentUpdated, 'utf-8');
     }
   }

@@ -1,8 +1,6 @@
 import '@thewebformula/materially';
-import './code-block.js';
 
 import './routes/index/index.js';
-
 import './routes/badges/index.js';
 import './routes/bottom app bars/index.js';
 import './routes/bottom sheets/index.js';
@@ -39,6 +37,8 @@ import './routes/time pickers/index.js';
 import './routes/tooltips/index.js';
 import './routes/top app bars/index.js';
 import './routes/utilities/index.js';
+
+import './code-block.js';
 
 
 

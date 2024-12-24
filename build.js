@@ -55,56 +55,6 @@ if (process.env.NODE_ENV === 'production') generate({
   // ]
 }, './docs/colorTokens.css');
 
-// build({
-//   devWarnings: false,
-//   spa: true,
-//   chunks: false,
-//   gzip: false,
-//   basedir: 'docs/',
-//   outdir: 'dist/',
-//   securityLevel: 0,
-//   copyFiles: [
-//     { from: 'docs/_headers', to: 'dist/' },
-//     { from: 'docs/robots.txt', to: 'dist/' },
-//     { from: 'docs/sitemap.xml', to: 'dist/' },
-//     { from: 'docs/favicon.ico', to: 'dist/' },
-//     { from: 'docs/woman.jpg', to: 'dist/' },
-//     { from: 'docs/icons.woff2', to: 'dist/' },
-//     { from: 'docs/outlined-icons-variable.woff2', to: 'dist/' },
-//     { from: 'docs/rounded-icons.woff2', to: 'dist/' },
-//     { from: 'docs/highlight-11.10.0.js', to: 'dist/' },
-//     {
-//       from: 'docs/routes/**/(?!page)*.html',
-//       to: 'dist/routes/',
-//       transform({ content, outputFileNames }) {
-//         if (outputFileNames) return content.replace(cssTagRegex, () => {
-//           const filename = outputFileNames
-//             .filter(v => !!v.entryPoint)
-//             .find(v => v.entryPoint.endsWith('app.css')).output.split('/').pop();
-//           return `<link href="/${filename}" rel="stylesheet">`;
-//         });
-//         return content;
-//       }
-//     },
-//     { from: 'docs/manifest.json', to: 'dist/' },
-//     { from: 'docs/icons/*', to: 'dist/icons/' }
-//   ],
-//   onStart() {
-//     // build separate file for iframe pages without app code.
-//     context.rebuild();
-//   }
-// })
-//   .then(() => { // TODO not sure what is going on. The process stop existing on npm run build at some point
-//     esbuild.buildSync({
-//       entryPoints: ['src/styles.css'],
-//       bundle: true,
-//       outfile: 'dist/material.css',
-//       minify: true
-//     });
-//     if (process.env.NODE_ENV === 'production') process.exit();
-//   });
-
-
 build({
   entryPoint: 'docs/app.js',
   entryPointCSS: 'docs/app.css',
@@ -127,19 +77,19 @@ build({
     // build separate file for iframe pages without app code.
     context.rebuild();
   },
-  // async onEnd({ metafile }) {
-  //   const outputsEntries = Object.entries(metafile.outputs);
-  //   for await (const entry of glob('./docs/routes/**/*.html')) {
-  //     if (metafile.inputs[entry]) continue;
+  async onEnd({ metafile }) {
+    const outputsEntries = Object.entries(metafile.outputs);
+    for await (const entry of glob('./docs/routes/**/*.html')) {
+      if (metafile.inputs[entry]) continue;
 
-  //     const content = await readFile(entry, 'utf-8');
-  //     const contentUpdated = content.replace(cssTagRegex, () => {
-  //       const filename = outputsEntries
-  //         .filter(([out, item]) => !!item.entryPoint)
-  //         .find(([out, item]) => item.entryPoint.endsWith('app.css'))[0].split('/').pop();
-  //       return `<link href="/${filename}" rel="stylesheet">`;
-  //     });
-  //     await writeFile(entry.replace(/^docs/, 'dist'), contentUpdated, 'utf-8');
-  //   }
-  // }
+      const content = await readFile(entry, 'utf-8');
+      const contentUpdated = content.replace(cssTagRegex, () => {
+        const filename = outputsEntries
+          .filter(([out, item]) => !!item.entryPoint)
+          .find(([out, item]) => item.entryPoint.endsWith('app.css'))[0].split('/').pop();
+        return `<link href="/${filename}" rel="stylesheet">`;
+      });
+      await writeFile(entry.replace(/^docs/, 'dist'), contentUpdated, 'utf-8');
+    }
+  }
 });

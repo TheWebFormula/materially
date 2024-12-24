@@ -1,7 +1,7 @@
 import { Component } from '@thewebformula/lithe';
 import htmlTemplate from './page.html';
 
-export default class extends Component {
+class SelectsPage extends Component {
   static title = 'Selects';
   static htmlTemplate = htmlTemplate;
 
@@ -69,3 +69,4 @@ export default class extends Component {
     });
   }
 }
+customElements.define('selects-page', SelectsPage);

@@ -1,7 +1,7 @@
 import { Component, Signal } from '@thewebformula/lithe';
 import htmlTemplate from './page.html';
 
-export default class extends Component {
+class ProgressIndicatorsPage extends Component {
   static title = 'Progress indicators';
   static htmlTemplate = htmlTemplate;
 
@@ -23,3 +23,4 @@ export default class extends Component {
     }, 200);
   }
 }
+customElements.define('progress-indicators-page', ProgressIndicatorsPage);

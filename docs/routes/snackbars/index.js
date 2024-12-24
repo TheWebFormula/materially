@@ -1,7 +1,7 @@
 import { Component } from '@thewebformula/lithe';
 import htmlTemplate from './page.html';
 
-export default class extends Component {
+class SnackbarsPage extends Component {
   static title = 'Snackbars';
   static htmlTemplate = htmlTemplate;
 
@@ -32,3 +32,4 @@ export default class extends Component {
     });
   }
 }
+customElements.define('snackbars-page', SnackbarsPage);

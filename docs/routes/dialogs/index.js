@@ -2,7 +2,7 @@ import { Component } from '@thewebformula/lithe';
 import { mcDialog } from '@thewebformula/materially/services';
 import htmlTemplate from './page.html';
 
-export default class extends Component {
+class DialogsPage extends Component {
   static title = 'Dialogs';
   static htmlTemplate = htmlTemplate;
 
@@ -40,3 +40,4 @@ export default class extends Component {
     console.log(value);
   }
 }
+customElements.define('dialogs-page', DialogsPage);

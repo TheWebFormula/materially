@@ -1,7 +1,7 @@
 import { Component, Signal, html } from '@thewebformula/lithe';
 import htmlTemplate from './page.html';
 
-export default class extends Component {
+class ListsPage extends Component {
   static title = 'Lists';
   static htmlTemplate = htmlTemplate;
 
@@ -34,3 +34,4 @@ export default class extends Component {
     console.log('list items have been reorder. listElement.children will be the new order');
   }
 }
+customElements.define('lists-page', ListsPage);

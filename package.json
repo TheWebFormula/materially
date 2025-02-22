@@ -1,6 +1,6 @@
 {
   "name": "@thewebformula/materially",
-  "version": "0.8.7",
+  "version": "0.9.0",
   "description": "Material design web components",
   "type": "module",
   "main": "./src/index.js",
@@ -45,6 +45,7 @@
     "./components/snackbar": "./src/components/snackbar/index.js",
     "./components/switch": "./src/components/switch/index.js",
     "./components/tab": "./src/components/tab/index.js",
+    "./components/table": "./src/components/table/index.js",
     "./components/textfield": "./src/components/textfield/index.js",
     "./components/time-picker": "./src/components/time-picker/index.js",
     "./components/tooltip": "./src/components/tooltip/index.js",
@@ -75,7 +76,7 @@
   "devDependencies": {
     "@thewebformula/lithe": "^0.15.1",
     "@thewebformula/materially": "file:./",
-    "esbuild": "^0.24.0"
+    "esbuild": "^0.25.0"
   },
   "dependencies": {
     "@material/material-color-utilities": "^0.3.0"

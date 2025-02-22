@@ -20,6 +20,7 @@ class MCSwitchElement extends HTMLComponentElement {
   #initiating = true;
   #touched = false;
   #updateValue_bound = this.#updateValue.bind(this);
+  #onClick_bound = this.#onClick.bind(this);
 
   
   constructor() {
@@ -85,6 +86,7 @@ class MCSwitchElement extends HTMLComponentElement {
 
     this.#abort = new AbortController();
     this.#input.addEventListener('change', this.#updateValue_bound, { signal: this.#abort.signal });
+    this.#input.addEventListener('click', this.#onClick_bound, { signal: this.#abort.signal });
     this.#updateValidity();
     this.#initiating = false;
 
@@ -204,6 +206,10 @@ class MCSwitchElement extends HTMLComponentElement {
       this.#updateValidityDisplay();
     }
     if (!this.#initiating) this.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  #onClick() {
+    this.#touched = true;
   }
 }
 customElements.define(MCSwitchElement.tag, MCSwitchElement);

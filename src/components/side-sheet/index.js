@@ -3,6 +3,7 @@ import styles from './component.css' assert { type: 'css' };
 import device from '../../helpers/device.js';
 import Swipe from '../../helpers/Swipe.js';
 import util from '../../helpers/util.js';
+
 import {
   close_FILL0_wght400_GRAD0_opsz24,
   arrow_back_FILL1_wght300_GRAD0_opsz24,
@@ -18,12 +19,12 @@ export default class MCSideSheetElement extends HTMLComponentElement {
 
   #abort;
   #open = false;
-  #openSet = false;
   #modalSet = false;
   #windowStateChange_bound = this.#windowStateChange.bind(this);
-  #close_bound = this.close.bind(this);
   #redispatchBack_bound = this.#redispatchBack.bind(this);
-  #formSubmit_bound = this.#formSubmit.bind(this);
+  #formClose_bound = this.#formClose.bind(this);
+  #closeFormCheck_bound = this.#closeFormCheck.bind(this);
+  #closeScrim_bound = this.#closeScrim.bind(this);
 
   #initiated = false;
   #predictiveBackDisable = false;
@@ -31,6 +32,8 @@ export default class MCSideSheetElement extends HTMLComponentElement {
   #swipe;
   #swipeCloseIconAuto;
   #predictiveBackIcon;
+  #form;
+  #preventClose = false;
 
   #swipeCloseStart_bound = this.#swipeCloseStart.bind(this);
   #swipeCloseMove_bound = this.#swipeCloseMove.bind(this);
@@ -40,10 +43,11 @@ export default class MCSideSheetElement extends HTMLComponentElement {
   constructor() {
     super();
 
-    // if modal or open is added initially we want to prevent automatic changing based on window size
-    this.#openSet = this.hasAttribute('open');
     this.#modalSet = this.hasAttribute('modal');
+    
+    // TODO figure out calling this
     this.#windowStateChange({ detail: device });
+    
     this.render();
     this.#surface = this.shadowRoot.querySelector('.surface');
     this.#predictiveBackIcon = this.shadowRoot.querySelector('.predictive-back-icon');
@@ -97,19 +101,16 @@ export default class MCSideSheetElement extends HTMLComponentElement {
 
   connectedCallback() {
     this.#abort = new AbortController();
-    if (!this.hideClose) this.shadowRoot.querySelector('.close').addEventListener('click', this.#close_bound, { signal: this.#abort.signal });
-    if (this.back) this.shadowRoot.querySelector('.back').addEventListener('click', this.#redispatchBack_bound, { signal: this.#abort.signal });
-    if (!this.preventClose && this.scrim) {
-      this.shadowRoot.querySelector('.scrim').addEventListener('click', this.#close_bound, { signal: this.#abort.signal });
-    }
+    this.shadowRoot.querySelector('.back').addEventListener('click', this.#redispatchBack_bound, { signal: this.#abort.signal });
+    this.shadowRoot.querySelector('.scrim').addEventListener('click', this.#closeScrim_bound, { signal: this.#abort.signal });
+    this.shadowRoot.querySelector('.close').addEventListener('click', this.#closeFormCheck_bound, { signal: this.#abort.signal });
     window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound, { signal: this.#abort.signal });
 
-    let form = this.querySelector('form[method=dialog]');
-    if (form) {
-      form.addEventListener('submit', this.#formSubmit_bound, { signal: this.#abort.signal });
-
+    this.#form = this.querySelector('form[method=dialog]');
+    if (this.#form) {
+      this.#form.addEventListener('submit', this.#formClose_bound, { signal: this.#abort.signal });
       let cancelButton = this.querySelector('mc-button[form][type=cancel]');
-      if (cancelButton) cancelButton.addEventListener('cancel', this.#close_bound, { signal: this.#abort.signal });
+      if (cancelButton) cancelButton.addEventListener('cancel', this.#formClose_bound, { signal: this.#abort.signal });
     }
 
     const allowPredictiveBack = !this.#predictiveBackDisable && device.state === device.COMPACT;
@@ -161,9 +162,9 @@ export default class MCSideSheetElement extends HTMLComponentElement {
     this.toggleAttribute('scrim', !!value);
   }
 
-  get preventClose() { return this.hasAttribute('prevent-close'); }
+  get preventClose() { return this.#preventClose; }
   set preventClose(value) {
-    this.toggleAttribute('prevent-close', !!value);
+    this.#preventClose = !!value;
   }
 
   get inset() { return this.hasAttribute('inset'); }
@@ -218,22 +219,35 @@ export default class MCSideSheetElement extends HTMLComponentElement {
     this.open = true;
   }
 
-  close() {
+  async close() {
     this.open = false;
   }
 
   #windowStateChange({ detail }) {
     const state = detail.state;
     if (!this.#modalSet) this.modal = state === device.COMPACT;
-    if (!this.#openSet) this.open = state !== device.COMPACT;
   }
 
   #redispatchBack() {
     this.dispatchEvent(new CustomEvent('back'));
   }
 
-  #formSubmit(event) {
+  #formClose() {
+    if (this.#preventClose) return;
     this.close();
+  }
+
+  // check for form changes and show cancel dialog
+  async #closeFormCheck(event) {
+    if (this.#form && this.#form.formState) {
+      const prevent = await this.#form.formState.preventUnsavedChanges(event);
+      if (prevent) return;
+    }
+    this.close();
+  }
+
+  #closeScrim() {
+    if (!this.#preventClose) this.close();
   }
 
 

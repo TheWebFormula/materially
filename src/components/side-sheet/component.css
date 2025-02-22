@@ -18,6 +18,7 @@
 .surface {
   z-index: 22;
   overflow: hidden;
+  box-sizing: border-box;
   width: 0px;
   height: 100%;
   transition: width;
@@ -38,6 +39,14 @@
   transition: width;
   transition-duration: var(--mc-motion-duration-medium3);
   transition-timing-function: var(--mc-motion-easing-standard-decelerate);
+}
+
+:host([divider]:not([modal]).open) .surface {
+  border-radius: 0;
+  border-left: 2px solid var(--mc-outline-variant);
+  transition: width, border;
+  transition-duration: var(--mc-motion-duration-medium3), var(--mc-motion-duration-medium3);
+  transition-timing-function: var(--mc-motion-easing-standard-decelerate), var(--mc-motion-easing-standard-decelerate);
 }
 
 :host([align-left]) .surface {
@@ -149,6 +158,7 @@
   align-items: center;
   justify-content: end;
   margin-top: 12px;
+  min-height: 48px;
 }
 
 slot[name="headline"] {

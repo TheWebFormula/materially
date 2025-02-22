@@ -35,6 +35,7 @@ import './src/components/textfield/index.js';
 import './src/components/time-picker/index.js';
 import './src/components/tooltip/index.js';
 import './src/components/top-app-bar/index.js';
+import './src/components/form/index.js'
 
 export {
   mcDate,

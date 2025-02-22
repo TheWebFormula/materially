@@ -41,6 +41,7 @@ export default class MCIconButtonElement extends MCButtonElement {
     return [
       ['aria-label', 'string'],
       ['href', 'string'],
+      ['type', 'string'],
       ['target', 'string'],
       ['toggle', 'boolean'],
       ['checked', 'boolean'],

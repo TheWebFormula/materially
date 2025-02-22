@@ -11,7 +11,7 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
   static tag = 'mc-navigation-drawer';
   static styleSheets = [sideSheetStyles, styles, stylesAnchor];
 
-
+  #openSet = false;
   #locationchange_bound = this.#locationchange.bind(this);
   #windowStateChange_bound = this.#windowStateChange.bind(this);
   #click_bound = this.#click.bind(this);
@@ -31,6 +31,8 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
     this.scrim = true;
     this.allowClose = true;
     this.hideClose = true;
+    this.#openSet = this.hasAttribute('open');
+    this.#windowStateChange({ detail: device });
     this.#locationchange();
   }
 
@@ -66,6 +68,7 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
   }
 
   #windowStateChange({ detail }) {
+    if (this.#openSet && !this.open) this.open = state !== device.COMPACT;
     switch (detail.state) {
       case device.EXPANDED:
         this.open = true;

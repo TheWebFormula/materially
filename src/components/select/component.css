@@ -14,6 +14,10 @@
   height: 56px;
 }
 
+:host([condensed]) {
+  height: 42px;
+}
+
 /* :host([filter]) mc-menu {
   box-shadow: var(--mc-elevation-2-reverse);
 } */
@@ -37,6 +41,13 @@ mc-textfield,
 .drop-arrow {
   margin-top: 18px;
   z-index: 1;
+  width: 10px;
+  height: 5px;
+  min-width: 10px;
+}
+
+:host([condensed]) .drop-arrow {
+  margin-top: 11px;
 }
 
 .drop-arrow .up,
@@ -60,6 +71,7 @@ mc-textfield,
 slot[name="leading-icon"],
 slot[name="trailing-icon"] {
   display: contents;
+  visibility: visible
 }
 
 

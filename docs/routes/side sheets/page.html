@@ -31,6 +31,7 @@
               <mc-switch onchange="document.querySelector('#one').back = this.checked" label="back arrow"></mc-switch>
               <mc-switch onchange="document.querySelector('#one').modal = this.checked" label="Modal"></mc-switch>
               <mc-switch onchange="document.querySelector('#one').scrim = this.checked" label="Scrim (backdrop)"></mc-switch>
+              <mc-switch onchange="document.querySelector('#one').preventClose = this.checked" label="Prevent close (scrim click)"></mc-switch>
             </div>
             <div id="local-container"
               style="display: flex; position: relative; height: 380px; overflow: hidden; margin: -16px; border-top: 1px solid var(--mc-outline); margin-top: 16px; padding-top: 0">
@@ -76,7 +77,7 @@ ${`<div style="display: flex">
   <div>
     content...
   </div>
-  <mc-side-sheet id="one" open="\${page.oneOpen}" onchange="page.oneOpen = this.open" onback="this.close();">
+  <mc-side-sheet id="one" open="\${page.oneOpen}" onchange="page.oneOpen = this.open">
     <div slot="headline">Headline</div>
   
     <div>
@@ -97,10 +98,19 @@ ${`<div style="display: flex">
     hideClose - Hide close icon button
     back - show back arrow
     modal - use modal
-    scrom - show scrim (backdrop) when open
+    scrim - show scrim (backdrop) when open
+    prevent-close - prevents close for scrim click and form buttons(submit, cancel)
     onback - event attribute for back button
 -->
-<mc-side-sheet open hideClose back modal scrim onback="this.close();"></mc-side-sheet>`}
+<mc-side-sheet
+  open
+  hide-close
+  modal
+  scrim
+  prevent-close
+  back
+  onback="fired on back click"
+></mc-side-sheet>`}
             </pre></code-block>
         </mc-card>
       </section>
@@ -203,40 +213,9 @@ ${`<div style="display: flex">
             </div>
             <div style="display: flex">
               <mc-side-sheet id="predictive" open="${page.predictiveOpen}" onchange="page.predictiveOpen.value = this.open" global>
-                <div slot="headline">swipe / drag from the edge to close on campact screen (mobile)</div>
+                <div slot="headline">Predictive back</div>
       
-                <div class="font-size: 20px">One</div>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna
-                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat.
-                  Duis
-                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-      
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna
-                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat.
-                  Duis
-                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-      
-                <div class="font-size: 20px">Two</div>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna
-                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat.
-                  Duis
-                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-      
+                <div class="font-size: 20px">swipe / drag from the edge to close on campact screen (mobile)</div>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
                   magna
@@ -284,12 +263,18 @@ ${`<div style="display: flex">
       <section id="forms" aria-label="Side sheet with forms">
         <mc-card>
           <h2 slot="headline">Form with change detection</h2>
-          <div slot="supporting-text">Invalid forms prevent form submission. Cancel button will prevent click actions and show
-            dialog when form has changes.</div>
+          <div slot="supporting-text">
+            Invalid forms prevent form submission. Cancel button will prevent click actions and show dialog when form has changes.
+            <ul>
+              <li>The close button will show a "discard changes" dialog if there are unsubmitted changes</li>
+              <li><strong>prevent-close</strong> will prevent the side-sheep from closeing on submit or cancel action buttons. Normally these would close the side-sheet.</li>
+            </ul>
+          </div>
         
           <div class="example">
             <div style="display: flex; flex-direction: column; width: 190px;">
-              <mc-switch onchange="page.threeOpen.value = this.checked" checked="${page.threeOpen}">Toggle</mc-switch>
+              <mc-switch onchange="page.threeOpen.value = this.checked" checked="${page.threeOpen}" label="Toggle"></mc-switch>
+              <mc-switch onchange="document.querySelector('#formsheet').preventClose = this.checked" label="Prevent close (cancel, submit)"></mc-switch>
             </div>
         
             <div id="local-container"
@@ -314,34 +299,34 @@ ${`<div style="display: flex">
                   occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
               </div>
-              <mc-side-sheet id="formdialog" open="${page.threeOpen}" onchange="page.threeOpen.value = this.open" hide-close>
+              <mc-side-sheet id="formsheet" open="${page.threeOpen}" onchange="page.threeOpen.value = this.open">
                 <div slot="headline">Headline</div>
                 <form id="test" method="dialog">
                   <div style="font-size: 14px; margin-bottom: 8px;"><strong>Cancel</strong> checks for form changes and presents dialog</div>
                   <div style="font-size: 14px; margin-bottom: 24px;"><strong>Save</strong> will validate the form</div>
                   <div style="font-size: 14px; margin-bottom: 24px;"><strong>Close</strong> will disregard the form and close the sheet</div>
-                  <mc-textfield label="Required" supporting-test="Required" required value="one"
+                  <mc-textfield label="Required" supporting-text="Required" required value="one"
                     outlined></mc-textfield>
                 </form>
-                <mc-button slot="action" onclick="formdialog.close()">close</mc-button>
-                <mc-button slot="action" form="test" type="cancel">cancel</mc-button>
+                <mc-button slot="action" onclick="formsheet.close()">close</mc-button>
+                <mc-button slot="action" form="test" type="cancel" oncancel="console.log('cancel')">cancel</mc-button>
                 <mc-button slot="action" form="test" type="submit">save</mc-button>
               </mc-side-sheet>
             </div>
           </div>
         
           <code-block language="html"><pre>
-${`<mc-side-sheet id="formdialog" hide-close>
+${`<mc-side-sheet id="formsheet">
   <div slot="headline">Headline</div>
   <form id="test" method="dialog">
     <div style="font-size: 14px; margin-bottom: 8px;"><strong>Cancel</strong> checks for form changes and presents dialog</div>
     <div style="font-size: 14px; margin-bottom: 24px;"><strong>Save</strong> will validate the form</div>
     <div style="font-size: 14px; margin-bottom: 24px;"><strong>Close</strong> will disregard the form and close the sheet</div>
-    <mc-textfield label="Required" supporting-test="Required" required value="one"
+    <mc-textfield label="Required" supporting-text="Required" required value="one"
       outlined></mc-textfield>
   </form>
-  <mc-button slot="action" onclick="formdialog.close()">close</mc-button>
-  <mc-button slot="action" form="test" type="cancel">cancel</mc-button>
+  <mc-button slot="action" onclick="formsheet.close()">close</mc-button>
+  <mc-button slot="action" form="test" type="cancel" oncancel="console.log('cancel')">cancel</mc-button>
   <mc-button slot="action" form="test" type="submit">save</mc-button>
 </mc-side-sheet>`}
             </pre></code-block>

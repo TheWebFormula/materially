@@ -2,7 +2,7 @@ import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import util from '../../helpers/util.js';
 import { close_FILL0_wght400_GRAD0_opsz24 } from '../../helpers/svgs.js';
-import FormState from '../../helpers/form.js';
+
 
 
 export default class MCDialogElement extends HTMLComponentElement {
@@ -13,21 +13,22 @@ export default class MCDialogElement extends HTMLComponentElement {
 
   #abort;
   #dialog;
+  #form;
+
   #preventClose = false;
   #preventNavigation = false;
   #removeOnClose = false;
   #closeIgnoreElements = [];
-  #handleSubmit_bound = this.#handleSubmit.bind(this);
-  #beforeUnload_bound = this.#beforeUnload.bind(this);
-  #handleActionsClick_bound = this.#handleActionsClick.bind(this);
-  #fullscreenClose_bound = this.#fullscreenClose.bind(this);
-  #fullscreenSave_bound = this.#fullscreenSave.bind(this);
 
   #handleCancel_bound = this.#handleCancel.bind(this);
   #handleClose_bound = this.#handleClose.bind(this);
   #handleEsc_bound = this.#handleEsc.bind(this);
   #clickOutsideClose_bound = this.#clickOutsideClose.bind(this);
-  #formState;
+  #handleSubmit_bound = this.#handleSubmit.bind(this);
+  #handleActionsClick_bound = this.#handleActionsClick.bind(this);
+  #beforeUnload_bound = this.#beforeUnload.bind(this);
+  #fullscreenClose_bound = this.#fullscreenClose.bind(this);
+  #fullscreenSave_bound = this.#fullscreenSave.bind(this);
 
 
   constructor() {
@@ -56,6 +57,7 @@ export default class MCDialogElement extends HTMLComponentElement {
     `;
   }
 
+
   static get observedAttributesExtended() {
     return [
       ['prevent-close', 'boolean'],
@@ -69,7 +71,21 @@ export default class MCDialogElement extends HTMLComponentElement {
     this[name] = newValue;
   }
 
+
+
   get open() { return this.hasAttribute('open'); }
+
+  get closeIgnoreElements() { return this.#closeIgnoreElements; }
+  set closeIgnoreElements(value) {
+    this.#closeIgnoreElements = Array.isArray(value) ? value : [];
+  }
+
+  get fullscreen() { return this.hasAttribute('fullscreen'); }
+  set fullscreen(value) {
+    this.toggleAttribute('fullscreen', !!value);
+    const form = !value ? undefined : this.querySelector('form');
+    this.shadowRoot.querySelector('.save-fullscreen-form').classList.toggle('show', !!form);
+  }
 
   get preventClose() { return this.#preventClose; }
   set preventClose(value) {
@@ -81,32 +97,16 @@ export default class MCDialogElement extends HTMLComponentElement {
     this.#preventNavigation = !!value;
   }
 
-  get fullscreen() { return this.hasAttribute('fullscreen'); }
-  set fullscreen(value) {
-    this.toggleAttribute('fullscreen', !!value);
-    const form = !value ? undefined : this.querySelector('form');
-    this.shadowRoot.querySelector('.save-fullscreen-form').classList.toggle('show', !!form);
-    if (form) this.#formState = new FormState(form);
-  }
-
   get removeOnClose() { return this.#removeOnClose; }
   set removeOnClose(value) { this.#removeOnClose = !!value; }
 
-  get closeIgnoreElements() { return this.#closeIgnoreElements; }
-  set closeIgnoreElements(value) {
-    this.#closeIgnoreElements = Array.isArray(value) ? value : [];
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.#abort = new AbortController();
-    this.#preventNavigation = this.hasAttribute('prevent-navigation');
-  }
-  
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    if (this.#abort) this.#abort.abort();
+    if (this.#abort) {
+      this.#abort.abort();
+      this.#abort = undefined;
+    }
   }
 
   show() {
@@ -133,36 +133,22 @@ export default class MCDialogElement extends HTMLComponentElement {
     this.#dialog.close(returnValue);
   }
 
-  async #fullscreenClose(event) {
-    if (this.#formState) {
-      const prevent = await this.#formState.preventUnsavedChanges(event);
-      if (prevent) return;
-      this.#formState.reset();
-    }
-    
-    this.close();
-  }
 
-  async #fullscreenSave(event) {
-    if (!this.#formState.canSubmitForm(event)) return;
-    this.#formState.formRequestSubmit(event);
-    this.close();
-  }
 
   #showAfter() {
+    if (!this.#abort) {
+      this.#abort = new AbortController();
+    }
     this.#dialog.addEventListener('cancel', this.#handleCancel_bound, { signal: this.#abort.signal });
     this.#dialog.addEventListener('close', this.#handleClose_bound, { signal: this.#abort.signal });
     window.addEventListener('keydown', this.#handleEsc_bound, { signal: this.#abort.signal });
 
-    if (!this.preventClose) {
-      window.addEventListener('click', this.#clickOutsideClose_bound, { signal: this.#abort.signal, capture: true });
-    }
+    if (!this.preventClose) window.addEventListener('click', this.#clickOutsideClose_bound, { signal: this.#abort.signal, capture: true });
+    if (this.#preventNavigation) window.addEventListener('beforeunload', this.#beforeUnload_bound, { signal: this.#abort.signal });
 
-    const content = this.shadowRoot.querySelector('[name="content"]');
-    const isScroll = content.scrollHeight > 0 && content.offsetHeight !== content.scrollHeight;
-    this.#dialog.classList.toggle('scroll', isScroll);
-
-    if (this.querySelector('form')) {
+    this.#form = this.querySelector('form');
+    if (this.#form) {
+      this.#form.track();
       this.addEventListener('submit', this.#handleSubmit_bound, { signal: this.#abort.signal });
     } else {
       const actions = this.querySelectorAll('[slot="actions"]');
@@ -171,59 +157,23 @@ export default class MCDialogElement extends HTMLComponentElement {
       }
     }
 
-    if (this.#preventNavigation) window.addEventListener('beforeunload', this.#beforeUnload_bound, { signal: this.#abort.signal });
     if (this.fullscreen) {
       this.shadowRoot.querySelector('.close-fullscreen').addEventListener('click', this.#fullscreenClose_bound, { signal: this.#abort.signal });
-      if (this.#formState) {
+      if (this.#form) {
         this.shadowRoot.querySelector('.save-fullscreen-form').addEventListener('click', this.#fullscreenSave_bound, { signal: this.#abort.signal });
-        this.#formState.setInitialFormState();
       }
     }
+
+
+    const content = this.shadowRoot.querySelector('[name="content"]');
+    const isScroll = content.scrollHeight > 0 && content.offsetHeight !== content.scrollHeight;
+    this.#dialog.classList.toggle('scroll', isScroll);
+
+
     this.dispatchEvent(new Event('open', { bubbles: true }));
   }
 
 
-  #handleSubmit(event) {
-    const form = event.target;
-    const { submitter } = event;
-    if (form.method !== 'dialog' || !submitter) return;
-    this.close(submitter.getAttribute('value') ?? this.returnValue);
-  }
-
-  #handleActionsClick(event) {
-    this.close(event.target.getAttribute('value') ?? this.returnValue);
-  }
-
-  // for prevent navigation
-  #beforeUnload(event) {
-    event.preventDefault();
-    event.returnValue = 'You may have unsaved changes';
-  }
-
-  async #handleClose() {
-    this.removeAttribute('open');
-    this.#dialog.removeEventListener('cancel', this.#handleCancel_bound);
-    this.#dialog.removeEventListener('close', this.#handleClose_bound);
-    window.removeEventListener('keydown', this.#handleEsc_bound);
-    window.removeEventListener('click', this.#clickOutsideClose_bound);
-
-    if (this.#preventNavigation) window.removeEventListener('beforeunload', this.#beforeUnload_bound);
-    if (this.fullscreen) this.shadowRoot.querySelector('.close-fullscreen').removeEventListener('click', this.#fullscreenClose_bound);
-
-    if (this.querySelector('form')) {
-      this.removeEventListener('submit', this.#handleSubmit_bound);
-    } else {
-      const actions = this.querySelectorAll('[slot=actions]');
-      for (const action of actions) {
-        action.removeEventListener('click', this.#handleActionsClick_bound)
-      }
-    }
-
-    if (this.removeOnClose) {
-      await util.animationendAsync(this.#dialog);
-      this.parentElement.removeChild(this);
-    }
-  }
 
   #handleCancel(event) {
     const preventClose = !this.dispatchEvent(new Event('close', { cancelable: true }));
@@ -251,7 +201,61 @@ export default class MCDialogElement extends HTMLComponentElement {
       this.close();
     }
   }
-}
 
+  #handleActionsClick(event) {
+    this.close(event.target.getAttribute('value') ?? this.returnValue);
+  }
+
+  // for prevent navigation
+  #beforeUnload(event) {
+    event.preventDefault();
+    event.returnValue = 'You may have unsaved changes';
+  }
+
+
+  async #handleSubmit(event) {
+    const form = event.target;
+    const { submitter } = event;
+
+    if (submitter.nodeName === 'MC-BUTTON' && submitter.async && submitter.isPending) {
+      this.classList.add('lock');
+      await submitter.pending();
+      this.classList.remove('lock');
+    }
+
+    if (form.method !== 'dialog' || !submitter) return;
+    this.close(submitter.getAttribute('value') ?? this.returnValue);
+  }
+
+
+  async #handleClose() {
+    this.removeAttribute('open');
+    if (this.#abort) {
+      this.#abort.abort();
+      this.#abort = undefined;
+    }
+
+    if (this.removeOnClose) {
+      await util.animationendAsync(this.#dialog);
+      this.parentElement.removeChild(this);
+    }
+  }
+
+
+  async #fullscreenClose(event) {
+    if (this.#form) {
+      const prevent = this.hasAttribute('formnovalidate') ? false : await this.#form.formState.preventUnsavedChanges(event);
+      if (prevent) return;
+
+      // TODO reset automatically?
+      // this.#form.reset();
+    }
+    this.close();
+  }
+
+  async #fullscreenSave(event) {
+    this.#form.requestSubmit(event.target);
+  }
+}
 
 customElements.define(MCDialogElement.tag, MCDialogElement);

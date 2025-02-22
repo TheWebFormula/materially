@@ -38,6 +38,14 @@
             <mc-textfield label="Label" outlined value="My name" disabled>
               <mc-icon slot="trailing-icon">person</mc-icon>
             </mc-textfield>
+
+            <mc-textfield label="No indicator (underline)" no-indicator></mc-textfield>
+
+            <mc-textfield label="Shape" no-indicator style="--mc-textfield-shape: var(--mc-shape-extra-large)">
+              <mc-icon slot="leading-icon">search</mc-icon>
+            </mc-textfield>
+
+            <mc-textfield label="Condensed" condensed></mc-textfield>
           </div>
 
           <code-block language="html"><pre>
@@ -50,7 +58,16 @@ ${`<mc-textfield label="Label">
 
 <mc-textfield label="Label" outlined value="My name" disabled>
   <mc-icon slot="trailing-icon">person</mc-icon>
-</mc-textfield>`}
+</mc-textfield>
+
+<!-- No indicator (underline) -->
+<mc-textfield label="No indicator" no-indicator></mc-textfield>
+
+<mc-textfield label="Shape" no-indicator style="--mc-textfield-shape: var(--mc-shape-extra-large)">
+  <mc-icon slot="leading-icon">search</mc-icon>
+</mc-textfield>
+
+<mc-textfield label="Condensed" condensed></mc-textfield>`}
             </pre></code-block>
         </mc-card>
       </section>

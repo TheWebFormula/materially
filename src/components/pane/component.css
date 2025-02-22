@@ -8,6 +8,10 @@
   gap: 16px;
 }
 
+:host(.window-compact) {
+  padding: 0;
+}
+
 :host(.top-app-bar-exists) {
   padding-top: 0;
 }
@@ -31,6 +35,11 @@
 :host([scroll]) ::slotted(mc-pane) {
   height: 100%;
   overflow: auto;
+}
+
+/* TODO work out single pane full width */
+:host(:not([resize])) ::slotted(mc-pane:not([fixed])) {
+  flex: 1;
 }
 
 /* :host(:not([resize])) ::slotted(mc-pane:not([fixed])) {

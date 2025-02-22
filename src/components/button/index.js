@@ -2,7 +2,7 @@ import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import '../state-layer/index.js';
 import './angled-corners.js';
-import FormState from '../../helpers/form.js';
+import '../progress-circular/index.js';
 
 
 const targetValues = ['_blank', '_parent', '_self', '_top'];
@@ -23,24 +23,20 @@ export default class MCButtonElement extends HTMLComponentElement {
   #target = 'test';
   #href;
   #button;
-  #onclickValue;
   #popovertarget;
-  #formState;
   #async = false;
+  #pendingPromise;
+  #pendingPromiseResolve;
   #focus_bound = this.#focus.bind(this);
   #blur_bound = this.#blur.bind(this);
   #asyncMouseup_bound = this.pending.bind(this);
   #formClick_bound = this.#formClick.bind(this);
-  #formFocusIn_bound = this.#formFocusIn.bind(this);
   #focusKeydown_bound = this.#focusKeydown.bind(this);
-  #formMouseDown_bound = this.#formMouseDown.bind(this);
-  #formMouseUp_bound = this.#formMouseUp.bind(this);
   #hrefClick_bound = this.#hrefClick.bind(this);
 
   
   constructor() {
     super();
-
 
     this.role = 'button';
     this.tabIndex = this.hasAttribute('tabindex') ? this.getAttribute('tabindex') : 0;
@@ -88,19 +84,17 @@ export default class MCButtonElement extends HTMLComponentElement {
 
     if (this.#async) this.addEventListener('mouseup', this.#asyncMouseup_bound, { signal: this.#abort.signal });
     this.addEventListener('focus', this.#focus_bound, { signal: this.#abort.signal });
-
-    if (this.form) {
-      this.#formState = new FormState(this.form);
+ 
+    if (this.form && this.type !== 'button') {
+      this.form.track();
       this.addEventListener('click', this.#formClick_bound, { signal: this.#abort.signal });
-      this.addEventListener('mousedown', this.#formMouseDown_bound, { signal: this.#abort.signal });
-      this.addEventListener('mouseup', this.#formMouseUp_bound, { signal: this.#abort.signal });
-      this.form.addEventListener('focusin', this.#formFocusIn_bound, { signal: this.#abort.signal });
     }
   }
 
   disconnectedCallback() {
     if (this.#abort) this.#abort.abort();
-    this.#onclickValue = undefined;
+    this.#pendingPromise = undefined;
+    this.#pendingPromiseResolve = undefined
     this.removeEventListener('click', this.#hrefClick_bound);
   }
 
@@ -177,19 +171,31 @@ export default class MCButtonElement extends HTMLComponentElement {
     this.#button.popoverTargetAction = value;
   }
 
+  get isPending() {
+    return this.classList.contains('async-pending');
+  }
+
 
   pending() {
+    if (this.#pendingPromise) return this.#pendingPromise;
+
     this.classList.add('async-pending');
     this.shadowRoot.querySelector('.spinner').innerHTML = `
       <mc-progress-circular style="width: 20px; height: 20px;" indeterminate class="${this.hasAttribute('filled') ? ' on-filled' : ''}${this.hasAttribute('filled-tonal') ? ' on-filled-tonal' : ''}"></mc-progress-circular>
     `;
+    this.#pendingPromise = new Promise(resolve => {
+      this.#pendingPromiseResolve = resolve;
+    });
+    return this.#pendingPromise;
   }
 
   resolve() {
     this.classList.remove('async-pending');
     this.shadowRoot.querySelector('.spinner').innerHTML = '';
+    this.#pendingPromiseResolve();
+    this.#pendingPromise = undefined;
+    this.#pendingPromiseResolve = undefined;
   }
-
 
   #focus() {
     this.addEventListener('blur', this.#blur_bound, { signal: this.#abort.signal });
@@ -205,41 +211,21 @@ export default class MCButtonElement extends HTMLComponentElement {
     if (e.key === 'Enter' || e.keyCode === 32) this.shadowRoot.querySelector('mc-state-layer').triggerRipple();
   }
 
-  // prevent onclick attribute from firing when form invalid
-  #formMouseDown() {
-    const formHasChange = this.#formState.formHasChanges();
-    if (this.type === 'cancel' && this.onclick && formHasChange) {
-      this.#onclickValue = this.onclick;
-      this.onclick = undefined;
-    }
-  }
-
-  #formMouseUp() {
-    if (this.type === 'cancel' && this.#onclickValue) {
-      setTimeout(() => {
-        this.onclick = this.#onclickValue;
-        this.#onclickValue = undefined;
-      });
-    }
-  }
-
   async #formClick(event) {
     const type = this.type || this.#button.type;
+
     switch (type) {
       case 'reset':
-        this.#formState.reset();
+        this.form.reset();
         break;
 
       case 'submit':
-        const canSubmit = this.#formState.canSubmitForm(event);
-        if (canSubmit) {
-          this.#internals.setFormValue(this.value);
-          this.#formState.formRequestSubmit(event);
-        }
+        this.#internals.setFormValue('test');
+        this.form.requestSubmit(this);
         break;
 
       case 'cancel':
-        const prevent = await this.#formState.preventUnsavedChanges(event);
+        const prevent = this.hasAttribute('formnovalidate') ? false : await this.form.formState.preventUnsavedChanges(event);
         if (prevent) {
           return;
         } else {
@@ -250,13 +236,9 @@ export default class MCButtonElement extends HTMLComponentElement {
       default:
         if (this.form.method === 'dialog') {
           this.#internals.setFormValue(this.value);
-          this.#formState.formRequestSubmit(event);
+          this.form.requestSubmit(event);
         }
     }
-  }
-
-  #formFocusIn() {
-    this.#formState.setInitialFormState();
   }
 
   #hrefClick() {

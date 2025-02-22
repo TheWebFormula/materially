@@ -104,7 +104,7 @@ document.querySelector('#one').addEventListener('submit', submit);`}
               <div style="display: flex; justify-self: end;">
                 <mc-button form="two" type="submit">Submit</mc-button>
                 <!-- type="cancel" is custom and does not natively exist -->
-                <mc-button form="two" type="cancel" onclick="two.reset(); console.log('Called on discard, or when from has no changes');">Cancel</mc-button>
+                <mc-button form="two" type="cancel" onclick="console.log('Called on discard, or when from has no changes');" oncancel="two.reset()">Cancel</mc-button>
               </div>
             </form>
           </div>
@@ -120,7 +120,7 @@ ${`<!-- method="dialog" Will prevent any page redirects or endpoint calls -->
   <div style="display: flex; justify-self: end;">
     <mc-button form="two" type="submit">Submit</mc-button>
     <!-- type="cancel" is custom and does not natively exist -->
-    <mc-button form="two" type="cancel" onclick="two.reset(); console.log('Called on discard, or when from has no changes');">Cancel</mc-button>
+    <mc-button form="two" type="cancel" onclick="console.log('Called on discard, or when from has no changes');" oncancel="two.reset()">Cancel</mc-button>
   </div>
 </form>`}
             </pre></code-block>

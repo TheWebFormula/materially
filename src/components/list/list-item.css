@@ -11,6 +11,7 @@
   box-sizing: border-box;
   gap: 16px;
   min-height: 56px;
+  height: 56px;
   overflow: hidden;
   position: relative;
   text-overflow: ellipsis;
@@ -31,6 +32,7 @@
 
 :host([multiline]) {
   min-height: 72px;
+  height: auto;
 }
 
 :host(.selected) {

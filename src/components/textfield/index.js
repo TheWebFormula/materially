@@ -78,7 +78,7 @@ class MCTextfieldElement extends HTMLComponentElement {
 
         <div class="outlined-border-container">
           <div class="outlined-leading"></div>
-          <div class="outlined-notch no-animation">${this.label}</div>
+          <div class="outlined-notch no-animation" label=""></div>
           <div class="outlined-trailing"></div>
         </div>
 
@@ -171,7 +171,10 @@ class MCTextfieldElement extends HTMLComponentElement {
     this.#label = value;
     this.shadowRoot.querySelector('.text-field').classList.toggle('label', !!this.#label);
     this.shadowRoot.querySelector('label').textContent = this.#label;
-    if (this.hasAttribute('outlined')) this.shadowRoot.querySelector('.outlined-notch').textContent = this.#label;
+    if (this.hasAttribute('outlined')) {
+      this.shadowRoot.querySelector('.outlined-notch').textContent = this.#label;
+      this.shadowRoot.querySelector('.outlined-notch').setAttribute('label', this.#label);
+    }
     if (!this.ariaLabel) this.ariaLabel = this.#label;
   }
 
@@ -394,7 +397,9 @@ class MCTextfieldElement extends HTMLComponentElement {
 
 
   clear() {
+    const change = this.value !== '';
     this.value = '';
+    if (this.type === 'search' && change) this.dispatchEvent(new Event('search'));
   }
 
   reset() {

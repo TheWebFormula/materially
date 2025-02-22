@@ -101,3 +101,11 @@ html.pull-to-refresh-inactive body {
 mc-bottom-app-bar {
   view-transition-name: stacking-order-fix;
 } */
+
+
+mc-side-sheet mc-divider {
+  display: flex;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border-top: 1px solid rgb(from var(--mc-outline) r g b / 26%);
+}

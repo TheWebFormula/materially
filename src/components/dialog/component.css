@@ -58,6 +58,10 @@ dialog {
     transition-duration: var(--mc-motion-duration-short3);
   }
 
+  &.check-scroll {
+    display: flex;
+  }
+
   &[open] {
     display: flex;
     opacity: 1;
@@ -109,6 +113,10 @@ dialog {
   animation: show-fullscreen;
   animation-duration: var(--mc-motion-duration-medium2);
   animation-timing-function: var(--mc-motion-easing-emphasized);
+}
+
+:host(.lock) dialog[open] {
+  pointer-events: none;
 }
 
 :host([fullscreen]) slot[name='headline'] {
@@ -229,8 +237,12 @@ slot[name='actions'] {
   justify-content: end;
 }
 
-slot[name='actions']::slotted(*) {
+dialog:not(.scroll) slot[name='actions']::slotted(*) {
   margin-top: 24px;
+}
+
+dialog.scroll slot[name='actions']::slotted(*) {
+  margin: 12px 0px;
 }
 
 ::slotted(mc-divider) {
@@ -247,14 +259,14 @@ slot[name='actions']::slotted(md-divider) {
   top: 0;
 }
 
-
+/* TODO address max-height. It messes with scroll check */
 @keyframes show-translate-y {
   0% {
     display: flex;
     opacity: 0;
     min-height: 48px;
     overflow: hidden;
-    max-height: 40%;
+    /* max-height: 40%; */
     transform: translateY(-60%);
   }
 
@@ -266,7 +278,7 @@ slot[name='actions']::slotted(md-divider) {
     display: flex;
     min-height: 48px;
     overflow: hidden;
-    max-height: inherit;
+    /* max-height: inherit; */
   }
 
   100% {

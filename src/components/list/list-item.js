@@ -157,7 +157,8 @@ class MCListItemElement extends HTMLComponentElement {
     util.removeLongPressListener(this, this.#longPress_bound);
   }
 
-  remove() {
+  remove(animate = true) {
+    if (!animate) return super.remove();
     this.style.height = `${this.offsetHeight}px`;
     this.classList.add('remove');
     setTimeout(() => {

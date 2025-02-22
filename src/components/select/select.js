@@ -3,6 +3,7 @@ import styles from './component.css' assert { type: 'css' };
 import fuzzySearch from '../../helpers/fuzzySearch.js'
 import '../textfield/index.js';
 import '../menu/index.js';
+import '../progress-linear/index.js';
 
 // TODO compact view (bottom-sheet, fullscreen filter)? (Im not sure we want this. The menu component does this)
 // TODO ?Handle filter on compact. Do we want to use a fullscreen view (like search)?
@@ -25,6 +26,7 @@ class MCSelectElement extends HTMLComponentElement {
   #options = [];
   #initialOptions = [];
   #label = '';
+  #readonly = false;
   #dirty = false;
   #touched = false;
   #isFilter = false;
@@ -57,6 +59,7 @@ class MCSelectElement extends HTMLComponentElement {
     this.#isAsync = this.hasAttribute('async');
 
     this.#textfield.label = this.label;
+    if (this.hasAttribute('condensed')) this.#textfield.setAttribute('condensed', '');
     if (this.hasAttribute('outlined')) this.#textfield.setAttribute('outlined', '');
     if (this.hasAttribute('placeholder')) this.#textfield.setAttribute('placeholder', this.getAttribute('placeholder'));
     if (this.hasAttribute('required')) this.#textfield.setAttribute('required', '');
@@ -77,7 +80,7 @@ class MCSelectElement extends HTMLComponentElement {
         <mc-textfield>
           <slot slot="leading-icon" name="leading-icon"></slot>
           <slot slot="trailing-icon" name="trailing-icon">
-            <svg height="5" viewBox="7 10 10 5" focusable="false" class="drop-arrow">
+            <svg viewBox="7 10 10 5" focusable="false" class="drop-arrow">
               <polygon
                 class="down"
                 stroke="none"
@@ -123,10 +126,14 @@ class MCSelectElement extends HTMLComponentElement {
 
   get value() { return this.#value; }
   set value(value) {
-    this.#value = value;
-    const selected = this.#options.filter(el => el.selected = el.value === value);
+    this.#value = `${value}`;
+    const selected = this.#options.filter(el => el.selected = el.value === this.#value);
     if (selected.length > 0) this.#textfield.value = selected[0].displayValue;
-    this.#internals.setFormValue(this.value);
+    else {
+      this.#textfield.value = '';
+      this.#textfield.classList.remove('raise-label');
+    }
+    this.#internals.setFormValue(this.#value);
   }
 
   get displayValue() { return this.#textfield.value || ''; }
@@ -136,6 +143,13 @@ class MCSelectElement extends HTMLComponentElement {
     this.#label = value;
     if (!this.ariaLabel) this.ariaLabel = this.#label;
     this.#textfield.label = this.#label;
+  }
+
+  get readonly() { return this.hasAttribute('readonly'); }
+  set readonly(value) {
+    this.#readonly = !!value;
+    this.toggleAttribute('readonly', this.#readonly);
+    this.#textfield.toggleAttribute('readonly', this.#readonly);
   }
 
   get required() { return this.hasAttribute('required'); }
@@ -175,9 +189,28 @@ class MCSelectElement extends HTMLComponentElement {
     this.#updateValidity();
   }
 
-  checkValidity() { return this.#textfield.checkValidity(); }
+  // readonly is used to stop user from inputting text when filter is not set
+  checkValidity() {
+    if (this.#readonly) return true;
+
+    const currentReadonly = this.#input.readOnly;
+    this.#input.readOnly = false;
+    this.#updateValidity();
+    const validity = this.#textfield.checkValidity();
+    this.#input.readOnly = currentReadonly;
+    return validity;
+  }
+
+  // readonly is used to stop user from inputting text when filter is not set
   reportValidity() {
-    return this.#textfield.reportValidity();
+    if (this.#readonly) return true;
+
+    const currentReadonly = this.#input.readOnly;
+    this.#input.readOnly = false;
+    this.#updateValidity();
+    const validity = this.#textfield.reportValidity();
+    this.#input.readOnly = currentReadonly;
+    return validity;
   }
   setCustomValidity(value = '') {
     this.#textfield.setCustomValidity(value);

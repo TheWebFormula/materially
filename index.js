@@ -30,6 +30,7 @@ import './src/components/side-sheet/index.js';
 import './src/components/slider/index.js';
 import './src/components/snackbar/index.js';
 import './src/components/switch/index.js';
+import './src/components/table/index.js';
 import './src/components/tab/index.js';
 import './src/components/textfield/index.js';
 import './src/components/time-picker/index.js';

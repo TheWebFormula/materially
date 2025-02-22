@@ -1,0 +1,393 @@
+<article>
+  <header>
+    <h1>Tables</h1>
+    <div class="page-subheader mc-font-title-medium">Tables with sorting, pagination, and asynchronous data loading</div>
+  </header>
+
+  <div class="article-main">
+    <nav class="links-nav">
+      <h2>Links</h2>
+      <ul class="links">
+        <li><a href="#example">Table example</a></li>
+        <li><a href="#async">Dynamic table data</a></li>
+        <li><a href="#select">Selectable rows</a></li>
+      </ul>
+    </nav>
+
+    <div class="article-content">
+      <section id="example" aria-label="Table example">
+        <mc-card>
+          <h2 id="button-types" slot="headline">Table example</h2>
+          <div slot="supporting-text">Table with static html. Click on headers to change sort</div>
+      
+          <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap;">
+            <mc-table>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Breed</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Luna</td>
+                    <td>Domestic Shorthair</td>
+                    <td>Female</td>
+                    <td>11</td>
+                  </tr>
+                  <tr>
+                    <td>Elise</td>
+                    <td>Domestic Longhair</td>
+                    <td>Female</td>
+                    <td>12</td>
+                  </tr>
+                  <tr>
+                    <td>Pig</td>
+                    <td>Domestic Shorthair</td>
+                    <td>Female</td>
+                    <td>8</td>
+                  </tr>
+                  <tr>
+                    <td>Crackers</td>
+                    <td>Maine Coon</td>
+                    <td>Male</td>
+                    <td>5</td>
+                  </tr>
+                  <tr>
+                    <td>Zuma</td>
+                    <td>Ragdoll</td>
+                    <td>Male</td>
+                    <td>8</td>
+                  </tr>
+                  <tr>
+                    <td>Lord Fluffybottom, the Third test sdfkls sdklsdf lksdjf</td>
+                    <td>Domestic Longhair</td>
+                    <td>Male</td>
+                    <td>8</td>
+                  </tr>
+                  <tr>
+                    <td>Zelda</td>
+                    <td>Domestic Shorthair</td>
+                    <td>Female</td>
+                    <td>7</td>
+                  </tr>
+                  <tr>
+                    <td>Apollo</td>
+                    <td>Persian</td>
+                    <td>Male</td>
+                    <td>3</td>
+                  </tr>
+                </tbody>
+              </table>
+              <mc-table-pagination sizes="5,10" size="5" total="8"></mc-table-pagination>
+            </mc-table>
+          </div>
+      
+          <code-block language="html">
+            <pre>
+${`<mc-table>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Breed</th>
+        <th>Gender</th>
+        <th>Age</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Luna</td>
+        <td>Domestic Shorthair</td>
+        <td>Female</td>
+        <td>11</td>
+      </tr>
+      <tr>
+        <td>Elise</td>
+        <td>Domestic Longhair</td>
+        <td>Female</td>
+        <td>12</td>
+      </tr>
+      ...
+    </tbody>
+  </table>
+
+  <!--
+    mc-table-pagination is optional
+    mc-table-pagination[sizes] - Comma separated list of rows to show per page
+    mc-table-pagination[size] - default amount of rows to show per page
+
+    mc-table-pagination[total] - (Set) Used to show page item count info
+    mc-table-pagination[total] - (Not set) Page item count will not display and there will be no last page button
+  -->
+  <mc-table-pagination
+    sizes="5,10"
+    size="5"
+    total="8"
+  ></mc-table-pagination>
+</mc-table>
+
+<!-- Optional sort attributes -->
+<mc-table sort="Name" direction="ascending">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <!-- you can set an alternate property name or use the text -->
+        <th property="breed">Breed</th>
+        <th>Gender</th>
+        <th>Age</th>
+      </tr>
+    </thead>
+    <tbody>
+    ...
+    </tbody>
+  </table>
+</mc-table>
+`}
+                </pre>
+          </code-block>
+        </mc-card>
+      </section>
+
+
+
+
+
+      <section id="async" aria-label="Table async">
+        <mc-card>
+          <h2 id="button-types" slot="headline">Dynamic async table data</h2>
+          <div slot="supporting-text">You can dynamically manage table data</div>
+      
+          <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap;">
+            <mc-table id="tableasync" select sort="name" async>
+              <table>
+                <thead>
+                  <tr>
+                    <th property="name">Name</th>
+                    <th property="breed">Breed</th>
+                    <th property="gender">Gender</th>
+                    <th property="age">Age</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+              <mc-table-pagination sizes="5,10" size="5"></mc-table-pagination>
+            </mc-table>
+          </div>
+      
+          <code-block language="html">
+            <pre>
+${`<mc-table id="tableasync" select sort="name" async>
+  <table>
+    <thead>
+      <tr>
+        <th property="name">Name</th>
+        <th property="breed">Breed</th>
+        <th property="gender">Gender</th>
+        <th property="age">Age</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <mc-table-pagination sizes="5,10" size="5"></mc-table-pagination>
+</mc-table>`}
+            </pre>
+          </code-block>
+
+          <code-block language="javascript">
+            <pre>
+${`let table = document.querySelector('#tableasync');
+table.addEventListener('sort', onPageOrSort);
+table.addEventListener('page', onPageOrSort);
+
+
+function onPageOrSort(event) {
+  handleTableData({
+    page: event.target.page,
+    pageSize: event.target.pageSize,
+    sort: event.target.sort,
+    direction: event.target.direction
+  });
+}
+
+async function handleTableData(listFilter = {
+  page: 0,
+  pageSize: 5,
+  sort: 'id',
+  direction: 'ascending'
+}) {
+  // show progress indicator and lock interactions
+  table.loading();
+  let data = await getData();
+  table.rowData = data;
+  table.resolveLoading();
+}
+
+
+async function getData() {
+  ...
+  /*
+    [{
+      name: 'Zuna',
+      breed: 'Ragdoll',
+      gender: 'male',
+      age: 5
+    }]
+  */
+}`}
+            </pre>
+          </code-block>
+        </mc-card>
+      </section>
+
+
+
+
+      <section id="select" aria-label="Table selection">
+        <mc-card>
+          <h2 id="button-types" slot="headline">Table with selectable rows</h2>
+          <div slot="supporting-text">Adding a checkbox is option, if you do not add one to the html then the checkboxes will be inserted as the first column</div>
+      
+          <div class="example" style="gap: 8px; display: flex; flex-wrap: wrap;">
+            <mc-table select onchange="console.log(this.value)">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Breed</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr value="Luna">
+                    <td>Luna</td>
+                    <td>Domestic Shorthair</td>
+                    <td>Female</td>
+                    <td>11</td>
+                  </tr>
+                  <tr value="Elise">
+                    <td>Elise</td>
+                    <td>Domestic Longhair</td>
+                    <td>Female</td>
+                    <td>12</td>
+                  </tr>
+                  <tr value="Pig">
+                    <td>Pig</td>
+                    <td>Domestic Shorthair</td>
+                    <td>Female</td>
+                    <td>8</td>
+                  </tr>
+                  <tr value="Crackers">
+                    <td>Crackers</td>
+                    <td>Maine Coon</td>
+                    <td>Male</td>
+                    <td>5</td>
+                  </tr>
+                  <tr value="Zuma">
+                    <td>Zuma</td>
+                    <td>Ragdoll</td>
+                    <td>Male</td>
+                    <td>8</td>
+                  </tr>
+                  <tr value="Lord">
+                    <td>Lord Fluffybottom, the Third test sdfkls sdklsdf lksdjf</td>
+                    <td>Domestic Longhair</td>
+                    <td>Male</td>
+                    <td>8</td>
+                  </tr>
+                  <tr value="Zelda">
+                    <td>Zelda</td>
+                    <td>Domestic Shorthair</td>
+                    <td>Female</td>
+                    <td>7</td>
+                  </tr>
+                  <tr value="Apollo">
+                    <td>Apollo</td>
+                    <td>Persian</td>
+                    <td>Male</td>
+                    <td>3</td>
+                  </tr>
+                </tbody>
+              </table>
+              <mc-table-pagination sizes="5,10" size="5"></mc-table-pagination>
+            </mc-table>
+          </div>
+      
+          <code-block language="html">
+            <pre>
+${`<!-- Select will auto insert checkboxes as the first column -->
+<mc-table>
+  <table select onchange="console.log(this.value)">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Breed</th>
+        <th>Gender</th>
+        <th>Age</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr value="Luna">
+        <td>Luna</td>
+        <td>Domestic Shorthair</td>
+        <td>Female</td>
+        <td>11</td>
+      </tr>
+      <tr value="Elise">
+        <td>Elise</td>
+        <td>Domestic Longhair</td>
+        <td>Female</td>
+        <td>12</td>
+      </tr>
+      ...
+    </tbody>
+  </table>
+  <mc-table-pagination sizes="5,10" size="5"></mc-table-pagination>
+</mc-table>
+
+
+<!-- Place checkboxes on the right -->
+<mc-table>
+  <table select onchange="console.log(this.value)">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Breed</th>
+        <th>Gender</th>
+        <th>Age</th>
+        <th><mc-checkbox></mc-checkbox></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr value="Luna">
+        <td>Luna</td>
+        <td>Domestic Shorthair</td>
+        <td>Female</td>
+        <td>11</td>
+        <td><mc-checkbox></mc-checkbox></td>
+      </tr>
+      <tr value="Elise">
+        <td>Elise</td>
+        <td>Domestic Longhair</td>
+        <td>Female</td>
+        <td>12</td>
+        <td><mc-checkbox></mc-checkbox></td>
+      </tr>
+      ...
+    </tbody>
+  </table>
+  <mc-table-pagination sizes="5,10" size="5"></mc-table-pagination>
+</mc-table>`}
+                </pre>
+          </code-block>
+        </mc-card>
+      </section>
+      
+    </div>
+  </div>
+</article>

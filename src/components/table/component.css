@@ -1,0 +1,136 @@
+mc-table {
+  --mc-table-container-color-local: var(--mc-table-container-color, var(--mc-surface));
+  position: relative;
+}
+
+mc-table tbody > tr,
+mc-table mc-table-pagination {
+  opacity: 1;
+  transition: opacity 120ms;
+}
+
+mc-table.loading tbody > tr,
+mc-table.loading mc-table-pagination {
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: progress;
+  transition: opacity 240ms;
+}
+
+mc-table.loading thead {
+  pointer-events: none;
+}
+
+mc-table .table-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 240ms;
+}
+
+mc-table .table-progress.show {
+  opacity: 1;
+}
+
+
+table {
+  width: 100%;
+  min-width: 100%;
+  border: 0;
+  border-spacing: 0;
+  table-layout: fixed;
+  white-space: normal;
+  background-color: var(--mc-table-container-color-local);
+  color: var(--mc-on-surface);
+}
+
+thead,
+tbody {
+  background: inherit;
+}
+
+tr {
+  background: inherit;
+}
+
+th {
+  border-bottom: 1px solid var(--mc-outline);
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  outline: none;
+  text-align: left;
+  padding: 0 16px;
+
+  color: var(--mc-on-surface);
+  font-size: var(--mc-font-medium-title-size);
+  font-weight: var(--mc-font-medium-title-weight);
+  letter-spacing: var(--mc-font-medium-title-tracking);
+  line-height: 56px;
+}
+
+td {
+  border-bottom: 1px solid var(--mc-outline);
+  box-sizing: border-box;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  
+  height: 56px;
+  padding: 0 16px;
+
+  color: var(--mc-on-surface-variant);
+  font-size: var(--mc-font-medium-body-size);
+  font-weight: var(--mc-font-medium-body-weight);
+  letter-spacing: var(--mc-font-medium-body-tracking);
+  line-height: 56px;
+}
+
+th.select {
+  width: 56px;
+}
+
+mc-table th:not(:has(mc-checkbox)) {
+  position: relative;
+  padding-right: 24px;
+  cursor: pointer;
+}
+
+mc-table th:not(:has(mc-checkbox))::after {
+  opacity: 0;
+  position: absolute;
+  content: '';
+  mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMThweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIxOHB4IiBmaWxsPSIjZThlYWVkIj48cGF0aCBkPSJNNDQwLTE2MHYtNDg3TDIxNi00MjNsLTU2LTU3IDMyMC0zMjAgMzIwIDMyMC01NiA1Ny0yMjQtMjI0djQ4N2gtODBaIi8+PC9zdmc+Cg==');
+  background-color: var(--mc-on-surface);
+  width: 18px;
+  height: 18px;
+  top: calc(50% - 11px);
+  margin-left: 4px;
+  transition: opacity, transform;
+  transition-duration: 240ms;
+}
+
+mc-table th:not(:has(mc-checkbox)):hover::after {
+  opacity: 0.6;
+}
+
+mc-table th:not(:has(mc-checkbox))[aria-sort]::after {
+  opacity: 1;
+}
+
+mc-table th:not(:has(mc-checkbox))[aria-sort=descending]::after {
+  transform: rotate(180deg);
+}
+
+
+tr[selected] {
+  background-color: var(--mc-primary-container);
+}
+
+tr.hide {
+  display: none;
+}

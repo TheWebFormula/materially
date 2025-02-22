@@ -37,6 +37,7 @@ import './routes/time pickers/index.js';
 import './routes/tooltips/index.js';
 import './routes/top app bars/index.js';
 import './routes/utilities/index.js';
+import './routes/tables/index.js';
 
 import './code-block.js';
 

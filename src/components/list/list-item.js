@@ -157,17 +157,18 @@ class MCListItemElement extends HTMLComponentElement {
     util.removeLongPressListener(this, this.#longPress_bound);
   }
 
-  remove(animate = true) {
-    if (!animate) return super.remove();
-    this.style.height = `${this.offsetHeight}px`;
-    this.classList.add('remove');
-    setTimeout(() => {
-      this.style.height = '';
-    }, 50);
-    setTimeout(() => {
-      super.remove();
-    }, 150)
-  }
+  // TODO work out remove animation. The issue animations can be wrong when swapping out the entire list (signals)
+  // remove(animate = true) {
+  //   if (!animate) return super.remove();
+  //   this.style.height = `${this.offsetHeight}px`;
+  //   this.classList.add('remove');
+  //   setTimeout(() => {
+  //     this.style.height = '';
+  //   }, 50);
+  //   setTimeout(() => {
+  //     super.remove();
+  //   }, 150)
+  // }
 
   // Example of view transition on remove. CSS in list.css
   // remove() {

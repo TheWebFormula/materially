@@ -158,7 +158,6 @@
   align-items: center;
   justify-content: end;
   margin-top: 12px;
-  min-height: 48px;
 }
 
 slot[name="headline"] {
@@ -167,7 +166,7 @@ slot[name="headline"] {
   font-size: var(--mc-font-large-title-size);
   font-weight: var(--mc-font-large-title-weight);
   letter-spacing: var(--mc-font-large-title-tracking);
-  line-height: 46px;
+  line-height: 48px;
   color: var(--mc-on-surface-variant);
   margin-left: 24px;
 }

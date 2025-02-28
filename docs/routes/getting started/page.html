@@ -11,6 +11,7 @@
         <li><a href="#install">Installation</a></li>
         <li><a href="#imports">Imports</a></li>
         <li><a href="#theme">Generate theme</a></li>
+        <li><a href="#appcss">App css</a></li>
       </ul>
     </nav>
 
@@ -104,6 +105,46 @@ generateTheme({
 ${`/* Import the generated color tokens to your app */
 @import url(./color-tokens.css);`}
             </pre>
+          </code-block>
+        </mc-card>
+      </section>
+
+
+      <section id="appcss" aria-label="appcss">
+        <mc-card>
+          <h2 slot="headline">App css</h2>
+          <div slot="supporting-text">You can prevent page load layout shifting by adding visibility: hidden to the app</div>
+      
+          <code-block language="html">
+            <pre>
+${`<!DOCTYPE html>
+<html lang="en">
+<head>
+  ...
+
+  <!--
+    Add visibility: hidden to body.
+    This will automatically be removed when app is ready
+  -->
+  <style>
+    body {
+      visibility: hidden;
+    }
+  </style>
+
+
+  <script defer type="module" src="/app.js"></script>
+  ...
+</head>
+
+<body>
+  <mc-navigation-drawer>...</mc-navigation-drawer>
+  <mc-pane-container>
+    <mc-pane id="page-content"></mc-pane>
+  </mc-pane-container>
+</body>
+</html>`}
+                  </pre>
           </code-block>
         </mc-card>
       </section>

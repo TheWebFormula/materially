@@ -12,6 +12,7 @@
         <li><a href="#colors">Colors</a></li>
         <li><a href="#font">Fonts and icons</a></li>
         <li><a href="#customize">Customize</a></li>
+        <li><a href="#shifts">Prevent layout shifts</a></li>
       </ul>
     </nav>
 
@@ -131,6 +132,46 @@ ${`
   style="--mc-navigation-drawer-container-color: var(--mc-surface-container-low)"
 ></mc-navigation-drawer>`}
         </pre></code-block>
+      </section>
+
+
+      <section id="shifts" aria-label="appcss">
+        <mc-card>
+          <h2 slot="headline">Prevent layout shifts</h2>
+          <div slot="supporting-text">You can prevent page load layout shifting by adding visibility: hidden to the app</div>
+      
+          <code-block language="html">
+            <pre>
+${`<!DOCTYPE html>
+<html lang="en">
+<head>
+  ...
+
+  <!--
+    Add visibility: hidden to body.
+    This will automatically be removed when app is ready
+  -->
+  <style>
+    body {
+      visibility: hidden;
+    }
+  </style>
+
+
+  <script defer type="module" src="/app.js"></script>
+  ...
+</head>
+
+<body>
+  <mc-navigation-drawer>...</mc-navigation-drawer>
+  <mc-pane-container>
+    <mc-pane id="page-content"></mc-pane>
+  </mc-pane-container>
+</body>
+</html>`}
+                  </pre>
+          </code-block>
+        </mc-card>
       </section>
     </div>
   </div>

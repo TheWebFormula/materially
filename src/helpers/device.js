@@ -34,16 +34,15 @@ const mcDevice = new class MCDevice {
       if (event.matches) this.#updateState(this.EXPANDED);
     });
 
-
-    if (document.readyState !== 'complete') {
-      document.addEventListener('DOMContentLoaded', () => {
-        document.body.classList.add('mc-initiated');
-      });
-    } else {
-      window.addEventListener('pageshow', () => {
-        document.body.classList.add('mc-initiated');
-      });
-    }
+    // if (document.readyState !== 'complete') {
+    //   document.addEventListener('DOMContentLoaded', () => {
+    //     document.body.classList.add('mc-initiated');
+    //   });
+    // } else {
+    //   window.addEventListener('pageshow', () => {
+    //     document.body.classList.add('mc-initiated');
+    //   });
+    // }
   }
 
   get state() {

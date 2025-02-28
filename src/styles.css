@@ -3,3 +3,7 @@
 @import url(./styles/typography.css);
 @import url(./styles/anchor.css);
 @import url(./components/anchor/global.css);
+
+html body {
+  visibility: visible;
+}

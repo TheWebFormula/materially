@@ -189,10 +189,10 @@ export default class MCButtonElement extends HTMLComponentElement {
     return this.#pendingPromise;
   }
 
-  resolve() {
+  resolve(value) {
     this.classList.remove('async-pending');
     this.shadowRoot.querySelector('.spinner').innerHTML = '';
-    this.#pendingPromiseResolve();
+    this.#pendingPromiseResolve(value);
     this.#pendingPromise = undefined;
     this.#pendingPromiseResolve = undefined;
   }
@@ -213,15 +213,15 @@ export default class MCButtonElement extends HTMLComponentElement {
 
   async #formClick(event) {
     const type = this.type || this.#button.type;
-
     switch (type) {
       case 'reset':
         this.form.reset();
         break;
 
       case 'submit':
-        this.#internals.setFormValue('test');
-        this.form.requestSubmit(this);
+        // this.#internals.setFormValue('test');
+        const canSubmit = this.form.requestSubmit(this);
+        if (canSubmit === false && this.#async) this.resolve();
         break;
 
       case 'cancel':

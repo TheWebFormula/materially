@@ -153,6 +153,7 @@ dialog.scroll {
 dialog.scroll [name=content] {
   padding-top: 16px;
   padding-bottom: 16px;
+  overflow: scroll;
 }
 
 dialog.scroll .header::after {
@@ -215,8 +216,13 @@ slot[name='headline']::slotted(*) {
   color: var(--mc-dialog-headline-color-local);
 }
 
+/* TODO */
 slot[name=content] {
   display: block;
+  /* overflow-y: auto; */
+}
+
+:host(.scroll) slot[name=content] {
   overflow-y: auto;
 }
 

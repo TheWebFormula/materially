@@ -55,11 +55,11 @@ class MCChipElement extends HTMLComponentElement {
         <slot name="leading-icon"></slot>
         <div class="label"></div>
         <div class="menu-arrow"></div>
-        <div class="clear">${close_FILL1_wght400_GRAD0_opsz20}</div>
         <input tabIndex="-1" aria-label="filter input" />
         <mc-state-layer ripple></mc-state-layer>
         <slot name="menu"></slot>
         <span class="touch-target-fix"></span>
+        <div class="clear">${close_FILL1_wght400_GRAD0_opsz20}</div>
       </button>
     `;
   }

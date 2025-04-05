@@ -7,11 +7,14 @@ class MCChipSetElement extends HTMLComponentElement {
   static useShadowRoot = true;
   static useTemplate = true;
   static styleSheets = [styles];
+  static formAssociated = true;
 
   #label;
   #input;
   #inputElement;
   #edit;
+  #name;
+  #internals;
   #inputFocus_bound = this.#inputFocus.bind(this);
   #inputBlur_bound = this.#inputBlur.bind(this);
   #createChip_bound = this.#createChip.bind(this);
@@ -20,6 +23,7 @@ class MCChipSetElement extends HTMLComponentElement {
   constructor() {
     super();
 
+    this.#internals = this.attachInternals();
     this.render();
     this.#inputElement = this.shadowRoot.querySelector('input');
   }
@@ -37,7 +41,8 @@ class MCChipSetElement extends HTMLComponentElement {
       ['label', 'string'],
       ['value', 'string'],
       ['input', 'boolean'],
-      ['edit', 'boolean']
+      ['edit', 'boolean'],
+      ['name', 'string']
     ];
   }
 
@@ -47,6 +52,18 @@ class MCChipSetElement extends HTMLComponentElement {
 
   get values() {
     return [...this.querySelectorAll('mc-chip')].map(chip => chip.valueObject);
+  }
+
+  get value() {
+    return [...this.querySelectorAll('mc-chip')].map(chip => chip.value);
+  }
+  set value(value) {
+    requestAnimationFrame(() => {
+      const arr = value.split(',').filter(v => !!v);
+      [...this.querySelectorAll('mc-chip')].forEach(chip => {
+        chip.checked = arr.includes(chip.value);
+      });
+    });
   }
 
   get input() { return this.#input; }
@@ -64,9 +81,15 @@ class MCChipSetElement extends HTMLComponentElement {
     if (this.#inputElement) this.#inputElement.ariaLabel = value;
   }
 
+  get name() { return this.#name; }
+  set name(value) { this.#name = value; }
+
 
   connectedCallback() {
-    if (this.#input) this.#inputElement.addEventListener('focus', this.#inputFocus_bound);
+    if (this.#input) {
+      this.#inputElement.addEventListener('focus', this.#inputFocus_bound);
+      if (this.#name) this.#inputElement.setAttribute('name', this.#name);
+    }
     // checking the slot covers chip sets in search
     // const slot = this.querySelector('[name="chips"]');
     // const chipLength = slot ? slot.assignedElements().length : this.querySelectorAll('mc-chip').length;
@@ -116,6 +139,9 @@ class MCChipSetElement extends HTMLComponentElement {
     if (event.key !== 'Enter' || !this.#inputElement.value) return;
     this.insertAdjacentHTML('beforeend', `<mc-chip input${this.#edit ? ' edit' : ''} value="${this.#inputElement.value}"></mc-chip>`);
     this.#inputElement.value = '';
+
+    this.#internals.setFormValue(this.values.map(v => v.value).join(','));
+
     this.dispatchEvent(new Event('change'));
   }
 }

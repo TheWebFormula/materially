@@ -55,7 +55,7 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
         current.parentElement.classList.remove('has-current');
       }
     }
-    const match = this.querySelector(`[href="${path}"]`) || this.querySelector(`[href="${path.split('#')[0]}"]`);
+    const match = this.querySelector(`[href="${path}"]`) || this.querySelector(`[href="${path.split('#')[0]}"]`) || this.querySelector(`[href="${path.split('?')[0]}"]`);
     if (match) {
       match.classList.add('current');
       if (match.parentElement.nodeName === 'MC-ANCHOR-GROUP') {

@@ -382,6 +382,7 @@ class MCTextfieldElement extends HTMLComponentElement {
     this.#internals.setFormValue(this.#value);
     this.classList.toggle('has-value', !!this.#value);
     this.#updateCharacterCount();
+    this.#updateValidity();
   }
 
   get validationMessage() { return this.#internals.validationMessage; }

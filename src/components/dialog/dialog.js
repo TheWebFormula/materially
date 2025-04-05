@@ -165,10 +165,8 @@ export default class MCDialogElement extends HTMLComponentElement {
     }
 
 
-    const content = this.shadowRoot.querySelector('[name="content"]');
-    const isScroll = content.scrollHeight > 0 && content.offsetHeight !== content.scrollHeight;
+    const isScroll = this.#dialog.scrollHeight > 0 && this.#dialog.offsetHeight !== this.#dialog.scrollHeight;
     this.#dialog.classList.toggle('scroll', isScroll);
-
 
     this.dispatchEvent(new Event('open', { bubbles: true }));
   }
@@ -216,11 +214,12 @@ export default class MCDialogElement extends HTMLComponentElement {
   async #handleSubmit(event) {
     const form = event.target;
     const { submitter } = event;
-
+    
     if (submitter.nodeName === 'MC-BUTTON' && submitter.async && submitter.isPending) {
       this.classList.add('lock');
-      await submitter.pending();
+      const value = await submitter.pending();
       this.classList.remove('lock');
+      if (value === false) return;
     }
 
     if (form.method !== 'dialog' || !submitter) return;

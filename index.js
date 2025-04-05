@@ -44,7 +44,8 @@ export {
   mcDialog,
   mcUtil,
   mcSnackbar,
-  MCSwipe
+  MCSwipe,
+  MCDrag
 } from './src/services.js';
 
 // TODO component level navigation transitions (card -> fullscreen, list item -> expand / fullscreen, carousel -> expand / fullscreen)

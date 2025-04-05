@@ -4,6 +4,7 @@ import mcDialog from './components/dialog/service.js';
 import mcSnackbar from './components/snackbar/service.js';
 import mcUtil from './helpers/util.js';
 import MCSwipe from './helpers/Swipe.js';
+import MCDrag from './helpers/Drag.js';
 
 export {
   mcDate,
@@ -11,5 +12,6 @@ export {
   mcDialog,
   mcUtil,
   mcSnackbar,
-  MCSwipe
+  MCSwipe,
+  MCDrag
 }

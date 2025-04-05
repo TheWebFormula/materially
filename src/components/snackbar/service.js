@@ -12,14 +12,18 @@ const mcSnackbar = new class mcSnackbar {
     message: '',
     actionLabel: '',
     closeButton: true,
-    time: this.defaultTime
+    time: this.defaultTime,
+    classNames: '',
+    twoLine: false
   }) {
     if (!params.message) throw Error('Message required');
     if (params.closeButton === undefined) params.closeButton = true;
 
     const id = `mc-snackbar-${this.#idCounter++}`;
+    let classNames = params.classNames;
+    if (params.twoLine) classNames += ' two-line';
     document.body.insertAdjacentHTML('beforeend', /*html*/`
-      <mc-snackbar id="${id}" ${params.twoLine ? 'class="two-line"' : ''} aria-label="[alert] ${params.message}">
+      <mc-snackbar id="${id}" class="${classNames}" aria-label="[alert] ${params.message}">
         <div class="mc-text">${params.message}</div>
         ${!params.actionLabel ? '' : `<mc-button onclick="mcSnackbar.dismiss('action')">${params.actionLabel}</mc-button>`}
         ${!params.closeButton ? '' : `<mc-icon-button aria-label="close" onclick="mcSnackbar.dismiss('close')"><mc-icon>${close_FILL1_wght400_GRAD0_opsz24}</mc-icon></mc-icon-button>`}

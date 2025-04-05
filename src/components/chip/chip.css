@@ -1,6 +1,6 @@
 :host {
   --mc-chip-elevated-container-color-local: var(--mc-chip-elevated-container-color, var(--mc-surface-container-low));
-  --mc-chip-checked-container-color-local: var(--mc-chip-elevated-container-color, var(--mc-secondary-container));
+  --mc-chip-checked-container-color-local: var(--mc-chip-checked-container-color, var(--mc-secondary-container));
   --mc-chip-text-color-local: var(--mc-chip-text-color, var(--mc-on-surface));
   --mc-chip-check-color-local: var(--mc-chip-check-color, var(--mc-primary));
 

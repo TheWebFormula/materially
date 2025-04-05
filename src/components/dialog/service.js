@@ -50,11 +50,12 @@ const mcDialog = new class mcDialog {
     template,
     scrim: true,
     preventClose: false,
-    preventNavigation: true
+    preventNavigation: true,
+    classes: []
   }) {
     const id = `mc-dialog-${++this.#idCounter}`;
     document.body.insertAdjacentHTML('beforeend', `
-      <mc-dialog id="${id}">
+      <mc-dialog id="${id}" class="${(params.classes || []).join(' ')}">
         ${params.template}
       </mc-dialog>
     `);

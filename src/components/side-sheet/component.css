@@ -43,7 +43,7 @@
 
 :host([divider]:not([modal]).open) .surface {
   border-radius: 0;
-  border-left: 2px solid var(--mc-outline-variant);
+  border-left: 1px solid var(--mc-outline-variant);
   transition: width, border;
   transition-duration: var(--mc-motion-duration-medium3), var(--mc-motion-duration-medium3);
   transition-timing-function: var(--mc-motion-easing-standard-decelerate), var(--mc-motion-easing-standard-decelerate);

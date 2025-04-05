@@ -26,6 +26,7 @@
   box-sizing: border-box;
   border-radius: var(--mc-shape-large);
   background-color: var(--mc-surface-container-color, var(--mc-surface));
+  overflow: hidden;
 }
 
 ::slotted(mc-pane[no-padding]) {

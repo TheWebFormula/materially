@@ -11,7 +11,7 @@ HTMLFormElement.prototype.track = function () {
 const originalRequestSubmit = HTMLFormElement.prototype.requestSubmit;
 HTMLFormElement.prototype.requestSubmit = function (submitter) {
   if (!this.formState) return originalRequestSubmit.call(this);
-  
+
   const canSubmit = this.formState.canSubmitForm(submitter);
   if (!canSubmit) return false;
 

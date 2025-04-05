@@ -1,6 +1,6 @@
 {
   "name": "@thewebformula/materially",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "Material design web components",
   "type": "module",
   "main": "./src/index.js",
@@ -74,9 +74,9 @@
   },
   "homepage": "https://github.com/TheWebFormula/materially#readme",
   "devDependencies": {
-    "@thewebformula/lithe": "^0.17.2",
+    "@thewebformula/lithe": "^0.17.6",
     "@thewebformula/materially": "file:./",
-    "esbuild": "^0.25.0"
+    "esbuild": "^0.25.2"
   },
   "dependencies": {
     "@material/material-color-utilities": "^0.3.0"

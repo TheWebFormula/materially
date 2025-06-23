@@ -213,6 +213,7 @@ export default class MCButtonElement extends HTMLComponentElement {
 
   async #formClick(event) {
     const type = this.type || this.#button.type;
+
     switch (type) {
       case 'reset':
         this.form.reset();
@@ -229,7 +230,7 @@ export default class MCButtonElement extends HTMLComponentElement {
         if (prevent) {
           return;
         } else {
-          this.dispatchEvent(new Event('cancel'));
+          this.dispatchEvent(new Event('cancel', { bubbles: true }));
         }
         break;
 

@@ -35,9 +35,13 @@ ${`<!--
 <html lang="en">
   <header>...</header>
 
-  <!-- Hide content while site loads to prevent layout shifts -->
+  <!--
+    Add visibility: hidden to body.
+    This will automatically be removed when app is ready
+    This will prevent any flickering or layout shifts when the app loads.
+  -->
   <style>
-    body:not(.mc-initiated) { visibility: hidden; }
+    body { visibility: hidden; }
   </style>
 
   <body>

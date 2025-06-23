@@ -14,6 +14,7 @@ export default class MCDialogElement extends HTMLComponentElement {
   #abort;
   #dialog;
   #form;
+  #lock = false;
 
   #preventClose = false;
   #preventNavigation = false;
@@ -100,6 +101,12 @@ export default class MCDialogElement extends HTMLComponentElement {
   get removeOnClose() { return this.#removeOnClose; }
   set removeOnClose(value) { this.#removeOnClose = !!value; }
 
+  get lock() { return this.#lock; }
+  set lock(value) {
+    this.#lock = !!value;
+    this.classList.toggle('lock', this.#lock);
+  }
+
 
   disconnectedCallback() {
     super.disconnectedCallback();
@@ -136,6 +143,8 @@ export default class MCDialogElement extends HTMLComponentElement {
 
 
   #showAfter() {
+    this.lock = false;
+
     if (!this.#abort) {
       this.#abort = new AbortController();
     }
@@ -192,7 +201,8 @@ export default class MCDialogElement extends HTMLComponentElement {
   }
 
   #clickOutsideClose(event) {
-    let ignore = this.#closeIgnoreElements.find(e => e === event.target || e.contains(event.target));
+    if (this.#lock) return;
+    let ignore = event.composedPath().includes(this) || this.#closeIgnoreElements.find(e => e === event.target);
     const shouldClose = !ignore && event.target !== this && !this.contains(event.target);
     if (shouldClose) {
       window.removeEventListener('click', this.#clickOutsideClose_bound);
@@ -216,9 +226,9 @@ export default class MCDialogElement extends HTMLComponentElement {
     const { submitter } = event;
     
     if (submitter.nodeName === 'MC-BUTTON' && submitter.async && submitter.isPending) {
-      this.classList.add('lock');
+      this.lock = true;
       const value = await submitter.pending();
-      this.classList.remove('lock');
+      this.lock = false;
       if (value === false) return;
     }
 

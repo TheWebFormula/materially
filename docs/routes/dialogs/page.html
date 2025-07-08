@@ -20,6 +20,7 @@
         <li><a href="#fullscreen">Fullscreen</a></li>
         <li><a href="#fullscreen-form">Fullscreen with form</a></li>
         <li><a href="#prevent-navigation">Prevent navigation</a></li>
+        <li><a href="#contextanimation">Contextual animations</a></li>
         <li><a href="#style">Style</a></li>
       </ul>
     </nav>
@@ -41,31 +42,54 @@
               <mc-button slot="actions" form="form" value="cancel">ok</mc-button>
               <mc-button slot="actions" form="form">cancel</mc-button>
             </mc-dialog> -->
-            <mc-button onclick="page.openSimple(true, true, 'settings')">open</mc-button>
+            <mc-button onclick="page.openSimple(true, true, 'settings', this)">open</mc-button>
+
+            <mc-button onclick="page.test1()">test1</mc-button>
+            <mc-button onclick="page.test2()">test2</mc-button>
+
+
+            <mc-dialog id="test2">
+              <div slot="headline">Settings</div>
+              <form id="settings-form" method="dialog" slot="content" style="display: flex; flex-direction: column; flex-wrap: wrap;"
+                onsubmit="resourceUpdateFieldFromForm(this)">
+                <input hidden name="id">
+                <input hidden name="resourceId">
+                <mc-textfield name="label" label="Label" required></mc-textfield>
+                <mc-switch name="required" label="Required"></mc-switch>
+              </form>
+              <mc-button slot="actions" id="field-settings-save" form="settings-form" type="submit" async>Save</mc-button>
+              <mc-button slot="actions" form="settings-form" type="cancel" formnovalidate onclick="this.parentElement.close()"
+                style="--mc-button-color: var(--mc-error);">Close</mc-button>
+
+            </mc-dialog>
           </div>
 
+
+          <code-block language="html">
+            <pre>
+${`<mc-button onclick="page.openSimple(true, true, 'settings', this)">open</mc-button>`}
+            </pre>
+          </code-block>
           <code-block language="javascript"><pre>
-// also available globally on window
+// 'mcDialog' is also available globally on window
 import { mcDialog } from '@thewebformula/materially/services';
 // import { mcDialog } from '@thewebformula/materially';
 
-const answer = await mcDialog.simple({
-  icon: 'settings',
-  headline: 'Question',
-  message: 'Are you sure?',
-  preventClose: false, // clicking outside of dialog will close it
 
-  // If prevent navigation is not set then it will be the opposite of preventClose
-  preventNavigation: true, // default false
-  
-  actionConfirm: true, // default true
-  actionConfirmLabel: 'OK', // default OK
-  actionCancel: true, // default false
-  actionCancelLabel: 'Cancel' // default Cancel
-});
+async openSimple(preventClose = false, preventNavigation = true, icon, triggerElement) {
+  const answer = await mcDialog.simple({
+    icon,
+    headline: 'Question',
+    message: 'Are you sure?',
+    actionCancel: true,
+    preventClose,
+    preventNavigation,
+    triggerElement
+  });
 
-if (answer === 'confirm') console.log('User pressed ok');
-if (answer === 'cancel') console.log('User pressed cancel');
+  if (answer === 'confirm') console.log('User pressed ok');
+  if (answer === 'cancel') console.log('User pressed cancel');
+}
             </pre></code-block>
         </mc-card>
       </section>
@@ -336,7 +360,7 @@ ${`<mc-dialog id="scrollable-dialog">
             </div>
           </mc-dialog>
           
-          <mc-button onclick="document.querySelector('#fullscreen-dialog').showModal()" style="margin-top: 12px;">Open</mc-button>
+          <mc-button onclick="document.querySelector('#fullscreen-dialog').showModal(this)" style="margin-top: 12px;">Open</mc-button>
         
           <code-block language="html"><pre>
 ${`<mc-dialog id="fullscreen-dialog" fullscreen>
@@ -418,6 +442,47 @@ const answer = await mcDialog.simple({
         </mc-card>
       </section>
       
+
+      <section id="contextanimation" aria-label="Contextual animation">
+        <mc-card>
+          <h2 slot="headline">Contextual animation</h2>
+          <div slot="supporting-text">Keep the context to the button that opened the dialog using animations that open and close from the button</div>
+      
+          <mc-button onclick="mcDialog.simple({
+            headline: 'Contextual animation',
+            message: 'The dialog will close and animation to the button',
+            actionCancel: true,
+            triggerElement: this
+          })">open</mc-button>
+            
+
+          <code-block language="html">
+            <pre>
+${`<!-- reference the button "triggerElement: this" when opening the dialog -->
+<mc-button onclick="mcDialog.simple({
+  headline: 'Contextual animation',
+  message: 'The dialog will close and animation to the button',
+  actionCancel: true,
+  triggerElement: this
+})">open</mc-button>`}
+            </pre>
+          </code-block>
+          <code-block language="javascript">
+            <pre>
+import { mcDialog } from '@thewebformula/materially';
+
+const answer = await mcDialog.simple({
+  headline: 'Question',
+  message: 'Are you sure?',
+  preventClose: false, // default false
+  preventNavigation: true // default false
+  triggerElement: document.querySelector('button'), // reference the button that opened the dialog
+});
+            </pre>
+          </code-block>
+        </mc-card>
+      </section>
+
 
       <section id="style" aria-label="Style">
         <mc-card>

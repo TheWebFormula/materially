@@ -1,0 +1,11 @@
+<div slot="headline">Settings</div>
+<form id="settings-form" method="dialog" slot="content" style="display: flex; flex-direction: column; flex-wrap: wrap;"
+  onsubmit="resourceUpdateFieldFromForm(this)">
+  <input hidden name="id">
+  <input hidden name="resourceId">
+  <mc-textfield name="label" label="Label" required></mc-textfield>
+  <mc-switch name="required" label="Required"></mc-switch>
+</form>
+<mc-button slot="actions" id="field-settings-save" form="settings-form" type="submit" async>Save</mc-button>
+<mc-button slot="actions" form="settings-form" type="cancel" formnovalidate onclick="this.parentElement.close()"
+  style="--mc-button-color: var(--mc-error);">Close</mc-button>

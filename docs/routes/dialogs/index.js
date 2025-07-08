@@ -1,6 +1,7 @@
 import { Component } from '@thewebformula/lithe';
 import { mcDialog } from '@thewebformula/materially/services';
 import htmlTemplate from './page.html';
+import settingsDialogTemplate from './settings-dialog.html';
 
 class DialogsPage extends Component {
   static title = 'Dialogs';
@@ -13,14 +14,15 @@ class DialogsPage extends Component {
     super();
   }
 
-  async openSimple(preventClose = false, preventNavigation = true, icon) {
+  async openSimple(preventClose = false, preventNavigation = true, icon, triggerElement) {
     const answer = await mcDialog.simple({
       icon,
       headline: 'Question',
       message: 'Are you sure?',
       actionCancel: true,
       preventClose,
-      preventNavigation
+      preventNavigation,
+      triggerElement
     });
 
     if (answer === 'confirm') console.log('User pressed ok');
@@ -38,6 +40,33 @@ class DialogsPage extends Component {
       `
     });
     console.log(value);
+  }
+
+
+  test1() {
+    mcDialog.template({
+      classes: ['settings-dialog'],
+      preventClose: true,
+      template: settingsDialogTemplate
+    });
+
+    const form = document.querySelector('#settings-form');
+    form.querySelector('[name=id]').value = '123';
+    form.querySelector('[name=resourceId]').value = '6436';
+    form.querySelector('[name=label]').value = 'Label';
+    form.querySelector('[name=required]').checked = true
+    // form.formState.saveFormState();
+  }
+
+  test2() {
+    const dialog = document.querySelector('#test2');
+    dialog.showModal();
+
+    const form = document.querySelector('#test2 #settings-form');
+    form.querySelector('[name=id]').value = '123';
+    form.querySelector('[name=resourceId]').value = '6436';
+    form.querySelector('[name=label]').value = 'Label';
+    form.querySelector('[name=required]').checked = true
   }
 }
 customElements.define('dialogs-page', DialogsPage);

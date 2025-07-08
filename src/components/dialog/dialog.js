@@ -116,14 +116,14 @@ export default class MCDialogElement extends HTMLComponentElement {
     }
   }
 
-  show() {
-    this.showModal();
+  show(triggerElement) {
+    this.showModal(triggerElement);
   }
 
-  showModal() {
+  showModal(triggerElement) {
     this.setAttribute('open', '');
     this.#dialog.showModal();
-    this.#showAfter();
+    this.#showAfter(triggerElement);
   }
 
   close(returnValue) {
@@ -134,7 +134,7 @@ export default class MCDialogElement extends HTMLComponentElement {
     const preventClose = !this.dispatchEvent(new Event('close', { cancelable: true }));
     if (preventClose) {
       this.returnValue = previousReturnValue;
-      return;
+      return; 
     }
 
     this.#dialog.close(returnValue);
@@ -142,8 +142,37 @@ export default class MCDialogElement extends HTMLComponentElement {
 
 
 
-  #showAfter() {
+  #showAfter(triggerElement) {
     this.lock = false;
+
+    if (triggerElement) {
+      this.#dialog.classList.add('trigger-animation');
+      const triggerBounds = triggerElement.getBoundingClientRect();
+      
+      let totalWidth;
+      let totalHeight;
+      let offsetX;
+      let offsetY;
+      if (this.fullscreen) {
+        totalWidth = window.innerWidth;
+        totalHeight = window.innerHeight;
+        offsetX = triggerBounds.left;
+        offsetY = triggerBounds.top;
+      } else {
+        totalWidth = this.#dialog.offsetWidth;
+        totalHeight = this.#dialog.offsetHeight;
+        const dialogBounds = this.#dialog.getBoundingClientRect();
+        offsetX = triggerBounds.right - dialogBounds.right;
+        offsetY = triggerBounds.bottom - dialogBounds.bottom;
+      }
+
+      const initialWidth = Math.round((triggerBounds.width / totalWidth) * 100);
+      const initialHeight = Math.round((triggerBounds.height / totalHeight) * 100);
+      this.#dialog.style.setProperty('--mc-trigger-x', `${offsetX}px`);
+      this.#dialog.style.setProperty('--mc-trigger-y', `${offsetY}px`);
+      this.#dialog.style.setProperty('--mc-trigger-width', `${initialWidth}%`);
+      this.#dialog.style.setProperty('--mc-trigger-height', `${initialHeight}%`);
+    }
 
     if (!this.#abort) {
       this.#abort = new AbortController();

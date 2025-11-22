@@ -40,8 +40,9 @@ const mcSnackbar = new class mcSnackbar {
     });
   }
 
-  dismiss() {
+  dismiss(value) {
     if (!this.#currentSnackbar) return;
+    this.#currentSnackbar.snackbar.dismissValue = value;
     this.#currentSnackbar.snackbar.hidePopover();
   }
 
@@ -60,7 +61,7 @@ const mcSnackbar = new class mcSnackbar {
 
       this.#currentSnackbar.snackbar.removeEventListener('toggle', onClose);
       clearTimeout(currentTimer);
-      this.#currentSnackbar.resolve();
+      this.#currentSnackbar.resolve(this.#currentSnackbar.snackbar.dismissValue);
       const currentRef = this.#currentSnackbar.snackbar;
       util.animationendAsync(currentRef).then(() => {
         currentRef.remove();

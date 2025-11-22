@@ -28,13 +28,16 @@
 }
 
 :host([auto-hide].window-compact) {
-  transition: bottom;
+  transition: bottom, box-shadow;
   transition-duration: var(--mc-motion-duration-short3);
   transition-timing-function: var(---mc-motion-easing-standard);
 }
 
 :host([auto-hide].window-compact.hide) {
   bottom: -80px;
+
+  /* this is a temp fix to a bottom scroll issue on ios with bottom ui shrink. This will prevent overlay drop shadow */
+  box-shadow: none; 
 }
 
 

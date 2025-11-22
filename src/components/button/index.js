@@ -1,7 +1,7 @@
 import HTMLComponentElement from '../HTMLComponentElement.js';
 import styles from './component.css' assert { type: 'css' };
 import '../state-layer/index.js';
-import './angled-corners.js';
+import { loadCut } from './angled-corners.js';
 import '../progress-circular/index.js';
 
 
@@ -43,6 +43,7 @@ export default class MCButtonElement extends HTMLComponentElement {
 
     isCut = this.closest('[cut]') !== null;
     if (isCut) this.setAttribute('cut', '');
+    if (this.hasAttribute('cut')) loadCut();
 
 
     this.#internals = this.attachInternals();

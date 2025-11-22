@@ -50,7 +50,7 @@ const mcDevice = new class MCDevice {
   }
 
   get orientation() {
-    // screen.orientation does not work on chrome ios. window.orientation is deprecated but works on chrom ios for now
+    // screen.orientation does not work on chrome ios. window.orientation is deprecated but works on chrome ios for now
     if (screen?.orientation ? screen.orientation.type.startsWith('portrait') : Math.abs(window.orientation) !== 90) return 'portrait';
     return 'landscape';
   }

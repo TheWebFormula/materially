@@ -10,7 +10,6 @@
   display: flex;
   box-sizing: border-box;
   gap: 16px;
-  min-height: 56px;
   height: 56px;
   overflow: hidden;
   position: relative;
@@ -26,17 +25,27 @@
   outline: none;
 }
 
+/* :host {
+  will-change: height;
+} */
+
+:host(.removing) {
+  transition: height;
+  transition-duration: var(--mc-motion-duration-medium1);
+  height: 0px;
+  /* this adjusts for the row gap to prevent a snap */
+  margin-bottom: -2px;
+}
+
 :host([draggable=true]) {
   cursor: grab;
 }
 
 :host([condensed]) {
-  min-height: 36px;
   height: 36px;
 }
 
 :host([multiline]) {
-  min-height: 72px;
   height: auto;
 }
 
@@ -46,7 +55,6 @@
 
 :host(.remove) {
   height: 0px;
-  min-height: 0px;
   transition: height;
   transition-duration: var(--mc-motion-duration-short3);
 }
@@ -221,5 +229,26 @@ mc-state-layer {
   :host(:hover) slot[name='end']::slotted([hover-only]) {
     opacity: 1;
     transition-duration: var(--mc-motion-duration-short3);
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  :host(.removing) {
+    transition: opacity;
+    transition-duration: var(--mc-motion-duration-medium1);
+    height: 56px;
+    opacity: 0;
+  }
+
+  [name="swipe-start"],
+  [name="swipe-end"] {
+    &::slotted(*) {
+      transition: none
+    }
+  }
+
+  .container {
+    transition-duration: 10ms
   }
 }

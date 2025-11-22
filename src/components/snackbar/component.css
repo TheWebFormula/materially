@@ -26,7 +26,7 @@ mc-snackbar {
   color: var(--mc-snackbar-text-color-local);
 
   animation: show-snackbar;
-  animation-duration: var(--mc-motion-duration-medium1);
+  animation-duration: var(--mc-motion-duration-medium2);
   animation-timing-function: var(--mc-motion-easing-emphasized);
   z-index: 9;
 
@@ -68,10 +68,10 @@ mc-snackbar .mc-text {
 @keyframes show-snackbar {
   0% {
     opacity: 0;
-    max-height: 24px;
+    max-height: 12px;
   }
 
-  70% {
+  40% {
     opacity: 1;
   }
 

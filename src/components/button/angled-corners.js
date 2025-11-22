@@ -1,5 +1,10 @@
-if (typeof CSS !== 'undefined' && 'paintWorklet' in CSS) {
-  CSS.paintWorklet.addModule(URL.createObjectURL(new Blob([`
+let loaded = false;
+export function loadCut() {
+  if (loaded) return;
+  loaded = true;
+
+  if (typeof CSS !== 'undefined' && 'paintWorklet' in CSS) {
+    CSS.paintWorklet.addModule(URL.createObjectURL(new Blob([`
     class BorderRadiusCut {
       static get inputProperties() {
         return [
@@ -50,4 +55,5 @@ if (typeof CSS !== 'undefined' && 'paintWorklet' in CSS) {
     }
     registerPaint('cut-corners', BorderRadiusCut);
   `], { type: "application/javascript" })));
+  }
 }

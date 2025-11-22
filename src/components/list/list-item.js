@@ -113,6 +113,13 @@ class MCListItemElement extends HTMLComponentElement {
     if (this.#drag) this.#drag.swap = !!value;
   }
 
+  remove() {
+    this.classList.add('removing');
+    this.addEventListener('transitionend', (e) => {
+      if (this.isConnected) super.remove();
+    }, { once: true });
+  }
+
 
   connectedCallback() {
     if (this.#dragging) return;
@@ -156,28 +163,6 @@ class MCListItemElement extends HTMLComponentElement {
     if (this.#drag) this.#drag.destroy();
     util.removeLongPressListener(this, this.#longPress_bound);
   }
-
-  // TODO work out remove animation. The issue animations can be wrong when swapping out the entire list (signals)
-  // remove(animate = true) {
-  //   if (!animate) return super.remove();
-  //   this.style.height = `${this.offsetHeight}px`;
-  //   this.classList.add('remove');
-  //   setTimeout(() => {
-  //     this.style.height = '';
-  //   }, 50);
-  //   setTimeout(() => {
-  //     super.remove();
-  //   }, 150)
-  // }
-
-  // Example of view transition on remove. CSS in list.css
-  // remove() {
-  //   this.style.viewTransitionName = 'img-expand';
-  //   document.startViewTransition(() => {
-  //     super.remove();
-  //   });
-  // }
-
 
 
   #onChange(event) {
@@ -231,10 +216,7 @@ class MCListItemElement extends HTMLComponentElement {
 
     // wait to see if remove is called
     setTimeout(() => {
-      if (this.classList.contains('remove')) {
-        this.#container.style.transitionDuration = '120ms';
-        this.#container.style.transform = event.distanceX > 0 ? 'translateX(100%)' : 'translateX(-100%)';
-      } else {
+      if (!this.classList.contains('removing')) {
         this.shadowRoot.querySelector('slot[name="swipe-start"]').classList.remove('activate');
         this.shadowRoot.querySelector('slot[name="swipe-end"]').classList.remove('activate');
         this.#container.style.transform = '';

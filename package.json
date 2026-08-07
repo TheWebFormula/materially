@@ -1,9 +1,10 @@
 {
   "name": "@thewebformula/materially",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "description": "Material design web components",
   "type": "module",
   "main": "./src/index.js",
+  "customElements": "custom-elements.json",
   "exports": {
     ".": "./index.js",
     "./theme-generator": "./src/theme-generator.js",
@@ -74,11 +75,12 @@
   },
   "homepage": "https://github.com/TheWebFormula/materially#readme",
   "devDependencies": {
-    "@thewebformula/lithe": "^0.19.3",
-    "@thewebformula/materially": "file:./",
-    "esbuild": "^0.27.0"
+    "esbuild": "^0.28.1",
+    "highlight.js": "^11.11.1"
   },
   "dependencies": {
-    "@material/material-color-utilities": "^0.3.0"
+    "@material/material-color-utilities": "^0.3.0",
+    "@thewebformula/lithe": "^0.21.0",
+    "@thewebformula/materially": "file:./"
   }
 }

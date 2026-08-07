@@ -1,7 +1,11 @@
 import styles from '../styles.css' assert { type: 'css' };
 document.adoptedStyleSheets.push(styles);
 
+const policy = trustedTypes.createPolicy('materially', {
+  createHTML: (s) => s
+});
 const dashCaseRegex = /-([a-z])/g;
+const camelCaseRegex = /([a-zA-Z])(?=[A-Z])/g;
 const onRegex = /^on/;
 let templates = new Map();
 
@@ -18,20 +22,31 @@ export default class HTMLComponentElement extends HTMLElement {
    */
   static useTemplate = true;
 
+
   /** Extend observedAttributes to allow type information and handling */
   static get observedAttributesExtended() { return []; };
-  static get observedAttributes() { return this.observedAttributesExtended.map(a => a[0]); }
+  static get observedAttributes() { return this.observedAttributesExtended.map(a => a[0].replace(camelCaseRegex, '$1-').toLowerCase()); }
+  static get _attrs() {
+    return Object.fromEntries(this.observedAttributesExtended);
+  }
+
+  /**
+   * Use with observedAttributesExtended
+   *   This automatically handles type conversions and duplicate calls from setting attributes
+   * @name observedAttributesExtended
+   * @function
+   */
+  // static get observedAttributesExtended() { }
+
 
   #prepared = false;
   #attributeEvents = {};
-  #attributesLookup;
+  #attrConfig;
   #templateElement;
 
 
   constructor() {
     super();
-    
-    this.#attributesLookup = Object.fromEntries(this.constructor.observedAttributesExtended);
 
     if (this.constructor.useShadowRoot) {
       this.attachShadow({ mode: 'open', delegatesFocus: this.constructor.shadowRootDelegateFocus });
@@ -40,26 +55,36 @@ export default class HTMLComponentElement extends HTMLElement {
     }
   }
 
+  get _attrs() {
+    if (!this.#attrConfig) this.#attrConfig = this.constructor._attrs;
+    return this.#attrConfig;
+  }
+
 
   /** Default function used by extended version */
   attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue === newValue) return;
-    const type = this.#attributesLookup[name];
+
+    // placeholders can leak through on initial parse
+    // if (oldValue === '{_ex_}') oldValue = '';
+    // if (newValue === '{_ex_}') newValue = '';
+
     name = name.replace(dashCaseRegex, (_, s) => s.toUpperCase());
-    if (type === 'event') {
-      if (this.#attributeEvents[name]) {
-        this.removeEventListener(name.replace(onRegex, ''), this.#attributeEvents[name]);
-        this.#attributeEvents[name] = undefined;
+    const attrType = this._attrs[name];
+    if (attrType === 'event') {
+      if (this.#attributeEvents.has(name)) {
+        this.removeEventListener(name.replace(onRegex, ''), this.#attributeEvents.get(name));
+        this.#attributeEvents.delete(name);
       }
       if (newValue) {
-        this.#attributeEvents[name] = this.#attributeDescriptorTypeConverter(newValue, type);
-        this.addEventListener(name.replace(onRegex, ''), this.#attributeEvents[name]);
+        this.#attributeEvents.set(name, this.#attributeDescriptorTypeConverter(newValue, attrType, name));
+        this.addEventListener(name.replace(onRegex, ''), this.#attributeEvents.get(name));
       }
     } else {
       this.attributeChangedCallbackExtended(
         name,
-        this.#attributeDescriptorTypeConverter(oldValue, type),
-        this.#attributeDescriptorTypeConverter(newValue, type)
+        this.#attributeDescriptorTypeConverter(oldValue, attrType, name),
+        this.#attributeDescriptorTypeConverter(newValue, attrType, name)
       );
     }
   }
@@ -87,7 +112,7 @@ export default class HTMLComponentElement extends HTMLElement {
       templates.set(this.constructor, template);
 
       // only render once
-      if (this.constructor.useTemplate) template.innerHTML = this.template();
+      if (this.constructor.useTemplate) template.innerHTML = policy.createHTML(this.template());
     }
 
     this.#templateElement = template;
@@ -98,8 +123,9 @@ export default class HTMLComponentElement extends HTMLElement {
   }
 
   /** Type logic for observedAttributesExtended */
-  #attributeDescriptorTypeConverter(value, type) {
+  #attributeDescriptorTypeConverter(value, type, name) {
     switch (type) {
+      case 'toggle':
       case 'boolean':
         return value !== null && `${value}` !== 'false';
       case 'int':

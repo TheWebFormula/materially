@@ -8,6 +8,7 @@ const cssFilterRegex = /\.css$/;
 const cssTagRegex = /<\s*link[^>]*href="\.?\/?app.css"[^>]*>/;
 
 
+// build separate file to support docs pages with iframe examples
 const plugin = {
   name: 'plugin',
   setup(build) {
@@ -67,7 +68,6 @@ build({
     { from: 'docs/icons.woff2', to: 'dist/' },
     { from: 'docs/outlined-icons-variable.woff2', to: 'dist/' },
     { from: 'docs/rounded-icons.woff2', to: 'dist/' },
-    { from: 'docs/highlight-11.10.0.js', to: 'dist/' },
     { from: 'docs/manifest.json', to: 'dist/' },
     { from: 'docs/icons/*', to: 'dist/icons/' }
   ],
@@ -78,12 +78,14 @@ build({
     context.rebuild();
   },
   async onEnd({ metafile }) {
+
+    // update and write all docs pages to dist with correct app.css filename for iframe examples
     const outputsEntries = Object.entries(metafile.outputs);
     for await (const entry of glob('./docs/routes/**/*.html')) {
       if (metafile.inputs[entry]) continue;
 
       const content = await readFile(entry, 'utf-8');
-      const contentUpdated = content.replace(cssTagRegex, () => {
+      const contentUpdated = content.replace(cssTagRegex, (c) => {
         const filename = outputsEntries
           .filter(([out, item]) => !!item.entryPoint)
           .find(([out, item]) => item.entryPoint.endsWith('app.css'))[0].split('/').pop();
@@ -93,7 +95,9 @@ build({
       let pathSplit = path.split('/');
       pathSplit.pop();
       await mkdir(pathSplit.join('/'), { recursive: true });
-      await writeFile(entry.replace(/^docs/, 'dist'), contentUpdated, 'utf-8');
+      await writeFile(path, contentUpdated, 'utf-8');
     }
+
+    // await writeFile('meta.json', JSON.stringify(metafile))
   }
 });

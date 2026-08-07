@@ -11,29 +11,33 @@
   <meta name="color-scheme" content="light dark">
   <meta name="mc-theme-color-scheme-preference-disable">
   <meta name="theme-color" content="#fdf8fd">
+  
   <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
-  <link rel="manifest" href="/manifest.json" />
 
-  <title></title>
-
-  <style>
-    body {
-      font-family: Arial;
-    }
-  
-    body {
-      visibility: hidden;
-    }
-  </style>
-
-  <script defer type="module" src="/app.js"></script>
+  <title>Materially</title>
 
   <link rel="prefetch" href="./outlined-icons-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="prefetch" href="./rounded-icons.woff2" as="font" type="font/woff2" crossorigin>
-  <link href="/app.css" rel="stylesheet">
-  <script id="hljsscript" src="/highlight-11.10.0.js" async></script>
+
+
+  <!-- Lithe will automatically handle hooking up preloaded style links -->
+  <link rel="preload" href="/app.css" as="style">
+  <script type="module" src="/app.js" defer></script>
+
+  <link rel="manifest" href="/manifest.json">
+
+  <style>
+    /* smooth scroll for element anchor links */
+    html:has(:target) {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: Arial;
+      visibility: hidden;
+    }
+  </style>
 
   <style>
     @font-face {

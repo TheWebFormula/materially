@@ -75,12 +75,12 @@
   },
   "homepage": "https://github.com/TheWebFormula/materially#readme",
   "devDependencies": {
+    "@thewebformula/lithe": "^0.21.0",
+    "@thewebformula/materially": "^0.9.6",
     "esbuild": "^0.28.1",
     "highlight.js": "^11.11.1"
   },
   "dependencies": {
-    "@material/material-color-utilities": "^0.3.0",
-    "@thewebformula/lithe": "^0.21.0",
-    "@thewebformula/materially": "file:./"
+    "@material/material-color-utilities": "^0.3.0"
   }
 }

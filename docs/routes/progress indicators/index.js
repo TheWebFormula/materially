@@ -13,6 +13,8 @@ class ProgressIndicatorsPage extends Component {
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback();
+    
     clearInterval(this.linearInterval);
   }
 

@@ -42,6 +42,8 @@ class CodeBlock extends Component {
   }
 
   connectedCallback() {
+    super.connectedCallback();
+
     const pre = this.querySelector('pre');
     pre.classList.add('hljs');
     const highlighted = hljs.highlight(pre.textContent, { language: this.language });
@@ -52,6 +54,8 @@ class CodeBlock extends Component {
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback();
+    
     let button = this.querySelector('button');
     if (button) button.removeEventListener('click', this.#copyClick_bound);
   }

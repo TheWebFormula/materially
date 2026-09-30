@@ -28,6 +28,8 @@ class TablesPage extends Component {
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback();
+    
     if (this.#abort) {
       this.#abort.abort();
       this.#abort = undefined;

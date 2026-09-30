@@ -26,6 +26,8 @@ class ListsPage extends Component {
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback();
+    
     const list = document.querySelector('#list-reorder');
     if (list) list.removeEventListener('reorder', this.#listReorder_bound);
   }

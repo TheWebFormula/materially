@@ -16,6 +16,7 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
   #pane2;
   #initialPageX;
   #initialWidth;
+  #collapsiblePane1 = false;
   #collapsiblePane2 = false;
   #memory = [];
   #pointerUp_bound = this.#pointerUp.bind(this);
@@ -39,6 +40,7 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
     window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound);
     if (panes.length > 2 && this.resize) console.warn('mc-pane-container only supports resizing for 2 mc-pane elements');
 
+    this.#collapsiblePane1 = this.#pane1?.hasAttribute('collapsible');
     this.#collapsiblePane2 = this.#pane2?.hasAttribute('collapsible');
   }
 
@@ -146,6 +148,16 @@ export default class MCPaneContainerElement extends HTMLComponentElement {
     const two = 1 - one;
     this.#pane1.style.flexBasis = `${one * 100}%`;
     this.#pane2.style.flexBasis = `${two * 100}%`;
+
+    if (this.#collapsiblePane1) {
+      this.#pane1.style.minWidth = 0;
+
+      if (this.#pane1.offsetWidth <= 32) {
+        this.#pane1.style.flexBasis = '0%';
+        this.#pane2.style.flexBasis = '100%';
+        this.#pane1.style.padding = 0;
+      }
+    }
 
     if (this.#collapsiblePane2) {
       this.#pane2.style.minWidth = 0;

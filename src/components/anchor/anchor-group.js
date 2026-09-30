@@ -4,6 +4,11 @@ import stylesAnchor from './anchor-drawer.css' assert { type: 'css' };
 import { expand_more_FILL0_wght400_GRAD0_opsz24 } from '../../helpers/svgs.js';
 
 
+/**
+ * Anchor group - wraps a group of mc-anchor elements with an expanding container
+ * @tag mc-anchor-group
+ * @slot control - You can put some elements here
+ */
 class MCAnchorGroupElement extends HTMLComponentElement {
   static tag = 'mc-anchor-group';
   static useShadowRoot = true;
@@ -40,9 +45,19 @@ class MCAnchorGroupElement extends HTMLComponentElement {
     this.#control.removeEventListener('click', this.#controlClick_bound);
   }
 
+  /**
+   * Gets open state
+   * @returns {boolean}
+   * @default false
+   */
   get open() {
     return this.#open;
   }
+
+  /**
+   * Sets the open state
+   * @param {boolean} value
+   */
   set open(value) {
     if (this.#open === !!value) return;
 

@@ -26,7 +26,6 @@
   box-sizing: border-box;
   border-radius: var(--mc-shape-large);
   background-color: var(--mc-surface-container-color, var(--mc-surface));
-  overflow: hidden;
 }
 
 ::slotted(mc-pane[no-padding]) {
@@ -54,10 +53,6 @@
 :host([resize]) ::slotted(mc-pane[fixed]) {
   max-width: max-content;
 } */
-
-:host([resize]) ::slotted(mc-pane[collapsible]:not([scroll])) {
-  overflow: hidden;
-}
 
 
 .resize-handle {

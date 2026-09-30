@@ -37,7 +37,8 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
 
   connectedCallback() {
     super.connectedCallback();
-    window.addEventListener('locationchange', this.#locationchange_bound);
+    navigation.addEventListener('navigatesuccess', this.#locationchange_bound);
+    window.addEventListener('hashchange', this.#locationchange_bound);
     window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound);
     this.addEventListener('focusin', this.#focus_bound);
     this.addEventListener('click', this.#click_bound);
@@ -46,21 +47,20 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
 
 
   #locationchange() {
-    const path = `${location.pathname}${location.hash}${location.search}`;
-    const current = this.querySelector('.current');
+    const path = `${location.pathname}${location.hash}`;
+    const current = this.querySelector('[aria-current="page"]');
     if (current) {
-      current.classList.remove('current');
+      current.removeAttribute('aria-current');
       if (current.parentElement.nodeName === 'MC-ANCHOR-GROUP') {
         current.parentElement.open = false;
-        current.parentElement.classList.remove('has-current');
       }
     }
-    const match = this.querySelector(`[href="${path}"]`) || this.querySelector(`[href="${path.split('#')[0]}"]`) || this.querySelector(`[href="${path.split('?')[0]}"]`);
+    const match = [...document.querySelectorAll('a')].find(a => a.href === location.href);
+    // const match = this.querySelector(`[href="${path}"]`) || this.querySelector(`[href="${path.split('#')[0]}"]`) || this.querySelector(`[href="${path.split('?')[0]}"]`);
     if (match) {
-      match.classList.add('current');
+      match.setAttribute('aria-current', 'page');
       if (match.parentElement.nodeName === 'MC-ANCHOR-GROUP') {
         match.parentElement.open = true;
-        match.parentElement.classList.add('has-current');
       }
     }
 
@@ -73,7 +73,7 @@ class MCNavigationDrawerElement extends MCSideSheetElement {
       case device.EXPANDED:
         this.open = true;
 
-        const current = this.querySelector('.current');
+        const current = this.querySelector('[aria-current="page"]');
         if (current) {
           let bounds = current.offsetTop - this.offsetHeight + 56;
           if (bounds > 0) {

@@ -82,7 +82,7 @@ class MCSwitchElement extends HTMLComponentElement {
     this.#input.checked = this.checked;
     this.#input.disabled = this.disabled;
     this.#input.required = this.required;
-    this.#updateValue();
+    this.#updateValue(false);
 
     this.#abort = new AbortController();
     this.#input.addEventListener('change', this.#updateValue_bound, { signal: this.#abort.signal });
@@ -104,14 +104,14 @@ class MCSwitchElement extends HTMLComponentElement {
   get value() { return this.#input.value; }
   set value(value) {
     this.#input.value = value;
-    this.#updateValue();
+    this.#updateValue(false);
   }
 
   get checked() { return this.#checked; }
   set checked(value) {
     this.#checked = !!value;
     this.#input.checked = this.#checked;
-    this.#updateValue();
+    this.#updateValue(false);
   }
 
   get ariaLabel() { return this.#input.ariaLabel; }
@@ -197,7 +197,7 @@ class MCSwitchElement extends HTMLComponentElement {
     this.#internals.setValidity(this.#input.validity, this.#input.validationMessage || '', this.#input);
   }
 
-  #updateValue() {
+  #updateValue(dispatch = true) {
     this.#checked = this.#input.checked;
     this.setAttribute('aria-checked', this.#checked.toString());
     this.#internals.setFormValue(this.#checked ? this.value : null, this.#checked ? 'checked' : undefined);
@@ -205,7 +205,7 @@ class MCSwitchElement extends HTMLComponentElement {
       this.#updateValidity();
       this.#updateValidityDisplay();
     }
-    if (!this.#initiating) this.dispatchEvent(new Event('change', { bubbles: true }));
+    if (!this.#initiating && dispatch) this.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
   #onClick() {

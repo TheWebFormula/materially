@@ -44,7 +44,7 @@ class MCNavigationBarElement extends HTMLComponentElement {
 
   connectedCallback() {
     this.#abort =  new AbortController();
-    window.addEventListener('locationchange', this.#locationchange_bound, { signal: this.#abort.signal });
+    navigation.addEventListener('navigatesuccess', this.#locationchange_bound, { signal: this.#abort.signal });
     window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound, { signal: this.#abort.signal });
     if (this.#autoHide) util.trackPageScroll(this.#scroll_bound);
     [...this.querySelectorAll('a')].forEach(anchor => {
@@ -97,14 +97,12 @@ class MCNavigationBarElement extends HTMLComponentElement {
   }
 
   #locationchange() {
-    const path = `${location.pathname}${location.hash}${location.search}`;
-    const current = this.querySelector('.current');
-    if (current) current.classList.remove('current');
+    const path = `${location.pathname}${location.hash}`;
+    const current = this.querySelector('[aria-current="page"]');
+    if (current) current.removeAttribute('aria-current');
     const match = this.querySelector(`[href="${path}"]`);
 
-    if (match) {
-      match.classList.add('current');
-    }
+    if (match) match.setAttribute('aria-current', 'page');
   }
 
   #windowStateChange({ detail }) {

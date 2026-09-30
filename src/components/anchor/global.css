@@ -33,9 +33,9 @@ mc-navigation-drawer a > [slot="leading-icon"] {
 
 
 @media (hover: hover) {
-  mc-navigation-rail a:hover:not(.current) mc-icon,
-  mc-navigation-bar a:hover:not(.current) mc-icon,
-  mc-navigation-drawer a:hover:not(.current) mc-icon {
+  mc-navigation-rail a:hover:not([aria-current="page"]) mc-icon,
+  mc-navigation-bar a:hover:not([aria-current="page"]) mc-icon,
+  mc-navigation-drawer a:hover:not([aria-current="page"]) mc-icon {
     color: var(--mc-on-surface);
   }
 

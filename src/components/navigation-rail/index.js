@@ -35,7 +35,7 @@ class MCNavigationRailElement extends HTMLComponentElement {
   }
 
   connectedCallback() {
-    window.addEventListener('locationchange', this.#locationchange_bound);
+    navigation.addEventListener('navigatesuccess', this.#locationchange_bound);
     window.addEventListener('mcwindowstatechange', this.#windowStateChange_bound);
     [...this.querySelectorAll('a')].forEach(anchor => {
       if (!util.getTextFromNode(anchor)) anchor.classList.add('no-text');
@@ -44,18 +44,18 @@ class MCNavigationRailElement extends HTMLComponentElement {
   }
 
   disconnectedCallback() {
-    // window.removeEventListener('locationchange', this.#locationchange_bound);
+    // navigation.addEventListener('navigatesuccess', this.#locationchange_bound);
   }
 
 
   #locationchange() {
-    const path = `${location.pathname}${location.hash}${location.search}`;
-    const current = this.querySelector('.current');
-    if (current) current.classList.remove('current');
+    const path = `${location.pathname}${location.hash}`;
+    const current = this.querySelector('[aria-current="page"]');
+    if (current) current.removeAttribute('aria-current');
     const match = this.querySelector(`[href="${path}"]`);
 
     if (match) {
-      match.classList.add('current');
+      match.setAttribute('aria-current', 'page ');
       // if (match.parentElement.nodeName === 'MC-ANCHOR-GROUP') {
       //   match.parentElement.classList.add('has-current');
       // }

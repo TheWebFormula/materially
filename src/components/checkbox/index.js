@@ -4,6 +4,41 @@ import '../state-layer/index.js';
 
 let counter = 0;
 
+
+/**
+ * mc-checkbox form control
+ * [documentation](https://materially.dev/checkboxes)
+ *
+ * Example:
+ * ```html
+ * <mc-checkbox checked label="Label"></mc-checkbox>
+ * ```
+ *
+ * @tag mc-checkbox
+ * @reference Materially - https://materially.dev/checkboxes
+ *
+ * @attr {string} [value="one"] - Added to formData when checked = true
+ * @attr {boolean} [checked=false] - Checkbox checked state
+ * @attr {boolean} [indeterminate=false] - Indeterminate state
+ * @attr {string} label - Label value that displays next to checkbox
+ * @attr {string} label-left - Label value that displays to th left of the checkbox
+ * @attr {boolean} [disabled=false] - Disabled state
+ * @attr {boolean} [required=false] - Required state
+ *
+ * @prop {string} validationMessage - read-only property that returns a string representation of validation constraints
+ * @prop {ValidityState} validity - read-only returns validity state object
+ * @prop {boolean} willValidate - read-only property that indicates if it is candidate for constraint validation
+ *
+ * @fires {Event} change - fires change when checked or indeterminate change
+ *
+ * @cssprop [--mc-checkbox-background-color=--mc-primary] - Checkbox background color
+ * @cssprop [--mc-checkbox-background-disabled-color=--mc-on-surface] - Checkbox background color when disabled
+ * @cssprop [--mc-checkbox-icon-color=--mc-on-primary] - Checkbox icon (checkmark) color
+ * @cssprop [--mc-checkbox-icon-disabled-color=--mc-surface] - Checkbox icon (checkmark) color when disabled
+ * @cssprop [--mc-checkbox-outline-color=--mc-on-surface-variant] - Checkbox outline color
+ * @cssprop [--mc-checkbox-outline-disabled-color=--mc-on-surface] - Checkbox outline color when disabled
+ * @cssprop [--mc-checkbox-label-disabled-color=--mc-on-surface] - Checkbox label color when disabled
+ */
 class MCCheckboxElement extends HTMLComponentElement {
   static tag = 'mc-checkbox';
   static useShadowRoot = true;
@@ -74,7 +109,7 @@ class MCCheckboxElement extends HTMLComponentElement {
     this.#input.indeterminate = this.indeterminate;
     this.#input.required = this.required;
     this.#updateValue();
-    
+
     this.#abort = new AbortController();
     this.#input.addEventListener('change', this.#updateValue_bound, { signal: this.#abort.signal });
     this.#input.addEventListener('click', this.#onClick_bound, { signal: this.#abort.signal });
@@ -194,7 +229,7 @@ class MCCheckboxElement extends HTMLComponentElement {
     this.#internals.setValidity(this.#input.validity, this.#input.validationMessage || '', this.#input);
   }
 
-  #updateValue() {
+  #updateValue(event) {
     this.#checked = this.#input.checked;
     this.classList.toggle('checked', this.#checked);
     this.setAttribute('aria-checked', this.#checked.toString());
@@ -203,7 +238,7 @@ class MCCheckboxElement extends HTMLComponentElement {
       this.#updateValidity();
       this.#updateValidityDisplay();
     }
-    if (!this.#initiating) this.dispatchEvent(new Event('change', { bubbles: true }));
+    if (!this.#initiating && !!event) this.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
   #onClick() {

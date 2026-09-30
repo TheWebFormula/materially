@@ -104,6 +104,7 @@ class MCListElement extends HTMLComponentElement {
     else templateElement.innerHTML = template;
     const element = templateElement.content.firstElementChild;
     element.style.visible = 'hidden';
+    // TODO prevent view transitions during this
     this.append(element);
     this.#itemHeight = element.offsetHeight;
     this.removeChild(element);

@@ -75,15 +75,15 @@ a:focus::after {
   background-color: var(--mc-on-surface);
 }
 
-::slotted(a.current)::before,
-a.current::before {
+::slotted(a[aria-current="page"])::before,
+a[aria-current="page"]::before {
   pointer-events: none;
   background-color: var(--mc-anchor-current-container-color-local);
   transform: scale(1);
 }
 
-::slotted(a.current:focus)::after,
-a.current:focus::after {
+::slotted(a[aria-current="page"]:focus)::after,
+a[aria-current="page"]:focus::after {
   background-color: var(--mc-on-secondary-container);
 }
 
@@ -127,8 +127,8 @@ a:not(.no-text),
     background-color: var(--mc-on-surface);
   }
 
-  ::slotted(a:hover.current)::after,
-  a:hover.current::after {
+  ::slotted(a[aria-current="page"]:hover)::after,
+  a[aria-current="page"]:hover::after {
     background-color: var(--mc-on-secondary-container);
   }
 }

@@ -78,26 +78,28 @@ export default class MCSurfaceElement extends HTMLComponentElement {
 
   get anchor() { return this.#anchor; }
   set anchor(value) {
-    if (this.anchor && value !== null) return;
-    else if (value === null) this.#anchor = null;
-    else if (value === '') this.#anchor = this.parentElement;
-    else if (value instanceof HTMLElement) this.#anchor = value;
-    else this.#anchor = document.querySelector(`#${value}`);
-    this.classList.toggle('anchor', !!this.#anchor);
+    requestAnimationFrame(() => {
+      if (this.anchor && value !== null) return;
+      else if (value === null) this.#anchor = null;
+      else if (value === '') this.#anchor = this.parentElement;
+      else if (value instanceof HTMLElement) this.#anchor = value;
+      else this.#anchor = document.querySelector(`#${value}`);
+      this.classList.toggle('anchor', !!this.#anchor);
 
-    if (this.#anchor) {
-      let id = this.getAttribute('id') || `surface_${parseInt(Math.random() * 999)}`;
-      if (!this.hasAttribute('id')) this.setAttribute('id', id);
+      if (this.#anchor) {
+        let id = this.getAttribute('id') || `surface_${parseInt(Math.random() * 999)}`;
+        if (!this.hasAttribute('id')) this.setAttribute('id', id);
 
-      let anchorId = this.#anchor.getAttribute('id') || `anchor_${id}`;
-      if (!this.#anchor.hasAttribute('id')) this.#anchor.setAttribute('id', anchorId);
+        let anchorId = this.#anchor.getAttribute('id') || `anchor_${id}`;
+        if (!this.#anchor.hasAttribute('id')) this.#anchor.setAttribute('id', anchorId);
 
-      // this.#anchor.setAttribute('popovertarget', id);
-      this.#anchor.popoverTargetElement = this;
-      this.setAttribute('aria-labelledby', anchorId);
-      this.#anchor.ariaHasPopup = true;
-      this.#anchor.setAttribute('aria-controls', id);
-    }
+        // this.#anchor.setAttribute('popovertarget', id);
+        this.#anchor.popoverTargetElement = this;
+        this.setAttribute('aria-labelledby', anchorId);
+        this.#anchor.ariaHasPopup = true;
+        this.#anchor.setAttribute('aria-controls', id);
+      }
+    });
   }
 
   get modal() { return this.#modal; }

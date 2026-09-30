@@ -113,7 +113,9 @@ class MCListItemElement extends HTMLComponentElement {
     if (this.#drag) this.#drag.swap = !!value;
   }
 
-  remove() {
+  // TODO work out exist animation
+  remove(animate = false) {
+    if (!animate) return super.remove();
     this.classList.add('removing');
     this.addEventListener('transitionend', (e) => {
       if (this.isConnected) super.remove();
